@@ -6,21 +6,21 @@
   </div>
 </template>
 <script>
-import SearchHeader from "@/components/search/SearchHeader";
-import SearchResultSection from "@/components/search/SearchResultSection";
-import SearchFooter from "@/components/search/SearchFooter";
+import SearchHeader from '@/components/search/SearchHeader'
+import SearchResultSection from '@/components/search/SearchResultSection'
+import SearchFooter from '@/components/search/SearchFooter'
 
 export default {
-  name: "SearchHome",
+  name: 'SearchHome',
   components: {
     SearchHeader,
     SearchResultSection,
-    SearchFooter,
+    SearchFooter
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-    };
-  },
-};
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
 </script>

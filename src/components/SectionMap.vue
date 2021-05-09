@@ -1,0 +1,226 @@
+<template>
+  <section class="map-section bg-dark text-white pb-5 p-lg-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-lg-4 mx-auto pb-lg-5 mt-5 mb-5 mb-lg-0 text-center text-lg-left border-lg-bottom px-0">
+          <h6 class="text-warning sub-heading mb-1">Nos activites selon</h6>
+          <h2 class="text-uppercase font-weight-normal heading">les <strong>destinations</strong></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-10 mx-md-auto offset-lg-7 col-lg-5 mr-lg-0 selective-div">
+          <div class="d-flex py-3 py-md-4 py-lg-3 absolute-border position-relative">
+            <ul class="list-unstyled flex-div mb-0">
+              <li>
+                <h6 class="text-uppercase country-head d-flex mb-0">
+                  pays :
+                  <div class="btn-group select-dropdown px-3 align-items-center">
+                    <a class="select-toggle tous text-white text-decoration-none" data-toggle="dropdown" href="#" aria-expanded="false">tous <i class="fa fa-chevron-down ml-2 chevron"></i></a><i role="button" class="fa fa-times text-warning ml-2 cancel"></i>
+                    <ul class="dropdown-menu menu-items">
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> France</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> Espagne</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> Grèce</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> Marac</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> Portugal</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> Sri Lanka</a>
+                      </li>
+                    </ul>
+                  </div>
+                </h6>
+              </li>
+              <li class="divider mr-3 d-none d-lg-inline-block"></li>
+              <li class="d-none d-lg-inline-block">
+                <h6 class="text-uppercase city-head d-flex mb-0 zero-opacity">
+                  ville :
+                  <div class="btn-group select-dropdown px-3 align-items-center">
+                    <a href="javaScript:void(0);" id="dropdownMenuLink" class="select-toggle toutes text-white text-decoration-none" data-toggle="dropdown" aria-expanded="false">toutes <i class="fa fa-chevron-down ml-2 chevron"></i></a
+                    ><i role="button" class="fa fa-times text-warning ml-2 cancel"></i>
+                    <ul class="dropdown-menu menu-items" aria-labelledby="dropdownMenuLink">
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> serre-chevaliver</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> asdfgh</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> serre</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> lkjhgf</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> qwerty</a>
+                      </li>
+                      <li>
+                        <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> poiuyt</a>
+                      </li>
+                    </ul>
+                  </div>
+                </h6>
+              </li>
+              <li class="divider mr-3 d-none d-lg-inline-block"></li>
+              <li class="ml-auto ml-lg-0">
+                <p class="mb-0 activity-count zero-opacity">11 activites</p>
+              </li>
+            </ul>
+            <a href="#" class="text-uppercase text-white view-link ml-auto">tout voir <img class="ml-3" fluid :src="require('@/assets/images/arr-r.png')" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-7 d-none d-lg-block map-img-div">
+          <img class="img-fluid img-fill" fluid :src="require('@/assets/images/MAPS.png')" />
+          <img class="img-fluid centered-img" fluid :src="require('@/assets/images/fr2.png')" />
+        </div>
+        <div class="col-12 col-md-10 mx-md-auto col-lg-5 map-content-div">
+          <div class="map-content border-top">
+            <div class="zone-div col-12 col-lg-4 mx-auto h-100 flex-column justify-content-center align-items-center text-center">
+              <p>Sélectionnez une zone de la map ou dans la liste un pays pour afficher le détails</p>
+              <img class="d-block mx-auto" fluid :src="require('@/assets/images/map-icon.png')" />
+            </div>
+            <ul class="list-unstyled mb-0 grid-list pt-5">
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/c2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">Multi-activites</h6>
+                      <p class="mb-0 text-warning">VTT Descente</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/m2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">Multi-activites</h6>
+                      <p class="mb-0 text-warning">Via Ferrata</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/c2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">stage</h6>
+                      <p class="mb-0 text-warning">Windsurf</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/m2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">stage</h6>
+                      <p class="mb-0 text-warning">Kitesurf</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/c2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">Multi-activites</h6>
+                      <p class="mb-0 text-warning">VTT Descente</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/m2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">Multi-activites</h6>
+                      <p class="mb-0 text-warning">Via Ferrata</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/c2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">stage</h6>
+                      <p class="mb-0 text-warning">Windsurf</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/m2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">stage</h6>
+                      <p class="mb-0 text-warning">Kitesurf</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-reset">
+                  <div class="content-grid">
+                    <img fluid :src="require('@/assets/images/c2.png')" />
+                    <div class="contents">
+                      <h6 class="mb-0">Multi-activites</h6>
+                      <p class="mb-0 text-warning">VTT Descente</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- <div class="col-12">
+            <div class="d-block d-lg-none py-4 py-sm-5 overflow-hidden">
+              <img class="img-responsive img-fill tablet-map-img" fluid :src="require('@/assets/images/tablet-map.png')" alt="" />
+            </div>
+          </div> -->
+      </div>
+    </div>
+    <div class="d-block d-lg-none">
+      <div id="mapCarousel" class="owl-carousel py-5">
+        <div class="item">
+          <img class="img-responsive img-fill" fluid :src="require('@/assets/images/MAP_ESPAGNE.png')" alt="" />
+        </div>
+        <div class="item">
+          <img class="img-responsive img-fill" fluid :src="require('@/assets/images/MAP_FRANCE.png')" alt="" />
+        </div>
+        <div class="item">
+          <img class="img-responsive img-fill" fluid :src="require('@/assets/images/MAP_MAROC.png')" alt="" />
+        </div>
+        <div class="item">
+          <img class="img-responsive img-fill" fluid :src="require('@/assets/images/MAP_ESPAGNE.png')" alt="" />
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style></style>

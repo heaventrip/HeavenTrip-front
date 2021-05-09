@@ -1,13 +1,10 @@
 <template>
   <div>
-    <header class="header bg-dark text-white p-0 product-header d-none">
+    <header class="header bg-dark text-white p-0 product-header d-none xl-header">
       <div class="container-fluid p-0 position-relative">
         <div class="header-part">
           <ul class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
-            <li v-if="token">
-              <a v-on:click="logout()" class="text-reset pr-4">se déconnecter</a>
-            </li>
-            <li v-else>
+            <li>
               <a href="/login" class="text-reset pr-4">se connecter</a>
             </li>
             <li>
@@ -15,7 +12,7 @@
             </li>
           </ul>
           <div class="clearfix"></div>
-          <nav class="navbar navbar-expand-lg navbar-dark p-0 border-lg-0">
+          <nav class="navbar navbar-expand-lg activity-p-header-nav navbar-dark p-0 border-lg-0">
             <a class="navbar-brand pl-sm-5 pl-lg-0" href="/"><img class="logo" fluid :src="require('@/assets/images/logo.png')" /></a>
             <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
               <img class="mail-icon" fluid :src="require('@/assets/images/svg/PICTO_CONTACT_MOBILE.svg')" />
@@ -29,7 +26,7 @@
               <i class="fa fa-times cross-sym mx-auto"></i>
             </button>
 
-            <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse nav-heaven-collapsable text-white" id="navbarSupportedContent">
               <ul class="navbar-nav mx-md-5 text-uppercase">
                 <li class="nav-item">
                   <a class="nav-link" href="#"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
@@ -48,7 +45,7 @@
             </div>
           </nav>
         </div>
-        <div class="wrapper d-flex align-items-end align-items-md-center align-items-xl-end product-wrapper">
+        <div class="wrapper d-flex d-update align-items-end align-items-md-center align-items-xl-end product-wrapper">
           <div class="content w-100 mb-lg-5">
             <div class="d-flex align-items-center justify-content-md-center top-div">
               <img class="head-icon d-inline-block" fluid :src="require('@/assets/images/pink.png')" />
@@ -111,22 +108,9 @@
 <script>
 export default {
   name: 'ProductHeader',
-  mounted() {
-    var token_val = localStorage.getItem('user-token')
-    if (!token_val) {
-      this.token = false
-    }
-  },
   data() {
     return {
-      token: true,
       msg: 'Welcome to Your Vue.js App'
-    }
-  },
-  methods: {
-    logout: function (event) {
-      localStorage.removeItem('user-token')
-      this.$router.push('/')
     }
   }
 }

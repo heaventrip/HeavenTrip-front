@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="modal fade"
-    id="login"
-    tabindex="-1"
-    aria-labelledby="loginLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl login-modal">
       <div class="modal-content border-0 rounded-0">
         <div class="modal-body p-0 border-0">
@@ -16,67 +10,40 @@
                 <h6 class="modal-heading mb-0 d-none">
                   <span>INSCRIPITON</span>
                 </h6>
-                <div
-                  class="border-left border-white text-white cancel-block d-lg-none"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
+                <div class="border-left border-white text-white cancel-block d-lg-none" data-dismiss="modal" aria-label="Close">
                   <i class="fa fa-times h5 mb-0"></i>
                 </div>
               </div>
-              <ul
-                class="d-none list-unstyled mb-0 text-left registor-mobile-list text-uppercase"
-              >
+              <ul class="d-none list-unstyled mb-0 text-left registor-mobile-list text-uppercase">
                 <li class="row">
                   <div class="col-3 text-center">
-                    <img
-                      class="img-fluid"
-                      fluid
-                      :src="require('@/assets/images/fprint_white.png')"
-                    />
+                    <img class="img-fluid" fluid :src="require('@/assets/images/fprint_white.png')" />
                   </div>
                   <div class="col-9 align-self-center">
                     <p class="mb-0 registor-points">
-                      <strong
-                        class="h6 mb-1 Oswald-font d-block font-weight-bold"
-                        >CONSEILS & SUIVI</strong
-                      >
+                      <strong class="h6 mb-1 Oswald-font d-block font-weight-bold">CONSEILS & SUIVI</strong>
                       AVANT ET PENDANT TON Séjour
                     </p>
                   </div>
                 </li>
                 <li class="row">
                   <div class="col-3 text-center">
-                    <img
-                      class="img-fluid"
-                      fluid
-                      :src="require('@/assets/images/lab_white.png')"
-                    />
+                    <img class="img-fluid" fluid :src="require('@/assets/images/lab_white.png')" />
                   </div>
                   <div class="col-9 align-self-center">
                     <p class="mb-0 registor-points">
-                      <strong
-                        class="h6 mb-1 Oswald-font d-block font-weight-bold"
-                        >ORGANISATION</strong
-                      >
+                      <strong class="h6 mb-1 Oswald-font d-block font-weight-bold">ORGANISATION</strong>
                       MADE IN HEAVEN TRIP
                     </p>
                   </div>
                 </li>
                 <li class="row">
                   <div class="col-3 text-center">
-                    <img
-                      class="img-fluid"
-                      fluid
-                      :src="require('@/assets/images/mic_light.png')"
-                    />
+                    <img class="img-fluid" fluid :src="require('@/assets/images/mic_light.png')" />
                   </div>
                   <div class="col-9 align-self-center">
                     <p class="mb-0 registor-points">
-                      <strong
-                        class="h6 mb-1 Oswald-font d-block font-weight-bold"
-                        >DISCUTE AVANT LE DéPART</strong
-                      >
+                      <strong class="h6 mb-1 Oswald-font d-block font-weight-bold">DISCUTE AVANT LE DéPART</strong>
                       AVEC TOUS LES TRIPPERS
                     </p>
                   </div>
@@ -86,36 +53,18 @@
                 <div class="login_form">
                   <div class="row">
                     <div class="col-12 col-lg-6">
-                      <button
-                        class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"
-                      >
-                        <i
-                          class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"
-                        ></i
-                        >Connexion avec Facebook
-                      </button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
                     </div>
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn">
-                        <i
-                          class="fab fa-google mr-3 h5 mb-0 align-text-bottom"
-                        ></i
-                        >Connexion avec Google
-                      </button>
+                      <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Google</button>
                     </div>
                   </div>
-                  <h6
-                    class="prefer-text text-uppercase font-weight-bold my-5 text-center"
-                  >
+                  <h6 class="prefer-text text-uppercase font-weight-bold my-5 text-center">
                     <span>Ou par adresse mail</span>
                   </h6>
                   <div class="row">
                     <div class="col-12 col-lg-10 mx-auto">
-                      <form
-                        id="login_form"
-                        v-on:submit.prevent="checkLoginForm"
-                        method="post"
-                      >
+                      <form id="login_form" v-on:submit.prevent="checkLoginForm" method="post">
                         <!-- <p v-if="errors.length" class="errors">
                             <b>Veuillez corriger la ou les erreurs suivantes :</b>
                             <ul>
@@ -125,87 +74,37 @@
                         <div class="row">
                           <div class="col-12">
                             <div class="form-group">
-                              <input
-                                class="form-control modal-input"
-                                type="mail"
-                                name="email"
-                                value=""
-                                placeholder="Adresse mail"
-                              />
+                              <input class="form-control modal-input" type="mail" name="email" value="" placeholder="Adresse mail" />
                             </div>
                           </div>
                           <div class="col-12">
                             <div class="form-group">
-                              <input
-                                class="form-control modal-input mb-2"
-                                type="password"
-                                autocomplete="off"
-                                name="password"
-                                value=""
-                                placeholder="Mot de passe"
-                              />
-                              <a
-                                class="password-link text-right mb-4 d-block"
-                                href="#"
-                                >Mot de passe oublié</a
-                              >
+                              <input class="form-control modal-input mb-2" type="password" autocomplete="off" name="password" value="" placeholder="Mot de passe" />
+                              <a class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
                             </div>
                           </div>
                         </div>
-                        <button
-                          class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-5 mt-0"
-                        >
-                          SE CONNECTER
-                        </button>
+                        <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-5 mt-0">SE CONNECTER</button>
                       </form>
                     </div>
                   </div>
                   <div class="bottom-block">
-                    <h6 class="profile-text text-center">
-                      De l’évasion sportive pour tous !
-                    </h6>
-                    <ul
-                      class="list-unstyled modal-profile-list mb-4 d-flex justify-content-center align-items-center ml-4"
-                    >
+                    <h6 class="profile-text text-center">De l’évasion sportive pour tous !</h6>
+                    <ul class="list-unstyled modal-profile-list mb-4 d-flex justify-content-center align-items-center ml-4">
                       <li>
-                        <a href="#"
-                          ><img
-                            class="img-fill"
-                            fluid
-                            :src="require('@/assets/images/ui_faces/1.jpg')"
-                        /></a>
+                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /></a>
                       </li>
                       <li>
-                        <a href="#"
-                          ><img
-                            class="img-fill"
-                            fluid
-                            :src="require('@/assets/images/ui_faces/2.jpg')"
-                        /></a>
+                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
                       </li>
                       <li>
-                        <a href="#"
-                          ><img
-                            class="img-fill"
-                            fluid
-                            :src="require('@/assets/images/ui_faces/3.jpg')"
-                        /></a>
+                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/3.jpg')" /></a>
                       </li>
                       <li>
-                        <a href="#"
-                          ><img
-                            class="img-fill"
-                            fluid
-                            :src="require('@/assets/images/ui_faces/4.jpg')"
-                        /></a>
+                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" /></a>
                       </li>
                       <li>
-                        <a href="#"
-                          ><img
-                            class="img-fill"
-                            fluid
-                            :src="require('@/assets/images/ui_faces/2.jpg')"
-                        /></a>
+                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
                       </li>
                       <li><span>+1.5k</span></li>
                     </ul>
@@ -213,28 +112,12 @@
                   <h6 class="prefer-text text-center">
                     <span>Pas encore de compte ?</span>
                   </h6>
-                  <button
-                    class="d-none btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0"
-                  >
-                    s’INSCRIRE
-                  </button>
-                  <button
-                    class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0"
-                    v-on:click="registerForm"
-                  >
-                    INSCRIPTION
-                  </button>
+                  <button class="d-none btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0">s’INSCRIRE</button>
+                  <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0" v-on:click="registerForm">INSCRIPTION</button>
                 </div>
                 <div class="register_form d-none">
-                  <p class="content-head">
-                    Merci de remplir tous les champs pour valider votre
-                    inscription :
-                  </p>
-                  <form
-                    id="register_submit_form"
-                    v-on:submit.prevent="checkRegisterForm"
-                    method="post"
-                  >
+                  <p class="content-head">Merci de remplir tous les champs pour valider votre inscription :</p>
+                  <form id="register_submit_form" v-on:submit.prevent="checkRegisterForm" method="post">
                     <!-- <p v-if="register_errors.length" class="errors">
                             <b>Veuillez corriger la ou les erreurs suivantes :</b>
                             <ul>
@@ -255,62 +138,26 @@
                         </div> -->
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            class="form-control modal-input"
-                            type="mail"
-                            name="register_email"
-                            value=""
-                            placeholder="Adresse mail"
-                          />
+                          <input class="form-control modal-input" type="mail" name="register_email" value="" placeholder="Adresse mail" />
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            class="form-control modal-input"
-                            type="password"
-                            autocomplete="off"
-                            name="register_password"
-                            value=""
-                            placeholder="Mot de passe"
-                          />
+                          <input class="form-control modal-input" type="password" autocomplete="off" name="register_password" value="" placeholder="Mot de passe" />
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input
-                            class="form-control modal-input"
-                            type="password"
-                            name="register_password_confirmation"
-                            value=""
-                            placeholder="Confirmation du mot de passe"
-                          />
+                          <input class="form-control modal-input" type="password" name="register_password_confirmation" value="" placeholder="Confirmation du mot de passe" />
                         </div>
                       </div>
                     </div>
-                    <button
-                      class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn incomplete mb-2 mt-0 d-none"
-                    >
-                      S ‘inscrire
-                    </button>
-                    <button
-                      class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-2 mt-0"
-                    >
-                      S ‘inscrire
-                    </button>
+                    <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn incomplete mb-2 mt-0 d-none">S ‘inscrire</button>
+                    <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-2 mt-0">S ‘inscrire</button>
                   </form>
                   <div class="d-flex regist">
-                    <a class="password-link text-center mx-auto" href="#"
-                      >En cliquant, tu acceptes nos
-                      <span class="text-danger text-decoration-underline"
-                        >conditions générales d’utilisation</span
-                      ></a
-                    >
-                    <a
-                      class="ml-auto acc-text d-none d-lg-block"
-                      v-on:click="loginForm"
-                      >J’ai déjà un compte</a
-                    >
+                    <a class="password-link text-center mx-auto" href="#">En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d’utilisation</span></a>
+                    <a class="ml-auto acc-text d-none d-lg-block" v-on:click="loginForm">J’ai déjà un compte</a>
                   </div>
 
                   <h6 class="prefer-text text-center">
@@ -318,118 +165,56 @@
                   </h6>
                   <div class="form-row">
                     <div class="col-12 col-lg-6">
-                      <button
-                        class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"
-                      >
-                        <i
-                          class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"
-                        ></i
-                        >S’inscrire avec Facebook
-                      </button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>S’inscrire avec Facebook</button>
                     </div>
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn">
-                        <i
-                          class="fab fa-google mr-3 h5 mb-0 align-text-bottom"
-                        ></i
-                        >S’inscrire avec Google
-                      </button>
+                      <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>S’inscrire avec Google</button>
                     </div>
                   </div>
                   <div class="form-row d-none">
                     <div class="col-12 col-lg-6">
-                      <button
-                        class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"
-                      >
-                        <i
-                          class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"
-                        ></i
-                        >Connexion avec Facebook
-                      </button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
                     </div>
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn">
-                        <i
-                          class="fab fa-google mr-3 h5 mb-0 align-text-bottom"
-                        ></i
-                        >Connexion avec Google
-                      </button>
+                      <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Google</button>
                     </div>
                   </div>
                   <p class="recaptcha text-center mb-0">
                     Ce site est protégé par reCAPTCHA.
-                    <span class="highlights"
-                      >La politique de confidentialité</span
-                    >
+                    <span class="highlights">La politique de confidentialité</span>
                     et les
-                    <span class="highlights">conditions d’utilisation</span> de
-                    Google s’appliquent.
+                    <span class="highlights">conditions d’utilisation</span> de Google s’appliquent.
                   </p>
                 </div>
               </div>
             </div>
             <div class="right-part dark-content-body d-none d-lg-block">
               <div class="top-block">
-                <img
-                  class="cancel-icon d-none d-lg-block"
-                  fluid
-                  :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')"
-                  type="button"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                />
-                <img
-                  class="logo mx-auto mb-3"
-                  fluid
-                  :src="require('@/assets/images/LOGO_FULL_WHITE.png')"
-                />
+                <img class="cancel-icon d-none d-lg-block" fluid :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" type="button" data-dismiss="modal" aria-label="Close" />
+                <img class="logo mx-auto mb-3" fluid :src="require('@/assets/images/LOGO_FULL_WHITE.png')" />
                 <ul class="list-unstyled mb-0 text-left registor-list mt-3">
                   <li class="row">
                     <div class="col-2 text-center">
-                      <img
-                        class="img-fluid"
-                        fluid
-                        :src="require('@/assets/images/fprint_white.png')"
-                      />
+                      <img class="img-fluid" fluid :src="require('@/assets/images/fprint_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">
-                        Une agence en ligne oui, mais bien humaine je te
-                        rassure. Nous avons à cœur d’accompagner et conseiller
-                        nos Trippers. Fun, rencontres et convivialité assurés !
-                      </p>
+                      <p class="mb-0 registor-points">Une agence en ligne oui, mais bien humaine je te rassure. Nous avons à cœur d’accompagner et conseiller nos Trippers. Fun, rencontres et convivialité assurés !</p>
                     </div>
                   </li>
                   <li class="row">
                     <div class="col-2 text-center">
-                      <img
-                        class="img-fluid"
-                        fluid
-                        :src="require('@/assets/images/lab_white.png')"
-                      />
+                      <img class="img-fluid" fluid :src="require('@/assets/images/lab_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">
-                        Nous accordons beaucoup de temps et d’énergie dans la
-                        création de nos séjours qui se veulent authentiques et
-                        personnalisables. Gagnez en liberté !
-                      </p>
+                      <p class="mb-0 registor-points">Nous accordons beaucoup de temps et d’énergie dans la création de nos séjours qui se veulent authentiques et personnalisables. Gagnez en liberté !</p>
                     </div>
                   </li>
                   <li class="row">
                     <div class="col-2 text-center">
-                      <img
-                        class="img-fluid"
-                        fluid
-                        :src="require('@/assets/images/mic_light.png')"
-                      />
+                      <img class="img-fluid" fluid :src="require('@/assets/images/mic_light.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">
-                        Ce sont les individus avec qui on partage une expérience
-                        unique qui vont la rendre inoubliable. Rejoins toi aussi
-                        la communauté Heaven Trip !
-                      </p>
+                      <p class="mb-0 registor-points">Ce sont les individus avec qui on partage une expérience unique qui vont la rendre inoubliable. Rejoins toi aussi la communauté Heaven Trip !</p>
                     </div>
                   </li>
                 </ul>
@@ -437,48 +222,21 @@
               <div class="bottom-block">
                 <div class="separator-line"></div>
                 <h6 class="profile-text">De l’évasion sportive pour tous !</h6>
-                <ul
-                  class="list-unstyled modal-profile-list mb-0 d-flex justify-content-center align-items-center ml-4"
-                >
+                <ul class="list-unstyled modal-profile-list mb-0 d-flex justify-content-center align-items-center ml-4">
                   <li>
-                    <a href="#"
-                      ><img
-                        class="img-fill"
-                        fluid
-                        :src="require('@/assets/images/ui_faces/1.jpg')"
-                    /></a>
+                    <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /></a>
                   </li>
                   <li>
-                    <a href="#"
-                      ><img
-                        class="img-fill"
-                        fluid
-                        :src="require('@/assets/images/ui_faces/2.jpg')"
-                    /></a>
+                    <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
                   </li>
                   <li>
-                    <a href="#"
-                      ><img
-                        class="img-fill"
-                        fluid
-                        :src="require('@/assets/images/ui_faces/3.jpg')"
-                    /></a>
+                    <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/3.jpg')" /></a>
                   </li>
                   <li>
-                    <a href="#"
-                      ><img
-                        class="img-fill"
-                        fluid
-                        :src="require('@/assets/images/ui_faces/4.jpg')"
-                    /></a>
+                    <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" /></a>
                   </li>
                   <li>
-                    <a href="#"
-                      ><img
-                        class="img-fill"
-                        fluid
-                        :src="require('@/assets/images/ui_faces/2.jpg')"
-                    /></a>
+                    <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
                   </li>
                   <li><span>+1.5k</span></li>
                 </ul>
@@ -496,27 +254,27 @@
 }
 </style>
 <script>
-import axios from "axios";
-import config from "@/components/config";
+import axios from 'axios'
+import config from '@/components/config'
 export default {
-  name: "Login",
-  props: ["loading"],
+  name: 'Login',
+  props: ['loading'],
   model: {
-    prop: "loading",
-    event: "loadingchange",
+    prop: 'loading',
+    event: 'loadingchange'
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      msg: 'Welcome to Your Vue.js App',
       errors: [],
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       register_errors: [],
-      register_email: "",
-      register_password: "",
-      register_password_confirmation: "",
-    };
-  },
+      register_email: '',
+      register_password: '',
+      register_password_confirmation: ''
+    }
+  }
   // methods:{
   //   checkLoginForm: function (e) {
   //     this.$emit('loadingchange', true);
@@ -621,5 +379,5 @@ export default {
   //     return re.test(email);
   //   }
   // }
-};
+}
 </script>

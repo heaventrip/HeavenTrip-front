@@ -33,15 +33,15 @@
 }
 </style>
 <script>
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import MainSection from "@/components/MainSection";
-import Login from "@/components/Login";
-import Profile from "@/components/Profile";
-import SelectADate from "@/components/SelectADate";
-import Password from "@/components/Password";
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import MainSection from '@/components/MainSection'
+import Login from '@/components/Login'
+import Profile from '@/components/Profile'
+import SelectADate from '@/components/SelectADate'
+import Password from '@/components/Password'
 export default {
-  name: "HomePage",
+  name: 'HomePage',
   components: {
     Header,
     MainSection,
@@ -49,15 +49,15 @@ export default {
     Login,
     Profile,
     SelectADate,
-    Password,
+    Password
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-      loading: false,
-    };
-  },
-};
+      msg: 'Welcome to Your Vue.js App',
+      loading: false
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

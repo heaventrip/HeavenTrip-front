@@ -1,23 +1,28 @@
 <template>
   <div>
-    <ProductHeader />
-    <div class="main-product-content">
-      <ProductNav />
-      <ProductNav2 />
-    </div>
-    <ProductSection />
-    <ProductFooter />
-    <ProductModal />
+    <ActivityHeader />
+    <main class="main-product-content">
+      <ActivityNav />
+      <ActivityNav2 />
+    </main>
+    <ActivitySection />
+    <ActivityFooter />
+    <ActivityModal />
   </div>
 </template>
-
+<style>
+/* @import "../../assets/dist/datepicker.min.css"; NOTE OLD IMPORTS
+@import "../../assets/dist/css/default/zebra_datepicker.min.css";
+<script src="../../assets/dist/zebra_datepicker.min.js"></script>
+<script src="../../assets/dist/zebra_datepicker.src.js"></script> */
+</style>
 <script>
-import ProductHeader from '@/components/product/ProductHeader'
-import ProductNav from '@/components/product/ProductNav'
-import ProductNav2 from '@/components/product/ProductNav2'
-import ProductFooter from '@/components/product/ProductFooter'
-import ProductSection from '@/components/product/ProductSection'
-import ProductModal from '@/components/product/ProductModal'
+import ActivityHeader from '@/components/activity/ActivityHeader'
+import ActivityNav from '@/components/activity/ActivityNav'
+import ActivityNav2 from '@/components/activity/ActivityNav2'
+import ActivityFooter from '@/components/activity/ActivityFooter'
+import ActivitySection from '@/components/product/ActivitySection'
+import ActivityModal from '@/components/activity/ActivityModal'
 
 export default {
   name: 'ProductHome',
@@ -198,7 +203,7 @@ export default {
       value++
       document.getElementById('number').value = value
 
-      // var value = parseInt(document.getElementById("countNumber").value, 10);
+      // var value = parseInt(document.getElementById("countNumber").value, 10); # NOTE was an error
       value = isNaN(value) ? 0 : value
       // value > 2 ? value = 2 : '';
       if (value > 1) {
@@ -227,7 +232,7 @@ export default {
       value--
       document.getElementById('number').value = value
 
-      // var value = parseInt(document.getElementById("countNumber").value, 10);
+      // var value = parseInt(document.getElementById("countNumber").value, 10); NOTE was an error
       value = isNaN(value) ? 0 : value
       value < 1 ? (value = 1) : ''
       value--
@@ -235,12 +240,12 @@ export default {
     }
   },
   components: {
-    ProductHeader,
-    ProductNav,
-    ProductNav2,
-    ProductFooter,
-    ProductSection,
-    ProductModal
+    ActivityHeader,
+    ActivityNav,
+    ActivityNav2,
+    ActivityFooter,
+    ActivitySection,
+    ActivityModal
   },
   data() {
     return {

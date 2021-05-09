@@ -5,19 +5,19 @@
   </div>
 </template>
 <script>
-import CheckOutHeader from "@/components/checkout/CheckOutHeader";
-import CheckOutSections from "@/components/checkout/CheckOutSections";
+import CheckOutHeader from '@/components/checkout/CheckOutHeader'
+import CheckOutSections from '@/components/checkout/CheckOutSections'
 
 export default {
-  name: "CheckOutHome",
+  name: 'CheckOutHome',
   components: {
     CheckOutHeader,
-    CheckOutSections,
+    CheckOutSections
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-    };
-  },
-};
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
 </script>

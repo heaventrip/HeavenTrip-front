@@ -6,23 +6,23 @@
   </div>
 </template>
 <script>
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import MainContentSection from "@/components/legal/MainContentSection";
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import MainContentSection from '@/components/legal/MainContentSection'
 
 export default {
-  name: "Legal",
+  name: 'Legal',
   components: {
     Header,
     Footer,
-    MainContentSection,
+    MainContentSection
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-    };
-  },
-};
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

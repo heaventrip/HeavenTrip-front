@@ -4,17 +4,17 @@
   </div>
 </template>
 <script>
-import LoginHeader from "@/components/login/LoginHeader";
+import LoginHeader from '@/components/login/LoginHeader'
 
 export default {
-  name: "LoginPage",
+  name: 'LoginPage',
   components: {
-    LoginHeader,
+    LoginHeader
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-    };
-  },
-};
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
 </script>
