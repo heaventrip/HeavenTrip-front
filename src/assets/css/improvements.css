@@ -1569,7 +1569,7 @@
     max-width: 150px; 
   }
   .login-modal .separator-line{
-    border-bottom: 1px dashed #292F334d;
+    border-bottom: 1.8px dashed #292f3344;
     margin: 28px 0;
   }
   .position-pink{

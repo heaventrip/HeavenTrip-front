@@ -7,14 +7,14 @@
             <div class="left-part">
               <div class="modal-content-head">
                 <h6 class="modal-heading mb-0"><span>CONNEXION</span></h6>
-                <h6 class="modal-heading mb-0 d-none">
+                <!-- <h6 class="modal-heading mb-0 d-none">
                   <span>INSCRIPITON</span>
-                </h6>
+                </h6> -->
                 <div class="border-left border-white text-white cancel-block d-lg-none" data-dismiss="modal" aria-label="Close">
                   <i class="fa fa-times h5 mb-0"></i>
                 </div>
               </div>
-              <ul class="d-none list-unstyled mb-0 text-left registor-mobile-list text-uppercase">
+              <!-- <ul class="d-none list-unstyled mb-0 text-left registor-mobile-list text-uppercase">
                 <li class="row">
                   <div class="col-3 text-center">
                     <img class="img-fluid" fluid :src="require('@/assets/images/fprint_white.png')" />
@@ -48,7 +48,7 @@
                     </p>
                   </div>
                 </li>
-              </ul>
+              </ul> -->
               <div class="modal-content-body bg-white">
                 <div class="login_form">
                   <div class="row">
@@ -59,7 +59,7 @@
                       <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Google</button>
                     </div>
                   </div>
-                  <h6 class="prefer-text text-uppercase font-weight-bold my-5 text-center">
+                  <h6 class="prefer-text text-uppercase font-weight-bold my-4 text-center">
                     <span>Ou par adresse mail</span>
                   </h6>
                   <div class="row">
@@ -84,30 +84,9 @@
                             </div>
                           </div>
                         </div>
-                        <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-5 mt-0">SE CONNECTER</button>
+                        <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-4 mt-0">SE CONNECTER</button>
                       </form>
                     </div>
-                  </div>
-                  <div class="bottom-block">
-                    <h6 class="profile-text text-center">De l’évasion sportive pour tous !</h6>
-                    <ul class="list-unstyled modal-profile-list mb-4 d-flex justify-content-center align-items-center ml-4">
-                      <li>
-                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /></a>
-                      </li>
-                      <li>
-                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
-                      </li>
-                      <li>
-                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/3.jpg')" /></a>
-                      </li>
-                      <li>
-                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" /></a>
-                      </li>
-                      <li>
-                        <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
-                      </li>
-                      <li><span>+1.5k</span></li>
-                    </ul>
                   </div>
                   <h6 class="prefer-text text-center">
                     <span>Pas encore de compte ?</span>
@@ -194,7 +173,7 @@
                 <img class="logo mx-auto mb-3" fluid :src="require('@/assets/images/LOGO_FULL_WHITE.png')" />
                 <ul class="list-unstyled mb-0 text-left registor-list mt-3">
                   <li class="row">
-                    <div class="col-2 text-center">
+                    <div class="col-2 text-center m-auto">
                       <img class="img-fluid" fluid :src="require('@/assets/images/fprint_white.png')" />
                     </div>
                     <div class="col-10">
@@ -202,7 +181,7 @@
                     </div>
                   </li>
                   <li class="row">
-                    <div class="col-2 text-center">
+                    <div class="col-2 text-center m-auto">
                       <img class="img-fluid" fluid :src="require('@/assets/images/lab_white.png')" />
                     </div>
                     <div class="col-10">
@@ -210,7 +189,7 @@
                     </div>
                   </li>
                   <li class="row">
-                    <div class="col-2 text-center">
+                    <div class="col-2 text-center m-auto">
                       <img class="img-fluid" fluid :src="require('@/assets/images/mic_light.png')" />
                     </div>
                     <div class="col-10">
@@ -274,110 +253,120 @@ export default {
       register_password: '',
       register_password_confirmation: ''
     }
+  },
+  methods: {
+    // checkLoginForm: function (e) {
+    //   this.$emit('loadingchange', true)
+    //   e.preventDefault()
+    //   this.errors = []
+    //   if (!this.validEmail(this.email)) {
+    //     this.errors.push('Veuillez saisir une adresse e-mail valide.')
+    //   } else if (this.password === '') {
+    //     this.errors.push('Veuillez saisir votre mot de passe.')
+    //   } else {
+    //     NProgress.start()
+    //     axios
+    //       .post(
+    //         config.API_URL + `/login`,
+    //         {
+    //           user: {
+    //             email: this.email,
+    //             password: this.password
+    //           }
+    //         },
+    //         {
+    //           headers: {
+    //             // Overwrite Axios's automatically set Content-Type
+    //             'Content-Type': 'application/json'
+    //           }
+    //         }
+    //       )
+    //       .then((response) => {
+    //         NProgress.done()
+    //         console.log(response)
+    //         console.log(response)
+    //         alert('Connexion réussie')
+    //         localStorage.setItem('user-token', response.data.auth_token)
+    //         localStorage.setItem('email', this.email)
+    //         window.location.reload()
+    //       })
+    //       .catch((e) => {
+    //         NProgress.done()
+    //         localStorage.removeItem('user-token')
+    //         console.log(e.response.data)
+    //         if (e.response.data.error) {
+    //           this.errors.push(e.response.data.error)
+    //         } else {
+    //           console.log(e.response.data.message)
+    //           this.errors.push(e.response.data.message)
+    //         }
+    //       })
+    //     // this.$router.push('/');
+    //   }
+    // },
+    registerForm: function (e) {
+      e.preventDefault()
+      $('.login_form').addClass('d-none')
+      $('.register_form').removeClass('d-none')
+    },
+    loginForm: function (e) {
+      e.preventDefault()
+      $('.register_form').addClass('d-none')
+      $('.login_form').removeClass('d-none')
+    },
+    checkRegisterForm: function (e) {
+      e.preventDefault()
+      this.register_errors = []
+      if (!this.validEmail(this.register_email)) {
+        this.register_errors.push('Veuillez saisir une adresse e-mail valide.')
+      } else if (this.register_password === '') {
+        this.register_errors.push('Veuillez saisir votre mot de passe.')
+      } else if (this.register_password !== this.register_password_confirmation) {
+        this.register_errors.push('Veuillez saisir le mot de passe et confirmer le même mot de passe.')
+      } else {
+        axios
+          .post(
+            config.API_URL + `/registration`,
+            {
+              user: {
+                email: this.register_email,
+                password: this.register_password,
+                password_confirmation: this.register_password_confirmation
+              }
+            },
+            {
+              headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/json'
+              }
+            }
+          )
+          .then((response) => {
+            console.log(response)
+            console.log(response)
+            alert('Inscription réussie. Veuillez vérifier l’email ' + this.register_email + ' et confirmer l’inscription puis connectez-vous.')
+            this.register_email = ''
+            this.register_password = ''
+            this.register_password_confirmation = ''
+            $('.register_form').addClass('d-none')
+            $('.login_form').removeClass('d-none')
+          })
+          .catch((e) => {
+            console.log(e.response.data)
+            if (e.response.data.error) {
+              this.register_errors.push(e.response.data.error)
+            } else {
+              console.log(e.response.data.message)
+              this.register_errors.push(e.response.data.message)
+            }
+          })
+        // this.$router.push('/');
+      }
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(email)
+    }
   }
-  // methods:{
-  //   checkLoginForm: function (e) {
-  //     this.$emit('loadingchange', true);
-  //     e.preventDefault();
-  //     this.errors = [];
-  //     if (!this.validEmail(this.email)) {
-  //       this.errors.push('Veuillez saisir une adresse e-mail valide.');
-  //     }else if (this.password === '') {
-  //       this.errors.push('Veuillez saisir votre mot de passe.');
-  //     }else {
-  //       NProgress.start()
-  //       axios.post(config.API_URL+`/login`, {
-  //         "user":{
-  //             email:this.email,
-  //             password:this.password
-  //           }
-  //         }, {
-  //           headers: {
-  //             // Overwrite Axios's automatically set Content-Type
-  //             'Content-Type': 'application/json'
-  //           }
-  //         })
-  //       .then(response => {
-  //         NProgress.done()
-  //         console.log(response);
-  //         console.log(response);
-  //         alert("Connexion réussie");
-  //         localStorage.setItem('user-token', response.data.auth_token);
-  //         localStorage.setItem('email', this.email);
-  //         window.location.reload();
-  //       })
-  //       .catch(e => {
-  //         NProgress.done()
-  //         localStorage.removeItem('user-token')
-  //         console.log(e.response.data);
-  //         if(e.response.data.error){
-  //           this.errors.push(e.response.data.error)
-  //         }else{
-  //           console.log(e.response.data.message);
-  //           this.errors.push(e.response.data.message)
-  //         }
-  //       })
-  //       // this.$router.push('/');
-  //     }
-  //   },
-  //   registerForm:function (e) {
-  //     e.preventDefault();
-  //     $(".login_form").addClass("d-none");
-  //     $(".register_form").removeClass("d-none");
-  //   },
-  //   loginForm:function (e) {
-  //     e.preventDefault();
-  //     $(".register_form").addClass("d-none");
-  //     $(".login_form").removeClass("d-none");
-  //   },
-  //   checkRegisterForm: function (e) {
-  //     e.preventDefault();
-  //     this.register_errors = [];
-  //     if (!this.validEmail(this.register_email)) {
-  //       this.register_errors.push('Veuillez saisir une adresse e-mail valide.');
-  //     }else if (this.register_password === '') {
-  //       this.register_errors.push('Veuillez saisir votre mot de passe.');
-  //     }else if (this.register_password !== this.register_password_confirmation) {
-  //       this.register_errors.push('Veuillez saisir le mot de passe et confirmer le même mot de passe.');
-  //     }else {
-  //       axios.post(config.API_URL+`/registration`, {
-  //         "user":{
-  //             email:this.register_email,
-  //             password:this.register_password,
-  //             password_confirmation:this.register_password_confirmation
-  //           }
-  //         }, {
-  //           headers: {
-  //             // Overwrite Axios's automatically set Content-Type
-  //             'Content-Type': 'application/json'
-  //           }
-  //         })
-  //       .then(response => {
-  //         console.log(response);
-  //         console.log(response);
-  //         alert("Inscription réussie. Veuillez vérifier l’email "+this.register_email+" et confirmer l’inscription puis connectez-vous.")
-  //         this.register_email = "";
-  //         this.register_password = "";
-  //         this.register_password_confirmation = "";
-  //        $(".register_form").addClass("d-none");
-  //         $(".login_form").removeClass("d-none");
-  //       })
-  //       .catch(e => {
-  //         console.log(e.response.data);
-  //         if(e.response.data.error){
-  //           this.register_errors.push(e.response.data.error)
-  //         }else{
-  //           console.log(e.response.data.message);
-  //           this.register_errors.push(e.response.data.message)
-  //         }
-  //       })
-  //       // this.$router.push('/');
-  //     }
-  //   },
-  //   validEmail: function (email) {
-  //     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //     return re.test(email);
-  //   }
-  // }
 }
 </script>

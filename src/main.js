@@ -6,18 +6,18 @@
 // import '../assets/dist/zebra_datepicker.min.js';
 // import '../assets/dist/zebra_datepicker.src.js';
 // import '../assets/js/product.js';
-import "./assets/css/sol.css";
-import "./assets/css/datepicker.min.css";
-import "./assets/css/zebra_datepicker.min.css";
-import "./assets/css/style.css";
+import './assets/css/sol.css'
+import './assets/css/datepicker.min.css'
+import './assets/css/zebra_datepicker.min.css'
+import './assets/css/style.css'
 
 // import "./assets/js/sol.js"; // NOTE used for MULTIPLE SELECTIONS
 // import "./assets/js/jquery.creditCardValidator.js";
 // import "./assets/js/search.js"; // NOTE used in SEARCH COMPONENTS
 // import "./assets/js/checkout.js"; // NOTE used no where for now
 
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).mount('#app')
