@@ -1952,8 +1952,6 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 .bg-white.box .head-pin-icon {
   width: 45px;
 }
-.box .list{
-}
 .box .list li a{
   font-size: .875rem;
   font-weight: 400;
@@ -2526,7 +2524,7 @@ button.Zebra_DatePicker_Icon{
   padding: 0px!important;
   font-family: 'Oswald', sans-serif;
   width: 100%!important;
-  top: auto!important!important;
+  top: auto!important;
   bottom: 115px!important;
   box-shadow: 0px 3px 6px #00000029!important;
 }
@@ -2585,7 +2583,7 @@ button.Zebra_DatePicker_Icon{
   background: #ffffff!important;
   color: #AAAAAA!important;
 }
-.Zebra_DatePicker .dp_body .dp_disabled.dp_current, {
+.Zebra_DatePicker .dp_body .dp_disabled.dp_current {
   color: #ffffff!important;
 }
 .Zebra_DatePicker .dp_actions .dp_hover {
@@ -2622,7 +2620,7 @@ button.Zebra_DatePicker_Icon{
   border:none!important;
   height: 21px!important;
   padding: 0!important;
-  padding-right: 0!important!important;
+  padding-right: 0!important;
   text-align: right!important;
   margin-top: 4px!important;
 }
