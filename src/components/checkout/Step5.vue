@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="tab-pane fade login-signup-tab"
-    id="step5"
-    role="tabpanel"
-    aria-labelledby="step5-tab"
-  >
+  <div class="tab-pane fade login-signup-tab" id="step5" role="tabpanel" aria-labelledby="step5-tab">
     <div class="row">
       <div class="col-12 col-lg-7">
         <Step5Module1 />
@@ -19,66 +14,63 @@
 </template>
 
 <script>
-import { loadStripe } from "@stripe/stripe-js";
-import Step5Module1 from "./Step5Module1.vue";
-import Step5Module2 from "./Step5Module2.vue";
-import Step5Module3 from "./Step5Module3.vue";
-import Step5Module4 from "./Step5Module4.vue";
+import { loadStripe } from '@stripe/stripe-js'
+import Step5Module1 from './Step5Module1.vue'
+import Step5Module2 from './Step5Module2.vue'
+import Step5Module3 from './Step5Module3.vue'
+import Step5Module4 from './Step5Module4.vue'
 export default {
-  name: "Step5",
+  name: 'Step5',
   components: {
     Step5Module1,
     Step5Module2,
     Step5Module3,
-    Step5Module4,
+    Step5Module4
   },
   methods: {
     async processPayment() {
-      const stripe = await loadStripe(
-        "pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa"
-      );
+      const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
 
       // const response = await fetch("http://localhost:3000/api/v1/secret");
       // const { client_secret: clientSecret } = await response.json();
       // // Render the form to collect payment details, then
       // // call stripe.confirmCardPayment() with the client secret.
-      const clientSecret =
-        "pi_1IpIgVLutaKCaG86LgQ30D84_secret_LwjUFfypRB3wz4SexQNv7NgrT";
+      const clientSecret = 'pi_1IpIgVLutaKCaG86LgQ30D84_secret_LwjUFfypRB3wz4SexQNv7NgrT'
 
-      (function () {
-        "use strict";
+      ;(function () {
+        'use strict'
 
-        const elements = stripe.elements();
+        const elements = stripe.elements()
 
-        var cardNumber = elements.create("cardNumber", {
+        var cardNumber = elements.create('cardNumber', {
           style: elementStyles,
-          classes: elementClasses,
-        });
-        cardNumber.mount("#example2-card-number");
+          classes: elementClasses
+        })
+        cardNumber.mount('#example2-card-number')
 
-        var cardExpiry = elements.create("cardExpiry", {
+        var cardExpiry = elements.create('cardExpiry', {
           style: elementStyles,
-          classes: elementClasses,
-        });
-        cardExpiry.mount("#example2-card-expiry");
+          classes: elementClasses
+        })
+        cardExpiry.mount('#example2-card-expiry')
 
-        var cardCvc = elements.create("cardCvc", {
+        var cardCvc = elements.create('cardCvc', {
           style: elementStyles,
-          classes: elementClasses,
-        });
-        cardCvc.mount("#example2-card-cvc");
+          classes: elementClasses
+        })
+        cardCvc.mount('#example2-card-cvc')
 
-        var form = document.getElementById("payment-form");
-        var errors = document.getElementById("card-errors");
-        form.addEventListener("submit", function (ev) {
-          ev.preventDefault();
+        var form = document.getElementById('payment-form')
+        var errors = document.getElementById('card-errors')
+        form.addEventListener('submit', function (ev) {
+          ev.preventDefault()
           // If the client secret was rendered server-side as a data-secret attribute
           // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
           // eslint-disable-next-line prettier/prettier
           stripe.confirmCardPayment(clientSecret, {
               payment_method: {
-                card: cardNumber,
-              },
+                card: cardNumber
+              }
             })
             .then(function (result) {
               // eslint-disable-next-line prettier/prettier
@@ -89,7 +81,7 @@ export default {
                 errors.textContent = result.error.message;
               } else {
                 // The payment has been processed!
-                if (result.paymentIntent.status === "succeeded") {
+                if (result.paymentIntent.status === 'succeeded') {
                   // eslint-disable-next-line prettier/prettier
                   console.log(result.paymentIntent);
                   // Show a success message to your customer
@@ -99,52 +91,52 @@ export default {
                   // post-payment actions.
                 }
               }
-            });
-        });
+            })
+        })
 
         var elementStyles = {
           base: {
-            color: "#fff",
+            color: '#fff',
             fontWeight: 600,
-            fontFamily: "Quicksand, Open Sans, Segoe UI, sans-serif",
-            fontSize: "16px",
-            fontSmoothing: "antialiased",
+            fontFamily: 'Quicksand, Open Sans, Segoe UI, sans-serif',
+            fontSize: '16px',
+            fontSmoothing: 'antialiased',
 
-            ":focus": {
-              color: "#424770",
+            ':focus': {
+              color: '#424770'
             },
 
-            "::placeholder": {
-              color: "#9BACC8",
+            '::placeholder': {
+              color: '#9BACC8'
             },
 
-            ":focus::placeholder": {
-              color: "#CFD7DF",
-            },
+            ':focus::placeholder': {
+              color: '#CFD7DF'
+            }
           },
           invalid: {
-            color: "#fff",
-            ":focus": {
-              color: "#FA755A",
+            color: '#fff',
+            ':focus': {
+              color: '#FA755A'
             },
-            "::placeholder": {
-              color: "#FFCCA5",
-            },
-          },
-        };
+            '::placeholder': {
+              color: '#FFCCA5'
+            }
+          }
+        }
 
         var elementClasses = {
-          focus: "focus",
-          empty: "empty",
-          invalid: "invalid",
-        };
-      })();
-    },
+          focus: 'focus',
+          empty: 'empty',
+          invalid: 'invalid'
+        }
+      })()
+    }
   },
   mounted() {
-    this.processPayment();
-  },
-};
+    this.processPayment()
+  }
+}
 </script>
 
 <style>
