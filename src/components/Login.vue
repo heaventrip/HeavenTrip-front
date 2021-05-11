@@ -56,7 +56,15 @@
                       <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
                     </div>
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Google</button>
+                      <button class="btn btn-block rounded-0 social-btn">
+                        <svg class="mr-3 h5 mb-0 align-text-bottom" id="Groupe_90" data-name="Groupe 90" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                          <path id="Tracé_2140" data-name="Tracé 2140" d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z" transform="translate(0 -132.327)" fill="#fbbb00" />
+                          <path id="Tracé_2141" data-name="Tracé 2141" d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z" transform="translate(-250.386 -199.231)" fill="#518ef8" />
+                          <path id="Tracé_2142" data-name="Tracé 2142" d="M47.084,315.692h0a11,11,0,0,1-16.575-3.365l3.565-2.918a6.542,6.542,0,0,0,9.427,3.35Z" transform="translate(-29.198 -296.114)" fill="#28b446" />
+                          <path id="Tracé_2143" data-name="Tracé 2143" d="M45.415,2.532,41.852,5.45a6.541,6.541,0,0,0-9.644,3.425L28.625,5.941h0A11,11,0,0,1,45.415,2.532Z" transform="translate(-27.394)" fill="#f14336" />
+                        </svg>
+                        S'inscrire avec Google
+                      </button>
                     </div>
                   </div>
                   <h6 class="prefer-text text-uppercase font-weight-bold my-4 text-center">
@@ -84,18 +92,19 @@
                             </div>
                           </div>
                         </div>
-                        <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-4 mt-0">SE CONNECTER</button>
+                        <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-4 mt-0 incomplete">SE CONNECTER</button>
                       </form>
                     </div>
                   </div>
                   <h6 class="prefer-text text-center">
                     <span>Pas encore de compte ?</span>
                   </h6>
-                  <button class="d-none btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0">s’INSCRIRE</button>
+                  <button class="d-none btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0">s'INSCRIRE</button>
                   <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0" v-on:click="registerForm">INSCRIPTION</button>
                 </div>
-                <div class="register_form d-none">
-                  <p class="content-head">Merci de remplir tous les champs pour valider votre inscription :</p>
+                <!-- NOTE toggle to flex  -->
+                <div class="register_form h-100 d-none flex-column">
+                  <p class="text-left content-head">Merci de remplir tous les champs pour valider votre inscription :</p>
                   <form id="register_submit_form" v-on:submit.prevent="checkRegisterForm" method="post">
                     <!-- <p v-if="register_errors.length" class="errors">
                             <b>Veuillez corriger la ou les erreurs suivantes :</b>
@@ -104,67 +113,65 @@
                             </ul>
                           </p> -->
                     <div class="row">
-                      <!-- <div class="col-12 col-lg-5">
-                          <div class="form-group position-relative">
-                            <input class="form-control modal-input" type="text" name="" value="Axel">
-                            <i class="fa fa-check check-sym"></i>
-                          </div>
-                        </div> -->
-                      <!-- <div class="col-12 col-lg-7">
-                          <div class="form-group">
-                            <input class="form-control modal-input" type="text" name="" value="" placeholder="Nom">
-                          </div>
-                        </div> -->
+                      <div class="col-12 col-lg-6">
+                        <div class="form-group position-relative">
+                          <input class="form-control modal-input" type="text" name="" value="" placeholder="Prénom" />
+                          <i class="fa fa-check check-sym"></i>
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                          <input class="form-control modal-input" type="text" name="" value="" placeholder="Nom" />
+                        </div>
+                      </div>
                       <div class="col-12">
                         <div class="form-group">
                           <input class="form-control modal-input" type="mail" name="register_email" value="" placeholder="Adresse mail" />
                         </div>
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 col-lg-6">
                         <div class="form-group">
                           <input class="form-control modal-input" type="password" autocomplete="off" name="register_password" value="" placeholder="Mot de passe" />
                         </div>
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input class="form-control modal-input" type="password" name="register_password_confirmation" value="" placeholder="Confirmation du mot de passe" />
+                          <input class="form-control modal-input" type="password" name="register_password_confirmation" value="" placeholder="Confirmer le mot de passe" />
                         </div>
                       </div>
                     </div>
-                    <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn incomplete mb-2 mt-0 d-none">S ‘inscrire</button>
-                    <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-2 mt-0">S ‘inscrire</button>
+                    <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-2 mt-0 incomplete">S'inscrire</button>
                   </form>
-                  <div class="d-flex regist">
-                    <a class="password-link text-center mx-auto" href="#">En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d’utilisation</span></a>
-                    <a class="ml-auto acc-text d-none d-lg-block" v-on:click="loginForm">J’ai déjà un compte</a>
+                  <div class="d-flex regist mb-4">
+                    <a class="password-link mr-auto" href="#">En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d'utilisation</span></a>
+                    <a class="ml-auto acc-text d-none d-lg-block" v-on:click="loginForm">J'ai déjà un compte</a>
                   </div>
-
                   <h6 class="prefer-text text-center">
-                    <span>Ou si tu préfères…</span>
+                    <span>Ou si tu préfères par</span>
                   </h6>
                   <div class="form-row">
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>S’inscrire avec Facebook</button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>S'inscrire avec Facebook</button>
                     </div>
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>S’inscrire avec Google</button>
+                      <button class="btn btn-block rounded-0 social-btn">
+                        <svg class="mr-3 h5 mb-0 align-text-bottom" id="Groupe_90" data-name="Groupe 90" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                          <path id="Tracé_2140" data-name="Tracé 2140" d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z" transform="translate(0 -132.327)" fill="#fbbb00" />
+                          <path id="Tracé_2141" data-name="Tracé 2141" d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z" transform="translate(-250.386 -199.231)" fill="#518ef8" />
+                          <path id="Tracé_2142" data-name="Tracé 2142" d="M47.084,315.692h0a11,11,0,0,1-16.575-3.365l3.565-2.918a6.542,6.542,0,0,0,9.427,3.35Z" transform="translate(-29.198 -296.114)" fill="#28b446" />
+                          <path id="Tracé_2143" data-name="Tracé 2143" d="M45.415,2.532,41.852,5.45a6.541,6.541,0,0,0-9.644,3.425L28.625,5.941h0A11,11,0,0,1,45.415,2.532Z" transform="translate(-27.394)" fill="#f14336" />
+                        </svg>
+                        S'inscrire avec Google
+                      </button>
                     </div>
                   </div>
-                  <div class="form-row d-none">
-                    <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Google</button>
-                    </div>
-                  </div>
-                  <p class="recaptcha text-center mb-0">
-                    Ce site est protégé par reCAPTCHA.
-                    <span class="highlights">La politique de confidentialité</span>
-                    et les
-                    <span class="highlights">conditions d’utilisation</span> de Google s’appliquent.
-                  </p>
                 </div>
+                <p class="recaptcha text-center mb-0">
+                  Ce site est protégé par reCAPTCHA.
+                  <span class="highlights">La politique de confidentialité</span>
+                  et les
+                  <span class="highlights">conditions d'utilisation</span> de Google s'appliquent.
+                </p>
               </div>
             </div>
             <div class="right-part dark-content-body d-none d-lg-block">
@@ -177,7 +184,7 @@
                       <img class="img-fluid" fluid :src="require('@/assets/images/fprint_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">Une agence en ligne oui, mais bien humaine je te rassure. Nous avons à cœur d’accompagner et conseiller nos Trippers. Fun, rencontres et convivialité assurés !</p>
+                      <p class="mb-0 registor-points">Une agence en ligne oui, mais bien humaine je te rassure. Nous avons à cœur d'accompagner et conseiller nos Trippers. Fun, rencontres et convivialité assurés !</p>
                     </div>
                   </li>
                   <li class="row">
@@ -185,7 +192,7 @@
                       <img class="img-fluid" fluid :src="require('@/assets/images/lab_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">Nous accordons beaucoup de temps et d’énergie dans la création de nos séjours qui se veulent authentiques et personnalisables. Gagnez en liberté !</p>
+                      <p class="mb-0 registor-points">Nous accordons beaucoup de temps et d'énergie dans la création de nos séjours qui se veulent authentiques et personnalisables. Gagnez en liberté !</p>
                     </div>
                   </li>
                   <li class="row">
@@ -200,7 +207,7 @@
               </div>
               <div class="bottom-block">
                 <div class="separator-line"></div>
-                <h6 class="profile-text">De l’évasion sportive pour tous !</h6>
+                <h6 class="profile-text">De l'évasion sportive pour tous !</h6>
                 <ul class="list-unstyled modal-profile-list mb-0 d-flex justify-content-center align-items-center ml-4">
                   <li>
                     <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /></a>
@@ -344,7 +351,7 @@ export default {
           .then((response) => {
             console.log(response)
             console.log(response)
-            alert('Inscription réussie. Veuillez vérifier l’email ' + this.register_email + ' et confirmer l’inscription puis connectez-vous.')
+            alert("Inscription réussie. Veuillez vérifier l'email ' + this.register_email + ' et confirmer l'inscription puis connectez-vous.")
             this.register_email = ''
             this.register_password = ''
             this.register_password_confirmation = ''

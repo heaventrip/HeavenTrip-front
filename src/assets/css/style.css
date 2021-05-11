@@ -61,6 +61,9 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 .bg-dark,.btn-dark {
   background-color: #292f33!important;
 }
+.btn-dark:not(.incomplete):hover {
+  background-color: #d82558!important;
+}
 .font-weight-500{
   font-weight: 500;
 }
@@ -636,7 +639,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 }
 .header .nav-btn{
   border: 1px solid hsla(0,0%,98%,.5);
-  font-size: .75rem;
+  font-size: .85rem;
   font-weight: 800;
   padding: 26px 16px;
   letter-spacing: 1.2px;
@@ -645,7 +648,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   padding: 0;
 }
 .header .profile-menu{
-	font-size: 0.750rem;
+	font-size: .85rem;
   letter-spacing: 0.6px;
   font-weight: 400;
 }
@@ -898,8 +901,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   display: flex;
   background-color: #793F4E;
 }
-.login-modal .modal-heading,
-.prefer-text{
+.login-modal .modal-heading {
   font-size: 1rem;
   font-weight: bold;
   line-height: 24px;
@@ -910,13 +912,23 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   padding: 20px 30px;
   flex: 1;
 }
-.prefer-text{
-  padding: 0;
+/* .login-modal .prefer-text{
+  padding: 20px 30px;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.8px;
+  line-height: 24px;
+  text-align: center;
+  position: relative;
+} */
+.login-modal .prefer-text{
+  padding: 20px 30px;
   color: #292F33;
   font-weight: 400;
-  letter-spacing: 0;
   font-size: .875rem;
-  margin-bottom: 16px;
+  letter-spacing: 0;
+  position: relative;
 }
 .login-modal .modal-content-head .cancel-block{
   padding: 20px 30px;
@@ -949,14 +961,17 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   border-bottom: 1px solid #292f3341;
 }
 .login-modal .modal-content-body{
-  padding: 50px 60px;
+  padding: 30px 60px;
   background-color: #ffffff;
   color: #292F33;
   font-weight: 400;
+  height: 600px;
+}
+.login-modal .modal-content-body-small{
+  height: unset;
 }
 .login-modal .modal-content-body .content-head{
   font-size: 13px;
-  margin-bottom: 25px;
 }
 .login-modal .modal-content-body .modal-input{
   box-shadow: 0px 2px 4px #0000000D;
@@ -980,10 +995,6 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   color: #7C7C7C;
   font-size: .625rem;
   font-family: 'Muli', sans-serif;
-  margin-bottom: 50px;
-}
-.login-modal .modal-content-body .regist .password-link{
-  margin-bottom: 30px;
 }
 .login-modal .modal-content-body .acc-text{
   font-size: .75rem;
@@ -1029,8 +1040,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   color: #FFFFFF;
 }
 .fb-btn:hover {
-  background-color: #292F33;
-  border-color: #292F33;
+  background-color: #D82558;
   color: #ffffff; 
 }
 .login-modal .modal-content-body .recaptcha{
@@ -1040,8 +1050,6 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   letter-spacing: -0.3px;
   color: #B4B4B4;
   margin: 0 -15px;
-  position: relative;
-  top: 30px;
 }
 .login-modal .modal-content-body .recaptcha .highlights{
   color: #B57B7B;
@@ -1139,11 +1147,11 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 .login-modal.profile-modal .modal-content-body .btn-group .btn:hover{
   background-color: #D82558;
 }
-.login-modal.profile-modal .modal-content-body .btn-group .btn.active{
-  background-color: #793F4E;
+/* .login-modal.profile-modal .modal-content-body .btn-group .btn.active{
+  background-color: #D82558;
   outline: none;
   box-shadow: none;
-}
+} */
 .info-textarea{
   background: radial-gradient(#FFFFFF, #FCFCFCCC);
   color: #B4B4B4;
@@ -1159,9 +1167,9 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 }
 .login-modal.profile-modal .modal-content-body .profile-btm-text{
   font-size: .75rem;
-  font-weight: 400;
+  font-weight: 500;
   position: relative;
-  top: 30px;
+  top: 15px;
   color: #292F33;
 }
 .login-modal.profile-modal .modal-content-body .info-text-small{

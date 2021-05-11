@@ -74,11 +74,6 @@
   border-radius: 0px 0px 0px 5px;
   font-weight: bold;
 }
-
-
-.login-modal .modal-content-body .regist .password-link{
-  margin-bottom: 20px;
-}
 .login-modal .modal-content-body .acc-text{
   font-size: 1rem;
   color: #292F33;
