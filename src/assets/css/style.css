@@ -8,7 +8,7 @@ p{
 	font-family: 'Muli', sans-serif;
   font-weight: 300;
 	font-size: .75rem;
-	line-height: 2;
+	line-height: 1.8;
 }
 hr {
   margin-top: 3rem;
@@ -39,8 +39,12 @@ a:hover{
 }
 .btn-danger,.btn-danger:hover,.btn:hover,.btn-danger:not(:disabled):not(.disabled):active {
   color: #fff;
-  background-color: #d82558;
-  border-color: #d82558;
+  background-color: #d82558 !important;
+  border-color: #d82558 !important;
+}
+.btn-danger:hover{
+  background-color: #292F33 !important;
+  border-color: #292F33 !important;
 }
 button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 	box-shadow: none;
@@ -639,7 +643,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 }
 .header .nav-btn{
   border: 1px solid hsla(0,0%,98%,.5);
-  font-size: .85rem;
+  font-size: .75rem;
   font-weight: 800;
   padding: 26px 16px;
   letter-spacing: 1.2px;
@@ -648,7 +652,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   padding: 0;
 }
 .header .profile-menu{
-	font-size: .85rem;
+	font-size: .75rem;
   letter-spacing: 0.6px;
   font-weight: 400;
 }
@@ -1115,6 +1119,8 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 .login-modal .profile-text{
   font-size: 13px;
   font-weight: 400;
+  position: relative;
+  bottom: 5px;
 }
 .login-modal .modal-profile-list li a{
   width: 56px;
@@ -1137,9 +1143,11 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   border-bottom: 1px dashed #7C7C7C;
   margin-bottom: 42px;
 }
-.login-modal.profile-modal .modal-content-body .btn-group .btn,
+.login-modal.profile-modal .modal-content-body .btn-group .btn{
+  font-size: .95rem;
+}
 .login-modal.profile-modal .modal-content-body .sub-text{
-  font-size: .75rem;
+  font-size: .85rem;
 }
 .login-modal.profile-modal .modal-content-body .btn-group .btn{
   background-color: #292F33;
@@ -1180,7 +1188,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 .login-modal.profile-modal .modal-content-body .upload-text{
   font-size: 13px;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.5;
 }
 .login-modal.profile-modal .modal-content-body .group-btn{
   margin-left: 1px;
@@ -6844,3 +6852,4 @@ a.descriptif-link.bg-danger:hover{
     max-width: 1410px;
   }
 }
+

@@ -53,10 +53,10 @@
                 <div class="login_form">
                   <div class="row">
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0 text-left pl-4"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
                     </div>
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn">
+                      <button class="btn btn-block rounded-0 social-btn text-left pl-4">
                         <svg class="mr-3 h5 mb-0 align-text-bottom" id="Groupe_90" data-name="Groupe 90" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
                           <path id="Tracé_2140" data-name="Tracé 2140" d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z" transform="translate(0 -132.327)" fill="#fbbb00" />
                           <path id="Tracé_2141" data-name="Tracé 2141" d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z" transform="translate(-250.386 -199.231)" fill="#518ef8" />
@@ -104,7 +104,7 @@
                 </div>
                 <!-- NOTE toggle to flex  -->
                 <div class="register_form h-100 d-none flex-column">
-                  <p class="text-left content-head">Merci de remplir tous les champs pour valider votre inscription :</p>
+                  <p class="text-left content-head mb-4">Merci de remplir tous les champs pour valider votre inscription :</p>
                   <form id="register_submit_form" v-on:submit.prevent="checkRegisterForm" method="post">
                     <!-- <p v-if="register_errors.length" class="errors">
                             <b>Veuillez corriger la ou les erreurs suivantes :</b>
@@ -144,17 +144,17 @@
                   </form>
                   <div class="d-flex regist mb-4">
                     <a class="password-link mr-auto" href="#">En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d'utilisation</span></a>
-                    <a class="ml-auto acc-text d-none d-lg-block" v-on:click="loginForm">J'ai déjà un compte</a>
+                    <a class="ml-auto acc-text d-none d-lg-block" style="cursor: pointer" v-on:click="loginForm">J'ai déjà un compte</a>
                   </div>
                   <h6 class="prefer-text text-center">
                     <span>Ou si tu préfères par</span>
                   </h6>
                   <div class="form-row">
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>S'inscrire avec Facebook</button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0 text-left pl-4"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>S'inscrire avec Facebook</button>
                     </div>
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn">
+                      <button class="btn btn-block rounded-0 social-btn text-left pl-4">
                         <svg class="mr-3 h5 mb-0 align-text-bottom" id="Groupe_90" data-name="Groupe 90" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
                           <path id="Tracé_2140" data-name="Tracé 2140" d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z" transform="translate(0 -132.327)" fill="#fbbb00" />
                           <path id="Tracé_2141" data-name="Tracé 2141" d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z" transform="translate(-250.386 -199.231)" fill="#518ef8" />
@@ -224,7 +224,7 @@
                   <li>
                     <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
                   </li>
-                  <li><span>+1.5k</span></li>
+                  <li><span style="font-size: 12px">+1.5k</span></li>
                 </ul>
               </div>
             </div>

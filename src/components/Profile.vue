@@ -37,8 +37,8 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div class="col-5 d-flex flex-column justify-content-center text-right">
                     <p class="upload-text mb-2">Clique sur l’icône pour télécharger ta photo de profil</p>
-                    <div style="transform: translateX(100%); width: 50%; border: 1px dashed #7c7c7c"></div>
-                    <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
+                    <div style="transform: translateX(100%); width: 50%; border: 1px dashed #b4b4b4"></div>
+                    <p class="info-text-small mb-0 mt-1 pb-0" style="font-size: 9px">Taille maximum 1MB</p>
                   </div>
                   <div style="margin-right: auto">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 104.501 103.177">
@@ -73,7 +73,7 @@
                       </g>
                     </svg>
                   </div>
-                  <div class="col-3 text-right" style="border-left: 1px dashed #7c7c7c">
+                  <div class="col-3 text-right" style="border-left: 1px dashed #b4b4b4">
                     <img src="/img/avatar_example.547c6af3.png" />
                   </div>
                 </div>
@@ -85,8 +85,8 @@
                     <h6 class="font-weight-bold text-left">INFOS A PARTAGER</h6>
                     <p class="sub-text font-weight-normal text-left">Visible sur ta page public par les autres Trippers, tu peux renseigner ou modifier à tout moment tes infos via ton espace client.</p>
                     <form>
-                      <textarea class="form-control info-textarea" rows="4">Fais-toi plaisir !</textarea>
-                      <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase">Valider mes infos</button>
+                      <textarea class="form-control info-textarea" style="border-radius: 0" rows="4">Aucune obligation! Fais-toi plaisir !</textarea>
+                      <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase">Valider mon inscription</button>
                     </form>
                   </div>
                 </div>
@@ -97,7 +97,7 @@
                   <strong class="letter-space text-warning d-block mb-2">Ton compte a bien été crée</strong>
                   Ému de te compter parmi nous !
                 </h6>
-                <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Retourner à l’accueil</button>
+                <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
               </div>
               <a class="d-block text-center profile-btm-text" href="#">Je décide de le faire plus tard</a>
             </div>

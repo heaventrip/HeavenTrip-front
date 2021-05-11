@@ -48,7 +48,7 @@
             <i class="fa fa-times cross-sym mx-auto"></i>
           </button>
 
-          <div class="collapse navbar-collapse text-white bg-white" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
             <ul class="navbar-nav mx-md-5 text-uppercase">
               <li class="nav-item">
                 <a class="nav-link" href="#"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
