@@ -80,7 +80,7 @@
             <div class="row">
               <div class="col-4 pr-0">
                 <h5 class="text-uppercase list-head">Top destinations</h5>
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" style="line-height: 1">
                   <li><a href="#">Marac</a></li>
                   <li><a href="#">Espagne</a></li>
                   <li><a href="#">Egypte</a></li>
@@ -89,7 +89,7 @@
               </div>
               <div class="col-4">
                 <h5 class="text-uppercase list-head">Top activites</h5>
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" style="line-height: 1">
                   <li><a href="#">Kitesurf</a></li>
                   <li><a href="#">Escalade</a></li>
                   <li><a href="#">Surf</a></li>
@@ -98,7 +98,7 @@
               </div>
               <div class="col-4">
                 <h5 class="text-uppercase list-head">thematiques</h5>
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" style="line-height: 1">
                   <li><a href="#">Vent & Mer</a></li>
                   <li><a href="#">Montagne</a></li>
                   <li><a href="#">Neige</a></li>
@@ -116,7 +116,7 @@
               </div>
               <div class="col-12 col-xl-8 ml-auto pr-0">
                 <h5 class="text-uppercase list-head">A propos</h5>
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" style="line-height: 1">
                   <li><a href="#">L'agence</a></li>
                   <li><a href="#">Tourisme responsable</a></li>
                   <li><a href="#">FAQ</a></li>
@@ -126,7 +126,7 @@
           </div>
           <div class="col-6 col-md-3 col-xl-1 p-xl-0 order-2 order-md-4 my-4 order-xl-4 positioned-tripcol">
             <h5 class="text-uppercase list-head">Rejoins-nous</h5>
-            <ul class="list-unstyled">
+            <ul class="list-unstyled" style="line-height: 1">
               <li><a href="#">Team Heaven Trip</a></li>
               <li><a href="#">Moniteur / Guide</a></li>
               <li><a href="#">Margue et sponsors</a></li>

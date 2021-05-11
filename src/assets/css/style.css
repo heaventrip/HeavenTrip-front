@@ -6829,7 +6829,7 @@ a.descriptif-link.bg-danger:hover{
 }
 @media only screen and (min-width: 1200px){
   .container{
-    max-width: 1344px;
+    max-width: 1444px;
   }
   .checkout-main-container{
     height: calc(100vh - 216px);
