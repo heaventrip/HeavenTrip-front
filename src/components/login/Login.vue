@@ -3,7 +3,10 @@
     <div class="modal-dialog modal-dialog-centered modal-xl login-modal">
       <div class="modal-content border-0 rounded-0">
         <div class="modal-body p-0 border-0">
-          <div id="login-wrapper" class="d-none flex-column flex-lg-row">
+          <div id="password-wrapper" v-if="passwordForgotten" class="d-flex flex-column flex-lg-row">
+            <Password @password-updated="passwordForgotten = false" />
+          </div>
+          <div id="login-wrapper" v-else class="d-flex flex-column flex-lg-row">
             <div class="left-part">
               <div class="modal-content-head">
                 <h6 class="modal-heading mb-0"><span>CONNEXION</span></h6>
@@ -88,7 +91,7 @@
                           <div class="col-12">
                             <div class="form-group">
                               <input v-model="loginPassword" class="form-control modal-input mb-2" type="password" autocomplete="off" name="password" placeholder="Mot de passe" />
-                              <a class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
+                              <a @click.prevent="passwordForgotten = true" class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
                             </div>
                           </div>
                         </div>
@@ -229,7 +232,6 @@
               </div>
             </div>
           </div>
-          <Password />
         </div>
       </div>
     </div>
@@ -239,7 +241,7 @@
 <script>
 import axios from 'axios'
 import { API_URL } from '@/components/config'
-import Password from '@/components/Password.vue'
+import Password from '@/components/password/Password.vue'
 
 export default {
   name: 'Login',
@@ -256,7 +258,8 @@ export default {
       lastName: '',
       registerEmail: '',
       registerPassword: '',
-      registerPasswordConfirmation: ''
+      registerPasswordConfirmation: '',
+      passwordForgotten: false
     }
   },
   methods: {

@@ -4,18 +4,18 @@
       <div class="header-part">
         <div class="dropdown login-dropdown">
           <button class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="login-img mr-2" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
             MARION <span class="l-name"> .K</span>
-            <img class="login-img" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
             <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
           </button>
-          <div class="dropdown-menu text-uppercase py-3" aria-labelledby="dropdownMenu2">
-            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+          <div class="dropdown-menu text-uppercase py-3" style="padding: 1rem 1.5rem" aria-labelledby="dropdownMenu2">
+            <div class="account-dropdown-item">
               <button class="dropdown-item" type="button">
                 Mes ENVIES
                 <span class="font-weight-bold text-danger ml-1">(2)</span>
               </button>
             </div>
-            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+            <div class="account-dropdown-item">
               <button class="dropdown-item" type="button">
                 Mes séjours
                 <div class="position-relative ml-auto">
@@ -24,13 +24,13 @@
                 </div>
               </button>
             </div>
-            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+            <div class="account-dropdown-item">
               <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
             </div>
-            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+            <div class="account-dropdown-item">
               <button class="dropdown-item account-page-link" type="button">Mon compte</button>
             </div>
-            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+            <div class="account-dropdown-item">
               <button class="dropdown-item logout-page-link" type="button">se déconnecter</button>
             </div>
           </div>
@@ -90,3 +90,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.account-dropdown-item {
+  padding: 0px 1.5rem;
+}
+.account-dropdown-item:hover {
+  background-color: #292f33;
+  color: #fff;
+}
+.account-dropdown-item:active {
+  background-color: #d82558;
+  color: #fff;
+}
+.dropdown-item:not(.logout-page-link) {
+  border-bottom: 1px dashed #b4b4b4;
+}
+</style>

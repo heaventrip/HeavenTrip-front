@@ -35,11 +35,11 @@
 <script>
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import MainSection from '@/components/MainSection'
-import Login from '@/components/Login'
-import Profile from '@/components/Profile'
+import MainSection from '@/components/home/MainSection'
+import Login from '@/components/login/Login'
+import Profile from '@/components/signup/Profile'
 import SelectADate from '@/components/SelectADate'
-import Password from '@/components/Password'
+import Password from '@/components/password/Password'
 export default {
   name: 'HomePage',
   components: {
