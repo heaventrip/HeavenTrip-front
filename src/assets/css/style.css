@@ -66,7 +66,10 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   background-color: #292f33!important;
 }
 .btn-dark:not(.incomplete):hover {
-  background-color: #d82558!important;
+  background-color: #d82558;
+}
+.btn-dark:not(.incomplete):active {
+  background-color: #292f33;
 }
 .font-weight-500{
   font-weight: 500;
@@ -5615,7 +5618,7 @@ a.descriptif-link.bg-danger:hover{
     max-width: 1125px;
   }
   .login-modal .modal-content .left-part{
-    width: 602px;
+    width: 550px;
   }
   .login-modal .modal-content .right-part{
     width: 523px;

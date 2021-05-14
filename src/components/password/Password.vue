@@ -5,7 +5,7 @@
         <span>REINITIALISE TON MOT DE PASSE</span>
       </h6>
       <h6 class="modal-heading mb-0">
-        <span>NOUVEAU MOT DE PASSE</span>
+        <span>MOT DE PASSSE PERDU</span>
       </h6>
       <div class="border-left border-white text-white cancel-block d-lg-none" data-dismiss="modal" aria-label="Close">
         <i class="fa fa-times h5 mb-0"></i>
@@ -76,3 +76,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.separator-line {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+}
+</style>

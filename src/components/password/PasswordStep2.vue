@@ -4,7 +4,7 @@
     <strong class="text-danger d-block">Un email a été envoyé.</strong>
     Il Contient le lien Pour réinitialiser ton mot de passe
   </h6>
-  <button @click.prevent="$emit('filled')" class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn sent">DEMANDE ENVOYée</button>
+  <button @click.prevent="$emit('filled')" class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn sent">Renvoyer l'email</button>
 </template>
 
 <script>
@@ -14,4 +14,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+button:hover {
+  background-color: #d82558 !important;
+}
+button:active {
+  background-color: #292f33 !important;
+}
+</style>

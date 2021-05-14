@@ -14,4 +14,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+button:hover {
+  background-color: #d82558 !important;
+}
+button:active {
+  background-color: #292f33 !important;
+}
+</style>

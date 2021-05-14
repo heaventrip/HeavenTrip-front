@@ -35,7 +35,7 @@
               <div id="step--2" class="centered-vh">
                 <h6 class="profile-head mb-5 mt-md-0">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                  <div class="col-5 d-flex flex-column justify-content-center text-right">
+                  <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
                     <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
                     <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
                     <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
@@ -73,7 +73,7 @@
                       </g>
                     </svg>
                   </div>
-                  <div class="col-3 text-right" style="border-left: 1px dashed #b4b4b4">
+                  <div class="col-3 text-center" style="border-left: 1px dashed #b4b4b4">
                     <img :src="require('@/assets/images/avatar_example.png')" />
                     <p class="info-text-small mb-0 mt-1 pb-0">Cadrage conseillé</p>
                   </div>
@@ -189,3 +189,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.info-text-small {
+  white-space: nowrap;
+}
+</style>
