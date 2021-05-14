@@ -8,21 +8,31 @@
             <img class="login-img" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
             <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
           </button>
-          <div class="dropdown-menu text-uppercase" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item" type="button">
-              Mes ENVIES
-              <span class="font-weight-bold text-danger ml-1">(2)</span>
-            </button>
-            <button class="dropdown-item" type="button">
-              Mes séjours
-              <div class="position-relative ml-auto">
-                <img class="picto-icon" fluid :src="require('@/assets/images/svg/PICTO_CHAT.svg')" />
-                <div class="notify-number">1</div>
-              </div>
-            </button>
-            <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
-            <button class="dropdown-item account-page-link" type="button">Mon compte</button>
-            <button class="dropdown-item logout-page-link" type="button">se déconnecter</button>
+          <div class="dropdown-menu text-uppercase py-3" aria-labelledby="dropdownMenu2">
+            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+              <button class="dropdown-item" type="button">
+                Mes ENVIES
+                <span class="font-weight-bold text-danger ml-1">(2)</span>
+              </button>
+            </div>
+            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+              <button class="dropdown-item" type="button">
+                Mes séjours
+                <div class="position-relative ml-auto">
+                  <img class="picto-icon" fluid :src="require('@/assets/images/svg/PICTO_CHAT.svg')" />
+                  <div class="notify-number">1</div>
+                </div>
+              </button>
+            </div>
+            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+              <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
+            </div>
+            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+              <button class="dropdown-item account-page-link" type="button">Mon compte</button>
+            </div>
+            <div style="padding: 0px 1rem; margin: 0px 1.5rem">
+              <button class="dropdown-item logout-page-link" type="button">se déconnecter</button>
+            </div>
           </div>
         </div>
         <!-- <ul class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">

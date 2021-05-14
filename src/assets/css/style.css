@@ -37,7 +37,7 @@ a:hover{
 .zindex-1{
   z-index: 1;
 }
-.btn-danger,.btn-danger:hover,.btn:hover,.btn-danger:not(:disabled):not(.disabled):active {
+.btn-danger,.btn-danger:hover,.btn-danger:not(:disabled):not(.disabled):active {
   color: #fff;
   background-color: #d82558 !important;
   border-color: #d82558 !important;
@@ -969,7 +969,6 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   background-color: #ffffff;
   color: #292F33;
   font-weight: 400;
-  height: 600px;
 }
 .login-modal .modal-content-body-small{
   height: unset;
@@ -1039,13 +1038,13 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   background-color: #ffffff;
   padding: 10px;
 }
+.social-btn:hover{
+  background-color: #292F33;
+  color: #FFFFFF;
+}
 .fb-btn{
   background-color: #3B5998;
   color: #FFFFFF;
-}
-.fb-btn:hover {
-  background-color: #D82558;
-  color: #ffffff; 
 }
 .login-modal .modal-content-body .recaptcha{
   font-family: 'Muli', sans-serif;
@@ -1054,6 +1053,8 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   letter-spacing: -0.3px;
   color: #B4B4B4;
   margin: 0 -15px;
+  position: absolute;
+  bottom: 1rem;
 }
 .login-modal .modal-content-body .recaptcha .highlights{
   color: #B57B7B;
@@ -1140,7 +1141,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   font-weight: 400;
   line-height: 24px;
   padding: 0 30px 35px;
-  border-bottom: 1px dashed #7C7C7C;
+  border-bottom: 1px dashed #b4b4b4;
   margin-bottom: 42px;
 }
 .login-modal.profile-modal .modal-content-body .btn-group .btn{
@@ -1182,8 +1183,9 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 }
 .login-modal.profile-modal .modal-content-body .info-text-small{
   font-weight: 400;
-  font-size: .5rem;
+  font-size: .7rem;
   color: #B57B7B;
+  line-height: 1.5;
 }
 .login-modal.profile-modal .modal-content-body .upload-text{
   font-size: 13px;
@@ -3046,11 +3048,19 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: .75rem;
 }
 .login-dropdown .dropdown-item{
-  border-bottom: 2px dashed #DBDBDB;
+  border-bottom: 1px dashed #b4b4b4;
   padding: 1rem 0;
   text-transform: uppercase;
   display: flex;
   align-items: center;
+}
+.login-dropdown .dropdown-item:hover{
+  background-color: #292f33;
+  color: #fff;
+}
+.login-dropdown .dropdown-item:active{
+  background-color: #d82558;
+  color: #fff;
 }
 .login-dropdown .dropdown-item:last-child{
   border-bottom: none;
@@ -5345,7 +5355,7 @@ a.descriptif-link.bg-danger:hover{
     padding: 0 75px 0 50px;
   }
   .header .wrapper .wrapper-content .wrapper-content-list.triple-list{
-    width: 78%;
+    width: 100%;
   }
   .header .wrapper .tab-header-content .inner-tab-pills{
     padding: 0 115px 0 25px;

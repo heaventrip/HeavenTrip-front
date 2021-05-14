@@ -41,19 +41,24 @@
             </div>
             <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
               <li class="nav-item">
-                <a class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+                <a @mouseover="displayMenu('pills-activites')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
+                  ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+                ></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+                <a @mouseover="displayMenu('pills-destination')" class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
+                  ><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+                ></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+                <a @mouseover="displayMenu('pills-agence')" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"
+                  ><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+                ></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
               </li>
             </ul>
-
             <button class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
             <div class="d-lg-none nav-btm-div d-none align-items-center">
               <!-- d-flex -->
@@ -67,7 +72,8 @@
             <div class="tab-content main-wrapper">
               <div id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper">
                 <div class="container">
-                  <div class="row w-100 m-0">
+                  <div class="row w-100 wrapper-head-para" style="margin-left: 65px; margin-right: 65px; padding-bottom: 1.5rem; border-bottom: 1px dashed #b4b4b4">(Variable prénom), choisis un sport et découvre nos compositions en séjours multi-activités.</div>
+                  <div class="row w-100 m-0 mt-5">
                     <div id="activites_pills" class="col-12 col-lg-3">
                       <h4 class="nav-head m-0">
                         <a href="#header_nav" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
@@ -96,12 +102,12 @@
                     </div>
                     <div class="col-12 col-lg-9">
                       <div class="tab-content wrapper-content" id="activites_pills_tabContent">
-                        <div class="tab-pane fade active show" id="v-pills-vent-mer" role="tabpanel" aria-labelledby="v-pills-vent-mer-tab">
+                        <div class="tab-pane fade active show" style="padding-top: 20px" id="v-pills-vent-mer" role="tabpanel" aria-labelledby="v-pills-vent-mer-tab">
                           <h4 class="nav-head m-0">
                             <a href="#activites_pills" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
                             . VENT & MER
                           </h4>
-                          <ul class="list-unstyled wrapper-content-list triple-list">
+                          <ul class="list-unstyled wrapper-content-list quad-list">
                             <li>
                               <span class="img-container"><img fluid :src="require('@/assets/images/Outline.svg')" /></span>
                               Kitesurf
@@ -124,14 +130,13 @@
                             </li>
                           </ul>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-montagne" role="tabpanel" aria-labelledby="v-pills-montagne-tab">asdfghj</div>
-                        <div class="tab-pane fade" id="v-pills-pied" role="tabpanel" aria-labelledby="v-pills-pied-tab">zxcvbnm</div>
-                        <div class="tab-pane fade" id="v-pills-multi-acti" role="tabpanel" aria-labelledby="v-pills-multi-acti-tab">
+                        <div class="tab-pane fade" style="padding-top: 20px" id="v-pills-montagne" role="tabpanel" aria-labelledby="v-pills-montagne-tab">asdfghj</div>
+                        <div class="tab-pane fade" style="padding-top: 20px" id="v-pills-pied" role="tabpanel" aria-labelledby="v-pills-pied-tab">zxcvbnm</div>
+                        <div class="tab-pane fade" style="padding-top: 20px" id="v-pills-multi-acti" role="tabpanel" aria-labelledby="v-pills-multi-acti-tab">
                           <h4 class="nav-head m-0">
                             <a href="#activites_pills" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
                             . MULTI - ACTIVITES
                           </h4>
-                          <p class="wrapper-head-para">(Variable prénom), choisis un sport et découvre nos compositions en séjours multi-activités.</p>
                           <ul class="list-unstyled wrapper-content-list quad-list">
                             <li>
                               <span class="img-container"><img fluid :src="require('@/assets/images/Outline.svg')" /></span>
@@ -190,8 +195,8 @@
                             </li>
                           </ul>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-bien" role="tabpanel" aria-labelledby="v-pills-bien-tab">zxcvbnm</div>
-                        <div class="tab-pane fade" id="v-pills-neige" role="tabpanel" aria-labelledby="v-pills-neige-tab">123456789</div>
+                        <div class="tab-pane fade" style="padding-top: 20px" id="v-pills-bien" role="tabpanel" aria-labelledby="v-pills-bien-tab">zxcvbnm</div>
+                        <div class="tab-pane fade" style="padding-top: 20px" id="v-pills-neige" role="tabpanel" aria-labelledby="v-pills-neige-tab">123456789</div>
                       </div>
                     </div>
                   </div>
@@ -1037,6 +1042,12 @@ export default {
     logout: function (event) {
       localStorage.removeItem('user-token')
       window.location.reload()
+    },
+    displayMenu(menu) {
+      $('#pills-activites').removeClass('active')
+      $('#pills-agence').removeClass('active')
+      $('#pills-destination').removeClass('active')
+      $(`#${menu}`).addClass('active')
     }
   }
 }

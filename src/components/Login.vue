@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl login-modal">
       <div class="modal-content border-0 rounded-0">
         <div class="modal-body p-0 border-0">
-          <div class="d-flex flex-column flex-lg-row">
+          <div id="login-wrapper" class="d-none flex-column flex-lg-row">
             <div class="left-part">
               <div class="modal-content-head">
                 <h6 class="modal-heading mb-0"><span>CONNEXION</span></h6>
@@ -49,8 +49,8 @@
                   </div>
                 </li>
               </ul> -->
-              <div class="modal-content-body bg-white">
-                <div class="login_form">
+              <div class="modal-content-body bg-white" style="height: 600px">
+                <div class="login-form">
                   <div class="row">
                     <div class="col-12 col-lg-6">
                       <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0 text-left pl-4"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
@@ -72,22 +72,22 @@
                   </h6>
                   <div class="row">
                     <div class="col-12 col-lg-10 mx-auto">
-                      <form id="login_form" v-on:submit.prevent="checkLoginForm" method="post">
-                        <!-- <p v-if="errors.length" class="errors">
-                            <b>Veuillez corriger la ou les erreurs suivantes :</b>
-                            <ul>
-                              <li v-for="error in errors">{{ error }}</li>
-                            </ul>
-                          </p> -->
+                      <form id="login-form" @submit.prevent="checkLoginForm" method="post">
+                        <div v-if="errors.length" class="errors">
+                          <b>Veuillez corriger la ou les erreurs suivantes :</b>
+                          <ul v-for="error in [...errors]" :key="error">
+                            <li>{{ error }}</li>
+                          </ul>
+                        </div>
                         <div class="row">
                           <div class="col-12">
                             <div class="form-group">
-                              <input class="form-control modal-input" type="mail" name="email" value="" placeholder="Adresse mail" />
+                              <input v-model="loginEmail" class="form-control modal-input" type="mail" name="email" placeholder="Adresse mail" />
                             </div>
                           </div>
                           <div class="col-12">
                             <div class="form-group">
-                              <input class="form-control modal-input mb-2" type="password" autocomplete="off" name="password" value="" placeholder="Mot de passe" />
+                              <input v-model="loginPassword" class="form-control modal-input mb-2" type="password" autocomplete="off" name="password" placeholder="Mot de passe" />
                               <a class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
                             </div>
                           </div>
@@ -100,43 +100,43 @@
                     <span>Pas encore de compte ?</span>
                   </h6>
                   <button class="d-none btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0">s'INSCRIRE</button>
-                  <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0" v-on:click="registerForm">INSCRIPTION</button>
+                  <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0" v-on:click="displayRegisterForm">INSCRIPTION</button>
                 </div>
-                <!-- NOTE toggle to flex  -->
-                <div class="register_form h-100 d-none flex-column">
+                <!-- NOTE toggle to d-flex to display it -->
+                <div class="register-form h-100 d-none flex-column">
                   <p class="text-left content-head mb-4">Merci de remplir tous les champs pour valider votre inscription :</p>
-                  <form id="register_submit_form" v-on:submit.prevent="checkRegisterForm" method="post">
-                    <!-- <p v-if="register_errors.length" class="errors">
-                            <b>Veuillez corriger la ou les erreurs suivantes :</b>
-                            <ul>
-                              <li v-for="error in register_errors">{{ error }}</li>
-                            </ul>
-                          </p> -->
+                  <form id="register-form" @submit.prevent="checkRegisterForm" method="post">
+                    <div v-if="registerErrors.length" class="errors">
+                      <b>Veuillez corriger la ou les erreurs suivantes :</b>
+                      <ul v-for="error in registerErrors" :key="error">
+                        <li>{{ error }}</li>
+                      </ul>
+                    </div>
                     <div class="row">
                       <div class="col-12 col-lg-6">
                         <div class="form-group position-relative">
-                          <input class="form-control modal-input" type="text" name="" value="" placeholder="Prénom" />
+                          <input v-model="firstName" class="form-control modal-input" type="text" name="" placeholder="Prénom" />
                           <i class="fa fa-check check-sym"></i>
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input class="form-control modal-input" type="text" name="" value="" placeholder="Nom" />
+                          <input v-model="lastName" class="form-control modal-input" type="text" name="" placeholder="Nom" />
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input class="form-control modal-input" type="mail" name="register_email" value="" placeholder="Adresse mail" />
+                          <input v-model="registerEmail" class="form-control modal-input" type="mail" name="register_email" placeholder="Adresse mail" />
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input class="form-control modal-input" type="password" autocomplete="off" name="register_password" value="" placeholder="Mot de passe" />
+                          <input v-model="registerPassword" class="form-control modal-input" type="password" autocomplete="off" name="register_password" placeholder="Mot de passe" />
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input class="form-control modal-input" type="password" name="register_password_confirmation" value="" placeholder="Confirmer le mot de passe" />
+                          <input v-model="registerPasswordConfirmation" class="form-control modal-input" type="password" name="register_password_confirmation" placeholder="Confirmer le mot de passe" />
                         </div>
                       </div>
                     </div>
@@ -144,7 +144,7 @@
                   </form>
                   <div class="d-flex regist mb-4">
                     <a class="password-link mr-auto" href="#">En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d'utilisation</span></a>
-                    <a class="ml-auto acc-text d-none d-lg-block" style="cursor: pointer" v-on:click="loginForm">J'ai déjà un compte</a>
+                    <a class="ml-auto acc-text d-none d-lg-block" style="cursor: pointer" v-on:click="displayLoginForm">J'ai déjà un compte</a>
                   </div>
                   <h6 class="prefer-text text-center">
                     <span>Ou si tu préfères par</span>
@@ -165,13 +165,13 @@
                       </button>
                     </div>
                   </div>
+                  <p class="recaptcha text-center mb-0">
+                    Ce site est protégé par reCAPTCHA.
+                    <span class="highlights">La politique de confidentialité</span>
+                    et les
+                    <span class="highlights">conditions d'utilisation</span> de Google s'appliquent.
+                  </p>
                 </div>
-                <p class="recaptcha text-center mb-0">
-                  Ce site est protégé par reCAPTCHA.
-                  <span class="highlights">La politique de confidentialité</span>
-                  et les
-                  <span class="highlights">conditions d'utilisation</span> de Google s'appliquent.
-                </p>
               </div>
             </div>
             <div class="right-part dark-content-body d-none d-lg-block">
@@ -229,151 +229,137 @@
               </div>
             </div>
           </div>
+          <Password />
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+import { API_URL } from '@/components/config'
+import Password from '@/components/Password.vue'
+
+export default {
+  name: 'Login',
+  components: {
+    Password
+  },
+  data() {
+    return {
+      errors: [],
+      registerErrors: [],
+      loginEmail: '',
+      loginPassword: '',
+      firstName: '',
+      lastName: '',
+      registerEmail: '',
+      registerPassword: '',
+      registerPasswordConfirmation: ''
+    }
+  },
+  methods: {
+    displayLoginForm(e) {
+      e.preventDefault()
+      $('.register-form').addClass('d-none')
+      $('.login-form').removeClass('d-none')
+    },
+    displayRegisterForm(e) {
+      e.preventDefault()
+      $('.login-form').addClass('d-none')
+      $('.register-form').removeClass('d-none')
+    },
+    checkLoginForm() {
+      this.errors = []
+      let err = this.errors
+
+      if (!this.validEmail(this.loginEmail)) {
+        err.push('Veuillez saisir une adresse e-mail valide.')
+      }
+
+      if (this.password === '') {
+        err.push('Veuillez saisir votre mot de passe.')
+      }
+
+      if (!err.length) this.submitLoginForm()
+    },
+    checkRegisterForm() {
+      this.registerErrors = []
+      let err = this.registerErrors
+
+      if (!this.firstName) {
+        err.push('Veuillez saisir votre prénom.')
+      }
+
+      if (!this.lastName) {
+        err.push('Veuillez saisir votre nom.')
+      }
+
+      if (!this.validEmail(this.registerEmail)) {
+        err.push('Veuillez saisir une adresse e-mail valide.')
+      }
+
+      if (this.registerPassword === '') {
+        err.push('Veuillez saisir votre mot de passe.')
+      }
+
+      if (this.registerPassword !== this.registerPasswordConfirmation) {
+        err.push('Les mots de passe ne sont pas indentiques.')
+      }
+
+      if (!err.length) this.submitRegisterForm()
+    },
+    submitLoginForm() {
+      axios
+        .post(API_URL + '/login', {
+          user: {
+            email: this.loginEmail,
+            password: this.loginPassword
+          }
+        })
+        .then((resp) => {
+          alert('Connexion réussie')
+          localStorage.setItem('auth-token', resp.data.auth_token)
+        })
+        .catch((err) => {
+          this.errors.push(err.response.data.message)
+        })
+    },
+    submitRegisterForm() {
+      axios
+        .post(API_URL + `/registration`, {
+          user: {
+            first_name: this.firstName,
+            last_name: this.lastName,
+            email: this.registerEmail,
+            password: this.registerPassword,
+            password_confirmation: this.registerPasswordConfirmation
+          }
+        })
+        .then((response) => {
+          alert("Inscription réussie! Veuillez vérifier l'email" + this.registerEmail + "et confirmer l'inscription puis connectez-vous.")
+          this.registerEmail = ''
+          this.registerPassword = ''
+          this.registerPasswordConfirmation = ''
+          $('.register-form').addClass('d-none')
+          $('.login-form').removeClass('d-none')
+        })
+        .catch((err) => {
+          this.registerErrors.push(err.response.data.message)
+        })
+      // this.$router.push('/');
+    },
+    validEmail: function (email) {
+      var regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return regexp.test(email)
+    }
+  }
+}
+</script>
+
 <style>
 .errors {
   color: red;
 }
 </style>
-<script>
-import axios from 'axios'
-import config from '@/components/config'
-export default {
-  name: 'Login',
-  props: ['loading'],
-  model: {
-    prop: 'loading',
-    event: 'loadingchange'
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      errors: [],
-      email: '',
-      password: '',
-      register_errors: [],
-      register_email: '',
-      register_password: '',
-      register_password_confirmation: ''
-    }
-  },
-  methods: {
-    // checkLoginForm: function (e) {
-    //   this.$emit('loadingchange', true)
-    //   e.preventDefault()
-    //   this.errors = []
-    //   if (!this.validEmail(this.email)) {
-    //     this.errors.push('Veuillez saisir une adresse e-mail valide.')
-    //   } else if (this.password === '') {
-    //     this.errors.push('Veuillez saisir votre mot de passe.')
-    //   } else {
-    //     NProgress.start()
-    //     axios
-    //       .post(
-    //         config.API_URL + `/login`,
-    //         {
-    //           user: {
-    //             email: this.email,
-    //             password: this.password
-    //           }
-    //         },
-    //         {
-    //           headers: {
-    //             // Overwrite Axios's automatically set Content-Type
-    //             'Content-Type': 'application/json'
-    //           }
-    //         }
-    //       )
-    //       .then((response) => {
-    //         NProgress.done()
-    //         console.log(response)
-    //         console.log(response)
-    //         alert('Connexion réussie')
-    //         localStorage.setItem('user-token', response.data.auth_token)
-    //         localStorage.setItem('email', this.email)
-    //         window.location.reload()
-    //       })
-    //       .catch((e) => {
-    //         NProgress.done()
-    //         localStorage.removeItem('user-token')
-    //         console.log(e.response.data)
-    //         if (e.response.data.error) {
-    //           this.errors.push(e.response.data.error)
-    //         } else {
-    //           console.log(e.response.data.message)
-    //           this.errors.push(e.response.data.message)
-    //         }
-    //       })
-    //     // this.$router.push('/');
-    //   }
-    // },
-    registerForm: function (e) {
-      e.preventDefault()
-      $('.login_form').addClass('d-none')
-      $('.register_form').removeClass('d-none')
-    },
-    loginForm: function (e) {
-      e.preventDefault()
-      $('.register_form').addClass('d-none')
-      $('.login_form').removeClass('d-none')
-    },
-    checkRegisterForm: function (e) {
-      e.preventDefault()
-      this.register_errors = []
-      if (!this.validEmail(this.register_email)) {
-        this.register_errors.push('Veuillez saisir une adresse e-mail valide.')
-      } else if (this.register_password === '') {
-        this.register_errors.push('Veuillez saisir votre mot de passe.')
-      } else if (this.register_password !== this.register_password_confirmation) {
-        this.register_errors.push('Veuillez saisir le mot de passe et confirmer le même mot de passe.')
-      } else {
-        axios
-          .post(
-            config.API_URL + `/registration`,
-            {
-              user: {
-                email: this.register_email,
-                password: this.register_password,
-                password_confirmation: this.register_password_confirmation
-              }
-            },
-            {
-              headers: {
-                // Overwrite Axios's automatically set Content-Type
-                'Content-Type': 'application/json'
-              }
-            }
-          )
-          .then((response) => {
-            console.log(response)
-            console.log(response)
-            alert("Inscription réussie. Veuillez vérifier l'email ' + this.register_email + ' et confirmer l'inscription puis connectez-vous.")
-            this.register_email = ''
-            this.register_password = ''
-            this.register_password_confirmation = ''
-            $('.register_form').addClass('d-none')
-            $('.login_form').removeClass('d-none')
-          })
-          .catch((e) => {
-            console.log(e.response.data)
-            if (e.response.data.error) {
-              this.register_errors.push(e.response.data.error)
-            } else {
-              console.log(e.response.data.message)
-              this.register_errors.push(e.response.data.message)
-            }
-          })
-        // this.$router.push('/');
-      }
-    },
-    validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return re.test(email)
-    }
-  }
-}
-</script>

@@ -26,8 +26,8 @@
                   <div class="form-group">
                     <label class="form-label text-uppercase font-weight-bold mt-3 d-block">Quel camp ?</label>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label class="btn text-white border-0 rounded-0 btn-lg px-4"> <input type="radio" name="options" id="option1" /> Femme </label>
-                      <label class="btn text-white border-0 rounded-0 btn-lg px-4 group-btn"> <input type="radio" name="options" id="option2" /> Homme </label>
+                      <label @click="saveGender(female)" class="btn text-white border-0 rounded-0 btn-lg px-4"> <input type="radio" /> Femme </label>
+                      <label @click="saveGender(male)" class="btn text-white border-0 rounded-0 btn-lg px-4 group-btn"> <input type="radio" /> Homme </label>
                     </div>
                   </div>
                 </form>
@@ -36,9 +36,9 @@
                 <h6 class="profile-head mb-5 mt-md-0">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div class="col-5 d-flex flex-column justify-content-center text-right">
-                    <p class="upload-text mb-2">Clique sur l’icône pour télécharger ta photo de profil</p>
-                    <div style="transform: translateX(100%); width: 50%; border: 1px dashed #b4b4b4"></div>
-                    <p class="info-text-small mb-0 mt-1 pb-0" style="font-size: 9px">Taille maximum 1MB</p>
+                    <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
+                    <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
+                    <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
                   </div>
                   <div style="margin-right: auto">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 104.501 103.177">
@@ -74,29 +74,32 @@
                     </svg>
                   </div>
                   <div class="col-3 text-right" style="border-left: 1px dashed #b4b4b4">
-                    <img src="/img/avatar_example.547c6af3.png" />
+                    <img :src="require('@/assets/images/avatar_example.png')" />
+                    <p class="info-text-small mb-0 mt-1 pb-0">Cadrage conseillé</p>
                   </div>
                 </div>
               </div>
               <div id="step--3" class="centered-vh">
                 <h6 class="profile-head">Ultra rapide, une petite bio, tes passions, un proverbe préféré ?</h6>
                 <div class="row">
-                  <div class="col-12 col-lg-11 mx-auto">
+                  <div class="col-12 col-lg-12 mx-auto">
                     <h6 class="font-weight-bold text-left">INFOS A PARTAGER</h6>
                     <p class="sub-text font-weight-normal text-left">Visible sur ta page public par les autres Trippers, tu peux renseigner ou modifier à tout moment tes infos via ton espace client.</p>
                     <form>
-                      <textarea class="form-control info-textarea" style="border-radius: 0" rows="4">Aucune obligation! Fais-toi plaisir !</textarea>
-                      <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase">Valider mon inscription</button>
+                      <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Aucune obligation! Fais-toi plaisir !"></textarea>
+                      <button @click="updateProfile" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase">Valider mon inscription</button>
                     </form>
                   </div>
                 </div>
               </div>
               <div id="step--4" class="centered-vh">
-                <img class="d-block mx-auto my-4" fluid :src="require('@/assets/images/mic_light.png')" />
-                <h6 class="text-uppercase text-white font-weight-normal text-center pb-3 pt-2">
-                  <strong class="letter-space text-warning d-block mb-2">Ton compte a bien été crée</strong>
-                  Ému de te compter parmi nous !
-                </h6>
+                <div class="row justify-content-center align-items-center mt-4">
+                  <img class="d-inline-block mr-5 my-4" fluid :src="require('@/assets/images/mic_light.png')" />
+                  <h6 class="text-uppercase text-white font-weight-normal">
+                    <strong class="letter-space text-warning d-block mb-2">Ton compte a bien été crée</strong>
+                    Ému de te compter parmi nous !
+                  </h6>
+                </div>
                 <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
               </div>
               <a class="d-block text-center profile-btm-text" href="#">Je décide de le faire plus tard</a>
@@ -119,13 +122,39 @@
     </div>
   </div>
 </template>
+
 <script>
+import axios from 'axios'
+import { API_URL } from '@/components/config'
+
 export default {
   name: 'Profile',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      gender: '',
+      description: ''
     }
+  },
+  methods: {
+    saveGender(gender) {
+      this.gender = gender
+    }
+  },
+  updateProfile() {
+    axios
+      .put(API_URL + '/users', {
+        user: {
+          email: this.loginEmail,
+          password: this.loginPassword
+        }
+      })
+      .then((resp) => {
+        alert('Connexion réussie')
+        localStorage.setItem('auth-token', resp.data.auth_token)
+      })
+      .catch((err) => {
+        this.errors.push(err.response.data.message)
+      })
   },
   mounted() {
     $('#step--1').hide()
