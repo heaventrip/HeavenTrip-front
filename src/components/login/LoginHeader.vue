@@ -98,10 +98,12 @@ export default {
 .account-dropdown-item:hover {
   background-color: #292f33;
   color: #fff;
+  border: none;
 }
 .account-dropdown-item:active {
   background-color: #d82558;
   color: #fff;
+  border: none;
 }
 .dropdown-item:not(.logout-page-link) {
   border-bottom: 1px dashed #b4b4b4;

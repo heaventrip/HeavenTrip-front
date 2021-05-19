@@ -1,26 +1,37 @@
 <template>
-  <div>
-    <ProductHeader />
-    <div class="main-product-content">
-      <ProductNav />
-      <ProductNav2 />
-    </div>
-    <ProductSection />
-    <ProductFooter />
-    <ProductModal />
+  <ProductHeader />
+  <div class="main-product-content">
+    <ProductNav />
+    <ProductContent />
   </div>
+  <!-- <ProductSection /> -->
+  <ProductFooter />
+  <!-- <ProductModal /> -->
 </template>
 
 <script>
 import ProductHeader from '@/components/product/ProductHeader'
 import ProductNav from '@/components/product/ProductNav'
-import ProductNav2 from '@/components/product/ProductNav2'
+import ProductContent from '@/components/product/ProductContent'
 import ProductFooter from '@/components/product/ProductFooter'
-import ProductSection from '@/components/product/ProductSection'
-import ProductModal from '@/components/product/ProductModal'
+// import ProductSection from '@/components/product/ProductSection'
+// import ProductModal from '@/components/product/ProductModal'
 
 export default {
   name: 'ProductHome',
+  components: {
+    ProductHeader,
+    ProductNav,
+    ProductContent,
+    ProductFooter
+    // ProductSection,
+    // ProductModal
+  },
+  data() {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  },
   mounted() {
     $(function () {
       $('.select-place').select2({
@@ -232,19 +243,6 @@ export default {
       value < 1 ? (value = 1) : ''
       value--
       document.getElementById('countNumber').value = value
-    }
-  },
-  components: {
-    ProductHeader,
-    ProductNav,
-    ProductNav2,
-    ProductFooter,
-    ProductSection,
-    ProductModal
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App'
     }
   }
 }

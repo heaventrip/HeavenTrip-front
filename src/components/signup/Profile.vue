@@ -40,8 +40,8 @@
                     <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
                     <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
                   </div>
-                  <div style="margin-right: auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 104.501 103.177">
+                  <div class="ml-2" style="margin-right: auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
                       <g id="Groupe_16781" data-name="Groupe 16781" transform="translate(0 0)">
                         <path
                           id="Union_21"
@@ -95,7 +95,7 @@
               <div id="step--4" class="centered-vh">
                 <div class="row justify-content-center align-items-center mt-4">
                   <img class="d-inline-block mr-5 my-4" fluid :src="require('@/assets/images/mic_light.png')" />
-                  <h6 class="text-uppercase text-white font-weight-normal">
+                  <h6 class="text-uppercase text-white font-weight-normal text-left">
                     <strong class="letter-space text-warning d-block mb-2">Ton compte a bien été crée</strong>
                     Ému de te compter parmi nous !
                   </h6>

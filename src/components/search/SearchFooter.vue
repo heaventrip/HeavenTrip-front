@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="bg-dark text-white footer pt-5 pb-4">
+    <div class="bg-dark text-white footer pt-5 pb-4">
       <div class="container">
         <div class="row">
           <div class="col-12 col-md-10 col-lg-5 mx-auto text-center">
@@ -173,7 +173,7 @@
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   </div>
 </template>
 <script>
