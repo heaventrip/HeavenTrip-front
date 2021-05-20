@@ -2,19 +2,19 @@ import { createRouter, createWebHistory } from 'vue-router'
 // import Vue from 'vue'
 // import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
-import HomePage from '@/components/HomePage'
-import ProductHome from '@/components/product/ProductHome'
-import CheckOutHome from '@/components/checkout/CheckOutHome'
-import SearchHome from '@/components/search/SearchHome'
-import LoginPage from '@/components/login/LoginPage'
-import Terms from '@/components/terms/Terms'
-import Legal from '@/components/legal/Legal'
+import Home from '@/views/Home.vue'
+import ProductHome from '@/components/product/ProductHome.vue'
+import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
+import SearchHome from '@/components/search/SearchHome.vue'
+import LoginHeader from '@/components/connection/LoginHeader.vue'
+import Terms from '@/components/legal/Terms.vue'
+import Legal from '@/components/legal/Legal.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'HomePage',
-    component: HomePage
+    name: 'Home',
+    component: Home
   },
   {
     path: '/product',
@@ -33,8 +33,8 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'LoginPage',
-    component: LoginPage
+    name: 'LoginHeader',
+    component: LoginHeader
   },
   {
     path: '/terms',
