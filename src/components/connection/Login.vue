@@ -6,7 +6,8 @@
           <div id="password-wrapper" v-if="passwordForgotten" class="d-flex flex-column flex-lg-row">
             <Password @password-updated="passwordForgotten = false" />
           </div>
-          <div id="login-wrapper" v-else class="d-flex flex-column flex-lg-row">
+          <!-- FIXME -->
+          <div id="login-wrapper" v-if="loginModal" class="d-flex flex-column flex-lg-row">
             <div class="left-part">
               <div class="modal-content-head">
                 <h6 class="modal-heading mb-0"><span>CONNEXION</span></h6>
@@ -240,8 +241,8 @@
 
 <script>
 import axios from 'axios'
-import { API_URL } from '@/components/config'
-import Password from '@/components/password/Password.vue'
+import { API_URL } from '@/config.json'
+import Password from '@/components/connection/Password.vue'
 
 export default {
   name: 'Login',
@@ -259,7 +260,8 @@ export default {
       registerEmail: '',
       registerPassword: '',
       registerPasswordConfirmation: '',
-      passwordForgotten: false
+      passwordForgotten: false,
+      loginModal: false
     }
   },
   methods: {

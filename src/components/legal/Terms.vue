@@ -7,9 +7,9 @@
   </div>
 </template>
 <script>
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import MainContentSection from '@/components/terms/MainContentSection'
+import Header from '@/components/header/Header'
+import Footer from '@/components/footer/Footer'
+import MainContentSection from '@/components/legal/MainContentSection'
 
 export default {
   name: 'Terms',

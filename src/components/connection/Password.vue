@@ -1,11 +1,8 @@
 <template>
   <div class="left-part">
     <div class="modal-content-head">
-      <h6 class="modal-heading mb-0 d-none">
-        <span>REINITIALISE TON MOT DE PASSE</span>
-      </h6>
       <h6 class="modal-heading mb-0">
-        <span>MOT DE PASSSE PERDU</span>
+        <span>MOT DE PASSE PERDU</span>
       </h6>
       <div class="border-left border-white text-white cancel-block d-lg-none" data-dismiss="modal" aria-label="Close">
         <i class="fa fa-times h5 mb-0"></i>

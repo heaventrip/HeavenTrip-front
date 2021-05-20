@@ -262,7 +262,7 @@
           </div>
         </div>
         <div id="pills-agence" role="tabpanel" aria-labelledby="pills-agence-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade home-wrapper">
-          <div id="agence_pills" class="col-12 p-0 tab-header">
+          <!-- <div id="agence_pills" class="col-12 p-0 tab-header">
             <h4 class="nav-head my-0">
               <a href="#header_nav" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
               . L’agence
@@ -278,7 +278,7 @@
                 <a class="nav-link" id="pills-contacter-tab" data-toggle="pill" href="#pills-contacter" role="tab" aria-controls="pills-contacter" aria-selected="false">NOUS CONTACTER <i class="fas fa-arrow-right float-right mt-1 chevron-left"></i></a>
               </li>
             </ul>
-          </div>
+          </div> -->
           <div class="col-12 tab-content tab-header-content order-lg-3" id="">
             <div class="tab-pane fade concept-pane" id="pills-concept" role="tabpanel" aria-labelledby="pills-concept-tab">
               <h4 class="nav-head m-0 px-4">

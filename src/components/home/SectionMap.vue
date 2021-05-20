@@ -220,7 +220,86 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'SectionMap',
+  mounted() {
+    $('.select-dropdown .cancel,.grid-list,.hoverable-div,.view-link,.centered-img').hide()
+    $('.map-section .city-head .select-toggle').removeAttr('data-toggle')
+    $('.select-dropdown').on('show.bs.dropdown', function () {
+      $('.map-content').css('margin-top', '7rem')
+      $('.zone-div').hide()
+    })
+    $('.select-dropdown').on('hide.bs.dropdown', function () {
+      $('.map-content').css('margin-top', '0')
+    })
+    $('.dropdown-menu li a').click(function () {
+      var selText = $(this).text()
+      $(this).parents('.btn-group').find('.select-toggle').addClass('text-warning').html(selText)
+      $(this).parents('.btn-group').find('.cancel').show()
+      $(this).parents('.btn-group').find('.chevron').hide()
+      $('.grid-list,.view-link,.centered-img').show()
+      $('.map-section .img-fill').addClass('blurred-img')
+      $('.map-section .city-head .select-toggle').attr('data-toggle', 'dropdown')
+      $('.map-section .city-head,.map-section .flex-div .activity-count').removeClass('zero-opacity')
+    })
+    $('.select-dropdown .cancel').click(function () {
+      $(this)
+        .parents('.btn-group')
+        .find('.select-toggle.tous')
+        .removeClass('text-warning')
+        .html('tous' + '<i class="fa fa-chevron-down ml-2 chevron"></i>')
+      $(this)
+        .parents('.btn-group')
+        .find('.select-toggle.toutes')
+        .removeClass('text-warning')
+        .html('toutes' + '<i class="fa fa-chevron-down ml-2 chevron"></i>')
+      $(this).parents('.btn-group').find('.cancel').hide()
+      $(this).parents('.btn-group').find('.chevron').show()
+      if ($(this).parents().hasClass('country-head')) {
+        $('.zone-div').show()
+        $('.grid-list,.view-link,.centered-img,.map-section .city-head .cancel').hide()
+        $('.map-section .img-fill').removeClass('blurred-img')
+        $('.map-section .city-head .select-toggle').removeAttr('data-toggle')
+        $('.map-section .city-head,.map-section .flex-div .activity-count').addClass('zero-opacity')
+        $('.select-toggle.toutes')
+          .removeClass('text-warning')
+          .html('toutes' + '<i class="fa fa-chevron-down ml-2 chevron"></i>')
+      }
+      // if ($(this).parents().hasClass('city-head') ) {
+      // }
+      $('#mapCarousel').owlCarousel({
+        loop: false,
+        center: true,
+        items: 3,
+        margin: 0,
+        autoplay: false,
+        dots: true,
+        nav: true,
+        autoplayTimeout: 8500,
+        smartSpeed: 450,
+        responsive: {
+          0: {
+            items: 2
+          },
+          768: {
+            items: 2
+          },
+          1170: {
+            items: 3
+          }
+        }
+      })
+      $('.owl-carousel').find('.owl-nav,.owl-dots').removeClass('disabled')
+      $('.owl-carousel').on('changed.owl.carousel', function (event) {
+        $(this).find('.owl-nav,.owl-dots').removeClass('disabled')
+      })
+      $('select.select-place').change(function () {
+        var selectedCountry = $(this).children('option:selected').val()
+        $('.nav-pills a[href="' + selectedCountry + '"]').tab('show')
+      })
+    })
+  }
+}
 </script>
 
 <style></style>

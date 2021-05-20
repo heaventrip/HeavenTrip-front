@@ -309,6 +309,112 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods: {
+    showDays() {
+      // get date
+      var start = $('#datepicker-range-start').val()
+      var end = $('#datepicker-range-end').val()
+      if (!start || !end) return
+
+      // parse date
+      var startArr = start.split(' ')
+      var endArr = end.split(' ')
+      if (endArr[1] == 'FÉVRIER') {
+        endArr[1] = 'feb'
+      }
+      if (endArr[1] == 'AOÛT') {
+        endArr[1] = 'aug'
+      }
+      if (endArr[1] == 'DÉCEMBRE') {
+        endArr[1] = 'dec'
+      }
+      if (startArr[1] == 'FÉVRIER') {
+        startArr[1] = 'feb'
+      }
+      if (startArr[1] == 'AOÛT') {
+        startArr[1] = 'aug'
+      }
+      if (startArr[1] == 'DÉCEMBRE') {
+        startArr[1] = 'dec'
+      }
+      var startDate = new Date(startArr)
+      var endDate = new Date(endArr)
+
+      // var startDate = new Date(startArr[2], startArr[0] - 1, startArr[1]);
+      // var endDate = new Date(endArr[2], endArr[0] - 1, endArr[1]);
+
+      // calculate days
+      var milliseconds = endDate.getTime() - startDate.getTime()
+      var days = milliseconds / (1000 * 60 * 60 * 24)
+      // var days = Math.round((endDate-startDate)/(1000*60*60*24));
+      $('#days').text(days)
+      $('#nights').text(days - 1)
+      $('.premier-text').show()
+    }
+  },
+  mounted() {
+    $('#datepicker-range-start').Zebra_DatePicker({
+      onChange: function () {
+        // var dval = $(this).val();
+        // alert(dval);
+        $('.date-buttons').removeClass('active')
+        $(this).parents('.date-buttons').addClass('active')
+      },
+      onClose: function (el) {
+        this.showDays(el)
+      },
+      direction: true,
+      container: $('.datepicker-col'),
+      pair: $('#datepicker-range-end'),
+      // always_visible: $('#show-datepicker'),
+      days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['JANVIER', 'FÉVRIER', 'MARS', 'AVRIL', 'MAI', 'JUIN', 'JUILLET', 'AOÛT', 'SEPTEMBRE', 'OCTOBRE', 'NOVEMBRE', 'DÉCEMBRE'],
+      // months_abbr: ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'],
+      // months_abbr:true,
+      // current_date: true,
+      // eslint-disable-next-line no-dupe-keys
+      onClose: null,
+      disabled_dates: false,
+      show_select_today: false,
+      show_clear_date: false,
+      select_other_months: true,
+      format: 'd F Y',
+      open_on_focus: true
+    })
+
+    $('#datepicker-range-end').Zebra_DatePicker({
+      onChange: function () {
+        $('.date-buttons').removeClass('active')
+        $(this).parents('.date-buttons').addClass('active')
+      },
+      onClose: function (el) {
+        this.showDays(el)
+      },
+      direction: 1,
+      container: $('.datepicker-col'),
+      days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      months: ['JANVIER', 'FÉVRIER', 'MARS', 'AVRIL', 'MAI', 'JUIN', 'JUILLET', 'AOÛT', 'SEPTEMBRE', 'OCTOBRE', 'NOVEMBRE', 'DÉCEMBRE'],
+      //months_abbr: ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'],
+      // months_abbr:['jan','frb','MARS','AVRIL','MAI','JUIN','JUILLET','ss','SEPTEMBRE','OCTOBRE','NOVEMBRE','dssd'],
+      // always_visible: $('#show-datepicker'),
+      show_select_today: false,
+      show_clear_date: false,
+      select_other_months: true,
+      format: 'd F Y'
+    })
+
+    $('#datepickbtn').on('click', function (e) {
+      $('#depart_datepick').find('.Zebra_DatePicker:first').addClass('after_date')
+      $('#datepicker-range-start').triggerHandler('click')
+      e.preventDefault()
+    })
+
+    $('#retourpickbtn').on('click', function (e) {
+      $('#depart_datepick').find('.Zebra_DatePicker:last').addClass('before_date')
+      $('#datepicker-range-end').triggerHandler('click')
+      e.preventDefault()
+    })
   }
 }
 </script>

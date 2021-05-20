@@ -125,7 +125,7 @@
 
 <script>
 import axios from 'axios'
-import { API_URL } from '@/components/config'
+import { API_URL } from '@/config.json'
 
 export default {
   name: 'Profile',
