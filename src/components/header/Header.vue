@@ -1,17 +1,9 @@
 <template>
-  <div class="header bg-dark text-white p-0">
-    <div class="container-fluid p-0">
-      <div class="header-part">
-        <ConnectionButtons />
-        <div class="clearfix"></div>
-        <Nav />
-        <div class="tab-content">
-          <div id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab" class="wrapper tab-pane fade show active home-wrapper pb-0">
-            <HeaderText />
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="header d-flex flex-column bg-dark text-white">
+    <ConnectionButtons />
+    <TheNav />
+    <HomeHeaderInfos v-if="$route.name == 'Home'" />
+    <ProductHeaderInfos v-else-if="$route.name == 'ProductHome'" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
@@ -74,17 +66,19 @@
 </template>
 
 <script>
-import Nav from '@/components/nav/Nav.vue'
+import TheNav from '@/components/nav/TheNav.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
-import HeaderText from './HeaderText.vue'
+import HomeHeaderInfos from './HomeHeaderInfos.vue'
+import ProductHeaderInfos from '@/components/product/ProductHeaderInfos.vue'
 import SessionsMenu from '@/components/SessionsMenu.vue'
 
 export default {
   name: 'Header',
   components: {
-    Nav,
+    TheNav,
     ConnectionButtons,
-    HeaderText,
+    HomeHeaderInfos,
+    ProductHeaderInfos,
     SessionsMenu
   },
   data() {
@@ -165,27 +159,23 @@ export default {
     }
   },
   mounted() {
-    const that = this
     var token_val = localStorage.getItem('user-token')
     if (!token_val) {
       this.token = false
     }
-    $(function () {})
+    this.jquery()
   }
 }
 </script>
 
 <style scoped>
 .header {
-  min-height: unset;
-  height: 94vh;
+  min-height: 94vh;
+  padding-bottom: 15vh;
+  /* background-color: rgba(255, 255, 255, 0.863); NOTE slmt sur agence */
 }
 .pre-booking-footer {
   bottom: 0;
-}
-/* FIXME slmt sur agence */
-.header-part {
-  /* background-color: rgba(255, 255, 255, 0.863); */
 }
 .big-letters {
   position: relative;

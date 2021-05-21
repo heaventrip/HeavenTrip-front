@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center align-items-lg-end w-100 h-100">
+  <div class="d-flex align-items-center align-items-lg-end w-100 mt-auto" style="padding: 0 111px">
     <div class="content d-flex align-items-end justify-content-between w-100 mt-5 mt-lg-0">
       <div>
         <div class="top-block d-flex align-items-center">
@@ -159,9 +159,6 @@ export default {
 .dates-link {
   background-color: transparent;
   border: 1px solid #fff;
-}
-.content {
-  margin-bottom: 15vh;
 }
 .list-info li span {
   display: inline-block;

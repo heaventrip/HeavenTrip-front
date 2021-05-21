@@ -8,11 +8,13 @@
     </main>
   </div>
 </template>
+
 <script>
 import SectionCarousel from './SectionCarousel.vue'
 import SectionMap from './SectionMap.vue'
 import SectionMiddle from './SectionMiddle.vue'
 import SectionBottom from './SectionBottom.vue'
+
 export default {
   name: 'MainSection',
   components: {
