@@ -27,13 +27,17 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click.prevent="onClicked('activities')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
+            ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click.prevent="onClicked('destinations')" class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
+            ><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="clickedAgency = true" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click.prevent="onClicked('agency')" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
@@ -50,49 +54,14 @@
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
       <div class="tab-content main-wrapper">
-        <div id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper">
+        <div v-show="activitiesIsActive" id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper show active">
           <ActivitiesTab />
         </div>
-        <div id="pills-destination" role="tabpanel" aria-labelledby="pills-destination-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper">
+        <div v-show="destinationsIsActive" id="pills-destination" role="tabpanel" aria-labelledby="pills-destination-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper show active">
           <DestinationsTab />
         </div>
-        <div id="pills-agence" role="tabpanel" aria-labelledby="pills-agence-tab" class="wrapper h-100 p-0 tab-pane fade home-wrapper">
-          <div v-if="clickedAgency" class="agency-content-wrapper d-flex flex-column justify-content-center">
-            <div class="row justify-content-center align-items-center">
-              <div class="col-3">
-                <div class="row align-items-center text-center">
-                  <div class="big-letters">
-                    HE<button @click="clickedConcept = true" class="btn choose-btn d-inline align-text-bottom">LE CONCEPT</button>
-                    <div class="text-content concept">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="row align-items-center text-center">
-                  <div class="big-letters">
-                    AV<button @click="clickedTeam = true" class="btn choose-btn d-inline align-text-bottom">LA TEAM</button>
-                    <div class="text-content team">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="row align-items-center text-center">
-                  <div class="big-letters">
-                    EN<button @click="clickedContact = true" class="btn choose-btn d-inline align-text-bottom">NOUS CONTACTER</button>
-                    <div class="text-content text-content-contact">Si tu as besoi dsdzd dz ar téléphone, formulaire ou via les réseaux sociaux</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row justify-content-center bottom-text">
-              <div class="text-center">
-                Heaven Trip c'est pas juste une nouvelle agence de voyage, c'est la rencontre de deux passionnés qui veulent reconnecter les uns aux autres <br />à travers des expériences concentrées sur l'humain, et le dépassement de soi. Ici, on valorise ce que tu veux devenir et non ce que tu es.
-              </div>
-            </div>
-          </div>
-          <NavConcept v-show="clickedConcept" />
-          <NavTeam v-show="clickedTeam" />
-          <NavContact v-show="clickedContact" />
+        <div v-show="agencyIsActive" id="pills-agence" role="tabpanel" aria-labelledby="pills-agence-tab" class="wrapper h-100 p-0 tab-pane fade home-wrapper show active">
+          <AgencyTab />
         </div>
       </div>
     </div>
@@ -100,22 +69,54 @@
 </template>
 
 <script>
+import AgencyTab from '@/components/nav/AgencyTab.vue'
 import ActivitiesTab from '@/components/nav/ActivitiesTab.vue'
 import DestinationsTab from '@/components/nav/DestinationsTab.vue'
-import NavConcept from '@/components/nav/NavConcept.vue'
-import NavTeam from '@/components/nav/NavTeam.vue'
-import NavContact from '@/components/nav/NavContact.vue'
 
 export default {
   name: 'Nav',
+  emits: ['changed-nav-status'],
   components: {
+    AgencyTab,
     ActivitiesTab,
-    NavConcept,
-    NavTeam,
-    NavContact,
     DestinationsTab
+  },
+  data() {
+    return {
+      activitiesIsActive: false,
+      destinationsIsActive: false,
+      agencyIsActive: false
+    }
+  },
+  computed: {
+    navIsActive() {
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
+    }
+  },
+  watch: {
+    navIsActive: function (newVal) {
+      this.$emit('changed-nav-status', newVal)
+    },
+    agencyIsActive: function (newVal) {
+      let headerBg = document.querySelector('.header-bg-image')
+      if (newVal === true) {
+        headerBg.style.filter = 'opacity(0.2)'
+      }
+    }
+  },
+  methods: {
+    onClicked(tab) {
+      let varName = tab + 'IsActive'
+      if (this.$data[varName] === true) return // if already active do nothing
+      ;[this.activitiesIsActive, this.destinationsIsActive, this.agencyIsActive].forEach((el) => (el = false))
+      this.$data[varName] = true
+    }
   }
 }
 </script>
 
-<style></style>
+<style scoped>
+.tab-content.main-wrapper {
+  z-index: 1;
+}
+</style>

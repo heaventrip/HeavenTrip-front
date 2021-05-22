@@ -1,9 +1,10 @@
 <template>
-  <div class="header d-flex flex-column bg-dark text-white">
+  <div class="header d-flex flex-column text-white">
+    <img src="@/assets/images/combined.png" class="header-bg-image" />
     <ConnectionButtons />
-    <TheNav />
-    <HomeHeaderInfos v-if="$route.name == 'Home'" />
-    <ProductHeaderInfos v-else-if="$route.name == 'ProductHome'" />
+    <TheNav @changed-nav-status="setNavStatus" />
+    <HomeHeaderInfos v-if="$route.name == 'Home' && !navIsActive" />
+    <ProductHeaderInfos v-else-if="$route.name == 'ProductHome' && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
@@ -85,53 +86,23 @@ export default {
     return {
       token: true,
       toggleSessions: false,
-      clickedAgency: false,
-      clickedConcept: false,
-      clickedTeam: false,
-      clickedContact: false
-    }
-  },
-  watch: {
-    clickedAgency: function (newVal) {
-      if (newVal === true) {
-        this.clickedConcept = false
-        this.clickedTeam = false
-        this.clickedContact = false
-      }
-    },
-    clickedConcept: function (newVal) {
-      if (newVal === true) {
-        this.clickedAgency = false
-        this.clickedTeam = false
-        this.clickedContact = false
-      }
-    },
-    clickedTeam: function (newVal) {
-      if (newVal === true) {
-        this.clickedAgency = false
-        this.clickedConcept = false
-        this.clickedContact = false
-      }
-    },
-    clickedContact: function (newVal) {
-      if (newVal === true) {
-        this.clickedAgency = false
-        this.clickedConcept = false
-        this.clickedTeam = false
-      }
+      navIsActive: false
     }
   },
   methods: {
-    logout: function (event) {
+    setNavStatus(status) {
+      this.navIsActive = status
+    },
+    logout(event) {
       localStorage.removeItem('user-token')
       window.location.reload()
     },
-    displayMenu(menu) {
-      $('#pills-activites').removeClass('active')
-      $('#pills-agence').removeClass('active')
-      $('#pills-destination').removeClass('active')
-      $(`#${menu}`).addClass('active')
-    },
+    // displayMenu(menu) {
+    //   $('#pills-activites').removeClass('active')
+    //   $('#pills-agence').removeClass('active')
+    //   $('#pills-destination').removeClass('active')
+    //   $(`#${menu}`).addClass('active')
+    // },
     jquery() {
       $('.selection').select2({
         minimumResultsForSearch: Infinity
@@ -172,54 +143,14 @@ export default {
 .header {
   min-height: 94vh;
   padding-bottom: 15vh;
-  /* background-color: rgba(255, 255, 255, 0.863); NOTE slmt sur agence */
+}
+.header-bg-image {
+  position: absolute;
+  height: 94vh;
+  width: 100%;
+  z-index: -1;
 }
 .pre-booking-footer {
   bottom: 0;
-}
-.big-letters {
-  position: relative;
-  font-size: 220px;
-  font-weight: 700;
-  color: #292f330d;
-}
-.choose-btn {
-  font-weight: bold;
-  border: 1px solid #292f33;
-  border-radius: 0;
-  padding: 0.5rem 1.5rem;
-  margin-left: 10px;
-  position: relative;
-  bottom: 62px; /** line-height + padding-y */
-  color: #292f33;
-  letter-spacing: 0.5px;
-  font-size: 0.875rem;
-}
-.text-content {
-  position: absolute;
-  right: -90px;
-  bottom: 45%;
-  color: #292f33;
-  font-size: 0.8rem;
-  font-weight: 100;
-  font-family: Muli, sans-serif;
-  max-width: 300px;
-  line-height: 1.8;
-}
-.text-content-contact {
-  right: -60px;
-}
-.bottom-text {
-  color: #292f3333;
-  font-size: 0.8rem;
-  font-weight: bold;
-  line-height: 1.8;
-  letter-spacing: 0.2px;
-  margin-top: 10vh;
-}
-.agency-content-wrapper {
-  height: calc(100% - 10vh);
-  position: relative;
-  top: -5vh;
 }
 </style>
