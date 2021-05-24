@@ -679,11 +679,11 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   padding-top: 10px;
   padding-bottom: 4px;
 }
-.header .content .sub-heading{
+/* .header .content .sub-heading{
   font-weight: 400;
   font-size: 0.875rem;
   letter-spacing: 0.6px;
-}
+} */
 .header .content .list-info{
 	display: inline-flex;
 	letter-spacing: 1.4px;

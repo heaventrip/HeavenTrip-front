@@ -145,6 +145,7 @@ export default {
   padding-bottom: 15vh;
 }
 .header-bg-image {
+  object-fit: cover;
   position: absolute;
   height: 94vh;
   width: 100%;

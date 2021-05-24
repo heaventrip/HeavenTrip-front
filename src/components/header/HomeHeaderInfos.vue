@@ -7,12 +7,12 @@
           <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
           <div>
             <h1 class="heading text-uppercase mb-2"><strong>ski</strong> freeride</h1>
-            <h5 class="sub-heading text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> serre-chevalier</h5>
+            <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> serre-chevalier</h5>
           </div>
         </div>
         <!-- TODO tags multiactivités ici -->
         <div class="abc text-center text-lg-left mt-5 mt-lg-0 pt-md-4 pt-lg-0">
-          <ul class="list-unstyled py-4 py-lg-3 text-uppercase list-info mb-0 align-items-center">
+          <ul class="list-unstyled py-4 py-lg-4 text-uppercase list-info mb-0 align-items-center">
             <li>
               <img class="icons" fluid :src="require('@/assets/images/globe.png')" />
               <span>france</span>
@@ -95,9 +95,15 @@ export default {
 </script>
 
 <style scoped>
+.header-infos__sub-title {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+}
+
 /* TEXT */
 .text--smaller {
-  font-size: 12px;
+  font-size: 0.85rem;
 }
 /* BLOCK */
 .block--white {
@@ -110,6 +116,7 @@ export default {
   transform: translateY(-50%);
   width: fit-content;
   margin: auto;
+  line-height: 1.3;
 }
 /* BTTN */
 .bttn {
@@ -123,6 +130,8 @@ export default {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  font-weight: 500;
+  letter-spacing: 1.5px;
 }
 .bttn__text--bold {
   font-weight: bold;
@@ -200,7 +209,8 @@ export default {
 }
 .bottom-left-text {
   font-size: 0.75rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  letter-spacing: 0.4px;
 }
 .bottom-left-text span:last-child {
   font-weight: bold;

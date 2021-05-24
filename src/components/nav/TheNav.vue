@@ -100,7 +100,7 @@ export default {
     agencyIsActive: function (newVal) {
       let headerBg = document.querySelector('.header-bg-image')
       if (newVal === true) {
-        headerBg.style.filter = 'opacity(0.2)'
+        headerBg.style.filter = 'blur(3px) opacity(0.2)'
       }
     }
   },
