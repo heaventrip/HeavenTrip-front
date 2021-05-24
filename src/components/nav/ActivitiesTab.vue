@@ -32,33 +32,33 @@
         <div class="row h-100 justify-content-center align-items-center main-grid">
           <div class="col-3">
             <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
-              <svg transform="translate(-8)" x="0" height="400" width="200" fill="none">
+              <svg x="-10" height="400" width="200" fill="none">
                 <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
               </svg>
-              <svg transform="translate(8)" x="200" height="400" width="200" fill="none">
-                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="14" />
+              <svg x="210" height="400" width="200" fill="none">
+                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="17" />
               </svg>
             </svg>
             <span class="sport-name">Plongée</span>
           </div>
           <div class="col-3" v-if="activitiesCount >= 2">
             <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
-              <svg transform="translate(-8)" x="0" height="400" width="200" fill="none">
+              <svg x="-10" height="400" width="200" fill="none">
                 <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
               </svg>
-              <svg transform="translate(8)" x="200" height="400" width="200" fill="none">
-                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="14" />
+              <svg x="210" height="400" width="200" fill="none">
+                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="17" />
               </svg>
             </svg>
             <span class="sport-name">Chiens</span>
           </div>
           <div class="col-3" v-if="activitiesCount >= 3">
             <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
-              <svg transform="translate(-8)" x="0" height="400" width="200" fill="none">
+              <svg x="-10" height="400" width="200" fill="none">
                 <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
               </svg>
-              <svg transform="translate(8)" x="200" height="400" width="200" fill="none">
-                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="14" />
+              <svg x="210" height="400" width="200" fill="none">
+                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="17" />
               </svg>
             </svg>
             <span class="sport-name">Surf</span>
