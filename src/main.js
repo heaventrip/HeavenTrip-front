@@ -19,5 +19,9 @@ import './assets/css/style.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import InlineSvg from 'vue-inline-svg'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.component('InlineSvg', InlineSvg)
+app.use(router)
+app.mount('#app')

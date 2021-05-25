@@ -2,16 +2,29 @@
   <div>
     <footer class="bg-dark text-white footer pt-5 pb-4">
       <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-10 col-lg-5 mx-auto text-center">
-            <p class="head para pt-3 pt-md-5 pt-lg-4">
-              <span class="mobile-block">Besain d'un conseil</span> au demande specifique ?<br />disponible <span class="font-weight-bold">7j / 7</span> de
-              <span class="font-weight-bold">8h30 à 20h00</span>
-            </p>
-            <div class="border rounded p-2 d-flex justify-content-around text-white text-uppercase font-weight-bold mail-box">
-              <a href="tel:0369316618" class="text-reset py-2"><img class="mr-3" fluid :src="require('@/assets/images/tel.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/tel_h.png')" />03 69 31 66 18</a>
-              <div class="divider"></div>
-              <a href="#" class="text-reset py-2 positioned-tripcol"><img class="mr-3" fluid :src="require('@/assets/images/chat.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/chat_h.png')" />écrivez-nous</a>
+        <div class="row text-center text-uppercase pt-md-5 pt-lg-0">
+          <div class="col-12 col-md-10 mx-auto">
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-3">
+                <InlineSvg :src="require('@/assets/svg/fingerprint.svg')" />
+                <h6 class="sub-heading my-1 font-weight-bold">conseils & suivi</h6>
+                <p class="para-points">avant et pendant ton sejour</p>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <InlineSvg :src="require('@/assets/svg/flask.svg')" />
+                <h6 class="sub-heading my-1 font-weight-bold">creer et personnalise</h6>
+                <p class="para-points">ton propre stage</p>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <InlineSvg :src="require('@/assets/svg/kitchen-hat.svg')" />
+                <h6 class="sub-heading my-1 font-weight-bold">organisation</h6>
+                <p class="para-points">made in heaven trip</p>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <InlineSvg :src="require('@/assets/svg/mic.svg')" />
+                <h6 class="sub-heading my-1 font-weight-bold">discute avant le depart</h6>
+                <p class="para-points">avec les autres participants</p>
+              </div>
             </div>
           </div>
         </div>
@@ -172,3 +185,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.user_icon {
+  background-color: white;
+}
+</style>

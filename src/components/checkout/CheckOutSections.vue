@@ -6,16 +6,16 @@
           <div class="col-12 col-xl-4 p-0 bg-image h-100 position-relative">
             <div class="d-flex justify-content-between align-items-center trip-list-div text-white px-3">
               <ul class="list-unstyled mb-0 d-flex align-items-center text-uppercase">
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/images/globe.png')" />france</li>
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/images/timer.png')" />8 j - 7 nuits</li>
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/images/circle.png')" />confirmé</li>
+                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/globe.svg')" />france</li>
+                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/timer.svg')" />8 j - 7 nuits</li>
+                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/ring.svg')" />confirmé</li>
               </ul>
               <ul class="list-unstyled mb-0 d-flex align-items-center trip-list">
                 <li>
                   <img class="mr-2 icons" fluid :src="require('@/assets/images/head-pin.png')" />
                 </li>
                 <li>
-                  <img class="mr-2 icons" fluid :src="require('@/assets/images/yoga.png')" />
+                  <img class="mr-2 icons" fluid :src="require('@/assets/svg/yoga.svg')" />
                 </li>
               </ul>
             </div>

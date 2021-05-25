@@ -16,17 +16,89 @@ export default {
   /* text-align: center; */
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.muli {
+  font-family: Muli, sans-serif;
+}
+.oswald {
+  font-family: Oswald, sans-serif;
+}
+.text--light {
+  font-weight: 200;
+}
+.text--bold {
+  font-weight: bold;
+}
+.text--bolder {
+  font-weight: 800;
+}
+.text--12 {
+  font-size: 0.75rem;
+}
+.text--13 {
+  font-size: 0.8125rem;
+}
+.text--14 {
+  font-size: 0.875rem;
+}
+.text--16 {
+  font-size: 1rem;
+}
+.text--18 {
+  font-size: 1.125rem;
+}
+.text--20 {
+  font-size: 1.25rem;
+}
+.text--22 {
+  font-size: 1.375rem;
+}
+.text--24 {
+  font-size: 1.5rem;
+}
+.fg-0 {
+  flex-grow: 0;
+}
+.fg-1 {
+  flex-grow: 1;
+}
+.fg-2 {
+  flex-grow: 2;
+}
+.fg-3 {
+  flex-grow: 3;
+}
+.fg-4 {
+  flex-grow: 4;
+}
+.fg-5 {
+  flex-grow: 5;
+}
+.fs-0 {
+  flex-shrink: 0;
+}
+.fs-1 {
+  flex-shrink: 1;
+}
+.fs-2 {
+  flex-shrink: 2;
+}
+.fs-3 {
+  flex-shrink: 3;
+}
+.fs-4 {
+  flex-shrink: 4;
+}
+.fs-5 {
+  flex-shrink: 5;
 }
 </style>

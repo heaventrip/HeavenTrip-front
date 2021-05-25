@@ -1,0 +1,8 @@
+<svg transform="rotate(-30)" height="400" width="400">
+<svg x="-10" height="400" width="200" fill="none">
+<circle cx="205" cy="220" r="50%" stroke="black" stroke-width="4"/>
+</svg>
+<svg x="210" height="400" width="200" fill="none">
+<circle cx="-5" cy="220" r="50%" stroke="black" stroke-width="30"/>
+</svg>
+</svg>

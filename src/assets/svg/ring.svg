@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27.517" height="30.45" viewBox="0 0 27.517 30.45">
+  <defs>
+    <filter id="Tracé_5223" x="5.792" y="0" width="21.725" height="30.45" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.082"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Composant_105_1" data-name="Composant 105 – 1" transform="translate(2.292 3.225)">
+    <g id="Groupe_1042" data-name="Groupe 1042" transform="translate(20 20) rotate(180)">
+      <ellipse id="Ellipse_100" data-name="Ellipse 100" cx="8.725" cy="8.725" rx="8.725" ry="8.725" transform="translate(0 17.228) rotate(-80.858)" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="4" opacity="0.567"/>
+      <g transform="matrix(-1, 0, 0, -1, 22.29, 23.22)" filter="url(#Tracé_5223)">
+        <path id="Tracé_5223-2" data-name="Tracé 5223" d="M8.725,17.45A8.725,8.725,0,0,1,8.725,0" transform="translate(21.02 21.95) rotate(180)" fill="none" stroke="#292f33" stroke-linecap="round" stroke-miterlimit="10" stroke-width="4"/>
+      </g>
+    </g>
+  </g>
+</svg>
+ 

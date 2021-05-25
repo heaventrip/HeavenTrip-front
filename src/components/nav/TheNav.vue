@@ -53,7 +53,7 @@
         <span class="mx-1 font-weight-bold">-</span>
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
-      <div class="tab-content main-wrapper">
+      <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
         <div v-show="activitiesIsActive" id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper show active">
           <ActivitiesTab />
         </div>
