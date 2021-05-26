@@ -1,10 +1,10 @@
 <template>
-  <div class="bttn" :class="pColor">
-    <div class="bttn__text" :class="pWeight" :style="pPadding">
+  <div class="bttn" :class="pColor" :style="pStyle">
+    <div class="bttn__text" :class="pWeight">
       <div>
-        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" />
-        <span class="align-middle">{{ pText }}</span>
-        <InlineSvg v-if="pArrow" :src="require('@/assets/svg/arrow-right.svg')" class="ml-3 align-middle" />
+        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" :fill="pBackgroundColor == 'white' ? 'red' : 'white'" />
+        <span class="align-middle" v-html="pText"></span>
+        <InlineSvg v-if="pArrow" :src="require('@/assets/svg/arrow-right.svg')" class="ml-4 align-middle" height="14" fill="white" />
       </div>
     </div>
   </div>
@@ -13,23 +13,24 @@
 <script>
 export default {
   name: 'Button',
-  props: ['text', 'color', 'weight', 'icon', 'px', 'py', 'arrow'],
+  props: ['text', 'color', 'weight', 'height', 'icon', 'px', 'py', 'arrow', 'size'],
   data() {
     return {
+      pBackgroundColor: this.color,
       pText: this.text,
       pArrow: this.arrow,
       pIcon: this.icon
     }
   },
   computed: {
-    pPadding() {
-      return `padding: ${this.py || '0'} ${this.px || '0'};`
+    pStyle() {
+      return `padding: ${this.py || '0'} ${this.px || '0'}; font-size: ${this.size || '0.8rem'}; height: ${this.height};`
     },
     pColor() {
-      return `bttn--${this.color}`
+      return `bttn--${this.pBackgroundColor}`
     },
     pWeight() {
-      return `bttn__text--${this.weight}`
+      return `bttn__text--${this.weight};`
     }
   }
 }
@@ -40,7 +41,6 @@ export default {
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
-  height: 80px;
 }
 .bttn__text {
   position: relative;

@@ -3,7 +3,8 @@
     <div class="content d-flex align-items-end justify-content-between w-100 mt-5 mt-lg-0">
       <div>
         <div class="top-block d-flex align-items-center">
-          <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" />
+          <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" class="head-icon d-inline-block" height="90" />
+          <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
           <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
           <div>
             <h1 class="heading text-uppercase mb-2"><strong>ski</strong> freeride</h1>
@@ -11,8 +12,8 @@
           </div>
         </div>
         <!-- TODO tags multiactivités ici -->
-        <div class="abc text-center text-lg-left mt-5 mt-lg-0 pt-md-4 pt-lg-0">
-          <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :divider="true" :border="true" />
+        <div v-show="!toggledSessions" class="abc text-center text-lg-left mt-5 mt-lg-0 pt-md-4 pt-lg-0">
+          <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :divider="false" :border="true" color="white" icon="globe" />
           <br />
           <div class="d-inline-flex d-lg-flex align-items-center p-3 px-lg-0 trippers-div">
             <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
@@ -50,7 +51,7 @@
       </div>
       <div class="row no-gutters" style="margin-bottom: 5vh">
         <div class="col-4">
-          <Button text="voir les dates" color="transparent" weight="bold" px="1rem" />
+          <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" />
         </div>
         <div class="col-8 bg block--white">
           <div class="block__content">
@@ -64,7 +65,7 @@
         </div>
         <div class="col-6 ml-auto">
           <div class="bttn bttn--pink">
-            <div class="bttn__text bttn__text--bold">Détails<i class="fa fa-chevron-right ml-3"></i></div>
+            <div class="bttn__text">Détails<i class="fa fa-chevron-right ml-3"></i></div>
           </div>
         </div>
       </div>
@@ -77,9 +78,21 @@ import Button from '@/components/elements/Button.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 export default {
   name: 'HeaderText',
+  emits: ['toggled-sessions'],
   components: {
     Button,
     InlineProductInfos
+  },
+  data() {
+    return {
+      toggledSessions: false
+    }
+  },
+  methods: {
+    emitToggledSessions() {
+      this.toggledSessions = true
+      this.$emit('toggled-sessions')
+    }
   }
 }
 </script>

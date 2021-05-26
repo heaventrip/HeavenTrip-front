@@ -2,46 +2,41 @@
   <section class="middle-section">
     <div class="container">
       <div class="row">
-        <div class="pad-block col-12 col-lg-6 col-xl-5 rounded text-white p-0 desk-width-right">
-          <div class="pad__header text-uppercase rounded-top d-flex justify-content-between align-items-center">
-            <h5 class="small-head">Votre coup de coeur</h5>
+        <div class="pad-block col-12 col-lg-6 col-xl-5 rounded text-white p-0">
+          <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
+            <h5 class="pad__header__title">Votre coup de coeur</h5>
             <div style="width: min-content">
-              <InlineAvatars :avatars="[1, 2, 3, 4]" :heart="true" />
+              <InlineAvatars :avatars="[1, 2, 3, 4]" :heart="true" spacing="-10px" border-color="grey" />
             </div>
           </div>
           <div class="d-flex">
-            <div class="d-inline-block" style="width: 90%">
-              <div class="pad__content">
-                <h1 class="text-uppercase heading font-weight-bold mb-4 d-flex align-items-center">
-                  yoggi & surf
-                  <span class="font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
-                </h1>
-                <div class="d-flex justify-content-center py-3 tooltip-div my-4">
-                  <a href="" class="mr-3" data-toggle="tooltip" data-placement="top" title="Pilates"><img class="" fluid :src="require('@/assets/svg/surf.svg')" /></a>
-                  <a href="" class="mr-3" data-toggle="tooltip" data-placement="top" title="Pilates"><img class="" fluid :src="require('@/assets/svg/yoga.svg')" /></a>
-                  <a href="" class="mr-3" data-toggle="tooltip" data-placement="top" title="Pilates"><img class="" fluid :src="require('@/assets/svg/mat.svg')" /></a>
+            <div class="d-inline-block" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
+              <div class="pad__content shadow--right">
+                <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
+                  <span class="pad__content__title__sport">yoggi & surf</span>
+                  <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
+                </div>
+                <div class="pad__content__sports d-flex align-items-center justify-content-center tooltip-div mt-4">
+                  <InlineSvg class="mr-4" :src="require('@/assets/svg/surf.svg')" height="22" />
+                  <InlineSvg class="mr-4" :src="require('@/assets/svg/yoga.svg')" height="22" />
+                  <InlineSvg class="mr-4" :src="require('@/assets/svg/mat.svg')" height="22" />
                   <span class="ml-auto euro"><strong>750&euro;</strong>/pers. </span>
                 </div>
                 <div class="d-flex align-items-center social-info">
-                  <InlineProductInfos :infos="['text1', 'text', 'text1', 'text222']" :divider="false" :extra-class="'w-100 justify-content-between'" />
+                  <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" :divider="false" :extra-class="'w-100 justify-content-between'" color="#292f33" />
                 </div>
               </div>
               <div class="d-flex pad__footer">
-                <div class="pad__footer__review-counter">
-                  <Button text="54 avis" icon="star" color="white" weight="bold" />
+                <div class="pad__footer__review-counter shadow--top">
+                  <Button text="54 avis" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
                 </div>
-                <div class="bttn bttn--pink w-100">
-                  <div class="bttn__text bttn__text--bold">
-                    VOIR LE DETAIL DU SEJOUR
-                    <img class="align-baseline ml-3" src="@/assets/svg/arrow-right.svg" style="max-height: 15px" />
-                  </div>
-                </div>
+                <Button class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
               </div>
             </div>
-            <div class="d-inline-block pad__content" style="width: 10%; height: min-content">
-              <div class="pad__content__month-block"><span>Mai</span></div>
-              <div class="pad__content__month-block"><span>Juil</span></div>
-              <div class="pad__content__month-block"><span>Août</span></div>
+            <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
+              <div class="pad__content__month-block shadow"><span>Mai</span></div>
+              <div class="pad__content__month-block shadow"><span>Juil</span></div>
+              <div class="pad__content__month-block shadow"><span>Août</span></div>
             </div>
           </div>
         </div>
@@ -66,6 +61,34 @@ export default {
 </script>
 
 <style scoped>
+.pad__content__sports {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+.pad__header__title {
+  font-size: 1rem;
+  font-weight: 400;
+  position: relative;
+}
+.pad__header__title::before {
+  position: absolute;
+  content: '';
+  width: 50px;
+  height: 1px;
+  background-color: #ffffff;
+  bottom: -1rem;
+  left: 0;
+}
+.pad__content__title__sport {
+  font-size: 1.75rem;
+}
+.pad__content__title {
+  margin-bottom: 2.4rem;
+}
+.pad__content__title__spot {
+  color: #793f4e !important;
+}
 .pad__footer__review-counter {
   background-color: #fff;
   color: #292f33;
@@ -73,12 +96,17 @@ export default {
 }
 .pad-block {
   margin-left: auto;
-  margin-right: 15%;
+  max-width: 500px;
 }
 .pad__header {
-  padding: 2rem;
+  padding: 1.2rem 2rem;
+  background-color: #292f33;
+  margin-bottom: 0.1rem;
+  position: relative;
+  z-index: 2;
 }
 .pad__content {
+  color: #292f33;
   padding: 2rem 2rem 0rem 2rem;
 }
 .pad__content__month-block span {
@@ -87,8 +115,13 @@ export default {
 }
 .pad__content__month-block {
   text-align: center;
-  border-bottom: 1px dashed #b4b4b4;
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  background-color: #fff;
+  font-family: 'Muli', sans-serif;
+  font-size: 0.75rem;
+  font-weight: lighter;
 }
 .tooltip-div {
   border-top: 1px dashed #292f33;
@@ -129,15 +162,9 @@ export default {
   background-color: #d82558;
   border-color: #d82558;
 }
-.pad__header {
-  background-color: #292f33;
-  margin-bottom: 0.5rem;
-}
-.pad__content {
-  background-color: #ffffff80;
-  color: #292f33;
-}
+
 .middle-section {
   background: url('../../assets/images/asset-1.png') no-repeat center center / cover;
+  height: 100vh;
 }
 </style>

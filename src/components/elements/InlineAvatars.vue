@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper d-flex align-items-center">
     <div v-for="avatar in pAvatars" :key="avatar" :style="pSpacing">
-      <img class="small-avatar rounded-circle" :style="pHeight" :src="require('@/assets/images/t4.png')" />
+      <img class="rounded-circle" :class="pBorderColor" :style="pStyle" :src="require('@/assets/images/t4.png')" />
     </div>
     <div v-if="pHeart">
       <img :style="pHeight" :src="require('@/assets/svg/heart-logo.svg')" />
@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'InlineAvatars',
-  props: ['height', 'heart', 'spacing', 'avatars'],
+  props: ['height', 'heart', 'spacing', 'avatars', 'border-color'],
   data() {
     return {
       pHeart: this.heart,
@@ -25,6 +25,9 @@ export default {
     },
     pHeight() {
       return `height: ${this.height || '40px'};`
+    },
+    pBorderColor() {
+      return `small-avatar--${this.borderColor}`
     }
   }
 }
@@ -35,8 +38,12 @@ export default {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-.small-avatar {
+.small-avatar--grey {
   outline: 5px solid #292f33;
   border: 1px solid #292f33;
+}
+.small-avatar--white {
+  outline: 5px solid #fff;
+  border: 1px solid #fff;
 }
 </style>

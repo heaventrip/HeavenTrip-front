@@ -3,7 +3,7 @@
     <img src="@/assets/images/combined.png" class="header-bg-image" />
     <ConnectionButtons />
     <TheNav @changed-nav-status="setNavStatus" />
-    <HomeHeaderInfos v-if="$route.name == 'Home' && !navIsActive" />
+    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="$route.name == 'Home' && !navIsActive" />
     <ProductHeaderInfos v-else-if="$route.name == 'ProductHome' && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
@@ -60,9 +60,9 @@
         <p class="font-weight-bold">La validation d’un item fait office de validation Et permet de revenir à l’écran précédent.</p>
       </div>
     </div>
-  </div>
-  <div class="pre-booking-footer sticky-bottom d-none d-lg-block" v-if="toggleSessions">
-    <SessionsMenu />
+    <div class="pre-booking-footer sticky-bottom d-none d-lg-block" v-if="toggleSessions">
+      <SessionsMenu />
+    </div>
   </div>
 </template>
 
@@ -152,6 +152,5 @@ export default {
   z-index: -1;
 }
 .pre-booking-footer {
-  bottom: 0;
 }
 </style>

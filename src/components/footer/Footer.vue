@@ -7,23 +7,23 @@
             <div class="row">
               <div class="col-12 col-sm-6 col-lg-3">
                 <InlineSvg :src="require('@/assets/svg/fingerprint.svg')" />
-                <h6 class="sub-heading my-1 font-weight-bold">conseils & suivi</h6>
-                <p class="para-points">avant et pendant ton sejour</p>
+                <h6 class="sub-heading mt-4 font-weight-bold">conseils & suivi</h6>
+                <div class="sub-sub-heading">avant et pendant ton sejour</div>
               </div>
               <div class="col-12 col-sm-6 col-lg-3">
                 <InlineSvg :src="require('@/assets/svg/flask.svg')" />
-                <h6 class="sub-heading my-1 font-weight-bold">creer et personnalise</h6>
-                <p class="para-points">ton propre stage</p>
+                <h6 class="sub-heading mt-4 font-weight-bold">creer et personnalise</h6>
+                <div class="sub-sub-heading">ton propre stage</div>
               </div>
               <div class="col-12 col-sm-6 col-lg-3">
                 <InlineSvg :src="require('@/assets/svg/kitchen-hat.svg')" />
-                <h6 class="sub-heading my-1 font-weight-bold">organisation</h6>
-                <p class="para-points">made in heaven trip</p>
+                <h6 class="sub-heading mt-4 font-weight-bold">organisation</h6>
+                <div class="sub-sub-heading">made in heaven trip</div>
               </div>
               <div class="col-12 col-sm-6 col-lg-3">
                 <InlineSvg :src="require('@/assets/svg/mic.svg')" />
-                <h6 class="sub-heading my-1 font-weight-bold">discute avant le depart</h6>
-                <p class="para-points">avec les autres participants</p>
+                <h6 class="sub-heading mt-4 font-weight-bold">discute avant le depart</h6>
+                <div class="sub-sub-heading">avec les autres participants</div>
               </div>
             </div>
           </div>
@@ -189,5 +189,11 @@ export default {
 <style scoped>
 .user_icon {
   background-color: white;
+}
+.sub-sub-heading {
+  font-size: 0.75rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-family: Muli, sans-serif;
 }
 </style>

@@ -32,6 +32,27 @@ export default {
 .oswald {
   font-family: Oswald, sans-serif;
 }
+.shadow {
+  box-shadow: 0px 0px 4px #292f331a !important;
+}
+.shadow--right {
+  box-shadow: 1px 1px 6px rgba(41, 47, 51, 0.04) !important;
+}
+.shadow--top {
+  box-shadow: 0px -1px 3px rgba(41, 47, 51, 0.03) !important;
+}
+.shadow--bottom {
+  box-shadow: 0px 3px 6px rgba(41, 47, 51, 0.15) !important;
+}
+.bg-white {
+  background-color: #fff;
+}
+.bg-pink {
+  background-color: #d9345a;
+}
+.bg-grey {
+  background-color: #292f33;
+}
 .text--grey {
   color: #292f33;
 }

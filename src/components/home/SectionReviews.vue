@@ -6,13 +6,13 @@
         <span>ils&nbsp;</span>
         <span class="text--bold">témoignent</span>
       </div>
-      <InlineAvatars height="40px" :heart="false" spacing="10px" :avatars="[1, 2, 3]" />
+      <InlineAvatars height="40px" :heart="false" spacing="15px" :avatars="[1, 2, 3]" />
     </div>
     <div class="reviews__user d-flex flex-column">
       <img :src="require('@/assets/images/avatar.png')" class="reviews__user-avatar rounded-circle" />
       <div class="reviews__user-infos mx-auto">
         <span class="text--bold mr-4">
-          <InlineSvg :src="require('@/assets/svg/map-pin.svg')" class="align-sub" />
+          <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
           <span class="ml-2">Nice</span>
         </span>
         <span class="text--bold">Remi Flemming</span>
@@ -20,11 +20,11 @@
     </div>
     <div class="reviews__comment">
       <h6 class="text-uppercase">
-        <span class="mr-2">
-          <img class="align-baseline mr-2" src="@/assets/svg/arrow-right.svg" style="max-height: 15px" />
-          Séjour KITESURF
+        <span> Séjour KITESURF </span>
+        <span class="review-comment__date" style="font-size: 0.8rem">
+          <img class="align-baseline mx-2" src="@/assets/svg/arrow-right.svg" style="max-height: 10px" />
+          session du 01/02/03
         </span>
-        <span class="review-comment__date" style="font-size: 0.8rem">session du 01/02/03</span>
       </h6>
       <p class="mb-0">
         C'est en vivant des emotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c'est trop coooool! Et hop encore une ligne pour la manmotte ! Toussa toussa toussa Toussa toussa toussa c'est Charlie qui dit ! Enfin j'ai peut-etre pas totalement termine...
@@ -44,6 +44,9 @@ export default {
 </script>
 
 <style scoped>
+.reviews__user-infos__spot-svg {
+  vertical-align: sub;
+}
 .reviews__user-avatar {
   border: 15px solid #fff;
   border-radius: 50%;

@@ -1,7 +1,7 @@
 <template>
-  <div class="block d-flex align-items-center justify-content-start py-4 text-uppercase mx-auto" :class="pClass" :style="borderStyle">
+  <div class="block d-flex align-items-center justify-content-between py-4 text-uppercase" :class="pClass" :style="borderStyle">
     <div class="d-flex align-items-center" v-for="(info, key) in pInfos" :key="info">
-      <InlineSvg :src="require('@/assets/svg/globe.svg')" fill="white" />
+      <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
       <span class="block__text-content">{{ info }}</span>
       <span v-if="key != pInfos.length - 1" class="block__divider" :style="display"></span>
     </div>
@@ -12,9 +12,11 @@
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos', 'divider', 'border', 'extra-class'],
+  props: ['infos', 'divider', 'border', 'extra-class', 'color', 'icon'],
   data() {
     return {
+      pIcon: this.icon,
+      pColor: this.color,
       pBorder: this.border,
       pClass: this.extraClass
     }
@@ -24,7 +26,7 @@ export default {
       return this.infos.filter((val) => val) // remove undefined values
     },
     display() {
-      return this.divider === true ? 'background-color: rgba(250, 250, 250, 0.35);' : 'background-color: transparent;'
+      return this.divider === true ? 'background-color: rgba(250, 250, 250, 0.35);' : 'display: none;'
     },
     borderStyle() {
       return this.pBorder === true ? 'border-top: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
@@ -41,6 +43,7 @@ export default {
 }
 .block {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
+  line-height: 2;
 }
 .block__divider {
   display: inline-block;
@@ -51,8 +54,10 @@ export default {
   margin: 0 1rem;
 }
 .block__text-content {
-  margin-left: 1rem;
+  margin-left: 0.6rem;
   display: inline-block;
   vertical-align: middle;
+  font-size: 0.8rem;
+  letter-spacing: 0.044rem;
 }
 </style>
