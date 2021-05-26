@@ -2,11 +2,11 @@
   <section class="middle-section">
     <div class="container">
       <div class="row">
-        <div class="pad-block col-12 col-lg-6 col-xl-5 rounded text-white p-0">
+        <div class="pad-block rounded text-white p-0">
           <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
             <h5 class="pad__header__title">Votre coup de coeur</h5>
             <div style="width: min-content">
-              <InlineAvatars :avatars="[1, 2, 3, 4]" :heart="true" spacing="-10px" border-color="grey" />
+              <InlineAvatars :avatars="[1, 2, 3, 4]" :heart="false" spacing="-5px" border-color="grey" />
             </div>
           </div>
           <div class="d-flex">
@@ -33,6 +33,7 @@
                 <Button class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
               </div>
             </div>
+            <!-- TODO changement de content au hover, et hover en gris -->
             <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
               <div class="pad__content__month-block shadow"><span>Mai</span></div>
               <div class="pad__content__month-block shadow"><span>Juil</span></div>
@@ -96,7 +97,7 @@ export default {
 }
 .pad-block {
   margin-left: auto;
-  max-width: 500px;
+  min-width: 500px;
 }
 .pad__header {
   padding: 1.2rem 2rem;

@@ -1,6 +1,6 @@
 <template>
-  <div class="tag" :class="pColor">
-    <span class="tag__content">{{ pText }}</span>
+  <div class="d-flex align-items-center tag" :class="pColor">
+    <div class="tag__content">{{ pText }}</div>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     pColor() {
-      return `tag--${this.color};`
+      return `tag--${this.color}`
     }
   }
 }
@@ -23,21 +23,30 @@ export default {
 
 <style scoped>
 .tag {
-  filter: opactiy(0.5);
+  height: 25px;
+  /* height: 2rem; */
+  border-radius: 50px;
 }
 .tag--white {
-  background-color: #fff;
-  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.6);
   color: #292f33;
 }
 .tag--grey {
-  border-radius: 5px;
-  background-color: #292f33;
-  border-color: #292f33;
+  background-color: rgba(41, 47, 51, 0.6);
+  border-color: rgba(41, 47, 51, 0.6);
   color: #fff;
 }
 .tag__content {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
   font-family: Oswald, sans-serif;
-  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  /* position: relative;
+  top: 50%;
+  transform: translateY(-50%); */
 }
 </style>

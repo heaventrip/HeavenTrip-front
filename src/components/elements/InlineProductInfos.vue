@@ -58,6 +58,6 @@ export default {
   display: inline-block;
   vertical-align: middle;
   font-size: 0.8rem;
-  letter-spacing: 0.044rem;
+  letter-spacing: 0.013rem;
 }
 </style>

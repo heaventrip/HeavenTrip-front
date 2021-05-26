@@ -121,24 +121,34 @@
                   <div class="slider1 text-dark customers-testimonials">
                     <div class="">
                       <div class="shadow-effect overflow-hidden position-relative">
+                        <Tag style="position: absolute; top: 5%; left: 5%" color="white" text="2 départs" />
+                        <Tag style="position: absolute; top: 5%; left: 15%" color="grey" text="nouveau" />
                         <a href="/product"><img class="img-responsive img-fill" fluid :src="require('@/assets/images/s1.png')" alt="" /></a>
-                        <div class="item-details">
+                        <div class="card__footer item-details">
                           <div class="content">
                             <div class="text-uppercase">
                               <div class="d-flex align-items-center">
                                 <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
                                 <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
                                 <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
-                                <div>
-                                  <h2 class="heading mb-0">
-                                    <strong class="text-dark d-block d-md-inline-block mb-2 mb-md-0">ski freeride</strong><span><i class="fas fa-caret-right mx-md-2 mr-2"></i>serre-chevalier</span>
-                                  </h2>
-                                  <h5 class="sub-heading mb-0 d-none d-md-inline-block"><strong>inclus :</strong> yoga - rando - vtt neige</h5>
+                                <div class="card__footer__infos">
+                                  <div class="card__footer__infos__heading d-flex align-items-center">
+                                    <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">ski freeride</span>
+                                    <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
+                                    <span class="card__footer__infos__heading-spot d-inline-block align-middle">serre-chevalier</span>
+                                  </div>
+                                  <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
+                                    <span>inclus :&nbsp;</span>
+                                    <span>yoga - rando - vtt neige</span>
+                                  </div>
                                 </div>
                               </div>
-                              <h5 class="sub-heading mb-0 p-3 d-block d-md-none"><strong>inclus :</strong> yoga - rando - vtt neige</h5>
+                              <!-- <h5 class="sub-heading mb-0 p-3 d-block d-md-none">
+                                <span>inclus :</span>
+                                <span>yoga - rando - vtt neige</span>
+                              </h5> -->
                             </div>
-                            <div class="text-right d-none d-lg-inline-block align-self-center euro-border">
+                            <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
                               <h6 class="euro-per mb-0">par pers.</h6>
                               <h1 class="euro mb-0 euro">1 390&euro;</h1>
                             </div>
@@ -205,7 +215,9 @@
                             <a href="#" class="btn bg-dark text-white small font-weight-bold rounded-pill d-inline-flex align-items-center d-lg-none border-radius-style euro">1 990&euro;</a>
                           </div>
                         </div>
-                        <a href="#" class="btn text-uppercase text-dark font-weight-bold new-link border-0">nouveau</a>
+                        <a href="#" class="btn new-link border-0">
+                          <InlineSvg :src="require('@/assets/svg/heart-outline.svg')" />
+                        </a>
                       </div>
                     </div>
                     <div class="d-none"></div>
@@ -231,8 +243,13 @@
 </template>
 
 <script>
+import Tag from '@/components/elements/Tag.vue'
+
 export default {
   name: 'SectionCarousel',
+  components: {
+    Tag
+  },
   methods: {
     // TODO mettre un composant Vuejs à la place
     jquery() {
@@ -299,7 +316,7 @@ export default {
         ]
       })
       $('.customers-testimonials')
-        .on('mouseenter', '.shadow-effect', function (e) {
+        .on('click', '.shadow-effect', function (e) {
           e.preventDefault()
           $(this).parent().animate({ width: '+=50px' })
           $(this).parent().find('.content').addClass('hover')
@@ -307,10 +324,10 @@ export default {
           $(this).parent().find('.trip-link').animate({ bottom: '+=45px' })
         })
         .on('mouseleave', '.shadow-effect', function () {
-          $(this).parent().animate({ width: '-=50px' })
-          $(this).parent().find('.content').removeClass('hover')
-          $(this).parent().find('.hoverable-div').slideUp()
-          $(this).parent().find('.trip-link').animate({ bottom: '-=45px' })
+          // $(this).parent().animate({ width: '-=50px' })
+          // $(this).parent().find('.content').removeClass('hover')
+          // $(this).parent().find('.hoverable-div').slideUp()
+          // $(this).parent().find('.trip-link').animate({ bottom: '-=45px' })
         })
     }
   },
@@ -320,4 +337,38 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.card__footer__infos__sub-heading {
+  font-size: 0.75rem;
+  color: #292f33;
+}
+.card__footer__infos__sub-heading span:first-child {
+  font-weight: bold;
+}
+.card__footer__infos__sub-heading span:last-child {
+  font-weight: normal;
+}
+.card__footer__infos__heading-arrow {
+  margin-right: 0.7rem;
+  margin-left: 0.8rem;
+}
+.card__footer__infos__heading-spot {
+  font-weight: normal;
+  color: #793f4e;
+  font-size: 0.8rem;
+}
+.shadow-effect {
+  box-shadow: 0px 2px 6px rgb(0, 0, 0, 0.05) !important;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 30%, rgba(0, 0, 0, 0) 100%, rgba(0, 212, 255, 1) 100%) !important;
+}
+.img-fill {
+  border-radius: 11px !important;
+}
+.card__footer {
+  padding: 10px 35px 30px 0px;
+}
+.card__footer__price {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(41, 47, 51, 0.25);
+}
+</style>
