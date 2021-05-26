@@ -1,21 +1,33 @@
 <template>
-  <div class="block d-flex align-items-center justify-content-start py-4 text-uppercase">
-    <div v-for="(info, key) in pInfos" :key="info">
+  <div class="block d-flex align-items-center justify-content-start py-4 text-uppercase mx-auto" :class="pClass" :style="borderStyle">
+    <div class="d-flex align-items-center" v-for="(info, key) in pInfos" :key="info">
       <InlineSvg :src="require('@/assets/svg/globe.svg')" fill="white" />
       <span class="block__text-content">{{ info }}</span>
-      <span v-if="key != pInfos.length - 1" class="block__divider"></span>
+      <span v-if="key != pInfos.length - 1" class="block__divider" :style="display"></span>
     </div>
   </div>
-  <div class="half-border"></div>
+  <div v-if="pBorder" class="half-border"></div>
 </template>
 
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos'],
+  props: ['infos', 'divider', 'border', 'extra-class'],
+  data() {
+    return {
+      pBorder: this.border,
+      pClass: this.extraClass
+    }
+  },
   computed: {
     pInfos() {
       return this.infos.filter((val) => val) // remove undefined values
+    },
+    display() {
+      return this.divider === true ? 'background-color: rgba(250, 250, 250, 0.35);' : 'background-color: transparent;'
+    },
+    borderStyle() {
+      return this.pBorder === true ? 'border-top: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
     }
   }
 }

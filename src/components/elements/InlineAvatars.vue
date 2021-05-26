@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper d-flex align-items-center">
     <div v-for="avatar in pAvatars" :key="avatar" :style="pSpacing">
-      <img class="rounded-circle" :style="pHeight" :src="require('@/assets/images/t4.png')" />
+      <img class="small-avatar rounded-circle" :style="pHeight" :src="require('@/assets/images/t4.png')" />
     </div>
     <div v-if="pHeart">
-      <a href="#"><img :style="pHeight" :src="require('@/assets/svg/heart-logo.svg')" /> </a>
+      <img :style="pHeight" :src="require('@/assets/svg/heart-logo.svg')" />
     </div>
   </div>
 </template>
@@ -21,10 +21,10 @@ export default {
   },
   computed: {
     pSpacing() {
-      return `margin-left: ${this.spacing};`
+      return `margin-left: ${this.spacing || '-0.5rem'};`
     },
     pHeight() {
-      return `height: ${this.height};`
+      return `height: ${this.height || '40px'};`
     }
   }
 }
@@ -34,5 +34,9 @@ export default {
 .wrapper {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.small-avatar {
+  outline: 5px solid #292f33;
+  border: 1px solid #292f33;
 }
 </style>

@@ -32,6 +32,12 @@ export default {
 .oswald {
   font-family: Oswald, sans-serif;
 }
+.text--grey {
+  color: #292f33;
+}
+.text--white {
+  color: #fff;
+}
 .text--light {
   font-weight: 200;
 }

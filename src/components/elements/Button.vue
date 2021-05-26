@@ -1,10 +1,11 @@
 <template>
   <div class="bttn" :class="pColor">
     <div class="bttn__text" :class="pWeight" :style="pPadding">
-      <span>
-        {{ pText }}
-        <InlineSvg :src="require('@/assets/svg/arrow-right.svg')" v-if="pArrow" class="ml-3" />
-      </span>
+      <div>
+        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" />
+        <span class="align-middle">{{ pText }}</span>
+        <InlineSvg v-if="pArrow" :src="require('@/assets/svg/arrow-right.svg')" class="ml-3 align-middle" />
+      </div>
     </div>
   </div>
 </template>
@@ -16,7 +17,8 @@ export default {
   data() {
     return {
       pText: this.text,
-      pArrow: this.arrow
+      pArrow: this.arrow,
+      pIcon: this.icon
     }
   },
   computed: {
@@ -37,7 +39,6 @@ export default {
 .bttn {
   text-align: center;
   text-transform: uppercase;
-  color: #fff;
   cursor: pointer;
   height: 80px;
 }
@@ -67,6 +68,7 @@ export default {
 .bttn--pink {
   background-color: #d82558;
   border-color: #d82558;
+  color: #fff;
 }
 .bttn--pink:hover {
   background-color: #292f33;
@@ -79,6 +81,7 @@ export default {
 .bttn--grey {
   background-color: #292f33;
   border-color: #292f33;
+  color: #fff;
 }
 .bttn--grey:hover {
   background-color: #d82558;
@@ -87,5 +90,20 @@ export default {
 .bttn--grey:active {
   background-color: #292f33;
   border-color: #292f33;
+}
+.bttn--white {
+  background-color: #fff;
+  border-color: #fff;
+  color: #292f33;
+}
+.bttn--white:hover {
+  background-color: #292f33;
+  border-color: #292f33;
+  color: #fff;
+}
+.bttn--white:active {
+  background-color: #fff;
+  border-color: #fff;
+  color: #292f33;
 }
 </style>
