@@ -215,9 +215,6 @@
                             <a href="#" class="btn bg-dark text-white small font-weight-bold rounded-pill d-inline-flex align-items-center d-lg-none border-radius-style euro">1 990&euro;</a>
                           </div>
                         </div>
-                        <a href="#" class="btn new-link border-0">
-                          <InlineSvg :src="require('@/assets/svg/heart-outline.svg')" />
-                        </a>
                       </div>
                     </div>
                     <div class="">
@@ -271,12 +268,12 @@
                               <li><small>+1.5k</small></li>
                             </ul> -->
                           </div>
-                          <div class="hoverable-div ml-3">
+                          <div class="hoverable-div ml-3 d-flex align-items-end">
                             <!-- TODO aligner avec picto au dessus -->
-                            <div style="position: relative; top: 20px"><InlineProductInfos class="mb-0" :infos="['test1', 'test2', 'test3', 'test4']" :divider="false" :border="false" color="grey" icon="globe" /></div>
-                            <div style="position: relative; top: 8px" class="card__footer__price--hover text-right d-none d-lg-inline-block align-self-center">
+                            <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :divider="false" :border="false" color="grey" icon="globe" py="0" />
+                            <div class="card__footer__price--hover text-right d-none d-lg-inline-block align-self-center">
                               <h6 class="euro-per mb-0" style="font-weight: 300; font-size: 0.8rem">par pers.</h6>
-                              <h1 class="euro mb-0 euro" style="font-weight: bold; font-size: 1.8rem">1 390€</h1>
+                              <h1 class="euro mb-0 euro" style="font-weight: bold; font-size: 1.8rem; white-space: nowrap">1 390€</h1>
                             </div>
                           </div>
                           <div class="d-flex d-lg-none justify-content-between mt-1 mt-md-3">
@@ -545,6 +542,7 @@ export default {
   },
   methods: {
     // TODO mettre un composant Vuejs à la place
+    // 530px min-width
     jquery() {
       $('.slider1').slick({
         dots: true,
@@ -631,6 +629,15 @@ export default {
 </script>
 
 <style scoped>
+.slick-slide {
+  width: 530px !important;
+}
+.slick-slide.slick-current {
+  width: 580px !important;
+}
+.customers-testimonials .item-details .content.hover::after {
+  content: none !important;
+}
 .customers-testimonials .new-link {
   background-color: unset;
   font-size: unset;
@@ -638,6 +645,7 @@ export default {
 }
 .card__footer__price--hover {
   border: none;
+  margin-left: 3rem;
 }
 .card__footer__infos__sub-heading {
   font-size: 0.75rem;

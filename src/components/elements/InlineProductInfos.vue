@@ -47,6 +47,7 @@ export default {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
   line-height: 2;
   width: 100%;
+  height: min-content;
 }
 .block__text-content {
   margin-left: 0.6rem;
