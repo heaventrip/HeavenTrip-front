@@ -1,7 +1,8 @@
 <template>
   <section class="carousel-section">
     <div class="container">
-      <div class="row">
+      <!-- NOTE toggled hidden -->
+      <div class="row" style="visibility: hidden">
         <div class="col-12 col-sm-10 col-lg-9 mx-auto">
           <div class="rounded bg-white d-flex mb-5 centered-div">
             <div class="d-flex align-items-center p-3 flex-1 search-input-container">

@@ -1,5 +1,6 @@
 <template>
-  <div class="agency-content-wrapper d-flex flex-column justify-content-center">
+  <!-- NOTE toggled dnone -->
+  <div class="agency-content-wrapper d-none flex-column justify-content-center">
     <div class="row no-gutters justify-content-center align-items-center">
       <div class="col-3">
         <div class="row align-items-center text-center">
@@ -20,7 +21,7 @@
       <div class="col-3">
         <div class="row align-items-center text-center">
           <div class="big-letters">
-            EN<button @click="onClicked('team')" class="btn choose-btn d-inline align-text-bottom">CONTACT</button>
+            EN<button @click="onClicked('contact')" class="btn choose-btn d-inline align-text-bottom">CONTACT</button>
             <div class="text-content team">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
           </div>
         </div>
@@ -40,9 +41,9 @@
       </div>
     </div>
   </div>
-  <NavConcept v-show="conceptIsDisplayed" />
-  <NavTeam v-show="teamIsDisplayed" />
-  <NavContact v-show="contactIsDisplayed" />
+  <NavConcept />
+  <NavTeam v-show="false" />
+  <NavContact v-show="false" />
 </template>
 
 <script>
@@ -59,6 +60,7 @@ export default {
   },
   data() {
     return {
+      agencyIsActive: true,
       conceptIsActive: false,
       teamIsActive: false,
       contactIsActive: false
@@ -68,7 +70,7 @@ export default {
     onClicked(tab) {
       let varName = tab + 'IsActive'
       if (this.$data[varName] === true) return // if already active do nothing
-      ;[this.conceptIsActive, this.teamIsActive, this.contactIsActive].forEach((el) => (el = false))
+      ;[this.agencyIsActive, this.conceptIsActive, this.teamIsActive, this.contactIsActive].forEach((el) => (el = false))
       this.$data[varName] = true
     }
   }
