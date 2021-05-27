@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper d-flex align-items-center">
     <div v-for="avatar in pAvatars" :key="avatar" :style="pSpacing">
-      <img class="rounded-circle" :class="pBorderColor" :style="pStyle" :src="require('@/assets/images/t4.png')" />
+      <!-- FIXME intégrer border color ET outline -->
+      <img class="rounded-circle ${pBorderColor}" :class="{ 'small-avatar--outline': pOutline }" :style="pHeight" :src="require('@/assets/images/t4.png')" />
     </div>
     <div v-if="pHeart">
       <img :style="pHeight" :src="require('@/assets/svg/heart-logo.svg')" />
@@ -12,9 +13,10 @@
 <script>
 export default {
   name: 'InlineAvatars',
-  props: ['height', 'heart', 'spacing', 'avatars', 'border-color'],
+  props: ['height', 'heart', 'spacing', 'avatars', 'border-color', 'border-width'],
   data() {
     return {
+      pOutline: this.outline,
       pHeart: this.heart,
       pAvatars: this.avatars
     }
@@ -38,12 +40,13 @@ export default {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.small-avatar--outline {
+  outline: 5px solid inherit;
+}
 .small-avatar--grey {
-  outline: 5px solid #292f33;
   border: 1px solid #292f33;
 }
 .small-avatar--white {
-  outline: 5px solid #fff;
   border: 1px solid #fff;
 }
 </style>

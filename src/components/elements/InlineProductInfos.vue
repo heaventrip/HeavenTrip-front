@@ -1,9 +1,8 @@
 <template>
-  <div class="block d-flex align-items-center justify-content-between py-4 text-uppercase" :class="pClass" :style="borderStyle">
-    <div class="d-flex align-items-center" v-for="(info, key) in pInfos" :key="info">
+  <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderStyle, paddingStyle]">
+    <div class="d-flex align-items-center" v-for="info in pInfos" :key="info">
       <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
       <span class="block__text-content">{{ info }}</span>
-      <span v-if="key != pInfos.length - 1" class="block__divider" :style="display"></span>
     </div>
   </div>
   <div v-if="pBorder" class="half-border"></div>
@@ -12,7 +11,7 @@
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos', 'divider', 'border', 'extra-class', 'color', 'icon'],
+  props: ['infos', 'border', 'px', 'py', 'extra-class', 'color', 'icon'],
   data() {
     return {
       pIcon: this.icon,
@@ -30,6 +29,9 @@ export default {
     },
     borderStyle() {
       return this.pBorder === true ? 'border-top: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
+    },
+    paddingStyle() {
+      return `padding: ${this.py || '1.5rem'} ${this.px || '0'};`
     }
   }
 }
@@ -44,14 +46,7 @@ export default {
 .block {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
   line-height: 2;
-}
-.block__divider {
-  display: inline-block;
-  vertical-align: middle;
-  height: 1rem;
-  width: 1px;
-  background-color: #292f33;
-  margin: 0 1rem;
+  width: 100%;
 }
 .block__text-content {
   margin-left: 0.6rem;

@@ -13,7 +13,7 @@
         </div>
         <!-- TODO tags multiactivités ici -->
         <div v-show="!toggledSessions" class="abc text-center text-lg-left mt-5 mt-lg-0 pt-md-4 pt-lg-0">
-          <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :divider="false" :border="true" color="white" icon="globe" />
+          <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :border="true" color="white" icon="globe" />
           <br />
           <div class="d-inline-flex d-lg-flex align-items-center p-3 px-lg-0 trippers-div">
             <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">

@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-items-center justify-content-flex-start" style="padding-left: 111px; background-color: #292f33b6; color: #fff">
-    <InlineProductInfos :infos="['france', '7 jours', 'confirmé', '10 places']" :divider="false" :border="false" color="white" />
+    <InlineProductInfos :infos="['france', '7 jours', 'confirmé', '10 places']" :border="false" color="white" />
     <Button class="ml-5" text="sessions : fermer les dates" color="pink" px="1.5rem" />
   </div>
   <div class="booking-session d-flex align-items-center">

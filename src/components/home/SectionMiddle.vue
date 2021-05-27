@@ -23,7 +23,7 @@
                   <span class="ml-auto euro"><strong>750&euro;</strong>/pers. </span>
                 </div>
                 <div class="d-flex align-items-center social-info">
-                  <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" :divider="false" :extra-class="'w-100 justify-content-between'" color="#292f33" />
+                  <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" color="#292f33" />
                 </div>
               </div>
               <div class="d-flex pad__footer">
