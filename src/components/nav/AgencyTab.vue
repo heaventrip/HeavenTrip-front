@@ -1,11 +1,10 @@
 <template>
-  <!-- NOTE toggled dnone -->
-  <div class="agency-content-wrapper d-none flex-column justify-content-center">
+  <div :class="[tabsActive ? 'd-none' : 'd-flex']" class="agency-content-wrapper flex-column justify-content-center">
     <div class="row no-gutters justify-content-center align-items-center">
       <div class="col-3">
         <div class="row align-items-center text-center">
           <div class="big-letters">
-            HE<button @click="onClicked('concept')" class="btn choose-btn d-inline align-text-bottom">LE CONCEPT</button>
+            HE<button @click.prevent="onClicked('concept')" class="btn choose-btn d-inline align-text-bottom">LE CONCEPT</button>
             <div class="text-content concept">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
           </div>
         </div>
@@ -13,7 +12,7 @@
       <div class="col-3">
         <div class="row align-items-center text-center">
           <div class="big-letters">
-            AV<button @click="onClicked('team')" class="btn choose-btn d-inline align-text-bottom">LA TEAM</button>
+            AV<button @click.prevent="onClicked('team')" class="btn choose-btn d-inline align-text-bottom">LA TEAM</button>
             <div class="text-content team">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
           </div>
         </div>
@@ -21,7 +20,7 @@
       <div class="col-3">
         <div class="row align-items-center text-center">
           <div class="big-letters">
-            EN<button @click="onClicked('contact')" class="btn choose-btn d-inline align-text-bottom">CONTACT</button>
+            EN<button @click.prevent="onClicked('contact')" class="btn choose-btn d-inline align-text-bottom">CONTACT</button>
             <div class="text-content team">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
           </div>
         </div>
@@ -41,12 +40,13 @@
       </div>
     </div>
   </div>
-  <NavConcept />
-  <NavTeam v-show="false" />
-  <NavContact v-show="false" />
+  <NavConcept v-show="conceptIsActive" />
+  <NavTeam v-show="teamIsActive" />
+  <NavContact v-show="contactIsActive" />
 </template>
 
 <script>
+// eslint-disable prettier/prettier
 import NavConcept from '@/components/nav/NavConcept.vue'
 import NavTeam from '@/components/nav/NavTeam.vue'
 import NavContact from '@/components/nav/NavContact.vue'
@@ -60,17 +60,26 @@ export default {
   },
   data() {
     return {
-      agencyIsActive: true,
       conceptIsActive: false,
       teamIsActive: false,
       contactIsActive: false
     }
   },
+  computed: {
+    tabsActive() {
+      return this.conceptIsActive || this.teamIsActive || this.contactIsActive
+    }
+  },
   methods: {
     onClicked(tab) {
       let varName = tab + 'IsActive'
-      if (this.$data[varName] === true) return // if already active do nothing
-      ;[this.agencyIsActive, this.conceptIsActive, this.teamIsActive, this.contactIsActive].forEach((el) => (el = false))
+
+      // if already active do nothing
+      // eslint-disable-next-line prettier/prettier
+      if (this.$data[varName] === true) return
+      
+      // only show the one clicked
+      ;['conceptIsActive', 'teamIsActive', 'contactIsActive'].forEach((el) => (this.$data[el] = false))
       this.$data[varName] = true
     }
   }

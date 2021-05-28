@@ -27,23 +27,25 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @click.prevent="onClicked('activities')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
+          <a @click.prevent="onClicked('activities')" class="nav-link togglable-color" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
             ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
           ></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('destinations')" class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
+          <a @click.prevent="onClicked('destinations')" class="nav-link togglable-color" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
             ><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
           ></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('agency')" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click.prevent="onClicked('agency')" class="nav-link togglable-color" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"
+            ><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link active" id="pills-activity-tab togglable-color" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
-      <button class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
+      <button class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block togglable-color">creer ton séjour</button>
       <div class="d-lg-none nav-btm-div d-none align-items-center">
         <!-- d-flex -->
         <a href="#" class="social-circle d-inline-block mr-3"><img class="img-fluid" fluid :src="require('@/assets/images/insta.png')" /></a>
@@ -54,14 +56,14 @@
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
-        <div v-show="activitiesIsActive" id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper show active">
+        <div v-show="activitiesIsActive" id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-pane fade black pt-lg-5 home-wrapper show active">
           <ActivitiesTab />
         </div>
-        <div v-show="destinationsIsActive" id="pills-destination" role="tabpanel" aria-labelledby="pills-destination-tab" class="wrapper h-100 p-0 tab-wrapper tab-pane fade black pt-lg-5 home-wrapper show active">
+        <div v-show="destinationsIsActive" id="pills-destination" role="tabpanel" aria-labelledby="pills-destination-tab" class="wrapper h-100 p-0 tab-pane fade black pt-lg-5 home-wrapper show active">
           <DestinationsTab />
         </div>
         <div v-show="agencyIsActive" id="pills-agence" role="tabpanel" aria-labelledby="pills-agence-tab" class="wrapper h-100 p-0 tab-pane fade home-wrapper show active">
-          <AgencyTab />
+          <AgencyTab ref="agencyTab" />
         </div>
       </div>
     </div>
@@ -83,9 +85,14 @@ export default {
   },
   data() {
     return {
+      headerEl: '',
       activitiesIsActive: false,
       destinationsIsActive: false,
-      agencyIsActive: false
+      agencyIsActive: false,
+      bgFilter: {
+        light: 'opacity(0.4)',
+        dark: 'brightness(0.5)'
+      }
     }
   },
   computed: {
@@ -97,20 +104,47 @@ export default {
     navIsActive: function (newVal) {
       this.$emit('changed-nav-status', newVal)
     },
+    activitiesIsActive: function (newVal) {
+      if (newVal === true) this.changeBgFilter(this.bgFilter.dark)
+    },
+    destinationsIsActive: function (newVal) {
+      if (newVal === true) this.changeBgFilter(this.bgFilter.dark)
+    },
     agencyIsActive: function (newVal) {
-      let headerBg = document.querySelector('.header-bg-image')
       if (newVal === true) {
-        headerBg.style.filter = 'blur(3px) opacity(0.2)'
+        this.changeBgFilter(this.bgFilter.light)
+        document.body.style.position = 'fixed'
+        document.querySelectorAll('.togglable-color').forEach((el) => (el.style.color = '#292f33'))
+      }
+      if (newVal === false) {
+        document.body.style.position = 'static' // reset
+        document.querySelectorAll('.togglable-color').forEach((el) => (el.style.color = 'white'))
       }
     }
   },
   methods: {
+    changeBgFilter(filter) {
+      this.headerEl.style.filter = `blur(3px) ${filter}`
+    },
     onClicked(tab) {
+      // these must be reset so user lands back on menu later
+      this.$refs.agencyTab.conceptIsActive = false
+      this.$refs.agencyTab.teamIsActive = false
+      this.$refs.agencyTab.contactIsActive = false
+
       let varName = tab + 'IsActive'
-      if (this.$data[varName] === true) return // if already active do nothing
-      ;[this.activitiesIsActive, this.destinationsIsActive, this.agencyIsActive].forEach((el) => (el = false))
+
+      // if already active do nothing
+      // eslint-disable-next-line prettier/prettier
+      if (this.$data[varName] === true) return
+
+      // only show the one clicked
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
       this.$data[varName] = true
     }
+  },
+  mounted() {
+    this.headerEl = document.querySelector('.header-bg-image')
   }
 }
 </script>

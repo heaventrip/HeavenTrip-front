@@ -145,12 +145,10 @@ export default {
   padding-bottom: 15vh;
 }
 .header-bg-image {
+  z-index: -1;
   object-fit: cover;
   position: absolute;
   height: 94vh;
   width: 100%;
-  z-index: -1;
-}
-.pre-booking-footer {
 }
 </style>
