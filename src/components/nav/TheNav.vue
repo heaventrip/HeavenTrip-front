@@ -27,25 +27,23 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @click.prevent="onClicked('activities')" class="nav-link togglable-color" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
+          <a @click.prevent="onClicked('activities')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
             ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
           ></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('destinations')" class="nav-link togglable-color" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
+          <a @click.prevent="onClicked('destinations')" class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
             ><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
           ></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('agency')" class="nav-link togglable-color" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"
-            ><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
-          ></a>
+          <a @click.prevent="onClicked('agency')" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="pills-activity-tab togglable-color" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
-      <button class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block togglable-color">creer ton séjour</button>
+      <button class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
       <div class="d-lg-none nav-btm-div d-none align-items-center">
         <!-- d-flex -->
         <a href="#" class="social-circle d-inline-block mr-3"><img class="img-fluid" fluid :src="require('@/assets/images/insta.png')" /></a>
@@ -114,11 +112,11 @@ export default {
       if (newVal === true) {
         this.changeBgFilter(this.bgFilter.light)
         document.body.style.position = 'fixed'
-        document.querySelectorAll('.togglable-color').forEach((el) => (el.style.color = '#292f33'))
+        document.querySelector('.search').style.visibility = 'hidden'
       }
       if (newVal === false) {
         document.body.style.position = 'static' // reset
-        document.querySelectorAll('.togglable-color').forEach((el) => (el.style.color = 'white'))
+        document.querySelector('.search').style.visibility = 'visible'
       }
     }
   },
@@ -150,6 +148,9 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+  height: 70px; /* easier to manipulate with fixed height */
+}
 .tab-content.main-wrapper {
   z-index: 1;
 }

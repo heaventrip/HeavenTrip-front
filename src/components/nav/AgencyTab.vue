@@ -70,6 +70,31 @@ export default {
       return this.conceptIsActive || this.teamIsActive || this.contactIsActive
     }
   },
+  watch: {
+    conceptIsActive(newVal) {
+      if (newVal === true) {
+        document.querySelector('nav').style.position = 'static'
+        document.querySelector('.header-bg-image').style.filter = 'opacity(0)'
+        document.querySelector('.tab-content.main-wrapper').style.top = '0px'
+        document.querySelector('.tab-content.main-wrapper').style.zIndex = '-1'
+        document.querySelector('.nav-btn').style.visibility = 'hidden'
+        document.querySelector('.navbar-nav').style.position = 'absolute'
+        document.querySelector('.navbar-nav').style.left = 'calc(100vw / 12 * 5)' // line up with col-5
+        document.querySelector('.navbar-nav').style.borderBottom = '1px solid #292f3399' // line up with col-5
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => (el.style.color = '#292f33'))
+      }
+      if (newVal === false) {
+        document.querySelector('nav').style.position = 'relative' // reset
+        document.querySelector('.tab-content.main-wrapper').style.top = '108px' // initial
+        document.querySelector('.tab-content.main-wrapper').style.zIndex = '1' // initial
+        document.querySelector('.nav-btn').style.visibility = 'visible' // initial
+        document.querySelector('.navbar-nav').style.position = 'unset' // initial
+        document.querySelector('.navbar-nav').style.left = 'unset'
+        document.querySelector('.navbar-nav').style.borderBottom = '1px solid hsl(0, 0, 75% / 60%);'
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => (el.style.color = '#fff'))
+      }
+    }
+  },
   methods: {
     onClicked(tab) {
       let varName = tab + 'IsActive'
@@ -95,7 +120,7 @@ export default {
 }
 .choose-btn {
   font-weight: bold;
-  border: 1px solid #292f33;
+  border: 1px solid #292f3399;
   border-radius: 0;
   padding: 0.5rem 1.5rem;
   margin-left: 10px;
