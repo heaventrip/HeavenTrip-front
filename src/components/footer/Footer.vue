@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="bg-dark text-white footer pt-5 pb-4">
+    <footer class="bg-dark text-white footer pb-4">
       <div class="container">
         <div class="row text-center text-uppercase pt-md-5 pt-lg-0">
           <div class="col-12 col-md-10 mx-auto">
@@ -28,20 +28,9 @@
             </div>
           </div>
         </div>
-        <hr />
-        <div class="row">
-          <div class="col-12 col-sm-6 col-lg-3 pl-lg-0 order-sm-2 order-lg-4 mb-5 mb-lg-0">
-            <h3 class="text-uppercase d-flex align-items-center heading">
-              <img class="mr-2" fluid :src="require('@/assets/images/f-mail.png')" />
-              abonne-toi a la newsletter
-            </h3>
-            <p class="para mb-3">Ne manque surtout pas toute l'actualite sur nos offres !</p>
-            <form class="d-flex">
-              <input class="form-control mail_input rounded-left" type="text" name="" placeholder="Mon adresse email..." />
-              <button class="btn btn-warning font-weight-bold rounded-right text-uppercase mail_btn">s'abonner</button>
-            </form>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 pr-md-5 order-sm-1 mb-5 mb-lg-0">
+        <hr style="margin: 5rem 0" />
+        <div class="row align-items-start">
+          <div class="col-12 col-sm-6 col-lg-3">
             <h3 class="text-uppercase border-bottom d-flex align-items-center pb-3 heading mb-4">
               social media
               <img class="mr-2 ml-auto" fluid :src="require('@/assets/images/share.png')" />
@@ -53,7 +42,15 @@
               <span class="ml-auto">#yourheaventrip</span>
             </div>
           </div>
-          <div class="col-12 col-sm-6 col-lg-3 pr-md-5 order-sm-3 mb-5 mb-sm-0 mt-4 mt-md-5 mt-lg-0">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <h3 class="text-uppercase border-bottom d-flex align-items-center pb-3 heading mb-4">
+              creer ton stage
+              <img class="mr-2 ml-auto" fluid :src="require('@/assets/images/stage.png')" />
+            </h3>
+            <p class="para mb-0">Devenez auteur en personnalisant votre stage sportif et partagez le !</p>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
             <h3 class="text-uppercase border-bottom d-flex align-items-center pb-3 heading mb-4">
               partenaires
               <img class="mr-2 ml-auto" fluid :src="require('@/assets/images/star_white.png')" />
@@ -75,17 +72,21 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-6 col-lg-3 pr-lg-5 order-sm-4 order-lg-2 mb-0 mt-4 mt-md-5 mt-lg-0">
-            <h3 class="text-uppercase border-bottom d-flex align-items-center pb-3 heading mb-4">
-              creer ton stage
-              <img class="mr-2 ml-auto" fluid :src="require('@/assets/images/stage.png')" />
+          <div class="col-12 col-sm-6 col-lg-3">
+            <h3 class="text-uppercase d-flex align-items-center heading">
+              <img class="mr-2" fluid :src="require('@/assets/images/f-mail.png')" />
+              abonne-toi a la newsletter
             </h3>
-            <p class="para mb-0">Devenez auteur en personnalisant votre stage sportif et partagez le !</p>
+            <p class="para mb-3">Ne manque surtout pas toute l'actualite sur nos offres !</p>
+            <form class="d-flex">
+              <input class="form-control mail_input rounded-left" type="text" name="" placeholder="Mon adresse email..." />
+              <button class="btn btn-warning font-weight-bold rounded-right text-uppercase mail_btn">s'abonner</button>
+            </form>
           </div>
         </div>
         <hr />
         <div class="row list-row">
-          <div class="col-12 col-md-8 mr-md-auto col-xl-4 px-lg-0 ml-lg-3 ml-xl-3 order-5 order-md-1 text-center text-md-left my-4">
+          <div class="col-12 col-md-8 mr-md-auto col-xl-4 pl-0 pr-5 ml-lg-3 ml-xl-3 order-5 order-md-1 text-center text-md-left my-4">
             <img class="logo mb-3" fluid :src="require('@/assets/images/logo.png')" />
             <p class="para">Heaven Trip organise en petit groupe des voyages sportifs pour tous et à travers le globe. Un nouveau concept d'evasion melant sport. culture et bien-etre.</p>
           </div>
@@ -187,6 +188,9 @@ export default {
 </script>
 
 <style scoped>
+.carousel-slide {
+  margin-bottom: 0 !important;
+}
 .user_icon {
   background-color: white;
 }
@@ -195,5 +199,8 @@ export default {
   font-weight: 300;
   text-transform: uppercase;
   font-family: Muli, sans-serif;
+}
+.footer {
+  padding-top: 4rem;
 }
 </style>

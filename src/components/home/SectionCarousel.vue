@@ -113,8 +113,30 @@
       </div>
       <div class="d-flex align-items-center mt-4">
         <div class="slider-buttons col-2 text-center">
-          <div @click="slideLeft" style="position: relative; bottom: 10px"><InlineSvg :src="require('@/assets/svg/star.svg')" /></div>
-          <div @click="slideRight" style="position: relative; top: 10px"><InlineSvg :src="require('@/assets/svg/star.svg')" /></div>
+          <div @click="slideLeft" style="transform: translateY(-60%)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
+              <g id="Calque_2" data-name="Calque 2">
+                <g id="Calque_1-2" data-name="Calque 1">
+                  <path id="PICTO_ARROW_RIGHT_1" data-name="PICTO ARROW RIGHT 1" d="M23.56,14.74,17,21.27l6.6,6.53-2,2-8.64-8.53,8.64-8.54Z" />
+                  <path d="M5.52,9.38l.08-.09-.51-.52L5,8.87A18.48,18.48,0,0,0,31.13,35l.1-.08-.52-.52-.09.08A17.75,17.75,0,0,1,5.52,9.38Z" />
+                  <path d="M24.27.53A20.22,20.22,0,0,0,8.93,3.08a20.77,20.77,0,0,0-3.44,2.7l-.36.35.35.35,2.41,2.4.34.34.34-.33A16.13,16.13,0,0,1,11.25,6.8,16,16,0,0,1,30.93,9a16.6,16.6,0,0,1,2.27,2.86,15.94,15.94,0,0,1-2.09,19.53l-.33.34.34.34,2.4,2.41.35.35.35-.36a20.32,20.32,0,0,0-9.95-34Z" />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div @click="slideRight" style="transform: translateY(-40%)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
+              <g id="Calque_2" data-name="Calque 2">
+                <g id="Calque_1-2" data-name="Calque 1">
+                  <path id="PICTO_ARROW_RIGHT_1" data-name="PICTO ARROW RIGHT 1" d="M16.44,25.26,23,18.73l-6.6-6.53,2-2,8.64,8.53-8.64,8.54Z" />
+                  <path d="M34.48,30.62l-.08.09.51.52.09-.1A18.48,18.48,0,0,0,8.87,5l-.1.08.52.52.09-.08a17.75,17.75,0,0,1,25.1,25.09Z" />
+                  <path
+                    d="M15.73,39.47a20.22,20.22,0,0,0,15.34-2.55,20.77,20.77,0,0,0,3.44-2.7l.36-.35-.35-.35-2.41-2.4-.34-.34-.34.33a16.13,16.13,0,0,1-2.68,2.09A16,16,0,0,1,9.07,31,16.6,16.6,0,0,1,6.8,28.11,15.94,15.94,0,0,1,8.89,8.58l.33-.34L8.88,7.9,6.48,5.49l-.35-.35-.35.36a20.32,20.32,0,0,0,10,34Z"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
         </div>
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
           <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">asdfghj</div>
@@ -732,6 +754,7 @@
 import Tag from '@/components/elements/Tag.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
+import vueMultiSelect from 'vue-multi-select';
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 gsap.registerPlugin(CustomEase)
