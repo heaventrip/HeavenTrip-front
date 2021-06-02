@@ -119,7 +119,7 @@
               <div class="col-12 col-lg-11 ml-auto p-0">
                 <div class="main">
                   <div class="slider1 text-dark customers-testimonials">
-                    <div class="">
+                    <div class="d-inline-block" v-for="course in courses" :key="course" style="max-width: 600px">
                       <div class="shadow-effect overflow-hidden position-relative">
                         <Tag style="position: absolute; top: 5%; left: 5%; z-index: 1" color="white" text="2 départs" />
                         <Tag style="position: absolute; top: 5%; left: 20%; z-index: 1" color="grey" text="nouveau" />
@@ -133,9 +133,9 @@
                                 <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
                                 <div class="card__footer__infos">
                                   <div class="card__footer__infos__heading d-flex align-items-center">
-                                    <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">ski freeride</span>
+                                    <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ course?.sports[0]?.name }}</span>
                                     <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
-                                    <span class="card__footer__infos__heading-spot d-inline-block align-middle">serre-chevalier</span>
+                                    <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ course.spot?.name }}</span>
                                   </div>
                                   <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
                                     <span>inclus :&nbsp;</span>
@@ -150,7 +150,7 @@
                             </div>
                             <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
                               <h6 class="euro-per mb-0" style="font-weight: 300">par pers.</h6>
-                              <h1 class="euro mb-0 euro">1 390&euro;</h1>
+                              <h1 class="euro mb-0 euro">{{ course.price }}&euro;</h1>
                             </div>
                             <ul class="img-list list-unstyled d-none d-md-inline-flex d-lg-none align-items-center justify-content-center mx-4 mb-0">
                               <li>
@@ -170,10 +170,10 @@
                           </div>
                           <div class="hoverable-div">
                             <ul class="list-unstyled text-uppercase list-info mb-0 d-flex justify-content-around align-items-center border-0">
-                              <li><img class="icons" fluid :src="require('@/assets/images/globe_d.png')" />france</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/timer_d.png')" />8 jours</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/circle_d.png')" />TOUS NIVEAUX</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/places_d.png')" />10 places</li>
+                              <li><img class="icons" fluid :src="require('@/assets/images/globe_d.png')" />{{ course.country?.name }}</li>
+                              <li><img class="icons" fluid :src="require('@/assets/images/timer_d.png')" />{{ course.duration }} jours</li>
+                              <li><img class="icons" fluid :src="require('@/assets/images/circle_d.png')" />Niveau {{ course.level?.name }}</li>
+                              <li><img class="icons" fluid :src="require('@/assets/images/places_d.png')" />{{ course.max }} places</li>
                             </ul>
                             <ul class="img-list list-unstyled d-inline-flex align-items-center ml-auto mb-0">
                               <li>
@@ -217,7 +217,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="">
+                    <!-- NOTE this one is when clicked -->
+                    <div class="d-none">
                       <div class="shadow-effect overflow-hidden position-relative">
                         <Tag style="position: absolute; top: 5%; left: 5%; z-index: 1" color="white" text="2 départs" />
                         <Tag style="position: absolute; top: 5%; left: 20%; z-index: 1" color="grey" text="nouveau" />
@@ -305,208 +306,6 @@
                         </a>
                       </div>
                     </div>
-                    <div class="">
-                      <div class="shadow-effect overflow-hidden position-relative">
-                        <Tag style="position: absolute; top: 5%; left: 5%" color="white" text="2 départs" />
-                        <Tag style="position: absolute; top: 5%; left: 15%" color="grey" text="nouveau" />
-                        <a href="/product"><img class="img-responsive img-fill img--hover" fluid :src="require('@/assets/images/s1.png')" alt="" /></a>
-                        <div class="card__footer item-details">
-                          <div class="content">
-                            <div class="text-uppercase">
-                              <div class="d-flex align-items-center">
-                                <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
-                                <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
-                                <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
-                                <div class="card__footer__infos">
-                                  <div class="card__footer__infos__heading d-flex align-items-center">
-                                    <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">ski freeride</span>
-                                    <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
-                                    <span class="card__footer__infos__heading-spot d-inline-block align-middle">serre-chevalier</span>
-                                  </div>
-                                  <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
-                                    <span>inclus :&nbsp;</span>
-                                    <span>yoga - rando - vtt neige</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- <h5 class="sub-heading mb-0 p-3 d-block d-md-none">
-                                <span>inclus :</span>
-                                <span>yoga - rando - vtt neige</span>
-                              </h5> -->
-                            </div>
-                            <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
-                              <h6 class="euro-per mb-0" style="font-weight: 300">par pers.</h6>
-                              <h1 class="euro mb-0 euro">1 390&euro;</h1>
-                            </div>
-                            <ul class="img-list list-unstyled d-none d-md-inline-flex d-lg-none align-items-center justify-content-center mx-4 mb-0">
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t1.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t2.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t3.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t4.png')" /> </a>
-                              </li>
-                              <li><small>+1.5k</small></li>
-                            </ul>
-                          </div>
-                          <div class="hoverable-div">
-                            <ul class="list-unstyled text-uppercase list-info mb-0 d-flex justify-content-around align-items-center border-0">
-                              <li><img class="icons" fluid :src="require('@/assets/images/globe_d.png')" />france</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/timer_d.png')" />8 jours</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/circle_d.png')" />TOUS NIVEAUX</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/places_d.png')" />10 places</li>
-                            </ul>
-                            <ul class="img-list list-unstyled d-inline-flex align-items-center ml-auto mb-0">
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t1.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t2.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t3.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t4.png')" /> </a>
-                              </li>
-                              <li><small>+1.5k</small></li>
-                            </ul>
-                          </div>
-                          <div class="d-flex d-lg-none justify-content-between mt-1 mt-md-3">
-                            <ul class="list-unstyled py-3 text-uppercase list-info mb-0 d-none d-md-inline-flex d-lg-none ml-md-3">
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/globe_d.png')" />espagne</li>
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/timer_d.png')" />8 jours</li>
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/circle_d.png')" />tous niveaux</li>
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/places_d.png')" />10 places</li>
-                            </ul>
-
-                            <ul class="img-list list-unstyled d-inline-flex d-md-none align-items-center mx-3 mb-0">
-                              <li class="mr-4 grid-col"><img class="icons" fluid :src="require('@/assets/images/timer_d.png')" /><span>8 jours</span></li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t2.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t3.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t4.png')" /> </a>
-                              </li>
-                              <li><small>+1.5k</small></li>
-                            </ul>
-                            <a href="#" class="btn bg-dark text-white small font-weight-bold rounded-pill d-inline-flex align-items-center d-lg-none border-radius-style euro">1 990&euro;</a>
-                          </div>
-                        </div>
-                        <a href="#" class="btn new-link border-0">
-                          <InlineSvg :src="require('@/assets/svg/heart-outline.svg')" />
-                        </a>
-                      </div>
-                    </div>
-                    <div class="">
-                      <div class="shadow-effect overflow-hidden position-relative">
-                        <Tag style="position: absolute; top: 5%; left: 5%" color="white" text="2 départs" />
-                        <Tag style="position: absolute; top: 5%; left: 15%" color="grey" text="nouveau" />
-                        <a href="/product"><img class="img-responsive img-fill" fluid :src="require('@/assets/images/s1.png')" alt="" /></a>
-                        <div class="card__footer item-details">
-                          <div class="content">
-                            <div class="text-uppercase">
-                              <div class="d-flex align-items-center">
-                                <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
-                                <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
-                                <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
-                                <div class="card__footer__infos">
-                                  <div class="card__footer__infos__heading d-flex align-items-center">
-                                    <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">ski freeride</span>
-                                    <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
-                                    <span class="card__footer__infos__heading-spot d-inline-block align-middle">serre-chevalier</span>
-                                  </div>
-                                  <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
-                                    <span>inclus :&nbsp;</span>
-                                    <span>yoga - rando - vtt neige</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- <h5 class="sub-heading mb-0 p-3 d-block d-md-none">
-                                <span>inclus :</span>
-                                <span>yoga - rando - vtt neige</span>
-                              </h5> -->
-                            </div>
-                            <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
-                              <h6 class="euro-per mb-0">par pers.</h6>
-                              <h1 class="euro mb-0 euro">1 390&euro;</h1>
-                            </div>
-                            <ul class="img-list list-unstyled d-none d-md-inline-flex d-lg-none align-items-center justify-content-center mx-4 mb-0">
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t1.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t2.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t3.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t4.png')" /> </a>
-                              </li>
-                              <li><small>+1.5k</small></li>
-                            </ul>
-                          </div>
-                          <div class="hoverable-div">
-                            <ul class="list-unstyled text-uppercase list-info mb-0 d-flex justify-content-around align-items-center border-0">
-                              <li><img class="icons" fluid :src="require('@/assets/images/globe_d.png')" />france</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/timer_d.png')" />8 jours</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/circle_d.png')" />TOUS NIVEAUX</li>
-                              <li><img class="icons" fluid :src="require('@/assets/images/places_d.png')" />10 places</li>
-                            </ul>
-                            <ul class="img-list list-unstyled d-inline-flex align-items-center ml-auto mb-0">
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t1.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t2.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t3.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t4.png')" /> </a>
-                              </li>
-                              <li><small>+1.5k</small></li>
-                            </ul>
-                          </div>
-                          <div class="d-flex d-lg-none justify-content-between mt-1 mt-md-3">
-                            <ul class="list-unstyled py-3 text-uppercase list-info mb-0 d-none d-md-inline-flex d-lg-none ml-md-3">
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/globe_d.png')" />espagne</li>
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/timer_d.png')" />8 jours</li>
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/circle_d.png')" />tous niveaux</li>
-                              <li><img class="icons mr-2" fluid :src="require('@/assets/images/places_d.png')" />10 places</li>
-                            </ul>
-
-                            <ul class="img-list list-unstyled d-inline-flex d-md-none align-items-center mx-3 mb-0">
-                              <li class="mr-4 grid-col"><img class="icons" fluid :src="require('@/assets/images/timer_d.png')" /><span>8 jours</span></li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t2.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t3.png')" /> </a>
-                              </li>
-                              <li>
-                                <a href="#"><img class="img-fluid user_icon rounded-circle" fluid :src="require('@/assets/images/t4.png')" /> </a>
-                              </li>
-                              <li><small>+1.5k</small></li>
-                            </ul>
-                            <a href="#" class="btn bg-dark text-white small font-weight-bold rounded-pill d-inline-flex align-items-center d-lg-none border-radius-style euro">1 990&euro;</a>
-                          </div>
-                        </div>
-                        <a href="#" class="btn new-link border-0">
-                          <InlineSvg :src="require('@/assets/svg/heart-outline.svg')" />
-                        </a>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -539,6 +338,14 @@ export default {
     InlineProductInfos,
     InlineAvatars,
     Tag
+  },
+  data() {
+    return {
+      courses: []
+    }
+  },
+  created() {
+    this.$axios.get('/courses').then((res) => (this.courses = res.data.courses))
   },
   methods: {
     // TODO mettre un composant Vuejs à la place

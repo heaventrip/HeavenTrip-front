@@ -302,4 +302,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.map-section {
+  filter: blur(4px);
+  pointer-events: none;
+}
+</style>
