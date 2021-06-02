@@ -1,36 +1,50 @@
 <template>
-  <div class="container">
-    <div class="row w-100 wrapper-head-para" :style="{ visibility: clickedMultiactivity }" style="margin-left: 65px; margin-right: 65px; padding-bottom: 1.5rem; border-bottom: 1px dashed #7c7c7ca6">(Variable prénom), choisis un sport et découvre nos compositions en séjours multi-activités.</div>
+  <div class="container" v-if="loaded">
+    <div class="row w-100 wrapper-head-para" :style="{ visibility: clickedMultiActivity ? '' : 'hidden' }" style="margin-left: 65px; margin-right: 65px; padding-bottom: 1.5rem; border-bottom: 1px dashed #7c7c7ca6">
+      (Variable prénom), choisis un sport et découvre nos compositions en séjours multi-activités.
+    </div>
     <div class="row w-100 m-0 mt-5">
       <div id="activites_pills" class="col-12 col-lg-3">
-        <h4 class="nav-head m-0">
+        <!-- <h4 class="nav-head m-0">
           <a href="#header_nav" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
           . ACTIVITéS
-        </h4>
+        </h4> -->
         <ul class="nav navbar-nav inner-nav-list flex-column nav-pills wrapper-pills border-0 mobile-navs" id="activites_pills_tab" role="tablist" aria-orientation="vertical">
           <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false">VENT & MER <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+            <a @click="clicked(sportCategories[0]?.name)" class="nav-link active text-uppercase" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false"
+              >{{ sportCategories[0]?.name }}<i class="fa fa-chevron-right chevron-left float-right"></i
+            ></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne" role="tab" aria-controls="v-pills-montagne" aria-selected="false">MONTAGNE <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+            <a @click="clicked(sportCategories[1]?.name)" class="nav-link text-uppercase" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne" role="tab" aria-controls="v-pills-montagne" aria-selected="false"
+              >{{ sportCategories[1]?.name }}<i class="fa fa-chevron-right chevron-left float-right"></i
+            ></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a @click="clickedMultiactivity = ''" class="nav-link" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false">A PIED <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+            <a @click="clicked(sportCategories[2]?.name)" class="nav-link text-uppercase" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false"
+              >{{ sportCategories[2]?.name }}<i class="fa fa-chevron-right chevron-left float-right"></i
+            ></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a @click="clickedMultiactivity = 'hidden'" class="nav-link" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false">MULTI - ACTIVITES <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+            <a @click="clicked(sportCategories[3]?.name)" class="nav-link text-uppercase" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false"
+              >{{ sportCategories[3]?.name }}<i class="fa fa-chevron-right chevron-left float-right"></i
+            ></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false">BIEN-ÊTRE <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+            <a @click="clicked(sportCategories[4]?.name)" class="nav-link text-uppercase" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false"
+              >{{ sportCategories[4]?.name }}<i class="fa fa-chevron-right chevron-left float-right"></i
+            ></a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false">NEIGE <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+            <a @click="clicked(sportCategories[5]?.name)" class="nav-link text-uppercase" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false"
+              >{{ sportCategories[5]?.name }}<i class="fa fa-chevron-right chevron-left float-right"></i
+            ></a>
           </li>
         </ul>
       </div>
-      <div class="col-12 col-lg-9">
-        <div class="row h-100 justify-content-center align-items-center main-grid">
-          <div class="col-3">
+      <div v-for="category in sportCategories" :key="category" class="flex-column flex-grow-1 justify-content-around" :class="[category.name === activeCategory ? 'd-flex' : 'd-none']">
+        <div class="row no-gutters justify-content-around align-items-center">
+          <div v-for="sport in category.sports.slice(0, 3)" :key="sport" class="col-3">
             <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
               <svg x="-10" height="400" width="200" fill="none">
                 <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
@@ -39,9 +53,9 @@
                 <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="17" />
               </svg>
             </svg>
-            <span class="sport-name">Plongée</span>
+            <span class="sport-name">{{ sport.name }}</span>
           </div>
-          <div class="col-3" v-if="activitiesCount >= 2">
+          <!-- <div class="col-3" v-if="category.sports.length >= 2">
             <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
               <svg x="-10" height="400" width="200" fill="none">
                 <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
@@ -52,7 +66,7 @@
             </svg>
             <span class="sport-name">Chiens</span>
           </div>
-          <div class="col-3" v-if="activitiesCount >= 3">
+          <div class="col-3" v-if="category.sports.length >= 3">
             <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
               <svg x="-10" height="400" width="200" fill="none">
                 <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
@@ -62,17 +76,33 @@
               </svg>
             </svg>
             <span class="sport-name">Surf</span>
+          </div> -->
+        </div>
+        <div class="row no-gutters justify-content-around align-items-center" v-if="category.sports.length > 3">
+          <div v-for="sport in category.sports.slice(3, 6)" :key="sport" class="col-3">
+            <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
+              <svg x="-10" height="400" width="200" fill="none">
+                <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
+              </svg>
+              <svg x="210" height="400" width="200" fill="none">
+                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="17" />
+              </svg>
+            </svg>
+            <span class="sport-name">{{ sport.name }}</span>
           </div>
         </div>
-        <div class="row justify-content-center align-items-center" v-if="activitiesCount > 3">
-          <div class="col-3" v-if="activitiesCount >= 4">4</div>
-          <div class="col-3" v-if="activitiesCount >= 5">5</div>
-          <div class="col-3" v-if="activitiesCount >= 6">6</div>
-        </div>
-        <div class="row justify-content-center align-items-center" v-if="activitiesCount > 6">
-          <div class="col-3" v-if="activitiesCount >= 6">7</div>
-          <div class="col-3" v-if="activitiesCount >= 8">8</div>
-          <div class="col-3" v-if="activitiesCount >= 9">9</div>
+        <div class="row no-gutters justify-content-around align-items-center" v-if="category.sports.length > 6">
+          <div v-for="sport in category.sports.slice(6)" :key="sport" class="col-3">
+            <svg transform="translate(0, -5) rotate(-30)" height="110" width="110" viewBox="0 0 400 400">
+              <svg x="-10" height="400" width="200" fill="none">
+                <circle cx="205" cy="220" r="50%" stroke="white" stroke-width="4" />
+              </svg>
+              <svg x="210" height="400" width="200" fill="none">
+                <circle cx="-5" cy="220" r="50%" stroke="orange" stroke-width="17" />
+              </svg>
+            </svg>
+            <span class="sport-name">{{ sport.name }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -181,18 +211,38 @@ export default {
   name: 'ActivitiesTab',
   data() {
     return {
-      activitiesCount: 3,
-      clickedMultiactivity: false
+      loaded: false,
+      clickedMultiActivity: false,
+      sportCategories: [],
+      activeCategory: ''
+      // windAndWater: '',
+      // mountain: '',
+      // walk: '',
+      // multiActivities: '',
+      // wellNess: '',
+      // snow: ''
+    }
+  },
+  watch: {
+    sportCategories() {
+      console.log(this.sportCategories[0].name)
+    }
+  },
+  created() {
+    this.$axios.get('/sport-categories').then((res) => {
+      this.sportCategories = res.data.sportCategories
+      this.loaded = true
+    })
+  },
+  methods: {
+    clicked(category) {
+      this.activeCategory = category
     }
   }
 }
 </script>
 
 <style scoped>
-.main-grid {
-  position: relative;
-  left: -5vw;
-}
 .wrapper-head-para {
   font-family: Muli, sans-serif;
 }

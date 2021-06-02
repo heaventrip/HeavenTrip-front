@@ -20,8 +20,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import InlineSvg from 'vue-inline-svg'
+import axios from 'axios'
 
 const app = createApp(App)
 app.component('InlineSvg', InlineSvg)
 app.use(router)
 app.mount('#app')
+
+app.config.globalProperties.$axios = axios.create({ baseURL: 'http://localhost:3000/api/v1' })

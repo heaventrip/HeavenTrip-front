@@ -13,21 +13,21 @@
       <div class="reviews__user-infos mx-auto">
         <span class="text--bold mr-4">
           <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
-          <span class="ml-2">Nice</span>
+          <span class="ml-2">{{ review.user?.city }}</span>
         </span>
-        <span class="text--bold">Remi Flemming</span>
+        <span class="text--bold">{{ review.user?.firstName }} {{ review.user?.lastName }}</span>
       </div>
     </div>
     <div class="reviews__comment">
       <h6 class="text-uppercase">
-        <span> Séjour KITESURF </span>
+        <span>{{ review.session?.course.typeOfCourse }} {{ review.session?.course.sport }}</span>
         <span class="review-comment__date" style="font-size: 0.8rem">
           <img class="align-baseline mx-2" src="@/assets/svg/arrow-right.svg" style="max-height: 10px" />
-          session du 01/02/03
+          Session du {{ review.session?.dateStart }}
         </span>
       </h6>
       <p class="mb-0">
-        C'est en vivant des emotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c'est trop coooool! Et hop encore une ligne pour la manmotte ! Toussa toussa toussa Toussa toussa toussa c'est Charlie qui dit ! Enfin j'ai peut-etre pas totalement termine...
+        {{ review.comment }}
       </p>
     </div>
   </div>
@@ -39,6 +39,14 @@ export default {
   name: 'SectionReviews',
   components: {
     InlineAvatars
+  },
+  data() {
+    return {
+      review: {}
+    }
+  },
+  created() {
+    this.$axios.get('/reviews').then((res) => (this.review = res.data.reviews[0])) // we want only one
   }
 }
 </script>

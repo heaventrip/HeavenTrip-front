@@ -7,19 +7,18 @@
           <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
           <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
           <div>
-            <h1 class="heading text-uppercase mb-2"><strong>ski</strong> freeride</h1>
-            <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> serre-chevalier</h5>
+            <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1>
+            <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
           </div>
         </div>
         <!-- TODO tags multiactivités ici -->
         <div v-show="!toggledSessions" class="abc text-center text-lg-left mt-5 mt-lg-0 pt-md-4 pt-lg-0">
-          <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :border="true" color="white" icon="globe" />
-          <br />
+          <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border="true" color="white" icon="globe" />
           <div class="d-inline-flex d-lg-flex align-items-center p-3 px-lg-0 trippers-div">
             <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
               <span>Ca te titille? Rejoint</span>
               <br />
-              les <span>12 intéressés</span>
+              les <span>{{ featuredCourse.wishlistUsers?.length }} intéressés</span>
             </span>
             <ul class="img-list list-unstyled d-none d-md-inline-flex align-items-center mx-4 mb-0">
               <li>
@@ -56,7 +55,7 @@
         <div class="col-8 bg block--white">
           <div class="block__content">
             <div class="px-2">
-              <span class="euro">1 990€</span>
+              <span class="euro">{{ featuredCourse.price }}€</span>
               <span class="euro-pers">/pers.</span>
               <br />
               <span class="text--smaller">Tout inclus (sans transports)</span>
@@ -85,7 +84,8 @@ export default {
   },
   data() {
     return {
-      toggledSessions: false
+      toggledSessions: false,
+      featuredCourse: {}
     }
   },
   methods: {
@@ -93,6 +93,9 @@ export default {
       this.toggledSessions = true
       this.$emit('toggled-sessions')
     }
+  },
+  created() {
+    this.$axios.get('/courses', { params: { featured: true } }).then((res) => (this.featuredCourse = res.data.course))
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <div class="modal-content border-0 rounded-0">
         <div class="modal-body p-0 border-0">
           <div id="password-wrapper" v-if="passwordForgotten" class="d-flex flex-column flex-lg-row">
-            <Password @password-updated="passwordForgotten = false" />
+            <Password @password-updated="hidePasswordForm" @clicked-password-retrieved="hidePasswordForm" />
           </div>
           <!-- FIXME -->
           <div id="login-wrapper" v-if="loginModal" class="d-flex flex-column flex-lg-row">
@@ -79,7 +79,7 @@
                       <form id="login-form" @submit.prevent="checkLoginForm" method="post">
                         <div v-if="errors.length" class="errors">
                           <b>Veuillez corriger la ou les erreurs suivantes :</b>
-                          <ul v-for="error in [...errors]" :key="error">
+                          <ul v-for="error in errors" :key="error">
                             <li>{{ error }}</li>
                           </ul>
                         </div>
@@ -92,7 +92,7 @@
                           <div class="col-12">
                             <div class="form-group">
                               <input v-model="loginPassword" class="form-control modal-input mb-2" type="password" autocomplete="off" name="password" placeholder="Mot de passe" />
-                              <a @click.prevent="passwordForgotten = true" class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
+                              <a @click.prevent="displayPasswordForm" class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
                             </div>
                           </div>
                         </div>
@@ -240,8 +240,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { API_URL } from '@/config.json'
+// import axios from 'axios'
+// import { API_URL } from '@/config.json'
 import Password from '@/components/connection/Password.vue'
 
 export default {
@@ -261,10 +261,18 @@ export default {
       registerPassword: '',
       registerPasswordConfirmation: '',
       passwordForgotten: false,
-      loginModal: false
+      loginModal: true
     }
   },
   methods: {
+    displayPasswordForm() {
+      this.passwordForgotten = true
+      this.loginModal = false
+    },
+    hidePasswordForm() {
+      this.passwordForgotten = false
+      this.loginModal = true
+    },
     displayLoginForm(e) {
       e.preventDefault()
       $('.register-form').addClass('d-none')
@@ -316,8 +324,8 @@ export default {
       if (!err.length) this.submitRegisterForm()
     },
     submitLoginForm() {
-      axios
-        .post(API_URL + '/login', {
+      this.$axios
+        .post('/login', {
           user: {
             email: this.loginEmail,
             password: this.loginPassword
@@ -332,8 +340,8 @@ export default {
         })
     },
     submitRegisterForm() {
-      axios
-        .post(API_URL + `/registration`, {
+      this.$axios
+        .post('/registration', {
           user: {
             first_name: this.firstName,
             last_name: this.lastName,

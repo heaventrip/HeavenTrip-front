@@ -85,7 +85,7 @@ export default {
       }
       if (newVal === false) {
         document.querySelector('nav').style.position = 'relative' // reset
-        document.querySelector('.tab-content.main-wrapper').style.top = '108px' // initial
+        document.querySelector('.tab-content.main-wrapper').style.top = '8vh' // initial
         document.querySelector('.tab-content.main-wrapper').style.zIndex = '1' // initial
         document.querySelector('.nav-btn').style.visibility = 'visible' // initial
         document.querySelector('.navbar-nav').style.position = 'unset' // initial

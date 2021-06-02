@@ -4,7 +4,7 @@
       <a v-on:click="logout()" class="text-reset px-4 py-3 d-inline-block">se déconnecter</a>
     </li>
     <li v-else>
-      <a href="login.html" class="text-reset px-4 py-3 d-inline-block" data-toggle="modal" data-target="#login">se connecter</a>
+      <a href="#" class="text-reset px-4 py-3 d-inline-block" data-toggle="modal" data-target="#login">se connecter</a>
     </li>
     <li>
       <a href="#" class="px-4 py-3 profile-link font-weight-bold d-inline-block" data-toggle="modal" data-target="#profile">creér son profil</a>

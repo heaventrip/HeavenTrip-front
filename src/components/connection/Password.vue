@@ -10,7 +10,7 @@
     </div>
     <div class="modal-content-body bg-white py-5">
       <div v-if="step == 1">
-        <PasswordStep1 @filled="step = 2" />
+        <PasswordStep1 @clicked-password-retrieved="$emit('clicked-password-retrieved')" @filled="step = 2" />
       </div>
       <div v-else-if="step == 2" class="text-center">
         <PasswordStep2 @filled="step = 3" />
@@ -65,7 +65,7 @@ export default {
     PasswordStep3,
     PasswordStep4
   },
-  emits: ['passwordUpdated'],
+  emits: ['passwordUpdated', 'clicked-password-retrieved'],
   data() {
     return {
       step: 1
