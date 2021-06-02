@@ -124,9 +124,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { API_URL } from '@/config.json'
-
 export default {
   name: 'Profile',
   data() {
@@ -141,8 +138,8 @@ export default {
     }
   },
   updateProfile() {
-    axios
-      .put(API_URL + '/users', {
+    this.$axios
+      .put('/users', {
         user: {
           email: this.loginEmail,
           password: this.loginPassword
