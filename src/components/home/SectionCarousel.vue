@@ -808,68 +808,6 @@ export default {
     // TODO mettre un composant Vuejs à la place
     // 530px min-width
     jquery() {
-      $('.slider1').slick({
-        dots: true,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 3,
-        centerMode: true,
-        draggable: true,
-        centerPadding: '60px',
-        prevArrow: '<button type="button" class="slick-prev">Previous</button>',
-        nextArrow: '<button type="button" class="slick-prev">Previous</button>',
-        responsive: [
-          {
-            breakpoint: 2561,
-            settings: {
-              initialSlide: 1,
-              arrows: true,
-              centerMode: true,
-              centerPadding: '60px',
-              slidesToShow: 3,
-              draggable: false
-            }
-          },
-          {
-            breakpoint: 1441,
-            settings: {
-              initialSlide: 1,
-              arrows: true,
-              centerMode: true,
-              centerPadding: '80px',
-              slidesToShow: 2,
-              draggable: false
-            }
-          },
-          {
-            breakpoint: 1025,
-            settings: {
-              arrows: false,
-              centerMode: true,
-              centerPadding: '80px',
-              slidesToShow: 1
-            }
-          },
-          {
-            breakpoint: 991,
-            settings: {
-              arrows: false,
-              centerMode: true,
-              centerPadding: '90px',
-              slidesToShow: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              arrows: false,
-              centerMode: false,
-              // centerPadding: '40px',
-              slidesToShow: 1
-            }
-          }
-        ]
-      })
       $('.customers-testimonials')
         .on('click', '.shadow-effect', function (e) {
           e.preventDefault()
