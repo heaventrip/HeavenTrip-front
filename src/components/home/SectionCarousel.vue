@@ -2,47 +2,26 @@
   <section class="carousel-section">
     <div class="container">
       <div class="search row">
-        <div class="col-12 col-sm-10 col-lg-9 mx-auto">
-          <div class="rounded bg-white d-flex mb-5 centered-div">
+        <div class="col-12 col-sm-10 col-lg-9 mx-auto" style="position: relative; bottom: 35px">
+          <div class="rounded bg-white d-flex centered-div">
             <div class="d-flex align-items-center p-3 flex-1 search-input-container">
               <img class="mx-3 img-20 d-none d-lg-inline-block" fluid :src="require('@/assets/images/search.png')" />
               <input class="form-control p-0 search-input ml-2 ml-sm-3 ml-lg-0 mr-xl-4" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>
             <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2">
               <li>
-                <div class="position-relative multi-select-filter"></div>
-              </li>
-              <li>
                 <div class="position-relative multi-select-filter">
-                  <select id="departure_month" name="depart" multiple="multiple" class="multi-select-option depart-dropdown text-capitalize">
-                    <option value="janvier">janvier</option>
-                    <option value="février">février</option>
-                    <option value="mars">mars</option>
-                    <option value="avril">avril</option>
-                    <option value="mai">mai</option>
-                    <option value="juin">juin</option>
-                    <option value="juillet">juillet</option>
-                    <option value="août">août</option>
-                    <option value="septembre">septembre</option>
-                    <option value="octobre">octobre</option>
-                    <option value="novembre">novembre</option>
-                    <option value="décembre">décembre</option>
-                  </select>
+                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
                 </div>
               </li>
               <li>
                 <div class="position-relative multi-select-filter">
-                  <select id="my-activity" name="activity" class="multi-select-option activity-dropdown">
-                    <option value="VTT Descente">VTT Descente</option>
-                    <option value="Via Ferrata">Via Ferrata</option>
-                    <option value="Windsurf">Windsurf</option>
-                    <option value="Kitesurf">Kitesurf</option>
-                    <option value="VTT Descente">VTT Descente</option>
-                    <option value="Via Ferrata">Via Ferrata</option>
-                    <option value="Windsurf">Windsurf</option>
-                    <option value="Kitesurf">Kitesurf</option>
-                    <option value="VTT Descente">VTT Descente</option>
-                  </select>
+                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%" />
+                </div>
+              </li>
+              <li>
+                <div class="position-relative multi-select-filter">
+                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%" />
                 </div>
               </li>
             </ul>
@@ -54,6 +33,7 @@
               ><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
             </button>
           </div>
+          <div class="tags-container d-flex justify-content-center mb-5"></div>
         </div>
       </div>
       <div class="row">
@@ -141,7 +121,7 @@
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
           <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">asdfghj</div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
-            <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh">
+            <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem">
               <div class="card-block" style="max-width: 530px">
                 <div class="shadow-effect overflow-hidden position-relative">
                   <Tag style="position: absolute; top: 5%; left: 5%; z-index: 1" color="white" text="2 départs" />
@@ -692,7 +672,7 @@
                           </div>
                           <div class="hoverable-div ml-3 d-flex align-items-end">
                             <!-- TODO aligner avec picto au dessus -->
-                            <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :divider="false" :border="false" color="grey" icon="globe" py="0" />
+                            <InlineProductInfos :infos="['test1', 'test2', 'test3', 'test4']" :divider="false" :border-top="false" :border-bottom="false" color="grey" icon="globe" py="0" />
                             <div class="card__footer__price--hover text-right d-none d-lg-inline-block align-self-center">
                               <h6 class="euro-per mb-0" style="font-weight: 300; font-size: 0.8rem">par pers.</h6>
                               <h1 class="euro mb-0 euro" style="font-weight: bold; font-size: 1.8rem; white-space: nowrap">1 390€</h1>
@@ -751,10 +731,10 @@
 <script>
 // import '@/assets/css/carousel.css'
 // import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import Multiselect from '@vueform/multiselect'
 import Tag from '@/components/elements/Tag.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
-import vueMultiSelect from 'vue-multi-select';
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 gsap.registerPlugin(CustomEase)
@@ -764,7 +744,8 @@ export default {
   components: {
     InlineProductInfos,
     InlineAvatars,
-    Tag
+    Tag,
+    Multiselect
     // Carousel,
     // Slide,
     // Navigation
@@ -773,7 +754,51 @@ export default {
     return {
       courses: [],
       currentViewportWidth: '',
-      cardsArr: []
+      cardsArr: [],
+      monthSelection: {
+        mode: 'tags',
+        value: ['Janvier'],
+        placeholder: 'Mois de départ',
+        openDirection: 'top',
+        caret: false,
+        options: [
+          { value: 'jan', label: 'Janvier' },
+          { value: 'feb', label: 'Février' },
+          { value: 'mar', label: 'Mars' },
+          { value: 'apr', label: 'Avril' },
+          { value: 'may', label: 'Mai' },
+          { value: 'jun', label: 'Juin' },
+          { value: 'jul', label: 'Juillet' },
+          { value: 'aug', label: 'Août' },
+          { value: 'sep', label: 'Septembre' },
+          { value: 'oct', label: 'Octobre' },
+          { value: 'nov', label: 'Novembre' },
+          { value: 'dec', label: 'Décembre' }
+        ],
+        createTag: true
+      },
+      activitySelection: {
+        mode: 'tags',
+        value: ['VTT'],
+        placeholder: 'Activités',
+        openDirection: 'top',
+        caret: false,
+        options: [
+          { value: 'vtt', label: 'VTT' },
+          { value: 'ski', label: 'Ski' },
+          { value: 'surf', label: 'Surf' },
+          { value: 'kitesurf', label: 'Kitesurf' },
+          { value: 'escalade', label: 'Escalade' }
+        ],
+        createTag: true
+      },
+      countrySelection: {
+        value: 0,
+        openDirection: 'top',
+        caret: false,
+        options: ['France', 'Espagne', 'Italie'],
+        placeholder: 'Pays'
+      }
     }
   },
   created() {
@@ -912,6 +937,10 @@ export default {
             '<0.08'
           )
         })
+    },
+    changeBackground(e, color) {
+      e.target.style.backgroundColor = color
+      e.target.style.color = color === 'grey' ? '#fff' : 'unset'
     }
   },
   mounted() {
@@ -924,6 +953,22 @@ export default {
       x: (i) => i * 540 + this.currentViewportWidth * 0.15 // left offset of 10vw
     })
     this.cardsArr = gsap.utils.toArray('.card-block')
+    document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
+      document.querySelector('.tags-container').append(tagContainer)
+    })
+
+    document.querySelectorAll('.multi-select-filter').forEach((el) => {
+      el.addEventListener('mouseenter', (e) => {
+        e.target.style.backgroundColor = '#292f33'
+        e.target.style.borderColor = '#292f33'
+        e.target.style.color = '#fff'
+      })
+      el.addEventListener('mouseleave', (e) => {
+        e.target.style.backgroundColor = 'unset'
+        e.target.style.borderColor = 'unset'
+        e.target.style.color = 'unset'
+      })
+    })
   }
 }
 </script>

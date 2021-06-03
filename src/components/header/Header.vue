@@ -144,6 +144,15 @@ export default {
   min-height: 94vh;
   padding-bottom: 15vh;
 }
+.header::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(to right, #5a3a5f 0%, #5a3a5f62 100%);
+  opacity: 0.6;
+  width: 100%;
+  height: 94vh; /* corresponds height of image */
+  z-index: -1;
+}
 .header-bg-image {
   z-index: -1;
   object-fit: cover;

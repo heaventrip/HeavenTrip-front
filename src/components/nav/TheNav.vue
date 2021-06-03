@@ -150,6 +150,7 @@ export default {
 <style scoped>
 .navbar {
   height: 70px; /* easier to manipulate with fixed height */
+  z-index: 1;
 }
 .tab-content.main-wrapper {
   z-index: 1;

@@ -1,5 +1,6 @@
 <template>
   <div class="reviews-section d-flex justify-content-center align-items-center">
+    <InlineSvg class="reviews__quote reviews__quote--right" :src="require('@/assets/svg/right-quote.svg')" opacity="0.1" />
     <div class="reviews__infos d-flex flex-column align-items-end">
       <span>Pour vous</span>
       <div class="text-uppercase" style="font-size: 1.5rem">
@@ -9,6 +10,7 @@
       <InlineAvatars height="40px" :heart="false" spacing="15px" :avatars="[1, 2, 3]" />
     </div>
     <div class="reviews__user d-flex flex-column">
+      <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
       <img :src="require('@/assets/images/avatar.png')" class="reviews__user-avatar rounded-circle" />
       <div class="reviews__user-infos mx-auto">
         <span class="text--bold mr-4">
@@ -52,6 +54,17 @@ export default {
 </script>
 
 <style scoped>
+.reviews__quote {
+  position: absolute;
+}
+.reviews__quote--left {
+  transform: translate(-100%, 200%);
+}
+.reviews__quote--right {
+  height: 60%;
+  top: 30px; /* compensates top offset of review-section block */
+  left: 80%;
+}
 .reviews__user-infos__spot-svg {
   vertical-align: sub;
 }

@@ -3,46 +3,25 @@
     <div class="content d-flex align-items-end justify-content-between w-100 mt-5 mt-lg-0">
       <div>
         <div class="top-block d-flex align-items-center">
-          <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" class="head-icon d-inline-block" height="90" />
+          <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 116px" />
           <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
           <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-          <div>
-            <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1>
+          <div style="margin-left: 1.5rem; position: relative; top: 4px">
+            <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
+            <h1 class="heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
             <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
           </div>
         </div>
         <!-- TODO tags multiactivités ici -->
         <div v-show="!toggledSessions" class="abc text-center text-lg-left mt-5 mt-lg-0 pt-md-4 pt-lg-0">
-          <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border="true" color="white" icon="globe" />
-          <div class="d-inline-flex d-lg-flex align-items-center p-3 px-lg-0 trippers-div">
+          <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border-top="true" color="white" icon="globe" width="130%" />
+          <div class="d-inline-flex d-lg-flex align-items-center justify-content-between pb-3 trippers-div">
             <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
               <span>Ca te titille? Rejoint</span>
               <br />
               les <span>{{ featuredCourse.wishlistUsers?.length }} intéressés</span>
             </span>
-            <ul class="img-list list-unstyled d-none d-md-inline-flex align-items-center mx-4 mb-0">
-              <li>
-                <a href="#"><img class="img-fluid user_icon positioned-img rounded-circle" fluid width="40px" :src="require('@/assets/images/t2.png')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fluid user_icon positioned-img rounded-circle" fluid width="40px" :src="require('@/assets/images/t1.png')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fluid user_icon positioned-img rounded-circle" fluid width="40px" :src="require('@/assets/images/t2.png')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fluid user_icon positioned-img rounded-circle" fluid width="40px" :src="require('@/assets/images/t3.png')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fluid user_icon positioned-img rounded-circle" fluid width="40px" :src="require('@/assets/images/t4.png')" /> </a>
-              </li>
-              <li class="d-none d-lg-inline-block">
-                <a href="#"><img class="img-fluid user_icon" fluid :src="require('@/assets/images/th.png')" /> </a>
-              </li>
-              <li class="d-inline-block d-lg-none">
-                <span>+1.5k</span>
-              </li>
-            </ul>
+            <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violet" :heart="true" spacing="-10px" />
             <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
             <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
           </div>
@@ -75,12 +54,15 @@
 <script>
 import Button from '@/components/elements/Button.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
+import InlineAvatars from '@/components/elements/InlineAvatars.vue'
+
 export default {
   name: 'HeaderText',
   emits: ['toggled-sessions'],
   components: {
     Button,
-    InlineProductInfos
+    InlineProductInfos,
+    InlineAvatars
   },
   data() {
     return {
@@ -187,6 +169,7 @@ export default {
 }
 .head-icon {
   max-width: 90px;
+  margin-right: 10px;
 }
 .top-block {
   margin-bottom: 1.8rem;
@@ -195,17 +178,10 @@ export default {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
   border-bottom: 1px solid rgba(250, 250, 250, 0.35);
 }
-/* FIXME must be 50% width (maybe elements must be blocks instead of inline) */
-/* .list-info:after {
-  content: '';
-  display: block;
-  margin: 0 auto;
-  width: 50%;
-  border-bottom: 1px solid rgba(250, 250, 250, 0.35);
-} */
 .trippers-div {
-  border: none;
-  margin-top: 1.2em;
+  border-top: 1px solid rgba(250, 250, 250, 0.35);
+  padding-top: 1.6rem;
+  width: max-content;
 }
 .icons {
   margin-right: 0.6rem;
@@ -217,6 +193,7 @@ export default {
   font-size: 0.75rem;
   line-height: 1.6;
   letter-spacing: 0.4px;
+  margin-right: 1.5rem;
 }
 .bottom-left-text span:last-child {
   font-weight: bold;

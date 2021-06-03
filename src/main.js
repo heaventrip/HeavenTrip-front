@@ -10,7 +10,7 @@ import './assets/css/sol.css'
 import './assets/css/datepicker.min.css'
 import './assets/css/zebra_datepicker.min.css'
 import './assets/css/style.css'
-import 'vue-multi-select/dist/lib/vue-multi-select.css'
+import './assets/css/multiselect.css'
 
 // import "./assets/js/sol.js"; // NOTE used for MULTIPLE SELECTIONS
 // import "./assets/js/jquery.creditCardValidator.js";

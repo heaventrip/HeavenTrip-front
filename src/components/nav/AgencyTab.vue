@@ -35,9 +35,11 @@
       </div> -->
     </div>
     <div class="row justify-content-center bottom-text">
+      <InlineSvg :src="require('@/assets/svg/left-quote.svg')" height="50" opacity="0.06" style="transform: translateY(-50%)" />
       <div class="text-center">
         Heaven Trip c'est pas juste une nouvelle agence de voyage, c'est la rencontre de deux passionnés qui veulent reconnecter les uns aux autres <br />à travers des expériences concentrées sur l'humain, et le dépassement de soi. Ici, on valorise ce que tu veux devenir et non ce que tu es.
       </div>
+      <InlineSvg :src="require('@/assets/svg/right-quote.svg')" height="50" opacity="0.06" style="transform: translateY(50%)" />
     </div>
   </div>
   <NavConcept v-show="conceptIsActive" />

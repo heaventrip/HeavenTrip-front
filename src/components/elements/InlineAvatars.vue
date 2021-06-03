@@ -1,11 +1,11 @@
 <template>
-  <div class="wrapper d-flex align-items-center">
+  <div class="avatars-wrapper d-flex align-items-center">
     <div v-for="avatar in pAvatars" :key="avatar" :style="pSpacing">
       <!-- FIXME intégrer border color ET outline -->
-      <img class="rounded-circle ${pBorderColor}" :class="{ 'small-avatar--outline': pOutline }" :style="pHeight" :src="require('@/assets/images/t4.png')" />
+      <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="require('@/assets/images/t4.png')" />
     </div>
-    <div v-if="pHeart">
-      <img :style="pHeight" :src="require('@/assets/svg/heart-logo.svg')" />
+    <div v-if="pHeart" :style="pSpacing">
+      <InlineSvg :src="require('@/assets/svg/heart-logo-light.svg')" width="40" height="40" />
     </div>
   </div>
 </template>
@@ -13,10 +13,9 @@
 <script>
 export default {
   name: 'InlineAvatars',
-  props: ['height', 'heart', 'spacing', 'avatars', 'border-color', 'border-width'],
+  props: ['height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width'],
   data() {
     return {
-      pOutline: this.outline,
       pHeart: this.heart,
       pAvatars: this.avatars
     }
@@ -28,25 +27,26 @@ export default {
     pHeight() {
       return `height: ${this.height || '40px'};`
     },
-    pBorderColor() {
-      return `small-avatar--${this.borderColor}`
+    pOutlineColor() {
+      return `small-avatar--${this.outlineColor}`
     }
   }
 }
 </script>
 
 <style scoped>
-.wrapper {
+.avatars-wrapper {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-.small-avatar--outline {
-  outline: 5px solid inherit;
-}
 .small-avatar--grey {
-  border: 1px solid #292f33;
+  outline: 4px solid #292f33;
 }
 .small-avatar--white {
-  border: 1px solid #fff;
+  outline: 4px solid #fff;
+}
+
+.small-avatar--violet {
+  outline: 4px solid #564559;
 }
 </style>
