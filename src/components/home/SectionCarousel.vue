@@ -11,16 +11,28 @@
             <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2">
               <li>
                 <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
+                    <InlineSvg :src="require('@/assets/svg/country-search.svg')" height="20" />
+                    <span class="ml-2">Pays</span>
+                  </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
                 </div>
               </li>
               <li>
                 <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
+                    <InlineSvg :src="require('@/assets/svg/date-search.svg')" height="20" />
+                    <span class="ml-2">Mois de départ</span>
+                  </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%" />
                 </div>
               </li>
               <li>
                 <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
+                    <InlineSvg :src="require('@/assets/svg/activity-search.svg')" height="20" />
+                    <span class="ml-2">Activités</span>
+                  </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%" />
                 </div>
               </li>
@@ -758,7 +770,6 @@ export default {
       monthSelection: {
         mode: 'tags',
         value: ['Janvier'],
-        placeholder: 'Mois de départ',
         openDirection: 'top',
         caret: false,
         options: [
@@ -780,7 +791,6 @@ export default {
       activitySelection: {
         mode: 'tags',
         value: ['VTT'],
-        placeholder: 'Activités',
         openDirection: 'top',
         caret: false,
         options: [
@@ -796,8 +806,7 @@ export default {
         value: 0,
         openDirection: 'top',
         caret: false,
-        options: ['France', 'Espagne', 'Italie'],
-        placeholder: 'Pays'
+        options: ['France', 'Espagne', 'Italie']
       }
     }
   },

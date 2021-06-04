@@ -18,7 +18,8 @@
     "vue": "^3.0.0",
     "vue-inline-svg": "^3.0.0-beta.3",
     "vue-router": "^4.0.0-0",
-    "vue3-carousel": "^0.1.21"
+    "vue3-carousel": "^0.1.21",
+    "vue3-perfect-scrollbar": "^1.5.5"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.11.5",

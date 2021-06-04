@@ -1,6 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar">
-    <a class="navbar-brand pl-sm-5 pl-lg-0" href="/"><img class="logo" width="150" fluid :src="require('@/assets/svg/logo-white.svg')" /></a>
+    <a class="navbar-brand pl-sm-5 pl-lg-0" href="/">
+      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" width="150" />
+      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" width="150" />
+    </a>
     <!-- NOTE MOBILE ONLY -->
     <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
       <img class="mail-icon" fluid :src="require('@/assets/images/svg/PICTO_CONTACT_MOBILE.svg')" data-toggle="modal" data-target="#profile" />
@@ -43,7 +46,8 @@
           <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
-      <button class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
+      <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
+      <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
       <div class="d-lg-none nav-btm-div d-none align-items-center">
         <!-- d-flex -->
         <a href="#" class="social-circle d-inline-block mr-3"><img class="img-fluid" fluid :src="require('@/assets/images/insta.png')" /></a>
@@ -75,7 +79,7 @@ import DestinationsTab from '@/components/nav/DestinationsTab.vue'
 
 export default {
   name: 'Nav',
-  emits: ['changed-nav-status'],
+  emits: ['changed-nav-status', 'changed-tab'],
   components: {
     AgencyTab,
     ActivitiesTab,
@@ -103,20 +107,37 @@ export default {
       this.$emit('changed-nav-status', newVal)
     },
     activitiesIsActive: function (newVal) {
-      if (newVal === true) this.changeBgFilter(this.bgFilter.dark)
+      if (newVal === true) {
+        this.$emit('changed-tab', 'activities')
+        this.changeBgFilter(this.bgFilter.dark)
+      }
     },
     destinationsIsActive: function (newVal) {
-      if (newVal === true) this.changeBgFilter(this.bgFilter.dark)
+      if (newVal === true) {
+        this.$emit('changed-tab', 'destinations')
+        this.changeBgFilter(this.bgFilter.dark)
+      }
     },
     agencyIsActive: function (newVal) {
       if (newVal === true) {
+        this.$emit('changed-tab', 'agency')
         this.changeBgFilter(this.bgFilter.light)
         document.body.style.position = 'fixed'
         document.querySelector('.search').style.visibility = 'hidden'
+        document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+          el.classList.toggle('navbar-grey', true)
+          el.style.color = '#292f33'
+        })
       }
       if (newVal === false) {
         document.body.style.position = 'static' // reset
         document.querySelector('.search').style.visibility = 'visible'
+        document.querySelector('#header_nav').removeAttribute('style')
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+          el.classList.toggle('navbar-grey', false)
+          el.style.color = '#fff'
+        })
       }
     }
   },
