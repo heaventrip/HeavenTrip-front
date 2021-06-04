@@ -621,23 +621,25 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   height: calc(100vh - 160px);
 }
 .header .navbar-dark .navbar-nav{
-  border-bottom: 1px solid hsl(0deg 0% 75% / 60%);
+  border-bottom: 1px solid hsl(0deg 0% 75% / 40%);
 }
 .header .navbar-dark .navbar-nav .navbar-grey{
   border-bottom: 1px solid #292f33;
 }
+
 .header .navbar-dark .navbar-nav .nav-link{
   font-family: Muli,sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #ffffff;
-  padding: 1rem 0;
+  padding: 1.2rem 0;
   margin: 0 25px -1px;
-  letter-spacing: 0.6px;
+  letter-spacing: 1.2px;
   border-bottom: 1px solid transparent;
   background-color: transparent;
   border-radius: 0;
 }
+
 .header .navbar-dark .navbar-nav .nav-link span{
   display: none;
 }

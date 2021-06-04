@@ -1,10 +1,11 @@
 <template>
-  <div class="d-flex align-items-center align-items-lg-end w-100 mt-auto" style="padding: 0 111px">
+  <div class="d-flex align-items-center align-items-lg-end w-100 mt-auto" style="padding: 0 130px">
     <div class="content d-flex align-items-start justify-content-between w-100 mt-5 mt-lg-0">
       <div>
-        <div style="width: 100%">
+        <div style="width: 115%">
           <div class="top-block d-flex align-items-center" style="width: 100%">
-            <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 10.5rem" />
+            <!-- FIXME Reduire pour les écrans standarts -->
+            <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 9rem" />
             <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
             <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
             <div style="width: 115%; margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
