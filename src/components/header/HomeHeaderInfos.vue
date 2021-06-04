@@ -37,7 +37,7 @@
               <span class="euro">{{ featuredCourse.price }}€</span>
               <span class="euro-pers">/pers.</span>
               <br />
-              <span class="text--smaller">Tout inclus (sans transports)</span>
+              <span class="text--smaller">Tout inclus(sans transports)</span>
             </div>
           </div>
         </div>
