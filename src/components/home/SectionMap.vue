@@ -306,5 +306,6 @@ export default {
 .map-section {
   filter: blur(4px);
   pointer-events: none;
+  cursor: not-allowed;
 }
 </style>
