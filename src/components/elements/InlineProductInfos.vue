@@ -2,16 +2,15 @@
   <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderTopStyle, borderBottomStyle, paddingStyle, widthStyle]">
     <div class="d-flex align-items-center" v-for="info in pInfos" :key="info">
       <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
-      <span class="block__text-content">{{ info }}</span>
+      <span class="block__text-content" :style="iconMarginStyle">{{ info }}</span>
     </div>
   </div>
-  <div v-if="pBorder" class="half-border"></div>
 </template>
 
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'extra-class', 'color', 'icon', 'width'],
+  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icon-margin', 'width'],
   data() {
     return {
       pIcon: this.icon,
@@ -32,8 +31,11 @@ export default {
     borderBottomStyle() {
       return this.borderBottom === true ? 'border-bottom: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
     },
+    iconMarginStyle() {
+      return `margin-left: ${this.iconMargin};`
+    },
     paddingStyle() {
-      return `padding: ${this.pt || '1.5rem'} 0 ${this.pb || '1.5rem'} 0;`
+      return `padding: ${this.pt || '1.5rem'} ${this.pr || '0rem'} ${this.pb || '1.5rem'} ${this.pl || '0rem'};`
     },
     widthStyle() {
       return `width: ${this.width};`
