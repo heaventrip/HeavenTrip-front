@@ -849,14 +849,6 @@ export default {
           this.cardsArr.push(this.cardsArr.shift()) // making first element the last element
         }
       })
-      // gsap.to(this.cardsArr[this.cardsArr.length - 1], {
-      //   opacity: 1,
-      //   duration: 1,
-      //   onComplete: () => {
-      //     gsap.set(this.cardsArr[0], { opacity: 1 })
-      //     this.cardsArr.push(this.cardsArr.shift()) // making first element the last element
-      //   }
-      // })
     },
     slideRight() {
       let tl = gsap.timeline()
@@ -868,7 +860,6 @@ export default {
             card,
             {
               x: '+=540',
-              // ease: CustomEase.create('custom', 'M0,0,C0.146,0,0.329,0.63,0.448,0.812,0.554,0.974,0.818,1.001,1,1'),
               ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
               duration: 1.0
             },
