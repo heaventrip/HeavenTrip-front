@@ -123,7 +123,6 @@ export default {
         this.$emit('changed-tab', 'agency')
         this.changeBgFilter(this.bgFilter.light)
         document.body.style.position = 'fixed'
-        document.querySelector('.search').style.visibility = 'hidden'
         document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
           el.classList.toggle('navbar-grey', true)
@@ -132,7 +131,6 @@ export default {
       }
       if (newVal === false) {
         document.body.style.position = 'static' // reset
-        document.querySelector('.search').style.visibility = 'visible'
         document.querySelector('#header_nav').removeAttribute('style')
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
           el.classList.toggle('navbar-grey', false)

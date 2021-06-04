@@ -1,33 +1,33 @@
 <template>
   <div class="d-flex align-items-center align-items-lg-end w-100 mt-auto" style="padding: 0 111px">
-    <div class="content d-flex align-items-end justify-content-between w-100 mt-5 mt-lg-0">
+    <div class="content d-flex align-items-start justify-content-between w-100 mt-5 mt-lg-0">
       <div>
-        <div class="top-block d-flex align-items-center">
-          <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 116px" />
-          <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
-          <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-          <div style="margin-left: 1.5rem; position: relative; top: 4px">
-            <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
-            <h1 class="heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
-            <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
+        <div style="width: 130%">
+          <div class="top-block d-flex align-items-center" style="width: 100%">
+            <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 116px" />
+            <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
+            <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
+            <div style="width: 100%; margin-left: 1.5rem; position: relative; top: 4px; padding: 2rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
+              <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
+              <h1 class="heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
+              <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
+            </div>
           </div>
+          <!-- TODO tags multiactivités ici -->
+          <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border-top="false" color="white" icon="globe" pt="0rem" />
         </div>
-        <!-- TODO tags multiactivités ici -->
-        <div v-show="!toggledSessions" class="abc text-center text-lg-left mt-5 mt-lg-0 pt-md-4 pt-lg-0">
-          <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border-top="true" color="white" icon="globe" width="130%" />
-          <div class="d-inline-flex d-lg-flex align-items-center justify-content-between pb-3 trippers-div">
-            <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
-              <span>Ca te titille? Rejoint</span>
-              <br />
-              les <span>{{ featuredCourse.wishlistUsers?.length }} intéressés</span>
-            </span>
-            <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violet" :heart="true" spacing="-10px" />
-            <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
-            <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
-          </div>
+        <div class="d-inline-flex d-lg-flex align-items-center justify-content-between pb-3 trippers-div">
+          <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
+            <span>Ca te titille? Rejoint</span>
+            <br />
+            les <span>{{ featuredCourse.wishlistUsers?.length }} intéressés</span>
+          </span>
+          <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violet" :heart="true" spacing="-10px" />
+          <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
+          <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
         </div>
       </div>
-      <div class="row no-gutters" style="margin-bottom: 5vh">
+      <div class="row no-gutters" style="margin-top: 6vh">
         <div class="col-4">
           <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" />
         </div>

@@ -73,6 +73,9 @@ export default {
     }
   },
   watch: {
+    tabsActive(newVal) {
+      document.querySelector('.search').style.visibility = newVal === true ? 'hidden' : 'visible'
+    },
     conceptIsActive(newVal) {
       if (newVal === true) {
         document.querySelector('nav').style.position = 'static'

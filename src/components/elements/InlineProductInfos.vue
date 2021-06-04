@@ -1,5 +1,5 @@
 <template>
-  <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderStyle, paddingStyle, widthStyle]">
+  <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderTopStyle, borderBottomStyle, paddingStyle, widthStyle]">
     <div class="d-flex align-items-center" v-for="info in pInfos" :key="info">
       <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
       <span class="block__text-content">{{ info }}</span>
@@ -11,7 +11,7 @@
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos', 'borderTop', 'borderBottom', 'px', 'py', 'extra-class', 'color', 'icon', 'width'],
+  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'extra-class', 'color', 'icon', 'width'],
   data() {
     return {
       pIcon: this.icon,
@@ -27,13 +27,13 @@ export default {
       return this.divider === true ? 'background-color: rgba(250, 250, 250, 0.35);' : 'display: none;'
     },
     borderTopStyle() {
-      return this.pBorderTop === true ? 'border-top: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
+      return this.borderTop === true ? 'border-top: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
     },
     borderBottomStyle() {
-      return this.pBorderBottom === true ? 'border-bottom: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
+      return this.borderBottom === true ? 'border-bottom: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
     },
     paddingStyle() {
-      return `padding: ${this.py || '1.5rem'} ${this.px || '0'};`
+      return `padding: ${this.pt || '1.5rem'} 0 ${this.pb || '1.5rem'} 0;`
     },
     widthStyle() {
       return `width: ${this.width};`
