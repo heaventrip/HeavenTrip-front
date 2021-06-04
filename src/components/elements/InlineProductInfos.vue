@@ -1,8 +1,10 @@
 <template>
-  <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderTopStyle, borderBottomStyle, paddingStyle, widthStyle]">
-    <div class="d-flex align-items-center" v-for="info in pInfos" :key="info">
-      <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
-      <span class="block__text-content" :style="iconMarginStyle">{{ info }}</span>
+  <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderTopStyle, borderBottomStyle, paddingYStyle, widthStyle]">
+    <div class="d-flex align-items-center">
+      <div v-for="(info, index) in pInfos" :key="info" :style="[paddingXStyle, index === 0 ? '' : dividerStyle]">
+        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
+        <span class="block__text-content" :style="iconMarginStyle">{{ info }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -10,7 +12,7 @@
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icon-margin', 'width'],
+  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icon-margin', 'width', 'divider'],
   data() {
     return {
       pIcon: this.icon,
@@ -22,8 +24,8 @@ export default {
     pInfos() {
       return this.infos.filter((val) => val) // remove undefined values
     },
-    display() {
-      return this.divider === true ? 'background-color: rgba(250, 250, 250, 0.35);' : 'display: none;'
+    dividerStyle() {
+      return this.divider === true ? 'border-left: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
     },
     borderTopStyle() {
       return this.borderTop === true ? 'border-top: 1px solid rgba(250, 250, 250, 0.35);' : 'border: none;'
@@ -34,8 +36,11 @@ export default {
     iconMarginStyle() {
       return `margin-left: ${this.iconMargin};`
     },
-    paddingStyle() {
-      return `padding: ${this.pt || '1.5rem'} ${this.pr || '0rem'} ${this.pb || '1.5rem'} ${this.pl || '0rem'};`
+    paddingYStyle() {
+      return `padding-top: ${this.pt || '1.5rem'}; padding-bottom: ${this.pb || '1.5rem'};`
+    },
+    paddingXStyle() {
+      return `padding-left: ${this.pl || '1rem'}; padding-right: ${this.pr || '1rem'};`
     },
     widthStyle() {
       return `width: ${this.width};`

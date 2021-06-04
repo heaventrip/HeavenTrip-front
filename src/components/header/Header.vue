@@ -174,7 +174,7 @@ export default {
 }
 .header--search {
   height: 100vh;
-  padding-bottom: 5vh;
+  padding-bottom: 3vh;
 }
 .header-filter--search::after {
   content: '';
