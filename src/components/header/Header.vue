@@ -1,6 +1,8 @@
 <template>
-  <div class="header d-flex flex-column text-white" :class="{ 'gradient-filter': !agencyIsActive }">
-    <img src="@/assets/images/combined.png" class="header-bg-image" />
+  <div class="header d-flex flex-column text-white" :class="{ 'gradient-filter': !navIsActive }">
+    <div class="header-bg-container">
+      <img src="@/assets/images/combined.png" class="header-bg-image" />
+    </div>
     <ConnectionButtons />
     <TheNav @changed-nav-status="setNavStatus" @changed-tab="setAgencyStatus" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="$route.name == 'Home' && !navIsActive" />
@@ -161,8 +163,14 @@ export default {
 .header-bg-image {
   z-index: -1;
   object-fit: cover;
+  height: 105%;
+  width: 100%;
+}
+.header-bg-container {
   position: absolute;
   height: 94vh;
   width: 100%;
+  overflow: hidden;
+  z-index: -1;
 }
 </style>

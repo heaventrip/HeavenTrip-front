@@ -456,42 +456,6 @@
         </div>
       </div>
     </section>
-    <section class="bottom-section py-5">
-      <div class="container">
-        <div class="row mb-5 text-center text-uppercase">
-          <div class="col-12">
-            <p class="mb-0 text-capitalize sub-head">Tripper</p>
-            <h2 class="heading"><strong>rappel</strong> toi</h2>
-          </div>
-        </div>
-        <div class="row text-center text-uppercase pt-md-5 pt-lg-0">
-          <div class="col-12 col-md-10 mx-auto">
-            <div class="row">
-              <div class="col-12 col-sm-6 col-lg-3">
-                <img class="user_icon" fluid :src="require('@/assets/images/fprint.png')" />
-                <h6 class="sub-heading my-1 font-weight-bold">conseils & suivi</h6>
-                <p class="para-points">avant et pendant ton sejour</p>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-3">
-                <img class="user_icon" fluid :src="require('@/assets/images/lab.png')" />
-                <h6 class="sub-heading my-1 font-weight-bold">creer et personnalise</h6>
-                <p class="para-points">ton propre stage</p>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-3">
-                <img class="user_icon" fluid :src="require('@/assets/images/chef-hat.png')" />
-                <h6 class="sub-heading my-1 font-weight-bold">organisation</h6>
-                <p class="para-points">made in heaven trip</p>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-3">
-                <img class="user_icon" fluid :src="require('@/assets/images/mic.png')" />
-                <h6 class="sub-heading my-1 font-weight-bold">discute avant le depart</h6>
-                <p class="para-points">avec les autres participants</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 <script>

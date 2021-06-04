@@ -1,15 +1,21 @@
 <template>
   <div>
+    <Header />
     <SearchResultSection />
+    <Footer />
   </div>
 </template>
 <script>
-import SearchResultSection from '@/components/search/SearchResultSection'
+import Header from '@/components/header/Header.vue'
+import SearchResultSection from '@/components/search/SearchResultSection.vue'
+import Footer from '@/components/footer/Footer.vue'
 
 export default {
   name: 'SearchHome',
   components: {
-    SearchResultSection
+    Header,
+    SearchResultSection,
+    Footer
   },
   data() {
     return {
