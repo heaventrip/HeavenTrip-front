@@ -82,8 +82,6 @@ export default {
         document.querySelector('.nav-btn').style.visibility = 'hidden'
         document.querySelector('.navbar-nav').style.position = 'absolute'
         document.querySelector('.navbar-nav').style.left = 'calc(100vw / 12 * 5)' // line up with col-5
-        document.querySelector('.navbar-nav').style.borderBottom = '1px solid #292f3399' // line up with col-5
-        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => (el.style.color = '#292f33'))
       }
       if (newVal === false) {
         document.querySelector('nav').style.position = 'relative' // reset
@@ -92,8 +90,6 @@ export default {
         document.querySelector('.nav-btn').style.visibility = 'visible' // initial
         document.querySelector('.navbar-nav').style.position = 'unset' // initial
         document.querySelector('.navbar-nav').style.left = 'unset'
-        document.querySelector('.navbar-nav').style.borderBottom = '1px solid hsl(0, 0, 75% / 60%);'
-        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => (el.style.color = '#fff'))
       }
     }
   },
@@ -114,6 +110,9 @@ export default {
 </script>
 
 <style scoped>
+.navbar-nav .nav-link:hover {
+  border-bottom: 1px solid red !important;
+}
 .big-letters {
   position: relative;
   font-size: 220px;
@@ -154,6 +153,5 @@ export default {
 .agency-content-wrapper {
   height: calc(100% - 10vh);
   position: relative;
-  top: -5vh;
 }
 </style>

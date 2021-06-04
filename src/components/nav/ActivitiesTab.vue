@@ -74,19 +74,19 @@
           <a @click="clicked(sportCategories[0]?.name)" class="nav-link active text-uppercase" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false">{{ sportCategories[0]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="clicked(sportCategories[1]?.name)" class="nav-link text-uppercase" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne" role="tab" aria-controls="v-pills-montagne" aria-selected="false">{{ sportCategories[1]?.name }}</a>
+          <a @click="clicked(sportCategories[1]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne" role="tab" aria-controls="v-pills-montagne" aria-selected="false">{{ sportCategories[1]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="clicked(sportCategories[2]?.name)" class="nav-link text-uppercase" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false">{{ sportCategories[2]?.name }}</a>
+          <a @click="clicked(sportCategories[2]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false">{{ sportCategories[2]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="clicked(sportCategories[3]?.name)" class="nav-link text-uppercase" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false">{{ sportCategories[3]?.name }}</a>
+          <a @click="clicked(sportCategories[3]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false">{{ sportCategories[3]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="clicked(sportCategories[4]?.name)" class="nav-link text-uppercase" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false">{{ sportCategories[4]?.name }}</a>
+          <a @click="clicked(sportCategories[4]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false">{{ sportCategories[4]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="clicked(sportCategories[5]?.name)" class="nav-link text-uppercase" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false">{{ sportCategories[5]?.name }}</a>
+          <a @click="clicked(sportCategories[5]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false">{{ sportCategories[5]?.name }}</a>
         </li>
       </ul>
     </div>

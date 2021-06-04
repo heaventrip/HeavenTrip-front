@@ -1,8 +1,8 @@
 <template>
-  <div class="header d-flex flex-column text-white">
+  <div class="header d-flex flex-column text-white" :class="{ 'gradient-filter': !agencyIsActive }">
     <img src="@/assets/images/combined.png" class="header-bg-image" />
     <ConnectionButtons />
-    <TheNav @changed-nav-status="setNavStatus" />
+    <TheNav @changed-nav-status="setNavStatus" @changed-tab="setAgencyStatus" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="$route.name == 'Home' && !navIsActive" />
     <ProductHeaderInfos v-else-if="$route.name == 'ProductHome' && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
@@ -86,12 +86,17 @@ export default {
     return {
       token: true,
       toggleSessions: false,
-      navIsActive: false
+      navIsActive: false,
+      agencyIsActive: false
     }
   },
   methods: {
     setNavStatus(status) {
       this.navIsActive = status
+    },
+    setAgencyStatus(clickedTab) {
+      if (clickedTab === 'agency') this.agencyIsActive = true
+      else this.agencyIsActive = false
     },
     logout(event) {
       localStorage.removeItem('user-token')
@@ -144,7 +149,7 @@ export default {
   min-height: 94vh;
   padding-bottom: 15vh;
 }
-.header::after {
+.gradient-filter::after {
   content: '';
   position: absolute;
   background: linear-gradient(to right, #5a3a5f 0%, #5a3a5f62 100%);

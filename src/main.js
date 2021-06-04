@@ -11,6 +11,7 @@ import './assets/css/datepicker.min.css'
 import './assets/css/zebra_datepicker.min.css'
 import './assets/css/style.css'
 import './assets/css/multiselect.css'
+import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 
 // import "./assets/js/sol.js"; // NOTE used for MULTIPLE SELECTIONS
 // import "./assets/js/jquery.creditCardValidator.js";
@@ -21,10 +22,12 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import InlineSvg from 'vue-inline-svg'
+import PerfectScrollbar from 'vue3-perfect-scrollbar'
 import axios from 'axios'
 
 const app = createApp(App)
 app.component('InlineSvg', InlineSvg)
+app.component('PerfectScrollbar', PerfectScrollbar)
 app.use(router)
 app.mount('#app')
 
