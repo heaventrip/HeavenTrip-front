@@ -486,7 +486,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 .contact-form .form-control{
   color: #292F33;
   font-weight: 500;
-  font-size: .875rem; 
+  font-size: .875rem;
   font-family: Muli,sans-serif;
   background-color: transparent;
   border-radius: 0;
@@ -1231,7 +1231,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 	font-size: .75rem;
 }
 .header .content .condensed-text{
-	font-family: 'Oswald', sans-serif;	
+	font-family: 'Oswald', sans-serif;
 }
 .header .content .details-btn{
 	border-radius: 0;
@@ -1293,7 +1293,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 }
 .head-pin-icon{
   width: 20px;
-  margin-right: 20px; 
+  margin-right: 20px;
 }
 .tab-content{
   z-index: 1;
@@ -1425,7 +1425,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 }
 .header .search-div.navbar-dark .navbar-nav.inner-nav-list .nav-item .nav-link{
   font-size: 1.125rem;
-  border-bottom: 1px dashed #454545;  
+  border-bottom: 1px dashed #454545;
   font-weight: 300;
   color: #292F33;
   line-height: 21px;
@@ -1435,7 +1435,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
   align-items: center;
 }
 .header .search-div.navbar-dark .navbar-nav .nav-link .chevron-right{
-  width: 8px;   
+  width: 8px;
   margin-right: 10px;
 }
 .header .search-div.navbar-dark .navbar-nav.chevron-list .nav-link .chevron-right{
@@ -1871,7 +1871,7 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 .main-product-content .activity-head .img_icon:first-child{
   margin-left: 0;
   border-left: none;
-  padding-left: 0; 
+  padding-left: 0;
 }
 .left-border{
   border-left: 1px solid #292F33;
@@ -2622,7 +2622,7 @@ button.Zebra_DatePicker_Icon{
 .Zebra_DatePicker .dp_actions .dp_next, .Zebra_DatePicker .dp_actions .dp_previous{
   color: #fff!important;
 }
-.Zebra_DatePicker .dp_actions .dp_next:before, 
+.Zebra_DatePicker .dp_actions .dp_next:before,
 .Zebra_DatePicker .dp_actions .dp_previous:before{
   font-family: "Font Awesome 5 Free"!important;
   font-weight: 900!important;
@@ -2669,7 +2669,7 @@ button.Zebra_DatePicker_Icon{
 .Zebra_DatePicker .dp_header.dp_actions td.dp_next{
   border-top-right-radius: 16px!important;
 }
-.Zebra_DatePicker .dp_body tr:first-child td, 
+.Zebra_DatePicker .dp_body tr:first-child td,
 .Zebra_DatePicker .dp_body tr:first-child th {
   height: 37px!important;
 }
@@ -2683,7 +2683,7 @@ button.Zebra_DatePicker_Icon{
   letter-spacing: 1.2px;
 }
 .narrow-header-div .letter-space-1{
- letter-spacing: 1.2px; 
+ letter-spacing: 1.2px;
 }
 
 .main-product-content .narrow-header-pills{
@@ -2810,7 +2810,7 @@ button.Zebra_DatePicker_Icon{
 }
 .participants-container .header-text{
   font-size: 1.125rem;
-  line-height: 24px; 
+  line-height: 24px;
 }
 .participants-container .top-div{
   padding: 40px 30px;
@@ -2880,12 +2880,12 @@ button.Zebra_DatePicker_Icon{
   border: none;
   text-align: center;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 .participants-count-block .value-button.increase{
   background-color: #292F33;
@@ -3073,7 +3073,7 @@ input[type=number]::-webkit-outer-spin-button {
 .login-dropdown .btn{
   font-size: .75rem;
   font-weight: 500;
-  font-family: 'Muli', sans-serif; 
+  font-family: 'Muli', sans-serif;
   color: #FFFFFF;
 }
 .login-dropdown .btn .l-name{
@@ -3245,7 +3245,7 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  margin: 0; 
+  margin: 0;
 }
 .search-list .multi-select-filter .depart-dropdown .sol-checkbox:before{
   content: "";
@@ -3283,7 +3283,7 @@ input[type=number]::-webkit-outer-spin-button {
   text-indent: 32px;
 }
 .search-list .multi-select-filter .sol-container.sol-active.depart-dropdown .sol-input-container input[type="text"]{
-  background : url('../images/cal_light.png') no-repeat center left 30px / 24px #D82558; 
+  background : url('../images/cal_light.png') no-repeat center left 30px / 24px #D82558;
 }
 .search-list .multi-select-filter .sol-container.sol-active .sol-input-container input[type="text"]{
   background-color: #D82558;
@@ -3368,7 +3368,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 8px;
 }
 .select-place{
-  
+
   background: url('../images/down_gray.png') no-repeat center right 20px / 12px ;
   font-family: 'Muli', sans-serif;
   font-weight: 300;
@@ -3519,7 +3519,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #ccc; 
+  background-color: #ccc;
 }
 /*.owl-carousel button.owl-dot.active,.testimonials .slick-dots li.slick-active{
   background-color: #000;
@@ -3705,7 +3705,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .map-section .content-grid{
 	display: grid;
-    grid-template-columns: 1fr 3fr;	
+    grid-template-columns: 1fr 3fr;
 }
 .map-section .content-grid .contents h6{
     font-size: .75rem;
@@ -3871,7 +3871,7 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: 400;
 }
 .bottom-section .user_name{
-	font-size: .875rem;	
+	font-size: .875rem;
 }
 .bottom-section .quote {
     font-size: 1.25rem;
@@ -4375,7 +4375,7 @@ a.descriptif-link.bg-danger:hover{
 .fem-hom-toggle .btn.active,
 .fem-hom-toggle .btn:hover{
  background-color: #292F33;
- color: #ffffff; 
+ color: #ffffff;
 }
 .profile-upload{
   font-size: .75rem;
@@ -4584,7 +4584,7 @@ a.descriptif-link.bg-danger:hover{
   border-left: 1px solid rgba(250,250,250,.1);
 }
 .name-list li:last-child{
-  border-right: 1px solid rgba(250,250,250,.1);  
+  border-right: 1px solid rgba(250,250,250,.1);
 }
 .check-amount{
   font-size: 1.25rem;
@@ -4841,7 +4841,7 @@ a.descriptif-link.bg-danger:hover{
 }
 .selection-div-list{
   font-size: 13px;
-  letter-spacing: 1.3px;  
+  letter-spacing: 1.3px;
 }
 .selection-div-list li{
   margin: 0 15px;
@@ -5177,16 +5177,16 @@ a.descriptif-link.bg-danger:hover{
   background : url('../images/heart.png') no-repeat center left 20px / 20px ;
 }
 .sol-container.place-dropdown .sol-input-container input[type="text"]{
- background : url('../images/globe_dark.png') no-repeat center left 20px / 20px ; 
+ background : url('../images/globe_dark.png') no-repeat center left 20px / 20px ;
 }
 .sol-container.spot-dropdown .sol-input-container input[type="text"]{
- background : url('../images/map_icon.png') no-repeat center left 20px / 20px ; 
+ background : url('../images/map_icon.png') no-repeat center left 20px / 20px ;
 }
 .sol-container.depart-dropdown .sol-input-container input[type="text"]{
- background : url('../images/cal.png') no-repeat center left 20px / 20px ; 
+ background : url('../images/cal.png') no-repeat center left 20px / 20px ;
 }
 .sol-container.level-dropdown .sol-input-container input[type="text"]{
- background : url('../images/circle_d.png') no-repeat center left 20px / 20px ; 
+ background : url('../images/circle_d.png') no-repeat center left 20px / 20px ;
 }
 .sol-label-text {
   padding: 15px 10px;
@@ -5253,7 +5253,7 @@ a.descriptif-link.bg-danger:hover{
   .pay-card{
     padding: 20px;
   }
-  .carousel-section .slick-slide{ 
+  .carousel-section .slick-slide{
     padding: 0 15px;
   }
   .owl-carousel .owl-next, .owl-carousel .owl-prev{
@@ -5698,7 +5698,7 @@ a.descriptif-link.bg-danger:hover{
   }
   .contact-pane .tel-box{
     box-shadow: 0px -1px 2px #0000001F;
-    border: 1px solid #FFFFFF; 
+    border: 1px solid #FFFFFF;
     border-radius: 2px;
     opacity: 0.96;
     position: fixed;
@@ -6052,7 +6052,7 @@ a.descriptif-link.bg-danger:hover{
   .header .navbar-dark .navbar-nav .nav-link,
   .header .navbar-dark .navbar-nav .active > .nav-link,
   .header .wrapper .wrapper-pills.nav-pills .nav-link,
-  .header .wrapper .wrapper-pills.nav-pills .nav-link.active, 
+  .header .wrapper .wrapper-pills.nav-pills .nav-link.active,
   .header .wrapper .wrapper-pills.nav-pills .nav-link.active:hover{
     margin: 0;
     font-size: 1rem;
@@ -6066,7 +6066,7 @@ a.descriptif-link.bg-danger:hover{
   }
   .header .navbar-dark .navbar-nav.inner-nav-list .nav-link,
   .header .navbar-dark .navbar-nav.inner-nav-list .active > .nav-link,
-  .header .wrapper .wrapper-pills.nav-pills .nav-link.active, 
+  .header .wrapper .wrapper-pills.nav-pills .nav-link.active,
   .header .wrapper .wrapper-pills.nav-pills .nav-link.active:hover{
     padding: 0;
     padding-left: 23px;
@@ -6248,7 +6248,7 @@ a.descriptif-link.bg-danger:hover{
     font-weight: 400;
     font-size: .875rem;
   }
-  
+
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px){
 
@@ -6412,7 +6412,7 @@ a.descriptif-link.bg-danger:hover{
     height: 46px;
     margin-left: -20px;
   }
-  
+
 }
 @media only screen and (min-width: 320px) and (max-width: 480px){
   .footer .list-head{
@@ -6503,10 +6503,10 @@ a.descriptif-link.bg-danger:hover{
     /*grid-template-columns: 100%;*/
   }
   .map-section .content-grid{
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
   .map-section .content-grid img,.content-grid .contents h6{
-    display: none;  
+    display: none;
   }
   .middle-section .heading{
     font-size: 1rem;
@@ -6515,7 +6515,7 @@ a.descriptif-link.bg-danger:hover{
     max-width: 130px;
   }
   .login-modal .dark-content-body .logo{
-    max-width: 150px; 
+    max-width: 150px;
   }
   .login-modal .separator-line{
     border-bottom: 1px dashed #292F334d;
@@ -6760,7 +6760,7 @@ a.descriptif-link.bg-danger:hover{
 .main-search-content .activity-head .img_icon:first-child{
   margin-left: 0;
   border-left: none;
-  padding-left: 0; 
+  padding-left: 0;
 }
 
 
@@ -6871,4 +6871,3 @@ a.descriptif-link.bg-danger:hover{
     max-width: 1410px;
   }
 }
-

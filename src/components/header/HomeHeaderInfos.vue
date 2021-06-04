@@ -2,15 +2,15 @@
   <div class="d-flex align-items-center align-items-lg-end w-100 mt-auto" style="padding: 0 111px">
     <div class="content d-flex align-items-start justify-content-between w-100 mt-5 mt-lg-0">
       <div>
-        <div style="width: 130%">
+        <div style="width: 100%">
           <div class="top-block d-flex align-items-center" style="width: 100%">
-            <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 116px" />
+            <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 10.5rem" />
             <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
             <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-            <div style="width: 100%; margin-left: 1.5rem; position: relative; top: 4px; padding: 2rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
+            <div style="width: 115%; margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
               <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
-              <h1 class="heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
-              <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
+              <h1 class="headsport heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
+              <h5 class="header-infos__sub-title d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
             </div>
           </div>
           <!-- TODO tags multiactivités ici -->
@@ -84,9 +84,15 @@ export default {
 
 <style scoped>
 .header-infos__sub-title {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 400;
-  letter-spacing: 0.6px;
+  letter-spacing: 1px;
+}
+
+.headsport {
+  font-weight: 400;
+  font-size: 3.5rem !important;
+  letter-spacing: 3px !important;
 }
 
 /* TEXT */
