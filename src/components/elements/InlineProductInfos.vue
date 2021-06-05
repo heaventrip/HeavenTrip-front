@@ -1,7 +1,7 @@
 <template>
   <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderTopStyle, borderBottomStyle, paddingYStyle, widthStyle]">
     <div class="d-flex align-items-center">
-      <div v-for="(info, index) in pInfos" :key="info" :style="[paddingXStyle, index === 0 ? '' : dividerStyle]">
+      <div v-for="info in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
         <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
         <span class="block__text-content" :style="iconMarginStyle">{{ info }}</span>
       </div>
@@ -39,8 +39,11 @@ export default {
     paddingYStyle() {
       return `padding-top: ${this.pt || '1.5rem'}; padding-bottom: ${this.pb || '1.5rem'};`
     },
-    paddingXStyle() {
-      return `padding-left: ${this.pl || '1rem'}; padding-right: ${this.pr || '1rem'};`
+    paddingLeftStyle() {
+      return `padding-left: ${this.pl || '1rem'};`
+    },
+    paddingRightStyle() {
+      return `padding-right: ${this.pr || '1rem'};`
     },
     widthStyle() {
       return `width: ${this.width};`

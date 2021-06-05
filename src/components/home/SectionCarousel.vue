@@ -2,8 +2,8 @@
   <section class="carousel-section">
     <div class="container">
       <div class="search row">
-        <div class="col-12 col-sm-10 col-lg-9 mx-auto" style="position: relative; bottom: 35px">
-          <div class="rounded bg-white d-flex centered-div">
+        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 35px; border-radius: 0.1px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.15); background-color: rgba(0, 0, 0, 0.15)">
+          <div class="bg-white d-flex centered-div">
             <div class="d-flex align-items-center p-3 flex-1 search-input-container">
               <img class="mx-3 img-20 d-none d-lg-inline-block" fluid :src="require('@/assets/images/search.png')" />
               <input class="form-control p-0 search-input ml-2 ml-sm-3 ml-lg-0 mr-xl-4" type="text" name="" placeholder="Ma recherche manuelle" />
@@ -45,7 +45,7 @@
               ><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
             </button>
           </div>
-          <div class="tags-container d-flex justify-content-center mb-5"></div>
+          <div class="tags-container d-flex justify-content-center"></div>
         </div>
       </div>
       <div class="row">
@@ -58,9 +58,9 @@
             <div class="d-none d-md-inline-block">
               <span class="separator"></span>
             </div>
-            <p class="mb-0 d-none d-md-inline-block">
+            <p class="mb-0 d-none d-md-inline-block" style="height: 300px; overflow: hidden">
               <span class="font-weight-bold d-none d-lg-inline-block">(Prénom),</span>
-              sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y voir les autres Trippers interesses ou inscrits et chater avec eux !
+              sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y v! sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y voir les autres Trippers interesses ou inscrits et chater avec eux !
             </p>
           </div>
         </div>
@@ -877,8 +877,10 @@ export default {
         })
     },
     changeBackground(e, color) {
+      // console.log(this.$event)
       e.target.style.backgroundColor = color
       e.target.style.color = color === 'grey' ? '#fff' : 'unset'
+      // window.scrollTo(0, 0)
     }
   },
   mounted() {
@@ -912,6 +914,9 @@ export default {
 </script>
 
 <style scoped>
+.centered-div {
+  box-shadow: none;
+}
 .slider-buttons {
   position: absolute;
   z-index: 2;
@@ -990,5 +995,8 @@ export default {
 .card__footer__price {
   padding-left: 1rem;
   border-left: 1px solid rgba(41, 47, 51, 0.25);
+}
+.ps {
+  height: 100px;
 }
 </style>
