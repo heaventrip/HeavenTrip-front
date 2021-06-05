@@ -1,10 +1,8 @@
 <template>
   <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderTopStyle, borderBottomStyle, paddingYStyle, widthStyle]">
-    <div class="d-flex align-items-center">
-      <div v-for="info in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
-        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
-        <span class="block__text-content" :style="iconMarginStyle">{{ info }}</span>
-      </div>
+    <div v-for="(info, index) in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
+      <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
+      <span class="block__text-content" :style="iconMarginStyle">{{ info }}</span>
     </div>
   </div>
 </template>
@@ -62,7 +60,7 @@ export default {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
   line-height: 2;
   width: 100%;
-  height: min-content;
+  height: max-content;
 }
 .block__text-content {
   margin-left: 0.6rem;

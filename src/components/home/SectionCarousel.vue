@@ -58,7 +58,7 @@
             <div class="d-none d-md-inline-block">
               <span class="separator"></span>
             </div>
-            <p class="mb-0 d-none d-md-inline-block" style="height: 300px; overflow: hidden">
+            <p class="mb-0 d-none d-md-inline-block">
               <span class="font-weight-bold d-none d-lg-inline-block">(Prénom),</span>
               sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y v! sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y voir les autres Trippers interesses ou inscrits et chater avec eux !
             </p>
