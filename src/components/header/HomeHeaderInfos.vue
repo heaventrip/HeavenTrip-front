@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="d-inline-flex d-lg-flex align-items-center justify-content-center pb-3 trippers-div">
-        <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violetfullscreen" :heart="true" spacing="-6px" height="50px" />
+        <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violetfullscreen" :heart="true" spacing="-6px" height="50px" heartheight="50px" heartwidth="50px" />
         <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
         <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
       </div>
