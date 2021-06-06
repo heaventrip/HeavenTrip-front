@@ -185,7 +185,7 @@ export default {
 .header-filter--home::after {
   content: '';
   position: absolute;
-  background: linear-gradient(to right, #5a3a5f 0%, #5a3a5f62 100%);
+  background: #5a3a5f;
   opacity: 0.6;
   width: 100%;
   height: 94vh; /* corresponds height of image */
