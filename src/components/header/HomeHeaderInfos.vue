@@ -3,7 +3,7 @@
     <div class="content d-flex flex-column align-items-center justify-content-between w-100 mt-5 mt-lg-0" style="height: 50vh">
       <div class="top-block d-flex align-items-center justify-content-center" style="width: 100%">
         <!-- FIXME Reduire pour les écrans standarts -->
-        <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 11rem" />
+        <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="top-block__svg d-inline-block" />
         <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
         <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
         <div style="margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0">
@@ -111,17 +111,29 @@ export default {
 
 <style scoped>
 .header-infos__sub-title {
-  font-size: 1.9rem;
+  font-size: 1.4rem;
   font-weight: 400;
   letter-spacing: 1px;
 }
-
 .headsport {
   font-weight: 400;
-  font-size: 4.5rem !important;
+  font-size: 3.5rem !important;
   letter-spacing: 3px !important;
 }
-
+.top-block__svg {
+  max-width: 9rem;
+}
+@media only screen and (min-width: 1441px) {
+  .header-infos__sub-title {
+    font-size: 1.9rem;
+  }
+  .headsport {
+    font-size: 4.5rem !important;
+  }
+  .top-block__svg {
+    max-width: 11rem;
+  }
+}
 /* TEXT */
 .text--smaller {
   font-size: 0.85rem;
@@ -203,9 +215,6 @@ export default {
 .head-icon {
   max-width: 90px;
   margin-right: 10px;
-}
-.top-block {
-  /* margin-bottom: 1.8rem; */
 }
 .list-info {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
