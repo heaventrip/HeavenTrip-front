@@ -51,4 +51,7 @@ export default {
 .small-avatar--violet {
   outline: 4px solid #564559;
 }
+.small-avatar--violetfullscreen {
+  outline: 4px solid #847387;
+}
 </style>
