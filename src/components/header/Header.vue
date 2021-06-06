@@ -1,10 +1,20 @@
 <template>
-  <div class="header d-flex flex-column text-white" :class="{ 'header--home': currentRoute('/'), 'header-filter--home': !navIsActive && currentRoute('/'), 'header--search': !navIsActive && currentRoute('/search'), 'header-filter--search': !navIsActive && currentRoute('/search') }">
+  <div
+    class="header d-flex flex-column text-white"
+    :class="{
+      'header--home': currentRoute('/'),
+      'header-filter--home': !navIsActive && currentRoute('/'),
+      'header-filter--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/'),
+      'header-filter--light': agencyIsActive && currentRoute('/'),
+      'header--search': !navIsActive && currentRoute('/search'),
+      'header-filter--search': !navIsActive && currentRoute('/search')
+    }"
+  >
     <div class="header-bg-container" :class="{ 'header-bg-container--home': currentRoute('/'), 'header-bg-container--search': currentRoute('/search') }">
-      <img src="@/assets/images/combined.png" class="header-bg-image" />
+      <img src="@/assets/images/combined.png" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <ConnectionButtons />
-    <TheNav @changed-nav-status="setNavStatus" @changed-tab="setAgencyStatus" />
+    <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('/') && !navIsActive" />
     <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" />
     <SearchHeaderInfos v-else-if="currentRoute('/search') && !navIsActive" />
@@ -91,14 +101,21 @@ export default {
     return {
       token: true,
       toggleSessions: false,
-      navIsActive: false,
-      agencyIsActive: false
+      // navIsActive: false,
+      agencyIsActive: false,
+      destinationsIsActive: false,
+      activitiesIsActive: false
     }
   },
   watch: {
     $route(to, from) {
       console.log('to', to)
       console.log('from', from)
+    }
+  },
+  computed: {
+    navIsActive() {
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
     }
   },
   methods: {
@@ -108,9 +125,10 @@ export default {
     setNavStatus(status) {
       this.navIsActive = status
     },
-    setAgencyStatus(clickedTab) {
-      if (clickedTab === 'agency') this.agencyIsActive = true
-      else this.agencyIsActive = false
+    setActiveTab(clickedTab) {
+      let varName = clickedTab + 'IsActive'
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      this.$data[varName] = true
     },
     logout(event) {
       localStorage.removeItem('user-token')
@@ -159,6 +177,7 @@ export default {
 </script>
 
 <style scoped>
+/* HOME */
 .header--home {
   min-height: 94vh;
   padding-bottom: 6vh;
@@ -172,6 +191,25 @@ export default {
   height: 94vh; /* corresponds height of image */
   z-index: -1;
 }
+.header-filter--grey::after {
+  content: '';
+  position: absolute;
+  background-color: #292f33;
+  opacity: 0.9;
+  width: 100%;
+  height: 94vh; /* corresponds height of image */
+  z-index: -1;
+}
+.header-filter--light::after {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  opacity: 0.8;
+  width: 100%;
+  height: 94vh; /* corresponds height of image */
+  z-index: -1;
+}
+/* SEARCH */
 .header--search {
   height: 100vh;
   padding-bottom: 3vh;
