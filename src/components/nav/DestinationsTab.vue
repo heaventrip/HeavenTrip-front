@@ -1,5 +1,5 @@
 <template>
-  <div class="container h-100">
+  <div class="container">
     <!-- <h4 class="nav-head m-0">
       <a href="#header_nav" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
       . destination
@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .container {
   justify-content: center;
-  height: 70%;
+  height: 80%;
 }
 .wrapper-innerlist {
   line-height: 1.1;

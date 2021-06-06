@@ -1,8 +1,8 @@
 <template>
   <div class="block d-flex align-items-center justify-content-between text-uppercase" :class="pClass" :style="[borderTopStyle, borderBottomStyle, paddingYStyle, widthStyle]">
-    <div v-for="(info, index) in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
+    <div class="block__item" v-for="(info, index) in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
       <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
-      <span class="block__text-content" :style="iconMarginStyle">{{ info }}</span>
+      <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle]">{{ info }}</span>
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icon-margin', 'width', 'divider'],
+  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icon-margin', 'width', 'divider', 'letter-spacing'],
   data() {
     return {
       pIcon: this.icon,
@@ -38,10 +38,13 @@ export default {
       return `padding-top: ${this.pt || '1.5rem'}; padding-bottom: ${this.pb || '1.5rem'};`
     },
     paddingLeftStyle() {
-      return `padding-left: ${this.pl || '1rem'};`
+      return `padding-left: ${this.pl};`
     },
     paddingRightStyle() {
-      return `padding-right: ${this.pr || '1rem'};`
+      return `padding-right: ${this.pr};`
+    },
+    letterSpacingStyle() {
+      return `letter-spacing: ${this.letterSpacing};`
     },
     widthStyle() {
       return `width: ${this.width};`
@@ -51,6 +54,10 @@ export default {
 </script>
 
 <style scoped>
+.block__item {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
 .half-border {
   width: 50%;
   height: 1px;
