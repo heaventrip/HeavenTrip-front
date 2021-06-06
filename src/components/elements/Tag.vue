@@ -33,15 +33,20 @@ export default {
   color: #292f33;
 }
 .tag--grey {
-  background-color: rgba(41, 47, 51, 0.6);
-  border-color: rgba(41, 47, 51, 0.6);
+  background-color: white;
+  color: #292f33;
+  opacity: 60%;
+}
+.tag--pink {
+  background-color: #d82558;
   color: #fff;
+  opacity: 90%;
 }
 .tag__content {
   padding-left: 0.6rem;
   padding-right: 0.6rem;
   font-family: Oswald, sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2px;
   font-size: 11px;
   text-transform: uppercase;

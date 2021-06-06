@@ -3,7 +3,7 @@
     <div class="content d-flex flex-column align-items-center justify-content-between w-100 mt-5 mt-lg-0" style="height: 50vh">
       <div class="top-block d-flex align-items-center justify-content-center" style="width: 100%">
         <!-- FIXME Reduire pour les écrans standarts -->
-        <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 9rem" />
+        <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 11rem" />
         <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
         <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
         <div style="margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0">
@@ -13,14 +13,14 @@
         </div>
       </div>
       <div class="d-inline-flex d-lg-flex align-items-center justify-content-center pb-3 trippers-div">
-        <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violet" :heart="true" spacing="-10px" />
+        <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violetfullscreen" :heart="true" spacing="-6px" height="50px" heartheight="50px" heartwidth="50px" />
         <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
         <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
       </div>
-      <div class="">
+      <div style="padding-top: auto; padding-bottom: 1rem">
         <Tag text="4 départs" color="grey" />
       </div>
-      <div><InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border-top="false" color="white" icon="globe" pt="0rem" /></div>
+      <div><InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border-top="false" color="white" icon="globe" pt="1rem" pl="2.5rem" /></div>
     </div>
     <div class="row no-gutters" style="right: 0; top: 60vh; position: absolute">
       <div class="col-4">
@@ -111,14 +111,14 @@ export default {
 
 <style scoped>
 .header-infos__sub-title {
-  font-size: 1.4rem;
+  font-size: 1.9rem;
   font-weight: 400;
   letter-spacing: 1px;
 }
 
 .headsport {
   font-weight: 400;
-  font-size: 3.5rem !important;
+  font-size: 4.5rem !important;
   letter-spacing: 3px !important;
 }
 
@@ -212,7 +212,9 @@ export default {
   border-bottom: 1px solid rgba(250, 250, 250, 0.35);
 }
 .trippers-div {
-  padding-top: 1.6rem;
+  /* TODO Specify for ultrawide : break si <  */
+  margin-bottom: auto;
+  padding-top: 4.6rem;
   width: max-content;
 }
 .icons {
