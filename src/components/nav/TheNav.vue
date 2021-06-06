@@ -224,9 +224,10 @@ export default {
   font-family: Muli, sans-serif !important;
 }
 .subactivity-nav__item.active {
-  color: white !important;
+  font-weight: 800 !important;
+  color: #e0a800 !important;
 }
-.subactivity-nav__item:hover:not(.active) {
+.subactivity-nav__item:hover {
   color: #e0a800 !important;
 }
 .navbar {

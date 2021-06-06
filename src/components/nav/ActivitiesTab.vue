@@ -216,6 +216,8 @@ export default {
 <style scoped>
 .sports-block {
   padding-left: calc(100% / 4);
+  position: relative;
+  bottom: 2%;
 }
 
 .container {
