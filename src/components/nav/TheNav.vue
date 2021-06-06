@@ -28,7 +28,7 @@
           <div class="notify-number">1</div>
         </div>
       </div>
-      <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
+      <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs" style="position: relative">
         <li class="nav-item">
           <a @click.prevent="onClicked('activities')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
             ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
@@ -45,6 +45,56 @@
         <li class="nav-item">
           <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
+        <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" role="tablist" aria-orientation="vertical" style="position: absolute; top: 150%; z-index: 2; width: max-content">
+          <li class="nav-item" role="presentation">
+            <a @click="$refs.activitiesTab.clicked(sportCategories[0]?.name)" class="nav-link active text-uppercase subactivity-nav__item" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false">{{
+              sportCategories[0]?.name
+            }}</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              @click="$refs.activitiesTab.clicked(sportCategories[1]?.name)"
+              class="nav-link text-uppercase subactivity-nav__item"
+              style="border-bottom: none !important"
+              id="v-pills-montagne-tab"
+              data-toggle="pill"
+              href="#v-pills-montagne"
+              role="tab"
+              aria-controls="v-pills-montagne"
+              aria-selected="false"
+              >{{ sportCategories[1]?.name }}</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a @click="$refs.activitiesTab.clicked(sportCategories[2]?.name)" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false">{{
+              sportCategories[2]?.name
+            }}</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              @click="$refs.activitiesTab.clicked(sportCategories[3]?.name)"
+              class="nav-link text-uppercase subactivity-nav__item"
+              style="border-bottom: none !important"
+              id="v-pills-multi-acti-tab"
+              data-toggle="pill"
+              href="#v-pills-multi-acti"
+              role="tab"
+              aria-controls="v-pills-multi-acti"
+              aria-selected="false"
+              >{{ sportCategories[3]?.name }}</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a @click="$refs.activitiesTab.clicked(sportCategories[4]?.name)" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false">{{
+              sportCategories[4]?.name
+            }}</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a @click="$refs.activitiesTab.clicked(sportCategories[5]?.name)" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false">{{
+              sportCategories[5]?.name
+            }}</a>
+          </li>
+        </ul>
       </ul>
       <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
       <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
@@ -59,7 +109,7 @@
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
         <div v-show="activitiesIsActive" id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-pane fade black pt-lg-5 home-wrapper show active">
-          <ActivitiesTab />
+          <ActivitiesTab ref="activitiesTab" />
         </div>
         <div v-show="destinationsIsActive" id="pills-destination" role="tabpanel" aria-labelledby="pills-destination-tab" class="wrapper h-100 p-0 tab-pane fade black pt-lg-5 home-wrapper show active">
           <DestinationsTab />
@@ -87,14 +137,15 @@ export default {
   },
   data() {
     return {
-      headerEl: '',
+      // headerEl: '',
       activitiesIsActive: false,
       destinationsIsActive: false,
       agencyIsActive: false,
-      bgFilter: {
-        light: 'opacity(0.4)',
-        dark: 'brightness(0.5)'
-      }
+      sportCategories: []
+      // bgFilter: {
+      //   light: 'opacity(0.4)',
+      //   dark: 'brightness(0.5)'
+      // }
     }
   },
   computed: {
@@ -103,25 +154,25 @@ export default {
     }
   },
   watch: {
-    navIsActive: function (newVal) {
-      this.$emit('changed-nav-status', newVal)
-    },
+    // navIsActive: function (newVal) {
+    //   this.$emit('changed-nav-status', newVal)
+    // },
     activitiesIsActive: function (newVal) {
       if (newVal === true) {
         this.$emit('changed-tab', 'activities')
-        this.changeBgFilter(this.bgFilter.dark)
+        // this.changeBgFilter(this.bgFilter.dark)
       }
     },
     destinationsIsActive: function (newVal) {
       if (newVal === true) {
         this.$emit('changed-tab', 'destinations')
-        this.changeBgFilter(this.bgFilter.dark)
+        // this.changeBgFilter(this.bgFilter.dark)
       }
     },
     agencyIsActive: function (newVal) {
       if (newVal === true) {
         this.$emit('changed-tab', 'agency')
-        this.changeBgFilter(this.bgFilter.light)
+        // this.changeBgFilter(this.bgFilter.light)
         document.body.style.position = 'fixed'
         document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
@@ -141,7 +192,7 @@ export default {
   },
   methods: {
     changeBgFilter(filter) {
-      this.headerEl.style.filter = `blur(3px) ${filter}`
+      this.headerEl.style.filter = 'blur(3px)'
     },
     onClicked(tab) {
       // these must be reset so user lands back on menu later
@@ -161,12 +212,23 @@ export default {
     }
   },
   mounted() {
-    this.headerEl = document.querySelector('.header-bg-image')
+    // this.headerEl = document.querySelector('.header-bg-image')
   }
 }
 </script>
 
 <style scoped>
+.subactivity-nav__item {
+  color: rgba(250, 250, 250, 0.5) !important;
+  border: none !important;
+  font-family: Muli, sans-serif !important;
+}
+.subactivity-nav__item.active {
+  color: white !important;
+}
+.subactivity-nav__item:hover:not(.active) {
+  color: #e0a800 !important;
+}
 .navbar {
   height: 70px; /* easier to manipulate with fixed height */
   z-index: 1;

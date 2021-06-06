@@ -628,13 +628,13 @@ button:focus,input:focus,.btn:focus,.form-control:focus,.btn.focus{
 }
 
 .header .navbar-dark .navbar-nav .nav-link{
-  font-family: Muli,sans-serif;
+  font-family: Oswald, sans-serif;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #ffffff;
   padding: 1.2rem 0;
   margin: 0 25px -1px;
-  letter-spacing: 1.2px;
+  letter-spacing: 2px;
   border-bottom: 1px solid transparent;
   background-color: transparent;
   border-radius: 0;
@@ -5280,10 +5280,10 @@ a.descriptif-link.bg-danger:hover{
     padding: 0 111px 60px;
   }
   .navbar-expand-lg .navbar-collapse{
-    padding-left: 80px;
+    padding-left: 100px;
   }
   .header .nav-btn{
-    margin-left: 40px;
+    margin-left: 50px;
   }
   .recap-div{
     margin-right: 5rem;
