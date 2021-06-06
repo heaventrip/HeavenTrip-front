@@ -161,7 +161,7 @@ export default {
 <style scoped>
 .header--home {
   min-height: 94vh;
-  padding-bottom: 15vh;
+  padding-bottom: 6vh;
 }
 .header-filter--home::after {
   content: '';
