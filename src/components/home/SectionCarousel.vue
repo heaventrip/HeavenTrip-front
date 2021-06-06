@@ -137,7 +137,7 @@
               <div class="card-block" style="max-width: 530px">
                 <div class="shadow-effect overflow-hidden position-relative">
                   <Tag style="position: absolute; top: 5%; left: 5%; z-index: 1" color="white" text="2 départs" />
-                  <Tag style="position: absolute; top: 5%; left: 20%; z-index: 1" color="grey" text="nouveau" />
+                  <Tag style="position: absolute; top: 5%; left: 22%; z-index: 1" color="pink" text="nouveau" />
                   <a href="/product"><img class="img-responsive img-fill" fluid :src="require('@/assets/images/s1.png')" alt="" /></a>
                   <div class="card__footer item-details" style="width: 100%">
                     <div class="content d-flex justify-content-between">

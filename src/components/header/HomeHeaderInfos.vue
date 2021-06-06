@@ -17,7 +17,7 @@
         <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
         <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
       </div>
-      <div style="padding-top: auto">
+      <div style="padding-top: auto; padding-bottom: 1rem">
         <Tag text="4 départs" color="grey" />
       </div>
       <div><InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border-top="false" color="white" icon="globe" pt="1rem" pl="2.5rem" /></div>
