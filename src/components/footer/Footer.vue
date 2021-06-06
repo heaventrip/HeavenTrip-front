@@ -90,6 +90,7 @@
             <img class="logo mb-3" fluid :src="require('@/assets/images/logo.png')" />
             <p class="para">Heaven Trip organise en petit groupe des voyages sportifs pour tous et à travers le globe. Un nouveau concept d'evasion melant sport. culture et bien-etre.</p>
           </div>
+
           <div class="col-12 col-md-9 col-xl-4 pl-xl-5 order-md-3 order-xl-2 my-4">
             <div class="row">
               <div class="col-4 pr-0">
