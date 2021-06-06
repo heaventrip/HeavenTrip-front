@@ -521,6 +521,7 @@ export default {
 }
 .cards-slider {
   width: max-content;
+  padding-top: 1rem;
 }
 /* .customers-testimonials .item-details .content.hover::after {
   content: none !important;
