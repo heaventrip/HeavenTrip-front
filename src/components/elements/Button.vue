@@ -3,7 +3,7 @@
     <div class="bttn__text" :class="pWeight">
       <div>
         <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" :fill="pBackgroundColor == 'white' ? 'red' : 'white'" />
-        <span class="align-middle" v-html="pText"></span>
+        <span class="align-middle" :style="pTextColor" v-html="pText"></span>
         <InlineSvg v-if="pArrow" :src="require('@/assets/svg/arrow-right.svg')" class="ml-4 align-middle" height="14" fill="white" />
       </div>
     </div>
@@ -13,10 +13,9 @@
 <script>
 export default {
   name: 'Button',
-  props: ['text', 'color', 'weight', 'height', 'icon', 'px', 'py', 'arrow', 'size'],
+  props: ['text', 'color', 'weight', 'height', 'icon', 'px', 'py', 'arrow', 'size', 'width', 'radius', 'text-color', 'background-color'],
   data() {
     return {
-      pBackgroundColor: this.color,
       pText: this.text,
       pArrow: this.arrow,
       pIcon: this.icon
@@ -24,10 +23,13 @@ export default {
   },
   computed: {
     pStyle() {
-      return `padding: ${this.py || '0'} ${this.px || '0'}; font-size: ${this.size || '0.8rem'}; height: ${this.height};`
+      return `padding: ${this.py || '0'} ${this.px || '0'}; font-size: ${this.size || '0.8rem'}; height: ${this.height || '80px'}; width: ${this.width}; border-radius: ${this.radius}; background-color: ${this.backgroundColor};`
     },
     pColor() {
-      return `bttn--${this.pBackgroundColor}`
+      return `bttn--${this.color}`
+    },
+    pTextColor() {
+      return `color: ${this.textColor}`
     },
     pWeight() {
       return `bttn__text--${this.weight};`

@@ -1,12 +1,13 @@
 <template>
-  <div class="header d-flex flex-column text-white" :class="{ 'gradient-filter': !navIsActive }">
-    <div class="header-bg-container">
+  <div class="header d-flex flex-column text-white" :class="{ 'header--home': currentRoute('/'), 'header-filter--home': !navIsActive && currentRoute('/'), 'header--search': !navIsActive && currentRoute('/search'), 'header-filter--search': !navIsActive && currentRoute('/search') }">
+    <div class="header-bg-container" :class="{ 'header-bg-container--home': currentRoute('/'), 'header-bg-container--search': currentRoute('/search') }">
       <img src="@/assets/images/combined.png" class="header-bg-image" />
     </div>
     <ConnectionButtons />
     <TheNav @changed-nav-status="setNavStatus" @changed-tab="setAgencyStatus" />
-    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="$route.name == 'Home' && !navIsActive" />
-    <ProductHeaderInfos v-else-if="$route.name == 'ProductHome' && !navIsActive" />
+    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('/') && !navIsActive" />
+    <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" />
+    <SearchHeaderInfos v-else-if="currentRoute('/search') && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
@@ -73,6 +74,7 @@ import TheNav from '@/components/nav/TheNav.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeHeaderInfos from './HomeHeaderInfos.vue'
 import ProductHeaderInfos from '@/components/product/ProductHeaderInfos.vue'
+import SearchHeaderInfos from '@/components/header/SearchHeaderInfos.vue'
 import SessionsMenu from '@/components/SessionsMenu.vue'
 
 export default {
@@ -82,6 +84,7 @@ export default {
     ConnectionButtons,
     HomeHeaderInfos,
     ProductHeaderInfos,
+    SearchHeaderInfos,
     SessionsMenu
   },
   data() {
@@ -92,7 +95,16 @@ export default {
       agencyIsActive: false
     }
   },
+  watch: {
+    $route(to, from) {
+      console.log('to', to)
+      console.log('from', from)
+    }
+  },
   methods: {
+    currentRoute(route) {
+      return this.$route.path === route
+    },
     setNavStatus(status) {
       this.navIsActive = status
     },
@@ -147,17 +159,30 @@ export default {
 </script>
 
 <style scoped>
-.header {
+.header--home {
   min-height: 94vh;
-  padding-bottom: 15vh;
+  padding-bottom: 6vh;
 }
-.gradient-filter::after {
+.header-filter--home::after {
   content: '';
   position: absolute;
   background: linear-gradient(to right, #5a3a5f 0%, #5a3a5f62 100%);
   opacity: 0.6;
   width: 100%;
   height: 94vh; /* corresponds height of image */
+  z-index: -1;
+}
+.header--search {
+  height: 100vh;
+  padding-bottom: 3vh;
+}
+.header-filter--search::after {
+  content: '';
+  position: absolute;
+  background-color: #5a3a5fb3;
+  /* opacity: 0.6; */
+  width: 100%;
+  height: 100vh; /* corresponds height of image */
   z-index: -1;
 }
 .header-bg-image {
@@ -168,9 +193,14 @@ export default {
 }
 .header-bg-container {
   position: absolute;
-  height: 94vh;
   width: 100%;
   overflow: hidden;
   z-index: -1;
+}
+.header-bg-container--home {
+  height: 94vh;
+}
+.header-bg-container--search {
+  height: 100%;
 }
 </style>

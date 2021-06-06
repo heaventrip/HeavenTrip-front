@@ -80,7 +80,9 @@
           <a @click="clicked(sportCategories[2]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false">{{ sportCategories[2]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="clicked(sportCategories[3]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false">{{ sportCategories[3]?.name }}</a>
+          <a @click="clicked(sportCategories[3]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false">{{
+            sportCategories[3]?.name
+          }}</a>
         </li>
         <li class="nav-item" role="presentation">
           <a @click="clicked(sportCategories[4]?.name)" class="nav-link text-uppercase" style="border-bottom: none !important" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false">{{ sportCategories[4]?.name }}</a>
@@ -237,7 +239,8 @@ export default {
 .sports-block {
   padding-left: calc(100% / 4); /* col-2 offset */
 }
-.nav-item {
+.nav-item,
+.nav-link.active {
   border: none !important;
 }
 .container {

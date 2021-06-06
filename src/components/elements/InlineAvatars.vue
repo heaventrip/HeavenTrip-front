@@ -1,6 +1,6 @@
 <template>
-  <div class="avatars-wrapper d-flex align-items-center">
-    <div v-for="avatar in pAvatars" :key="avatar" :style="pSpacing">
+  <div class="avatars-wrapper d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
+    <div v-for="(avatar, index) in pAvatars" :key="avatar" :style="[index === 0 ? '' : pSpacing]">
       <!-- FIXME intégrer border color ET outline -->
       <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="require('@/assets/images/t4.png')" />
     </div>
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: 'InlineAvatars',
-  props: ['height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width'],
+  props: ['height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width', 'mt', 'mb'],
   data() {
     return {
       pHeart: this.heart,
@@ -23,6 +23,12 @@ export default {
   computed: {
     pSpacing() {
       return `margin-left: ${this.spacing || '-0.5rem'};`
+    },
+    pMarginTopStyle() {
+      return `margin-top: ${this.mt || '0.5rem'};`
+    },
+    pMarginBottomStyle() {
+      return `margin-bottom: ${this.mb || '0.5rem'};`
     },
     pHeight() {
       return `height: ${this.height || '40px'};`
@@ -35,10 +41,6 @@ export default {
 </script>
 
 <style scoped>
-.avatars-wrapper {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 .small-avatar--grey {
   outline: 4px solid #292f33;
 }
