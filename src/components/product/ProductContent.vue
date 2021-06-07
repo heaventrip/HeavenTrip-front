@@ -249,676 +249,649 @@
                 </div>
               </div>
             </div>
-            <div class="accordion" id="">
-              <div class="linear-block">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingTwo">
-                    <div class="head-block py-3 px-4 px-lg-0 mb-lg-3 d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Wouah</p>
-                        <h4 class="heading mb-0">Le spot</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white d-block d-lg-none"></i>
-                      <h6 class="map-head d-none d-lg-flex align-items-center justify-content-end mr-4 m-lg-0 text-danger">
-                        VOIR SUR <br />LA MAP<span class="img-block"><img class="img_icon" fluid :src="require('@/assets/images/map_icon.png')" /></span>
-                      </h6>
+            <div class="linear-block">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingTwo">
+                  <div class="head-block py-3 px-4 px-lg-0 mb-lg-3 d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Wouah</p>
+                      <h4 class="heading mb-0">Le spot</h4>
                     </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white d-block d-lg-none"></i>
+                    <h6 class="map-head d-none d-lg-flex align-items-center justify-content-end mr-4 m-lg-0 text-danger">
+                      VOIR SUR <br />LA MAP<span class="img-block"><img class="img_icon" fluid :src="require('@/assets/images/map_icon.png')" /></span>
+                    </h6>
                   </div>
-                  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
-                    <div class="card-body">
-                      <h6 class="map-head d-flex d-lg-none align-items-center justify-content-end mb-3 mr-4">
-                        VOIR SUR <br />LA MAP<span class="img-block"><img class="img_icon" fluid :src="require('@/assets/images/map_icon.png')" /></span>
-                      </h6>
-                      <p class="content">
-                        Vous avez un niveau expert avec une bonne expérience de la pratique du hors-piste, vous pouvez descendre toutes les pentes, dans toutes les conditions ‘ Vous maitrisez l’utilisation des appareils de sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus
-                        belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
-                        <span class="collapse" id="viewMoreToggle">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
-                      </p>
-                      <a class="view-more-btn full_width" data-toggle="collapse" href="#viewMoreToggle" role="button" aria-expanded="false" aria-controls="viewMoreToggle">Voir plus <i class="fas fa-chevron-down ml-2"></i></a>
-                      <div class="row">
-                        <div class="col-9 col-lg-12 mx-auto">
-                          <div class="like-div white">
-                            <h5 class="content-head">LES + DU SPOT</h5>
-                            <ul class="list-unstyled text-uppercase content-list">
-                              <li>
-                                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Restauration sur place</a>
-                              </li>
-                              <li>
-                                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Vous avez pieds</a>
-                              </li>
-                              <li>
-                                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Plan d’eau flat</a>
-                              </li>
-                              <li>
-                                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Spot à vagues</a>
-                              </li>
-                            </ul>
-                          </div>
+                </div>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
+                  <div class="card-body">
+                    <h6 class="map-head d-flex d-lg-none align-items-center justify-content-end mb-3 mr-4">
+                      VOIR SUR <br />LA MAP<span class="img-block"><img class="img_icon" fluid :src="require('@/assets/images/map_icon.png')" /></span>
+                    </h6>
+                    <p class="content">
+                      Vous avez un niveau expert avec une bonne expérience de la pratique du hors-piste, vous pouvez descendre toutes les pentes, dans toutes les conditions ‘ Vous maitrisez l’utilisation des appareils de sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus
+                      belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
+                      <span class="collapse" id="viewMoreToggle">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
+                    </p>
+                    <a class="view-more-btn full_width" data-toggle="collapse" href="#viewMoreToggle" role="button" aria-expanded="false" aria-controls="viewMoreToggle">Voir plus <i class="fas fa-chevron-down ml-2"></i></a>
+                    <div class="row">
+                      <div class="col-9 col-lg-12 mx-auto">
+                        <div class="like-div white">
+                          <h5 class="content-head">LES + DU SPOT</h5>
+                          <ul class="list-unstyled text-uppercase content-list">
+                            <li>
+                              <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Restauration sur place</a>
+                            </li>
+                            <li>
+                              <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Vous avez pieds</a>
+                            </li>
+                            <li>
+                              <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Plan d’eau flat</a>
+                            </li>
+                            <li>
+                              <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Spot à vagues</a>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="linear-block">
-                <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
-                  <div class="left-border pl-3 ml-3 ml-lg-0">
-                    <p class="sub-heading mb-2">Oh Yeah !</p>
-                    <h4 class="heading mb-0">aCTIVItés incluses</h4>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12 col-lg-6">
-                      <div class="box bg-white">
-                        <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
-                          <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-                          YOGA
-                        </h5>
-                        <ul class="list-unstyled list mt-3 mb-0">
-                          <li>
-                            <a href="#" class="text-decoration-none">
-                              HEURES DE PRATIQUE :
-                              <strong class="text-dark ml-2"> 20H</strong></a
-                            >
-                          </li>
-                          <li>
-                            <a href="#" class="text-decoration-none">
-                              Séances :
-                              <strong class="text-dark ml-2"> 3</strong></a
-                            >
-                          </li>
-                          <li>
-                            <a href="#" class="text-decoration-none">
-                              Type :
-                              <strong class="text-dark ml-2">
-                                Ashtanga
-                                <i class="fas fa-info-circle text-dark ml-2 h5 align-middle mb-0"></i></strong
-                            ></a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                      <div class="box bg-white">
-                        <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
-                          <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-                          YOGA
-                        </h5>
-                        <ul class="list-unstyled list mt-3 mb-0">
-                          <li>
-                            <a href="#" class="text-decoration-none">
-                              HEURES DE PRATIQUE :
-                              <strong class="text-dark ml-2"> 20H</strong></a
-                            >
-                          </li>
-                          <li>
-                            <a href="#" class="text-decoration-none">
-                              Séances :
-                              <strong class="text-dark ml-2"> 3</strong></a
-                            >
-                          </li>
-                          <li>
-                            <a href="#" class="text-decoration-none">
-                              Type :
-                              <strong class="text-dark ml-2">
-                                Ashtanga
-                                <i class="fas fa-info-circle text-dark ml-2 h5 align-middle mb-0"></i></strong
-                            ></a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingOne">
-                    <div class="head-block py-3 px-4 px-lg-0 mt-lg-5 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Personnalise !</p>
-                        <h4 class="heading mb-0">aCTIVItés en option</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
-                    </div>
-                  </div>
-
-                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
-                    <div class="card-body">
-                      <p class="content">En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.</p>
-                      <ul class="activity-list list-unstyled">
-                        <li>
-                          <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />Plongée sous-marine</h5>
-                          <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                            <li>Durée : <strong>1 journée</strong></li>
-                            <li>plongée : <strong>2</strong></li>
-                            <li>Niveaux requis : <strong>aucun</strong></li>
-                            <li><strong>60€</strong>/pers.</li>
-                          </ul>
-                        </li>
-                        <li>
-                          <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SUP-PADDLE</h5>
-                          <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                            <li>Durée : <strong>2h</strong></li>
-                            <li>Tendance : <strong>eau calme</strong></li>
-                            <li><strong>15€</strong>/pers.</li>
-                          </ul>
-                        </li>
-                        <li>
-                          <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SPA TRADITIONNEL</h5>
-                          <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                            <li>Durée : <strong>1/2 journée</strong></li>
-                            <li>plongée : <strong>2</strong></li>
-                            <li>Niveaux requis : <strong>aucun</strong></li>
-                            <li><strong>60€</strong>/pers.</li>
-                          </ul>
-                        </li>
-                        <li>
-                          <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SUP-PADDLE</h5>
-                          <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                            <li>Durée : <strong>2h</strong></li>
-                            <li>Tendance : <strong>eau calme</strong></li>
-                            <li><strong>15€</strong>/pers.</li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+            </div>
+            <div class="linear-block">
+              <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
+                <div class="left-border pl-3 ml-3 ml-lg-0">
+                  <p class="sub-heading mb-2">Oh Yeah !</p>
+                  <h4 class="heading mb-0">aCTIVItés incluses</h4>
                 </div>
               </div>
-              <div class="block-separator"></div>
-              <div class="linear-block">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingThree">
-                    <div class="head-block py-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Sur place…</p>
-                        <h4 class="heading mb-0">Hébergement</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
-                    </div>
-                  </div>
-                  <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center mb-4">
-                        <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5>
-                        <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav" id="pills-tab " role="tablist">
-                          <li class="nav-item" role="presentation">
-                            <a class="nav-link active ml-0" id="pills-solo-tab" data-toggle="pill" href="#pills-solo" role="tab" aria-controls="pills-solo" aria-selected="true">BUNGALOW SOLO</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="pills-duo-tab" data-toggle="pill" href="#pills-duo" role="tab" aria-controls="pills-duo" aria-selected="false">BUNGALOW DUO</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a class="nav-link mr-0" id="pills-vip-tab" data-toggle="pill" href="#pills-vip" role="tab" aria-controls="pills-vip" aria-selected="false">BUNGALOW VIP</a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="stay-dropdown d-block d-lg-none">
-                        <select class="form-control select-place">
-                          <option value="#pills-solo">BUNGALOW SOLO</option>
-                          <option value="#pills-duo">BUNGALOW DUO</option>
-                          <option value="#pills-vip">BUNGALOW VIP</option>
-                        </select>
-                      </div>
-                      <div class="tab-content">
-                        <div class="tab-pane fade show active" id="pills-solo" role="tabpanel" aria-labelledby="pills-solo-tab">
-                          <p class="content">
-                            Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises
-                            <span class="collapse show" id="viewMoreOptions">conditions météorologiques. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</span>
-                          </p>
-                        </div>
-                        <div class="tab-pane fade" id="pills-duo" role="tabpanel" aria-labelledby="pills-duo-tab">qwertyu</div>
-                        <div class="tab-pane fade" id="pills-vip" role="tabpanel" aria-labelledby="pills-vip-tab">qwertyu</div>
-                      </div>
-                      <ul class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-lg-6">
+                    <div class="box bg-white">
+                      <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
+                        <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+                        YOGA
+                      </h5>
+                      <ul class="list-unstyled list mt-3 mb-0">
+                        <li>
+                          <a href="#" class="text-decoration-none">
+                            HEURES DE PRATIQUE :
+                            <strong class="text-dark ml-2"> 20H</strong></a
+                          >
+                        </li>
+                        <li>
+                          <a href="#" class="text-decoration-none">
+                            Séances :
+                            <strong class="text-dark ml-2"> 3</strong></a
+                          >
+                        </li>
                         <li>
                           <a href="#" class="text-decoration-none">
                             Type :
                             <strong class="text-dark ml-2">
-                              BUNGALOW SOLO
-                              <i class="fas fa-info-circle text-dark h6 mb-0"></i></strong
-                          ></a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-decoration-none">
-                            Lieu :
-                            <strong class="text-dark ml-2"> EL Gouna</strong></a
-                          >
-                        </li>
-                        <li>
-                          <a href="#" class="text-decoration-none">
-                            Situation :
-                            <strong class="text-dark ml-2"> proximité du spot</strong></a
-                          >
-                        </li>
-                        <li>
-                          <a href="#" class="text-decoration-none">
-                            Capacités :
-                            <strong class="text-dark ml-2"> 10 personnes</strong></a
-                          >
-                        </li>
-                        <li>
-                          <a href="#" class="text-decoration-none">
-                            chambres :
-                            <strong class="text-dark ml-2">
-                              a partager & privée
-                              <i class="fas fa-info-circle text-dark h6 mb-0"></i></strong
+                              Ashtanga
+                              <i class="fas fa-info-circle text-dark ml-2 h5 align-middle mb-0"></i></strong
                           ></a>
                         </li>
                       </ul>
-                      <div class="image-flexbox px-3 mb-3">
-                        <div class="row galary-grid">
-                          <div class="col-12 col-lg img-container py-3 mb-0">
-                            <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-                          </div>
-                          <div class="col-12 col-lg img-container py-3 mb-0">
-                            <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-                          </div>
-                          <div class="col-12 col-lg-5 img-container py-3 mb-0">
-                            <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-                          </div>
-                          <div class="col-12 col-lg img-container py-3 mb-0">
-                            <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-                            <div class="overlay-count">+21</div>
-                          </div>
-                        </div>
-                      </div>
-                      <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
-                      <a class="view-more-btn full_width d-lg-none" data-toggle="collapse" href="#viewMoreOptions" role="button" aria-expanded="true" aria-controls="viewMoreOptions">VOIR LES OPTIONS <i class="fas fa-chevron-down ml-2"></i></a>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="linear-block">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingFour">
-                    <div class="head-block py-3 px-4 mb-lg-2 px-lg-0 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Chef !</p>
-                        <h4 class="heading mb-0">LES repas</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
-                    </div>
-                  </div>
-                  <div id="collapseFour" class="collapse show" aria-labelledby="headingFour">
-                    <div class="card-body">
-                      <p class="content mb-5">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</p>
-                      <div class="d-flex no-gutters">
-                        <div class="col-12 col-lg-5">
-                          <h5 class="head text-uppercase font-weight-bold text-danger mb-4">
-                            <img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_CUISINE.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i>
-                            Cuisine
-                          </h5>
-                          <ul class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
-                            <li>
-                              <a href="#" class="text-decoration-none">
-                                Style :
-                                <strong class="text-dark ml-2"> CUISINIER PRIvé</strong></a
-                              >
-                            </li>
-                            <li>
-                              <a href="#" class="text-decoration-none border-0 pr-0 mr-0">
-                                Repas :
-                                <strong class="text-dark ml-2"> matin - soir</strong></a
-                              >
-                            </li>
-                            <li>
-                              <a href="#" class="text-decoration-none">
-                                Service :
-                                <strong class="text-dark ml-2"> domicile</strong></a
-                              >
-                            </li>
-                            <li>
-                              <a href="#" class="text-decoration-none">
-                                Cuisine :
-                                <strong class="text-dark ml-2"> internationale</strong></a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="brown-div col-4">
-                          <h6 class="head text-uppercase text-white py-2">Mot du pro…</h6>
-                          <p class="content">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-                          <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
-                        </div>
-                        <div class="img-block col-3">
-                          <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="linear-block plain-block">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingFive">
-                    <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Sortons !</p>
-                        <h4 class="heading mb-0">A proximité</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
-                    </div>
-                  </div>
-                  <div id="collapseFive" class="collapse show" aria-labelledby="headingFive">
-                    <div class="card-body">
-                      <p class="content">
-                        Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises conditions météorologiques ou autres. En cas de mauvaises conditions météorologiques ou autres.
-                        En cas de mauvaises conditions météorologiques.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-separator"></div>
-              <div class="linear-block plain-block">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0 bg-white" id="headingSix">
-                    <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Programme</p>
-                        <h4 class="heading mb-0">Déroulé du séjour</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
-                    </div>
-                  </div>
-                  <div id="collapseSix" class="collapse show" aria-labelledby="headingSix">
-                    <div class="card-body">
-                      <h5 class="tour-head text-uppercase d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
-                        <span class="font-weight-bold text-danger">Jour 1</span>
-                        <ul class="list-unstyled tour-list text-uppercase ml-auto d-flex flex-column flex-lg-row mb-0">
-                          <li><img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg')" />VOL pour <strong>HURGHADA</strong></li>
-                          <li>
-                            <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/Picto_transfert_navette.svg')" />Transferts VERS EL GOUNA :
-                            <strong>18H 19H 20H</strong>
-                          </li>
-                        </ul>
+                  <div class="col-12 col-lg-6">
+                    <div class="box bg-white">
+                      <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
+                        <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+                        YOGA
                       </h5>
-                      <div class="row mb-60">
-                        <div class="col-4 d-none d-lg-inline-block">
-                          <img class="img-fluid rounded-day-img" fluid :src="require('@/assets/images/beach.jpg')" />
-                        </div>
-                        <div class="col-12 col-lg-8">
-                          <p class="content">
-                            A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion
-                            d’information est prévue le dimanche.
-                          </p>
-                          <a class="view-more-btn active_hidden" data-toggle="collapse" href="#viewMoreday1" role="button" aria-expanded="false" aria-controls="viewMoreday1">Afficher d’avantage… <i class="fas fa-chevron-down ml-2"></i></a>
-                        </div>
-                        <div id="viewMoreday1" class="col-12 collapse">
-                          <p class="content">
-                            <span class="font-weight-800 d-block">Vous voyagez avec Heaven Trip</span>
-                            Possibilité de vol dans la nuit du samedi au dimanche. A noter que le choix de vol Paris / Hurghada est très limité, et contraignant : l’arrivée tardive dans la nuit de samedi à dimanche certaines semaines peut être à 4. Possibilité de vol dans la nuit du samedi au
-                            dimanche. A noter que le choix de vol Paris / Hurghada est très.
-                          </p>
-
-                          <a class="view-more-btn" data-toggle="collapse" href="#viewMoreday1" role="button" aria-expanded="false" aria-controls="viewMoreday1">Réduire<i class="fas fa-chevron-up ml-2"></i></a>
-                        </div>
-                      </div>
-
-                      <h5 class="tour-head text-uppercase font-weight-bold text-danger mt-3">Jour 2</h5>
-                      <div class="row">
-                        <div class="col-4 d-none d-lg-inline-block">
-                          <img class="img-fluid rounded-day-img" fluid :src="require('@/assets/images/beach.jpg')" />
-                        </div>
-                        <div class="col-12 col-lg-8">
-                          <p class="content">
-                            A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion
-                            d’information est prévue le dimanche.
-                          </p>
-                          <a class="view-more-btn active_hidden" data-toggle="collapse" href="#viewMoreday2" role="button" aria-expanded="false" aria-controls="viewMoreday2">Afficher d’avantage… <i class="fas fa-chevron-down ml-2"></i></a>
-                        </div>
-                        <div id="viewMoreday2" class="col-12 collapse">
-                          <p class="content">
-                            <span class="font-weight-800 d-block">Vous voyagez avec Heaven Trip</span>
-                            Possibilité de vol dans la nuit du samedi au dimanche. A noter que le choix de vol Paris / Hurghada est très limité, et contraignant : l’arrivée tardive dans la nuit de samedi à dimanche certaines semaines peut être à 4. Possibilité de vol dans la nuit du samedi au
-                            dimanche. A noter que le choix de vol Paris / Hurghada est très.
-                          </p>
-                          <a class="view-more-btn" data-toggle="collapse" href="#viewMoreday2" role="button" aria-expanded="false" aria-controls="viewMoreday2">Réduire<i class="fas fa-chevron-up ml-2"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-separator"></div>
-              <div class="linear-block position-relative">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingSeven">
-                    <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">A savoir</p>
-                        <h4 class="heading mb-0">Infos PAYS</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
-                    </div>
-                  </div>
-                  <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-12 col-lg-7">
-                          <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">L’EGYPTE</h5>
-                          <p class="content">
-                            Vous avez un niveau expert avec une bonne expérience de la pratique du hors-piste, vous pouvez descendre toutes les pentes, dans toutes les conditions ‘ Vous maitrisez l’utilisation des appareils de sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les
-                            plus belles pentes des Hautes-Pyrénées
-                          </p>
-                        </div>
-                      </div>
-                      <ul class="list-unstyled place-list f-13 text-uppercase mb-0 d-flex flex-wrap flex-column flex-lg-row">
+                      <ul class="list-unstyled list mt-3 mb-0">
                         <li>
-                          <a href="#" class="text-decoration-none">Aéroport : <strong class="text-dark"> Hurghada</strong></a>
+                          <a href="#" class="text-decoration-none">
+                            HEURES DE PRATIQUE :
+                            <strong class="text-dark ml-2"> 20H</strong></a
+                          >
                         </li>
                         <li>
-                          <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
+                          <a href="#" class="text-decoration-none">
+                            Séances :
+                            <strong class="text-dark ml-2"> 3</strong></a
+                          >
                         </li>
                         <li>
-                          <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
-                        </li>
-                        <li>
-                          <a href="#" class="text-decoration-none"><strong class="text-dark"> Temps moyen de vol : </strong>3H50 </a>
+                          <a href="#" class="text-decoration-none">
+                            Type :
+                            <strong class="text-dark ml-2">
+                              Ashtanga
+                              <i class="fas fa-info-circle text-dark ml-2 h5 align-middle mb-0"></i></strong
+                          ></a>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div class="top-positioned-div">
-                  <div class="bg-dark pays-block rounded-top text-uppercase">
-                    <h6 class="head text-warning font-weight-bold letter-space">
-                      <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />
-                      Quelques indicateurs
-                    </h6>
-                    <ul class="list-unstyled pays-list mb-0">
-                      <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
+              </div>
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingOne">
+                  <div class="head-block py-3 px-4 px-lg-0 mt-lg-5 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Personnalise !</p>
+                      <h4 class="heading mb-0">aCTIVItés en option</h4>
+                    </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                  </div>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                  <div class="card-body">
+                    <p class="content">En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.</p>
+                    <ul class="activity-list list-unstyled">
                       <li>
-                        <strong class="letter-space">Restaurants :</strong>
-                        Prix moyen
-                        <span class="text-warning ml-1"> 60 EGP</span>
+                        <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />Plongée sous-marine</h5>
+                        <ul class="list-unstyled text-uppercase activity-content-list mb-0">
+                          <li>Durée : <strong>1 journée</strong></li>
+                          <li>plongée : <strong>2</strong></li>
+                          <li>Niveaux requis : <strong>aucun</strong></li>
+                          <li><strong>60€</strong>/pers.</li>
+                        </ul>
                       </li>
-                      <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
+                      <li>
+                        <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SUP-PADDLE</h5>
+                        <ul class="list-unstyled text-uppercase activity-content-list mb-0">
+                          <li>Durée : <strong>2h</strong></li>
+                          <li>Tendance : <strong>eau calme</strong></li>
+                          <li><strong>15€</strong>/pers.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SPA TRADITIONNEL</h5>
+                        <ul class="list-unstyled text-uppercase activity-content-list mb-0">
+                          <li>Durée : <strong>1/2 journée</strong></li>
+                          <li>plongée : <strong>2</strong></li>
+                          <li>Niveaux requis : <strong>aucun</strong></li>
+                          <li><strong>60€</strong>/pers.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SUP-PADDLE</h5>
+                        <ul class="list-unstyled text-uppercase activity-content-list mb-0">
+                          <li>Durée : <strong>2h</strong></li>
+                          <li>Tendance : <strong>eau calme</strong></li>
+                          <li><strong>15€</strong>/pers.</li>
+                        </ul>
+                      </li>
                     </ul>
                   </div>
-                  <button class="btn btn-danger btn-block rounded-0 border-0 pay-btn py-3 text-uppercase mb-5"><img class="d-inline-block mr-3" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />VOIR LES INFOs SANITAIRE</button>
                 </div>
               </div>
-              <div class="linear-block">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingEight">
-                    <div class="head-block py-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Cadeau !</p>
-                        <h4 class="heading mb-0">TIPS & astuces</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+            </div>
+            <div class="block-separator"></div>
+            <div class="linear-block">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingThree">
+                  <div class="head-block py-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Sur place…</p>
+                      <h4 class="heading mb-0">Hébergement</h4>
                     </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
                   </div>
-                  <div id="collapseEight" class="collapse show" aria-labelledby="headingEight">
-                    <div class="card-body">
-                      <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">S’Y RENDRE !</h5>
-                      <p class="content">
-                        En venant du nord de la France, prenez l’autoroute jusqu’à Grenoble, puis RN 91 “Col du Lautaret”. En venant de l’Italie prenez l’autoroute jusqu’à Oulx (35km de Briançon) puis emprunter le Col de Montgenèvre RN 94. En venant du sud de la France, prenez l’autoroute jusqu’au
-                        Tallard, Embrun, Briançon RN 94.
-                      </p>
-                      <ul class="list-unstyled place-list f-13 text-uppercase my-3 mb-0 d-flex flex-wrap">
-                        <li>
-                          <a href="#" class="text-decoration-none">
-                            AÉROPORTS :
-                            <strong class="text-dark ml-2"> LYON - GRENOBLE</strong></a
-                          >
+                </div>
+                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                      <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5>
+                      <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav" id="pills-tab " role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link active ml-0" id="pills-solo-tab" data-toggle="pill" href="#pills-solo" role="tab" aria-controls="pills-solo" aria-selected="true">BUNGALOW SOLO</a>
                         </li>
-                        <li>
-                          <a href="#" class="text-decoration-none">
-                            GARE :
-                            <strong class="text-dark ml-2"> proximité du spot</strong></a
-                          >
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="pills-duo-tab" data-toggle="pill" href="#pills-duo" role="tab" aria-controls="pills-duo" aria-selected="false">BUNGALOW DUO</a>
                         </li>
-                        <li>
-                          <a href="#" class="text-decoration-none">
-                            LIAISONS AUTOCAR :
-                            <strong class="text-dark ml-2"> Www.autocars-resalp.com</strong></a
-                          >
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link mr-0" id="pills-vip-tab" data-toggle="pill" href="#pills-vip" role="tab" aria-controls="pills-vip" aria-selected="false">BUNGALOW VIP</a>
                         </li>
                       </ul>
                     </div>
+                    <div class="stay-dropdown d-block d-lg-none">
+                      <select class="form-control select-place">
+                        <option value="#pills-solo">BUNGALOW SOLO</option>
+                        <option value="#pills-duo">BUNGALOW DUO</option>
+                        <option value="#pills-vip">BUNGALOW VIP</option>
+                      </select>
+                    </div>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="pills-solo" role="tabpanel" aria-labelledby="pills-solo-tab">
+                        <p class="content">
+                          Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises
+                          <span class="collapse show" id="viewMoreOptions">conditions météorologiques. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</span>
+                        </p>
+                      </div>
+                      <div class="tab-pane fade" id="pills-duo" role="tabpanel" aria-labelledby="pills-duo-tab">qwertyu</div>
+                      <div class="tab-pane fade" id="pills-vip" role="tabpanel" aria-labelledby="pills-vip-tab">qwertyu</div>
+                    </div>
+                    <ul class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          Type :
+                          <strong class="text-dark ml-2">
+                            BUNGALOW SOLO
+                            <i class="fas fa-info-circle text-dark h6 mb-0"></i></strong
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          Lieu :
+                          <strong class="text-dark ml-2"> EL Gouna</strong></a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          Situation :
+                          <strong class="text-dark ml-2"> proximité du spot</strong></a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          Capacités :
+                          <strong class="text-dark ml-2"> 10 personnes</strong></a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          chambres :
+                          <strong class="text-dark ml-2">
+                            a partager & privée
+                            <i class="fas fa-info-circle text-dark h6 mb-0"></i></strong
+                        ></a>
+                      </li>
+                    </ul>
+                    <div class="image-flexbox px-3 mb-3">
+                      <div class="row galary-grid">
+                        <div class="col-12 col-lg img-container py-3 mb-0">
+                          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+                        </div>
+                        <div class="col-12 col-lg img-container py-3 mb-0">
+                          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+                        </div>
+                        <div class="col-12 col-lg-5 img-container py-3 mb-0">
+                          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+                        </div>
+                        <div class="col-12 col-lg img-container py-3 mb-0">
+                          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+                          <div class="overlay-count">+21</div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
+                    <a class="view-more-btn full_width d-lg-none" data-toggle="collapse" href="#viewMoreOptions" role="button" aria-expanded="true" aria-controls="viewMoreOptions">VOIR LES OPTIONS <i class="fas fa-chevron-down ml-2"></i></a>
                   </div>
                 </div>
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingNine">
-                    <div class="head-block py-3 px-4 px-lg-0 my-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Dans ton paquetage…</p>
-                        <h4 class="heading mb-0">A prévoir pour ton séjour</h4>
+              </div>
+            </div>
+            <div class="linear-block">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingFour">
+                  <div class="head-block py-3 px-4 mb-lg-2 px-lg-0 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Chef !</p>
+                      <h4 class="heading mb-0">LES repas</h4>
+                    </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                  </div>
+                </div>
+                <div id="collapseFour" class="collapse show" aria-labelledby="headingFour">
+                  <div class="card-body">
+                    <p class="content mb-5">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</p>
+                    <div class="d-flex no-gutters">
+                      <div class="col-12 col-lg-5">
+                        <h5 class="head text-uppercase font-weight-bold text-danger mb-4">
+                          <img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_CUISINE.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i>
+                          Cuisine
+                        </h5>
+                        <ul class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+                          <li>
+                            <a href="#" class="text-decoration-none">
+                              Style :
+                              <strong class="text-dark ml-2"> CUISINIER PRIvé</strong></a
+                            >
+                          </li>
+                          <li>
+                            <a href="#" class="text-decoration-none border-0 pr-0 mr-0">
+                              Repas :
+                              <strong class="text-dark ml-2"> matin - soir</strong></a
+                            >
+                          </li>
+                          <li>
+                            <a href="#" class="text-decoration-none">
+                              Service :
+                              <strong class="text-dark ml-2"> domicile</strong></a
+                            >
+                          </li>
+                          <li>
+                            <a href="#" class="text-decoration-none">
+                              Cuisine :
+                              <strong class="text-dark ml-2"> internationale</strong></a
+                            >
+                          </li>
+                        </ul>
                       </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                      <div class="brown-div col-4">
+                        <h6 class="head text-uppercase text-white py-2">Mot du pro…</h6>
+                        <p class="content">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+                        <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+                      </div>
+                      <div class="img-block col-3">
+                        <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+                      </div>
                     </div>
                   </div>
-                  <div id="collapseNine" class="collapse show" aria-labelledby="headingNine">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-12 col-lg-5">
-                          <div class="shadow-box">
-                            <h6 class="head">Indispensable :</h6>
-                            <ul class="points list-unstyled mb-0">
-                              <li>Chausson de nautisme</li>
-                              <li>Sac à dos (environ 20L)</li>
-                              <li>Crème solaire visage et corps</li>
-                              <li>Lunettes de soleil (avec attaches)</li>
-                              <li>Un Lycra manche courte ou longue</li>
-                              <li>Maillot de bain</li>
-                            </ul>
-                          </div>
+                </div>
+              </div>
+            </div>
+            <div class="linear-block plain-block">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingFive">
+                  <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Sortons !</p>
+                      <h4 class="heading mb-0">A proximité</h4>
+                    </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                  </div>
+                </div>
+                <div id="collapseFive" class="collapse show" aria-labelledby="headingFive">
+                  <div class="card-body">
+                    <p class="content">
+                      Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises conditions météorologiques ou autres. En cas de mauvaises conditions météorologiques ou autres. En
+                      cas de mauvaises conditions météorologiques.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="block-separator"></div>
+            <div class="linear-block plain-block">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0 bg-white" id="headingSix">
+                  <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Programme</p>
+                      <h4 class="heading mb-0">Déroulé du séjour</h4>
+                    </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                  </div>
+                </div>
+                <div id="collapseSix" class="collapse show" aria-labelledby="headingSix">
+                  <div class="card-body">
+                    <h5 class="tour-head text-uppercase d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
+                      <span class="font-weight-bold text-danger">Jour 1</span>
+                      <ul class="list-unstyled tour-list text-uppercase ml-auto d-flex flex-column flex-lg-row mb-0">
+                        <li><img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg')" />VOL pour <strong>HURGHADA</strong></li>
+                        <li>
+                          <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/Picto_transfert_navette.svg')" />Transferts VERS EL GOUNA :
+                          <strong>18H 19H 20H</strong>
+                        </li>
+                      </ul>
+                    </h5>
+                    <div class="row mb-60">
+                      <div class="col-4 d-none d-lg-inline-block">
+                        <img class="img-fluid rounded-day-img" fluid :src="require('@/assets/images/beach.jpg')" />
+                      </div>
+                      <div class="col-12 col-lg-8">
+                        <p class="content">
+                          A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion
+                          d’information est prévue le dimanche.
+                        </p>
+                        <a class="view-more-btn active_hidden" data-toggle="collapse" href="#viewMoreday1" role="button" aria-expanded="false" aria-controls="viewMoreday1">Afficher d’avantage… <i class="fas fa-chevron-down ml-2"></i></a>
+                      </div>
+                      <div id="viewMoreday1" class="col-12 collapse">
+                        <p class="content">
+                          <span class="font-weight-800 d-block">Vous voyagez avec Heaven Trip</span>
+                          Possibilité de vol dans la nuit du samedi au dimanche. A noter que le choix de vol Paris / Hurghada est très limité, et contraignant : l’arrivée tardive dans la nuit de samedi à dimanche certaines semaines peut être à 4. Possibilité de vol dans la nuit du samedi au
+                          dimanche. A noter que le choix de vol Paris / Hurghada est très.
+                        </p>
+
+                        <a class="view-more-btn" data-toggle="collapse" href="#viewMoreday1" role="button" aria-expanded="false" aria-controls="viewMoreday1">Réduire<i class="fas fa-chevron-up ml-2"></i></a>
+                      </div>
+                    </div>
+
+                    <h5 class="tour-head text-uppercase font-weight-bold text-danger mt-3">Jour 2</h5>
+                    <div class="row">
+                      <div class="col-4 d-none d-lg-inline-block">
+                        <img class="img-fluid rounded-day-img" fluid :src="require('@/assets/images/beach.jpg')" />
+                      </div>
+                      <div class="col-12 col-lg-8">
+                        <p class="content">
+                          A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion
+                          d’information est prévue le dimanche.
+                        </p>
+                        <a class="view-more-btn active_hidden" data-toggle="collapse" href="#viewMoreday2" role="button" aria-expanded="false" aria-controls="viewMoreday2">Afficher d’avantage… <i class="fas fa-chevron-down ml-2"></i></a>
+                      </div>
+                      <div id="viewMoreday2" class="col-12 collapse">
+                        <p class="content">
+                          <span class="font-weight-800 d-block">Vous voyagez avec Heaven Trip</span>
+                          Possibilité de vol dans la nuit du samedi au dimanche. A noter que le choix de vol Paris / Hurghada est très limité, et contraignant : l’arrivée tardive dans la nuit de samedi à dimanche certaines semaines peut être à 4. Possibilité de vol dans la nuit du samedi au
+                          dimanche. A noter que le choix de vol Paris / Hurghada est très.
+                        </p>
+                        <a class="view-more-btn" data-toggle="collapse" href="#viewMoreday2" role="button" aria-expanded="false" aria-controls="viewMoreday2">Réduire<i class="fas fa-chevron-up ml-2"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="block-separator"></div>
+            <div class="linear-block position-relative">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingSeven">
+                  <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">A savoir</p>
+                      <h4 class="heading mb-0">Infos PAYS</h4>
+                    </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                  </div>
+                </div>
+                <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 col-lg-7">
+                        <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">L’EGYPTE</h5>
+                        <p class="content">
+                          Vous avez un niveau expert avec une bonne expérience de la pratique du hors-piste, vous pouvez descendre toutes les pentes, dans toutes les conditions ‘ Vous maitrisez l’utilisation des appareils de sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les
+                          plus belles pentes des Hautes-Pyrénées
+                        </p>
+                      </div>
+                    </div>
+                    <ul class="list-unstyled place-list f-13 text-uppercase mb-0 d-flex flex-wrap flex-column flex-lg-row">
+                      <li>
+                        <a href="#" class="text-decoration-none">Aéroport : <strong class="text-dark"> Hurghada</strong></a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none"><strong class="text-dark"> Temps moyen de vol : </strong>3H50 </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="top-positioned-div">
+                <div class="bg-dark pays-block rounded-top text-uppercase">
+                  <h6 class="head text-warning font-weight-bold letter-space">
+                    <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />
+                    Quelques indicateurs
+                  </h6>
+                  <ul class="list-unstyled pays-list mb-0">
+                    <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
+                    <li>
+                      <strong class="letter-space">Restaurants :</strong>
+                      Prix moyen
+                      <span class="text-warning ml-1"> 60 EGP</span>
+                    </li>
+                    <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
+                  </ul>
+                </div>
+                <button class="btn btn-danger btn-block rounded-0 border-0 pay-btn py-3 text-uppercase mb-5"><img class="d-inline-block mr-3" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />VOIR LES INFOs SANITAIRE</button>
+              </div>
+            </div>
+            <div class="linear-block">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingEight">
+                  <div class="head-block py-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Cadeau !</p>
+                      <h4 class="heading mb-0">TIPS & astuces</h4>
+                    </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                  </div>
+                </div>
+                <div id="collapseEight" class="collapse show" aria-labelledby="headingEight">
+                  <div class="card-body">
+                    <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">S’Y RENDRE !</h5>
+                    <p class="content">
+                      En venant du nord de la France, prenez l’autoroute jusqu’à Grenoble, puis RN 91 “Col du Lautaret”. En venant de l’Italie prenez l’autoroute jusqu’à Oulx (35km de Briançon) puis emprunter le Col de Montgenèvre RN 94. En venant du sud de la France, prenez l’autoroute jusqu’au
+                      Tallard, Embrun, Briançon RN 94.
+                    </p>
+                    <ul class="list-unstyled place-list f-13 text-uppercase my-3 mb-0 d-flex flex-wrap">
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          AÉROPORTS :
+                          <strong class="text-dark ml-2"> LYON - GRENOBLE</strong></a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          GARE :
+                          <strong class="text-dark ml-2"> proximité du spot</strong></a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="text-decoration-none">
+                          LIAISONS AUTOCAR :
+                          <strong class="text-dark ml-2"> Www.autocars-resalp.com</strong></a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingNine">
+                  <div class="head-block py-3 px-4 px-lg-0 my-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Dans ton paquetage…</p>
+                      <h4 class="heading mb-0">A prévoir pour ton séjour</h4>
+                    </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+                  </div>
+                </div>
+                <div id="collapseNine" class="collapse show" aria-labelledby="headingNine">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 col-lg-5">
+                        <div class="shadow-box">
+                          <h6 class="head">Indispensable :</h6>
+                          <ul class="points list-unstyled mb-0">
+                            <li>Chausson de nautisme</li>
+                            <li>Sac à dos (environ 20L)</li>
+                            <li>Crème solaire visage et corps</li>
+                            <li>Lunettes de soleil (avec attaches)</li>
+                            <li>Un Lycra manche courte ou longue</li>
+                            <li>Maillot de bain</li>
+                          </ul>
                         </div>
-                        <div class="col-12 col-lg-5">
-                          <div class="shadow-box">
-                            <h6 class="head">Pour votre confort :</h6>
-                            <ul class="points list-unstyled mb-0">
-                              <li>Une petite pharmacie,contre</li>
-                              <li>Un pull et coupe-vent</li>
-                              <li>Chaussures de sports</li>
-                            </ul>
-                          </div>
+                      </div>
+                      <div class="col-12 col-lg-5">
+                        <div class="shadow-box">
+                          <h6 class="head">Pour votre confort :</h6>
+                          <ul class="points list-unstyled mb-0">
+                            <li>Une petite pharmacie,contre</li>
+                            <li>Un pull et coupe-vent</li>
+                            <li>Chaussures de sports</li>
+                          </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="block-separator"></div>
-              <div class="">
-                <div class="card border-0 rounded-0">
-                  <div class="card-header p-0 border-0 rounded-0" id="headingTen">
-                    <div class="head-block linear-block plain-block py-3 px-4 px-lg-0 my-0 d-flex justify-content-between justify-content-lg-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
-                      <div class="left-border pl-3 ml-3 ml-lg-0">
-                        <p class="sub-heading mb-2">Trippers…</p>
-                        <h4 class="heading mb-0">VOS avis…</h4>
-                      </div>
-                      <i class="fa fa-chevron-down h4 mb-0 arrow text-white text-arrow"></i>
+            </div>
+            <div class="block-separator"></div>
+            <div class="mb-5">
+              <div class="card border-0 rounded-0">
+                <div class="card-header p-0 border-0 rounded-0" id="headingTen">
+                  <div class="head-block linear-block plain-block py-3 px-4 px-lg-0 my-0 d-flex justify-content-between justify-content-lg-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                    <div class="left-border pl-3 ml-3 ml-lg-0">
+                      <p class="sub-heading mb-2">Trippers…</p>
+                      <h4 class="heading mb-0">VOS avis…</h4>
                     </div>
+                    <i class="fa fa-chevron-down h4 mb-0 arrow text-white text-arrow"></i>
                   </div>
-                  <div id="collapseTen" class="collapse show" aria-labelledby="headingTen">
-                    <div class="card-body">
-                      <div class="linear-block mb-0">
-                        <div class="avatar">
-                          <div class="row">
-                            <div class="col-12 col-lg-10 ml-auto">
-                              <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1">
-                                <img class="user-icon d-inline-block mx-auto" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                                <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
-                                  <i class="fas fa-quote-left mr-4 chat-quote"></i>
-                                  <strong>Remi Flemming</strong>
-                                  <span class="d-block d-lg-inline-block"><span class="mx-3 d-none d-lg-inline-block">|</span> <i class="fas fa-map-marker-alt mr-2"></i>Nice <span class="mx-3">|</span> 2 séjours</span>
-                                  <div class="text-warning text-right small star-container"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
-                                  <a class="ml-auto user-profile-link text-reset d-none d-lg-inline-block" href="#">VOIR PROFIL <img class="align-baseline ml-2" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></a>
-                                </div>
-                              </h5>
-                              <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est trop cooooool Et hop encore une ligne pour la marmotte ! Toussa toussa toussa Toussa toussa toussa c’est Charlie qui.</p>
-                              <div class="text-right date">25 avril 2020</div>
-                            </div>
-                          </div>
-                        </div>
+                </div>
+                <div id="collapseTen" class="collapse show" aria-labelledby="headingTen">
+                  <div class="card-body">
+                    <div class="review__block d-flex align-items-center">
+                      <div class="review__block-left d-flex flex-column align-items-center mr-5">
+                        <img class="review__block-left__avatar" :src="require('@/assets/images/ui_faces/1.jpg')" height="100" />
+                        <div class="review__block-left__date">25 Avril 2020</div>
                       </div>
-                      <div class="row">
-                        <div class="col-12 col-lg-10 mx-auto">
-                          <div class="linear-block plain-block my-5">
-                            <img class="align-text-bottom ml-n4" fluid :src="require('@/assets/images/svg/noun_Reply.svg')" />
-                            <div class="row">
-                              <div class="col-12 col-lg-9 ml-auto">
-                                <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1 mt-4">
-                                  <img class="user-icon d-inline-block" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                                  <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
-                                    <strong>Réponse de Marion :</strong>
-                                    <div class="text-right date-text ml-auto">25 avril 2020</div>
-                                  </div>
-                                </h5>
-                                <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est</p>
-                              </div>
-                            </div>
+                      <div class="review__block-right">
+                        <div class="review__block-right__top-infos d-flex justify-content-between">
+                          <div class="review__block-right__user-name">Remi Flemming</div>
+                          <div class="review__block-right__user-infos">
+                            <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
+                            Nice
                           </div>
+                          <div class="review__block__stars"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
+                          <div class="review__block__user-profile-link"><span>Voir profil</span></div>
                         </div>
+                        <div class="review__block-right__text-content">aaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaa</div>
                       </div>
-                      <div class="linear-block mb-0">
-                        <div class="avatar">
-                          <div class="row">
-                            <div class="col-12 col-lg-10 ml-auto">
-                              <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1">
-                                <img class="user-icon d-inline-block mx-auto" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                                <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
-                                  <i class="fas fa-quote-left mr-4 chat-quote"></i>
-                                  <strong>Remi Flemming</strong>
-                                  <span class="d-block d-lg-inline-block"><span class="mx-3 d-none d-lg-inline-block">|</span> <i class="fas fa-map-marker-alt mr-2"></i>Nice <span class="mx-3">|</span> 2 séjours</span>
-                                  <div class="text-warning text-right small star-container"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
-                                  <a class="ml-auto user-profile-link text-reset d-none d-lg-inline-block" href="#">VOIR PROFIL <img class="align-baseline ml-2" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></a>
-                                </div>
-                              </h5>
-                              <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est trop cooooool Et hop encore une ligne pour la marmotte ! Toussa toussa toussa Toussa toussa toussa c’est Charlie qui.</p>
-                              <div class="text-right date">25 avril 2020</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="collapse" id="viewMoreBlog">
-                        <div class="linear-block mb-0">
-                          <div class="avatar">
-                            <div class="row">
-                              <div class="col-12 col-lg-10 ml-auto">
-                                <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1">
-                                  <img class="user-icon d-inline-block mx-auto" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                                  <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
-                                    <i class="fas fa-quote-left mr-4 chat-quote"></i>
-                                    <strong>Remi Flemming</strong>
-                                    <span class="d-block d-lg-inline-block"><span class="mx-3 d-none d-lg-inline-block">|</span> <i class="fas fa-map-marker-alt mr-2"></i>Nice <span class="mx-3">|</span> 2 séjours</span>
-                                    <div class="text-warning text-right small star-container"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
-                                    <a class="ml-auto user-profile-link text-reset d-none d-lg-inline-block" href="#">VOIR PROFIL <img class="align-baseline ml-2" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></a>
-                                  </div>
-                                </h5>
-                                <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est trop cooooool Et hop encore une ligne pour la marmotte ! Toussa toussa toussa Toussa toussa toussa c’est Charlie qui.</p>
-                                <div class="text-right date">25 avril 2020</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="view-more-btn full_width mt-4" data-toggle="collapse" href="#viewMoreBlog" role="button" aria-expanded="false" aria-controls="viewMoreBlog">AFFICHER ENCORE PLUS D’AVIS (24) <i class="fas fa-chevron-down ml-2"></i></a>
                     </div>
+                    <!-- <div class="linear-block mb-0">
+                      <div class="avatar">
+                        <div class="row">
+                          <div class="col-12 col-lg-10 ml-auto">
+                            <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1">
+                              <img class="user-icon d-inline-block mx-auto" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+                              <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
+                                <strong>Remi Flemming</strong>
+                                <span class="d-block d-lg-inline-block"><span class="mx-3 d-none d-lg-inline-block">|</span> <i class="fas fa-map-marker-alt mr-2"></i>Nice <span class="mx-3">|</span> 2 séjours</span>
+                                <div class="text-warning text-right small star-container"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
+                                <a class="ml-auto user-profile-link text-reset d-none d-lg-inline-block" href="#">VOIR PROFIL <img class="align-baseline ml-2" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></a>
+                              </div>
+                            </h5>
+                            <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est trop cooooool Et hop encore une ligne pour la marmotte ! Toussa toussa toussa Toussa toussa toussa c’est Charlie qui.</p>
+                            <div class="text-right date">25 avril 2020</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-lg-10 mx-auto">
+                        <div class="linear-block plain-block my-5">
+                          <img class="align-text-bottom ml-n4" fluid :src="require('@/assets/images/svg/noun_Reply.svg')" />
+                          <div class="row">
+                            <div class="col-12 col-lg-9 ml-auto">
+                              <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1 mt-4">
+                                <img class="user-icon d-inline-block" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+                                <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
+                                  <strong>Réponse de Marion :</strong>
+                                  <div class="text-right date-text ml-auto">25 avril 2020</div>
+                                </div>
+                              </h5>
+                              <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="view-more-btn full_width mt-4" data-toggle="collapse" href="#viewMoreBlog" role="button" aria-expanded="false" aria-controls="viewMoreBlog">AFFICHER ENCORE PLUS D’AVIS (24) <i class="fas fa-chevron-down ml-2"></i></a> -->
                   </div>
                 </div>
               </div>
@@ -1024,6 +997,42 @@ export default {
 </script>
 
 <style scoped>
+.review__block {
+  margin-top: 2rem;
+  color: #7c7c7c;
+}
+.review__block-right__text-content {
+  font-size: 0.875rem;
+  font-family: Muli, sans-serif;
+}
+.review__block-right__top-infos {
+  font-size: 0.875rem;
+  font-family: Oswald, sans-serif;
+  font-weight: 600;
+  width: 65%;
+  margin-bottom: 0.5rem;
+}
+.review__block__user-profile-link {
+  height: min-content;
+  padding-left: 1.5rem;
+  border-left: 1px solid #7c7c7c;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.review__block-left__avatar {
+  margin-bottom: 0.2rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.review__block-left__date {
+  font-family: Oswald, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.review__block__stars {
+  margin-right: 1.5rem;
+  color: #ffc300;
+}
 .product__nav__section-number {
   position: relative;
   width: 3rem;

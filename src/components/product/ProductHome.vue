@@ -19,8 +19,8 @@ export default {
   name: 'ProductHome',
   components: {
     Header,
-    ProductContent,
-    ProductFooter
+    ProductContent
+    // ProductFooter
     // ProductSection,
     // ProductModal
   },

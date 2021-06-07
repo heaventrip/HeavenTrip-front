@@ -4,7 +4,7 @@
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
       <transition name="fade">
-        <InlineSvg v-if="hovered" :src="require('@/assets/svg/heart-outline.svg')" style="position: absolute; top: 7%; right: 7%" height="24" />
+        <InlineSvg v-if="hovered" :src="require('@/assets/svg/heart-outline.svg')" style="position: absolute; top: 7%; right: 7%" height="20" />
       </transition>
       <a href="/product">
         <img class="card__bg-image img-responsive img-fill" :src="require('@/assets/images/s1.png')" alt="" />
