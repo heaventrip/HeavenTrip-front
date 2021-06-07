@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .container {
   justify-content: center;
-  height: 80%;
+  height: 70%;
 }
 .wrapper-innerlist {
   line-height: 1.1;

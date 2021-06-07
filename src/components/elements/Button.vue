@@ -2,7 +2,8 @@
   <div class="bttn" :class="pColor" :style="pStyle">
     <div class="bttn__text" :class="pWeight">
       <div>
-        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" :fill="pBackgroundColor == 'white' ? 'red' : 'white'" />
+        <!-- TODO use slots and override all buttons components -->
+        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" :fill="pBackgroundColor == 'white' ? pBackgroundColor : 'white'" :height="pIconHeight" />
         <span class="align-middle" :style="pTextColor" v-html="pText"></span>
         <InlineSvg v-if="pArrow" :src="require('@/assets/svg/arrow-right.svg')" class="ml-4 align-middle" height="14" fill="white" />
       </div>
@@ -13,12 +14,13 @@
 <script>
 export default {
   name: 'Button',
-  props: ['text', 'color', 'weight', 'height', 'icon', 'px', 'py', 'arrow', 'size', 'width', 'radius', 'text-color', 'background-color'],
+  props: ['text', 'color', 'weight', 'height', 'icon', 'px', 'py', 'arrow', 'size', 'width', 'radius', 'text-color', 'background-color', 'icon-height'],
   data() {
     return {
       pText: this.text,
       pArrow: this.arrow,
-      pIcon: this.icon
+      pIcon: this.icon,
+      pIconHeight: this.iconHeight
     }
   },
   computed: {

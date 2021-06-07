@@ -1,44 +1,52 @@
 <template>
   <div class="d-flex align-items-center align-items-lg-end w-100 mt-auto" style="padding: 0 130px">
-    <div class="content d-flex flex-column align-items-center justify-content-between w-100 mt-5 mt-lg-0" style="height: 50vh">
-      <div class="top-block d-flex align-items-center justify-content-center" style="width: 100%">
-        <!-- FIXME Reduire pour les écrans standarts -->
-        <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="top-block__svg d-inline-block" />
-        <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
-        <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-        <div style="margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0">
-          <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
-          <h1 class="headsport heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
-          <h5 class="header-infos__sub-title d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
-        </div>
-      </div>
-      <div class="d-inline-flex d-lg-flex align-items-center justify-content-center pb-3 trippers-div">
-        <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violetfullscreen" :heart="true" spacing="-6px" height="50px" heartheight="50px" heartwidth="50px" />
-        <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
-        <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
-      </div>
-      <div style="padding-top: auto; padding-bottom: 1rem">
-        <Tag text="4 départs" color="grey" />
-      </div>
-      <div><InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :border-top="false" color="white" icon="globe" pt="1rem" pl="2.5rem" /></div>
-    </div>
-    <div class="row no-gutters" style="right: 0; top: 60vh; position: absolute">
-      <div class="col-4">
-        <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" />
-      </div>
-      <div class="price-block col-8 bg block--white">
-        <div class="block__content">
-          <div class="price-block-content px-2">
-            <span class="euro">{{ featuredCourse.price }}€</span>
-            <span class="euro-pers">/pers.</span>
-            <br />
-            <span class="text--smaller">Tout inclus (sans transports)</span>
+    <div class="content d-flex align-items-center justify-content-between w-100 mt-5 mt-lg-0">
+      <div>
+        <div style="width: 115%">
+          <div class="top-block d-flex align-items-center" style="width: 100%">
+            <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="top-block__svg d-inline-block" style="max-width: 9rem" />
+            <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
+            <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
+            <div style="width: 115%; margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
+              <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
+              <h1 class="headsport heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
+              <h5 class="header-infos__sub-title d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
+            </div>
+          </div>
+          <div class="d-flex">
+            <Tag text="4 départs" color="white" class="product-infos__tag" height="30px" />
+            <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" pr="0rem" :border-top="false" color="white" icon="globe" pt="0rem" />
           </div>
         </div>
+        <div class="d-inline-flex d-lg-flex align-items-center justify-content-between pb-3 trippers-div">
+          <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
+            <span>Ca te titille? Rejoint</span>
+            <br />
+            les <span>{{ featuredCourse.wishlistUsers?.length }} intéressés</span>
+          </span>
+          <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violet" :heart="true" spacing="-10px" heartheight="40px" heartwidth="40px" />
+          <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
+          <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
+        </div>
       </div>
-      <div class="col-6 ml-auto">
-        <div class="bttn bttn--pink">
-          <div class="bttn__text">Détails<i class="fa fa-chevron-right ml-3"></i></div>
+      <div class="row no-gutters">
+        <div class="col-4">
+          <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" />
+        </div>
+        <div class="col-8 bg block--white">
+          <div class="block__content">
+            <div class="px-2">
+              <span class="euro">{{ featuredCourse.price }}€</span>
+              <span class="euro-pers">/pers.</span>
+              <br />
+              <span class="text--smaller">Tout inclus (sans transports)</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 ml-auto">
+          <div class="bttn bttn--pink">
+            <div class="bttn__text">Détails<i class="fa fa-chevron-right ml-3"></i></div>
+          </div>
         </div>
       </div>
     </div>
@@ -46,20 +54,19 @@
 </template>
 
 <script>
-import Tag from '@/components/elements/Tag.vue'
 import Button from '@/components/elements/Button.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
-import { gsap } from 'gsap'
+import Tag from '@/components/elements/Tag.vue'
 
 export default {
   name: 'HeaderText',
   emits: ['toggled-sessions'],
   components: {
-    Tag,
     Button,
     InlineProductInfos,
-    InlineAvatars
+    InlineAvatars,
+    Tag
   },
   data() {
     return {
@@ -73,43 +80,17 @@ export default {
       this.$emit('toggled-sessions')
     }
   },
-  // watch: {
-  //   featuredCourse(newVal) {
-  //     if (featuredCourse.price) {
-
-  //     }
-  //   }
-  // },
   created() {
     this.$axios.get('/courses', { params: { featured: true } }).then((res) => (this.featuredCourse = res.data.course))
-  },
-  mounted() {
-    let priceBlock = document.querySelector('.price-block')
-    let price = priceBlock.querySelector('.euro')
-
-    function changeText(text) {
-      gsap.to(price, {
-        ease: 'power2.inOut',
-        duration: '0.8',
-        autoAlpha: 0,
-        delay: '3',
-        onComplete: () => {
-          price.innerHTML = text
-          gsap.to(price, {
-            ease: 'power2.inOut',
-            duration: '0.8',
-            autoAlpha: 1,
-            delay: '3',
-            onComplete: () => changeText('ok')
-          })
-        }
-      })
-    }
   }
 }
 </script>
 
 <style scoped>
+.product-infos__tag {
+  margin-right: 2.5rem;
+  margin-top: 0.3rem;
+}
 .header-infos__sub-title {
   font-size: 1.4rem;
   font-weight: 400;
@@ -123,7 +104,7 @@ export default {
 .top-block__svg {
   max-width: 9rem;
 }
-@media only screen and (min-width: 1441px) {
+/* @media only screen and (min-width: 1441px) {
   .header-infos__sub-title {
     font-size: 1.9rem;
   }
@@ -133,11 +114,7 @@ export default {
   .top-block__svg {
     max-width: 11rem;
   }
-}
-/* TEXT */
-.text--smaller {
-  font-size: 0.85rem;
-}
+} */
 /* BLOCK */
 .block--white {
   background-color: #fff;
@@ -216,14 +193,16 @@ export default {
   max-width: 90px;
   margin-right: 10px;
 }
+.top-block {
+  margin-bottom: 1.8rem;
+}
 .list-info {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
   border-bottom: 1px solid rgba(250, 250, 250, 0.35);
 }
 .trippers-div {
-  /* TODO Specify for ultrawide : break si <  */
-  margin-bottom: auto;
-  padding-top: 4.6rem;
+  border-top: 1px solid rgba(250, 250, 250, 0.35);
+  padding-top: 1.6rem;
   width: max-content;
 }
 .icons {

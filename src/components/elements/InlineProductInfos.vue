@@ -2,7 +2,7 @@
   <div class="block d-flex align-items-center text-uppercase" :class="[pJustifyContent || 'justify-content-between', pClass]" :style="[borderTopStyle, borderBottomStyle, paddingYStyle, widthStyle]">
     <div class="block__item" v-for="(info, index) in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
       <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
-      <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle]">{{ info }}</span>
+      <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle, { color: pColor }]">{{ info }}</span>
     </div>
   </div>
 </template>
@@ -55,9 +55,11 @@ export default {
 </script>
 
 <style scoped>
-.block__item {
-  padding-right: 1rem;
+.block__item:not(:first-of-type) {
   padding-left: 1rem;
+}
+.block__item:not(:last-of-type) {
+  padding-right: 1rem;
 }
 .half-border {
   width: 50%;

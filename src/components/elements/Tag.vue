@@ -26,6 +26,7 @@ export default {
   height: 25px;
   /* height: 2rem; */
   border-radius: 50px;
+  /* width: max-content; */
 }
 .tag--white {
   background-color: rgba(255, 255, 255, 0.6);
@@ -43,6 +44,7 @@ export default {
   opacity: 90%;
 }
 .tag__content {
+  width: max-content;
   padding-left: 0.6rem;
   padding-right: 0.6rem;
   font-family: Oswald, sans-serif;

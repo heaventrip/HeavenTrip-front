@@ -36,10 +36,11 @@
         <div class="row zero-margin">
           <div class="col col-12 col-lg-8">
             <div class="linear-block plain-block mt-lg-4">
-              <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start align-items-center">
-                <div class="left-border pl-3">
-                  <p class="sub-heading mb-2">En bref</p>
-                  <h4 class="heading mb-0">TON SÉJOUR</h4>
+              <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
+                <div class="product__nav__section-number"><span>01</span></div>
+                <div class="pl-3">
+                  <p class="sub-heading mb-2">Infos séjour</p>
+                  <h4 class="heading mb-0">EN BREF...</h4>
                 </div>
                 <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto"><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /></span>
               </div>
@@ -82,7 +83,7 @@
                 </div>
               </div>
             </div>
-            <div class="linear-block">
+            <div class="linear-block product__overview__details-block">
               <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
                 <div class="left-border pl-3">
                   <p class="sub-heading mb-2">Suis-je prêt ?</p>
@@ -542,8 +543,8 @@
                   <div id="collapseFour" class="collapse show" aria-labelledby="headingFour">
                     <div class="card-body">
                       <p class="content mb-5">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</p>
-                      <div class="row">
-                        <div class="col-12 col-lg-6">
+                      <div class="d-flex no-gutters">
+                        <div class="col-12 col-lg-5">
                           <h5 class="head text-uppercase font-weight-bold text-danger mb-4">
                             <img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_CUISINE.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i>
                             Cuisine
@@ -575,16 +576,13 @@
                             </li>
                           </ul>
                         </div>
-                        <div class="col-12 col-lg-6 border-left gray-border">
-                          <div class="avatar bg-white pl-lg-5">
-                            <h5 class="avatar-head mb-0">
-                              <img class="avatar-icon d-inline-block" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="d-inline-block">
-                                <strong class="d-block">Edouard du Thin</strong>
-                                Cuisinier
-                              </span>
-                            </h5>
-                            <p class="content mt-3">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises</p>
-                          </div>
+                        <div class="brown-div col-4">
+                          <h6 class="head text-uppercase text-white py-2">Mot du pro…</h6>
+                          <p class="content">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+                          <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+                        </div>
+                        <div class="img-block col-3">
+                          <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
                         </div>
                       </div>
                     </div>
@@ -608,25 +606,6 @@
                         Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises conditions météorologiques ou autres. En cas de mauvaises conditions météorologiques ou autres.
                         En cas de mauvaises conditions météorologiques.
                       </p>
-                      <div>
-                        <div class="outer-circle my-5">
-                          <div class="items left_top">
-                            <img class="d-inline-block" fluid :src="require('@/assets/images/svg/noun_Shopping.svg')" />
-                          </div>
-                          <div class="items right_bottom">
-                            <img class="d-inline-block" fluid :src="require('@/assets/images/svg/noun_Shopping.svg')" />
-                          </div>
-                          <div class="inner-circle">
-                            <div class="items right_top">
-                              <img class="d-inline-block" fluid :src="require('@/assets/images/svg/noun_Shopping.svg')" />
-                            </div>
-                            <div class="items left_bottom">
-                              <img class="d-inline-block" fluid :src="require('@/assets/images/svg/noun_Shopping.svg')" />
-                            </div>
-                            <div class="center-circle"><img class="d-inline-block home" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT_light.svg')" /><img class="d-inline-block mt-n4 map" fluid :src="require('@/assets/images/svg/PICTO_DISTANCE_HEBERGEMENT.svg')" /></div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -1043,3 +1022,22 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.product__nav__section-number {
+  position: relative;
+  width: 3rem;
+  border-radius: 10px;
+  background: #292f33;
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-align: center;
+  color: #fff;
+}
+.product__overview__details-block {
+  padding: 30px 60px;
+  border: 1px solid #ebebeb;
+  background: none;
+  border-radius: 0px;
+}
+</style>

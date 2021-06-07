@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar">
     <a class="navbar-brand pl-sm-5 pl-lg-0" href="/">
-      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" width="150" />
-      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" width="150" />
+      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" width="180" />
+      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" width="180" />
     </a>
     <!-- NOTE MOBILE ONLY -->
     <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
@@ -45,7 +45,7 @@
         <li class="nav-item">
           <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
-        <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" role="tablist" aria-orientation="vertical" style="position: absolute; top: 150%; z-index: 2; width: max-content">
+        <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" role="tablist" aria-orientation="vertical" style="position: absolute; top: 160%; z-index: 2; width: max-content">
           <li class="nav-item" role="presentation">
             <a @click="$refs.activitiesTab.clicked(sportCategories[0]?.name)" class="nav-link active text-uppercase subactivity-nav__item" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false">{{
               sportCategories[0]?.name

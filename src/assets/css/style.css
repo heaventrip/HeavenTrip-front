@@ -1988,7 +1988,7 @@ a.bg-danger:hover {
 .box {
   padding: 30px 50px;
   box-shadow: 0px 0px 9px #00000017;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   margin: 35px 0;
   color: #e2e2e2;
   text-transform: uppercase;
@@ -5501,14 +5501,14 @@ a.descriptif-link.bg-danger:hover {
     border-bottom: 1px solid hsla(0, 0%, 98%, 0.5);
   }
   .main-product-content .linear-block {
-    padding: 30px 60px;
+    padding: 30px 0px;
     margin: 80px 0;
-    border: 1px solid #ebebeb;
+    /* border: 1px solid #ebebeb; */
     border-radius: 5px;
-    background: radial-gradient(#ffffff, #fcfcfccc);
+    /* background: radial-gradient(#ffffff, #fcfcfccc); */
   }
   .main-product-content .linear-block.plain-block {
-    padding: 0 60px;
+    padding: 0 0px;
     border: none;
     background: none;
   }

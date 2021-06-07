@@ -7,10 +7,19 @@
       'header-filter--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/'),
       'header-filter--light': agencyIsActive && currentRoute('/'),
       'header--search': !navIsActive && currentRoute('/search'),
-      'header-filter--search': !navIsActive && currentRoute('/search')
+      'header-filter--search': !navIsActive && currentRoute('/search'),
+      'header--product': !navIsActive && currentRoute('/product'),
+      'header-filter--product': !navIsActive && currentRoute('/product')
     }"
   >
-    <div class="header-bg-container" :class="{ 'header-bg-container--home': currentRoute('/'), 'header-bg-container--search': currentRoute('/search') }">
+    <div
+      class="header-bg-container"
+      :class="{
+        'header-bg-container--home': currentRoute('/'),
+        'header-bg-container--search': currentRoute('/search'),
+        'header-bg-container--product': currentRoute('/product')
+      }"
+    >
       <img src="@/assets/images/combined.png" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <ConnectionButtons />
@@ -83,7 +92,7 @@
 import TheNav from '@/components/nav/TheNav.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeHeaderInfos from './HomeHeaderInfos.vue'
-import ProductHeaderInfos from '@/components/product/ProductHeaderInfos.vue'
+import ProductHeaderInfos from '@/components/header/ProductHeaderInfos.vue'
 import SearchHeaderInfos from '@/components/header/SearchHeaderInfos.vue'
 import SessionsMenu from '@/components/SessionsMenu.vue'
 
@@ -180,12 +189,12 @@ export default {
 /* HOME */
 .header--home {
   min-height: 94vh;
-  padding-bottom: 6vh;
+  padding-bottom: 13vh;
 }
 .header-filter--home::after {
   content: '';
   position: absolute;
-  background: #5a3a5f;
+  background: linear-gradient(to right, #5a3a5f 0%, #5a3a5f62 100%);
   opacity: 0.6;
   width: 100%;
   height: 94vh; /* corresponds height of image */
@@ -223,6 +232,20 @@ export default {
   height: 100vh; /* corresponds height of image */
   z-index: -1;
 }
+/* PRODUCT */
+.header--product {
+  min-height: 94vh;
+  padding-bottom: 13vh;
+}
+.header-filter--product::after {
+  content: '';
+  position: absolute;
+  background-color: #5a3a5fb3;
+  /* opacity: 0.6; */
+  width: 100%;
+  height: 100vh; /* corresponds height of image */
+  z-index: -1;
+}
 .header-bg-image {
   z-index: -1;
   object-fit: cover;
@@ -236,6 +259,9 @@ export default {
   z-index: -1;
 }
 .header-bg-container--home {
+  height: 94vh;
+}
+.header-bg-container--product {
   height: 94vh;
 }
 .header-bg-container--search {

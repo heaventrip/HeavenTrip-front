@@ -1,31 +1,29 @@
 <template>
   <div class="card-block" style="width: 540px" @mouseenter="biggerCard($event)" @mouseleave="smallerCard($event)">
     <div class="shadow-effect overflow-hidden position-relative">
-      <Tag style="position: absolute; top: 7%; left: 5%; z-index: 1" color="grey" text="2 départs" />
-      <Tag style="position: absolute; top: 7%; left: 20%; z-index: 1" color="pink" text="nouveau" />
+      <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
+      <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
       <transition name="fade">
-        <InlineSvg v-if="hovered" :src="require('@/assets/svg/heart-outline.svg')" style="position: absolute; top: 7%; right: 7%" />
+        <InlineSvg v-if="hovered" :src="require('@/assets/svg/heart-outline.svg')" style="position: absolute; top: 7%; right: 7%" height="24" />
       </transition>
       <a href="/product">
         <img class="card__bg-image img-responsive img-fill" :src="require('@/assets/images/s1.png')" alt="" />
       </a>
       <div class="card__footer item-details" style="width: 100%">
         <div class="content d-flex justify-content-between">
-          <div class="text-uppercase">
-            <div class="d-flex align-items-center">
-              <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
-              <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
-              <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
-              <div class="card__footer__infos text-left">
-                <div class="card__footer__infos__heading d-flex align-items-center">
-                  <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">ski freeride</span>
-                  <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
-                  <span class="card__footer__infos__heading-spot d-inline-block align-middle">serre-chevalier</span>
-                </div>
-                <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
-                  <span>inclus :&nbsp;</span>
-                  <span>yoga - rando - vtt neige</span>
-                </div>
+          <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
+            <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
+            <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
+            <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
+            <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
+              <div class="card__footer__infos__heading d-flex align-items-center">
+                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">ski freeride</span>
+                <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
+                <span class="card__footer__infos__heading-spot d-inline-block align-middle">serre-chevalier</span>
+              </div>
+              <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
+                <span>inclus :&nbsp;</span>
+                <span>yoga - rando - vtt neige</span>
               </div>
             </div>
           </div>
@@ -36,7 +34,7 @@
         </div>
         <div class="hoverable-div">
           <div class="d-flex">
-            <InlineProductInfos class="" :infos="['France', '7 jours', '10 places', 'Tout niveaux']" pt="0.5rem" pb="0.5rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#292f33" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
+            <InlineProductInfos :infos="['France', '7 jours', '10 places', 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
             <InlineAvatars class="pl-4" :avatars="[1, 2]" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
           </div>
         </div>
@@ -54,7 +52,8 @@ export default {
   name: 'SectionCarouselCard',
   data() {
     return {
-      hovered: false
+      hovered: false,
+      animFinished: true
     }
   },
   components: {
@@ -63,12 +62,14 @@ export default {
     Tag
   },
   methods: {
+    // FIXME check mouse events bug
     biggerCard(event) {
       this.hovered = true
       $(event.target).animate({ width: '+=50px' })
       $(event.target).find('.content').addClass('hover')
       $(event.target).find('.hoverable-div').slideDown()
       $(event.target).find('.card__bg-image').addClass('card__bg-image--hover')
+      $(event.target).find('.card__footer__price').addClass('border-0')
       // $(event.target).find('.trip-link').animate({ bottom: '+=45px' })
     },
     smallerCard(event) {
@@ -77,6 +78,7 @@ export default {
       $(event.target).find('.content').removeClass('hover')
       $(event.target).find('.hoverable-div').slideUp()
       $(event.target).find('.card__bg-image').removeClass('card__bg-image--hover')
+      $(event.target).find('.card__footer__price').removeClass('border-0')
       // $(event.target).find('.trip-link').animate({ bottom: '-=45px' })
     }
   }
@@ -84,7 +86,18 @@ export default {
 </script>
 
 <style scoped>
-.hoverable-div {
+.card__footer__infos {
+  position: relative;
+  flex-grow: 1;
+}
+.card__footer__infos--border::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.9rem;
+  width: 100%;
+  height: 1px;
+  background: rgba(41, 47, 51, 0.1);
 }
 .card-block {
   /* box-shadow: 0px 2px 6px rgb(0, 0, 0, 0.05) !important; */
@@ -138,7 +151,7 @@ export default {
 }
 .card__bg-image--hover {
   transition: 0.5s ease;
-  filter: blur(3px) opacity(0.4) !important;
+  filter: blur(2px) opacity(0.4) !important;
 }
 .card__footer {
   padding: 10px 35px 30px 0px;

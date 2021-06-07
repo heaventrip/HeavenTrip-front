@@ -1,6 +1,5 @@
 <template>
   <div class="main-product-content">
-    <ProductNav />
     <Header />
     <ProductContent />
     <ProductFooter />
@@ -11,7 +10,6 @@
 
 <script>
 import Header from '@/components/header/Header.vue'
-import ProductNav from '@/components/product/ProductNav.vue'
 import ProductContent from '@/components/product/ProductContent.vue'
 import ProductFooter from '@/components/product/ProductFooter.vue'
 // import ProductSection from '@/components/product/ProductSection.vue'
@@ -21,7 +19,6 @@ export default {
   name: 'ProductHome',
   components: {
     Header,
-    ProductNav,
     ProductContent,
     ProductFooter
     // ProductSection,

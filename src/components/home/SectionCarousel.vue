@@ -2,9 +2,9 @@
   <section class="carousel-section">
     <div class="container">
       <div class="search row">
-        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 35px; border-radius: 0.1px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.15); background-color: rgba(0, 0, 0, 0.15)">
+        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 35px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.15); background-color: rgba(0, 0, 0, 0.15)">
           <div class="bg-white d-flex centered-div">
-            <div class="d-flex align-items-center p-3 flex-1 search-input-container">
+            <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.4rem 1rem">
               <img class="mx-3 img-20 d-none d-lg-inline-block" fluid :src="require('@/assets/images/search.png')" />
               <input class="form-control p-0 search-input ml-2 ml-sm-3 ml-lg-0 mr-xl-4" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>
@@ -12,8 +12,8 @@
               <li>
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg :src="require('@/assets/svg/country-search.svg')" height="20" />
-                    <span class="ml-2">Pays</span>
+                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/country-search.svg')" height="20" />
+                    <span class="search-bar__fillter__name">Pays</span>
                   </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
                 </div>
@@ -21,8 +21,8 @@
               <li>
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg :src="require('@/assets/svg/date-search.svg')" height="20" />
-                    <span class="ml-2">Mois de départ</span>
+                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="20" />
+                    <span class="search-bar__fillter__name">Mois de départ</span>
                   </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%" />
                 </div>
@@ -30,8 +30,8 @@
               <li>
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg :src="require('@/assets/svg/activity-search.svg')" height="20" />
-                    <span class="ml-2">Activités</span>
+                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="20" />
+                    <span class="search-bar__fillter__name">Activités</span>
                   </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%" />
                 </div>
@@ -131,7 +131,9 @@
           </div>
         </div>
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
-          <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">asdfghj</div>
+          <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem"></div>
+          </div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
             <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem">
               <SectionCarouselCard />
@@ -500,11 +502,13 @@ export default {
         e.target.style.backgroundColor = '#292f33'
         e.target.style.borderColor = '#292f33'
         e.target.style.color = '#fff'
+        e.target.querySelector('.search-bar__fillter__svg').style.fill = 'white'
       })
       el.addEventListener('mouseleave', (e) => {
         e.target.style.backgroundColor = 'unset'
         e.target.style.borderColor = 'unset'
         e.target.style.color = 'unset'
+        e.target.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
       })
     })
   }
@@ -512,8 +516,12 @@ export default {
 </script>
 
 <style scoped>
+.search-bar__fillter__name {
+  margin-left: 1.2rem;
+}
 .centered-div {
   box-shadow: none;
+  border-radius: 6px;
 }
 .slider-buttons {
   position: absolute;
