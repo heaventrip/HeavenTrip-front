@@ -4,8 +4,8 @@
     :class="{
       'header--home': currentRoute('/'),
       'header-filter--home': !navIsActive && currentRoute('/'),
-      'header-filter--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/'),
-      'header-filter--light': agencyIsActive && currentRoute('/'),
+      'header-filter--grey': activitiesIsActive || destinationsIsActive,
+      'header-filter--light': agencyIsActive,
       'header--search': !navIsActive && currentRoute('/search'),
       'header-filter--search': !navIsActive && currentRoute('/search'),
       'header--product': !navIsActive && currentRoute('/product'),

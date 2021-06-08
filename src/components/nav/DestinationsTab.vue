@@ -4,8 +4,8 @@
       <a href="#header_nav" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
       . destination
     </h4> -->
-    <ul class="list-unstyled wrapper-list d-flex flex-wrap">
-      <li>
+    <ul class="list-unstyled wrapper-list d-flex flex-wrap justify-content-between" style="width: 60%">
+      <li class="destination-column">
         <!-- <h4 class="wrapper-list-head">{{ franceCountry.name }}</h4> -->
         <div v-for="region in franceCountry.regions" :key="region">
           <h5 class="wrapper-list-subhead">{{ region.name }}</h5>
@@ -16,7 +16,7 @@
           </ul>
         </div>
       </li>
-      <li v-for="continent in continents" :key="continent">
+      <li class="destination-column" v-for="continent in continents" :key="continent">
         <!-- <h4 class="wrapper-list-head">{{ continent.name }}</h4> -->
         <div v-for="country in continent.countries" :key="country" :class="[country.name === 'France' ? 'd-none' : '']">
           <h5 class="wrapper-list-subhead">{{ country.name }}</h5>
@@ -48,6 +48,9 @@ export default {
 </script>
 
 <style scoped>
+.destination-column {
+  margin-right: 0 !important;
+}
 .container {
   justify-content: center;
   height: 70%;

@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     pStyle() {
-      return `padding: ${this.py || '0'} ${this.px || '0'}; font-size: ${this.size || '0.8rem'}; height: ${this.height || '80px'}; width: ${this.width}; border-radius: ${this.radius}; background-color: ${this.backgroundColor};`
+      return `padding: ${this.py || '0'} ${this.px || '1rem'}; font-size: ${this.size || '0.8rem'}; height: ${this.height || '80px'}; width: ${this.width}; border-radius: ${this.radius}; background-color: ${this.backgroundColor};`
     },
     pColor() {
       return `bttn--${this.color}`

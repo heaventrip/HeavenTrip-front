@@ -74,7 +74,9 @@ export default {
   },
   watch: {
     tabsActive(newVal) {
-      document.querySelector('.search').style.visibility = newVal === true ? 'hidden' : 'visible'
+      if (document.querySelector('.search')) {
+        document.querySelector('.search').style.visibility = newVal === true ? 'hidden' : 'visible'
+      }
     },
     conceptIsActive(newVal) {
       if (newVal === true) {

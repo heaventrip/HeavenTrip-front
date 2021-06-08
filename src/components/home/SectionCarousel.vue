@@ -24,7 +24,9 @@
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="20" />
                     <span class="search-bar__fillter__name">Mois de départ</span>
                   </div>
-                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%" />
+                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
                 </div>
               </li>
               <li>
@@ -33,7 +35,9 @@
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="20" />
                     <span class="search-bar__fillter__name">Activités</span>
                   </div>
-                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%" />
+                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
                 </div>
               </li>
             </ul>
@@ -45,7 +49,9 @@
               ><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
             </button>
           </div>
-          <div class="tags-container d-flex justify-content-center"></div>
+          <div class="tags-container d-flex justify-content-center">
+            <Button text="Supprimer tous les filtres" background-color="pink" color="white" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="40px" />
+          </div>
         </div>
       </div>
       <div class="row">
@@ -135,7 +141,7 @@
             <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem"></div>
           </div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
-            <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem">
+            <div class="cards-slider d-flex overflow-hidden" style="">
               <SectionCarouselCard />
               <SectionCarouselCard />
               <SectionCarouselCard />
@@ -362,6 +368,7 @@ import Tag from '@/components/elements/Tag.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 import SectionCarouselCard from '@/components/home/SectionCarouselCard.vue'
+import Button from '@/components/elements/Button.vue'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 gsap.registerPlugin(CustomEase)
@@ -371,6 +378,7 @@ export default {
   components: {
     InlineProductInfos,
     SectionCarouselCard,
+    Button,
     InlineAvatars,
     Tag,
     Multiselect
@@ -380,13 +388,16 @@ export default {
   },
   data() {
     return {
+      // isMounted: false,
       hovered: false,
       courses: [],
       currentViewportWidth: '',
       cardsArr: [],
       monthSelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
         mode: 'tags',
-        value: ['Janvier'],
+        value: [],
         openDirection: 'top',
         caret: false,
         options: [
@@ -406,8 +417,10 @@ export default {
         createTag: true
       },
       activitySelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
         mode: 'tags',
-        value: ['VTT'],
+        value: [],
         openDirection: 'top',
         caret: false,
         options: [
@@ -420,6 +433,8 @@ export default {
         createTag: true
       },
       countrySelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
         value: 0,
         openDirection: 'top',
         caret: false,
@@ -511,6 +526,7 @@ export default {
         e.target.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
       })
     })
+    this.isMounted = true
   }
 }
 </script>
@@ -528,8 +544,10 @@ export default {
   z-index: 2;
 }
 .cards-slider {
-  width: max-content;
   padding-top: 1rem;
+  position: relative;
+  margin-bottom: 3rem;
+  min-height: 400px;
 }
 /* .customers-testimonials .item-details .content.hover::after {
   content: none !important;
