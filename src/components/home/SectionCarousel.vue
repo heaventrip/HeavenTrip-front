@@ -12,7 +12,7 @@
               <li>
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/country-search.svg')" height="20" />
+                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Pays</span>
                   </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
@@ -21,7 +21,7 @@
               <li>
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="20" />
+                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Mois de départ</span>
                   </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%" />
@@ -30,7 +30,7 @@
               <li>
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="20" />
+                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Activités</span>
                   </div>
                   <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%" />
@@ -517,7 +517,8 @@ export default {
 
 <style scoped>
 .search-bar__fillter__name {
-  margin-left: 1.2rem;
+  margin-left: 1rem;
+  vertical-align: middle;
 }
 .centered-div {
   box-shadow: none;

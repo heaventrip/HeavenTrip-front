@@ -34,7 +34,7 @@
         </div>
         <div class="hoverable-div">
           <div class="d-flex">
-            <InlineProductInfos :infos="['France', '7 jours', '10 places', 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
+            <InlineProductInfos class="InlineProduct" :infos="['France', '7 jours', '10 places', 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
             <InlineAvatars class="pl-4" :avatars="[1, 2]" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
           </div>
         </div>
@@ -86,6 +86,10 @@ export default {
 </script>
 
 <style scoped>
+.InlineProduct {
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+}
 .card__footer__infos {
   position: relative;
   flex-grow: 1;

@@ -87,6 +87,9 @@ export default {
 </script>
 
 <style scoped>
+.text--smaller {
+  font-size: 0.9rem;
+}
 .product-infos__tag {
   margin-right: 2.5rem;
   margin-top: 0.3rem;
