@@ -5,8 +5,8 @@
         <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 35px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.15); background-color: rgba(0, 0, 0, 0.15)">
           <div class="bg-white d-flex centered-div">
             <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.4rem 1rem">
-              <img class="mx-3 img-20 d-none d-lg-inline-block" fluid :src="require('@/assets/images/search.png')" />
-              <input class="form-control p-0 search-input ml-2 ml-sm-3 ml-lg-0 mr-xl-4" type="text" name="" placeholder="Ma recherche manuelle" />
+              <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
+              <input class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>
             <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2">
               <li class="country-filter">
@@ -15,7 +15,7 @@
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Pays</span>
                   </div>
-                  <Multiselect @open="setBgGrey('country-filter')" @close="setBgWhite('country-filter')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
+                  <Multiselect @open="setLBgGrey('country-filter')" @close="setBgWhite('country-filter')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
                 </div>
               </li>
               <li class="month-filter">
@@ -531,7 +531,6 @@ export default {
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').append(tagContainer)
     })
-
     document.querySelectorAll('.multi-select-filter').forEach((el) => {
       el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))
       el.addEventListener('mouseleave', (e) => this.turnBgWhite(e.target))
