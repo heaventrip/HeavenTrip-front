@@ -52,10 +52,37 @@
         <p class="sub-heading mb-2">Suis-je prêt ?</p>
         <h4 class="heading mb-0">Niveaux & intensité</h4>
       </div>
-      <h6 class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
+      <h6 @click="levelsModal = true" class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
         <img class="img_icon mr-2" fluid :src="require('@/assets/images/svg/PICTO_GRILLE_NIVEAUX.svg')" />
-        voir la grille <br />
-        des niveaux
+        <span>voir la grille <br />des niveaux</span>
+        <teleport to="#modal">
+          <div v-if="levelsModal" class="row level-modal" style="width: 50vw">
+            <div class="col-5 bg-dark">
+              <div class="nav flex-column nav-pills kitesurf-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-level1-tab" data-toggle="pill" href="#v-pills-level1" role="tab" aria-controls="v-pills-level1" aria-selected="true">NIVEAU 1 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                <a class="nav-link" id="v-pills-level2-tab" data-toggle="pill" href="#v-pills-level2" role="tab" aria-controls="v-pills-level2" aria-selected="false">NIVEAU 2 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                <a class="nav-link" id="v-pills-level3-tab" data-toggle="pill" href="#v-pills-level3" role="tab" aria-controls="v-pills-level3" aria-selected="false">NIVEAU 3 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                <a class="nav-link" id="v-pills-level4-tab" data-toggle="pill" href="#v-pills-level4" role="tab" aria-controls="v-pills-level4" aria-selected="false">NIVEAU 4 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+              </div>
+            </div>
+            <div class="col-7 bg-white">
+              <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-level1" role="tabpanel" aria-labelledby="v-pills-level1-tab">
+                  <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
+                  <h5 class="surfcontent-head mb-4">TOUS NIVEAUX</h5>
+                  <ul class="mb-0 surflist">
+                    <li>Marche de 4 à 5 heures par jour sur chemin, piste, sentier ou parcours vallonné. Dénivelé maximum de 500 m par jour.</li>
+                    <li>Je marche régulièrement sans trop de dénivelé</li>
+                    <li>Je pratique une activité sportive de temps en temps</li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="v-pills-level2" role="tabpanel" aria-labelledby="v-pills-level2-tab">qwertyu</div>
+                <div class="tab-pane fade" id="v-pills-level3" role="tabpanel" aria-labelledby="v-pills-level3-tab">asdfghjk</div>
+                <div class="tab-pane fade" id="v-pills-level4" role="tabpanel" aria-labelledby="v-pills-level4-tab">zxcvbnm,</div>
+              </div>
+            </div>
+          </div>
+        </teleport>
       </h6>
     </div>
     <div class="card-body p-lg-0">
@@ -149,13 +176,20 @@ export default {
   name: 'ProductTabInfos',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      levelsModal: false
     }
   }
 }
 </script>
 
 <style scoped>
+.level-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
 .review__block {
   margin-top: 2rem;
   color: #7c7c7c;

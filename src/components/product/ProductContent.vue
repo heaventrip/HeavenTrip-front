@@ -9,7 +9,7 @@
       <option value="#pills-opinion">VOS AVIS</option>
     </select>
   </div>
-  <ul class="bg-white nav nav-pills nav-justified mb-3 text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex" id="pills-tab " role="tablist">
+  <ul style="height: 80px" class="bg-white nav nav-pills nav-justified mb-3 text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex" id="pills-tab " role="tablist">
     <li class="nav-item" role="presentation">
       <a class="nav-link" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="false">INFOS SéJOUR</a>
     </li>

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex h-100 align-items-center justify-content-center">
+  <div class="d-flex h-100 align-items-center justify-content-center fg-1">
     <div class="d-flex align-items-center">
       <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 150px" />
       <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->

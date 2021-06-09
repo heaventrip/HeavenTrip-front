@@ -235,7 +235,7 @@ export default {
 /* PRODUCT */
 .header--product {
   min-height: 94vh;
-  padding-bottom: 13vh;
+  padding-bottom: 3vh;
 }
 .header-filter--product::after {
   content: '';
