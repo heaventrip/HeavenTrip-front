@@ -1,17 +1,18 @@
 <template>
   <div class="linear-block">
     <div class="card border-0 rounded-0">
-      <div class="card-header p-0 border-0 rounded-0" id="headingThree">
-        <div class="head-block py-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Sur place…</p>
-            <h4 class="heading mb-0">Hébergement</h4>
+      <div class="card-header p-0 border-0 rounded-0 mb-4" id="headingThree">
+        <div class="head-block px-4 px-lg-0 my-4 d-flex justify-content-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          <div class="product__nav__section-number"><span>03</span></div>
+          <div class="pl-3">
+            <p class="sub-heading mb-2">Vie sur place</p>
+            <h4 class="heading mb-0 text-uppercase">Hébergement</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
         </div>
       </div>
       <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
-        <div class="card-body">
+        <div class="card-body mb-5">
           <div class="d-flex align-items-center mb-4">
             <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5>
             <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav" id="pills-tab " role="tablist">
@@ -107,7 +108,7 @@
       <div class="card-header p-0 border-0 rounded-0" id="headingFour">
         <div class="head-block py-3 px-4 mb-lg-2 px-lg-0 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
           <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Chef !</p>
+            <p class="sub-heading mb-2">Vie sur place</p>
             <h4 class="heading mb-0">LES repas</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
@@ -116,7 +117,7 @@
       <div id="collapseFour" class="collapse show" aria-labelledby="headingFour">
         <div class="card-body">
           <p class="content mb-5">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</p>
-          <div class="d-flex no-gutters">
+          <div class="d-flex no-gutters justify-content-between">
             <div class="col-12 col-lg-5">
               <h5 class="head text-uppercase font-weight-bold text-danger mb-4">
                 <img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_CUISINE.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i>
@@ -149,12 +150,12 @@
                 </li>
               </ul>
             </div>
-            <div class="brown-div col-4">
-              <h6 class="head text-uppercase text-white py-2">Mot du pro…</h6>
-              <p class="content">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+            <div class="brown-div col-5" style="margin-left: 2rem; padding: 1rem; background-color: #fff; color: #292f33; box-shadow: 0px -1px 10px rgba(41, 47, 51, 0.1)">
+              <h6 class="head text-uppercase py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
+              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
               <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
-            <div class="img-block col-3">
+            <div class="img-block col-2">
               <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
             </div>
           </div>
@@ -199,6 +200,7 @@ export default {
 .product__nav__section-number {
   position: relative;
   width: 3rem;
+  height: 3rem;
   border-radius: 10px;
   background: #292f33;
   font-size: 1.8rem;

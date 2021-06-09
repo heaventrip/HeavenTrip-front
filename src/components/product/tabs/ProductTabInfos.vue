@@ -1,6 +1,6 @@
 <template>
   <div class="linear-block plain-block mt-lg-4">
-    <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
+    <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start">
       <div class="product__nav__section-number"><span>01</span></div>
       <div class="pl-3">
         <p class="sub-heading mb-2">Infos séjour</p>
@@ -23,11 +23,10 @@
         des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
         <span class="collapse" id="viewMore">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
       </p>
-      <a class="view-more-btn full_width" data-toggle="collapse" href="#viewMore" role="button" aria-expanded="false" aria-controls="viewMore">Voir plus <i class="fas fa-chevron-down ml-2"></i></a>
-      <div class="row">
+      <div class="row" style="margin-bottom: 4rem">
         <div class="col-9 col-lg-12 mx-auto">
           <div class="like-div">
-            <h5 class="content-head">Vous allez adorez :</h5>
+            <h5 class="content-head">Tu vas adorer :</h5>
             <ul class="list-unstyled text-uppercase content-list">
               <li>
                 <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>CHALET AUX PIEDS DES PISTES</a>
@@ -48,14 +47,15 @@
     </div>
   </div>
   <div class="linear-block product__overview__details-block">
-    <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
+    <div class="head-block d-flex justify-content-center justify-content-lg-start">
       <div class="left-border pl-3">
         <p class="sub-heading mb-2">Suis-je prêt ?</p>
         <h4 class="heading mb-0">Niveaux & intensité</h4>
       </div>
       <h6 class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
         <img class="img_icon mr-2" fluid :src="require('@/assets/images/svg/PICTO_GRILLE_NIVEAUX.svg')" />
-        grille Des <br />niveaux
+        voir la grille <br />
+        des niveaux
       </h6>
     </div>
     <div class="card-body p-lg-0">
@@ -67,21 +67,9 @@
             </div>
             <span class="ml-3">
               <h6 class="level-text">NIVEAUX : <strong class="ml-2">3</strong>/4</h6>
-              <h6 class="status-text mb-0">CONFIRMé</h6>
+              <h6 class="status-text mb-0">CONFIRMé ⓘ</h6>
             </span>
           </div>
-          <div class="d-flex">
-            <h6 class="need-head text-uppercase">En <strong>Ski Freeride</strong> il faut :</h6>
-            <h6 class="need-level text-uppercase d-flex d-lg-none align-items-center ml-auto">
-              <img class="img_icon mr-2" fluid :src="require('@/assets/images/svg/PICTO_GRILLE_NIVEAUX.svg')" />
-              grille Des <br />niveaux
-            </h6>
-          </div>
-          <ul class="list-unstyled need-list pl-4">
-            <li><i class="fa fa-check text-danger mr-3"></i> Vous pratiquez et maitrisez la discipline comme un Jedi</li>
-            <li><i class="fa fa-check text-danger mr-3"></i> Vous pratiquez et maitrisez la discipline</li>
-            <li><i class="fa fa-check text-danger mr-3"></i> Vous pratiquez et maitrisez la discipline</li>
-          </ul>
         </div>
         <div class="col-12 col-lg-6">
           <div class="grid-pin align-items-center my-lg-5 mt-0 mb-5">
@@ -96,14 +84,10 @@
               <h6 class="status-text mb-0">Sans les mains</h6>
             </span>
           </div>
-          <div class="d-flex">
-            <h6 class="need-head text-uppercase"><strong>Condition</strong> physique :</h6>
-          </div>
-          <p class="content">Vous tenez un effort physique avec intervalles sur de longues périodes avec un minimum de récupération. Vous tenez un effort physique avec intervalles.</p>
         </div>
       </div>
     </div>
-    <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start mb-0 mb-lg-3 mt-lg-5">
+    <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start mb-0 mb-lg-3 mt-lg-5">
       <div class="left-border pl-3">
         <p class="sub-heading mb-2">Bon a savoir…</p>
         <h4 class="heading mb-0">Prestations & équipements</h4>
@@ -210,6 +194,7 @@ export default {
 }
 .product__nav__section-number {
   position: relative;
+  height: 3rem;
   width: 3rem;
   border-radius: 10px;
   background: #292f33;

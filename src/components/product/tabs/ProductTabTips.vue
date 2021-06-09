@@ -2,12 +2,12 @@
   <div class="linear-block position-relative">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingSeven">
-        <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">A savoir</p>
-            <h4 class="heading mb-0">Infos PAYS</h4>
+        <div class="head-block my-4 d-flex justify-content-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          <div class="product__nav__section-number"><span>05</span></div>
+          <div class="pl-3">
+            <p class="sub-heading mb-2">Tips et astuces</p>
+            <h4 class="heading mb-0 text-uppercase">Infos pays</h4>
           </div>
-          <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
         </div>
       </div>
       <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven">
@@ -155,6 +155,7 @@ export default {
 .product__nav__section-number {
   position: relative;
   width: 3rem;
+  height: 3rem;
   border-radius: 10px;
   background: #292f33;
   font-size: 1.8rem;

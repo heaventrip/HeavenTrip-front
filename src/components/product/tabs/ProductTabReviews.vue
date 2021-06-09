@@ -2,10 +2,11 @@
   <div class="mb-5">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingTen">
-        <div class="head-block linear-block plain-block py-3 px-4 px-lg-0 my-0 d-flex justify-content-between justify-content-lg-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Trippers…</p>
-            <h4 class="heading mb-0">VOS avis…</h4>
+        <div class="head-block linear-block plain-block my-4 px-4 px-lg-0 d-flex justify-content-start justify-content-lg-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+          <div class="product__nav__section-number"><span>06</span></div>
+          <div class="pl-3">
+            <p class="sub-heading mb-2">Vos avis</p>
+            <h4 class="heading mb-0 text-uppercase">Les témoignages</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white text-arrow"></i>
         </div>
@@ -125,6 +126,7 @@ export default {
 .product__nav__section-number {
   position: relative;
   width: 3rem;
+  height: 3rem;
   border-radius: 10px;
   background: #292f33;
   font-size: 1.8rem;

@@ -29,7 +29,7 @@
       <a class="nav-link" id="pills-opinion-tab" data-toggle="pill" href="#pills-opinion" role="tab" aria-controls="pills-opinion" aria-selected="false">VOS AVIS</a>
     </li>
   </ul>
-  <div class="tab-content main-tab d-flex justify-content-around" id="pills-tabContent" style="padding: 0 6rem">
+  <div class="tab-content main-tab d-flex justify-content-around" id="pills-tabContent" style="padding: 2.5rem 6rem 3.5rem 6rem">
     <div class="tab-pane fade w-50" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
       <ProductTabInfos />
     </div>

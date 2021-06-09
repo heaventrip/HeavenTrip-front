@@ -271,12 +271,12 @@
 }
 .is-multiple .multiselect-option.is-selected,
 .is-tags .multiselect-option.is-selected {
-  color: #fff;
-  background: #d82558;
+  color: #292f33;
+  background: #ebebeb;
 }
 .is-multiple .multiselect-option.is-selected.is-pointed,
 .is-tags .multiselect-option.is-selected.is-pointed {
-  background: #d82558;
+  background: #ebebeb;
 }
 .multiselect-no-options,
 .multiselect-no-results {

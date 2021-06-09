@@ -181,7 +181,7 @@
                   </div>
                   <div class="d-flex pad__footer">
                     <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" />
+                      <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
                     </div>
                   </div>
                 </div>
@@ -291,7 +291,7 @@
                       <span class="pad__content__title__sport">yoggi & surf</span>
                       <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
                     </div>
-                    <div class="pad__content__sports d-flex align-items-center tooltip-div mt-4">
+                    <div class="pad__content__sports d-flex align-items-center tooltip-div">
                       <span class="pad__content__activities__title">Activités :</span>
                       <InlineSvg class="" :src="require('@/assets/svg/surf.svg')" height="22" />
                       <InlineSvg class="" :src="require('@/assets/svg/yoga.svg')" height="22" />
@@ -490,6 +490,7 @@ export default {
   font-size: 0.75rem;
   width: max-content;
   display: inline-block;
+  margin-right: 0.6rem;
 }
 .pad__content__activities__title {
   text-transform: uppercase;
@@ -511,8 +512,8 @@ export default {
   height: 50px;
 }
 .pad__content__price {
-  border-left: 1px solid #292f33;
-  padding-left: 1rem;
+  border-left: 1px dashed #292f33;
+  padding-left: 1.4rem;
 }
 .pad__content__price__info {
   font-size: 0.8rem;
@@ -521,11 +522,12 @@ export default {
 .pad__content__price__euro {
   font-size: 1.625rem;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.4;
 }
 .pad__content__sports {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 0.6rem;
   margin-bottom: 0.6rem;
   width: max-content;
 }

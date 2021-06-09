@@ -2049,6 +2049,7 @@ a.bg-danger:hover {
   margin-left: 8px;
 }
 .place-list li {
+  border-top: 1px dashed #dbdbdbb3;
   border-bottom: 1px dashed #dbdbdbb3;
   padding: 15px 0;
 }
@@ -2346,7 +2347,7 @@ a.bg-danger:hover {
   width: 33px;
 }
 .main-product-content .activity-list > li {
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px dashed #dbdbdb;
   padding: 27px 0 23px;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -2417,18 +2418,19 @@ a.bg-danger:hover {
 }
 .accommodation-nav.nav-pills .nav-link {
   border-radius: 0;
-  color: #e2e2e2;
+  color: #b4b4b4;
   font-size: 1rem;
   line-height: 30px;
-  margin: 0 21px;
-  padding: 10px 0;
+  /* margin: 0 21px; */
+  padding: 0.6rem 1rem;
   border-bottom: 1px solid transparent;
   margin-bottom: -1px;
+  border: 1px solid #b4b4b4;
 }
 .accommodation-nav.nav-pills .nav-link.active {
-  color: #d9345a;
-  border-color: #d9345a;
-  background-color: transparent;
+  color: #fff;
+  border-color: #292f33;
+  background-color: #292f33;
 }
 
 .galary-head {
@@ -5540,7 +5542,7 @@ a.descriptif-link.bg-danger:hover {
     font-size: 11px;
     padding: 0;
     padding-right: 36px;
-    border-right: 1px solid #ffffff;
+    /* border-right: 1px solid #ffffff; */
   }
   .main-product-content .like-div.white {
     padding: 0;
@@ -5642,7 +5644,7 @@ a.descriptif-link.bg-danger:hover {
     margin: 120px 0;
   }
   .main-product-content .tab-content.main-tab {
-    margin-top: 185px;
+    /* margin-top: 4rem; */
   }
   .pri-activity-block .box {
     border-top-left-radius: 0.25rem;
