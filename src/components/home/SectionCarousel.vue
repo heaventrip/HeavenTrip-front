@@ -9,31 +9,35 @@
               <input class="form-control p-0 search-input ml-2 ml-sm-3 ml-lg-0 mr-xl-4" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>
             <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2">
-              <li>
+              <li class="country-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Pays</span>
                   </div>
-                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
+                  <Multiselect @open="setBgGrey('country-filter')" @close="setBgWhite('country-filter')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
                 </div>
               </li>
-              <li>
+              <li class="month-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Mois de départ</span>
                   </div>
-                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%" />
+                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
                 </div>
               </li>
-              <li>
+              <li class="activity-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Activités</span>
                   </div>
-                  <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%" />
+                  <Multiselect @open="setBgGrey('activity-filter')" @close="setBgWhite('activity-filter')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
                 </div>
               </li>
             </ul>
@@ -45,7 +49,9 @@
               ><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
             </button>
           </div>
-          <div class="tags-container d-flex justify-content-center"></div>
+          <div class="tags-container d-flex justify-content-center">
+            <Button text="Supprimer tous les filtres" background-color="pink" color="white" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="40px" />
+          </div>
         </div>
       </div>
       <div class="row">
@@ -135,7 +141,7 @@
             <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem"></div>
           </div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
-            <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem">
+            <div class="cards-slider d-flex overflow-hidden" style="">
               <SectionCarouselCard />
               <SectionCarouselCard />
               <SectionCarouselCard />
@@ -362,6 +368,7 @@ import Tag from '@/components/elements/Tag.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 import SectionCarouselCard from '@/components/home/SectionCarouselCard.vue'
+import Button from '@/components/elements/Button.vue'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 gsap.registerPlugin(CustomEase)
@@ -371,6 +378,7 @@ export default {
   components: {
     InlineProductInfos,
     SectionCarouselCard,
+    Button,
     InlineAvatars,
     Tag,
     Multiselect
@@ -380,13 +388,16 @@ export default {
   },
   data() {
     return {
+      // isMounted: false,
       hovered: false,
       courses: [],
       currentViewportWidth: '',
       cardsArr: [],
       monthSelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
         mode: 'tags',
-        value: ['Janvier'],
+        value: [],
         openDirection: 'top',
         caret: false,
         options: [
@@ -406,8 +417,10 @@ export default {
         createTag: true
       },
       activitySelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
         mode: 'tags',
-        value: ['VTT'],
+        value: [],
         openDirection: 'top',
         caret: false,
         options: [
@@ -420,6 +433,8 @@ export default {
         createTag: true
       },
       countrySelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
         value: 0,
         openDirection: 'top',
         caret: false,
@@ -477,11 +492,31 @@ export default {
           )
         })
     },
-    changeBackground(e, color) {
-      // console.log(this.$event)
-      e.target.style.backgroundColor = color
-      e.target.style.color = color === 'grey' ? '#fff' : 'unset'
-      // window.scrollTo(0, 0)
+    setBgGrey(filterEl) {
+      let element = document.querySelector(`.${filterEl}`)
+      element.style.backgroundColor = '#292f33'
+      element.style.color = '#fff'
+      element.querySelector('.search-bar__fillter__svg').style.fill = '#fff'
+    },
+    setBgWhite(filterEl) {
+      let element = document.querySelector(`.${filterEl}`)
+      element.style.backgroundColor = '#fff'
+      element.style.color = '#292f33'
+      element.querySelector('.search-bar__fillter__svg').style.fill = '#fff'
+    },
+    turnBgGrey(el) {
+      if (!el.querySelector('.multiselect-options').style.display === 'none') return
+      el.style.backgroundColor = '#292f33'
+      el.style.borderColor = '#292f33'
+      el.style.color = '#fff'
+      el.querySelector('.search-bar__fillter__svg').style.fill = '#fff'
+    },
+    turnBgWhite(el) {
+      if (!el.querySelector('.multiselect-options').style.display === 'none') return
+      el.style.backgroundColor = '#fff'
+      el.style.borderColor = '#fff'
+      el.style.color = '#292f33'
+      el.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
     }
   },
   mounted() {
@@ -498,19 +533,10 @@ export default {
     })
 
     document.querySelectorAll('.multi-select-filter').forEach((el) => {
-      el.addEventListener('mouseenter', (e) => {
-        e.target.style.backgroundColor = '#292f33'
-        e.target.style.borderColor = '#292f33'
-        e.target.style.color = '#fff'
-        e.target.querySelector('.search-bar__fillter__svg').style.fill = 'white'
-      })
-      el.addEventListener('mouseleave', (e) => {
-        e.target.style.backgroundColor = 'unset'
-        e.target.style.borderColor = 'unset'
-        e.target.style.color = 'unset'
-        e.target.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
-      })
+      el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))
+      el.addEventListener('mouseleave', (e) => this.turnBgWhite(e.target))
     })
+    this.isMounted = true
   }
 }
 </script>
@@ -529,8 +555,10 @@ export default {
   z-index: 2;
 }
 .cards-slider {
-  width: max-content;
   padding-top: 1rem;
+  position: relative;
+  margin-bottom: 3rem;
+  min-height: 400px;
 }
 /* .customers-testimonials .item-details .content.hover::after {
   content: none !important;
