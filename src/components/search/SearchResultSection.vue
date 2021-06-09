@@ -321,10 +321,10 @@ export default {
     }
   },
   methods: {
-    changeBackground(e, color) {
-      e.target.style.backgroundColor = color
-      e.target.style.color = color === 'grey' ? '#fff' : 'unset'
-    }
+    // changeBackground(e, color) {
+    //   e.target.style.backgroundColor = color
+    //   e.target.style.color = color === 'grey' ? '#fff' : 'unset'
+    // }
   }
 }
 </script>
