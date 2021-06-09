@@ -163,12 +163,12 @@
       </div>
     </div>
   </div>
-  <div class="linear-block plain-block">
+  <div class="linear-block plain-block" style="margin-top: 3rem">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingFive">
         <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
           <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Sortons !</p>
+            <p class="sub-heading mb-2">Vie sur place</p>
             <h4 class="heading mb-0">A proximité</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>

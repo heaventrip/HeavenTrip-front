@@ -3,7 +3,7 @@
     <div class="head-block my-4 d-flex justify-content-center justify-content-lg-start">
       <div class="product__nav__section-number"><span>02</span></div>
       <div class="pl-3">
-        <p class="sub-heading mb-2">Activités et Spot</p>
+        <p class="sub-heading mb-2">Activités & Spot</p>
         <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
       </div>
       <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto"><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /></span>
@@ -59,7 +59,7 @@
       <div class="card-header p-0 border-0 rounded-0" id="headingTwo">
         <div class="head-block py-3 px-4 px-lg-0 mb-lg-3 d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Activités et Spot</p>
+            <p class="sub-heading mb-2">Activités & Spot</p>
             <h4 class="heading mb-0">Le spot</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white d-block d-lg-none"></i>
@@ -106,7 +106,7 @@
   <div class="linear-block">
     <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
       <div class="left-border pl-3 ml-3 ml-lg-0">
-        <p class="sub-heading mb-2">Activités et Spot</p>
+        <p class="sub-heading mb-2">Activités & Spot</p>
         <h4 class="heading mb-0">Activités incluses</h4>
       </div>
     </div>
@@ -178,7 +178,7 @@
       <div class="card-header p-0 border-0 rounded-0" id="headingOne">
         <div class="head-block py-3 px-4 px-lg-0 mt-lg-5 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Activités et Spot</p>
+            <p class="sub-heading mb-2">Activités & Spot</p>
             <h4 class="heading mb-0">Activités en option</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>

@@ -11,7 +11,7 @@
         </div>
       </div>
       <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven">
-        <div class="card-body">
+        <div class="card-body my-5">
           <div class="row">
             <div class="col-12 col-lg-7">
               <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">L’EGYPTE</h5>
@@ -21,7 +21,7 @@
               </p>
             </div>
           </div>
-          <ul class="list-unstyled place-list f-13 text-uppercase mb-0 d-flex flex-wrap flex-column flex-lg-row">
+          <ul class="list-unstyled place-list f-13 text-uppercase mb-0 d-flex flex-wrap flex-column flex-lg-row" style="border-bottom: 1px dashed #ebebeb">
             <li>
               <a href="#" class="text-decoration-none">Aéroport : <strong class="text-dark"> Hurghada</strong></a>
             </li>
@@ -60,10 +60,10 @@
   <div class="linear-block">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingEight">
-        <div class="head-block py-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+        <div class="head-block pt-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
           <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Cadeau !</p>
-            <h4 class="heading mb-0">TIPS & astuces</h4>
+            <p class="sub-heading mb-2">Tips & astuces</p>
+            <h4 class="heading mb-0">Itinéraires</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
         </div>
@@ -75,7 +75,7 @@
             En venant du nord de la France, prenez l’autoroute jusqu’à Grenoble, puis RN 91 “Col du Lautaret”. En venant de l’Italie prenez l’autoroute jusqu’à Oulx (35km de Briançon) puis emprunter le Col de Montgenèvre RN 94. En venant du sud de la France, prenez l’autoroute jusqu’au Tallard,
             Embrun, Briançon RN 94.
           </p>
-          <ul class="list-unstyled place-list f-13 text-uppercase my-3 mb-0 d-flex flex-wrap">
+          <ul class="list-unstyled place-list f-13 text-uppercase my-3 mb-0 d-flex flex-wrap" style="border-bottom: 1px dashed #ebebeb">
             <li>
               <a href="#" class="text-decoration-none">
                 AÉROPORTS :
@@ -102,8 +102,8 @@
       <div class="card-header p-0 border-0 rounded-0" id="headingNine">
         <div class="head-block py-3 px-4 px-lg-0 my-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
           <div class="left-border pl-3 ml-3 ml-lg-0">
-            <p class="sub-heading mb-2">Dans ton paquetage…</p>
-            <h4 class="heading mb-0">A prévoir pour ton séjour</h4>
+            <p class="sub-heading mb-2">Tips & astuces</p>
+            <h4 class="heading mb-0">A prévoir dans ton paquetage</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
         </div>
