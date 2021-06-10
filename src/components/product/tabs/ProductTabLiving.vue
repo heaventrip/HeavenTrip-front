@@ -150,12 +150,12 @@
                 </li>
               </ul>
             </div>
-            <div class="brown-div col-5" style="margin-left: 2rem; padding: 1rem; background-color: #fff; color: #292f33; box-shadow: 0px -1px 10px rgba(41, 47, 51, 0.1)">
+            <div class="brown-div col-5" style="margin-left: 2rem; padding: 1rem; background-color: #fff; color: #292f33; box-shadow: -1px 1px 6px rgba(41, 47, 51, 0.05); border-left: none !important">
               <h6 class="head text-uppercase py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
               <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
               <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
-            <div class="img-block col-2">
+            <div class="img-block col-2" style="border-radius: 0 5px 5px 0">
               <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
             </div>
           </div>

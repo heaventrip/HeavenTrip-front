@@ -112,7 +112,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-4">
           <div class="box bg-white">
             <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
               <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
@@ -142,7 +142,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-4">
           <div class="box bg-white">
             <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
               <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>

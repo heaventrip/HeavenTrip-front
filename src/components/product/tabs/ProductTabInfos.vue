@@ -65,7 +65,8 @@
                 <a class="nav-link" id="v-pills-level4-tab" data-toggle="pill" href="#v-pills-level4" role="tab" aria-controls="v-pills-level4" aria-selected="false">NIVEAU 4 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
               </div>
             </div>
-            <div class="col-7 bg-white">
+            <div class="col-7 bg-white" style="position: relative">
+              <button @click="levelsModal = false" style="position: absolute; top: 20px; right: 20px; z-index: 10">X</button>
               <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-level1" role="tabpanel" aria-labelledby="v-pills-level1-tab">
                   <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
@@ -177,6 +178,18 @@ export default {
   data() {
     return {
       levelsModal: false
+    }
+  },
+  watch: {
+    levelsModal(newVal) {
+      if (newVal === true) {
+        document.body.style.overflow = 'hidden'
+        document.querySelector('#app').style.filter = 'blur(5px)'
+      }
+      if (newVal === false) {
+        document.body.style.overflow = ''
+        document.querySelector('#app').style.filter = ''
+      }
     }
   }
 }

@@ -71,7 +71,8 @@
               <a class="nav-link" id="v-pills-health3-tab" data-toggle="pill" href="#v-pills-health3" role="tab" aria-controls="v-pills-health3" aria-selected="false">INFOS COVID <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
             </div>
           </div>
-          <div class="col-7 bg-white">
+          <div class="col-7 bg-white" style="position: relative">
+            <button @click="countryModal = false" style="position: absolute; top: 20px; right: 20px; z-index: 10">X</button>
             <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-health1" role="tabpanel" aria-labelledby="v-pills-health1-tab">
                 <h4 class="surfhead text-center"><img class="align-text-bottom mr-3 globe_dark" fluid :src="require('@/assets/images/globe_dark.png')" /> EGYPTE</h4>
@@ -182,6 +183,18 @@ export default {
   data() {
     return {
       countryModal: false
+    }
+  },
+  watch: {
+    countryModal(newVal) {
+      if (newVal === true) {
+        document.body.style.overflow = 'hidden'
+        document.querySelector('#app').style.filter = 'blur(5px)'
+      }
+      if (newVal === false) {
+        document.body.style.overflow = ''
+        document.querySelector('#app').style.filter = ''
+      }
     }
   }
 }
