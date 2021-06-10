@@ -40,7 +40,8 @@
                     <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
                     <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
                   </div>
-                  <div class="ml-2" style="margin-right: auto">
+                  <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" url="/upload" img-format="jpg"></my-upload>
+                  <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
                         <g id="Groupe_16781" data-name="Groupe 16781" transform="translate(0 0)">
@@ -73,13 +74,13 @@
                           </g>
                         </g></svg
                     ></a>
-                    <my-upload langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" url="/upload" :params="params" :headers="headers" img-format="png"></my-upload>
+                    <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" url="/upload" img-format="jpg"></my-upload>
                     <img :src="imgDataUrl" />
                   </div>
                   <div class="col-3 text-center" style="border-left: 1px dashed #b4b4b4">
                     <img :src="require('@/assets/images/avatar_example.png')" />
                     <p class="info-text-small mb-0 mt-1 pb-0">Cadrage conseillé</p>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div id="step--3" class="centered-vh">
@@ -139,11 +140,6 @@ export default {
       gender: '',
       description: '',
       show: true,
-      params: {
-        token: '123456789',
-        name: 'avatar'
-      },
-      headers: {},
       imgDataUrl: ''
     }
   },
