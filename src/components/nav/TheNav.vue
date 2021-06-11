@@ -47,6 +47,7 @@
         </li>
       </ul>
       <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
+      <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
       <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" role="tablist" aria-orientation="vertical" style="position: relative; left: 3rem; z-index: 2; width: max-content; margin-top: 2rem">
         <li class="nav-item" role="presentation">
           <a @click="$refs.activitiesTab.clicked(sportCategories[0]?.name)" class="nav-link active text-uppercase subactivity-nav__item" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false">{{
@@ -97,7 +98,6 @@
           }}</a>
         </li>
       </ul>
-      <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
       <div class="d-lg-none nav-btm-div d-none align-items-center">
         <!-- d-flex -->
         <a href="#" class="social-circle d-inline-block mr-3"><img class="img-fluid" fluid :src="require('@/assets/images/insta.png')" /></a>
