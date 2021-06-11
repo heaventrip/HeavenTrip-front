@@ -32,3 +32,4 @@ app.use(router)
 app.mount('#app')
 
 app.config.globalProperties.$axios = axios.create({ baseURL: 'https://heaventrip-dev.herokuapp.com/api/v1' })
+app.config.globalProperties.$contentful = require('contentful')

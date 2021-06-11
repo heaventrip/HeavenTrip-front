@@ -191,7 +191,7 @@ a.bg-danger:hover {
   color: #707070;
 }
 .header {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   /* background: url('../images/combined.png') no-repeat center center / cover; */
 }
@@ -2722,7 +2722,7 @@ button.Zebra_DatePicker_Icon {
 .main-product-content .narrow-header-pills {
   box-shadow: 0px 3px 6px #00000005;
   overflow: hidden;
-  top: 46px;
+  /* top: 46px; */
 }
 .main-product-content .narrow-header-pills.nav-pills .nav-link {
   border-radius: 0.25rem;
@@ -2743,7 +2743,7 @@ button.Zebra_DatePicker_Icon {
   position: absolute;
   background-color: #292f33;
   height: 1px;
-  width: 150%;
+  width: 100%;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);

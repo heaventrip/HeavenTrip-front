@@ -65,6 +65,9 @@ body.modal-open::after {
 .bg-grey {
   background-color: #292f33;
 }
+.text--pink {
+  color: #d9345a;
+}
 .text--grey {
   color: #292f33;
 }

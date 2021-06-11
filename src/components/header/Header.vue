@@ -181,6 +181,13 @@ export default {
       this.token = false
     }
     this.jquery()
+
+    // working contentful auth
+    const client = this.$contentful.createClient({
+      space: '4nx5joo7rzn4',
+      accessToken: 'nbv0vn5HDMDtpCH4M8Z07vc-p6Zk6tCWt-1Z0YcUp9o'
+    })
+    client.getAsset('2tfU1nf8WzcYTiSlj6QpeQ').then((e) => console.log(e))
   }
 }
 </script>
@@ -234,7 +241,7 @@ export default {
 }
 /* PRODUCT */
 .header--product {
-  min-height: 94vh;
+  height: 100vh;
   padding-bottom: 3vh;
 }
 .header-filter--product::after {
@@ -262,7 +269,7 @@ export default {
   height: 94vh;
 }
 .header-bg-container--product {
-  height: 94vh;
+  height: 100vh;
 }
 .header-bg-container--search {
   height: 100%;

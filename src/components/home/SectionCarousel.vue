@@ -4,7 +4,7 @@
       <div class="search row">
         <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 35px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.15); background-color: rgba(0, 0, 0, 0.15)">
           <div class="bg-white d-flex centered-div">
-            <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.4rem 1rem">
+            <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.4rem 2rem">
               <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
               <input class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>

@@ -8,48 +8,159 @@
       </div>
       <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto"><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /></span>
     </div>
-    <div class="card-body">
-      <div class="pri-activity-block">
-        <div class="box bg-dark m-0">
-          <h5 class="head text-uppercase mb-0 d-inline-block">
-            <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-            ski freeride
-          </h5>
-          <ul class="list-unstyled list mt-3 mb-0">
-            <li>
-              <a href="#" class="text-decoration-none">
-                COURS DE PERFECTIONNEMENT :
-                <strong class="text-white ml-2"> 20H</strong></a
-              >
-            </li>
-            <li>
-              <a href="#" class="text-decoration-none">
-                Sessions :
-                <strong class="text-white ml-2"> 4</strong></a
-              >
-            </li>
-            <li>
-              <a href="#" class="text-decoration-none">
-                Tendance :
-                <strong class="text-white ml-2"> 60% hors piste</strong></a
-              >
-            </li>
-            <li>
-              <a href="#" class="text-decoration-none">
-                Tendance :
-                <strong class="text-white ml-2"> 60% hors piste</strong></a
-              >
-            </li>
-          </ul>
-          <!-- <a href="#" class="corner-link">+</a> -->
+    <div class="d-flex align-items-center">
+      <ul class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab " role="tablist">
+        <li class="nav-item fg-1" role="presentation">
+          <a class="nav-link active ml-0" id="pills-act1-tab" data-toggle="pill" href="#pills-act1" role="tab" aria-controls="pills-solo" aria-selected="true">BUNGALOW SOLO</a>
+        </li>
+        <li class="nav-item fg-1" role="presentation">
+          <a class="nav-link" id="pills-act2-tab" data-toggle="pill" href="#pills-act2" role="tab" aria-controls="pills-duo" aria-selected="false">BUNGALOW DUO</a>
+        </li>
+        <li class="nav-item fg-1" role="presentation">
+          <a class="nav-link mr-0" id="pills-act3-tab" data-toggle="pill" href="#pills-act3" role="tab" aria-controls="pills-vip" aria-selected="false">BUNGALOW VIP</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="pills-act1" role="tabpanel" aria-labelledby="pills-act1-tab">
+        <div class="card-body">
+          <div class="pri-activity-block">
+            <div class="box bg-dark m-0">
+              <h5 class="head text-uppercase mb-0 d-inline-block">
+                <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+                ski freeride
+              </h5>
+              <ul class="list-unstyled list mt-3 mb-0">
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    COURS DE PERFECTIONNEMENT :
+                    <strong class="text-white ml-2"> 20H</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Sessions :
+                    <strong class="text-white ml-2"> 4</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Tendance :
+                    <strong class="text-white ml-2"> 60% hors piste</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Tendance :
+                    <strong class="text-white ml-2"> 60% hors piste</strong></a
+                  >
+                </li>
+              </ul>
+              <!-- <a href="#" class="corner-link">+</a> -->
+            </div>
+            <div class="brown-div">
+              <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
+              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+              <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+            </div>
+            <div class="img-block">
+              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+            </div>
+          </div>
         </div>
-        <div class="brown-div">
-          <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-          <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-          <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+      </div>
+      <div class="tab-pane fade" id="pills-act2" role="tabpanel" aria-labelledby="pills-act2-tab">
+        <div class="card-body">
+          <div class="pri-activity-block">
+            <div class="box bg-dark m-0">
+              <h5 class="head text-uppercase mb-0 d-inline-block">
+                <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+                ski freeride
+              </h5>
+              <ul class="list-unstyled list mt-3 mb-0">
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    COURS DE PERFECTIONNEMENT :
+                    <strong class="text-white ml-2"> 20H</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Sessions :
+                    <strong class="text-white ml-2"> 4</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Tendance :
+                    <strong class="text-white ml-2"> 60% hors piste</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Tendance :
+                    <strong class="text-white ml-2"> 60% hors piste</strong></a
+                  >
+                </li>
+              </ul>
+              <!-- <a href="#" class="corner-link">+</a> -->
+            </div>
+            <div class="brown-div">
+              <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
+              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+              <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+            </div>
+            <div class="img-block">
+              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+            </div>
+          </div>
         </div>
-        <div class="img-block">
-          <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+      </div>
+      <div class="tab-pane fade" id="pills-act3" role="tabpanel" aria-labelledby="pills-act3-tab">
+        <div class="card-body">
+          <div class="pri-activity-block">
+            <div class="box bg-dark m-0">
+              <h5 class="head text-uppercase mb-0 d-inline-block">
+                <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+                ski freeride
+              </h5>
+              <ul class="list-unstyled list mt-3 mb-0">
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    COURS DE PERFECTIONNEMENT :
+                    <strong class="text-white ml-2"> 20H</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Sessions :
+                    <strong class="text-white ml-2"> 4</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Tendance :
+                    <strong class="text-white ml-2"> 60% hors piste</strong></a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    Tendance :
+                    <strong class="text-white ml-2"> 60% hors piste</strong></a
+                  >
+                </li>
+              </ul>
+              <!-- <a href="#" class="corner-link">+</a> -->
+            </div>
+            <div class="brown-div">
+              <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
+              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+              <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+            </div>
+            <div class="img-block">
+              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="main-product-content">
     <Header />
-    <ProductContent />
-    <ProductFooter />
+    <ProductContent @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
+    <ProductFooter ref="productFooter" />
   </div>
   <!-- <ProductSection /> -->
   <!-- <ProductModal /> -->
@@ -19,8 +19,8 @@ export default {
   name: 'ProductHome',
   components: {
     Header,
-    ProductContent
-    // ProductFooter
+    ProductContent,
+    ProductFooter
     // ProductSection,
     // ProductModal
   },
