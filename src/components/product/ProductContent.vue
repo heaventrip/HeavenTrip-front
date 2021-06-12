@@ -14,7 +14,7 @@
     <ul
       :class="{ 'fade--out': slidingUp, 'fade--in--menu': slideIsUp }"
       style="position: relative"
-      :style="[slideIsUp ? 'height: 6vh; position: sticky; top: 0px; z-index: 2' : 'height: 10vh']"
+      :style="[slideIsUp && !navIsActive ? 'height: 6vh; position: sticky; top: 0px; z-index: 2' : 'height: 10vh']"
       class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center"
       id="pills-tab "
       role="tablist"
@@ -170,6 +170,7 @@ export default {
     ProductTabReviews,
     ProductTabTips
   },
+  props: ['nav-is-active'],
   emits: ['slide-is-up', 'slide-is-down'],
   data() {
     return {
@@ -180,10 +181,17 @@ export default {
       clickedTips: false,
       clickedReviews: false,
       slidingUp: false,
-      slideIsUp: false
+      slideIsUp: false,
+      navIsActive: this.$props.navIsActive
     }
   },
   watch: {
+    navIsActive(newVal) {
+      console.log(newVal)
+      if (newVal === true) {
+        gsap.set('.header--product', { height: window.innerHeight, ease: 'power3.out' })
+      }
+    },
     slideIsUp(newVal) {
       let that = this
       if (newVal === true) {

@@ -77,21 +77,29 @@
                   <div class="row">
                     <div class="col-12 col-lg-10 mx-auto">
                       <form id="login-form" @submit.prevent="checkLoginForm" method="post">
-                        <div v-if="errors.length" class="errors">
+                        <!-- <div v-if="errors.length" class="errors">
                           <b>Veuillez corriger la ou les erreurs suivantes :</b>
                           <ul v-for="error in errors" :key="error">
                             <li>{{ error }}</li>
                           </ul>
-                        </div>
+                        </div> -->
                         <div class="row">
                           <div class="col-12">
                             <div class="form-group">
-                              <input v-model="loginEmail" class="form-control modal-input" type="mail" name="email" placeholder="Adresse mail" />
+                              <input v-model="loginEmail" class="form-control modal-input" type="mail" name="email" placeholder="Adresse mail" :style="[errors.includes('loginEmail') && !loginEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
                             </div>
                           </div>
                           <div class="col-12">
                             <div class="form-group">
-                              <input v-model="loginPassword" class="form-control modal-input mb-2" type="password" autocomplete="off" name="password" placeholder="Mot de passe" />
+                              <input
+                                v-model="loginPassword"
+                                class="form-control modal-input mb-2"
+                                type="password"
+                                autocomplete="off"
+                                name="password"
+                                placeholder="Mot de passe"
+                                :style="[errors.includes('loginPassword') && !loginPassword ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+                              />
                               <a @click.prevent="displayPasswordForm" class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
                             </div>
                           </div>
@@ -110,37 +118,52 @@
                 <div class="register-form h-100 d-none flex-column">
                   <p class="text-left content-head mb-4">Merci de remplir tous les champs pour valider votre inscription :</p>
                   <form id="register-form" @submit.prevent="checkRegisterForm" method="post">
-                    <div v-if="registerErrors.length" class="errors">
+                    <!-- <div v-if="registerErrors.length" class="errors">
                       <b>Veuillez corriger la ou les erreurs suivantes :</b>
                       <ul v-for="error in registerErrors" :key="error">
                         <li>{{ error }}</li>
                       </ul>
-                    </div>
+                    </div> -->
                     <div class="row">
                       <div class="col-12 col-lg-6">
                         <div class="form-group position-relative">
-                          <input v-model="firstName" class="form-control modal-input" type="text" name="" placeholder="Prénom" />
+                          <input v-model="firstName" class="form-control modal-input" type="text" name="" placeholder="Prénom" :style="[registerErrors.includes('firstName') && !firstName ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
                           <i class="fa fa-check check-sym"></i>
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input v-model="lastName" class="form-control modal-input" type="text" name="" placeholder="Nom" />
+                          <input v-model="lastName" class="form-control modal-input" type="text" name="" placeholder="Nom" :style="[registerErrors.includes('lastName') && !lastName ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input v-model="registerEmail" class="form-control modal-input" type="mail" name="register_email" placeholder="Adresse mail" />
+                          <input v-model="registerEmail" class="form-control modal-input" type="mail" name="register_email" placeholder="Adresse mail" :style="[registerErrors.includes('registerEmail') && !registerEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input v-model="registerPassword" class="form-control modal-input" type="password" autocomplete="off" name="register_password" placeholder="Mot de passe" />
+                          <input
+                            v-model="registerPassword"
+                            class="form-control modal-input"
+                            type="password"
+                            autocomplete="off"
+                            name="register_password"
+                            placeholder="Mot de passe"
+                            :style="[registerErrors.includes('registerPassword') && !registerPassword ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+                          />
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input v-model="registerPasswordConfirmation" class="form-control modal-input" type="password" name="register_password_confirmation" placeholder="Confirmer le mot de passe" />
+                          <input
+                            v-model="registerPasswordConfirmation"
+                            class="form-control modal-input"
+                            type="password"
+                            name="register_password_confirmation"
+                            placeholder="Retaper le mot de passe"
+                            :style="[registerErrors.includes('registerPasswordConfirmation') && !registerPasswordConfirmation ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+                          />
                         </div>
                       </div>
                     </div>
@@ -264,6 +287,9 @@ export default {
       loginModal: true
     }
   },
+  watch: {
+    firstName() {}
+  },
   methods: {
     displayPasswordForm() {
       this.passwordForgotten = true
@@ -287,40 +313,19 @@ export default {
       this.errors = []
       let err = this.errors
 
-      if (!this.validEmail(this.loginEmail)) {
-        err.push('Veuillez saisir une adresse e-mail valide.')
-      }
-
-      if (this.password === '') {
-        err.push('Veuillez saisir votre mot de passe.')
-      }
-
+      if (!this.validEmail(this.loginEmail)) err.push('loginEmail')
+      if (this.loginPassword === '') err.push('loginPassword')
       if (!err.length) this.submitLoginForm()
     },
     checkRegisterForm() {
       this.registerErrors = []
       let err = this.registerErrors
 
-      if (!this.firstName) {
-        err.push('Veuillez saisir votre prénom.')
-      }
-
-      if (!this.lastName) {
-        err.push('Veuillez saisir votre nom.')
-      }
-
-      if (!this.validEmail(this.registerEmail)) {
-        err.push('Veuillez saisir une adresse e-mail valide.')
-      }
-
-      if (this.registerPassword === '') {
-        err.push('Veuillez saisir votre mot de passe.')
-      }
-
-      if (this.registerPassword !== this.registerPasswordConfirmation) {
-        err.push('Les mots de passe ne sont pas indentiques.')
-      }
-
+      if (!this.firstName) err.push('firstName')
+      if (!this.lastName) err.push('lastName')
+      if (!this.validEmail(this.registerEmail)) err.push('registerEmail')
+      if (this.registerPassword === '') err.push('registerPassword')
+      if (this.registerPassword !== this.registerPasswordConfirmation) err.push('registerPasswordConfirmation')
       if (!err.length) this.submitRegisterForm()
     },
     submitLoginForm() {
@@ -374,5 +379,9 @@ export default {
 <style>
 .errors {
   color: red;
+}
+.modal-input--error {
+  color: red;
+  border-left: 4px solid red;
 }
 </style>

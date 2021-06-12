@@ -1,7 +1,7 @@
 <template>
   <div class="main-product-content">
-    <Header />
-    <ProductContent @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
+    <Header @nav-is-active="$refs.productContent.navIsActive = true" />
+    <ProductContent ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
     <ProductFooter ref="productFooter" />
   </div>
   <!-- <ProductSection /> -->
@@ -23,11 +23,6 @@ export default {
     ProductFooter
     // ProductSection,
     // ProductModal
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
   },
   methods: {
     jquery() {

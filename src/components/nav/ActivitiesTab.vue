@@ -7,7 +7,7 @@
         </h4> -->
     </div>
     <div v-for="category in sportCategories" :key="category" class="sports-block flex-column justify-content-center w-100 flex-grow-1" :class="[category.name === activeCategory ? 'd-flex' : 'd-none']">
-      <div class="row no-gutters align-items-center justify-content-start py-3 mb-lg-3 mb-xl-5">
+      <div class="row no-gutters align-items-center justify-content-start py-3 my-xl-3">
         <div v-for="(sport, index) in category.sports.slice(0, 3)" :key="sport" class="col-3" :class="[category.sports.length === 1 && index === 0 ? 'offset-3' : '', category.sports.length === 2 && index === 0 ? 'offset-1' : '']">
           <svg transform="translate(0, -5) rotate(-30)" height="100" width="100" viewBox="0 0 400 400">
             <svg x="-10" height="400" width="200" fill="none">
@@ -42,7 +42,7 @@
             <span class="sport-name">Surf</span>
           </div> -->
       </div>
-      <div class="row no-gutters align-items-center justify-content-start py-3" v-if="category.sports.length > 3">
+      <div class="row no-gutters align-items-center justify-content-start py-3 my-xl-3" v-if="category.sports.length > 3">
         <div v-for="sport in category.sports.slice(3, 6)" :key="sport" class="col-3">
           <svg transform="translate(0, -5) rotate(-30)" height="100" width="100" viewBox="0 0 400 400">
             <svg x="-10" height="400" width="200" fill="none">

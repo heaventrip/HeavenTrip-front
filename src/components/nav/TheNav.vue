@@ -221,6 +221,7 @@ export default {
 #navbarSupportedContent {
   flex-wrap: wrap;
   align-items: flex-start;
+  padding-right: 30%;
 }
 .subactivity-nav__item {
   color: rgba(250, 250, 250, 0.5) !important;
