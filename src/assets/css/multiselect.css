@@ -49,6 +49,7 @@
 .multiselect-placeholder,
 .multiselect-single-label {
   display: flex;
+  display: none;
   align-items: center;
   height: 100%;
   padding-left: 14px;
@@ -140,23 +141,25 @@
 .multiselect-tag {
   background: #d82558;
   color: #fff;
-  font-size: 14px;
+  font-size: 0.85rem;
   font-weight: 600;
   padding: 0 0 0 8px;
   border-radius: 3px;
   margin-right: 5px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   display: flex;
   align-items: center;
   cursor: text;
   white-space: nowrap;
+  height: 40px;
 }
 .multiselect-tag i {
   cursor: pointer;
 }
 .multiselect-tag i:before {
   content: '×';
-  color: #266d4d;
+  color: #fff;
+  /* color: #266d4d; */
   font-size: 14px;
   font-weight: 700;
   padding: 1px 5px;
@@ -263,11 +266,13 @@
   cursor: not-allowed;
 }
 .multiselect-option.is-selected {
-  background: #41b883;
+  /* background: #41b883; */
+  background: #d82558;
   color: #fff;
 }
 .multiselect-option.is-selected.is-pointed {
-  background: #4fbd8c;
+  /* background: #4fbd8c; */
+  background: #d82558;
 }
 .is-multiple .multiselect-option.is-selected,
 .is-tags .multiselect-option.is-selected {

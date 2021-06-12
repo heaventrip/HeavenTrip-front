@@ -6,16 +6,19 @@
           <div class="bg-white d-flex centered-div">
             <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.4rem 2rem">
               <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
-              <input class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
+              <input v-model="freeSearch" class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>
             <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2">
               <li class="country-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
-                    <span class="search-bar__fillter__name">Pays</span>
+                    <span v-if="countrySelection.value" class="search-bar__fillter__name">{{ countrySelection.value }}</span>
+                    <span v-else class="search-bar__fillter__name">Pays</span>
                   </div>
-                  <Multiselect @open="setLBgGrey('country-filter')" @close="setBgWhite('country-filter')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%" />
+                  <Multiselect ref="countryMultiselect" @open="setLBgGrey('country-filter')" @close="setBgWhite('country-filter')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
                 </div>
               </li>
               <li class="month-filter">
@@ -24,7 +27,7 @@
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Mois de départ</span>
                   </div>
-                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                  <Multiselect ref="monthMultiselect" @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -35,7 +38,7 @@
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Activités</span>
                   </div>
-                  <Multiselect @open="setBgGrey('activity-filter')" @close="setBgWhite('activity-filter')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                  <Multiselect ref="activityMultiselect" @open="setBgGrey('activity-filter')" @close="setBgWhite('activity-filter')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -44,13 +47,13 @@
             <button class="btn btn-light bg-white text-uppercase search-btn filter-btn px-3 px-sm-4 rounded-right ml-auto border-left d-inline-block d-lg-none">
               <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
             </button>
-            <button class="btn btn-dark text-uppercase search-btn px-3 px-sm-4 rounded-right border-0">
+            <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-4 rounded-right border-0">
               <span class="d-none d-lg-inline-block"><a href="/search" class="text-link">rechercher</a></span
               ><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
             </button>
           </div>
           <div class="tags-container d-flex justify-content-center">
-            <Button text="Supprimer tous les filtres" background-color="pink" color="white" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="40px" />
+            <Button @click="clearFilters" text="Supprimer tous les filtres" background-color="pink" color="white" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="40px" />
           </div>
         </div>
       </div>
@@ -141,11 +144,8 @@
             <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem"></div>
           </div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
-            <div class="cards-slider d-flex overflow-hidden" style="">
-              <SectionCarouselCard />
-              <SectionCarouselCard />
-              <SectionCarouselCard />
-              <SectionCarouselCard />
+            <div v-if="isMounted" class="cards-slider d-flex overflow-hidden">
+              <SectionCarouselCard v-for="course in courses" :key="course" :course="course" />
             </div>
             <section class="testimonials d-none">
               <div class="col-12 col-lg-11 ml-auto p-0">
@@ -388,7 +388,8 @@ export default {
   },
   data() {
     return {
-      // isMounted: false,
+      freeSearch: '',
+      isMounted: false,
       hovered: false,
       courses: [],
       currentViewportWidth: '',
@@ -401,18 +402,18 @@ export default {
         openDirection: 'top',
         caret: false,
         options: [
-          { value: 'jan', label: 'Janvier' },
-          { value: 'feb', label: 'Février' },
-          { value: 'mar', label: 'Mars' },
-          { value: 'apr', label: 'Avril' },
-          { value: 'may', label: 'Mai' },
-          { value: 'jun', label: 'Juin' },
-          { value: 'jul', label: 'Juillet' },
-          { value: 'aug', label: 'Août' },
-          { value: 'sep', label: 'Septembre' },
-          { value: 'oct', label: 'Octobre' },
-          { value: 'nov', label: 'Novembre' },
-          { value: 'dec', label: 'Décembre' }
+          { value: '1', label: 'Janvier' },
+          { value: '2', label: 'Février' },
+          { value: '3', label: 'Mars' },
+          { value: '4', label: 'Avril' },
+          { value: '5', label: 'Mai' },
+          { value: '6', label: 'Juin' },
+          { value: '7', label: 'Juillet' },
+          { value: '8', label: 'Août' },
+          { value: '9', label: 'Septembre' },
+          { value: '10', label: 'Octobre' },
+          { value: '11', label: 'Novembre' },
+          { value: '12', label: 'Décembre' }
         ],
         createTag: true
       },
@@ -423,13 +424,7 @@ export default {
         value: [],
         openDirection: 'top',
         caret: false,
-        options: [
-          { value: 'vtt', label: 'VTT' },
-          { value: 'ski', label: 'Ski' },
-          { value: 'surf', label: 'Surf' },
-          { value: 'kitesurf', label: 'Kitesurf' },
-          { value: 'escalade', label: 'Escalade' }
-        ],
+        options: [],
         createTag: true
       },
       countrySelection: {
@@ -438,12 +433,29 @@ export default {
         value: 0,
         openDirection: 'top',
         caret: false,
-        options: ['France', 'Espagne', 'Italie']
+        options: []
       }
     }
   },
-  created() {
-    this.$axios.get('/courses').then((res) => (this.courses = res.data.courses))
+  async created() {
+    this.$axios.get('/countries').then((res) => {
+      res.data.countries.forEach((country) => {
+        this.countrySelection.options.push({ value: country.id, label: country.name })
+      })
+    })
+    this.$axios.get('/sports').then((res) => {
+      res.data.sports.forEach((sport) => {
+        this.activitySelection.options.push({ value: sport.id, label: sport.name })
+      })
+    })
+    this.$axios.get('/courses').then((res) => {
+      this.courses = res.data.courses
+      this.isMounted = true
+      // FIXME doesnt work below, elements not yet loaded
+      gsap.set('.card-block', {
+        x: (i) => i * 600 + this.currentViewportWidth * 0.15 // left offset of 10vw
+      })
+    })
   },
   methods: {
     // TODO mettre un composant Vuejs à la place
@@ -492,6 +504,23 @@ export default {
           )
         })
     },
+    submitSearchForm() {
+      this.$axios
+        .post('/courses/search', {
+          q: {
+            free_search: this.freeSearch,
+            spot_country_id_eq: this.countrySelection.value,
+            sports_id_in: this.activitySelection.value,
+            sessions_month_of_departure_eq: this.monthSelection.value
+          }
+        })
+        .then((res) => console.log(res))
+    },
+    clearFilters() {
+      this.$refs.countryMultiselect.clear()
+      this.$refs.monthMultiselect.clear()
+      this.$refs.activityMultiselect.clear()
+    },
     setBgGrey(filterEl) {
       let element = document.querySelector(`.${filterEl}`)
       element.style.backgroundColor = '#292f33'
@@ -524,9 +553,6 @@ export default {
     // gsap.utils.toArray('.card-block').forEach((card, index) => {
     //   gsap.set(card, { x: 550 * index })
     // })
-    gsap.set('.card-block', {
-      x: (i) => i * 600 + this.currentViewportWidth * 0.15 // left offset of 10vw
-    })
     this.cardsArr = gsap.utils.toArray('.card-block')
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').append(tagContainer)
@@ -535,7 +561,6 @@ export default {
       el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))
       el.addEventListener('mouseleave', (e) => this.turnBgWhite(e.target))
     })
-    this.isMounted = true
   }
 }
 </script>
