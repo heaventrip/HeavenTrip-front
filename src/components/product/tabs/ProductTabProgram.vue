@@ -2,10 +2,11 @@
   <div class="linear-block plain-block">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0 bg-white" id="headingSix">
-        <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
+        <div class="head-block px-4 px-lg-0 my-4 d-flex justify-content-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+          <div class="product__nav__section-number"><span>04</span></div>
+          <div class="pl-3">
             <p class="sub-heading mb-2">Programme</p>
-            <h4 class="heading mb-0">Déroulé du séjour</h4>
+            <h4 class="heading mb-0 text-uppercase">Déroulé du séjour</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
         </div>
@@ -85,6 +86,7 @@ export default {
 .product__nav__section-number {
   position: relative;
   width: 3rem;
+  height: 3rem;
   border-radius: 10px;
   background: #292f33;
   font-size: 1.8rem;

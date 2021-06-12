@@ -6,10 +6,14 @@
       'header-filter--home': !navIsActive && currentRoute('/'),
       'header-filter--grey': activitiesIsActive || destinationsIsActive,
       'header-filter--light': agencyIsActive,
-      'header--search': !navIsActive && currentRoute('/search'),
+      'header--search': currentRoute('/search'),
       'header-filter--search': !navIsActive && currentRoute('/search'),
-      'header--product': !navIsActive && currentRoute('/product'),
-      'header-filter--product': !navIsActive && currentRoute('/product')
+      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/search'),
+      'header-filter--search--light': agencyIsActive && currentRoute('/search'),
+      'header--product': currentRoute('/product'),
+      'header-filter--product': !navIsActive && currentRoute('/product'),
+      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/product'),
+      'header-filter--product--light': agencyIsActive && currentRoute('/product')
     }"
   >
     <div
@@ -25,7 +29,7 @@
     <ConnectionButtons />
     <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('/') && !navIsActive" />
-    <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" />
+    <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" ref="productHeaderInfos" />
     <SearchHeaderInfos v-else-if="currentRoute('/search') && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
@@ -120,6 +124,9 @@ export default {
     $route(to, from) {
       console.log('to', to)
       console.log('from', from)
+    },
+    navIsActive(newVal) {
+      if (newVal === true) this.$emit('nav-is-active')
     }
   },
   computed: {
@@ -181,6 +188,13 @@ export default {
       this.token = false
     }
     this.jquery()
+
+    // working contentful auth
+    const client = this.$contentful.createClient({
+      space: '4nx5joo7rzn4',
+      accessToken: 'nbv0vn5HDMDtpCH4M8Z07vc-p6Zk6tCWt-1Z0YcUp9o'
+    })
+    client.getAsset('2tfU1nf8WzcYTiSlj6QpeQ').then((e) => console.log(e))
   }
 }
 </script>
@@ -232,16 +246,52 @@ export default {
   height: 100vh; /* corresponds height of image */
   z-index: -1;
 }
+.header-filter--search--grey::after {
+  content: '';
+  position: absolute;
+  background-color: #292f33;
+  opacity: 0.9;
+  width: 100%;
+  height: 100vh; /* corresponds height of image */
+  z-index: -1;
+}
+.header-filter--search--light::after {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  opacity: 0.8;
+  width: 100%;
+  height: 100vh; /* corresponds height of image */
+  z-index: -1;
+}
 /* PRODUCT */
 .header--product {
-  min-height: 94vh;
-  padding-bottom: 13vh;
+  height: 100vh;
+  padding-bottom: 3vh;
 }
 .header-filter--product::after {
   content: '';
   position: absolute;
   background-color: #5a3a5fb3;
   /* opacity: 0.6; */
+  width: 100%;
+  height: 100vh; /* corresponds height of image */
+  z-index: -1;
+}
+.header-filter--product--grey::after {
+  content: '';
+  position: absolute;
+  background-color: #292f33;
+  opacity: 0.9;
+  width: 100%;
+  height: 100vh; /* corresponds height of image */
+  z-index: -1;
+}
+.header-filter--product--light::after {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  opacity: 0.8;
   width: 100%;
   height: 100vh; /* corresponds height of image */
   z-index: -1;
@@ -262,7 +312,7 @@ export default {
   height: 94vh;
 }
 .header-bg-container--product {
-  height: 94vh;
+  height: 100vh;
 }
 .header-bg-container--search {
   height: 100%;

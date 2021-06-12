@@ -13,6 +13,14 @@ body {
   width: 100vw;
   overflow-x: hidden;
 }
+body.modal-open::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(41, 47, 51, 0.2);
+}
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -56,6 +64,9 @@ body {
 }
 .bg-grey {
   background-color: #292f33;
+}
+.text--pink {
+  color: #d9345a;
 }
 .text--grey {
   color: #292f33;

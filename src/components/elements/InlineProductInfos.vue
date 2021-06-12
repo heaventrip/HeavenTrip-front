@@ -2,7 +2,7 @@
   <div class="block d-flex align-items-center text-uppercase" :class="[pJustifyContent || 'justify-content-between', pClass]" :style="[borderTopStyle, borderBottomStyle, paddingYStyle, widthStyle]">
     <div class="block__item" v-for="(info, index) in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
       <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" :fill="pColor" />
-      <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle, { color: pColor }]">{{ info }}</span>
+      <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle, { color: pColor }, fontWeightStyle]">{{ info }}</span>
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icon-margin', 'width', 'divider', 'justify-content', 'letter-spacing'],
+  props: ['font-weight', 'infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icon-margin', 'width', 'divider', 'justify-content', 'letter-spacing'],
   data() {
     return {
       pIcon: this.icon,
@@ -46,6 +46,9 @@ export default {
     },
     letterSpacingStyle() {
       return `letter-spacing: ${this.letterSpacing};`
+    },
+    fontWeightStyle() {
+      return `font-weight: ${this.fontWeight};`
     },
     widthStyle() {
       return `width: ${this.width};`

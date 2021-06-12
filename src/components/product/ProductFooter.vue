@@ -1,6 +1,6 @@
 <template>
-  <div class="pre-booking-footer sticky-bottom d-none d-lg-block">
-    <div class="booking-session d-flex align-items-center">
+  <div class="pre-booking-footer sticky-bottom w-100" :class="[slideIsUp ? 'd-flex' : 'd-none']" style="position: sticky; bottom: 0">
+    <div :class="[openBooking ? 'd-flex' : 'd-none']" class="booking-session align-items-center">
       <h2 class="session-head border-right border-white">CRÉER UNE SESSION</h2>
       <ul class="text-uppercase list-unstyled year-list border-right border-white px-3">
         <li><a href="#" class="text-reset active">2020</a></li>
@@ -209,10 +209,10 @@
       <div class="tab-pane fade" id="nov" role="tabpanel" aria-labelledby="nov-tab">asdfgh</div>
       <div class="tab-pane fade" id="dec" role="tabpanel" aria-labelledby="dec-tab">zxcvbn</div>
     </div>
-    <div class="booking-bottom d-flex align-items-center bg-dark text-uppercase text-white">
+    <div @click="openBooking = !openBooking" class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
       <div class="row flex-1 mx-0 text-center">
-        <div class="col-3 border-right center-col inactive">
+        <div class="col-3 border-right center-col inactive" style="background-color: #ebebeb">
           <div class="d-inline-block text-left">
             <h6 class="int-count"><strong class="">1800 TRIPPERS</strong> Intéressés</h6>
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-3 mb-0">
@@ -240,30 +240,17 @@
         </div>
         <div class="col-4 border-right center-col datepicker-col" id="depart_datepick">
           <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
-            <div id="datepickbtn" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
-              <div class="text-right">
-                <span
-                  ><img class="mr-2 img-20" fluid :src="require('@/assets/images/cal_light.png')" />
-                  départ
-                </span>
-                <input id="datepicker-range-start" type="text" class="form-control" data-zdp_readonly_element="false" value="" />
+            <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
+              <div class="text-right text--grey">
+                <div class="d-inline-block pb-2" style="border-bottom: 1px dashed rgba(41, 47, 51, 0.35)">
+                  <InlineSvg :src="require('@/assets/svg/date-search.svg')" height="24" style="vertical-align: text-bottom" class="mr-2" />
+                  Sélectionne une session
+                </div>
+                <div class="text-uppercase pt-2"><span class="text--pink">4 sessions</span>&nbsp;disponibles</div>
               </div>
               <i class="fa fa-chevron-down ml-3 mb-1 arrow"></i>
             </div>
-            <div id="retourpickbtn" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper end">
-              <div class="text-right">
-                <span
-                  ><img class="mr-2 img-20" fluid :src="require('@/assets/images/cal_light.png')" />
-                  retour
-                </span>
-                <input id="datepicker-range-end" type="text" class="form-control" data-zdp_readonly_element="false" value="" />
-              </div>
-              <i class="fa fa-chevron-down ml-3 mb-1 arrow"></i>
-            </div>
-            <h5 class="premier-text mb-0 col-3">
-              <strong id="nights"></strong> NUITS<br />
-              <strong id="days"></strong> JOURS
-            </h5>
+            <InlineSvg :src="require('@/assets/svg/arrow-right.svg')" transform="rotate(90)" height="24" fill="#292f33" />
           </div>
           <div class="d-none">
             <div class="d-none text-right">
@@ -281,7 +268,7 @@
           </div>
         </div>
         <div class="col-3 border-right center-col flex-column inactive">
-          <div class="d-inline-block text-right">
+          <div class="d-inline-block text-center w-100" style="border-left: 1px dashed #b4b4b4; border-right: 1px dashed #b4b4b4">
             <h5 class="premier-text mb-0 letter-space-1">
               <img class="mr-2 icons" fluid :src="require('@/assets/images/places.png')" />Participants
               <form class="d-inline-flex align-items-center align-bottom ml-3">
@@ -307,7 +294,8 @@ export default {
   name: 'ProductFooter',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      openBooking: false,
+      slideIsUp: false
     }
   },
   methods: {
@@ -418,3 +406,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.reserve-btn {
+  min-width: 200px !important;
+}
+</style>

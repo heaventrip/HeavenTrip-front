@@ -17,9 +17,9 @@
             <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
               <div class="card__footer__infos__heading d-flex align-items-center">
-                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">ski freeride</span>
+                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ pCourse.sports[0]?.name }}</span>
                 <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
-                <span class="card__footer__infos__heading-spot d-inline-block align-middle">serre-chevalier</span>
+                <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ pCourse.spot?.name }}</span>
               </div>
               <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
                 <span>inclus :&nbsp;</span>
@@ -29,12 +29,12 @@
           </div>
           <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
             <div class="card__footer__price__info" style="font-weight: 300">par pers.</div>
-            <div class="card__footer__price__euro">1 390&euro;</div>
+            <div class="card__footer__price__euro">{{ pCourse.price }}&euro;</div>
           </div>
         </div>
         <div class="hoverable-div">
           <div class="d-flex">
-            <InlineProductInfos class="InlineProduct" :infos="['France', '7 jours', '10 places', 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
+            <InlineProductInfos class="InlineProduct" :infos="[pCourse.spot?.country, pCourse?.duration, pCourse?.max, 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
             <InlineAvatars class="pl-4" :avatars="[1, 2]" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
           </div>
         </div>
@@ -53,7 +53,8 @@ export default {
   data() {
     return {
       hovered: false,
-      animFinished: true
+      animFinished: true,
+      pCourse: this.$props.course
     }
   },
   components: {
@@ -61,6 +62,7 @@ export default {
     InlineProductInfos,
     Tag
   },
+  props: ['course'],
   methods: {
     // FIXME check mouse events bug
     biggerCard(event) {

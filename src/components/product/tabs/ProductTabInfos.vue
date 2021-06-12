@@ -1,6 +1,6 @@
 <template>
   <div class="linear-block plain-block mt-lg-4">
-    <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
+    <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start">
       <div class="product__nav__section-number"><span>01</span></div>
       <div class="pl-3">
         <p class="sub-heading mb-2">Infos séjour</p>
@@ -23,11 +23,10 @@
         des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
         <span class="collapse" id="viewMore">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
       </p>
-      <a class="view-more-btn full_width" data-toggle="collapse" href="#viewMore" role="button" aria-expanded="false" aria-controls="viewMore">Voir plus <i class="fas fa-chevron-down ml-2"></i></a>
-      <div class="row">
+      <div class="row" style="margin-bottom: 4rem">
         <div class="col-9 col-lg-12 mx-auto">
           <div class="like-div">
-            <h5 class="content-head">Vous allez adorez :</h5>
+            <h5 class="content-head">Tu vas adorer :</h5>
             <ul class="list-unstyled text-uppercase content-list">
               <li>
                 <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>CHALET AUX PIEDS DES PISTES</a>
@@ -48,14 +47,43 @@
     </div>
   </div>
   <div class="linear-block product__overview__details-block">
-    <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
+    <div class="head-block d-flex justify-content-center justify-content-lg-start">
       <div class="left-border pl-3">
         <p class="sub-heading mb-2">Suis-je prêt ?</p>
         <h4 class="heading mb-0">Niveaux & intensité</h4>
       </div>
-      <h6 class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
+      <h6 @click="levelsModal = true" class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
         <img class="img_icon mr-2" fluid :src="require('@/assets/images/svg/PICTO_GRILLE_NIVEAUX.svg')" />
-        grille Des <br />niveaux
+        <span>voir la grille <br />des niveaux</span>
+        <teleport to="#modal">
+          <div v-if="levelsModal" class="row level-modal" style="width: 50vw">
+            <div class="col-5 bg-dark">
+              <div class="nav flex-column nav-pills kitesurf-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-level1-tab" data-toggle="pill" href="#v-pills-level1" role="tab" aria-controls="v-pills-level1" aria-selected="true">NIVEAU 1 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                <a class="nav-link" id="v-pills-level2-tab" data-toggle="pill" href="#v-pills-level2" role="tab" aria-controls="v-pills-level2" aria-selected="false">NIVEAU 2 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                <a class="nav-link" id="v-pills-level3-tab" data-toggle="pill" href="#v-pills-level3" role="tab" aria-controls="v-pills-level3" aria-selected="false">NIVEAU 3 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                <a class="nav-link" id="v-pills-level4-tab" data-toggle="pill" href="#v-pills-level4" role="tab" aria-controls="v-pills-level4" aria-selected="false">NIVEAU 4 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+              </div>
+            </div>
+            <div class="col-7 bg-white" style="position: relative">
+              <button @click="levelsModal = false" style="position: absolute; top: 20px; right: 20px; z-index: 10">X</button>
+              <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-level1" role="tabpanel" aria-labelledby="v-pills-level1-tab">
+                  <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
+                  <h5 class="surfcontent-head mb-4">TOUS NIVEAUX</h5>
+                  <ul class="mb-0 surflist">
+                    <li>Marche de 4 à 5 heures par jour sur chemin, piste, sentier ou parcours vallonné. Dénivelé maximum de 500 m par jour.</li>
+                    <li>Je marche régulièrement sans trop de dénivelé</li>
+                    <li>Je pratique une activité sportive de temps en temps</li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="v-pills-level2" role="tabpanel" aria-labelledby="v-pills-level2-tab">qwertyu</div>
+                <div class="tab-pane fade" id="v-pills-level3" role="tabpanel" aria-labelledby="v-pills-level3-tab">asdfghjk</div>
+                <div class="tab-pane fade" id="v-pills-level4" role="tabpanel" aria-labelledby="v-pills-level4-tab">zxcvbnm,</div>
+              </div>
+            </div>
+          </div>
+        </teleport>
       </h6>
     </div>
     <div class="card-body p-lg-0">
@@ -67,21 +95,9 @@
             </div>
             <span class="ml-3">
               <h6 class="level-text">NIVEAUX : <strong class="ml-2">3</strong>/4</h6>
-              <h6 class="status-text mb-0">CONFIRMé</h6>
+              <h6 class="status-text mb-0">CONFIRMé ⓘ</h6>
             </span>
           </div>
-          <div class="d-flex">
-            <h6 class="need-head text-uppercase">En <strong>Ski Freeride</strong> il faut :</h6>
-            <h6 class="need-level text-uppercase d-flex d-lg-none align-items-center ml-auto">
-              <img class="img_icon mr-2" fluid :src="require('@/assets/images/svg/PICTO_GRILLE_NIVEAUX.svg')" />
-              grille Des <br />niveaux
-            </h6>
-          </div>
-          <ul class="list-unstyled need-list pl-4">
-            <li><i class="fa fa-check text-danger mr-3"></i> Vous pratiquez et maitrisez la discipline comme un Jedi</li>
-            <li><i class="fa fa-check text-danger mr-3"></i> Vous pratiquez et maitrisez la discipline</li>
-            <li><i class="fa fa-check text-danger mr-3"></i> Vous pratiquez et maitrisez la discipline</li>
-          </ul>
         </div>
         <div class="col-12 col-lg-6">
           <div class="grid-pin align-items-center my-lg-5 mt-0 mb-5">
@@ -96,14 +112,10 @@
               <h6 class="status-text mb-0">Sans les mains</h6>
             </span>
           </div>
-          <div class="d-flex">
-            <h6 class="need-head text-uppercase"><strong>Condition</strong> physique :</h6>
-          </div>
-          <p class="content">Vous tenez un effort physique avec intervalles sur de longues périodes avec un minimum de récupération. Vous tenez un effort physique avec intervalles.</p>
         </div>
       </div>
     </div>
-    <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start mb-0 mb-lg-3 mt-lg-5">
+    <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start mb-0 mb-lg-3 mt-lg-5">
       <div class="left-border pl-3">
         <p class="sub-heading mb-2">Bon a savoir…</p>
         <h4 class="heading mb-0">Prestations & équipements</h4>
@@ -165,13 +177,32 @@ export default {
   name: 'ProductTabInfos',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      levelsModal: false
+    }
+  },
+  watch: {
+    levelsModal(newVal) {
+      if (newVal === true) {
+        document.body.style.overflow = 'hidden'
+        document.querySelector('#app').style.filter = 'blur(5px)'
+      }
+      if (newVal === false) {
+        document.body.style.overflow = ''
+        document.querySelector('#app').style.filter = ''
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.level-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
 .review__block {
   margin-top: 2rem;
   color: #7c7c7c;
@@ -210,6 +241,7 @@ export default {
 }
 .product__nav__section-number {
   position: relative;
+  height: 3rem;
   width: 3rem;
   border-radius: 10px;
   background: #292f33;

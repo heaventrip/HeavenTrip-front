@@ -1,9 +1,11 @@
 <template>
   <section class="result-section">
     <div class="search-filter-div bg-white">
-      <a class="px-3 bg-danger d-flex align-items-center justify-content-around text-white home-ref" href="index.html"><i class="fa fa-chevron-left"></i> <span class="d-none d-lg-inline-block">ACCUEIL</span></a>
-      <div class="result-div d-flex align-items-center p-3 px-5 px-lg-3">
-        <h4 class="pr-4 mr-2 mb-0 border-right border-dark count text-right font-weight-normal d-none d-md-block">
+      <a class="px-5 bg-danger d-flex align-items-center justify-content-around text-white home-ref" href="index.html">
+        <InlineSvg :src="require('@/assets/svg/home.svg')" height="24" fill="#fff" />
+      </a>
+      <div class="result-div d-flex align-items-center p-3 px-5 pl-lg-5 w-100">
+        <h4 class="pr-5 mr-5 mb-0 border-right border-dark count text-right font-weight-normal d-none d-md-block">
           <strong class="h6 d-block font-weight-bold mb-1">MA RECHERCHE</strong>
           12 séjours
         </h4>
@@ -14,8 +16,8 @@
         </div>
         <ul class="list-unstyled mb-0 text-uppercase d-none d-lg-flex align-items-center filter-list font-weight-normal">
           <li class="d-none"><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/surf_dark.png')" />SURF</li>
-          <li><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/globe_dark.png')" />FRANCE</li>
-          <li><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/cal.png')" />Décembre</li>
+          <li class="mr-3"><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/globe_dark.png')" />FRANCE</li>
+          <li class="mr-3"><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/cal.png')" />Décembre</li>
         </ul>
       </div>
       <a class="px-3 bg-dark d-flex d-lg-none align-items-center justify-content-around text-white menu-ref border-left" href="index.html"><img fluid :src="require('@/assets/images/mob-menu.png')" /></a>
@@ -24,33 +26,32 @@
         <!-- <div class="btn bg-white text-dark rounded-0 text-uppercase"> <i class="fas fa-sort ml-4 symbol"></i></div>
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Date de depart<i class="fas fa-sort ml-4 symbol"></i></div>
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Durée<i class="fas fa-sort ml-4 symbol"></i></div> -->
-        <div style="position: relative; flex-grow: 1">
-          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">Prix <i class="fas fa-sort ml-4 symbol"></i></div>
-          <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="priceSelection.value" v-bind="priceSelection" />
+        <div class="sort-by-button" style="position: relative; flex-grow: 1">
+          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
+            <span>Prix <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
+          </div>
         </div>
-        <div style="position: relative; flex-grow: 1">
-          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">Durée <i class="fas fa-sort ml-4 symbol"></i></div>
-          <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="priceSelection.value" v-bind="priceSelection" />
+        <div class="sort-by-button" style="position: relative; flex-grow: 1">
+          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
+            <span>Durée <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
+          </div>
         </div>
-        <div style="position: relative; flex-grow: 1">
-          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">Pays <i class="fas fa-sort ml-4 symbol"></i></div>
-          <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="priceSelection.value" v-bind="priceSelection" />
-        </div>
-        <div class="search-container d-flex align-items-center fg-2">
-          <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
-          <input id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
+        <div class="sort-by-button" style="position: relative; flex-grow: 1">
+          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
+            <span>Pays <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
+          </div>
         </div>
       </div>
     </div>
     <div class="result-block">
-      <div class="container">
+      <div class="container p-0">
         <div class="row">
           <div class="col-12 col-lg-3 pr-lg-0 d-none d-lg-block">
-            <div class="bg-dark text-white d-flex justify-content-between font-weight-normal py-4 px-5 text-uppercase filter-head mb-1">
-              MES FILTRES :
-              <span class="font-weight-bold">4 selections</span>
+            <div class="search-container d-flex align-items-center" style="background-color: #fff">
+              <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
+              <input id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
             </div>
-            <div class="py-4 px-5 theme-div">
+            <!-- <div class="py-4 px-5 theme-div">
               <div class="theme-dropdown position-relative">
                 <select class="form-control select-theme border-0 rounded-0 text-capitalize">
                   <option selected="" value="" disabled="" hidden="">Thématiques</option>
@@ -59,11 +60,68 @@
                   <option value="">sdfghj</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="py-4 px-5 filter-body bg-white font-weight-normal">
-              <div class="text-uppercase mb-4 mt-3 letter">TU PEUX ENCORE affiner :</div>
-              <div class="position-relative multi-select-filter">
-                <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="priceSelection.value" v-bind="priceSelection" placeholder="Filtre" />
+              <div class="text-uppercase mb-4 mt-3 letter">Tu peux encore affiner :</div>
+              <div class="filter-container">
+                <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
+                    <span class="search-bar__filter__name">Activités<i class="fas fa-sort float-right symbol"></i></span>
+                  </div>
+                  <Multiselect @open="setBgGrey('activity-filter')" @close="setBgWhite('activity-filter')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
+                </div>
+                <div class="tags-container"></div>
+              </div>
+              <div class="filter-container">
+                <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
+                    <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
+                  </div>
+                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
+                </div>
+                <div class="tags-container"></div>
+              </div>
+              <div class="filter-container">
+                <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
+                    <span class="search-bar__filter__name">Spot<i class="fas fa-sort float-right symbol"></i></span>
+                  </div>
+                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
+                </div>
+                <div class="tags-container"></div>
+              </div>
+              <div class="filter-container">
+                <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
+                    <span class="search-bar__filter__name">Mois de départ<i class="fas fa-sort float-right symbol"></i></span>
+                  </div>
+                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
+                </div>
+                <div class="tags-container"></div>
+              </div>
+              <div class="filter-container">
+                <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
+                    <span class="search-bar__filter__name">Niveau<i class="fas fa-sort float-right symbol"></i></span>
+                  </div>
+                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
+                </div>
+                <div class="tags-container"></div>
               </div>
               <br />
               <div class="custom-radio-container d-flex justify-content-between">
@@ -99,7 +157,7 @@
                       <span class="pad__content__title__sport">yoggi & surf</span>
                       <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
                     </div>
-                    <div class="pad__content__sports d-flex align-items-center tooltip-div mt-4">
+                    <div class="pad__content__sports d-flex align-items-center tooltip-div">
                       <span class="pad__content__activities__title">Activités :</span>
                       <InlineSvg class="" :src="require('@/assets/svg/surf.svg')" height="22" />
                       <InlineSvg class="" :src="require('@/assets/svg/yoga.svg')" height="22" />
@@ -113,7 +171,7 @@
                     <div class="">
                       <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers inscrits&nbsp;</span><span>aux sessions :</span> </span>
                       <div class="d-flex justify-content-between">
-                        <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0rem" mb="0rem" />
+                        <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         <div class="pad__content__price text-right">
                           <div class="pad__content__price__info" style="font-weight: 300">par pers.</div>
                           <div class="pad__content__price__euro">1 390&euro;</div>
@@ -123,7 +181,7 @@
                   </div>
                   <div class="d-flex pad__footer">
                     <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" />
+                      <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
                     </div>
                   </div>
                 </div>
@@ -233,7 +291,7 @@
                       <span class="pad__content__title__sport">yoggi & surf</span>
                       <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
                     </div>
-                    <div class="pad__content__sports d-flex align-items-center tooltip-div mt-4">
+                    <div class="pad__content__sports d-flex align-items-center tooltip-div">
                       <span class="pad__content__activities__title">Activités :</span>
                       <InlineSvg class="" :src="require('@/assets/svg/surf.svg')" height="22" />
                       <InlineSvg class="" :src="require('@/assets/svg/yoga.svg')" height="22" />
@@ -304,19 +362,66 @@ export default {
   },
   data() {
     return {
-      priceSelection: {
+      activitySelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
         mode: 'tags',
-        value: ['VTT'],
+        value: [],
         openDirection: 'top',
         caret: false,
         options: [
           { value: 'vtt', label: 'VTT' },
-          { value: 'ski', label: 'Ski' },
-          { value: 'surf', label: 'Surf' },
           { value: 'kitesurf', label: 'Kitesurf' },
           { value: 'escalade', label: 'Escalade' }
         ],
         createTag: true
+      },
+      countrySelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
+        value: 0,
+        openDirection: 'top',
+        caret: false,
+        options: ['France', 'Espagne', 'Italie']
+      },
+      spotSelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
+        value: 0,
+        openDirection: 'top',
+        caret: false,
+        options: ['France', 'Espagne', 'Italie']
+      },
+      monthSelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
+        mode: 'tags',
+        value: [],
+        openDirection: 'top',
+        caret: false,
+        options: [
+          { value: 'jan', label: 'Janvier' },
+          { value: 'feb', label: 'Février' },
+          { value: 'mar', label: 'Mars' },
+          { value: 'apr', label: 'Avril' },
+          { value: 'may', label: 'Mai' },
+          { value: 'jun', label: 'Juin' },
+          { value: 'jul', label: 'Juillet' },
+          { value: 'aug', label: 'Août' },
+          { value: 'sep', label: 'Septembre' },
+          { value: 'oct', label: 'Octobre' },
+          { value: 'nov', label: 'Novembre' },
+          { value: 'dec', label: 'Décembre' }
+        ],
+        createTag: true
+      },
+      levelSelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
+        value: 0,
+        openDirection: 'top',
+        caret: false,
+        options: ['France', 'Espagne', 'Italie']
       }
     }
   },
@@ -325,11 +430,49 @@ export default {
     //   e.target.style.backgroundColor = color
     //   e.target.style.color = color === 'grey' ? '#fff' : 'unset'
     // }
+  },
+  mounted() {
+    document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
+      tagContainer.closest('.filter-container').querySelector('.tags-container').append(tagContainer)
+    })
   }
 }
 </script>
 
 <style scoped>
+.filter-div {
+  width: 40%;
+  margin-left: auto;
+}
+.sort-by-button {
+  border-left: 2px solid #f1f1f1;
+}
+.sort-by-button:last-of-type {
+  border-right: 2px solid #f1f1f1;
+}
+.search-filter-div {
+  display: flex;
+  padding-right: calc((100vw - 1444px) / 2);
+}
+.search-container {
+  border: 8px solid rgba(247, 247, 247, 0.58);
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
+.search-bar__filter__svg {
+  padding-right: 1rem;
+}
+.search-bar__filter__name {
+  margin-left: 1rem;
+  vertical-align: middle;
+}
+
+.tags-container {
+  height: 2.5rem;
+}
+.multi-select-filter {
+  box-shadow: 1px 2px 2px rgba(41, 47, 51, 0.05);
+}
 .divider {
   display: inline-block;
   width: 1px;
@@ -347,6 +490,7 @@ export default {
   font-size: 0.75rem;
   width: max-content;
   display: inline-block;
+  margin-right: 0.6rem;
 }
 .pad__content__activities__title {
   text-transform: uppercase;
@@ -364,12 +508,12 @@ export default {
 .pad__footer {
   background-color: #fafafa;
   display: flex;
-  margin-top: 2rem;
+  margin-top: 1rem;
   height: 50px;
 }
 .pad__content__price {
-  border-left: 1px solid #292f33;
-  padding-left: 1rem;
+  border-left: 1px dashed #292f33;
+  padding-left: 1.4rem;
 }
 .pad__content__price__info {
   font-size: 0.8rem;
@@ -378,11 +522,12 @@ export default {
 .pad__content__price__euro {
   font-size: 1.625rem;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.4;
 }
 .pad__content__sports {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 0.6rem;
   margin-bottom: 0.6rem;
   width: max-content;
 }
@@ -431,7 +576,7 @@ export default {
   height: 100%;
   justify-content: space-between;
   color: #292f33;
-  padding: 2rem 2rem 0rem 2rem;
+  padding: 1.5rem 2rem 0rem 2rem;
 }
 .pad__content__month-block span {
   display: inline;
@@ -439,7 +584,7 @@ export default {
 }
 .pad__content__month-block {
   text-align: center;
-  padding: 0.4rem 0;
+  padding: 0.3rem 0;
   margin-bottom: 1px;
   margin-left: 1px;
   background-color: #fff;
@@ -451,46 +596,6 @@ export default {
 .tooltip-div {
   border-top: 1px dashed #292f33;
   border-bottom: 1px dashed #292f33;
-}
-.bttn {
-  text-align: center;
-  text-transform: uppercase;
-  cursor: pointer;
-  height: 80px;
-}
-.bttn__text {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-align: center;
-}
-.bttn__text--bold {
-  font-weight: bold;
-  letter-spacing: 1.5px;
-  font-size: 0.8rem;
-}
-.bttn--transparent {
-  background-color: transparent;
-  border: 1px solid #fff;
-}
-.bttn--pink {
-  background-color: #d82558;
-  border-color: #d82558;
-}
-.bttn--pink:hover {
-  background-color: #292f33;
-  border-color: #292f33;
-}
-.bttn--pink:active {
-  background-color: #d82558;
-  border-color: #d82558;
-}
-
-.middle-section {
-  background: url('../../assets/images/asset-1.png') no-repeat center center / cover;
-  height: 100vh;
 }
 .pad__content__avatars-title {
   font-size: 0.75rem;

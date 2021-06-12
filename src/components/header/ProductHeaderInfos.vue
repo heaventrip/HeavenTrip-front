@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex h-100 align-items-center justify-content-center">
-    <div class="d-flex align-items-center">
+  <div class="d-flex h-100 align-items-center justify-content-center fg-1">
+    <div class="product-header-infos__title d-flex align-items-center">
       <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="d-inline-block" style="max-width: 116px" />
       <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
       <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
@@ -13,7 +13,7 @@
   </div>
   <div class="d-flex flex-column align-items-center">
     <span class="header-infos__mentions__title">Critères sélectionnés :</span>
-    <InlineProductInfos :infos="['france', '7 jours', 'confirmé', '10 places']" color="white" icon="globe" width="auto" :divider="true" pt="1rem" />
+    <InlineProductInfos :infos="['france', '7 jours', 'confirmé', '10 places']" color="white" icon="globe" width="max-content" :divider="true" pt="1rem" />
   </div>
 </template>
 
