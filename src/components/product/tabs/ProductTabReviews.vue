@@ -1,37 +1,39 @@
 <template>
-  <div class="mb-5">
+  <div class="linear-block mb-0">
     <div class="card border-0 rounded-0">
-      <div class="card-header p-0 border-0 rounded-0" id="headingTen">
-        <div class="head-block linear-block plain-block my-4 px-4 px-lg-0 d-flex justify-content-start justify-content-lg-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
-          <div class="product__nav__section-number"><span>06</span></div>
-          <div class="pl-3">
+      <div class="card-header p-0 border-0 rounded-0" id="headingNine">
+        <div class="head-block px-4 px-lg-0 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+          <div class="ml-3 ml-lg-0">
             <p class="sub-heading mb-2">Vos avis</p>
-            <h4 class="heading mb-0 text-uppercase">Les témoignages</h4>
+            <h4 class="heading mb-0">Les témoignages</h4>
           </div>
-          <i class="fa fa-chevron-down h4 mb-0 arrow text-white text-arrow"></i>
+          <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
         </div>
       </div>
-      <div id="collapseTen" class="collapse show" aria-labelledby="headingTen">
-        <div class="card-body">
-          <div class="review__block d-flex align-items-center">
-            <div class="review__block-left d-flex flex-column align-items-center mr-5">
-              <img class="review__block-left__avatar" :src="require('@/assets/images/ui_faces/1.jpg')" height="100" />
-              <div class="review__block-left__date">25 Avril 2020</div>
+      <div id="collapseTen" class="collapse show" aria-labelledby="headingTen"></div>
+    </div>
+  </div>
+  <div class="linear-block mt-2">
+    <div class="card-body">
+      <div class="review__block d-flex align-items-center">
+        <div class="review__block-left d-flex flex-column align-items-center mr-5">
+          <img class="review__block-left__avatar" :src="require('@/assets/images/ui_faces/1.jpg')" height="100" />
+          <div class="review__block-left__date">25 Avril 2020</div>
+        </div>
+        <div class="review__block-right">
+          <div class="review__block-right__top-infos d-flex justify-content-between">
+            <div class="review__block-right__user-name">Remi Flemming</div>
+            <div class="review__block-right__user-infos">
+              <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
+              Nice
             </div>
-            <div class="review__block-right">
-              <div class="review__block-right__top-infos d-flex justify-content-between">
-                <div class="review__block-right__user-name">Remi Flemming</div>
-                <div class="review__block-right__user-infos">
-                  <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
-                  Nice
-                </div>
-                <div class="review__block__stars"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
-                <div class="review__block__user-profile-link"><span>Voir profil</span></div>
-              </div>
-              <div class="review__block-right__text-content">aaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaa</div>
-            </div>
+            <div class="review__block__stars"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
+            <div class="review__block__user-profile-link"><span>Voir profil</span></div>
           </div>
-          <!-- <div class="linear-block mb-0">
+          <div class="review__block-right__text-content">aaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaa</div>
+        </div>
+      </div>
+      <!-- <div class="linear-block mb-0">
                       <div class="avatar">
                         <div class="row">
                           <div class="col-12 col-lg-10 ml-auto">
@@ -70,8 +72,6 @@
                       </div>
                     </div>
                     <a class="view-more-btn full_width mt-4" data-toggle="collapse" href="#viewMoreBlog" role="button" aria-expanded="false" aria-controls="viewMoreBlog">AFFICHER ENCORE PLUS D’AVIS (24) <i class="fas fa-chevron-down ml-2"></i></a> -->
-        </div>
-      </div>
     </div>
   </div>
 </template>

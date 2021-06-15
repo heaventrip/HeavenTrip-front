@@ -1,10 +1,10 @@
 <template>
-  <div class="linear-block plain-block mt-lg-4">
+  <div class="linear-block plain-block pb-0">
     <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start">
-      <div class="product__nav__section-number"><span>01</span></div>
-      <div class="pl-3">
-        <p class="sub-heading mb-2">Infos séjour</p>
-        <h4 class="heading mb-0">EN BREF...</h4>
+      <!-- <div class="product__nav__section-number"><span>01</span></div> -->
+      <div class="">
+        <p class="sub-heading mb-2">Récap du stage</p>
+        <h4 class="heading mb-0">POUR FAIRE COURT...</h4>
       </div>
       <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto"><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /></span>
     </div>
@@ -23,8 +23,8 @@
         des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
         <span class="collapse" id="viewMore">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
       </p>
-      <div class="row" style="margin-bottom: 4rem">
-        <div class="col-9 col-lg-12 mx-auto">
+      <div class="row" style="margin-left: -2rem; margin-right: -2rem">
+        <div class="col-9 col-lg-12 p-0">
           <div class="like-div">
             <h5 class="content-head">Tu vas adorer :</h5>
             <ul class="list-unstyled text-uppercase content-list">
@@ -48,7 +48,7 @@
   </div>
   <div class="linear-block product__overview__details-block">
     <div class="head-block d-flex justify-content-center justify-content-lg-start">
-      <div class="left-border pl-3">
+      <div class="">
         <p class="sub-heading mb-2">Suis-je prêt ?</p>
         <h4 class="heading mb-0">Niveaux & intensité</h4>
       </div>
@@ -116,7 +116,7 @@
       </div>
     </div>
     <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start mb-0 mb-lg-3 mt-lg-5">
-      <div class="left-border pl-3">
+      <div class="">
         <p class="sub-heading mb-2">Bon a savoir…</p>
         <h4 class="heading mb-0">Prestations & équipements</h4>
       </div>
@@ -243,17 +243,11 @@ export default {
   position: relative;
   height: 3rem;
   width: 3rem;
-  border-radius: 10px;
+  border-radius: 6px;
   background: #292f33;
-  font-size: 1.8rem;
-  font-weight: 900;
+  font-size: 1.6rem;
+  font-weight: 500;
   text-align: center;
   color: #fff;
-}
-.product__overview__details-block {
-  padding: 30px 60px;
-  border: 1px solid #ebebeb;
-  background: none;
-  border-radius: 0px;
 }
 </style>

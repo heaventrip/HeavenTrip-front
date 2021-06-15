@@ -2,16 +2,16 @@
   <div class="linear-block position-relative">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingSeven">
-        <div class="head-block my-4 d-flex justify-content-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-          <div class="product__nav__section-number"><span>05</span></div>
-          <div class="pl-3">
+        <div class="head-block d-flex justify-content-start align-items-center collapsed mb-4" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          <!-- <div class="product__nav__section-number"><span>05</span></div> -->
+          <div class="">
             <p class="sub-heading mb-2">Tips et astuces</p>
             <h4 class="heading mb-0 text-uppercase">Infos pays</h4>
           </div>
         </div>
       </div>
       <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven">
-        <div class="card-body my-5">
+        <div class="card-body">
           <div class="row">
             <div class="col-12 col-lg-7">
               <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">L’EGYPTE</h5>
@@ -40,7 +40,7 @@
     </div>
     <div class="top-positioned-div">
       <div class="bg-dark pays-block rounded-top text-uppercase">
-        <h6 class="head text-warning font-weight-bold letter-space">
+        <h6 class="head text-white font-weight-bold letter-space">
           <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />
           Quelques indicateurs
         </h6>
@@ -98,7 +98,7 @@
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingEight">
         <div class="head-block pt-3 px-4 px-lg-0 mb-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
+          <div class="ml-3 ml-lg-0">
             <p class="sub-heading mb-2">Tips & astuces</p>
             <h4 class="heading mb-0">Itinéraires</h4>
           </div>
@@ -135,10 +135,12 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="linear-block">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingNine">
-        <div class="head-block py-3 px-4 px-lg-0 my-lg-5 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
+        <div class="head-block px-4 px-lg-0 d-flex justify-content-between align-items-center collapsed mb-5" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+          <div class="ml-3 ml-lg-0">
             <p class="sub-heading mb-2">Tips & astuces</p>
             <h4 class="heading mb-0">A prévoir dans ton paquetage</h4>
           </div>
@@ -201,6 +203,13 @@ export default {
 </script>
 
 <style scoped>
+.pays-list li {
+  padding: 0.8rem 0;
+  margin: 0;
+}
+.pays-list li:not(:last-child) {
+  border-bottom: 1px dashed #fff;
+}
 .level-modal {
   position: fixed;
   top: 50%;

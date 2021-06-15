@@ -42,9 +42,9 @@
       <InlineSvg :src="require('@/assets/svg/right-quote.svg')" height="50" opacity="0.06" style="transform: translateY(50%)" />
     </div>
   </div>
-  <NavConcept v-show="conceptIsActive" />
-  <NavTeam v-show="teamIsActive" />
-  <NavContact v-show="contactIsActive" />
+  <NavConcept v-if="conceptIsActive" />
+  <NavTeam v-if="teamIsActive" />
+  <NavContact v-if="contactIsActive" />
 </template>
 
 <script>

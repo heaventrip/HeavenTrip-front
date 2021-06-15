@@ -38,8 +38,8 @@
         <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-opinion-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
       </li>
     </ul>
-    <div class="product-content d-flex justify-content-around bg-white">
-      <div :class="{ 'fade--out': slidingUp, 'fade--in--content': slideIsUp }" class="w-50 tab-content main-tab d-flex flex-column justify-content-around bg-white" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
+    <div class="product-content d-flex justify-content-around">
+      <div :class="{ 'fade--out': slidingUp, 'fade--in--content': slideIsUp }" class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
         <div id="product-tab-infos" class="pt-5">
           <ProductTabInfos />
         </div>
@@ -77,20 +77,12 @@
             GALERIE PHOTOS
             <span class="galary-count ml-auto font-weight-normal">24 médias</span>
           </h6>
-          <div class="form-row galary-grid mt-3 mb-5">
-            <div class="col-8 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
-            <div class="col-4 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
-            <div class="col-4 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
-            <div class="col-8 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
-          </div>
+          <swiper :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderFraction }" :navigation="true">
+            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" height="200" /></swiper-slide>
+            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" height="200" /></swiper-slide>
+            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" height="200" /></swiper-slide>
+            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" height="200" /></swiper-slide>
+          </swiper>
           <h6 class="galary-head font-weight-bold mb-4 d-flex">
             DISCUSSIONS
             <span class="count-circle ml-auto font-weight-normal"><i class="fas fa-ellipsis-h"></i></span>
@@ -158,7 +150,10 @@ import ProductTabLiving from '@/components/product/tabs/ProductTabLiving.vue'
 import ProductTabProgram from '@/components/product/tabs/ProductTabProgram.vue'
 import ProductTabReviews from '@/components/product/tabs/ProductTabReviews.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
+import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue'
 import gsap from 'gsap'
+SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
 
 export default {
   name: 'ProductContent',
@@ -168,7 +163,9 @@ export default {
     ProductTabLiving,
     ProductTabProgram,
     ProductTabReviews,
-    ProductTabTips
+    ProductTabTips,
+    Swiper,
+    SwiperSlide
   },
   props: ['nav-is-active'],
   emits: ['slide-is-up', 'slide-is-down'],
@@ -182,7 +179,16 @@ export default {
       clickedReviews: false,
       slidingUp: false,
       slideIsUp: false,
-      navIsActive: this.$props.navIsActive
+      navIsActive: this.$props.navIsActive,
+      currentPaginationStyle: `
+        font-family: Oswald, sans-serif;
+        font-weight: 800;
+        font-size: 2rem;
+        color: #fff;`,
+      totalPaginationStyle: `
+        font-family: Oswald, sans-serif;
+        color: rgba(250, 250, 250, 0.7);
+        font-size: 1rem;`
     }
   },
   watch: {
@@ -194,53 +200,80 @@ export default {
     },
     slideIsUp(newVal) {
       let that = this
+
       if (newVal === true) {
         this.$emit('slide-is-up')
-        window.addEventListener('scroll', function scrollListener() {
-          if (window.pageYOffset < 900) {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            window.removeEventListener('scroll', scrollListener)
-            that.slideIsUp = false
-            that.slideIsUp = false
-          }
-        })
+        window.removeEventListener('scroll', that.handleScrollDown)
+        window.addEventListener('scroll', that.handleScrollUp)
       }
       if (newVal === false) {
         this.$emit('slide-is-down')
-        gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out' })
-        // document.querySelector('.header').addEventListener('wheel', (e) => {
-        //   gsap.to('.header--product', { height: window.innerHeight * 0.9, ease: 'power3.out' })
-        // })
+        window.removeEventListener('scroll', that.handleScrollUp)
+
+        setTimeout(function () {
+          window.addEventListener('scroll', that.handleScrollDown)
+        }, 1000) // wait for scrollTo to finish
       }
     }
   },
   methods: {
+    renderFraction(currentClass, totalClass) {
+      return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
+      <span style="${this.currentPaginationStyle}">.</span>
+      <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
+    },
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView()
+    },
+    // scroll to top when user reaches top of content (wheel up)
+    handleScrollUp() {
+      let contentTop = window.innerHeight * 0.9
+      if (window.pageYOffset < contentTop) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out', duration: 1 }) // duration 1000sec same as above
+        this.slideIsUp = false
+      }
+    },
+    // first scroll down brings page up (wheel down)
+    handleScrollDown() {
+      this.slidingUp = true
+      setTimeout(() => {
+        window.scrollTo({ top: window.innerHeight })
+        this.slidingUp = false
+        this.slideIsUp = true
+      }, 800)
     }
   },
   mounted() {
     let tl = gsap.timeline({ duration: 1 })
     tl.from('.header-bg-image', { scale: 1.2, duration: 10 })
-    tl.to('.header--product', { height: window.innerHeight * 0.9, ease: 'power3.out' }, '<0.2')
-    tl.from('.product-header-infos__title', { opacity: 0, duration: 0.3 }, '<0.7')
+    tl.to('.header--product', { height: window.innerHeight * 0.9, ease: 'power3.out' }, '<0.4')
+    tl.from('.product-header-infos__title', { opacity: 0, duration: 0.9 }, '<0.7')
 
-    document.querySelector('.header').addEventListener('wheel', (e) => {
-      e.preventDefault()
-      this.slidingUp = true
-      setTimeout(() => {
-        this.slideIsUp = true
-        window.scrollTo({ top: window.innerHeight * 0.9 })
-        this.slidingUp = false
-      }, 800)
-    })
+    window.addEventListener('scroll', this.handleScrollDown)
   }
 }
 </script>
 
 <style scoped>
+.swiper-button-prev,
+.swiper-button-next {
+  color: #292f33;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.nav-link {
+  padding: 0.5rem !important;
+}
+.product-content {
+  background-color: #fcfcfc;
+}
 .slider {
-  background-color: #fff;
+  background-color: #fcfcfc;
   position: absolute;
   width: 100vw;
   height: 100vh;

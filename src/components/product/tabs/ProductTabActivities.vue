@@ -1,14 +1,14 @@
 <template>
-  <div class="">
-    <div class="head-block my-4 d-flex justify-content-center justify-content-lg-start">
-      <div class="product__nav__section-number"><span>02</span></div>
-      <div class="pl-3">
+  <div class="linear-block pb-0">
+    <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start">
+      <!-- <div class="product__nav__section-number"><span>02</span></div> -->
+      <div class="">
         <p class="sub-heading mb-2">Activités & Spot</p>
         <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
       </div>
       <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto"><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /></span>
     </div>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center" style="margin-left: -2rem; margin-right: -2rem">
       <ul class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab " role="tablist">
         <li class="nav-item fg-1" role="presentation">
           <a class="nav-link active ml-0" id="pills-act1-tab" data-toggle="pill" href="#pills-act1" role="tab" aria-controls="pills-solo" aria-selected="true">BUNGALOW SOLO</a>
@@ -21,7 +21,7 @@
         </li>
       </ul>
     </div>
-    <div class="tab-content">
+    <div class="tab-content" style="margin-left: -2rem; margin-right: -2rem">
       <div class="tab-pane fade show active" id="pills-act1" role="tabpanel" aria-labelledby="pills-act1-tab">
         <div class="card-body">
           <div class="pri-activity-block">
@@ -168,8 +168,8 @@
   <div class="linear-block">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingTwo">
-        <div class="head-block py-3 px-4 px-lg-0 mb-lg-3 d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
+        <div class="head-block px-4 px-lg-0 mb-lg-3 d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <div class="ml-3 ml-lg-0">
             <p class="sub-heading mb-2">Activités & Spot</p>
             <h4 class="heading mb-0">Le spot</h4>
           </div>
@@ -189,7 +189,7 @@
             pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
             <span class="collapse" id="viewMoreToggle">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
           </p>
-          <div class="row" style="margin-bottom: 5rem">
+          <div class="row">
             <div class="col-9 col-lg-12 mx-auto">
               <div class="like-div white">
                 <h5 class="content-head">LES + DU SPOT</h5>
@@ -214,9 +214,9 @@
       </div>
     </div>
   </div>
-  <div class="linear-block">
-    <div class="head-block py-3 d-flex justify-content-center justify-content-lg-start">
-      <div class="left-border pl-3 ml-3 ml-lg-0">
+  <div class="linear-block" style="background-color: #fcfcfc; box-shadow: none">
+    <div class="head-block d-flex justify-content-center justify-content-lg-start mb-3">
+      <div class="ml-3 ml-lg-0">
         <p class="sub-heading mb-2">Activités & Spot</p>
         <h4 class="heading mb-0">Activités incluses</h4>
       </div>
@@ -285,10 +285,12 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="linear-block">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingOne">
-        <div class="head-block py-3 px-4 px-lg-0 mt-lg-5 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
+        <div class="head-block px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <div class="ml-3 ml-lg-0">
             <p class="sub-heading mb-2">Activités & Spot</p>
             <h4 class="heading mb-0">Activités en option</h4>
           </div>
@@ -299,7 +301,7 @@
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
         <div class="card-body">
           <p class="content">En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.</p>
-          <ul class="activity-list list-unstyled">
+          <ul class="activity-list list-unstyled mb-0">
             <li>
               <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />Plongée sous-marine</h5>
               <ul class="list-unstyled text-uppercase activity-content-list mb-0">

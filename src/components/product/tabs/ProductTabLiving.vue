@@ -1,10 +1,10 @@
 <template>
-  <div class="linear-block">
+  <div class="linear-block mb-0">
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0 mb-4" id="headingThree">
-        <div class="head-block px-4 px-lg-0 my-4 d-flex justify-content-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-          <div class="product__nav__section-number"><span>03</span></div>
-          <div class="pl-3">
+        <div class="head-block px-4 px-lg-0 mb-4 d-flex justify-content-start align-items-center collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          <!-- <div class="product__nav__section-number"><span>03</span></div> -->
+          <div class="">
             <p class="sub-heading mb-2">Vie sur place</p>
             <h4 class="heading mb-0 text-uppercase">Hébergement</h4>
           </div>
@@ -12,10 +12,10 @@
         </div>
       </div>
       <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
-        <div class="card-body mb-5">
+        <div class="card-body">
           <div class="d-flex align-items-center mb-4">
-            <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5>
-            <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav" id="pills-tab " role="tablist">
+            <!-- <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5> -->
+            <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab " role="tablist">
               <li class="nav-item" role="presentation">
                 <a class="nav-link active ml-0" id="pills-solo-tab" data-toggle="pill" href="#pills-solo" role="tab" aria-controls="pills-solo" aria-selected="true">BUNGALOW SOLO</a>
               </li>
@@ -80,34 +80,36 @@
               ></a>
             </li>
           </ul>
-          <div class="image-flexbox px-3 mb-3">
-            <div class="row galary-grid">
-              <div class="col-12 col-lg img-container py-3 mb-0">
-                <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-              </div>
-              <div class="col-12 col-lg img-container py-3 mb-0">
-                <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-              </div>
-              <div class="col-12 col-lg-5 img-container py-3 mb-0">
-                <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-              </div>
-              <div class="col-12 col-lg img-container py-3 mb-0">
-                <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-                <div class="overlay-count">+21</div>
-              </div>
-            </div>
-          </div>
-          <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
-          <a class="view-more-btn full_width d-lg-none" data-toggle="collapse" href="#viewMoreOptions" role="button" aria-expanded="true" aria-controls="viewMoreOptions">VOIR LES OPTIONS <i class="fas fa-chevron-down ml-2"></i></a>
+          <!-- <a class="view-more-btn full_width d-lg-none" data-toggle="collapse" href="#viewMoreOptions" role="button" aria-expanded="true" aria-controls="viewMoreOptions">VOIR LES OPTIONS <i class="fas fa-chevron-down ml-2"></i></a> -->
         </div>
       </div>
     </div>
   </div>
-  <div class="linear-block">
+  <div class="linear-block mt-2">
+    <div class="image-flexbox px-3 mb-3">
+      <div class="row galary-grid">
+        <div class="col-12 col-lg img-container py-3 mb-0">
+          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+        </div>
+        <div class="col-12 col-lg img-container py-3 mb-0">
+          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+        </div>
+        <div class="col-12 col-lg-5 img-container py-3 mb-0">
+          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+        </div>
+        <div class="col-12 col-lg img-container py-3 mb-0">
+          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
+          <div class="overlay-count">+21</div>
+        </div>
+      </div>
+    </div>
+    <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
+  </div>
+  <div class="linear-block mb-0">
     <div class="card border-0 rounded-0">
-      <div class="card-header p-0 border-0 rounded-0" id="headingFour">
-        <div class="head-block py-3 px-4 mb-lg-2 px-lg-0 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
+      <div class="card-header p-0 border-0 rounded-0 mb-3" id="headingFour">
+        <div class="head-block px-4 mb-lg-2 px-lg-0 d-flex justify-content-between align-items-center collapsed mb-4" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+          <div class="ml-3 ml-lg-0">
             <p class="sub-heading mb-2">Vie sur place</p>
             <h4 class="heading mb-0">LES repas</h4>
           </div>
@@ -116,49 +118,54 @@
       </div>
       <div id="collapseFour" class="collapse show" aria-labelledby="headingFour">
         <div class="card-body">
-          <p class="content mb-5">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</p>
-          <div class="d-flex no-gutters justify-content-between">
-            <div class="col-12 col-lg-5">
-              <h5 class="head text-uppercase font-weight-bold text-danger mb-4">
-                <img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_CUISINE.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i>
-                Cuisine
-              </h5>
-              <ul class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Style :
-                    <strong class="text-dark ml-2"> CUISINIER PRIvé</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none border-0 pr-0 mr-0">
-                    Repas :
-                    <strong class="text-dark ml-2"> matin - soir</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Service :
-                    <strong class="text-dark ml-2"> domicile</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Cuisine :
-                    <strong class="text-dark ml-2"> internationale</strong></a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="brown-div col-5" style="margin-left: 2rem; padding: 1rem; background-color: #fff; color: #292f33; box-shadow: -1px 1px 6px rgba(41, 47, 51, 0.05); border-left: none !important">
-              <h6 class="head text-uppercase py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-              <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
-            </div>
-            <div class="img-block col-2" style="border-radius: 0 5px 5px 0">
-              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-            </div>
-          </div>
+          <p class="content mb-0">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="linear-block p-0 mt-2">
+    <div class="card-body">
+      <div class="pri-activity-block">
+        <div class="box bg-dark m-0">
+          <h5 class="head text-uppercase mb-0 d-inline-block">
+            <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+            ski freeride
+          </h5>
+          <ul class="list-unstyled list mt-3 mb-0">
+            <li>
+              <a href="#" class="text-decoration-none">
+                COURS DE PERFECTIONNEMENT :
+                <strong class="text-white ml-2"> 20H</strong></a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none">
+                Sessions :
+                <strong class="text-white ml-2"> 4</strong></a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none">
+                Tendance :
+                <strong class="text-white ml-2"> 60% hors piste</strong></a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none">
+                Tendance :
+                <strong class="text-white ml-2"> 60% hors piste</strong></a
+              >
+            </li>
+          </ul>
+          <!-- <a href="#" class="corner-link">+</a> -->
+        </div>
+        <div class="brown-div">
+          <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
+          <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+          <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+        </div>
+        <div class="img-block">
+          <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
         </div>
       </div>
     </div>
@@ -167,7 +174,7 @@
     <div class="card border-0 rounded-0">
       <div class="card-header p-0 border-0 rounded-0" id="headingFive">
         <div class="head-block py-3 px-4 px-lg-0 mb-lg-4 d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-          <div class="left-border pl-3 ml-3 ml-lg-0">
+          <div class="ml-3 ml-lg-0">
             <p class="sub-heading mb-2">Vie sur place</p>
             <h4 class="heading mb-0">A proximité</h4>
           </div>
