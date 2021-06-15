@@ -268,7 +268,7 @@
 import Password from '@/components/connection/Password.vue'
 
 export default {
-  name: 'Login',
+  name: 'ConnectionModal',
   components: {
     Password
   },

@@ -7,7 +7,7 @@ import ProductHome from '@/components/product/ProductHome.vue'
 import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
 import SearchHome from '@/components/search/SearchHome.vue'
 import LoginHeader from '@/components/connection/LoginHeader.vue'
-import Login from '@/components/connection/Login.vue'
+import ConnectionModal from '@/components/connection/ConnectionModal.vue'
 import Terms from '@/components/legal/Terms.vue'
 import Legal from '@/components/legal/Legal.vue'
 
@@ -34,8 +34,8 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Login',
-    component: Login
+    name: 'ConnectionModal',
+    component: ConnectionModal
   },
   {
     path: '/terms',

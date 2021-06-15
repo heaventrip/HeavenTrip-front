@@ -1,19 +1,13 @@
 <template>
-  <div id="axiosForm">
-    <div class="loader" v-if="loading"></div>
-    <Header />
-    <MainSection />
-    <Footer />
-    <Login />
-    <Profile />
-    <SelectADate />
-  </div>
+  <div class="loader" v-if="loading"></div>
+  <Header />
+  <MainSection />
+  <Footer />
+  <Profile />
+  <SelectADate />
 </template>
+
 <style scoped>
-#axiosForm {
-  /* Components Root Element ID */
-  position: relative;
-}
 .loader {
   /* Loader Div Class */
   position: absolute;
@@ -31,11 +25,11 @@
   filter: alpha(opacity=40);
 }
 </style>
+
 <script>
 import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 import MainSection from '@/components/home/MainSection'
-import Login from '@/components/connection/Login'
 import Profile from '@/components/connection/Profile'
 import SelectADate from '@/components/SelectADate'
 export default {
@@ -44,7 +38,6 @@ export default {
     Header,
     MainSection,
     Footer,
-    Login,
     Profile,
     SelectADate
   },

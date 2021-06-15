@@ -24,6 +24,11 @@ export default {
     // ProductSection,
     // ProductModal
   },
+  data() {
+    return {
+      showLoginModal: false
+    }
+  },
   methods: {
     jquery() {
       // var x = document.getElementById('center')
