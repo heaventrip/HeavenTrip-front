@@ -115,6 +115,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="linear-block">
     <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start mb-0 mb-lg-3 mt-lg-5">
       <div class="">
         <p class="sub-heading mb-2">Bon a savoir…</p>

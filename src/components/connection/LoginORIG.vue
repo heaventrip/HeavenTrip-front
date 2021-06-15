@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" id="login">
+  <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl login-modal">
       <div class="modal-content border-0 rounded-0">
         <div class="modal-body p-0 border-0">
@@ -263,6 +263,8 @@
 </template>
 
 <script>
+// import axios from 'axios'
+// import { API_URL } from '@/config.json'
 import Password from '@/components/connection/Password.vue'
 
 export default {

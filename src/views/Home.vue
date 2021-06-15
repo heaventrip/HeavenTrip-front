@@ -4,7 +4,7 @@
     <Header />
     <MainSection />
     <Footer />
-    <Login :loading="loading" />
+    <Login />
     <Profile />
     <SelectADate />
   </div>

@@ -71,17 +71,17 @@
         <div class="w-50" id="pills-opinion" aria-labelledby="pills-opinion-tab">
         </div> -->
       </div>
-      <div class="w-25">
+      <div class="" style="width: 35%">
         <div class="" style="position: sticky; top: 10vh">
           <h6 class="galary-head font-weight-bold mb-0 d-flex">
             GALERIE PHOTOS
             <span class="galary-count ml-auto font-weight-normal">24 médias</span>
           </h6>
           <swiper :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderFraction }" :navigation="true">
-            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" height="200" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" height="200" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" height="200" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" height="200" /></swiper-slide>
+            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
           </swiper>
           <h6 class="galary-head font-weight-bold mb-4 d-flex">
             DISCUSSIONS
