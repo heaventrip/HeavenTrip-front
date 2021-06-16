@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-2 mt-0 incomplete">S'inscrire</button>
+      <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-2 mt-0" :disabled="!formIsFilled">S'inscrire</button>
     </form>
     <div class="d-flex regist mb-4">
       <a class="password-link mr-auto" href="#">En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d'utilisation</span></a>
@@ -82,7 +82,7 @@
 <script>
 export default {
   name: 'ConnectionModal',
-  emits: ['clicked-existing-account'],
+  emits: ['clicked-existing-account', 'submitted-form'],
   data() {
     return {
       registerErrors: [],
@@ -90,41 +90,15 @@ export default {
       lastName: '',
       registerEmail: '',
       registerPassword: '',
-      registerPasswordConfirmation: '',
-      passwordForgotten: false,
-      loginModal: true
+      registerPasswordConfirmation: ''
     }
   },
-  watch: {
-    firstName() {}
+  computed: {
+    formIsFilled() {
+      return !!(this.firstName && this.lastName && this.registerEmail && this.registerPassword && this.registerPasswordConfirmation)
+    }
   },
   methods: {
-    displayPasswordForm() {
-      this.passwordForgotten = true
-      this.loginModal = false
-    },
-    hidePasswordForm() {
-      this.passwordForgotten = false
-      this.loginModal = true
-    },
-    displayLoginForm(e) {
-      e.preventDefault()
-      $('.register-form').addClass('d-none')
-      $('.login-form').removeClass('d-none')
-    },
-    displayRegisterForm(e) {
-      e.preventDefault()
-      $('.login-form').addClass('d-none')
-      $('.register-form').removeClass('d-none')
-    },
-    checkLoginForm() {
-      this.errors = []
-      let err = this.errors
-
-      if (!this.validEmail(this.loginEmail)) err.push('loginEmail')
-      if (this.loginPassword === '') err.push('loginPassword')
-      if (!err.length) this.submitLoginForm()
-    },
     checkRegisterForm() {
       this.registerErrors = []
       let err = this.registerErrors
@@ -135,22 +109,6 @@ export default {
       if (this.registerPassword === '') err.push('registerPassword')
       if (this.registerPassword !== this.registerPasswordConfirmation) err.push('registerPasswordConfirmation')
       if (!err.length) this.submitRegisterForm()
-    },
-    submitLoginForm() {
-      this.$axios
-        .post('/login', {
-          user: {
-            email: this.loginEmail,
-            password: this.loginPassword
-          }
-        })
-        .then((resp) => {
-          alert('Connexion réussie')
-          localStorage.setItem('auth-token', resp.data.auth_token)
-        })
-        .catch((err) => {
-          this.errors.push(err.response.data.message)
-        })
     },
     submitRegisterForm() {
       this.$axios
@@ -168,8 +126,7 @@ export default {
           this.registerEmail = ''
           this.registerPassword = ''
           this.registerPasswordConfirmation = ''
-          $('.register-form').addClass('d-none')
-          $('.login-form').removeClass('d-none')
+          this.$emit('submitted-form')
         })
         .catch((err) => {
           this.registerErrors.push(err.response.data.message)
@@ -185,17 +142,6 @@ export default {
 </script>
 
 <style>
-.modal__backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(41, 47, 51, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .errors {
   color: red;
 }

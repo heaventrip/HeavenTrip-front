@@ -35,7 +35,7 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-4 mt-0 incomplete">SE CONNECTER</button>
+          <button class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn mb-4 mt-0" :disabled="!formIsFilled">SE CONNECTER</button>
         </form>
       </div>
     </div>
@@ -55,33 +55,15 @@ export default {
     return {
       errors: [],
       loginEmail: '',
-      loginPassword: '',
-      passwordForgotten: false,
-      loginModal: true
+      loginPassword: ''
     }
   },
-  watch: {
-    firstName() {}
+  computed: {
+    formIsFilled() {
+      return !!(this.loginEmail && this.loginPassword)
+    }
   },
   methods: {
-    displayPasswordForm() {
-      this.passwordForgotten = true
-      this.loginModal = false
-    },
-    hidePasswordForm() {
-      this.passwordForgotten = false
-      this.loginModal = true
-    },
-    displayLoginForm(e) {
-      e.preventDefault()
-      $('.register-form').addClass('d-none')
-      $('.login-form').removeClass('d-none')
-    },
-    displayRegisterForm(e) {
-      e.preventDefault()
-      $('.login-form').addClass('d-none')
-      $('.register-form').removeClass('d-none')
-    },
     checkLoginForm() {
       this.errors = []
       let err = this.errors
@@ -89,17 +71,6 @@ export default {
       if (!this.validEmail(this.loginEmail)) err.push('loginEmail')
       if (this.loginPassword === '') err.push('loginPassword')
       if (!err.length) this.submitLoginForm()
-    },
-    checkRegisterForm() {
-      this.registerErrors = []
-      let err = this.registerErrors
-
-      if (!this.firstName) err.push('firstName')
-      if (!this.lastName) err.push('lastName')
-      if (!this.validEmail(this.registerEmail)) err.push('registerEmail')
-      if (this.registerPassword === '') err.push('registerPassword')
-      if (this.registerPassword !== this.registerPasswordConfirmation) err.push('registerPasswordConfirmation')
-      if (!err.length) this.submitRegisterForm()
     },
     submitLoginForm() {
       this.$axios
@@ -117,30 +88,6 @@ export default {
           this.errors.push(err.response.data.message)
         })
     },
-    submitRegisterForm() {
-      this.$axios
-        .post('/registration', {
-          user: {
-            first_name: this.firstName,
-            last_name: this.lastName,
-            email: this.registerEmail,
-            password: this.registerPassword,
-            password_confirmation: this.registerPasswordConfirmation
-          }
-        })
-        .then((response) => {
-          alert("Inscription réussie! Veuillez vérifier l'email" + this.registerEmail + "et confirmer l'inscription puis connectez-vous.")
-          this.registerEmail = ''
-          this.registerPassword = ''
-          this.registerPasswordConfirmation = ''
-          $('.register-form').addClass('d-none')
-          $('.login-form').removeClass('d-none')
-        })
-        .catch((err) => {
-          this.registerErrors.push(err.response.data.message)
-        })
-      // this.$router.push('/');
-    },
     validEmail: function (email) {
       var regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return regexp.test(email)
@@ -150,17 +97,6 @@ export default {
 </script>
 
 <style>
-.modal__backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(41, 47, 51, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .errors {
   color: red;
 }

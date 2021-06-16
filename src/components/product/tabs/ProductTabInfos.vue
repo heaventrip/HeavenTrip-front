@@ -50,7 +50,7 @@
     <div class="head-block d-flex justify-content-center justify-content-lg-start">
       <div class="">
         <p class="sub-heading mb-2">Suis-je prêt ?</p>
-        <h4 class="heading mb-0">Niveaux & intensité</h4>
+        <h4 class="heading mb-0">Niveau & intensité</h4>
       </div>
       <h6 @click="levelsModal = true" class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
         <img class="img_icon mr-2" fluid :src="require('@/assets/images/svg/PICTO_GRILLE_NIVEAUX.svg')" />
@@ -87,29 +87,31 @@
       </h6>
     </div>
     <div class="card-body p-lg-0">
-      <div class="row">
+      <div class="row no-gutters mt-4">
         <div class="col-12 col-lg-6">
-          <div class="grid-pin align-items-center my-lg-5 mt-0 mb-5">
-            <div class="pin-circle">
-              <img class="img_icon" fluid :src="require('@/assets/images/head-pin-pink.png')" />
+          <div class="d-flex align-items-center justify-content-start">
+            <div style="position: relative">
+              <InlineSvg :src="require(`@/assets/svg/intensity-3.svg`)" height="150px" />
+              <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
             </div>
-            <span class="ml-3">
-              <h6 class="level-text">NIVEAUX : <strong class="ml-2">3</strong>/4</h6>
-              <h6 class="status-text mb-0">CONFIRMé ⓘ</h6>
+            <span class="ml-4">
+              <h6 class="level-text">Niveau : <strong class="ml-2">3</strong>/4</h6>
+              <h6 class="status-text mb-0">Confirmé <i class="fas fa-info-circle text-pink ml-2"></i></h6>
             </span>
           </div>
         </div>
         <div class="col-12 col-lg-6">
-          <div class="grid-pin align-items-center my-lg-5 mt-0 mb-5">
-            <div class="pin-circle">
-              <img class="img_icon" fluid :src="require('@/assets/images/head-pin-pink.png')" />
+          <div class="d-flex align-items-center justify-content-start">
+            <div style="position: relative">
+              <InlineSvg :src="require(`@/assets/svg/intensity-1.svg`)" height="150px" />
+              <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
             </div>
-            <span class="ml-3">
+            <span class="ml-4">
               <h6 class="level-text">
-                INTENSITé physique :
+                Intensité physique :
                 <strong class="ml-2">4</strong>/4
               </h6>
-              <h6 class="status-text mb-0">Sans les mains</h6>
+              <h6 class="status-text mb-0">Sans les mains <i class="fas fa-info-circle text-pink ml-2"></i></h6>
             </span>
           </div>
         </div>
@@ -179,7 +181,9 @@ export default {
   name: 'ProductTabInfos',
   data() {
     return {
-      levelsModal: false
+      levelsModal: false,
+      intensityNb: 1,
+      levelNb: 3
     }
   },
   watch: {
