@@ -14,7 +14,7 @@
                 </div>
               </div>
               <div class="modal-content-body bg-white" style="height: 600px">
-                <FormLogin v-if="pForm === 'login'" @clicked-signup="pForm = 'signup'" @clicked-password-forgotten="pForm = 'password'" />
+                <FormLogin v-if="pForm === 'login'" @login-success="$emit('login-success')" @clicked-signup="pForm = 'signup'" @clicked-password-forgotten="pForm = 'password'" />
                 <FormSignup v-if="pForm === 'signup'" @clicked-existing-account="pForm = 'login'" @submitted-form="pForm = 'login'" />
                 <Password v-if="pForm === 'password'" @password-updated="pForm = 'login'" @clicked-password-retrieved="pForm = 'login'" />
               </div>
@@ -113,6 +113,7 @@ import Password from '@/components/connection/Password.vue'
 
 export default {
   name: 'ConnectionModal',
+  emits: ['login-success'],
   components: {
     FormSignup,
     FormLogin,

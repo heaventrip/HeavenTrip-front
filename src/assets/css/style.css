@@ -1509,7 +1509,7 @@ a.bg-danger:hover {
 
 .pre-booking-footer {
   position: relative;
-  z-index: 99999;
+  z-index: 9;
 }
 .backdrop {
   position: fixed;
@@ -3089,14 +3089,15 @@ input[type='number']::-webkit-outer-spin-button {
   text-transform: uppercase;
   display: flex;
   align-items: center;
+  padding-left: 1rem;
 }
 .login-dropdown .dropdown-item:hover {
-  background-color: #292f33;
-  color: #fff;
+  /* background-color: #292f33;
+  color: #fff; */
 }
 .login-dropdown .dropdown-item:active {
-  background-color: #d82558;
-  color: #fff;
+  /* background-color: #d82558;
+  color: #fff; */
 }
 .login-dropdown .dropdown-item:last-child {
   border-bottom: none;

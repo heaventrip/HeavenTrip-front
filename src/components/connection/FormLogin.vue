@@ -52,7 +52,7 @@ import { loginUser } from '@/utils/auth'
 
 export default {
   name: 'ConnectionModal',
-  emits: ['clicked-signup', 'clicked-password-forgotten'],
+  emits: ['clicked-signup', 'clicked-password-forgotten', 'login-success'],
   data() {
     return {
       errors: [],
@@ -77,7 +77,7 @@ export default {
     async submitLoginForm() {
       try {
         await loginUser(this.loginEmail, this.loginPassword)
-        alert('Connexion réussie')
+        this.$emit('login-success')
       } catch (err) {
         alert(err)
       }

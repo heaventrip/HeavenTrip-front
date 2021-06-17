@@ -38,6 +38,15 @@ body.modal-open::after {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 #nav {
   padding: 30px;
