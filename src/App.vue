@@ -28,6 +28,17 @@ body.modal-open::after {
   /* text-align: center; */
   color: #2c3e50;
 }
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(41, 47, 51, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #nav {
   padding: 30px;
 }

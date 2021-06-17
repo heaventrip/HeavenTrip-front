@@ -45,6 +45,7 @@ export default {
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.5s ease;
 }
 .bttn__text {
   position: relative;

@@ -1,7 +1,7 @@
 <template>
   <div class="d-block modal modal__backdrop" id="login">
     <div class="modal-dialog modal-dialog-centered modal-xl login-modal">
-      <div class="modal-content border-0 rounded-0">
+      <div class="connection-modal modal-content border-0 rounded-0">
         <div class="modal-body p-0 border-0">
           <div id="login-wrapper" class="d-flex flex-column flex-lg-row">
             <div class="left-part">
@@ -126,17 +126,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.modal__backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(41, 47, 51, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

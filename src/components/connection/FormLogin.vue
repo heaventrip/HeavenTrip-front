@@ -31,7 +31,7 @@
             <div class="col-12">
               <div class="form-group">
                 <input v-model="loginPassword" class="form-control modal-input mb-2" type="password" autocomplete="off" name="password" placeholder="Mot de passe" :style="[errors.includes('loginPassword') && !loginPassword ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
-                <a @click="$emit('clicked-password-forgotten')" class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
+                <a @click.stop="$emit('clicked-password-forgotten')" class="password-link text-right mb-4 d-block" href="#">Mot de passe oublié</a>
               </div>
             </div>
           </div>
@@ -43,11 +43,13 @@
       <span>Pas encore de compte ?</span>
     </h6>
     <button class="d-none btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0">s'INSCRIRE</button>
-    <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0" @click="$emit('clicked-signup')">INSCRIPTION</button>
+    <button class="btn btn-danger btn-block text-uppercase border-0 rounded-0 modal-btn mb-0 mt-0" @click.stop="$emit('clicked-signup')">INSCRIPTION</button>
   </div>
 </template>
 
 <script>
+import { loginUser } from '@/utils/auth'
+
 export default {
   name: 'ConnectionModal',
   emits: ['clicked-signup', 'clicked-password-forgotten'],
@@ -72,21 +74,13 @@ export default {
       if (this.loginPassword === '') err.push('loginPassword')
       if (!err.length) this.submitLoginForm()
     },
-    submitLoginForm() {
-      this.$axios
-        .post('/login', {
-          user: {
-            email: this.loginEmail,
-            password: this.loginPassword
-          }
-        })
-        .then((resp) => {
-          alert('Connexion réussie')
-          localStorage.setItem('auth-token', resp.data.auth_token)
-        })
-        .catch((err) => {
-          this.errors.push(err.response.data.message)
-        })
+    async submitLoginForm() {
+      try {
+        await loginUser(this.loginEmail, this.loginPassword)
+        alert('Connexion réussie')
+      } catch (err) {
+        alert(err)
+      }
     },
     validEmail: function (email) {
       var regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

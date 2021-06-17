@@ -10,48 +10,72 @@ import LoginHeader from '@/components/connection/LoginHeader.vue'
 import ConnectionModal from '@/components/connection/ConnectionModal.vue'
 import Terms from '@/components/legal/Terms.vue'
 import Legal from '@/components/legal/Legal.vue'
+import { isLoggedIn } from '@/utils/auth'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/product',
     name: 'ProductHome',
-    component: ProductHome
+    component: ProductHome,
+    meta: {
+      allowAnonymous: false
+    }
   },
   {
     path: '/checkout',
     name: 'CheckOutHome',
-    component: CheckOutHome
+    component: CheckOutHome,
+    meta: {
+      allowAnonymous: false
+    }
   },
   {
     path: '/search',
     name: 'SearchHome',
-    component: SearchHome
+    component: SearchHome,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/login',
-    name: 'ConnectionModal',
-    component: ConnectionModal
-  },
-  {
-    path: '/terms',
-    name: 'Terms',
-    component: Terms
-  },
-  {
-    path: '/legal',
-    name: 'Legal',
-    component: Legal
+    name: 'LoginHeader',
+    component: LoginHeader
   }
+  // {
+  //   path: '/terms',
+  //   name: 'Terms',
+  //   component: Terms
+  // },
+  // {
+  //   path: '/legal',
+  //   name: 'Legal',
+  //   component: Legal
+  // }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.allowAnonymous && !isLoggedIn()) {
+    next({
+      path: '/',
+      query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
 })
 
 export default router

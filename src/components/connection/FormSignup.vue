@@ -49,7 +49,7 @@
     </form>
     <div class="d-flex regist mb-4">
       <a class="password-link mr-auto" href="#">En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d'utilisation</span></a>
-      <a class="ml-auto acc-text d-none d-lg-block" style="cursor: pointer" @click="$emit('clicked-existing-account')">J'ai déjà un compte</a>
+      <a class="ml-auto acc-text d-none d-lg-block" style="cursor: pointer" @click.stop="$emit('clicked-existing-account')">J'ai déjà un compte</a>
     </div>
     <h6 class="prefer-text text-center">
       <span>Ou si tu préfères par</span>
