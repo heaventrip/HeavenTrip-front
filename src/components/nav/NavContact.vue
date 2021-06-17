@@ -1,11 +1,11 @@
 <template>
-  <div class="container text-dark align-items-start justify-content-center">
-    <div class="d-flex flex-column justify-content-between col-6" style="padding-right: 20vh; border-right: 1px dashed #b4b4b4">
+  <div class="container text-dark align-items-start justify-content-center" style="top: 25%; padding: 0 5rem">
+    <div class="d-flex flex-column justify-content-between col-6" style="padding-right: 15vh; border-right: 1px dashed #b4b4b4">
       <div class="mb-4">
         <h4 class="contacter-head mb-1">Faut pas hésiter !</h4>
         <p class="contacter-para mb-4 mb-lg-0">Si tu as besoin de conseils, de renseignements, tu peux nous joindre par téléphone ou par le formulaire ci-dessous.</p>
       </div>
-      <div class="tel-box col-lg-4 mb-0">
+      <div class="tel-box mb-0">
         <a class="mob-number text-dark" href="tel:0954277519"><img class="mr-2 align-baseline" fluid :src="require('@/assets/images/tel_dark.png')" /> 09 54 27 75 19</a>
       </div>
       <p class="contacter-para" style="margin-bottom: 2rem">Lundi - samedi : 8h30 à 19h00</p>

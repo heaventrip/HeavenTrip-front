@@ -16,7 +16,7 @@
                     <span v-if="countrySelection.value" class="search-bar__fillter__name">{{ countrySelection.value }}</span>
                     <span v-else class="search-bar__fillter__name">Pays</span>
                   </div>
-                  <Multiselect ref="countryMultiselect" @open="setLBgGrey('country-filter')" @close="setBgWhite('country-filter')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
+                  <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" @close="setBgWhite('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -27,7 +27,7 @@
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Mois de départ</span>
                   </div>
-                  <Multiselect ref="monthMultiselect" @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                  <Multiselect class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" @close="setBgWhite('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -38,7 +38,7 @@
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Activités</span>
                   </div>
-                  <Multiselect ref="activityMultiselect" @open="setBgGrey('activity-filter')" @close="setBgWhite('activity-filter')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                  <Multiselect class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" @close="setBgWhite('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -53,7 +53,7 @@
             </button>
           </div>
           <div class="tags-container d-flex justify-content-center">
-            <Button @click="clearFilters" text="Supprimer tous les filtres" background-color="pink" color="white" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="40px" />
+            <Button @click="clearFilters" text="<span style='text-transform: lowercase;'>supprimer tous les filtres</span>" background-color="#7c7c7c" text-color="#fff" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="40px" />
           </div>
         </div>
       </div>
@@ -516,19 +516,26 @@ export default {
         })
         .then((res) => console.log(res))
     },
+    setMultiSelect(which) {
+      this.setBgGrey(which)
+      let filterDropdown = document.querySelector(`.${which}-multiselect .multiselect-options`)
+      this.$nextTick(function () {
+        filterDropdown.scrollTo({ top: filterDropdown.scrollHeight * -1 })
+      })
+    },
     clearFilters() {
       this.$refs.countryMultiselect.clear()
       this.$refs.monthMultiselect.clear()
       this.$refs.activityMultiselect.clear()
     },
     setBgGrey(filterEl) {
-      let element = document.querySelector(`.${filterEl}`)
+      let element = document.querySelector(`.${filterEl}-filter`)
       element.style.backgroundColor = '#292f33'
       element.style.color = '#fff'
       element.querySelector('.search-bar__fillter__svg').style.fill = '#fff'
     },
     setBgWhite(filterEl) {
-      let element = document.querySelector(`.${filterEl}`)
+      let element = document.querySelector(`.${filterEl}-filter`)
       element.style.backgroundColor = '#fff'
       element.style.color = '#292f33'
       element.querySelector('.search-bar__fillter__svg').style.fill = '#fff'
@@ -555,7 +562,7 @@ export default {
     // })
     this.cardsArr = gsap.utils.toArray('.card-block')
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
-      document.querySelector('.tags-container').append(tagContainer)
+      document.querySelector('.tags-container').prepend(tagContainer)
     })
     document.querySelectorAll('.multi-select-filter').forEach((el) => {
       el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))

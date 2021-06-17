@@ -61,7 +61,7 @@
                   <img class="d-block mx-auto" fluid :src="require('@/assets/images/decath.png')" />
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block mx-auto" fluid :src="require('@/assets/images/logo.png')" />
+                  <InlineSvg :src="require('@/assets/svg/logo-dark.svg')" width="180" fill="white" />
                 </div>
                 <div class="carousel-item">
                   <img class="d-block mx-auto" fluid :src="require('@/assets/images/decath.png')" />
@@ -79,16 +79,18 @@
             </h3>
             <p class="para mb-3">Ne manque surtout pas toute l'actualite sur nos offres !</p>
             <form class="d-flex">
-              <input class="form-control mail_input rounded-left" type="text" name="" placeholder="Mon adresse email..." />
-              <button class="btn btn-warning font-weight-bold rounded-right text-uppercase mail_btn">s'abonner</button>
+              <input class="form-control mail_input" type="text" name="" placeholder="Mon adresse email..." style="border-top-left-radius: 2px; border-bottom-left-radius: 2px" />
+              <button class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4" style="border-top-right-radius: 2px; border-bottom-right-radius: 2px">s'abonner</button>
             </form>
           </div>
         </div>
         <hr />
         <div class="row list-row">
           <div class="col-12 col-md-8 mr-md-auto col-xl-4 pl-0 pr-5 ml-lg-3 ml-xl-3 order-5 order-md-1 text-center text-md-left my-4">
-            <img class="logo mb-3" fluid :src="require('@/assets/images/logo.png')" />
-            <p class="para">Heaven Trip organise en petit groupe des voyages sportifs pour tous et à travers le globe. Un nouveau concept d'evasion melant sport. culture et bien-etre.</p>
+            <div class="d-flex align-items-center">
+              <InlineSvg :src="require('@/assets/svg/logo-small.svg')" height="140" class="fs-0 mr-5" fill="white" />
+              <p class="para mb-0">Heaven Trip organise en petit groupe des voyages sportifs pour tous et à travers le globe. Un nouveau concept d'evasion melant sport. culture et bien-etre.</p>
+            </div>
           </div>
 
           <div class="col-12 col-md-9 col-xl-4 pl-xl-5 order-md-3 order-xl-2 my-4">
@@ -152,8 +154,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 text-center mt-xl-3 d-xl-flex justify-content-xl-center align-items-xl-center position-relative">
-            <ul class="list-unstyled mb-0 d-flex justify-content-center bottom-link-list order-xl-2">
+          <div class="w-100 text-center mt-xl-3 d-xl-flex justify-content-xl-between align-items-xl-center">
+            <p class="mb-0 text-left text-sm-center copy-right mr-xl-3">&copy; Tous droits reserves - Heaven Trip 2019 - 2020</p>
+            <ul class="list-unstyled mb-0 d-flex justify-content-center bottom-link-list">
               <li>
                 <a href="#"><span class="d-none d-md-inline-block">Conditions generales de vente</span><span class="d-inline-block d-md-none">Nos CGV</span> </a>
               </li>
@@ -163,8 +166,18 @@
               <li><a href="#">Mentions légales</a></li>
             </ul>
             <hr class="d-block d-xl-none my-3" />
-            <p class="mb-0 text-left text-sm-center copy-right order-xl-1 mr-xl-3">&copy; Tous droits reserves - Heaven Trip 2019 - 2020</p>
-            <div class="btn-group dropright order-xl-3">
+            <div class="d-flex justify-content-between align-items-center text-uppercase font-weight-bold mail-box" style="flex-grow: 0.2">
+              <a href="tel:0369316618" class="text-reset py-2" style="font-size: 0.85rem">
+                <InlineSvg :src="require('@/assets/svg/phone.svg')" class="mr-3" fill="white" height="20" />
+                03 69 31 66 18
+              </a>
+              <div class="divider" style="height: 1rem"></div>
+              <a href="#" class="text-reset py-2" style="font-size: 0.85rem">
+                <InlineSvg :src="require('@/assets/svg/chat.svg')" class="mr-3" fill="white" height="20" />
+                écrivez-nous
+              </a>
+            </div>
+            <div class="btn-group">
               <button type="button" class="btn dropdown-toggle text-uppercase py-0 border-0 font-weight-bold drpbtn-right text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">fr</button>
               <div class="dropdown-menu text-uppercase">
                 <a class="dropdown-item" href="#">fr</a>

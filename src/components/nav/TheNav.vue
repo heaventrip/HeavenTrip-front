@@ -30,72 +30,38 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @click.prevent="onClicked('activities')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
-            ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
-          ></a>
+          <a @click.prevent="onClicked('activities')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('destinations')" class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
-            ><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
-          ></a>
+          <a @click.prevent="onClicked('destinations')" class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('agency')" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click.prevent="onClicked('agency')" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
       <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
       <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button>
-      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" role="tablist" aria-orientation="vertical" style="position: relative; left: 3rem; z-index: 2; width: max-content; margin-top: 2rem">
+      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content; margin-top: 2rem">
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.clicked(sportCategories[0]?.name)" class="nav-link active text-uppercase subactivity-nav__item" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false">{{
-            sportCategories[0]?.name
-          }}</a>
+          <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer">{{ sportCategories[0]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a
-            @click="$refs.activitiesTab.clicked(sportCategories[1]?.name)"
-            class="nav-link text-uppercase subactivity-nav__item"
-            style="border-bottom: none !important"
-            id="v-pills-montagne-tab"
-            data-toggle="pill"
-            href="#v-pills-montagne"
-            role="tab"
-            aria-controls="v-pills-montagne"
-            aria-selected="false"
-            >{{ sportCategories[1]?.name }}</a
-          >
+          <a @click="$refs.activitiesTab.activeCategory = sportCategories[1]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne">{{ sportCategories[1]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.clicked(sportCategories[2]?.name)" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false">{{
-            sportCategories[2]?.name
-          }}</a>
+          <a @click="$refs.activitiesTab.activeCategory = sportCategories[2]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied">{{ sportCategories[2]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a
-            @click="$refs.activitiesTab.clicked(sportCategories[3]?.name)"
-            class="nav-link text-uppercase subactivity-nav__item"
-            style="border-bottom: none !important"
-            id="v-pills-multi-acti-tab"
-            data-toggle="pill"
-            href="#v-pills-multi-acti"
-            role="tab"
-            aria-controls="v-pills-multi-acti"
-            aria-selected="false"
-            >{{ sportCategories[3]?.name }}</a
-          >
+          <a @click="$refs.activitiesTab.activeCategory = sportCategories[3]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti">{{ sportCategories[3]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.clicked(sportCategories[4]?.name)" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false">{{
-            sportCategories[4]?.name
-          }}</a>
+          <a @click="$refs.activitiesTab.activeCategory = sportCategories[4]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien">{{ sportCategories[4]?.name }}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.clicked(sportCategories[5]?.name)" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false">{{
-            sportCategories[5]?.name
-          }}</a>
+          <a @click="$refs.activitiesTab.activeCategory = sportCategories[5]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige">{{ sportCategories[5]?.name }}</a>
         </li>
       </ul>
       <div class="d-lg-none nav-btm-div d-none align-items-center">
@@ -108,13 +74,13 @@
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
-        <div v-show="activitiesIsActive" id="pills-activites" role="tabpanel" aria-labelledby="pills-activites-tab" class="wrapper h-100 p-0 tab-pane fade black pt-lg-5 home-wrapper show active">
+        <div v-show="activitiesIsActive" id="pills-activites" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
           <ActivitiesTab ref="activitiesTab" />
         </div>
-        <div v-show="destinationsIsActive" id="pills-destination" role="tabpanel" aria-labelledby="pills-destination-tab" class="wrapper h-100 p-0 tab-pane fade black pt-lg-5 home-wrapper show active">
+        <div v-show="destinationsIsActive" id="pills-destination" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
           <DestinationsTab />
         </div>
-        <div v-show="agencyIsActive" id="pills-agence" role="tabpanel" aria-labelledby="pills-agence-tab" class="wrapper h-100 p-0 tab-pane fade home-wrapper show active">
+        <div v-show="agencyIsActive" id="pills-agence" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
           <AgencyTab ref="agencyTab" />
         </div>
       </div>
@@ -224,16 +190,16 @@ export default {
   padding-right: 30%;
 }
 .subactivity-nav__item {
-  color: rgba(250, 250, 250, 0.5) !important;
+  color: rgba(250, 250, 250, 0.3) !important;
   border: none !important;
   font-family: Muli, sans-serif !important;
 }
 .subactivity-nav__item.active {
   font-weight: 800 !important;
-  color: #e0a800 !important;
+  color: white !important;
 }
 .subactivity-nav__item:hover {
-  color: #e0a800 !important;
+  color: white !important;
 }
 .navbar {
   height: 70px; /* easier to manipulate with fixed height */
