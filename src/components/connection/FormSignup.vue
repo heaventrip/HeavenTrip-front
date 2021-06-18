@@ -143,10 +143,10 @@ export default {
 
 <style>
 .errors {
-  color: red;
+  color: #ff0000;
 }
 .modal-input--error {
-  color: red;
-  border-left: 4px solid red;
+  color: #ff0000;
+  border-left: 4px solid #ff0000;
 }
 </style>
