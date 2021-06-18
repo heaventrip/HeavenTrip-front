@@ -3,7 +3,7 @@
     <div class="bttn__text" :class="pWeight">
       <div>
         <!-- TODO use slots and override all buttons components -->
-        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" :fill="pBackgroundColor == 'white' ? pBackgroundColor : 'white'" :height="pIconHeight" />
+        <InlineSvg v-if="pIcon" :src="require(`@/assets/svg/${pIcon}.svg`)" class="mr-2" :fill="pBackgroundColor == 'white' ? 'white' : pBackgroundColor" :height="pIconHeight" />
         <span class="align-middle" :style="pTextColor" v-html="pText"></span>
         <InlineSvg v-if="pArrow" :src="require('@/assets/svg/arrow-right.svg')" class="ml-4 align-middle" height="14" fill="white" />
       </div>

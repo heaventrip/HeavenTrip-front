@@ -30,13 +30,13 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @click.prevent="onClicked('activities')" class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onClicked('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('destinations')" class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onClicked('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @click.prevent="onClicked('agency')" class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onClicked('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
@@ -74,13 +74,13 @@
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
-        <div v-show="activitiesIsActive" id="pills-activites" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+        <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
           <ActivitiesTab ref="activitiesTab" />
         </div>
-        <div v-show="destinationsIsActive" id="pills-destination" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+        <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
           <DestinationsTab />
         </div>
-        <div v-show="agencyIsActive" id="pills-agence" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
+        <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
           <AgencyTab ref="agencyTab" />
         </div>
       </div>
@@ -92,6 +92,7 @@
 import AgencyTab from '@/components/nav/AgencyTab.vue'
 import ActivitiesTab from '@/components/nav/ActivitiesTab.vue'
 import DestinationsTab from '@/components/nav/DestinationsTab.vue'
+import gsap from 'gsap'
 
 export default {
   name: 'Nav',
@@ -161,10 +162,23 @@ export default {
       this.headerEl.style.filter = 'blur(3px)'
     },
     onClicked(tab) {
+      if (tab === 'destinations') {
+        let tl = gsap.timeline()
+
+        tl.to(`#pills-activities`, {
+          autoAlpha: 0,
+          duration: 1,
+          ease: 'power3.inOut'
+        }).to('#pills-destinations', {
+          autoAlpha: 1,
+          duration: 1,
+          ease: 'power3.inOut'
+        })
+      }
       // these must be reset so user lands back on menu later
-      this.$refs.agencyTab.conceptIsActive = false
-      this.$refs.agencyTab.teamIsActive = false
-      this.$refs.agencyTab.contactIsActive = false
+      // this.$refs.agencyTab.conceptIsActive = false
+      // this.$refs.agencyTab.teamIsActive = false
+      // this.$refs.agencyTab.contactIsActive = false
 
       let varName = tab + 'IsActive'
 
@@ -184,6 +198,14 @@ export default {
 </script>
 
 <style scoped>
+.nav-fade-enter-active,
+.nav-fade-leave-active {
+  transition: opacity 0.3s ease-out;
+}
+.nav-fade-enter-from,
+.nav-fade-leave-to {
+  opacity: 0;
+}
 #navbarSupportedContent {
   flex-wrap: wrap;
   align-items: flex-start;

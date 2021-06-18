@@ -68,7 +68,7 @@ body.modal-open::after {
   box-shadow: 0px 0px 4px #292f331a !important;
 }
 .shadow--right {
-  box-shadow: 1px 1px 6px rgba(41, 47, 51, 0.04) !important;
+  box-shadow: 1px 3px 6px rgba(41, 47, 51, 0.04) !important;
 }
 .shadow--top {
   box-shadow: 0px -1px 3px rgba(41, 47, 51, 0.03) !important;
