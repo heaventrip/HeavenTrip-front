@@ -20,7 +20,6 @@
               </div>
             </div>
             <div v-if="form === 'password'" class="right-part dark-content-body d-flex flex-column justify-content-center">
-              <img class="cancel-icon d-none d-lg-block" fluid :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" type="button" data-dismiss="modal" aria-label="Close" />
               <img class="logo d-none d-lg-block mx-auto" fluid :src="require('@/assets/images/LOGO_FULL_WHITE.png')" />
               <img class="logo d-block mx-auto d-lg-none" fluid :src="require('@/assets/images/LOGO_N.png')" />
               <div class="separator-line"></div>
@@ -47,7 +46,6 @@
             </div>
             <div v-else class="right-part dark-content-body d-none d-lg-block">
               <div class="top-block">
-                <img @click.prevent="$parent.showModal = false" class="cancel-icon d-none d-lg-block" fluid :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" />
                 <img class="logo mx-auto mb-3" fluid :src="require('@/assets/images/LOGO_FULL_WHITE.png')" />
                 <ul class="list-unstyled mb-0 text-left registor-list mt-3">
                   <li class="row">

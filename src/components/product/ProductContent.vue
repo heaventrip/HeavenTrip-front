@@ -41,22 +41,22 @@
     <div class="product-content d-flex justify-content-around">
       <div :class="{ 'fade--out': slidingUp, 'fade--in--content': slideIsUp }" class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
         <div id="product-tab-infos" class="pt-5">
-          <ProductTabInfos />
+          <ProductTabInfos :course="course" />
         </div>
         <div id="product-tab-activities" style="padding-top: 4rem">
-          <ProductTabActivities />
+          <ProductTabActivities :course="course" />
         </div>
         <div id="product-tab-living" style="padding-top: 4rem">
-          <ProductTabLiving />
+          <ProductTabLiving :course="course" />
         </div>
         <div id="product-tab-program" style="padding-top: 4rem">
-          <ProductTabProgram />
+          <ProductTabProgram :course="course" />
         </div>
         <div id="product-tab-tips" style="padding-top: 4rem">
-          <ProductTabTips />
+          <ProductTabTips :course="course" />
         </div>
         <div id="product-tab-reviews" style="padding-top: 4rem; min-height: 100vh">
-          <ProductTabReviews />
+          <ProductTabReviews :course="course" />
         </div>
         <!-- <div class="w-50" id="pills-info" aria-labelledby="pills-info-tab">
         </div>
@@ -167,7 +167,7 @@ export default {
     Swiper,
     SwiperSlide
   },
-  props: ['nav-is-active'],
+  props: ['nav-is-active', 'course'],
   emits: ['slide-is-up', 'slide-is-down'],
   data() {
     return {

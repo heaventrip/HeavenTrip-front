@@ -22,9 +22,10 @@ const routes = [
     }
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'ProductHome',
     component: ProductHome,
+    props: true,
     meta: {
       allowAnonymous: false
     }

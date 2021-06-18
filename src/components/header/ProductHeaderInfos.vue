@@ -6,14 +6,16 @@
       <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
       <div style="margin-left: 1.5rem; position: relative; top: 4px">
         <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
-        <h1 class="heading text-uppercase mb-2"><span style="font-weight: bold">Recherche</span></h1>
+        <h1 class="heading text-uppercase mb-2">
+          <span style="font-weight: bold">{{ course.sports[0]?.name }}</span>
+        </h1>
         <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>12 séjours</h5>
       </div>
     </div>
   </div>
   <div class="d-flex flex-column align-items-center">
     <span class="header-infos__mentions__title">Critères sélectionnés :</span>
-    <InlineProductInfos :infos="['france', '7 jours', 'confirmé', '10 places']" color="white" icon="globe" width="max-content" :divider="true" pt="1rem" />
+    <InlineProductInfos :infos="[course.country.name, `${course.duration} jours`, course.level.name, `${course.max} places`]" color="white" icon="globe" width="max-content" :divider="true" pt="1rem" />
   </div>
 </template>
 
@@ -24,7 +26,8 @@ export default {
   name: 'SearchHeaderInfos',
   components: {
     InlineProductInfos
-  }
+  },
+  props: ['course']
 }
 </script>
 

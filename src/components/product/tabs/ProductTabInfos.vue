@@ -19,9 +19,7 @@
         /></span>
       </h6>
       <p class="content mt-3 mb-4">
-        Vous avez un niveau expert avec une bonne expérience de la pratique du hors-piste, vous pouvez descendre toutes les pentes, dans toutes les conditions ‘ Vous maitrisez l’utilisation des appareils de sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes
-        des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
-        <span class="collapse" id="viewMore">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
+        {{ course.description }}
       </p>
       <div class="row" style="margin-left: -2rem; margin-right: -2rem">
         <div class="col-9 col-lg-12 p-0">
@@ -183,6 +181,7 @@
 <script>
 export default {
   name: 'ProductTabInfos',
+  props: ['course'],
   data() {
     return {
       levelsModal: false,

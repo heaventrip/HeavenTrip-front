@@ -5697,10 +5697,10 @@ a.descriptif-link.bg-danger:hover {
     width: 523px;
   }
   .login-modal .modal-content-head {
-    border-top-left-radius: 15px;
+    /* border-top-left-radius: 15px; */
   }
   .login-modal .modal-content-body {
-    border-bottom-left-radius: 15px;
+    /* border-bottom-left-radius: 15px; */
   }
   .modal-dialog.login-modal.profile-modal {
     max-width: 602px;
@@ -5713,7 +5713,7 @@ a.descriptif-link.bg-danger:hover {
   }
   .login-modal .dark-content-body {
     box-shadow: 0px 3px 16px #00000041;
-    border-radius: 0px 15px 15px 0px;
+    /* border-radius: 0px 15px 15px 0px; */
     background-color: #292f33cc;
     color: #ffffff;
     padding: 50px;

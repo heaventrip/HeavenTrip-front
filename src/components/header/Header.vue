@@ -29,7 +29,7 @@
     <ConnectionButtons />
     <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('/') && !navIsActive" />
-    <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" ref="productHeaderInfos" />
+    <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" ref="productHeaderInfos" :course="course" />
     <SearchHeaderInfos v-else-if="currentRoute('/search') && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
@@ -110,6 +110,7 @@ export default {
     SearchHeaderInfos,
     SessionsMenu
   },
+  props: ['course'],
   data() {
     return {
       token: true,
@@ -136,7 +137,7 @@ export default {
   },
   methods: {
     currentRoute(route) {
-      return this.$route.path === route
+      return this.$route.path.includes(route)
     },
     setNavStatus(status) {
       this.navIsActive = status
@@ -307,7 +308,7 @@ export default {
 }
 .header-bg-container {
   position: absolute;
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   z-index: -1;
 }

@@ -66,21 +66,28 @@ export default {
   methods: {
     // FIXME check mouse events bug
     biggerCard(event) {
-      this.hovered = true
+      if (!this.animFinished) return
+      this.$emit('mouse-entered')
+      this.animFinished = false
       $(event.target).animate({ width: '+=50px' })
       $(event.target).find('.content').addClass('hover')
       $(event.target).find('.hoverable-div').slideDown()
       $(event.target).find('.card__bg-image').addClass('card__bg-image--hover')
       $(event.target).find('.card__footer__price').addClass('border-0')
+      this.hovered = true
       // $(event.target).find('.trip-link').animate({ bottom: '+=45px' })
     },
     smallerCard(event) {
-      this.hovered = false
+      this.$emit('mouse-left')
       $(event.target).animate({ width: '-=50px' })
       $(event.target).find('.content').removeClass('hover')
       $(event.target).find('.hoverable-div').slideUp()
       $(event.target).find('.card__bg-image').removeClass('card__bg-image--hover')
       $(event.target).find('.card__footer__price').removeClass('border-0')
+      this.hovered = false
+      this.$nextTick(() => {
+        this.animFinished = true
+      })
       // $(event.target).find('.trip-link').animate({ bottom: '-=45px' })
     }
   }

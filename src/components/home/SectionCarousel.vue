@@ -144,8 +144,8 @@
             <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem"></div>
           </div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
-            <div v-if="isMounted" class="cards-slider d-flex overflow-hidden">
-              <SectionCarouselCard v-for="course in courses" :key="course" :course="course" />
+            <div class="cards-slider d-flex overflow-hidden">
+              <SectionCarouselCard v-for="course in courses" :key="course" :course="course" @mouse-entered="shiftCards('right')" @mouse-left="shiftCards('left')" />
             </div>
             <section class="testimonials d-none">
               <div class="col-12 col-lg-11 ml-auto p-0">
@@ -437,26 +437,6 @@ export default {
       }
     }
   },
-  async created() {
-    this.$axios.get('/countries').then((res) => {
-      res.data.countries.forEach((country) => {
-        this.countrySelection.options.push({ value: country.id, label: country.name })
-      })
-    })
-    this.$axios.get('/sports').then((res) => {
-      res.data.sports.forEach((sport) => {
-        this.activitySelection.options.push({ value: sport.id, label: sport.name })
-      })
-    })
-    this.$axios.get('/courses').then((res) => {
-      this.courses = res.data.courses
-      this.isMounted = true
-      // FIXME doesnt work below, elements not yet loaded
-      gsap.set('.card-block', {
-        x: (i) => i * 600 + this.currentViewportWidth * 0.15 // left offset of 10vw
-      })
-    })
-  },
   methods: {
     // TODO mettre un composant Vuejs à la place
     // 530px min-width
@@ -485,6 +465,13 @@ export default {
           gsap.to(this.cardsArr[0], { opacity: 1, duration: 0.5, easing: 'power4.out' })
           this.cardsArr.push(this.cardsArr.shift()) // making first element the last element
         }
+      })
+    },
+    shiftCards(dir) {
+      gsap.utils.toArray('.card-block').forEach((card) => {
+        gsap.to(card, {
+          x: dir === 'right' ? '+=100' : '-=100'
+        })
       })
     },
     slideRight() {
@@ -555,7 +542,7 @@ export default {
       el.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
     }
   },
-  mounted() {
+  async mounted() {
     this.currentViewportWidth = window.innerWidth
     // gsap.utils.toArray('.card-block').forEach((card, index) => {
     //   gsap.set(card, { x: 550 * index })
@@ -568,6 +555,25 @@ export default {
       el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))
       el.addEventListener('mouseleave', (e) => this.turnBgWhite(e.target))
     })
+    this.$axios.get('/countries').then((res) => {
+      res.data.countries.forEach((country) => {
+        this.countrySelection.options.push({ value: country.id, label: country.name })
+      })
+    })
+    this.$axios.get('/sports').then((res) => {
+      res.data.sports.forEach((sport) => {
+        this.activitySelection.options.push({ value: sport.id, label: sport.name })
+      })
+    })
+    await this.$axios.get('/courses').then((res) => {
+      this.courses = res.data.courses
+    })
+    this.$nextTick(() => {
+      gsap.set('.card-block', {
+        x: (i) => i * 600 + this.currentViewportWidth * 0.15 // left offset of 10vw
+      })
+    })
+    // FIXME doesnt work below, elements not yet loaded
   }
 }
 </script>

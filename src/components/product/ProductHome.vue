@@ -1,7 +1,7 @@
 <template>
   <div class="main-product-content">
-    <Header @nav-is-active="$refs.productContent.navIsActive = true" />
-    <ProductContent ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
+    <Header @nav-is-active="$refs.productContent.navIsActive = true" :course="course" />
+    <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
     <ProductFooter ref="productFooter" />
   </div>
   <!-- <ProductSection /> -->
@@ -24,8 +24,10 @@ export default {
     // ProductSection,
     // ProductModal
   },
+  props: ['id'],
   data() {
     return {
+      course: {},
       showLoginModal: false
     }
   },
@@ -59,6 +61,9 @@ export default {
           $('body').css('overflow', 'visible')
         })
     }
+  },
+  created() {
+    this.$axios.get(`/courses/${this.id}`).then((res) => (this.course = res.data.course))
   },
   mounted() {
     this.jquery()

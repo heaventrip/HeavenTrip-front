@@ -2,7 +2,7 @@
   <ul v-if="$parent.agencyIsActive" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
     <li v-if="isLoggedIn()">
       <div class="dropdown login-dropdown">
-        <button class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button style="color: #292f33" class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class="login-img mr-2" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
           MARION <span class="l-name"> .K</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
@@ -35,10 +35,10 @@
         </div>
       </div>
     </li>
-    <li v-if="!isLoggedIn()">
+    <li v-if="!isLoggedIn()" type="button">
       <a @click="openModal('login')" class="text-reset px-4 py-4 d-inline-block" style="color: #292f33 !important">se connecter</a>
     </li>
-    <li v-if="!isLoggedIn()">
+    <li v-if="!isLoggedIn()" type="button">
       <a @click="openModal('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
     </li>
   </ul>
@@ -78,10 +78,10 @@
         </div>
       </div>
     </li>
-    <li v-if="!isLoggedIn()">
+    <li v-if="!isLoggedIn()" type="button">
       <a @click="openModal('login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>
     </li>
-    <li v-if="!isLoggedIn()">
+    <li v-if="!isLoggedIn()" type="button">
       <a @click="openModal('signup')" class="px-4 py-4 profile-link font-weight-bold d-inline-block">creér son profil</a>
     </li>
   </ul>
