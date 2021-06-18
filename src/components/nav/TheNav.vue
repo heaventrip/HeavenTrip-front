@@ -30,16 +30,16 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @mouseover="onClicked('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onClicked('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onClicked('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link active" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
       <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
@@ -74,15 +74,25 @@
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
-        <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-          <ActivitiesTab ref="activitiesTab" />
+        <div @click="dismissNav" type="button" style="position: absolute; top: 10%; right: 20%; z-index: 10">
+          <InlineSvg v-if="agencyIsActive" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN_DARK.svg')" height="60" />
+          <InlineSvg v-else :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" height="60" />
         </div>
-        <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-          <DestinationsTab />
-        </div>
-        <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
-          <AgencyTab ref="agencyTab" />
-        </div>
+        <transition name="nav-fade">
+          <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+            <ActivitiesTab ref="activitiesTab" />
+          </div>
+        </transition>
+        <transition name="nav-fade">
+          <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
+            <AgencyTab ref="agencyTab" />
+          </div>
+        </transition>
+        <transition name="nav-fade">
+          <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+            <DestinationsTab />
+          </div>
+        </transition>
       </div>
     </div>
   </nav>
@@ -121,9 +131,6 @@ export default {
     }
   },
   watch: {
-    // navIsActive: function (newVal) {
-    //   this.$emit('changed-nav-status', newVal)
-    // },
     activitiesIsActive: function (newVal) {
       if (newVal === true) {
         this.$emit('changed-tab', 'activities')
@@ -158,27 +165,35 @@ export default {
     }
   },
   methods: {
+    dismissNav() {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => {
+        this.$data[el] = false
+        this.$parent[el] = false
+      })
+    },
     changeBgFilter(filter) {
       this.headerEl.style.filter = 'blur(3px)'
     },
     onClicked(tab) {
-      if (tab === 'destinations') {
-        let tl = gsap.timeline()
+      // if (tab === 'destinations') {
+      //   let tl = gsap.timeline()
 
-        tl.to(`#pills-activities`, {
-          autoAlpha: 0,
-          duration: 1,
-          ease: 'power3.inOut'
-        }).to('#pills-destinations', {
-          autoAlpha: 1,
-          duration: 1,
-          ease: 'power3.inOut'
-        })
-      }
+      //   tl.to(`#pills-activities`, {
+      //     autoAlpha: 0,
+      //     duration: 1,
+      //     ease: 'power3.inOut'
+      //   }).to('#pills-destinations', {
+      //     autoAlpha: 1,
+      //     duration: 1,
+      //     ease: 'power3.inOut'
+      //   })
+      // }
       // these must be reset so user lands back on menu later
-      // this.$refs.agencyTab.conceptIsActive = false
-      // this.$refs.agencyTab.teamIsActive = false
-      // this.$refs.agencyTab.contactIsActive = false
+      // if (tab === 'agency') {
+      //   this.$refs.agencyTab.conceptIsActive = false
+      //   this.$refs.agencyTab.teamIsActive = false
+      //   this.$refs.agencyTab.contactIsActive = false
+      // }
 
       let varName = tab + 'IsActive'
 
@@ -190,9 +205,6 @@ export default {
       ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
       this.$data[varName] = true
     }
-  },
-  mounted() {
-    // this.headerEl = document.querySelector('.header-bg-image')
   }
 }
 </script>
@@ -200,7 +212,7 @@ export default {
 <style scoped>
 .nav-fade-enter-active,
 .nav-fade-leave-active {
-  transition: opacity 0.3s ease-out;
+  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
 }
 .nav-fade-enter-from,
 .nav-fade-leave-to {

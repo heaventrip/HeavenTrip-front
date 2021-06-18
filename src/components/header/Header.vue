@@ -213,6 +213,7 @@ export default {
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
+  transition: background-color 0.5s ease-in;
 }
 .header-filter--grey::after {
   content: '';
@@ -222,6 +223,7 @@ export default {
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
+  transition: background-color 0.5s ease-in-out;
 }
 .header-filter--light::after {
   content: '';
@@ -231,6 +233,7 @@ export default {
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
+  transition: background-color 0.5s ease-in-out;
 }
 /* SEARCH */
 .header--search {
