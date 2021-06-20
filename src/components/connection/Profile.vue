@@ -86,7 +86,6 @@
                           </g>
                         </g></svg
                     ></a>
-<<<<<<< HEAD
                     <my-upload
                       :no-square="true"
                       langType="en"
@@ -100,9 +99,6 @@
                       url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
                       img-format="jpg"
                     ></my-upload>
-=======
-                    <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" url="/upload" img-format="jpg"></my-upload>
->>>>>>> 477bdd0b41c8699de33e312103893228786430e5
                     <img :src="imgDataUrl" />
                   </div>
                   <div class="col-3 text-center" style="border-left: 1px dashed #b4b4b4">
