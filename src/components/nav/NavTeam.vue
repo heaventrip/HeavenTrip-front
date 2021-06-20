@@ -1,144 +1,122 @@
 <template>
-  <div class="container p-0 px-lg-3">
-    <div class="row justify-content-around w-100">
-      <!-- d-lg-flex -->
-      <div class="col-12 col-lg-2">
-        <div class="position-relative">
-          <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-          <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
+  <swiper :navigation="true" :autoplay="{ delay: 5000 }" :centeredSlides="true">
+    <swiper-slide>
+      <div class="team-slide d-flex">
+        <div class="team-card__picture-block">
+          <img :src="require('@/assets/images/svg/background_team.svg')" class="team-card__picture-bg" alt="..." />
+          <img :src="require('@/assets/images/svg/team.png')" alt="..." class="team-card__picture" />
         </div>
-        <div class="d-flex align-items-end team-div">
-          <h2 class="team-head">
-            <span>Axel</span><br />
-            <span>Sonderer</span>
-          </h2>
-          <p class="para">Co-founder & CEO</p>
+        <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
+          <div class="team-card__person-infos__descr">
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
+            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+          </div>
+          <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
         </div>
-        <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
+      </div></swiper-slide
+    >
+    <swiper-slide>
+      <div class="team-slide d-flex">
+        <div class="team-card__picture-block">
+          <img :src="require('@/assets/images/svg/background_team.svg')" class="team-card__picture-bg" alt="..." />
+          <img :src="require('@/assets/images/svg/team.png')" alt="..." class="team-card__picture" />
+        </div>
+        <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
+          <div class="team-card__person-infos__descr">
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
+            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+          </div>
+          <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
+        </div>
+      </div></swiper-slide
+    >
+    <swiper-slide>
+      <div class="team-slide d-flex">
+        <div class="team-card__picture-block">
+          <img :src="require('@/assets/images/svg/background_team.svg')" class="team-card__picture-bg" alt="..." />
+          <img :src="require('@/assets/images/svg/team.png')" alt="..." class="team-card__picture" />
+        </div>
+        <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
+          <div class="team-card__person-infos__descr">
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
+            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+          </div>
+          <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
+        </div>
+      </div></swiper-slide
+    >
+    <swiper-slide>
+      <div class="team-slide d-flex">
+        <div class="team-card__picture-block">
+          <img :src="require('@/assets/images/svg/background_team.svg')" class="team-card__picture-bg" alt="..." />
+          <img :src="require('@/assets/images/svg/team.png')" alt="..." class="team-card__picture" />
+        </div>
+        <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
+          <div class="team-card__person-infos__descr">
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
+            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+          </div>
+          <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
+        </div>
+      </div></swiper-slide
+    >
+    <swiper-slide>
+      <div class="team-slide d-flex">
+        <div class="team-card__picture-block">
+          <img :src="require('@/assets/images/svg/background_team.svg')" class="team-card__picture-bg" alt="..." />
+          <img :src="require('@/assets/images/svg/team.png')" alt="..." class="team-card__picture" />
+        </div>
+        <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
+          <div class="team-card__person-infos__descr">
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
+            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+          </div>
+          <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
+        </div>
+      </div></swiper-slide
+    >
+  </swiper>
+  <!-- <div class="team-slider-container">
+    <div class="team-slide d-flex">
+      <div class="team-card__picture-block">
+        <img :src="require('@/assets/images/svg/background_team.svg')" class="team-card__picture-bg" alt="..." />
+        <img :src="require('@/assets/images/svg/team.png')" alt="..." class="team-card__picture" />
       </div>
-      <div class="col-12 col-lg-2">
-        <div class="position-relative">
-          <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-          <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
+      <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
+        <div class="team-card__person-infos__descr">
+          Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages
+          celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
         </div>
-        <div class="d-flex align-items-end team-div">
-          <h2 class="team-head">
-            <span>Axel</span><br />
-            <span>Sonderer</span>
-          </h2>
-          <p class="para">Co-founder & CEO</p>
-        </div>
-        <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-      </div>
-      <div class="col-12 col-lg-2">
-        <div class="position-relative">
-          <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-          <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
-        </div>
-        <div class="d-flex align-items-end team-div">
-          <h2 class="team-head">
-            <span>Axel</span><br />
-            <span>Sonderer</span>
-          </h2>
-          <p class="para">Co-founder & CEO</p>
-        </div>
-        <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-      </div>
-      <div class="col-12 col-lg-2">
-        <div class="position-relative">
-          <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-          <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
-        </div>
-        <div class="d-flex align-items-end team-div">
-          <h2 class="team-head">
-            <span>Axel</span><br />
-            <span>Sonderer</span>
-          </h2>
-          <p class="para">Co-founder & CEO</p>
-        </div>
-        <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-      </div>
-    </div>
-    <div class="main w-100">
-      <div class="team-slider text-dark">
-        <div>
-          <div class="position-relative">
-            <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-            <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
-          </div>
-          <div class="d-flex align-items-end team-div">
-            <h2 class="team-head">
-              <span>Axel</span><br />
-              <span>Sonderer</span>
-            </h2>
-            <p class="para">Co-founder & CEO</p>
-          </div>
-          <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-        </div>
-        <div>
-          <div class="position-relative">
-            <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-            <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
-          </div>
-          <div class="d-flex align-items-end team-div">
-            <h2 class="team-head">
-              <span>Axel</span><br />
-              <span>Sonderer</span>
-            </h2>
-            <p class="para">Co-founder & CEO</p>
-          </div>
-          <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-        </div>
-        <div>
-          <div class="position-relative">
-            <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-            <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
-          </div>
-          <div class="d-flex align-items-end team-div">
-            <h2 class="team-head">
-              <span>Axel</span><br />
-              <span>Sonderer</span>
-            </h2>
-            <p class="para">Co-founder & CEO</p>
-          </div>
-          <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-        </div>
-        <div>
-          <div class="position-relative">
-            <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-            <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
-          </div>
-          <div class="d-flex align-items-end team-div">
-            <h2 class="team-head">
-              <span>Axel</span><br />
-              <span>Sonderer</span>
-            </h2>
-            <p class="para">Co-founder & CEO</p>
-          </div>
-          <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-        </div>
-        <div>
-          <div class="position-relative">
-            <img fluid :src="require('@/assets/images/svg/background_team.svg')" class="img-fluid bubble-bg" alt="..." />
-            <img fluid :src="require('@/assets/images/svg/team.png')" class="img-fluid" alt="..." />
-          </div>
-          <div class="d-flex align-items-end team-div">
-            <h2 class="team-head">
-              <span>Axel</span><br />
-              <span>Sonderer</span>
-            </h2>
-            <p class="para">Co-founder & CEO</p>
-          </div>
-          <p class="para">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</p>
-        </div>
+        <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
       </div>
     </div>
-  </div>
+    <div class="team-slide d-flex">
+      <div class="team-card__picture-block">
+        <img :src="require('@/assets/images/svg/background_team.svg')" class="team-card__picture-bg" alt="..." />
+        <img :src="require('@/assets/images/svg/team.png')" alt="..." class="team-card__picture" />
+      </div>
+      <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
+        <div class="team-card__person-infos__descr">
+          Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages
+          celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+        </div>
+        <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
+      </div>
+    </div>
+  </div> -->
 </template>
 
 <script>
+import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+SwiperCore.use([Pagination, EffectFade, Autoplay])
+
 export default {
   name: 'NavTeam',
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   mounted() {
     //  #pills-team-tab doesn't exist anywhere
     //
@@ -205,4 +183,51 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .team-slider-container {
+  display: flex;
+  flex-direction: column;
+  height: 75%;
+} */
+.team-slide {
+  margin: auto;
+  width: 50%;
+}
+@media only screen and (max-width: 1400px) {
+  .team-slide {
+    width: 80%;
+  }
+}
+.team-card__picture-block {
+  position: relative;
+  transform: translateY(-40%);
+  /* display: flex;
+  flex-direction: column; */
+}
+.team-card__picture-bg {
+  position: relative;
+  top: 40%;
+}
+.team-card__picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.team-card__person-infos__descr {
+  font-family: Muli, sans-serif;
+  font-size: 0.85rem;
+  color: #292f33;
+}
+</style>

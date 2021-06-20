@@ -49,7 +49,7 @@
           <div class="col-12 col-lg-3 pr-lg-0 d-none d-lg-block">
             <div class="search-container d-flex align-items-center" style="background-color: #fff">
               <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
-              <input id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
+              <input v-model="freeSearch" id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
             </div>
             <!-- <div class="py-4 px-5 theme-div">
               <div class="theme-dropdown position-relative">
@@ -63,61 +63,61 @@
             </div> -->
             <div class="py-4 px-5 filter-body bg-white font-weight-normal">
               <div class="text-uppercase mb-4 mt-3 letter">Tu peux encore affiner :</div>
-              <div class="filter-container">
+              <div class="filter-container activity-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Activités<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect @open="setBgGrey('activity-filter')" @close="setBgWhite('activity-filter')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                  <Multiselect class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container">
+              <div class="filter-container country-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                  <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container">
+              <div class="filter-container spot-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
                     <span class="search-bar__filter__name">Spot<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                  <Multiselect class="spot-multiselect" ref="spotMultiselect" @open="setMultiSelect('spot')" v-model="spotSelection.value" v-bind="spotSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container">
+              <div class="filter-container month-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Mois de départ<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                  <Multiselect class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container">
+              <div class="filter-container level-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Niveau<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect @open="setBgGrey('month-filter')" @close="setBgWhite('month-filter')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                  <Multiselect class="level-multiselect" ref="levelMultiselect" @open="setMultiSelect('level')" v-model="levelSelection.value" v-bind="levelSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -135,27 +135,23 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-block clear-btn border-0 rounded-0">Effacer les 4 critères de sélection</button>
+            <!-- <button class="btn btn-block clear-btn border-0 rounded-0">Effacer les 4 critères de sélection</button> -->
+            <button @click="submitSearchForm" class="btn btn-block clear-btn border-0 rounded-0">Rechercher</button>
           </div>
           <div class="d-flex flex-column col-12 col-lg-8 ml-auto">
-            <div class="d-flex position-relative mb-5">
+            <!-- NOTE NORMAL -->
+            <div class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
               <div class="col-4 col-md-4 p-0">
                 <div class="position-relative w-100 h-100">
                   <a href="/checkout"><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
-                  <div class="py-2 px-lg-4 px-2 depart-div d-none">
-                    <a href="#" class="depart-text text-white d-flex align-items-center h-100 font-weight-normal"
-                      ><i class="fas fa-plane-departure mr-2"></i>24 au 2 décembre
-                      <span class="ml-auto place-count text-uppercase"><strong>2 places</strong> restantes</span>
-                    </a>
-                  </div>
                 </div>
               </div>
               <div class="d-flex fg-1">
                 <div class="d-flex flex-column justify-content-between shadow--right" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
                   <div class="pad__content">
                     <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
-                      <span class="pad__content__title__sport">yoggi & surf</span>
-                      <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
+                      <span class="pad__content__title__sport">{{ normalResult.sports[0]?.name }}</span>
+                      <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ normalResult.spot.name }}</span>
                     </div>
                     <div class="pad__content__sports d-flex align-items-center tooltip-div">
                       <span class="pad__content__activities__title">Activités :</span>
@@ -174,14 +170,78 @@
                         <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         <div class="pad__content__price text-right">
                           <div class="pad__content__price__info" style="font-weight: 300">par pers.</div>
-                          <div class="pad__content__price__euro">1 390&euro;</div>
+                          <div class="pad__content__price__euro">{{ normalResult.price }}&euro;</div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="d-flex pad__footer">
                     <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
+                      <InlineProductInfos :infos="[normalResult.country.name, `${normalResult.duration} jours`, normalResult.level.name, `${normalResult.max} places`]" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
+                    </div>
+                  </div>
+                </div>
+                <!-- TODO changement de content au hover, et hover en gris -->
+                <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('01') }"><span>Janv.</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('02') }"><span>Fév.</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('03') }"><span>Mars</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('04') }"><span>Avr.</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('05') }"><span>Mai</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('06') }"><span>Juin</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('07') }"><span>Juil.</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('08') }"><span>Août</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('09') }"><span>Sept.</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('10') }"><span>Oct.</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('11') }"><span>Nov.</span></div>
+                  <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('12') }"><span>Déc.</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- NOTE LAST SESSION -->
+            <div class="d-flex position-relative mb-5" v-for="lastSessionResult in lastSessionResults" :key="lastSessionResult">
+              <div class="col-4 col-md-4 p-0" style="box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
+                <div class="position-relative w-100 h-100">
+                  <a href="/checkout"><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
+                </div>
+                <div class="d-flex justify-content-around align-items-center" style="position: absolute; bottom: 0; width: 100%; background-color: white; padding: 0.8rem 2rem; font-size: 0.75rem; text-transform: uppercase; height: 50px">
+                  <div><span style="font-weight: bold">1 place &nbsp;</span>restante</div>
+                  <div class="divider"></div>
+                  <div>Session du 24 décembre</div>
+                </div>
+              </div>
+              <div class="d-flex fg-1">
+                <div class="d-flex flex-column justify-content-between shadow--right" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
+                  <div class="pad__content">
+                    <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
+                      <span class="pad__content__title__sport">{{ lastSessionResult.sports[0]?.name }}</span>
+                      <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ lastSessionResult.spot.name }}</span>
+                    </div>
+                    <div class="pad__content__sports d-flex align-items-center tooltip-div">
+                      <span class="pad__content__activities__title">Activités :</span>
+                      <InlineSvg class="" :src="require('@/assets/svg/surf.svg')" height="22" />
+                      <InlineSvg class="" :src="require('@/assets/svg/yoga.svg')" height="22" />
+                      <InlineSvg class="" :src="require('@/assets/svg/mat.svg')" height="22" />
+                    </div>
+                    <div class="pad__content__tags">
+                      <div class="pad__content__tags__tag">Cuisinier privé</div>
+                      <div class="pad__content__tags__tag">Cuisinier privé</div>
+                      <div class="pad__content__tags__tag">Cuisinier privé</div>
+                    </div>
+                    <div class="">
+                      <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers inscrits&nbsp;</span><span>à cette session :</span> </span>
+                      <div class="d-flex justify-content-between">
+                        <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
+                        <div class="pad__content__price text-right">
+                          <div class="pad__content__price__info" style="font-weight: 300">par pers.</div>
+                          <div class="pad__content__price__euro">{{ lastSessionResult.price }}&euro;</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex pad__footer">
+                    <div class="inline-product-infos-container">
+                      <InlineProductInfos :infos="[lastSessionResult.country.name, `${lastSessionResult.duration} jours`, lastSessionResult.level, `${lastSessionResult.max} places`]" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
                     </div>
                   </div>
                 </div>
@@ -202,94 +262,19 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex position-relative mb-5">
+            <!-- NOTE TRIP REQUEST -->
+            <div class="d-flex position-relative mb-5" v-for="requestedTripResult in requestedTripResults" :key="requestedTripResult">
               <div class="col-4 col-md-4 p-0">
                 <div class="position-relative w-100 h-100">
                   <a href="/checkout"><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
-                  <div class="py-2 px-lg-4 px-2 depart-div d-none">
-                    <a href="#" class="depart-text text-white d-flex align-items-center h-100 font-weight-normal"
-                      ><i class="fas fa-plane-departure mr-2"></i>24 au 2 décembre
-                      <span class="ml-auto place-count text-uppercase"><strong>2 places</strong> restantes</span>
-                    </a>
-                  </div>
                 </div>
               </div>
               <div class="d-flex fg-1">
                 <div class="d-flex flex-column justify-content-between shadow--right" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
                   <div class="pad__content">
                     <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
-                      <span class="pad__content__title__sport">yoggi & surf</span>
-                      <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
-                    </div>
-                    <div class="pad__content__sports d-flex align-items-center tooltip-div mt-4">
-                      <span class="pad__content__activities__title">Activités :</span>
-                      <InlineSvg class="" :src="require('@/assets/svg/surf.svg')" height="22" />
-                      <InlineSvg class="" :src="require('@/assets/svg/yoga.svg')" height="22" />
-                      <InlineSvg class="" :src="require('@/assets/svg/mat.svg')" height="22" />
-                    </div>
-                    <div class="pad__content__tags">
-                      <div class="pad__content__tags__tag">Cuisinier privé</div>
-                      <div class="pad__content__tags__tag">Cuisinier privé</div>
-                      <div class="pad__content__tags__tag">Cuisinier privé</div>
-                    </div>
-                    <div class="">
-                      <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers intéressés :&nbsp;</span></span>
-                      <div class="d-flex justify-content-between">
-                        <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0rem" mb="0rem" />
-                        <div class="pad__content__price text-right">
-                          <div class="pad__content__price__info" style="font-weight: 300">à partir de :</div>
-                          <div class="pad__content__price__euro">1 390&euro;</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-flex pad__footer">
-                    <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux']" icon="globe" color="#292f33" pb="0.6rem" pt="0.6rem" width="100%" />
-                    </div>
-                    <Button text="Sur devis" color="grey" px="1.5rem" size=".8rem" width="max-content" weight="bold" height="inherit" icon="globe" />
-                  </div>
-                </div>
-                <!-- TODO changement de content au hover, et hover en gris -->
-                <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content; visibility: hidden">
-                  <div class="pad__content__month-block shadow"><span>Janv.</span></div>
-                  <div class="pad__content__month-block shadow"><span>Fév.</span></div>
-                  <div class="pad__content__month-block shadow"><span>Mars</span></div>
-                  <div class="pad__content__month-block shadow"><span>Avr.</span></div>
-                  <div class="pad__content__month-block shadow"><span>Mai</span></div>
-                  <div class="pad__content__month-block shadow"><span>Juin</span></div>
-                  <div class="pad__content__month-block shadow"><span>Juil.</span></div>
-                  <div class="pad__content__month-block shadow"><span>Août</span></div>
-                  <div class="pad__content__month-block shadow"><span>Sept.</span></div>
-                  <div class="pad__content__month-block shadow"><span>Oct.</span></div>
-                  <div class="pad__content__month-block shadow"><span>Nov.</span></div>
-                  <div class="pad__content__month-block shadow"><span>Déc.</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex position-relative mb-5">
-              <div class="col-4 col-md-4 p-0" style="position: relative">
-                <div class="position-relative w-100 h-100">
-                  <a href="/checkout"><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
-                  <div class="py-2 px-lg-4 px-2 depart-div d-none">
-                    <a href="#" class="depart-text text-white d-flex align-items-center h-100 font-weight-normal"
-                      ><i class="fas fa-plane-departure mr-2"></i>24 au 2 décembre
-                      <span class="ml-auto place-count text-uppercase"><strong>2 places</strong> restantes</span>
-                    </a>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-around align-items-center" style="position: absolute; bottom: 0; width: 100%; background-color: white; padding: 0.8rem 2rem; font-size: 0.75rem; text-transform: uppercase; height: 50px">
-                  <div><span style="font-weight: bold">1 place &nbsp;</span>restante</div>
-                  <div class="divider"></div>
-                  <div>Session du 24 décembre</div>
-                </div>
-              </div>
-              <div class="d-flex fg-1">
-                <div class="d-flex flex-column justify-content-between shadow--right" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
-                  <div class="pad__content">
-                    <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
-                      <span class="pad__content__title__sport">yoggi & surf</span>
-                      <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
+                      <span class="pad__content__title__sport">{{ requestedTripResult.sports[0]?.name }}</span>
+                      <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ requestedTripResult.spot.name }}</span>
                     </div>
                     <div class="pad__content__sports d-flex align-items-center tooltip-div">
                       <span class="pad__content__activities__title">Activités :</span>
@@ -303,21 +288,21 @@
                       <div class="pad__content__tags__tag">Cuisinier privé</div>
                     </div>
                     <div class="">
-                      <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers intéressés :&nbsp;</span></span>
+                      <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers intéressés :</span> </span>
                       <div class="d-flex justify-content-between">
-                        <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0rem" mb="0rem" />
+                        <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         <div class="pad__content__price text-right">
-                          <div class="pad__content__price__info" style="font-weight: 300">à partir de :</div>
-                          <div class="pad__content__price__euro">1 390&euro;</div>
+                          <div class="pad__content__price__info" style="font-weight: 300">par pers.</div>
+                          <div class="pad__content__price__euro">{{ requestedTripResult.price }}&euro;</div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="d-flex pad__footer">
                     <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux']" icon="globe" color="#292f33" pb="0.6rem" pt="0.6rem" width="100%" />
+                      <InlineProductInfos :infos="[requestedTripResult.country.name, `${requestedTripResult.duration} jours`, requestedTripResult.level.name]" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
                     </div>
-                    <Button text="Sur devis" color="grey" px="1.5rem" size=".8rem" width="max-content" weight="bold" height="inherit" icon="globe" />
+                    <Button style="cursor: default" text-color="#292f33" text="Sur devis" background-color="#ebebeb" px="1.5rem" size=".8rem" width="max-content" weight="bold" height="inherit" icon="globe" />
                   </div>
                 </div>
                 <!-- TODO changement de content au hover, et hover en gris -->
@@ -362,6 +347,11 @@ export default {
   },
   data() {
     return {
+      sessionsArr: [],
+      normalResults: [],
+      lastSessionResults: [],
+      requestedTripResults: [],
+      freeSearch: '',
       activitySelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
@@ -369,28 +359,28 @@ export default {
         value: [],
         openDirection: 'top',
         caret: false,
-        options: [
-          { value: 'vtt', label: 'VTT' },
-          { value: 'kitesurf', label: 'Kitesurf' },
-          { value: 'escalade', label: 'Escalade' }
-        ],
+        options: [],
         createTag: true
       },
       countrySelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
-        value: 0,
+        mode: 'tags',
+        value: [],
         openDirection: 'top',
         caret: false,
-        options: ['France', 'Espagne', 'Italie']
+        options: [],
+        createTag: true
       },
       spotSelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
-        value: 0,
+        mode: 'tags',
+        value: [],
         openDirection: 'top',
         caret: false,
-        options: ['France', 'Espagne', 'Italie']
+        options: [],
+        createTag: true
       },
       monthSelection: {
         hideSelected: false,
@@ -400,36 +390,92 @@ export default {
         openDirection: 'top',
         caret: false,
         options: [
-          { value: 'jan', label: 'Janvier' },
-          { value: 'feb', label: 'Février' },
-          { value: 'mar', label: 'Mars' },
-          { value: 'apr', label: 'Avril' },
-          { value: 'may', label: 'Mai' },
-          { value: 'jun', label: 'Juin' },
-          { value: 'jul', label: 'Juillet' },
-          { value: 'aug', label: 'Août' },
-          { value: 'sep', label: 'Septembre' },
-          { value: 'oct', label: 'Octobre' },
-          { value: 'nov', label: 'Novembre' },
-          { value: 'dec', label: 'Décembre' }
+          { value: '1', label: 'Janvier' },
+          { value: '2', label: 'Février' },
+          { value: '3', label: 'Mars' },
+          { value: '4', label: 'Avril' },
+          { value: '5', label: 'Mai' },
+          { value: '6', label: 'Juin' },
+          { value: '7', label: 'Juillet' },
+          { value: '8', label: 'Août' },
+          { value: '9', label: 'Septembre' },
+          { value: '10', label: 'Octobre' },
+          { value: '11', label: 'Novembre' },
+          { value: '12', label: 'Décembre' }
         ],
         createTag: true
       },
       levelSelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
-        value: 0,
+        mode: 'tags',
+        value: [],
         openDirection: 'top',
         caret: false,
-        options: ['France', 'Espagne', 'Italie']
+        options: [],
+        createTag: true
+      }
+    }
+  },
+  watch: {
+    normalResults(val) {
+      if (val !== []) {
+        let arr = []
+        val.forEach((result) => {
+          if (!result.sessions) return
+          result.sessions.forEach((session) => {
+            arr.push(session.dateStart.split('-')[1]) // push month of departure
+            this.sessionsArr = [...new Set(arr)]
+          })
+        })
       }
     }
   },
   methods: {
-    // changeBackground(e, color) {
-    //   e.target.style.backgroundColor = color
-    //   e.target.style.color = color === 'grey' ? '#fff' : 'unset'
-    // }
+    submitSearchForm() {
+      this.$axios
+        .post('/courses/search', {
+          q: {
+            // free_search: this.freeSearch,
+            sports_id_in: this.activitySelection.value
+            // spot_country_id_in: this.countrySelection.value,
+            // spot_id_in: this.spotSelection.value,
+            // sessions_month_of_departure_eq: this.monthSelection.value
+          }
+        })
+        .then((res) => {
+          console.log(res)
+          this.normalResults = res.data.courses
+        })
+    },
+    setMultiSelect(which) {
+      let filterDropdown = document.querySelector(`.${which}-multiselect .multiselect-options`)
+      this.$nextTick(function () {
+        filterDropdown.scrollTo({ top: filterDropdown.scrollHeight * -1 })
+      })
+    }
+  },
+  async created() {
+    this.$axios.get('/sports').then((res) => {
+      res.data.sports.forEach((sport) => {
+        this.activitySelection.options.push({ value: sport.id, label: sport.name })
+      })
+    })
+    this.$axios.get('/countries').then((res) => {
+      res.data.countries.forEach((country) => {
+        this.countrySelection.options.push({ value: country.id, label: country.name })
+      })
+    })
+    this.$axios.get('/spots').then((res) => {
+      res.data.spots.forEach((spot) => {
+        this.spotSelection.options.push({ value: spot.id, label: spot.name })
+      })
+    })
+    this.$axios.get('/levels').then((res) => {
+      res.data.levels.forEach((level) => {
+        this.levelSelection.options.push({ value: level.id, label: level.name })
+      })
+    })
   },
   mounted() {
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
@@ -592,6 +638,10 @@ export default {
   font-size: 0.75rem;
   font-weight: lighter;
   flex-grow: 1;
+}
+.pad__content__month-block--with-sessions {
+  color: #fff;
+  background-color: #292f33;
 }
 .tooltip-div {
   border-top: 1px dashed #292f33;

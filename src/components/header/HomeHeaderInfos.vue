@@ -8,8 +8,7 @@
             <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
             <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
             <div style="width: 115%; margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
-              <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
-              <h1 class="headsport heading text-uppercase mb-2"><span style="font-weight: bold">Kite</span><span>surf</span></h1>
+              <h1 class="headsport heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1>
               <h5 class="header-infos__sub-title d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
             </div>
           </div>
@@ -22,7 +21,7 @@
           <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
             <span>Ca te titille? Rejoint</span>
             <br />
-            les <span>{{ featuredCourse.wishlistUsers?.length }} intéressés</span>
+            les <span>{{ featuredCourse.wishlistUsers?.length }} intéressé(s)</span>
           </span>
           <InlineAvatars :avatars="[1, 2, 3, 4]" outline-color="violet" :heart="true" spacing="-10px" heartheight="40px" heartwidth="40px" />
           <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>

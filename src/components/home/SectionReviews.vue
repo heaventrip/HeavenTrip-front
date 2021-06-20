@@ -3,11 +3,11 @@
     <InlineSvg class="reviews__quote reviews__quote--right" :src="require('@/assets/svg/right-quote.svg')" opacity="0.1" />
     <div class="reviews__infos d-flex flex-column align-items-end">
       <span>Pour vous</span>
-      <div class="text-uppercase" style="font-size: 1.5rem">
+      <div class="text-uppercase" style="font-size: 1.5rem; margin-bottom: 1rem">
         <span>ils&nbsp;</span>
         <span class="text--bold">témoignent</span>
       </div>
-      <InlineAvatars height="40px" :heart="false" spacing="15px" :avatars="[1, 2, 3]" />
+      <InlineAvatars height="48px" :heart="false" spacing="15px" :avatars="[1, 2, 3, 4]" />
     </div>
     <div class="reviews__user d-flex flex-column">
       <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
@@ -73,7 +73,7 @@ export default {
   border-radius: 50%;
 }
 .reviews__user {
-  margin-left: 8rem;
+  margin-left: 12rem;
   margin-right: 2rem;
 }
 .reviews__comment {
@@ -82,7 +82,7 @@ export default {
 .review-comment__date {
   text-transform: uppercase;
   font-size: 0.8rem;
-  font-weight: normal;
+  font-weight: 800l;
 }
 .divider {
   display: inline-block;

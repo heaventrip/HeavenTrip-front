@@ -11,7 +11,7 @@
       </ul>
       <a href="#" class="ml-auto font-weight-light text-reset">modifier</a>
     </div>
-    <div class="card d-none">
+    <div class="card d-block">
       <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
           <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
@@ -32,7 +32,7 @@
           <p class="font-weight-500">Dans la limite des stocks disponibles !</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
             <div class="custom-control">
-              <input type="radio" id="customRadio1" name="room" class="custom-control-input" />
+              <input v-model="room" value="1" type="radio" id="customRadio1" name="room" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio1">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -44,7 +44,7 @@
               </label>
             </div>
             <div class="custom-control">
-              <input type="radio" id="customRadio2" name="room" class="custom-control-input" />
+              <input v-model="room" value="2" type="radio" id="customRadio2" name="room" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio2">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -56,7 +56,7 @@
               </label>
             </div>
             <div class="custom-control">
-              <input type="radio" id="customRadio3" name="room" class="custom-control-input" />
+              <input v-model="room" value="3" type="radio" id="customRadio3" name="room" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio3">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -65,7 +65,7 @@
                   </span>
                   <div class="avalaible-mem col-6 justify-content-center align-items-center">
                     <p class="font-weight-500 mb-0">A partager avec :</p>
-                    <select class="form-control col-5 ml-3 text-capitalize custom-select">
+                    <select v-model="roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
                       <option>Axel</option>
                       <option>marion</option>
                     </select>
@@ -75,7 +75,7 @@
               </label>
             </div>
             <div class="custom-control">
-              <input type="radio" id="customRadio4" name="room" class="custom-control-input" />
+              <input v-model="room" value="4" type="radio" id="customRadio4" name="room" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio4">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -93,7 +93,7 @@
           <p class="font-weight-500">Matériel correspondant uniquement a tan activité principale</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
             <div class="custom-control">
-              <input type="radio" id="customRadio5" name="materiel" class="custom-control-input" />
+              <input v-model="equipmentRental" :value="true" type="radio" id="customRadio5" name="materiel" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio5">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -105,7 +105,7 @@
               </label>
             </div>
             <div class="custom-control">
-              <input type="radio" id="customRadio6" name="materiel" class="custom-control-input" />
+              <input v-model="equipmentRental" :value="false" type="radio" id="customRadio6" name="materiel" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio6">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -118,12 +118,12 @@
             </div>
           </div>
         </div>
-        <div class="card-body border-top p-0 pt-5 zero-opacity">
+        <div class="card-body border-top p-0 pt-5">
           <h6 class="font-weight-bold">Activites en +</h6>
           <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
           <div class="custom-radio-container inline-blocks py-3">
             <div class="custom-control custom-radio bg-light rounded border">
-              <input type="checkbox" id="customRadio7" class="custom-control-input" />
+              <input v-model="extraActivities" value="1" type="checkbox" id="customRadio7" class="custom-control-input" :disabled="noExtraActivities" />
               <label class="custom-control-label d-flex align-items-center border-0" for="customRadio7">
                 <div class="font-weight-bold text-uppercase">
                   sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
@@ -131,7 +131,7 @@
               </label>
             </div>
             <div class="custom-control custom-radio bg-light rounded border">
-              <input type="checkbox" id="customRadio8" class="custom-control-input" />
+              <input v-model="extraActivities" value="2" type="checkbox" id="customRadio8" class="custom-control-input" :disabled="noExtraActivities" />
               <label class="custom-control-label d-flex align-items-center border-0" for="customRadio8">
                 <div class="font-weight-bold text-uppercase">
                   plongee sous-marine<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
@@ -139,7 +139,7 @@
               </label>
             </div>
             <div class="custom-control custom-radio bg-light rounded border">
-              <input type="checkbox" id="customRadio9" class="custom-control-input" />
+              <input v-model="extraActivities" value="3" type="checkbox" id="customRadio9" class="custom-control-input" :disabled="noExtraActivities" />
               <label class="custom-control-label d-flex align-items-center border-0" for="customRadio9">
                 <div class="font-weight-bold text-uppercase">
                   sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
@@ -147,7 +147,7 @@
               </label>
             </div>
             <div class="custom-control custom-radio bg-light rounded border">
-              <input type="checkbox" id="customRadio10" class="custom-control-input" />
+              <input v-model="extraActivities" value="4" type="checkbox" id="customRadio10" class="custom-control-input" :disabled="noExtraActivities" />
               <label class="custom-control-label d-flex align-items-center border-0" for="customRadio10">
                 <div class="font-weight-bold text-uppercase">
                   sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
@@ -157,7 +157,7 @@
           </div>
           <div class="col-12 p-0">
             <div class="custom-control custom-checkbox mb-0 other-activity-check mb-5 pl-3">
-              <input type="checkbox" class="custom-control-input" id="exampleCheck3" />
+              <input v-model="noExtraActivities" type="checkbox" class="custom-control-input" id="exampleCheck3" />
               <label class="custom-control-label mb-0 ml-3" for="exampleCheck3">je ne souhaite pas d'autres activites</label>
             </div>
           </div>
@@ -167,6 +167,11 @@
           <p class="font-weight-500">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
           <textarea class="form-control info-textarea bg-light p-4 mb-5" rows="5">Fais-toi plaisir !</textarea>
           <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
+        </div>
+        <div class="card-body border-top p-0 pt-5">
+          <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
+          <p class="font-weight-500">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
+          <textarea v-model="extraNotes" class="form-control info-textarea bg-light p-4 mb-5" rows="5">Fais-toi plaisir !</textarea>
         </div>
       </div>
     </div>
@@ -200,7 +205,7 @@
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card d-none">
       <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
           <div class="participant-img-container position-relative participant-opacity"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
@@ -357,7 +362,16 @@
 
 <script>
 export default {
-  name: 'Step3'
+  name: 'Step3',
+  data() {
+    return {
+      extraNotes: '',
+      room: [],
+      roomMate: '',
+      noExtraActivities: false,
+      equipmentRental: null
+    }
+  }
 }
 </script>
 

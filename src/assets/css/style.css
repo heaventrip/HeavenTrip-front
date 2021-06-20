@@ -191,7 +191,7 @@ a.bg-danger:hover {
   color: #707070;
 }
 .header {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   /* background: url('../images/combined.png') no-repeat center center / cover; */
 }
@@ -1509,7 +1509,7 @@ a.bg-danger:hover {
 
 .pre-booking-footer {
   position: relative;
-  z-index: 99999;
+  z-index: 9;
 }
 .backdrop {
   position: fixed;
@@ -1888,9 +1888,9 @@ a.bg-danger:hover {
 .main-product-content .activity-head .img_icon {
   height: 30px;
   position: relative;
-  margin-left: 12px;
+  margin-left: 20px;
   border-left: 2px dotted #292f3373;
-  padding-left: 12px;
+  padding-left: 20px;
 }
 .main-product-content .activity-head .img_icon:first-child {
   margin-left: 0;
@@ -2376,8 +2376,8 @@ a.bg-danger:hover {
 }
 
 .brown-div {
-  background-color: #793f4e;
-  color: #ffffff;
+  background-color: #fff;
+  color: #292f33;
   border-left: 1px solid #ebebeb;
   padding: 30px 40px;
   text-align: right;
@@ -2722,7 +2722,7 @@ button.Zebra_DatePicker_Icon {
 .main-product-content .narrow-header-pills {
   box-shadow: 0px 3px 6px #00000005;
   overflow: hidden;
-  top: 46px;
+  /* top: 46px; */
 }
 .main-product-content .narrow-header-pills.nav-pills .nav-link {
   border-radius: 0.25rem;
@@ -2743,7 +2743,7 @@ button.Zebra_DatePicker_Icon {
   position: absolute;
   background-color: #292f33;
   height: 1px;
-  width: 150%;
+  width: 100%;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
@@ -3058,10 +3058,10 @@ input[type='number']::-webkit-outer-spin-button {
 .login-dropdown {
   width: 279px;
   background-color: transparent;
-  box-shadow: 0px 2px 10px #00000014;
-  position: absolute;
+  /* box-shadow: 0px 2px 10px #00000014; */
+  /* position: absolute;
   right: 0;
-  top: 0;
+  top: 0; */
   font-size: 0.75rem;
   font-weight: 500;
   font-family: 'Muli', sans-serif;
@@ -3089,14 +3089,15 @@ input[type='number']::-webkit-outer-spin-button {
   text-transform: uppercase;
   display: flex;
   align-items: center;
+  padding-left: 1rem;
 }
 .login-dropdown .dropdown-item:hover {
-  background-color: #292f33;
-  color: #fff;
+  /* background-color: #292f33;
+  color: #fff; */
 }
 .login-dropdown .dropdown-item:active {
-  background-color: #d82558;
-  color: #fff;
+  /* background-color: #d82558;
+  color: #fff; */
 }
 .login-dropdown .dropdown-item:last-child {
   border-bottom: none;
@@ -4067,7 +4068,7 @@ input[type='number']::-webkit-outer-spin-button {
 .footer .mail_input,
 .footer .mail_btn {
   font-size: 0.75rem;
-  height: 40px;
+  height: 50px;
   border: none;
   border-radius: 0;
   font-weight: 500;
@@ -5503,16 +5504,17 @@ a.descriptif-link.bg-danger:hover {
     border-bottom: 1px solid hsla(0, 0%, 98%, 0.5);
   }
   .main-product-content .linear-block {
-    /* padding: 30px 0px; */
-    /* margin: 80px 0; */
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding: 2rem 2rem;
+    box-shadow: 0 0 5px #ebebeb;
     /* border: 1px solid #ebebeb; */
-    border-radius: 5px;
-    /* background: radial-gradient(#ffffff, #fcfcfccc); */
+    background-color: #fff;
   }
   .main-product-content .linear-block.plain-block {
-    padding: 0 0px;
+    /* padding: 0 0px;
     border: none;
-    background: none;
+    background: none; */
   }
   .main-product-content .content-head.equip {
     letter-spacing: 1.4px;
@@ -5520,7 +5522,6 @@ a.descriptif-link.bg-danger:hover {
     color: #d9345a;
   }
   .main-product-content .like-div {
-    border: 1px solid #793f4e;
     display: flex;
     background-color: #292f33;
     color: #fff;
@@ -5539,9 +5540,10 @@ a.descriptif-link.bg-danger:hover {
     margin-left: auto;
   }
   .main-product-content .like-div .content-list li a {
-    font-size: 11px;
+    font-size: 12px;
+    letter-spacing: 0.06rem;
     padding: 0;
-    padding-right: 36px;
+    padding-right: 26px;
     /* border-right: 1px solid #ffffff; */
   }
   .main-product-content .like-div.white {
@@ -5695,10 +5697,10 @@ a.descriptif-link.bg-danger:hover {
     width: 523px;
   }
   .login-modal .modal-content-head {
-    border-top-left-radius: 15px;
+    /* border-top-left-radius: 15px; */
   }
   .login-modal .modal-content-body {
-    border-bottom-left-radius: 15px;
+    /* border-bottom-left-radius: 15px; */
   }
   .modal-dialog.login-modal.profile-modal {
     max-width: 602px;
@@ -5711,7 +5713,7 @@ a.descriptif-link.bg-danger:hover {
   }
   .login-modal .dark-content-body {
     box-shadow: 0px 3px 16px #00000041;
-    border-radius: 0px 15px 15px 0px;
+    /* border-radius: 0px 15px 15px 0px; */
     background-color: #292f33cc;
     color: #ffffff;
     padding: 50px;
@@ -6873,8 +6875,8 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .brown-div {
-  background-color: #793f4e;
-  color: #ffffff;
+  background-color: #fff;
+  color: #292f33;
   border-left: 1px solid #ebebeb;
   padding: 30px 40px;
   text-align: right;

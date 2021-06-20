@@ -1,8 +1,8 @@
 <template>
   <div class="main-product-content">
-    <Header />
-    <ProductContent />
-    <ProductFooter />
+    <Header @nav-is-active="$refs.productContent.navIsActive = true" :course="course" />
+    <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
+    <ProductFooter ref="productFooter" />
   </div>
   <!-- <ProductSection /> -->
   <!-- <ProductModal /> -->
@@ -19,14 +19,16 @@ export default {
   name: 'ProductHome',
   components: {
     Header,
-    ProductContent
-    // ProductFooter
+    ProductContent,
+    ProductFooter
     // ProductSection,
     // ProductModal
   },
+  props: ['id'],
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      course: {},
+      showLoginModal: false
     }
   },
   methods: {
@@ -59,6 +61,9 @@ export default {
           $('body').css('overflow', 'visible')
         })
     }
+  },
+  created() {
+    this.$axios.get(`/courses/${this.id}`).then((res) => (this.course = res.data.course))
   },
   mounted() {
     this.jquery()

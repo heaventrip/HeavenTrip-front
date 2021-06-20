@@ -1,13 +1,13 @@
 <template>
   <section class="map-section bg-dark text-white pb-5 p-lg-5">
-    <div class="container-fluid">
-      <div class="row">
+    <div class="container-fluid" style="margin: 6rem 0">
+      <div class="row d-none">
         <div class="col-12 col-lg-4 mx-auto pb-lg-5 mt-5 mb-5 mb-lg-0 text-center text-lg-left border-lg-bottom px-0">
           <h6 class="text-warning sub-heading mb-1">Nos activites selon</h6>
           <h2 class="text-uppercase font-weight-normal heading">les <strong>destinations</strong></h2>
         </div>
       </div>
-      <div class="row">
+      <div class="row d-none">
         <div class="col-12 col-md-10 mx-md-auto offset-lg-7 col-lg-5 mr-lg-0 selective-div">
           <div class="d-flex py-3 py-md-4 py-lg-3 absolute-border position-relative">
             <ul class="list-unstyled flex-div mb-0">
@@ -83,7 +83,7 @@
           <img class="img-fluid img-fill" fluid :src="require('@/assets/images/MAPS.png')" />
           <img class="img-fluid centered-img" fluid :src="require('@/assets/images/fr2.png')" />
         </div>
-        <div class="col-12 col-md-10 mx-md-auto col-lg-5 map-content-div">
+        <div class="col-12 col-md-10 mx-md-auto col-lg-5 map-content-div d-none">
           <div class="map-content border-top">
             <div class="zone-div col-12 col-lg-4 mx-auto h-100 flex-column justify-content-center align-items-center text-center">
               <p>Sélectionnez une zone de la map ou dans la liste un pays pour afficher le détails</p>
@@ -304,7 +304,6 @@ export default {
 
 <style scoped>
 .map-section {
-  filter: blur(4px);
   pointer-events: none;
   cursor: not-allowed;
 }

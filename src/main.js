@@ -11,6 +11,7 @@ import './assets/css/datepicker.min.css'
 import './assets/css/zebra_datepicker.min.css'
 import './assets/css/style.css'
 import './assets/css/multiselect.css'
+import 'swiper/swiper-bundle.css'
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 
 // import "./assets/js/sol.js"; // NOTE used for MULTIPLE SELECTIONS
@@ -32,3 +33,4 @@ app.use(router)
 app.mount('#app')
 
 app.config.globalProperties.$axios = axios.create({ baseURL: 'https://heaventrip-dev.herokuapp.com/api/v1' })
+app.config.globalProperties.$contentful = require('contentful')

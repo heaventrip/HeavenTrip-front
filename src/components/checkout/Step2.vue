@@ -4,29 +4,17 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12 col-lg-4">
-            <div class="participants-div align-items-center d-none">
-              <h4 class="head font-weight-bold">
-                PARTICIPANT
-                <i class="fa fa-caret-right mx-3 small align-baseline"></i>1
-                <span class="d-block mt-2 text-danger">J’ai déjà un compte</span>
-              </h4>
-              <div class="upload-div">
-                <i class="align-text-top fa fa-arrow-circle-up"></i>
-              </div>
-              <p class="profile-upload mb-0">Télécharge ta photo de profil</p>
-              <p class="upload-warning">Taille maximum 1MB</p>
-            </div>
             <div class="participants-div align-items-center">
               <img class="img-fluid rounded-circle uploaded-img" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
               <h4 class="head font-weight-bold">
                 PARTICIPANT
                 <i class="fa fa-caret-right mx-3 small align-baseline"></i>1
-                <span class="d-block mt-2 text-danger text-uppercase"><i class="fas fa-edit mr-2"></i> Modifier</span>
+                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'visibility: hidden;' : '']"><i class="fas fa-edit mr-2"></i> Modifier</span>
               </h4>
             </div>
           </div>
           <div class="col-12 col-lg-8">
-            <form class="participants-form contact-form completed-form pt-5">
+            <form class="participants-form contact-form pt-5" :class="{ 'form--disallowed': !allowForm }">
               <div class="row">
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
@@ -123,14 +111,14 @@
     <div class="card border-0 p-3 d-none">
       <a href="#" class="d-flex justify-content-center text-center text-uppercase text-reset text-decoration-none add-participant">ajouter un participant <i class="fa fa-plus-circle ml-3 h4 mb-0"></i></a>
     </div>
-    <div class="card border-0 p-3">
+    <div class="card border-0 p-3" v-for="i in participants.length" :key="i">
       <div class="card-header border-0">
         <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center">
           <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
           participants
           <i class="fa fa-caret-right mx-3 small align-baseline"></i>
           2
-          <a href="#" class="remove-parti text-decoration-none"
+          <a @click.prevent="hideParticipant($event)" href="#" class="remove-parti text-decoration-none"
             ><i class="fa fa-times-circle ml-4 mr-2 h6 mb-0"></i>
             retirer ce participant
           </a>
@@ -141,30 +129,19 @@
           <div class="row">
             <div class="col-12 col-lg-4">
               <div class="form-group has-float-label pr-5">
-                <input class="form-control" type="text" name="" value="Rammurthy Nagar" placeholder=" " />
+                <input v-model="extraParticipantsFirstName[i]" class="form-control" type="text" />
                 <label>Prénom*</label>
               </div>
             </div>
             <div class="col-12 col-lg-4">
               <div class="form-group has-float-label pr-5">
-                <label>Date de naissance*</label>
-                <div class="form-row">
-                  <div class="col-3">
-                    <input type="number" name="" class="form-control" placeholder=" " required value="04" />
-                  </div>
-                  <div class="col-3">
-                    <input type="number" name="" class="form-control" placeholder=" " required value="11" />
-                  </div>
-                  <div class="col-5">
-                    <input type="number" name="" class="form-control" placeholder=" " required value="1984" />
-                  </div>
-                </div>
-                <i class="fa fa-check check-sym d-none"></i>
+                <input v-model="extraParticipantsBirthday[i]" type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
+                <label for="date">DATE DE NAISSANCE*</label>
               </div>
             </div>
             <div class="col-12 col-lg-4">
               <div class="form-group has-float-label">
-                <input id="emailAddr" class="form-control" type="email" name="" value="" placeholder=" " />
+                <input v-model="extraParticipantsEmail[i]" id="emailAddr" class="form-control" type="email" name="" placeholder=" " />
                 <label for="emailAddr">Email*</label>
               </div>
             </div>
@@ -172,13 +149,48 @@
         </form>
       </div>
     </div>
+    <div @click="addParticipant" class="btn-add-participant" type="button">
+      <span> Ajouter un participant <InlineSvg class="ml-2" style="vertical-align: bottom" :src="require('@/assets/svg/plus.svg')" height="20" fill="#292f33" /></span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Step2'
+  name: 'Step2',
+  data() {
+    return {
+      extraParticipantsFirstName: [],
+      extraParticipantsBirthday: [],
+      extraParticipantsEmail: [],
+      allowForm: false,
+      participants: ['']
+    }
+  },
+  methods: {
+    addParticipant() {
+      this.participants.push('')
+    },
+    hideParticipant(e) {
+      e.target.closest('.card').classList.add('d-none')
+    }
+  }
 }
 </script>
 
-<style></style>
+<style scoped>
+.form--disallowed {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.btn-add-participant {
+  border: 1px solid #ebebeb;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #fff;
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+</style>

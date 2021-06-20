@@ -28,6 +28,26 @@ body.modal-open::after {
   /* text-align: center; */
   color: #2c3e50;
 }
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(41, 47, 51, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 #nav {
   padding: 30px;
 }
@@ -48,7 +68,7 @@ body.modal-open::after {
   box-shadow: 0px 0px 4px #292f331a !important;
 }
 .shadow--right {
-  box-shadow: 1px 1px 6px rgba(41, 47, 51, 0.04) !important;
+  box-shadow: 1px 3px 6px rgba(41, 47, 51, 0.04) !important;
 }
 .shadow--top {
   box-shadow: 0px -1px 3px rgba(41, 47, 51, 0.03) !important;
@@ -64,6 +84,9 @@ body.modal-open::after {
 }
 .bg-grey {
   background-color: #292f33;
+}
+.text--pink {
+  color: #d9345a;
 }
 .text--grey {
   color: #292f33;

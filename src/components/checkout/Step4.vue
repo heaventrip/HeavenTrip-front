@@ -1,5 +1,6 @@
 <template>
   <div class="tab-pane fade" id="step4" role="tabpanel" aria-labelledby="step4-tab">
+    <!-- NOTE RECAP BOOKING -->
     <div class="card completed rounded-0 mb-0">
       <div class="card-header rounded-0 border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
@@ -60,6 +61,7 @@
         </div>
       </div>
     </div>
+    <!-- NOTE ASSURANCES -->
     <div class="card mt-4 mb-0 rounded-0">
       <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center check-head pt-5 px-5 pb-4 flex-1">
@@ -76,7 +78,7 @@
             <div class="row">
               <div class="col-12 col-lg-5">
                 <div class="custom-control custom-radio dotted-border pb-3 mt-2 mb-4">
-                  <input type="radio" id="Radio11" name="insurance_plan" class="custom-control-input" />
+                  <input v-model="assurance" type="radio" id="Radio11" name="insurance_plan" class="custom-control-input" />
                   <label class="custom-control-label" for="Radio11">
                     <div class="d-flex align-items-center mb-2 font-weight-bold">
                       Rapatriment 60&euro;<span>/pers.</span>
