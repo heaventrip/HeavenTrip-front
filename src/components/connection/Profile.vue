@@ -73,7 +73,19 @@
                           </g>
                         </g></svg
                     ></a>
-                    <my-upload langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" url="/upload" :params="params" :headers="headers" img-format="png"></my-upload>
+                    <my-upload
+                      :no-square="true"
+                      langType="en"
+                      field="img"
+                      @crop-success="cropSuccess"
+                      @crop-upload-success="cropUploadSuccess"
+                      @crop-upload-fail="cropUploadFail"
+                      v-model="show"
+                      :width="300"
+                      :height="300"
+                      url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+                      img-format="jpg"
+                    ></my-upload>
                     <img :src="imgDataUrl" />
                   </div>
                   <div class="col-3 text-center" style="border-left: 1px dashed #b4b4b4">
@@ -139,11 +151,6 @@ export default {
       gender: '',
       description: '',
       show: true,
-      params: {
-        token: '123456789',
-        name: 'avatar'
-      },
-      headers: {},
       imgDataUrl: ''
     }
   },
