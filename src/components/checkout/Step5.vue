@@ -2,6 +2,7 @@
   <div class="tab-pane fade login-signup-tab" id="step5" role="tabpanel" aria-labelledby="step5-tab">
     <div class="row">
       <div class="col-12 col-lg-7">
+        <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button>
         <Step5Module1 />
         <Step5Module2 />
         <Step5Module3 />

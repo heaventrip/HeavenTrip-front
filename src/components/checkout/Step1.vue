@@ -82,7 +82,7 @@
                       <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Google</button>
                     </div>
                   </div>
-                  <h6 class="prefer-text text-uppercase font-weight-bold my-5 text-center">
+                  <h6 class="text-uppercase font-weight-bold my-5 text-center">
                     <span>INSCRIPTION</span>
                   </h6>
                   <div class="row">

@@ -37,11 +37,11 @@
             <div class="checkout-body-content bg-light">
               <ul class="nav nav-tabs font-weight-bold checkout-steps text-uppercase border-0 d-none" id="" role="tablist">
                 <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset active" id="step1-tab" data-toggle="tab" href="#step1" role="tab" aria-controls="step1" aria-selected="false"><span class="number-circle">1</span>Connexion </a>
+                  <a class="nav-link text-reset" id="step1-tab" data-toggle="tab" href="#step1" role="tab" aria-controls="step1" aria-selected="false"><span class="number-circle">1</span>Connexion </a>
                   <!-- INSCRIPTION -->
                 </li>
                 <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step2-tab" data-toggle="tab" href="#step2" role="tab" aria-controls="step2" aria-selected="false"><span class="number-circle">2</span> PARTICIPANT(s)</a>
+                  <a class="nav-link text-reset active" id="step2-tab" data-toggle="tab" href="#step2" role="tab" aria-controls="step2" aria-selected="false"><span class="number-circle">2</span> PARTICIPANT(s)</a>
                 </li>
                 <li class="nav-item d-none" role="presentation">
                   <a class="nav-link text-reset" id="step3-tab" data-toggle="tab" href="#step3" role="tab" aria-controls="step3" aria-selected="false"><span class="number-circle">3</span> OPTIONS</a>
@@ -57,17 +57,18 @@
                 </li>
               </ul>
               <div class="tab-content" id="">
-                <Step1 />
+                <!-- <Step1 /> -->
                 <Step2 />
                 <Step3 />
                 <Step4 />
                 <Step5 />
                 <Step6 />
                 <div class="text-right next-step-div pt-4" data-toggle="buttons" role="tablist">
-                  <button class="btn text-uppercase prev-step-btn" data-toggle="tab" role="tab" href="#step3">précédent</button>
-                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step4">etape suivante</button>
-                  <button class="btn text-uppercase prev-step-btn ml-4" data-toggle="tab" role="tab" href="#step5">précédent</button>
-                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step6">etape suivante</button>
+                  <button class="btn text-uppercase prev-step-btn" data-toggle="tab" role="tab" href="#step2">1</button>
+                  <button class="btn text-uppercase prev-step-btn" data-toggle="tab" role="tab" href="#step3">2</button>
+                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step4">3</button>
+                  <button class="btn text-uppercase prev-step-btn ml-4" data-toggle="tab" role="tab" href="#step5">4</button>
+                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step6">5</button>
                 </div>
               </div>
             </div>
@@ -79,7 +80,7 @@
 </template>
 
 <script>
-import Step1 from './Step1.vue'
+// import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
 import Step4 from './Step4.vue'
@@ -89,7 +90,7 @@ import Step6 from './Step6.vue'
 export default {
   name: 'CheckOutSections',
   components: {
-    Step1,
+    // Step1,
     Step2,
     Step3,
     Step4,
@@ -98,7 +99,57 @@ export default {
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      extraParticipants: [],
+      booker: {
+        infos: {
+          firstName: '',
+          lastName: '',
+          birthday: '',
+          phone: '',
+          email: '',
+          gender: '',
+          country: '',
+          city: '',
+          address: '',
+          zipCode: ''
+        },
+        booking: {
+          room: [],
+          roomMate: '',
+          equipmentRental: null,
+          noExtraActivities: false,
+          extraNotes: '',
+          insurance: ''
+        }
+      }
+    }
+  },
+  methods: {
+    submitBookingForm() {
+      this.$axios.post('http://localhost:3000/api/v1/reservations', {
+        booker: this.booker,
+        extraParticipants: this.extraParticipants
+      })
+    },
+    addParticipant() {
+      this.extraParticipants.push({
+        infos: {
+          firstName: '',
+          birthday: '',
+          email: ''
+        },
+        booking: {
+          room: [],
+          roomMate: '',
+          equipmentRental: null,
+          noExtraActivities: false,
+          extraNotes: '',
+          insurance: ''
+        }
+      })
+    },
+    removeParticipant(index) {
+      this.extraParticipants.splice(index, 1)
     }
   },
   mounted() {

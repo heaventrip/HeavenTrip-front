@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-pane fade login-signup-tab" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+  <div class="tab-pane fade show active login-signup-tab" id="step2" role="tabpanel" aria-labelledby="step2-tab">
     <div class="card border-0 p-3">
       <div class="card-body">
         <div class="row">
@@ -19,40 +19,30 @@
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Nom*</label>
-                    <input type="text" name="" class="form-control" value="qwertyui" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.lastName" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Prénom*</label>
-                    <input type="text" name="" class="form-control" value="qwertyui" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.firstName" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>DATE DE NAISSANCE*</label>
-                    <div class="form-row">
-                      <div class="col-3">
-                        <input type="number" name="" class="form-control" value="04" />
-                      </div>
-                      <div class="col-3">
-                        <input type="number" name="" class="form-control" value="11" />
-                      </div>
-                      <div class="col-6">
-                        <input type="number" name="" class="form-control" value="1982" />
-                      </div>
-                    </div>
+                    <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="$parent.booker.infos.birthday" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <div class="btn-group btn-group-toggle fem-hom-toggle text-capitalize" data-toggle="buttons">
                       <div class="btn btn-lg px-4 left-btn text-capitalize active">
-                        <input type="radio" name="options" checked="" />
+                        <input type="radio" name="options" checked="" v-model="$parent.booker.infos.gender" />
                         Femme
                       </div>
                       <div class="btn btn-lg px-4 right-btn text-capitalize">
-                        <input type="radio" name="options" />
+                        <input type="radio" name="options" v-model="$parent.booker.infos.gender" />
                         Homme
                       </div>
                     </div>
@@ -62,38 +52,38 @@
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Téléphone*</label>
-                    <input type="number" name="" class="form-control" value="566767565656" />
+                    <input type="number" name="" class="form-control" v-model="$parent.booker.infos.phone" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>ADRESSE MAIL*</label>
-                    <input class="form-control" type="email" name="" value="wertyu@dfgh.fgh" />
+                    <input class="form-control" type="email" name="" v-model="$parent.booker.infos.email" />
                     <i class="fa fa-check check-sym d-none"></i>
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Pays*</label>
-                    <input type="text" name="" class="form-control" value="qwertyui" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.country" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Adresse*</label>
-                    <input type="text" name="" class="form-control" value="qwertyui" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.address" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>VILLE*</label>
-                    <input type="text" name="" class="form-control" value="qwertyui" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.city" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Code postal*</label>
-                    <input type="text" name="" class="form-control" value="qwertyui" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.zipCode" />
                   </div>
                 </div>
                 <div class="col-12">
@@ -108,17 +98,14 @@
         </div>
       </div>
     </div>
-    <div class="card border-0 p-3 d-none">
-      <a href="#" class="d-flex justify-content-center text-center text-uppercase text-reset text-decoration-none add-participant">ajouter un participant <i class="fa fa-plus-circle ml-3 h4 mb-0"></i></a>
-    </div>
-    <div class="card border-0 p-3" v-for="i in participants.length" :key="i">
+    <div class="card border-0 p-3" v-for="(extraParticipant, index) in $parent.extraParticipants" :key="index">
       <div class="card-header border-0">
         <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center">
           <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-          participants
+          Participant
           <i class="fa fa-caret-right mx-3 small align-baseline"></i>
-          2
-          <a @click.prevent="hideParticipant($event)" href="#" class="remove-parti text-decoration-none"
+          {{ index + 2 }}
+          <a @click.prevent="removeParticipant(index, $event)" href="#" class="remove-parti text-decoration-none"
             ><i class="fa fa-times-circle ml-4 mr-2 h6 mb-0"></i>
             retirer ce participant
           </a>
@@ -129,19 +116,19 @@
           <div class="row">
             <div class="col-12 col-lg-4">
               <div class="form-group has-float-label pr-5">
-                <input v-model="extraParticipantsFirstName[i]" class="form-control" type="text" />
+                <input v-model="extraParticipant.infos.firstName" class="form-control" type="text" />
                 <label>Prénom*</label>
               </div>
             </div>
             <div class="col-12 col-lg-4">
               <div class="form-group has-float-label pr-5">
-                <input v-model="extraParticipantsBirthday[i]" type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
-                <label for="date">DATE DE NAISSANCE*</label>
+                <input v-model="extraParticipant.infos.birthday" type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
+                <label for="date">Date de naissance*</label>
               </div>
             </div>
             <div class="col-12 col-lg-4">
               <div class="form-group has-float-label">
-                <input v-model="extraParticipantsEmail[i]" id="emailAddr" class="form-control" type="email" name="" placeholder=" " />
+                <input v-model="extraParticipant.infos.email" id="emailAddr" class="form-control" type="email" name="" placeholder=" " />
                 <label for="emailAddr">Email*</label>
               </div>
             </div>
@@ -160,18 +147,15 @@ export default {
   name: 'Step2',
   data() {
     return {
-      extraParticipantsFirstName: [],
-      extraParticipantsBirthday: [],
-      extraParticipantsEmail: [],
-      allowForm: false,
-      participants: ['']
+      allowForm: false
     }
   },
   methods: {
     addParticipant() {
-      this.participants.push('')
+      this.$parent.addParticipant()
     },
-    hideParticipant(e) {
+    removeParticipant(index, e) {
+      this.$parent.removeParticipant(index)
       e.target.closest('.card').classList.add('d-none')
     }
   }

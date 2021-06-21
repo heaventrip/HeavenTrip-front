@@ -5,7 +5,7 @@
       <div class="card-header rounded-0 border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
           <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
-          <strong class="participant-name h6 mb-0 font-weight-bold">marion</strong>
+          <strong class="participant-name h6 mb-0 font-weight-bold">{{ $parent.booker.firstName }}</strong>
           <div class="completion-details">
             <ul class="completion-details-list mb-0 list-unstyled d-flex">
               <li>
@@ -30,13 +30,13 @@
         </div>
       </div>
     </div>
-    <div class="card completed rounded-0">
+    <div class="card completed rounded-0 mb-0" v-for="extraParticipant in $parent.extraParticipants" :key="extraParticipant">
       <div class="card-header rounded-0 border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
           <div class="participant-img-container position-relative">
             <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
           </div>
-          <strong class="participant-name h6 mb-0 font-weight-bold">AXEL</strong>
+          <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName }}</strong>
           <div class="completion-details">
             <ul class="completion-details-list mb-0 list-unstyled d-flex">
               <li>
@@ -66,8 +66,7 @@
       <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center check-head pt-5 px-5 pb-4 flex-1">
           <img class="mr-3" fluid :src="require('@/assets/images/svg/amb_icon.svg')" />
-          <strong class="font-weight-bold">ASSURANCE Marion </strong>
-
+          <strong class="font-weight-bold">ASSURANCE {{ $parent.booker.infos.firstName }} </strong>
           <div class="ml-auto text-right">Tripper 1</div>
         </h6>
       </div>
@@ -78,7 +77,7 @@
             <div class="row">
               <div class="col-12 col-lg-5">
                 <div class="custom-control custom-radio dotted-border pb-3 mt-2 mb-4">
-                  <input v-model="assurance" type="radio" id="Radio11" name="insurance_plan" class="custom-control-input" />
+                  <input v-model="$parent.booker.booking.insurance" type="radio" id="Radio11" name="insurance_plan" class="custom-control-input" />
                   <label class="custom-control-label" for="Radio11">
                     <div class="d-flex align-items-center mb-2 font-weight-bold">
                       Rapatriment 60&euro;<span>/pers.</span>
@@ -98,7 +97,7 @@
               </div>
               <div class="col-12 col-lg-6 offset-lg-1">
                 <div class="custom-control custom-radio dotted-border pb-3 mt-2 mb-4">
-                  <input type="radio" id="Radio12" name="insurance_plan" class="custom-control-input" />
+                  <input v-model="$parent.booker.booking.insurance" type="radio" id="Radio12" name="insurance_plan" class="custom-control-input" />
                   <label class="custom-control-label" for="Radio12">
                     <div class="d-flex align-items-center mb-2 font-weight-bold">
                       Rapatriment 60&euro;<span>/pers.</span>
@@ -118,7 +117,7 @@
               </div>
               <div class="col-12">
                 <div class="custom-control custom-radio dotted-border pb-3 mt-2 mb-3">
-                  <input type="radio" id="Radio13" name="insurance_plan" class="custom-control-input" />
+                  <input v-model="$parent.booker.booking.insurance" type="radio" id="Radio13" name="insurance_plan" class="custom-control-input" />
                   <label class="custom-control-label" for="Radio13">
                     <div class="d-flex align-items-center mb-2 font-weight-bold">
                       Je suis deja assure 0&euro;<span class="d-none">/pers.</span>
@@ -135,23 +134,22 @@
         </div>
       </div>
     </div>
-    <div class="card border-top-0 rounded-0">
-      <div class="card-header border-0 p-0 d-flex participant-opacity">
+    <div class="card border-top-0 rounded-0" v-for="(extraParticipant, index) in $parent.extraParticipants" :key="extraParticipant">
+      <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center check-head pt-5 px-5 pb-4 flex-1">
           <img class="mr-3" fluid :src="require('@/assets/images/svg/amb_icon.svg')" />
-          <strong class="font-weight-bold">ASSURANCE AXEL </strong>
-
-          <div class="ml-auto text-right">Tripper 2</div>
+          <strong class="font-weight-bold">ASSURANCE {{ extraParticipant.infos.firstName }} </strong>
+          <div class="ml-auto text-right">Tripper {{ index + 2 }}</div>
         </h6>
       </div>
-      <div class="mx-5 participant-opacity">
+      <div class="mx-5">
         <div class="card-body border-top p-0 pt-3">
           <p class="font-weight-500">Choisissez votre formule d’assurance :</p>
-          <div class="custom-radio-container assurance-radio-container d-none">
+          <div class="custom-radio-container assurance-radio-container">
             <div class="row">
               <div class="col-12 col-lg-5">
                 <div class="custom-control custom-radio dotted-border pb-3 mt-2 mb-4">
-                  <input type="radio" id="Radio11" name="insurance_plan" class="custom-control-input" />
+                  <input v-model="extraParticipant.booking.insurance" type="radio" id="Radio11" name="insurance_plan" class="custom-control-input" />
                   <label class="custom-control-label" for="Radio11">
                     <div class="d-flex align-items-center pt-2 mb-2 font-weight-bold">
                       Rapatriment 60&euro;<span>/pers.</span>
@@ -171,7 +169,7 @@
               </div>
               <div class="col-12 col-lg-6 offset-lg-1">
                 <div class="custom-control custom-radio dotted-border pb-3 mt-2 mb-4">
-                  <input type="radio" id="Radio12" name="insurance_plan" class="custom-control-input" />
+                  <input v-model="extraParticipant.booking.insurance" type="radio" id="Radio12" name="insurance_plan" class="custom-control-input" />
                   <label class="custom-control-label" for="Radio12">
                     <div class="d-flex align-items-center pt-2 mb-2 font-weight-bold">
                       Rapatriment 60&euro;<span>/pers.</span>
@@ -191,7 +189,7 @@
               </div>
               <div class="col-12">
                 <div class="custom-control custom-radio dotted-border pb-3 mt-2 mb-3">
-                  <input type="radio" id="Radio13" name="insurance_plan" class="custom-control-input" />
+                  <input v-model="extraParticipant.booking.insurance" type="radio" id="Radio13" name="insurance_plan" class="custom-control-input" />
                   <label class="custom-control-label" for="Radio13">
                     <div class="d-flex align-items-center pt-2 mb-2 font-weight-bold">
                       Je suis deja assure 0&euro;<span class="d-none">/pers.</span>
