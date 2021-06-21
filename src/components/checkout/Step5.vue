@@ -8,7 +8,7 @@
         <Step5Module3 />
       </div>
       <div class="col-12 col-lg-5 ml-auto">
-        <Step5Module4 />
+        <Step5Module4 :extraParticipants="$parent.extraParticipants" :booker="$parent.booker" />
       </div>
     </div>
   </div>

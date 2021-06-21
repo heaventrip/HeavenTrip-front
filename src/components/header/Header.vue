@@ -3,34 +3,34 @@
     class="header d-flex flex-column text-white"
     :class="{
       'header--home': currentRoute('/'),
-      'header-filter--home': !navIsActive && currentRoute('/'),
+      'header-filter--home': !navIsActive && currentRoute('Home'),
       'header-filter--grey': activitiesIsActive || destinationsIsActive,
       'header-filter--light': agencyIsActive,
-      'header--search': currentRoute('/search'),
-      'header-filter--search': !navIsActive && currentRoute('/search'),
-      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/search'),
-      'header-filter--search--light': agencyIsActive && currentRoute('/search'),
-      'header--product': currentRoute('/product'),
-      'header-filter--product': !navIsActive && currentRoute('/product'),
-      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/product'),
-      'header-filter--product--light': agencyIsActive && currentRoute('/product')
+      'header--search': currentRoute('SearchHome'),
+      'header-filter--search': !navIsActive && currentRoute('SearchHome'),
+      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('SearchHome'),
+      'header-filter--search--light': agencyIsActive && currentRoute('SearchHome'),
+      'header--product': currentRoute('ProductHome'),
+      'header-filter--product': !navIsActive && currentRoute('ProductHome'),
+      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('ProductHome'),
+      'header-filter--product--light': agencyIsActive && currentRoute('ProductHome')
     }"
   >
     <div
       class="header-bg-container"
       :class="{
-        'header-bg-container--home': currentRoute('/'),
-        'header-bg-container--search': currentRoute('/search'),
-        'header-bg-container--product': currentRoute('/product')
+        'header-bg-container--home': currentRoute('Home'),
+        'header-bg-container--search': currentRoute('SearchHome'),
+        'header-bg-container--product': currentRoute('ProductHome')
       }"
     >
       <img src="@/assets/images/combined.png" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <ConnectionButtons />
     <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" />
-    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('/') && !navIsActive" />
-    <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" ref="productHeaderInfos" :course="course" />
-    <SearchHeaderInfos v-else-if="currentRoute('/search') && !navIsActive" />
+    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
+    <ProductHeaderInfos v-else-if="currentRoute('ProductHome') && !navIsActive" ref="productHeaderInfos" :course="course" />
+    <SearchHeaderInfos v-else-if="currentRoute('SearchHome') && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     currentRoute(route) {
-      return this.$route.path.includes(route)
+      return this.$route.name === route
     },
     setNavStatus(status) {
       this.navIsActive = status

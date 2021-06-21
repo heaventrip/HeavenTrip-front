@@ -1,11 +1,11 @@
 <template>
   <div class="number-of-tripper-div">
-    <h6 class="tripper-head text-uppercase mb-0">NOMBRE DE TRIPPERS : 2</h6>
+    <h6 class="tripper-head text-uppercase mb-0">NOMBRE DE TRIPPERS : {{ $parent.$parent.partipantsNb }}</h6>
     <div class="accordion" id="tripperaccordion">
       <div class="card border-0">
         <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="tripOne" type="button" data-toggle="collapse" data-target="#tripperOne" aria-expanded="false" aria-controls="tripperOne">
           <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
-          <strong class="participant-name h6 mb-0 font-weight-bold">marion</strong>
+          <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
             <span class="view-detail">Voir Détails<i class="fas fa-chevron-down ml-2"></i></span>
@@ -61,12 +61,12 @@
           </div>
         </div>
       </div>
-      <div class="card border-0">
+      <div class="card border-0" v-for="extraParticipant in extraParticipants" :key="extraParticipant">
         <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="triptwo" type="button" data-toggle="collapse" data-target="#tripperTwo" aria-expanded="false" aria-controls="tripperTwo">
           <div class="participant-img-container position-relative">
             <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
           </div>
-          <strong class="participant-name h6 mb-0 font-weight-bold">axel</strong>
+          <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName }}</strong>
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
             <span class="view-detail">Voir Détails<i class="fas fa-chevron-down ml-2"></i></span>
@@ -128,7 +128,8 @@
 
 <script>
 export default {
-  name: 'Step5Module4'
+  name: 'Step5Module4',
+  props: ['booker', 'extraParticipants']
 }
 </script>
 

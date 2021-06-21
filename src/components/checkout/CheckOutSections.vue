@@ -6,8 +6,8 @@
           <div class="col-12 col-xl-4 p-0 bg-image h-100 position-relative">
             <div class="d-flex justify-content-between align-items-center trip-list-div text-white px-3">
               <ul class="list-unstyled mb-0 d-flex align-items-center text-uppercase">
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/globe.svg')" />france</li>
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/timer.svg')" />8 j - 7 nuits</li>
+                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/globe.svg')" />{{ productId }}</li>
+                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/timer.svg')" />nuits</li>
                 <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/ring.svg')" />confirmé</li>
               </ul>
               <ul class="list-unstyled mb-0 d-flex align-items-center trip-list">
@@ -97,6 +97,7 @@ export default {
     Step5,
     Step6
   },
+  props: ['course'],
   data() {
     return {
       extraParticipants: [],
@@ -104,38 +105,54 @@ export default {
         infos: {
           firstName: '',
           lastName: '',
-          birthday: '',
+          birthDate: '',
           phone: '',
           email: '',
           gender: '',
           country: '',
           city: '',
-          address: '',
-          zipCode: ''
+          street: '',
+          postalCode: ''
         },
         booking: {
           room: [],
           roomMate: '',
           equipmentRental: null,
           noExtraActivities: false,
+          extraActivities: [],
           extraNotes: '',
           insurance: ''
         }
       }
     }
   },
+  computed: {
+    partipantsNb() {
+      return this.booker.length + this.extraParticipants.length
+    }
+  },
   methods: {
     submitBookingForm() {
-      this.$axios.post('http://localhost:3000/api/v1/reservations', {
-        booker: this.booker,
-        extraParticipants: this.extraParticipants
-      })
+      const AUTH_TOKEN_KEY = 'authToken'
+      let token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.post(
+        'http://localhost:3000/api/v1/reservations',
+        {
+          booker: this.booker,
+          extraParticipants: this.extraParticipants
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
     },
     addParticipant() {
       this.extraParticipants.push({
         infos: {
           firstName: '',
-          birthday: '',
+          birthDate: '',
           email: ''
         },
         booking: {
@@ -143,6 +160,7 @@ export default {
           roomMate: '',
           equipmentRental: null,
           noExtraActivities: false,
+          extraActivities: [],
           extraNotes: '',
           insurance: ''
         }

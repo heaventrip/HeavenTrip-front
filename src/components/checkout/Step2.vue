@@ -31,7 +31,7 @@
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>DATE DE NAISSANCE*</label>
-                    <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="$parent.booker.infos.birthday" />
+                    <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="$parent.booker.infos.birthDate" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -71,7 +71,7 @@
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Adresse*</label>
-                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.address" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.street" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -83,7 +83,7 @@
                 <div class="col-12 col-lg-6">
                   <div class="form-group has-float-label">
                     <label>Code postal*</label>
-                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.zipCode" />
+                    <input type="text" name="" class="form-control" v-model="$parent.booker.infos.postalCode" />
                   </div>
                 </div>
                 <div class="col-12">
@@ -122,7 +122,7 @@
             </div>
             <div class="col-12 col-lg-4">
               <div class="form-group has-float-label pr-5">
-                <input v-model="extraParticipant.infos.birthday" type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
+                <input v-model="extraParticipant.infos.birthDate" type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
                 <label for="date">Date de naissance*</label>
               </div>
             </div>

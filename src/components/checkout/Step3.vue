@@ -1,7 +1,7 @@
 <template>
   <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
     <div class="preview-card border-0 d-none align-items-center text-uppercase flex-row bg-dark text-white px-5 rounded-lg mb-5">
-      <span class="font-weight-light mr-5 ml-2">vous êtes {{ partipantsNb }} trippers</span>
+      <span class="font-weight-light mr-5 ml-2">vous êtes {{ $parent.partipantsNb }} trippers</span>
       <ul class="list-unstyled mb-0 font-weight-500 name-list d-flex">
         <li>marion</li>
         <li>
@@ -11,16 +11,25 @@
       </ul>
       <a href="#" class="ml-auto font-weight-light text-reset">modifier</a>
     </div>
+    <!-- NOTE booker -->
     <div class="card d-block">
       <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
-          <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
-          <strong class="participant-name h6 mb-0 font-weight-bold">{{ $parent.booker.infos.firstName }}<i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i></strong>
-          <div class="participant-add participant-opacity position-relative d-flex align-items-center">
-            <i class="far fa-user-circle mx-3 align-baseline participant-icon"></i>
-            <strong class="participant-name h6 mb-0 font-weight-bold">Axel</strong>
+          <div class="participant-img-container position-relative">
+            <div class="d-inline-block" style="position: relative">
+              <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+              <span class="participant-check"></span>
+            </div>
+            <strong class="participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ $parent.booker.infos.firstName || 'Participant 1' }}</strong>
           </div>
-          <div class="ml-auto text-right check-amount-head">SEJOUR {{ $parent.booker.infos.firstName }}<br /><strong class="check-amount d-block mt-1">2 220 &euro;</strong></div>
+          <div class="participant-add participant-opacity position-relative d-flex align-items-center" v-for="(extraParticipant, index) in $parent.extraParticipants" :key="extraParticipant">
+            <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
+            <i class="far fa-user-circle mx-3 align-baseline participant-icon"></i>
+            <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName || `Participant ${index + 2}` }}</strong>
+          </div>
+          <div class="ml-auto text-right check-amount-head">
+            SEJOUR {{ $parent.booker.infos.firstName || 'Participant 1' }}<br /><strong class="check-amount d-block mt-1">{{ $parent.course.price }} &euro;</strong>
+          </div>
         </h6>
       </div>
       <div class="mx-5">
@@ -31,58 +40,21 @@
           <h6 class="font-weight-bold">Quel type de chambre :</h6>
           <p class="font-weight-500">Dans la limite des stocks disponibles !</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
-            <div class="custom-control">
-              <input v-model="$parent.booker.booking.room" value="1" type="radio" id="customRadio1" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio1">
-                <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
-                  <span>
-                    <div class="font-weight-bold text-uppercase">chambre a partager</div>
-                    <p class="font-weight-500 mb-0">Entre Trippers !</p>
-                  </span>
-                  <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control">
-              <input v-model="$parent.booker.booking.room" value="2" type="radio" id="customRadio2" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio2">
-                <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
-                  <span>
-                    <div class="font-weight-bold text-uppercase">chambre double</div>
-                    <p class="font-weight-500 mb-0">Lit simple</p>
-                  </span>
-                  <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control">
-              <input v-model="$parent.booker.booking.room" value="3" type="radio" id="customRadio3" name="room" class="custom-control-input" />
+            <div class="custom-control" v-for="(room, index) in $parent.course.rooms" :key="room">
+              <input v-model="$parent.booker.booking.room" :value="index" type="radio" id="customRadio3" name="room" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio3">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
-                    <div class="font-weight-bold text-uppercase">chambre privé</div>
-                    <p class="font-weight-500 mb-0">Lit double</p>
+                    <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
+                    <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
                   </span>
-                  <div class="avalaible-mem col-6 justify-content-center align-items-center">
+                  <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable">
                     <p class="font-weight-500 mb-0">A partager avec :</p>
                     <select v-model="$parent.booker.booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
-                      <option>Axel</option>
-                      <option>marion</option>
+                      <option v-for="extraParticipant in $parent.extraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
                     </select>
                   </div>
-                  <div class="ml-auto font-weight-bold text-uppercase">+ 60 &euro;</div>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control">
-              <input v-model="$parent.booker.booking.room" value="4" type="radio" id="customRadio4" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio4">
-                <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
-                  <span>
-                    <div class="font-weight-bold text-uppercase">chambre privé</div>
-                    <p class="font-weight-500 mb-0">Lit double</p>
-                  </span>
-                  <div class="ml-auto font-weight-bold text-uppercase">+ 60 &euro;</div>
+                  <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
                 </div>
               </label>
             </div>
@@ -175,16 +147,25 @@
         </div>
       </div>
     </div>
+    <!-- NOTE extras -->
     <div class="card d-block" v-for="extraParticipant in $parent.extraParticipants" :key="extraParticipant">
       <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
-          <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
-          <strong class="participant-name h6 mb-0 font-weight-bold">{{ $parent.booker.infos.firstName }}<i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i></strong>
-          <div class="participant-add participant-opacity position-relative d-flex align-items-center">
-            <i class="far fa-user-circle mx-3 align-baseline participant-icon"></i>
-            <strong class="participant-name h6 mb-0 font-weight-bold">AXEL </strong>
+          <div class="participant-img-container participant-opacity position-relative">
+            <div class="d-inline-block" style="position: relative">
+              <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+              <span class="participant-check"></span>
+            </div>
+            <strong class="participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ $parent.booker.infos.firstName || 'Participant 1' }}</strong>
           </div>
-          <div class="ml-auto text-right check-amount-head">SEJOUR {{ extraParticipant.infos.firstName }}<br /><strong class="check-amount d-block mt-1">2 220 &euro;</strong></div>
+          <div class="participant-add position-relative d-flex align-items-center" :class="[extraParticipantForHeader === extraParticipant ? '' : 'participant-opacity']" v-for="(extraParticipantForHeader, index) in $parent.extraParticipants" :key="extraParticipantForHeader">
+            <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
+            <i class="far fa-user-circle mx-3 align-baseline participant-icon"></i>
+            <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
+          </div>
+          <div class="ml-auto text-right check-amount-head">
+            SEJOUR {{ $parent.booker.infos.firstName || 'Participant 1' }}<br /><strong class="check-amount d-block mt-1">{{ $parent.course.price }} &euro;</strong>
+          </div>
         </h6>
       </div>
       <div class="mx-5">
@@ -195,58 +176,22 @@
           <h6 class="font-weight-bold">Quel type de chambre :</h6>
           <p class="font-weight-500">Dans la limite des stocks disponibles !</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
-            <div class="custom-control">
-              <input v-model="extraParticipant.booking.room" value="1" type="radio" id="customRadio1" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio1">
-                <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
-                  <span>
-                    <div class="font-weight-bold text-uppercase">chambre a partager</div>
-                    <p class="font-weight-500 mb-0">Entre Trippers !</p>
-                  </span>
-                  <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control">
-              <input v-model="extraParticipant.booking.room" value="2" type="radio" id="customRadio2" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio2">
-                <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
-                  <span>
-                    <div class="font-weight-bold text-uppercase">chambre double</div>
-                    <p class="font-weight-500 mb-0">Lit simple</p>
-                  </span>
-                  <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control">
-              <input v-model="extraParticipant.booking.room" value="3" type="radio" id="customRadio3" name="room" class="custom-control-input" />
+            <div class="custom-control" v-for="(room, index) in $parent.course.rooms" :key="room">
+              <input v-model="extraParticipant.booking.room" :value="index" type="radio" id="customRadio3" name="room" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio3">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
-                    <div class="font-weight-bold text-uppercase">chambre privé</div>
-                    <p class="font-weight-500 mb-0">Lit double</p>
+                    <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
+                    <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
                   </span>
-                  <div class="avalaible-mem col-6 justify-content-center align-items-center">
+                  <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable">
                     <p class="font-weight-500 mb-0">A partager avec :</p>
                     <select v-model="extraParticipant.booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
                       <option>{{ $parent.booker.infos.firstName }}</option>
-                      <option v-for="extraParticipant in $parent.extraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
+                      <option :disabled="extraParticipantForName === extraParticipant ? true : false" v-for="extraParticipantForName in $parent.extraParticipants" :key="extraParticipantForName">{{ extraParticipantForName.infos.firstName }}</option>
                     </select>
                   </div>
-                  <div class="ml-auto font-weight-bold text-uppercase">+ 60 &euro;</div>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control">
-              <input v-model="extraParticipant.booking.room" value="4" type="radio" id="customRadio4" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio4">
-                <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
-                  <span>
-                    <div class="font-weight-bold text-uppercase">chambre privé</div>
-                    <p class="font-weight-500 mb-0">Lit double</p>
-                  </span>
-                  <div class="ml-auto font-weight-bold text-uppercase">+ 60 &euro;</div>
+                  <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
                 </div>
               </label>
             </div>
@@ -373,12 +318,7 @@
 
 <script>
 export default {
-  name: 'Step3',
-  computed: {
-    partipantsNb() {
-      return this.$parent.booker.length + this.$parent.extraParticipants.length
-    }
-  }
+  name: 'Step3'
 }
 </script>
 
