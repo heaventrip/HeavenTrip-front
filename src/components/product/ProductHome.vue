@@ -1,10 +1,14 @@
 <template>
   <div class="main-product-content">
-    <Header v-if="!loaded" @nav-is-active="$refs.productContent.navIsActive = true" :course="course" />
-    <div v-else>
-      <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
-      <ProductFooter ref="productFooter" />
-    </div>
+    <!-- <Header v-if="loaded" @nav-is-active="$refs.productContent.navIsActive = true" :course="course" /> -->
+    <transition name="fade" @after-enter="afterEnter" @before-enter="beforeEnter">
+      <Header ref="header" v-if="header" :course="course" />
+      <div v-else>
+        <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
+        <ProductContent :course="course" ref="productContent" />
+        <ProductFooter ref="productFooter" />
+      </div>
+    </transition>
   </div>
   <!-- <ProductSection /> -->
   <!-- <ProductModal /> -->
@@ -30,7 +34,7 @@ export default {
   data() {
     return {
       course: {},
-      loaded: false,
+      header: true,
       showLoginModal: false
     }
   },
@@ -63,6 +67,48 @@ export default {
           $('.backdrop').hide()
           $('body').css('overflow', 'visible')
         })
+    },
+    afterEnter() {
+      if (this.header === true) {
+        this.listenScrollDown()
+      }
+
+      //entered product content
+      if (this.header === false) {
+        document.body.removeAttribute('style')
+      }
+    },
+    beforeEnter() {
+      if (this.header === true) {
+        document.body.style.position = 'fixed'
+        document.body.style.overflow = 'hidden'
+      }
+    },
+    listenScrollUp() {
+      let that = this
+      document.querySelector('.main-product-content').addEventListener('wheel', (e) => {
+        if (window.scrollY === 0 && e.deltaY < 0) {
+          that.header = true
+        }
+      })
+    },
+    listenScrollDown() {
+      let that = this
+      document.querySelector('.header').addEventListener('wheel', (e) => {
+        if (e.deltaY > 0) {
+          that.header = false
+        }
+      })
+    }
+  },
+  watch: {
+    header(newVal) {
+      if (newVal === true) {
+        this.listenScrollUp()
+      }
+      if (newVal === false) {
+        this.listenScrollUp()
+      }
     }
   },
   async created() {
@@ -73,6 +119,9 @@ export default {
   },
   mounted() {
     this.jquery()
+    document.body.style.position = 'fixed'
+    document.body.style.overflow = 'hidden'
+    this.listenScrollDown()
   }
 }
 </script>

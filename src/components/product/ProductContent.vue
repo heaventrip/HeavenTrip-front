@@ -1,24 +1,16 @@
 <template>
   <div class="stay-dropdown d-block d-lg-none">
     <select class="form-control select-place">
-      <option selected="" value="#pills-info">INFOS SéJOUR</option>
-      <option value="#pills-activityspot">ACTIVITéS & spot</option>
-      <option value="#pills-place">VIE SUR PLACE</option>
-      <option value="#pills-programe">PROGRAMME</option>
-      <option value="#pills-tips">TIPS & ASTUCES</option>
-      <option value="#pills-opinion">VOS AVIS</option>
+      <option selected="" value="#pills-info">Infos séjour</option>
+      <option value="#pills-activityspot">Activités & spot</option>
+      <option value="#pills-place">Vie sur place</option>
+      <option value="#pills-programe">Programme</option>
+      <option value="#pills-tips">Tips & astuces</option>
+      <option value="#pills-opinion">Vos avis</option>
     </select>
   </div>
   <div style="position: relative">
-    <div class="slider" :class="{ 'slider--up': slidingUp }" v-if="!slideIsUp"></div>
-    <ul
-      :class="{ 'fade--out': slidingUp, 'fade--in--menu': slideIsUp }"
-      style="position: relative"
-      :style="[slideIsUp && !navIsActive ? 'height: 6vh; position: sticky; top: 0px; z-index: 2' : 'height: 10vh']"
-      class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center"
-      id="pills-tab "
-      role="tablist"
-    >
+    <ul style="position: relative; height: 6vh; position: sticky; top: 0px; z-index: 2" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
       <li class="nav-item" role="presentation">
         <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
       </li>
@@ -39,7 +31,7 @@
       </li>
     </ul>
     <div class="product-content d-flex justify-content-around">
-      <div :class="{ 'fade--out': slidingUp, 'fade--in--content': slideIsUp }" class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
+      <div class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
         <div id="product-tab-infos" class="pt-5">
           <ProductTabInfos :course="course" />
         </div>
@@ -73,7 +65,7 @@
       </div>
       <div class="" style="width: 35%">
         <div class="" style="position: sticky; top: 10vh">
-          <swiper class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderFraction }" :navigation="true">
+          <swiper class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
             <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
             <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
             <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
@@ -129,8 +121,9 @@ export default {
     Swiper,
     SwiperSlide
   },
-  props: ['nav-is-active', 'course'],
-  emits: ['slide-is-up', 'slide-is-down'],
+  props: ['course'],
+  // props: ['nav-is-active', 'course'],
+  // emits: ['slide-is-up', 'slide-is-down'],
   data() {
     return {
       clickedInfos: false,
@@ -154,65 +147,55 @@ export default {
     }
   },
   watch: {
-    navIsActive(newVal) {
-      console.log(newVal)
-      if (newVal === true) {
-        gsap.set('.header--product', { height: window.innerHeight, ease: 'power3.out' })
-      }
-    },
-    slideIsUp(newVal) {
-      let that = this
-
-      if (newVal === true) {
-        this.$emit('slide-is-up')
-        window.removeEventListener('scroll', that.handleScrollDown)
-        window.addEventListener('scroll', that.handleScrollUp)
-      }
-      if (newVal === false) {
-        this.$emit('slide-is-down')
-        window.removeEventListener('scroll', that.handleScrollUp)
-
-        setTimeout(function () {
-          window.addEventListener('scroll', that.handleScrollDown)
-        }, 1000) // wait for scrollTo to finish
-      }
-    }
+    // navIsActive(newVal) {
+    //   console.log(newVal)
+    //   if (newVal === true) {
+    //     gsap.set('.header--product', { height: window.innerHeight, ease: 'power3.out' })
+    //   }
+    // },
+    // slideIsUp(newVal) {
+    //   let that = this
+    //   if (newVal === true) {
+    //     this.$emit('slide-is-up')
+    //     window.removeEventListener('scroll', that.handleScrollDown)
+    //     window.addEventListener('scroll', that.handleScrollUp)
+    //   }
+    //   if (newVal === false) {
+    //     this.$emit('slide-is-down')
+    //     window.removeEventListener('scroll', that.handleScrollUp)
+    //     setTimeout(function () {
+    //       window.addEventListener('scroll', that.handleScrollDown)
+    //     }, 1000) // wait for scrollTo to finish
+    //   }
+    // }
   },
   methods: {
-    renderFraction(currentClass, totalClass) {
+    renderSwiperFraction(currentClass, totalClass) {
       return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
       <span style="${this.currentPaginationStyle}">.</span>
       <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
     },
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView()
-    },
-    // scroll to top when user reaches top of content (wheel up)
-    handleScrollUp() {
-      let contentTop = window.innerHeight * 0.9
-      if (window.pageYOffset < contentTop) {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-        gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out', duration: 1 }) // duration 1000sec same as above
-        this.slideIsUp = false
-      }
-    },
-    // first scroll down brings page up (wheel down)
-    handleScrollDown() {
-      this.slidingUp = true
-      setTimeout(() => {
-        window.scrollTo({ top: window.innerHeight })
-        this.slidingUp = false
-        this.slideIsUp = true
-      }, 800)
     }
-  },
-  mounted() {
-    let tl = gsap.timeline({ duration: 1 })
-    tl.from('.header-bg-image', { scale: 1.2, duration: 10 })
-    tl.to('.header--product', { height: window.innerHeight * 0.9, ease: 'power3.out' }, '<0.4')
-    tl.from('.product-header-infos__title', { opacity: 0, duration: 0.9 }, '<0.7')
-
-    window.addEventListener('scroll', this.handleScrollDown)
+    // scroll to top when user reaches top of content (wheel up)
+    // handleScrollUp() {
+    //   let contentTop = window.innerHeight * 0.9
+    //   if (window.pageYOffset < contentTop) {
+    //     window.scrollTo({ top: 0, behavior: 'smooth' })
+    //     gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out', duration: 1 }) // duration 1000sec same as above
+    //     this.slideIsUp = false
+    //   }
+    // },
+    // first scroll down brings page up (wheel down)
+    // handleScrollDown() {
+    //   this.slidingUp = true
+    //   setTimeout(() => {
+    //     window.scrollTo({ top: window.innerHeight })
+    //     this.slidingUp = false
+    //     this.slideIsUp = true
+    //   }, 800)
+    // }
   }
 }
 </script>

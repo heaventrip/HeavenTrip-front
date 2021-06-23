@@ -46,12 +46,12 @@ const routes = [
     meta: {
       allowAnonymous: true
     }
-  },
-  {
-    path: '/login',
-    name: 'LoginHeader',
-    component: LoginHeader
   }
+  // {
+  //   path: '/login',
+  //   name: 'LoginHeader',
+  //   component: LoginHeader
+  // }
   // {
   //   path: '/terms',
   //   name: 'Terms',

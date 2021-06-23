@@ -27,7 +27,8 @@
       <img src="@/assets/images/combined.png" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <ConnectionButtons />
-    <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" />
+    <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
+    <TheNav @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
     <ProductHeaderInfos v-else-if="currentRoute('ProductHome') && !navIsActive" ref="productHeaderInfos" :course="course" />
     <SearchHeaderInfos v-else-if="currentRoute('SearchHome') && !navIsActive" />
@@ -115,7 +116,6 @@ export default {
     return {
       token: true,
       toggleSessions: false,
-      // navIsActive: false,
       agencyIsActive: false,
       destinationsIsActive: false,
       activitiesIsActive: false
@@ -128,6 +128,7 @@ export default {
     },
     navIsActive(newVal) {
       if (newVal === true) this.$emit('nav-is-active')
+      console.log('navactive')
     }
   },
   computed: {
@@ -139,9 +140,9 @@ export default {
     currentRoute(route) {
       return this.$route.name === route
     },
-    setNavStatus(status) {
-      this.navIsActive = status
-    },
+    // setNavStatus(status) {
+    //   this.navIsActive = status
+    // },
     setActiveTab(clickedTab) {
       let varName = clickedTab + 'IsActive'
       ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
