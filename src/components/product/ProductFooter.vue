@@ -1,5 +1,5 @@
 <template>
-  <div class="pre-booking-footer sticky-bottom w-100" :class="[slideIsUp ? 'd-flex' : 'd-none']" style="position: sticky; bottom: 0">
+  <div class="pre-booking-footer sticky-bottom w-100 flex-column" :class="[slideIsUp ? 'd-flex' : 'd-none']" style="position: sticky; bottom: 0">
     <div :class="[openBooking ? 'd-flex' : 'd-none']" class="booking-session align-items-center">
       <h2 class="session-head border-right border-white">CRÉER UNE SESSION</h2>
       <ul class="text-uppercase list-unstyled year-list border-right border-white px-3">

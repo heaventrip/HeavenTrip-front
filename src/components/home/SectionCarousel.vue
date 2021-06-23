@@ -145,8 +145,7 @@
           </div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
             <div class="cards-slider d-flex overflow-hidden">
-              <SectionCarouselCard v-for="course in courses" :key="course" :course="course" @mouse-entered="shiftCards('right')" @mouse-left="shiftCards('left')" />
-              <SectionCarouselCard v-for="course in courses" :key="course" :course="course" @mouse-entered="shiftCards('right')" @mouse-left="shiftCards('left')" />
+              <SectionCarouselCard ref="card" v-for="(course, index) in courses" :key="course" :course="course" :index="index" />
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">123456</div>
@@ -182,6 +181,7 @@ export default {
   },
   data() {
     return {
+      animFinished: true,
       cardsAnimLeft: null,
       cardsAnimRight: null,
       freeSearch: '',
@@ -233,23 +233,30 @@ export default {
       }
     }
   },
+  watch: {
+    cardsAnimLeft() {
+      console.log('changed')
+    }
+  },
   methods: {
-    shiftCards(dir) {
-      gsap.utils.toArray('.card-block').forEach((card) => {
+    shiftCardsRight(index) {
+      this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
         gsap.to(card, {
-          x: dir === 'right' ? '+=100' : '-=100'
+          x: '+=50'
+        })
+      })
+    },
+    shiftCardsLeft(index) {
+      this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
+        gsap.to(card, {
+          x: '-=50'
         })
       })
     },
     slideLeft() {
       if (!this.cardsAnimLeft) {
         let windowWrap = gsap.utils.wrap(0, 600 * 4) // card width * nb of cards
-        let tl = gsap
-          .timeline({
-            onStart: () => (this.animActive = true),
-            onComplete: () => (this.animActive = false)
-          })
-          .pause()
+        let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
         // slide all left
         this.cardsArr.forEach((card) => {
@@ -285,27 +292,31 @@ export default {
         this.cardsAnimLeft = tl
       }
 
-      if (!this.animActive) {
-        this.cardsAnimLeft.play()
+      if (this.animFinished) {
+        this.cardsAnimLeft.restart()
       }
     },
     slideRight() {
-      let windowWrap = gsap.utils.wrap(0, 600 * 4)
-      let tl = gsap.timeline()
-      gsap.utils
-        .toArray('.card-block')
-        .reverse()
-        .forEach((card) => {
+      if (!this.animRight) {
+        let windowWrap = gsap.utils.wrap(0, 600 * 4)
+        let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+
+        //slide all right
+        this.cardsArr.reverse().forEach((card) => {
           tl.to(
             card,
             {
               x: '+=600',
               ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
-              duration: 1.0
+              duration: 1.0,
+              modifiers: {
+                x: (x) => windowWrap(parseFloat(x)) + 'px'
+              }
             },
             '<0.08'
           )
         })
+      }
     },
     submitSearchForm() {
       this.$axios

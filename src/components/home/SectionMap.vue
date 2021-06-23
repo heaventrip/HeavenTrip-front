@@ -192,6 +192,20 @@
             </ul>
           </div>
         </div>
+        <div class="col-5 soon-avail-icon align-self-center text-center">
+          <svg class="" xmlns="http://www.w3.org/2000/svg" height="160" viewBox="0 0 100 100">
+            <g id="Calque_2" data-name="Calque 2">
+              <g id="Calque_1-2" data-name="Calque 1">
+                <path fill="white" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
+                <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
+              </g>
+            </g>
+            <svg viewBox="-13 -22 30 30" fill="white">
+              <text font-family="Muli" font-weight="500">!</text>
+            </svg>
+          </svg>
+          <div class="mt-3" style="font-weight: 500; font-family: Muli, sans-serif; text-transform: uppercase">Bientôt disponible !</div>
+        </div>
 
         <!-- <div class="col-12">
             <div class="d-block d-lg-none py-4 py-sm-5 overflow-hidden">

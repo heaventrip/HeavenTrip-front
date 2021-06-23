@@ -136,7 +136,6 @@ export default {
       const AUTH_TOKEN_KEY = 'authToken'
       let token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.post(
-        'http://localhost:3000/api/v1/reservations',
         {
           booker: this.booker,
           extraParticipants: this.extraParticipants

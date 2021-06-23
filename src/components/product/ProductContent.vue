@@ -73,69 +73,31 @@
       </div>
       <div class="" style="width: 35%">
         <div class="" style="position: sticky; top: 10vh">
-          <h6 class="galary-head font-weight-bold mb-0 d-flex">
-            GALERIE PHOTOS
-            <span class="galary-count ml-auto font-weight-normal">24 médias</span>
-          </h6>
-          <swiper :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderFraction }" :navigation="true">
+          <swiper class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderFraction }" :navigation="true">
             <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
             <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
             <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
             <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
           </swiper>
-          <h6 class="galary-head font-weight-bold mb-4 d-flex">
-            DISCUSSIONS
-            <span class="count-circle ml-auto font-weight-normal"><i class="fas fa-ellipsis-h"></i></span>
-          </h6>
+          <div class="linear-block font-weight-bold py-3 my-5">DISCUSSIONS</div>
           <ul class="list-unstyled mb-0 discuss-list mt-3">
             <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
+              <div class="d-flex mt-3 mb-5" style="padding-left: 2rem">
+                <div class="">
                   <div class="profile-container">
                     <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
                   </div>
                 </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
+                <div class="ml-4">
+                  <h6 class="discuss-head">Helena Brauer <span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">Jeudi à 12:37</span></h6>
                   <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                  </div>
-                </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" />
-                  </div>
-                </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
                 </div>
               </div>
             </li>
           </ul>
-          <div class="reply-block position-relative pr-4 mb-5">
-            <div class="profile-container float-right">
-              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" />
-            </div>
-            <textarea class="reply-container form-control pr-5" rows="1">Répondre…</textarea>
+          <div class="d-flex align-items-center pr-3" style="border: 1px solid #ebebeb">
+            <textarea placeholder="Tape ici ton message..." class="reply-container form-control p-3" rows="1"></textarea>
+            <InlineSvg :src="require('@/assets/svg/send.svg')" class="ml-3" height="20" />
           </div>
         </div>
       </div>
@@ -256,6 +218,21 @@ export default {
 </script>
 
 <style scoped>
+.reply-container {
+  font-size: 0.8rem;
+  color: #292f33;
+  font-weight: 400;
+}
+.profile-container {
+  margin: auto;
+  width: 60px;
+  height: 60px;
+}
+.discuss-head {
+  display: block;
+  color: #292f33;
+  font-size: 0.8rem;
+}
 .swiper-button-prev,
 .swiper-button-next {
   color: #292f33;
@@ -264,6 +241,7 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
+  max-height: 25vh;
   object-fit: cover;
 }
 .nav-link {

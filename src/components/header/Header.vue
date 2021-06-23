@@ -158,9 +158,9 @@ export default {
     //   $(`#${menu}`).addClass('active')
     // },
     jquery() {
-      $('.selection').select2({
-        minimumResultsForSearch: Infinity
-      })
+      // $('.selection').select2({
+      //   minimumResultsForSearch: Infinity
+      // })
       $('[data-toggle="tooltip"]').tooltip()
       $('.user-circle').hide()
       $('#navbarSupportedContent').on('shown.bs.collapse', function () {

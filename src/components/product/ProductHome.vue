@@ -1,8 +1,10 @@
 <template>
   <div class="main-product-content">
-    <Header @nav-is-active="$refs.productContent.navIsActive = true" :course="course" />
-    <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
-    <ProductFooter ref="productFooter" />
+    <Header v-if="!loaded" @nav-is-active="$refs.productContent.navIsActive = true" :course="course" />
+    <div v-else>
+      <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
+      <ProductFooter ref="productFooter" />
+    </div>
   </div>
   <!-- <ProductSection /> -->
   <!-- <ProductModal /> -->
@@ -28,6 +30,7 @@ export default {
   data() {
     return {
       course: {},
+      loaded: false,
       showLoginModal: false
     }
   },
@@ -62,10 +65,10 @@ export default {
         })
     }
   },
-  created() {
-    this.$axios.get(`/courses/${this.id}`).then((res) => {
+  async created() {
+    await this.$axios.get(`/courses/${this.id}`).then((res) => {
       this.course = res.data.course
-      console.log(res.data.course)
+      this.loaded = true
     })
   },
   mounted() {

@@ -8,7 +8,7 @@
         <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
         <h1 class="heading text-uppercase mb-2">
           <router-link :to="{ name: 'CheckOutHome', params: { productId: course.id } }">
-            <span style="font-weight: bold">{{ course.sports[0]?.name }}</span>
+            <span style="font-weight: bold">{{ course.sports ? course.sports[0]?.name : '' }}</span>
           </router-link>
         </h1>
         <h5 class="header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>12 séjours</h5>
@@ -17,7 +17,7 @@
   </div>
   <div class="d-flex flex-column align-items-center">
     <span class="header-infos__mentions__title">Critères sélectionnés :</span>
-    <InlineProductInfos :infos="[course.country.name, `${course.duration} jours`, course.level.name, `${course.max} places`]" color="white" icon="globe" width="max-content" :divider="true" pt="1rem" />
+    <InlineProductInfos :infos="[course.country?.name, `${course.duration} jours`, course.level?.name, `${course.max} places`]" color="white" icon="globe" width="max-content" :divider="true" pt="1rem" />
   </div>
 </template>
 
