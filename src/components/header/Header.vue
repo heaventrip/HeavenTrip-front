@@ -2,7 +2,7 @@
   <div
     class="header d-flex flex-column text-white"
     :class="{
-      'header--home': currentRoute('/'),
+      'header--home': currentRoute('Home'),
       'header-filter--home': !navIsActive && currentRoute('Home'),
       'header-filter--grey': activitiesIsActive || destinationsIsActive,
       'header-filter--light': agencyIsActive,

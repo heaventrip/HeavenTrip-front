@@ -1,16 +1,16 @@
 <template>
-  <div class="card-block" style="width: 540px" @mouseenter="biggerCard($event)" @mouseleave="smallerCard($event)">
+  <div class="card-block" style="width: 540px" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
       <transition name="fade">
-        <InlineSvg v-if="hovered" :src="require('@/assets/svg/heart-outline.svg')" style="position: absolute; top: 7%; right: 7%" height="20" />
+        <InlineSvg class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" style="opacity: 0; position: absolute; top: 7%; right: 7%" height="20" />
       </transition>
       <a href="/product">
         <img class="card__bg-image img-responsive img-fill" :src="require('@/assets/images/s1.png')" alt="" />
       </a>
       <div class="card__footer item-details" style="width: 100%">
-        <div class="content d-flex justify-content-between">
+        <div class="card__footer__static-infos content d-flex justify-content-between">
           <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
             <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
             <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
@@ -47,14 +47,15 @@
 import Tag from '@/components/elements/Tag.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
+import gsap from 'gsap'
 
 export default {
   name: 'SectionCarouselCard',
   data() {
     return {
       hovered: false,
-      animFinished: true,
-      pCourse: this.$props.course
+      pCourse: this.$props.course,
+      cardTl: null
     }
   },
   components: {
@@ -64,37 +65,48 @@ export default {
   },
   props: ['course'],
   methods: {
-    // FIXME check mouse events bug
-    biggerCard(event) {
-      if (!this.animFinished) return
-      this.$emit('mouse-entered')
-      this.animFinished = false
-      $(event.target).animate({ width: '+=50px' })
-      $(event.target).find('.content').addClass('hover')
-      $(event.target).find('.hoverable-div').slideDown()
-      $(event.target).find('.card__bg-image').addClass('card__bg-image--hover')
-      $(event.target).find('.card__footer__price').addClass('border-0')
-      this.hovered = true
-      // $(event.target).find('.trip-link').animate({ bottom: '+=45px' })
-    },
-    smallerCard(event) {
-      this.$emit('mouse-left')
-      $(event.target).animate({ width: '-=50px' })
-      $(event.target).find('.content').removeClass('hover')
-      $(event.target).find('.hoverable-div').slideUp()
-      $(event.target).find('.card__bg-image').removeClass('card__bg-image--hover')
-      $(event.target).find('.card__footer__price').removeClass('border-0')
-      this.hovered = false
-      this.$nextTick(() => {
-        this.animFinished = true
-      })
-      // $(event.target).find('.trip-link').animate({ bottom: '-=45px' })
+    transformCard(type, event) {
+      let card = event.target
+
+      if (!this.cardTl) {
+        let movingInfos = card.querySelector('.hoverable-div')
+        let staticInfos = card.querySelector('.card__footer__static-infos')
+        let heartIcon = card.querySelector('.card-block__heart-icon')
+        this.cardTl = gsap
+          .timeline({
+            defaults: {
+              duration: 0.5,
+              ease: 'power3.inOut'
+            }
+          })
+          .to(card, { width: '590px' })
+          .to(staticInfos, { y: '-=45px' }, '<')
+          .to(movingInfos, { y: '-=100' }, '<')
+          .to(heartIcon, { autoAlpha: 1 }, '<')
+      }
+
+      if (type === 'bigger') {
+        this.cardTl.play()
+        card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
+        card.querySelector('.card__footer__price').classList.add('border-0')
+      }
+      if (type === 'smaller') {
+        this.cardTl.reverse()
+        card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
+        card.querySelector('.card__footer__price').classList.remove('border-0')
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.card__footer__static-infos {
+  transform: translateY(45px);
+}
+.hoverable-div {
+  transform: translateY(100px);
+}
 .InlineProduct {
   margin-left: 0.6rem;
   margin-right: 0.6rem;

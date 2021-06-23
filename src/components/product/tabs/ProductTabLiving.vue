@@ -36,10 +36,7 @@
           </div>
           <div class="tab-content">
             <div class="tab-pane fade show active" id="pills-solo" role="tabpanel" aria-labelledby="pills-solo-tab">
-              <p class="content">
-                Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises
-                <span class="collapse show" id="viewMoreOptions">conditions météorologiques. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</span>
-              </p>
+              <p class="content"></p>
             </div>
             <div class="tab-pane fade" id="pills-duo" role="tabpanel" aria-labelledby="pills-duo-tab">qwertyu</div>
             <div class="tab-pane fade" id="pills-vip" role="tabpanel" aria-labelledby="pills-vip-tab">qwertyu</div>
@@ -118,7 +115,7 @@
       </div>
       <div id="collapseFour" class="collapse show" aria-labelledby="headingFour">
         <div class="card-body">
-          <p class="content mb-0">Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur.</p>
+          <p class="content mb-0">{{ course.spot.description }}</p>
         </div>
       </div>
     </div>

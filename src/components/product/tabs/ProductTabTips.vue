@@ -74,7 +74,6 @@
                 </div>
               </div>
               <div class="col-7 bg-white" style="position: relative">
-                <button @click="countryModal = false" style="position: absolute; top: 20px; right: 20px; z-index: 10">X</button>
                 <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
                   <div class="tab-pane fade show active" id="v-pills-health1" role="tabpanel" aria-labelledby="v-pills-health1-tab">
                     <h4 class="surfhead text-center"><img class="align-text-bottom mr-3 globe_dark" fluid :src="require('@/assets/images/globe_dark.png')" /> EGYPTE</h4>

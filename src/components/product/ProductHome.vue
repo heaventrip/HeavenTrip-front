@@ -63,7 +63,10 @@ export default {
     }
   },
   created() {
-    this.$axios.get(`/courses/${this.id}`).then((res) => (this.course = res.data.course))
+    this.$axios.get(`/courses/${this.id}`).then((res) => {
+      this.course = res.data.course
+      console.log(res.data.course)
+    })
   },
   mounted() {
     this.jquery()

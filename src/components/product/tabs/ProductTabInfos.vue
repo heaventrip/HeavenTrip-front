@@ -26,17 +26,8 @@
           <div class="like-div">
             <h5 class="content-head">Tu vas adorer :</h5>
             <ul class="list-unstyled text-uppercase content-list">
-              <li>
-                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>CHALET AUX PIEDS DES PISTES</a>
-              </li>
-              <li>
-                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Cuisinier privé</a>
-              </li>
-              <li>
-                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>DESTINATIONS FESTIVES</a>
-              </li>
-              <li>
-                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Bain finlandais</a>
+              <li v-for="willLove in course.willLoves" :key="willLove">
+                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>{{ willLove.name }}</a>
               </li>
             </ul>
           </div>
@@ -66,7 +57,6 @@
                   </div>
                 </div>
                 <div class="col-7 bg-white" style="position: relative">
-                  <button @click="levelsModal = false" style="position: absolute; top: 20px; right: 20px; z-index: 10">X</button>
                   <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-level1" role="tabpanel" aria-labelledby="v-pills-level1-tab">
                       <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
@@ -93,27 +83,31 @@
         <div class="col-12 col-lg-6">
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
-              <InlineSvg :src="require(`@/assets/svg/intensity-3.svg`)" height="150px" />
+              <InlineSvg :src="require(`@/assets/svg/intensity-${course.level.step}.svg`)" height="150px" />
               <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
             </div>
             <span class="ml-4">
-              <h6 class="level-text">Niveau : <strong class="ml-2">3</strong>/4</h6>
-              <h6 class="status-text mb-0">Confirmé <i class="fas fa-info-circle text-pink ml-2"></i></h6>
+              <h6 class="level-text">
+                Niveau : <strong class="ml-2">{{ course.level.step }}</strong
+                >/4
+              </h6>
+              <h6 class="status-text mb-0">{{ course.level.name }} <i class="fas fa-info-circle text-pink ml-2"></i></h6>
             </span>
           </div>
         </div>
         <div class="col-12 col-lg-6">
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
-              <InlineSvg :src="require(`@/assets/svg/intensity-1.svg`)" height="150px" />
+              <InlineSvg :src="require(`@/assets/svg/intensity-${course.intensity.step}.svg`)" height="150px" />
               <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
                 Intensité physique :
-                <strong class="ml-2">4</strong>/4
+                <strong class="ml-2">{{ course.intensity.step }}</strong
+                >/4
               </h6>
-              <h6 class="status-text mb-0">Sans les mains <i class="fas fa-info-circle text-pink ml-2"></i></h6>
+              <h6 class="status-text mb-0">{{ course.intensity.name }} <i class="fas fa-info-circle text-pink ml-2"></i></h6>
             </span>
           </div>
         </div>
@@ -132,46 +126,23 @@
         <div class="col-12 col-lg-6">
           <h5 class="content-head equip"><i class="far fa-check-circle mr-2 h4 align-text-top mb-0"></i>EST INCLUS :</h5>
           <ul class="list-unstyled content-list equip">
-            <li>
-              <a class="text-reset" href="#">Hébergement 6 nuits / 7 jours </a>
-            </li>
-            <li>
-              <a class="text-reset" href="#">Demi-pension (matin & soir) </a>
-            </li>
-            <li>
-              <a class="text-reset" href="#">20H de cours de Freeride </a>
-            </li>
-            <li>
-              <a class="text-reset" href="#">Location du matériel (équipement complet) </a>
-            </li>
-            <li>
-              <a class="text-reset" href="#">Transferts Hébergement / Piste de ski </a>
-            </li>
-            <li>
-              <a class="text-reset" href="#">Bain Finlandais </a>
-            </li>
-            <li>
-              <a class="text-reset" href="#">Accès piscine de la station</a>
+            <li v-for="includedService in course.includedServices" :key="includedService">
+              <a class="text-reset" href="#">{{ includedService.name }}</a>
             </li>
           </ul>
         </div>
         <div class="col-12 col-lg-6">
           <h5 class="content-head equip"><i class="far fa-times-circle mr-2 h4 align-text-top mb-0"></i>Non INCLUS :</h5>
           <ul class="list-unstyled content-list equip">
-            <li>
-              <a class="text-reset" href="#">Forfait des remontée mécaniques</a>
+            <li v-for="excludedService in course.excludedServices" :key="excludedService">
+              <a class="text-reset" href="#">{{ excludedService.name }}</a>
             </li>
-            <li>
-              <a class="text-reset" href="#">Les boissons (alcool / soda)</a>
-            </li>
-            <li><a class="text-reset" href="#">Le visa</a></li>
           </ul>
           <h5 class="content-head equip"><i class="far fa-dot-circle mr-2 h4 align-text-top mb-0"></i>En options :</h5>
           <ul class="list-unstyled content-list equip">
-            <li>
-              <a class="text-reset" href="#">Pack assurance</a>
+            <li v-for="extraService in course.extraServices" :key="extraService">
+              <a class="text-reset" href="#">{{ extraService.name }}</a>
             </li>
-            <li><a class="text-reset" href="#">Transports</a></li>
           </ul>
         </div>
       </div>

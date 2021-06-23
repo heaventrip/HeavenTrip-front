@@ -185,26 +185,15 @@
             VOIR SUR <br />LA MAP<span class="img-block"><img class="img_icon" fluid :src="require('@/assets/images/map_icon.png')" /></span>
           </h6>
           <p class="content">
-            Vous avez un niveau expert avec une bonne expérience de la pratique du hors-piste, vous pouvez descendre toutes les pentes, dans toutes les conditions ‘ Vous maitrisez l’utilisation des appareils de sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles
-            pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol. Vous maitrisez l’utilisation des appareils de
-            <span class="collapse" id="viewMoreToggle">sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles pentes des Hautes-Pyrénées : Saint Lary, Piau-Engaly, Peyragudes et Baqueira-Beret, la station du roi d’Espagne, plus grand domaine espagnol.</span>
+            {{ course.spot.description }}
           </p>
           <div class="row">
             <div class="col-9 col-lg-12 mx-auto">
               <div class="like-div white">
                 <h5 class="content-head">LES + DU SPOT</h5>
                 <ul class="list-unstyled text-uppercase content-list">
-                  <li>
-                    <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Restauration sur place</a>
-                  </li>
-                  <li>
-                    <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Vous avez pieds</a>
-                  </li>
-                  <li>
-                    <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Plan d’eau flat</a>
-                  </li>
-                  <li>
-                    <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>Spot à vagues</a>
+                  <li v-for="spotAdvantage in course.sportAdvantages" :key="spotAdvantage">
+                    <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>{{ spotAdvantage.name }}</a>
                   </li>
                 </ul>
               </div>

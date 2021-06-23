@@ -41,14 +41,14 @@
           <p class="font-weight-500">Dans la limite des stocks disponibles !</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
             <div class="custom-control" v-for="(room, index) in $parent.course.rooms" :key="room">
-              <input v-model="$parent.booker.booking.room" :value="index" type="radio" id="customRadio3" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio3">
+              <input v-model="$parent.booker.booking.room" :value="index" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="custom-control-input" />
+              <label class="custom-control-label" :for="`bookerRoom${index}`">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
                     <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
                     <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
                   </span>
-                  <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable">
+                  <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable && $parent.extraParticipants.length > 0">
                     <p class="font-weight-500 mb-0">A partager avec :</p>
                     <select v-model="$parent.booker.booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
                       <option v-for="extraParticipant in $parent.extraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
@@ -65,7 +65,7 @@
           <p class="font-weight-500">Matériel correspondant uniquement a tan activité principale</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
             <div class="custom-control">
-              <input v-model="$parent.booker.booking.equipmentRental" :value="true" type="radio" id="customRadio5" name="materiel" class="custom-control-input" />
+              <input v-model="$parent.booker.booking.equipmentRental" :value="true" type="radio" id="customRadio5" name="materielBooker" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio5">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -77,7 +77,7 @@
               </label>
             </div>
             <div class="custom-control">
-              <input v-model="$parent.booker.booking.equipmentRental" :value="false" type="radio" id="customRadio6" name="materiel" class="custom-control-input" />
+              <input v-model="$parent.booker.booking.equipmentRental" :value="false" type="radio" id="customRadio6" name="materielBooker" class="custom-control-input" />
               <label class="custom-control-label" for="customRadio6">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
@@ -97,30 +97,6 @@
             <div class="custom-control custom-radio bg-light rounded border">
               <input v-model="$parent.booker.booking.extraActivities" value="1" type="checkbox" id="customRadio7" class="custom-control-input" :disabled="noExtraActivities" />
               <label class="custom-control-label d-flex align-items-center border-0" for="customRadio7">
-                <div class="font-weight-bold text-uppercase">
-                  sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control custom-radio bg-light rounded border">
-              <input v-model="$parent.booker.booking.extraActivities" value="2" type="checkbox" id="customRadio8" class="custom-control-input" :disabled="noExtraActivities" />
-              <label class="custom-control-label d-flex align-items-center border-0" for="customRadio8">
-                <div class="font-weight-bold text-uppercase">
-                  plongee sous-marine<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control custom-radio bg-light rounded border">
-              <input v-model="$parent.booker.booking.extraActivities" value="3" type="checkbox" id="customRadio9" class="custom-control-input" :disabled="noExtraActivities" />
-              <label class="custom-control-label d-flex align-items-center border-0" for="customRadio9">
-                <div class="font-weight-bold text-uppercase">
-                  sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control custom-radio bg-light rounded border">
-              <input v-model="$parent.booker.booking.extraActivities" value="4" type="checkbox" id="customRadio10" class="custom-control-input" :disabled="noExtraActivities" />
-              <label class="custom-control-label d-flex align-items-center border-0" for="customRadio10">
                 <div class="font-weight-bold text-uppercase">
                   sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
                 </div>
@@ -148,7 +124,7 @@
       </div>
     </div>
     <!-- NOTE extras -->
-    <div class="card d-block" v-for="extraParticipant in $parent.extraParticipants" :key="extraParticipant">
+    <div class="card d-block" v-for="(extraParticipant, mainLoopIndex) in $parent.extraParticipants" :key="extraParticipant">
       <div class="card-header border-0 p-0 d-flex">
         <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
           <div class="participant-img-container participant-opacity position-relative">
@@ -177,8 +153,8 @@
           <p class="font-weight-500">Dans la limite des stocks disponibles !</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
             <div class="custom-control" v-for="(room, index) in $parent.course.rooms" :key="room">
-              <input v-model="extraParticipant.booking.room" :value="index" type="radio" id="customRadio3" name="room" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio3">
+              <input v-model="extraParticipant.booking.room" :value="index" type="radio" :id="`extraPart${mainLoopIndex}-${index}`" :name="`extraPartRoom${mainLoopIndex}-${index}`" class="custom-control-input" />
+              <label class="custom-control-label" :for="`extraPart${mainLoopIndex}-${index}`">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
                     <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
@@ -202,8 +178,8 @@
           <p class="font-weight-500">Matériel correspondant uniquement a tan activité principale</p>
           <div class="custom-radio-container p-4 px-5 mr-5 pb-5">
             <div class="custom-control">
-              <input v-model="extraParticipant.booking.equipmentRental" :value="true" type="radio" id="customRadio5" name="materiel" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio5">
+              <input v-model="extraParticipant.booking.equipmentRental" :value="true" type="radio" :id="`extraPart${mainLoopIndex}-with`" :name="`material-extraPart${mainLoopIndex}`" class="custom-control-input" />
+              <label class="custom-control-label" :for="`extraPart${mainLoopIndex}-with`">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
                     <div class="font-weight-bold text-uppercase">avec materiel</div>
@@ -214,8 +190,8 @@
               </label>
             </div>
             <div class="custom-control">
-              <input v-model="extraParticipant.booking.equipmentRental" :value="false" type="radio" id="customRadio6" name="materiel" class="custom-control-input" />
-              <label class="custom-control-label" for="customRadio6">
+              <input v-model="extraParticipant.booking.equipmentRental" :value="false" type="radio" :id="`extraPart${mainLoopIndex}-without`" :name="`material-extraPart${mainLoopIndex}`" class="custom-control-input" />
+              <label class="custom-control-label" :for="`extraPart${mainLoopIndex}-without`">
                 <div class="d-flex align-items-center pb-2 mb-2 dotted-border">
                   <span>
                     <div class="font-weight-bold text-uppercase">sans materiel</div>
@@ -234,30 +210,6 @@
             <div class="custom-control custom-radio bg-light rounded border">
               <input v-model="extraParticipant.booking.extraActivities" value="1" type="checkbox" id="customRadio7" class="custom-control-input" :disabled="noExtraActivities" />
               <label class="custom-control-label d-flex align-items-center border-0" for="customRadio7">
-                <div class="font-weight-bold text-uppercase">
-                  sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control custom-radio bg-light rounded border">
-              <input v-model="extraParticipant.booking.extraActivities" value="2" type="checkbox" id="customRadio8" class="custom-control-input" :disabled="noExtraActivities" />
-              <label class="custom-control-label d-flex align-items-center border-0" for="customRadio8">
-                <div class="font-weight-bold text-uppercase">
-                  plongee sous-marine<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control custom-radio bg-light rounded border">
-              <input v-model="extraParticipant.booking.extraActivities" value="3" type="checkbox" id="customRadio9" class="custom-control-input" :disabled="noExtraActivities" />
-              <label class="custom-control-label d-flex align-items-center border-0" for="customRadio9">
-                <div class="font-weight-bold text-uppercase">
-                  sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
-                </div>
-              </label>
-            </div>
-            <div class="custom-control custom-radio bg-light rounded border">
-              <input v-model="extraParticipant.booking.extraActivities" value="4" type="checkbox" id="customRadio10" class="custom-control-input" :disabled="noExtraActivities" />
-              <label class="custom-control-label d-flex align-items-center border-0" for="customRadio10">
                 <div class="font-weight-bold text-uppercase">
                   sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
                 </div>
