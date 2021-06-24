@@ -34,6 +34,6 @@ app.component('PerfectScrollbar', PerfectScrollbar)
 app.use(router, VueCollapsiblePanel)
 app.mount('#app')
 
-app.config.globalProperties.$axios = axios.create({ baseURL: 'http://localhost:3000/api/v1' })
-// app.config.globalProperties.$axios = axios.create({ baseURL: 'https://heaventrip-dev.herokuapp.com/api/v1' })
+// app.config.globalProperties.$axios = axios.create({ baseURL: 'http://localhost:3000/api/v1' })
+app.config.globalProperties.$axios = axios.create({ baseURL: 'https://heaventrip-dev.herokuapp.com/api/v1' })
 app.config.globalProperties.$contentful = require('contentful')

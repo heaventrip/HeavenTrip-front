@@ -43,9 +43,11 @@
           </div>
         </div>
         <div class="col-6 ml-auto">
-          <div class="bttn bttn--pink">
-            <div class="bttn__text">Détails<i class="fa fa-chevron-right ml-3"></i></div>
-          </div>
+          <router-link :to="{ name: 'ProductHome', params: { id: featuredCourse.id } }">
+            <div class="bttn bttn--pink">
+              <div class="bttn__text">Détails<i class="fa fa-chevron-right ml-3"></i></div>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>

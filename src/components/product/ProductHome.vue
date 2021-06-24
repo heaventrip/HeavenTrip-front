@@ -1,8 +1,15 @@
 <template>
   <div class="main-product-content">
-    <Header @nav-is-active="$refs.productContent.navIsActive = true" :course="course" />
-    <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" />
-    <ProductFooter ref="productFooter" />
+    <!-- <Header v-if="loaded" @nav-is-active="$refs.productContent.navIsActive = true" :course="course" /> -->
+    <transition name="fade" @after-enter="afterEnter" @before-enter="beforeEnter">
+      <Header ref="header" v-if="header" :course="course" />
+      <div v-else>
+        <!-- <ProductNav /> -->
+        <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
+        <ProductContent :course="course" ref="productContent" />
+        <ProductFooter ref="productFooter" />
+      </div>
+    </transition>
   </div>
   <!-- <ProductSection /> -->
   <!-- <ProductModal /> -->
@@ -12,6 +19,7 @@
 import Header from '@/components/header/Header.vue'
 import ProductContent from '@/components/product/ProductContent.vue'
 import ProductFooter from '@/components/product/ProductFooter.vue'
+import ProductNav from '@/components/product/ProductNav.vue'
 // import ProductSection from '@/components/product/ProductSection.vue'
 // import ProductModal from '@/components/product/ProductModal.vue'
 
@@ -20,6 +28,7 @@ export default {
   components: {
     Header,
     ProductContent,
+    // ProductNav,
     ProductFooter
     // ProductSection,
     // ProductModal
@@ -28,6 +37,7 @@ export default {
   data() {
     return {
       course: {},
+      header: true,
       showLoginModal: false
     }
   },
@@ -60,16 +70,62 @@ export default {
           $('.backdrop').hide()
           $('body').css('overflow', 'visible')
         })
+    },
+    afterEnter() {
+      if (this.header === true) {
+        this.listenScrollDown()
+      }
+
+      //entered product content
+      if (this.header === false) {
+        document.body.removeAttribute('style')
+        this.$refs.productContent.initGsap()
+      }
+    },
+    beforeEnter() {
+      if (this.header === true) {
+        document.body.style.position = 'fixed'
+        document.body.style.overflow = 'hidden'
+      }
+    },
+    listenScrollUp() {
+      let that = this
+      document.querySelector('.main-product-content').addEventListener('wheel', (e) => {
+        if (window.scrollY === 0 && e.deltaY < 0) {
+          that.header = true
+        }
+      })
+    },
+    listenScrollDown() {
+      let that = this
+      document.querySelector('.header').addEventListener('wheel', (e) => {
+        if (e.deltaY > 0) {
+          that.header = false
+        }
+      })
     }
   },
-  created() {
-    this.$axios.get(`/courses/${this.id}`).then((res) => {
+  watch: {
+    header(newVal) {
+      if (newVal === true) {
+        this.listenScrollUp()
+      }
+      if (newVal === false) {
+        this.listenScrollUp()
+      }
+    }
+  },
+  async created() {
+    await this.$axios.get(`/courses/${this.id}`).then((res) => {
       this.course = res.data.course
-      console.log(res.data.course)
+      this.loaded = true
     })
   },
   mounted() {
     this.jquery()
+    document.body.style.position = 'fixed'
+    document.body.style.overflow = 'hidden'
+    this.listenScrollDown()
   }
 }
 </script>

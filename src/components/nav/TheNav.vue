@@ -155,6 +155,7 @@ export default {
         })
       }
       if (newVal === false) {
+        this.$refs.agencyTab.resetTabs()
         document.body.style.position = 'static' // reset
         document.querySelector('#header_nav').removeAttribute('style')
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
@@ -197,9 +198,13 @@ export default {
 
       let varName = tab + 'IsActive'
 
-      // if already active do nothing
+      // if already active do nothing except for agency
       // eslint-disable-next-line prettier/prettier
-      if (this.$data[varName] === true) return
+      if (this.$data[varName] === true) {
+        if (!tab === 'agency') return
+
+        this.$refs.agencyTab.resetTabs()
+      }
 
       // only show the one clicked
       ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))

@@ -1,5 +1,5 @@
 <template>
-  <div class="card-block" style="width: 540px" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
+  <div class="card-block" :data-index="index" style="width: 540px" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
@@ -55,7 +55,8 @@ export default {
     return {
       hovered: false,
       pCourse: this.$props.course,
-      cardTl: null
+      cardTl: null,
+      cardsArr: []
     }
   },
   components: {
@@ -63,7 +64,7 @@ export default {
     InlineProductInfos,
     Tag
   },
-  props: ['course'],
+  props: ['course', 'index'],
   methods: {
     transformCard(type, event) {
       let card = event.target
@@ -87,15 +88,28 @@ export default {
 
       if (type === 'bigger') {
         this.cardTl.play()
+        gsap.to(this.cardsArr.slice(parseInt(card.dataset.index) + 1), {
+          x: '+=50',
+          duration: 0.5,
+          ease: 'power3.inOut'
+        })
         card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
         card.querySelector('.card__footer__price').classList.add('border-0')
       }
       if (type === 'smaller') {
         this.cardTl.reverse()
+        gsap.to(this.cardsArr.slice(parseInt(card.dataset.index) + 1), {
+          x: '-=50',
+          duration: 0.5,
+          ease: 'power3.inOut'
+        })
         card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
         card.querySelector('.card__footer__price').classList.remove('border-0')
       }
     }
+  },
+  mounted() {
+    this.cardsArr = gsap.utils.toArray('.card-block')
   }
 }
 </script>

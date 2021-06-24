@@ -1,45 +1,63 @@
 <template>
-  <div class="stay-dropdown d-block d-lg-none">
+  <!-- <div class="stay-dropdown d-block d-lg-none">
     <select class="form-control select-place">
-      <option selected="" value="#pills-info">INFOS SéJOUR</option>
-      <option value="#pills-activityspot">ACTIVITéS & spot</option>
-      <option value="#pills-place">VIE SUR PLACE</option>
-      <option value="#pills-programe">PROGRAMME</option>
-      <option value="#pills-tips">TIPS & ASTUCES</option>
-      <option value="#pills-opinion">VOS AVIS</option>
+      <option selected="" value="#pills-info">Infos séjour</option>
+      <option value="#pills-activityspot">Activités & spot</option>
+      <option value="#pills-place">Vie sur place</option>
+      <option value="#pills-programe">Programme</option>
+      <option value="#pills-tips">Tips & astuces</option>
+      <option value="#pills-opinion">Vos avis</option>
     </select>
-  </div>
-  <div style="position: relative">
-    <div class="slider" :class="{ 'slider--up': slidingUp }" v-if="!slideIsUp"></div>
-    <ul
-      :class="{ 'fade--out': slidingUp, 'fade--in--menu': slideIsUp }"
-      style="position: relative"
-      :style="[slideIsUp && !navIsActive ? 'height: 6vh; position: sticky; top: 0px; z-index: 2' : 'height: 10vh']"
-      class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center"
-      id="pills-tab "
-      role="tablist"
-    >
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link active" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-programe-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-tips').scrollIntoView()" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-opinion-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
-      </li>
-    </ul>
+  </div> -->
+  <div>
+    <div style="position: fixed; top: 0px; z-index: 2; width: 100vw">
+      <ProductNav />
+      <ul style="height: 6vh" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link active" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-programe-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-tips').scrollIntoView()" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-opinion-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
+        </li>
+      </ul>
+    </div>
+    <div class="main-slider">
+      <swiper
+        v-if="!asideSlider"
+        :slidesPerView="3"
+        :spaceBetween="5"
+        :slidesPerGroup="3"
+        :loop="true"
+        :loopFillGroupWithBlank="false"
+        :pagination="{
+          clickable: true
+        }"
+        :navigation="true"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(imgSrc, index) in imgs" :key="imgSrc" @click="showImg(index)">
+          <img class="swiper-slide__img" :src="imgSrc" />
+        </swiper-slide>
+        <!-- <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+      <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+      <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide> -->
+      </swiper>
+      <vue-easy-lightbox v-if="!asideSlider" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="handleHide"></vue-easy-lightbox>
+    </div>
     <div class="product-content d-flex justify-content-around">
-      <div :class="{ 'fade--out': slidingUp, 'fade--in--content': slideIsUp }" class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
+      <div class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
         <div id="product-tab-infos" class="pt-5">
           <ProductTabInfos :course="course" />
         </div>
@@ -72,70 +90,34 @@
         </div> -->
       </div>
       <div class="" style="width: 35%">
-        <div class="" style="position: sticky; top: 10vh">
-          <h6 class="galary-head font-weight-bold mb-0 d-flex">
-            GALERIE PHOTOS
-            <span class="galary-count ml-auto font-weight-normal">24 médias</span>
-          </h6>
-          <swiper :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderFraction }" :navigation="true">
-            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-          </swiper>
-          <h6 class="galary-head font-weight-bold mb-4 d-flex">
-            DISCUSSIONS
-            <span class="count-circle ml-auto font-weight-normal"><i class="fas fa-ellipsis-h"></i></span>
-          </h6>
+        <div class="aside-slider" style="position: sticky; top: 10vh">
+          <transition name="fade" @after-leave="afterLeave">
+            <swiper v-if="asideSlider" class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+            </swiper>
+          </transition>
+          <div class="linear-block font-weight-bold py-3 my-5">DISCUSSIONS</div>
           <ul class="list-unstyled mb-0 discuss-list mt-3">
             <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
+              <div class="d-flex mt-3 mb-5" style="padding-left: 2rem">
+                <div class="">
                   <div class="profile-container">
                     <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
                   </div>
                 </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
+                <div class="ml-4">
+                  <h6 class="discuss-head">Helena Brauer <span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">Jeudi à 12:37</span></h6>
                   <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                  </div>
-                </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" />
-                  </div>
-                </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
                 </div>
               </div>
             </li>
           </ul>
-          <div class="reply-block position-relative pr-4 mb-5">
-            <div class="profile-container float-right">
-              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" />
-            </div>
-            <textarea class="reply-container form-control pr-5" rows="1">Répondre…</textarea>
+          <div class="d-flex align-items-center pr-3" style="border: 1px solid #ebebeb">
+            <textarea placeholder="Tape ici ton message..." class="reply-container form-control p-3" rows="1"></textarea>
+            <InlineSvg :src="require('@/assets/svg/send.svg')" class="ml-3" height="20" />
           </div>
         </div>
       </div>
@@ -144,33 +126,44 @@
 </template>
 
 <script>
+import ProductNav from '@/components/product/ProductNav.vue'
 import ProductTabInfos from '@/components/product/tabs/ProductTabInfos.vue'
 import ProductTabActivities from '@/components/product/tabs/ProductTabActivities.vue'
 import ProductTabLiving from '@/components/product/tabs/ProductTabLiving.vue'
 import ProductTabProgram from '@/components/product/tabs/ProductTabProgram.vue'
 import ProductTabReviews from '@/components/product/tabs/ProductTabReviews.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import VueEasyLightbox from 'vue-easy-lightbox'
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import gsap from 'gsap'
 SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
+gsap.registerPlugin(ScrollTrigger)
 
 export default {
   name: 'ProductContent',
   components: {
+    ProductNav,
     ProductTabInfos,
     ProductTabActivities,
     ProductTabLiving,
     ProductTabProgram,
     ProductTabReviews,
     ProductTabTips,
+    VueEasyLightbox,
     Swiper,
     SwiperSlide
   },
-  props: ['nav-is-active', 'course'],
-  emits: ['slide-is-up', 'slide-is-down'],
+  props: ['course'],
+  // props: ['nav-is-active', 'course'],
+  // emits: ['slide-is-up', 'slide-is-down'],
   data() {
     return {
+      asideSlider: false,
+      imgs: ['https://via.placeholder.com/450.png/', 'https://via.placeholder.com/300.png/', 'https://via.placeholder.com/150.png/', 'https://via.placeholder.com/450.png/'], // Img Url , string or Array of string
+      visible: false,
+      index: 0, // default: 0
       clickedInfos: false,
       clickedActivities: false,
       clickedLiving: false,
@@ -192,32 +185,49 @@ export default {
     }
   },
   watch: {
-    navIsActive(newVal) {
-      console.log(newVal)
-      if (newVal === true) {
-        gsap.set('.header--product', { height: window.innerHeight, ease: 'power3.out' })
-      }
-    },
-    slideIsUp(newVal) {
-      let that = this
-
-      if (newVal === true) {
-        this.$emit('slide-is-up')
-        window.removeEventListener('scroll', that.handleScrollDown)
-        window.addEventListener('scroll', that.handleScrollUp)
-      }
-      if (newVal === false) {
-        this.$emit('slide-is-down')
-        window.removeEventListener('scroll', that.handleScrollUp)
-
-        setTimeout(function () {
-          window.addEventListener('scroll', that.handleScrollDown)
-        }, 1000) // wait for scrollTo to finish
-      }
+    asideSlider(newVal) {
+      if (newVal === true) this.asideGsap()
     }
   },
   methods: {
-    renderFraction(currentClass, totalClass) {
+    afterLeave() {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+    initGsap() {
+      let that = this
+      gsap.set('.main-slider .swiper-slide__img', { height: window.innerHeight * 0.5 + 'px' })
+      gsap.to(['.swiper-slide__img', '.swiper-container'], {
+        scrollTrigger: {
+          pin: true,
+          pinSpacing: false,
+          trigger: '.swiper-container',
+          start: 'top 102',
+          end: 'bottom 102', //
+          scrub: true,
+          onLeave: () => (that.asideSlider = true)
+        },
+        height: '0px',
+        ease: 'none'
+      })
+      gsap.set('.pin-spacer', { backgroundColor: '#fcfcfc' })
+    },
+    asideGsap() {
+      console.log('ok1')
+      document.addEventListener('wheel', (e) => {
+        if (e.deltaY < 0 && window.scrollY < window.innerHeight * 0.5) {
+          gsap.set(['.swiper-container', '.main-slider .swiper-slide__img'], { height: window.innerHeight * 0.5 + 'px' })
+          this.asideSlider = false
+        }
+      })
+    },
+    showImg(index) {
+      this.index = index
+      this.visible = true
+    },
+    handleHide() {
+      this.visible = false
+    },
+    renderSwiperFraction(currentClass, totalClass) {
       return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
       <span style="${this.currentPaginationStyle}">.</span>
       <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
@@ -225,45 +235,55 @@ export default {
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView()
     },
+    mounted() {}
     // scroll to top when user reaches top of content (wheel up)
-    handleScrollUp() {
-      let contentTop = window.innerHeight * 0.9
-      if (window.pageYOffset < contentTop) {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-        gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out', duration: 1 }) // duration 1000sec same as above
-        this.slideIsUp = false
-      }
-    },
+    // handleScrollUp() {
+    //   let contentTop = window.innerHeight * 0.9
+    //   if (window.pageYOffset < contentTop) {
+    //     window.scrollTo({ top: 0, behavior: 'smooth' })
+    //     gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out', duration: 1 }) // duration 1000sec same as above
+    //     this.slideIsUp = false
+    //   }
+    // },
     // first scroll down brings page up (wheel down)
-    handleScrollDown() {
-      this.slidingUp = true
-      setTimeout(() => {
-        window.scrollTo({ top: window.innerHeight })
-        this.slidingUp = false
-        this.slideIsUp = true
-      }, 800)
-    }
-  },
-  mounted() {
-    let tl = gsap.timeline({ duration: 1 })
-    tl.from('.header-bg-image', { scale: 1.2, duration: 10 })
-    tl.to('.header--product', { height: window.innerHeight * 0.9, ease: 'power3.out' }, '<0.4')
-    tl.from('.product-header-infos__title', { opacity: 0, duration: 0.9 }, '<0.7')
-
-    window.addEventListener('scroll', this.handleScrollDown)
+    // handleScrollDown() {
+    //   this.slidingUp = true
+    //   setTimeout(() => {
+    //     window.scrollTo({ top: window.innerHeight })
+    //     this.slidingUp = false
+    //     this.slideIsUp = true
+    //   }, 800)
+    // }
   }
 }
 </script>
 
 <style scoped>
+.aside-slider .swiper-slide__img {
+  height: 20vh;
+}
+.reply-container {
+  font-size: 0.8rem;
+  color: #292f33;
+  font-weight: 400;
+}
+.profile-container {
+  margin: auto;
+  width: 60px;
+  height: 60px;
+}
+.discuss-head {
+  display: block;
+  color: #292f33;
+  font-size: 0.8rem;
+}
 .swiper-button-prev,
 .swiper-button-next {
   color: #292f33;
 }
-.swiper-slide img {
+.swiper-slide__img {
   display: block;
   width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 .nav-link {
