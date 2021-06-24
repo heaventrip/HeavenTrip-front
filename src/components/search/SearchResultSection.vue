@@ -26,17 +26,17 @@
         <!-- <div class="btn bg-white text-dark rounded-0 text-uppercase"> <i class="fas fa-sort ml-4 symbol"></i></div>
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Date de depart<i class="fas fa-sort ml-4 symbol"></i></div>
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Durée<i class="fas fa-sort ml-4 symbol"></i></div> -->
-        <div class="sort-by-button" style="position: relative; flex-grow: 1">
+        <div @click="sortByPrice" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
             <span>Prix <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
           </div>
         </div>
-        <div class="sort-by-button" style="position: relative; flex-grow: 1">
+        <div @click="sortByDuration" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
             <span>Durée <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
           </div>
         </div>
-        <div class="sort-by-button" style="position: relative; flex-grow: 1">
+        <div @click="sortByCountry" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
             <span>Pays <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
           </div>
@@ -347,6 +347,7 @@ export default {
   },
   data() {
     return {
+      sortedBy: 'descPrice',
       sessionsArr: [],
       normalResults: [],
       lastSessionResults: [],
@@ -432,6 +433,33 @@ export default {
     }
   },
   methods: {
+    sortByPrice() {
+      if (this.sortedBy === 'descPrice') {
+        this.normalResults.sort((a, b) => a.price - b.price) // ascending order
+        this.sortedBy = 'ascPrice'
+      } else {
+        this.normalResults.sort((a, b) => a.price + b.price) // descending order
+        this.sortedBy = 'descPrice'
+      }
+    },
+    sortByDuration() {
+      if (this.sortedBy === 'descDuration') {
+        this.normalResults.sort((a, b) => a.duration - b.duration) // ascending order
+        this.sortedBy = 'ascDuration'
+      } else {
+        this.normalResults.sort((a, b) => a.duration + b.duration) // descending order
+        this.sortedBy = 'descDuration'
+      }
+    },
+    sortByCountry() {
+      if (this.sortedBy === 'descCountry') {
+        this.normalResults.sort((a, b) => a.country.name.localeCompare(b.country.name)) // ascending order
+        this.sortedBy = 'ascCountry'
+      } else {
+        this.normalResults.sort((a, b) => b.country.name.localeCompare(a.country.name)) // descending order
+        this.sortedBy = 'descCountry'
+      }
+    },
     submitSearchForm() {
       this.$axios
         .post('/courses/search', {

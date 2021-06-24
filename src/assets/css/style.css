@@ -4683,7 +4683,7 @@ a.descriptif-link.bg-danger:hover {
 .checkout-body-content #step3 .card {
   border-radius: 0;
   margin-bottom: 0;
-  border: 1px solid #e2e2e2;
+  border: 1px solid transparent;
 }
 .checkout-body-content #step3 .card:last-child {
   margin-bottom: 40px;

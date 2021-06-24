@@ -25,13 +25,12 @@ import App from './App.vue'
 import router from './router'
 import InlineSvg from 'vue-inline-svg'
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
-import VueCollapsiblePanel from '@dafcoe/vue-collapsible-panel'
 import axios from 'axios'
 
 const app = createApp(App)
 app.component('InlineSvg', InlineSvg)
 app.component('PerfectScrollbar', PerfectScrollbar)
-app.use(router, VueCollapsiblePanel)
+app.use(router)
 app.mount('#app')
 
 // app.config.globalProperties.$axios = axios.create({ baseURL: 'http://localhost:3000/api/v1' })

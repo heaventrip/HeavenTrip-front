@@ -23,119 +23,107 @@ import Step5Module4 from './Step5Module4.vue'
 export default {
   name: 'Step5',
   components: {
-    Step5Module1,
+    // Step5Module1,
     Step5Module2,
     Step5Module3,
     Step5Module4
   },
   methods: {
-    async processPayment() {
-      const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
-
-      // const response = await fetch("http://localhost:3000/api/v1/secret");
-      // const { client_secret: clientSecret } = await response.json();
-      // // Render the form to collect payment details, then
-      // // call stripe.confirmCardPayment() with the client secret.
-      const clientSecret = 'pi_1IpIgVLutaKCaG86LgQ30D84_secret_LwjUFfypRB3wz4SexQNv7NgrT'
-
-      ;(function () {
-        'use strict'
-
-        const elements = stripe.elements()
-
-        var cardNumber = elements.create('cardNumber', {
-          style: elementStyles,
-          classes: elementClasses
-        })
-        cardNumber.mount('#example2-card-number')
-
-        var cardExpiry = elements.create('cardExpiry', {
-          style: elementStyles,
-          classes: elementClasses
-        })
-        cardExpiry.mount('#example2-card-expiry')
-
-        var cardCvc = elements.create('cardCvc', {
-          style: elementStyles,
-          classes: elementClasses
-        })
-        cardCvc.mount('#example2-card-cvc')
-
-        var form = document.getElementById('payment-form')
-        var errors = document.getElementById('card-errors')
-        form.addEventListener('submit', function (ev) {
-          ev.preventDefault()
-          // If the client secret was rendered server-side as a data-secret attribute
-          // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
-          // eslint-disable-next-line prettier/prettier
-          stripe.confirmCardPayment(clientSecret, {
-              payment_method: {
-                card: cardNumber
-              }
-            })
-            .then(function (result) {
-              // eslint-disable-next-line prettier/prettier
-              document.querySelector(".example2").classList.remove("submitting");
-              if (result.error) {
-                // Show error to your customer (e.g., insufficient funds)
-                // eslint-disable-next-line prettier/prettier
-                errors.textContent = result.error.message;
-              } else {
-                // The payment has been processed!
-                if (result.paymentIntent.status === 'succeeded') {
-                  // eslint-disable-next-line prettier/prettier
-                  console.log(result.paymentIntent);
-                  // Show a success message to your customer
-                  // There's a risk of the customer closing the window before callback
-                  // execution. Set up a webhook or plugin to listen for the
-                  // payment_intent.succeeded event that handles any business critical
-                  // post-payment actions.
-                }
-              }
-            })
-        })
-
-        var elementStyles = {
-          base: {
-            color: '#fff',
-            fontWeight: 600,
-            fontFamily: 'Quicksand, Open Sans, Segoe UI, sans-serif',
-            fontSize: '16px',
-            fontSmoothing: 'antialiased',
-
-            ':focus': {
-              color: '#424770'
-            },
-
-            '::placeholder': {
-              color: '#9BACC8'
-            },
-
-            ':focus::placeholder': {
-              color: '#CFD7DF'
-            }
-          },
-          invalid: {
-            color: '#fff',
-            ':focus': {
-              color: '#FA755A'
-            },
-            '::placeholder': {
-              color: '#FFCCA5'
-            }
-          }
-        }
-
-        var elementClasses = {
-          focus: 'focus',
-          empty: 'empty',
-          invalid: 'invalid'
-        }
-      })()
-    }
+    // async processPayment() {
+    //   const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
+    //   // const response = await fetch("http://localhost:3000/api/v1/secret");
+    //   // const { client_secret: clientSecret } = await response.json();
+    //   // // Render the form to collect payment details, then
+    //   // // call stripe.confirmCardPayment() with the client secret.
+    //   const clientSecret = 'pi_1IpIgVLutaKCaG86LgQ30D84_secret_LwjUFfypRB3wz4SexQNv7NgrT'
+    //   ;(function () {
+    //     'use strict'
+    //     const elements = stripe.elements()
+    //     var cardNumber = elements.create('cardNumber', {
+    //       style: elementStyles,
+    //       classes: elementClasses
+    //     })
+    //     cardNumber.mount('#example2-card-number')
+    //     var cardExpiry = elements.create('cardExpiry', {
+    //       style: elementStyles,
+    //       classes: elementClasses
+    //     })
+    //     cardExpiry.mount('#example2-card-expiry')
+    //     var cardCvc = elements.create('cardCvc', {
+    //       style: elementStyles,
+    //       classes: elementClasses
+    //     })
+    //     cardCvc.mount('#example2-card-cvc')
+    //     var form = document.getElementById('payment-form')
+    //     var errors = document.getElementById('card-errors')
+    //     form.addEventListener('submit', function (ev) {
+    //       ev.preventDefault()
+    //       // If the client secret was rendered server-side as a data-secret attribute
+    //       // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
+    //       // eslint-disable-next-line prettier/prettier
+    //       stripe.confirmCardPayment(clientSecret, {
+    //           payment_method: {
+    //             card: cardNumber
+    //           }
+    //         })
+    //         .then(function (result) {
+    //           // eslint-disable-next-line prettier/prettier
+    //           document.querySelector(".example2").classList.remove("submitting");
+    //           if (result.error) {
+    //             // Show error to your customer (e.g., insufficient funds)
+    //             // eslint-disable-next-line prettier/prettier
+    //             errors.textContent = result.error.message;
+    //           } else {
+    //             // The payment has been processed!
+    //             if (result.paymentIntent.status === 'succeeded') {
+    //               // eslint-disable-next-line prettier/prettier
+    //               console.log(result.paymentIntent);
+    //               // Show a success message to your customer
+    //               // There's a risk of the customer closing the window before callback
+    //               // execution. Set up a webhook or plugin to listen for the
+    //               // payment_intent.succeeded event that handles any business critical
+    //               // post-payment actions.
+    //             }
+    //           }
+    //         })
+    //     })
+    //     var elementStyles = {
+    //       base: {
+    //         color: '#fff',
+    //         fontWeight: 600,
+    //         fontFamily: 'Quicksand, Open Sans, Segoe UI, sans-serif',
+    //         fontSize: '16px',
+    //         fontSmoothing: 'antialiased',
+    //         ':focus': {
+    //           color: '#424770'
+    //         },
+    //         '::placeholder': {
+    //           color: '#9BACC8'
+    //         },
+    //         ':focus::placeholder': {
+    //           color: '#CFD7DF'
+    //         }
+    //       },
+    //       invalid: {
+    //         color: '#fff',
+    //         ':focus': {
+    //           color: '#FA755A'
+    //         },
+    //         '::placeholder': {
+    //           color: '#FFCCA5'
+    //         }
+    //       }
+    //     }
+    //     var elementClasses = {
+    //       focus: 'focus',
+    //       empty: 'empty',
+    //       invalid: 'invalid'
+    //     }
+    //   })()
+    // }
   },
   mounted() {
-    this.processPayment()
+    // this.processPayment()
   }
 }
 </script>
