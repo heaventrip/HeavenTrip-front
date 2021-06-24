@@ -44,7 +44,7 @@ body.modal-open::after {
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }

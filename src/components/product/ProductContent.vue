@@ -1,5 +1,5 @@
 <template>
-  <div class="stay-dropdown d-block d-lg-none">
+  <!-- <div class="stay-dropdown d-block d-lg-none">
     <select class="form-control select-place">
       <option selected="" value="#pills-info">Infos séjour</option>
       <option value="#pills-activityspot">Activités & spot</option>
@@ -8,28 +8,54 @@
       <option value="#pills-tips">Tips & astuces</option>
       <option value="#pills-opinion">Vos avis</option>
     </select>
-  </div>
-  <div style="position: relative">
-    <ul style="position: relative; height: 6vh; position: sticky; top: 0px; z-index: 2" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link active" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-programe-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-tips').scrollIntoView()" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-opinion-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
-      </li>
-    </ul>
+  </div> -->
+  <div>
+    <div style="position: fixed; top: 0px; z-index: 2; width: 100vw">
+      <ProductNav />
+      <ul style="height: 6vh" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link active" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-programe-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-tips').scrollIntoView()" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-opinion-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
+        </li>
+      </ul>
+    </div>
+    <div class="main-slider">
+      <swiper
+        v-if="!asideSlider"
+        :slidesPerView="3"
+        :spaceBetween="5"
+        :slidesPerGroup="3"
+        :loop="true"
+        :loopFillGroupWithBlank="false"
+        :pagination="{
+          clickable: true
+        }"
+        :navigation="true"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(imgSrc, index) in imgs" :key="imgSrc" @click="showImg(index)">
+          <img class="swiper-slide__img" :src="imgSrc" />
+        </swiper-slide>
+        <!-- <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+      <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+      <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide> -->
+      </swiper>
+      <vue-easy-lightbox v-if="!asideSlider" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="handleHide"></vue-easy-lightbox>
+    </div>
     <div class="product-content d-flex justify-content-around">
       <div class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
         <div id="product-tab-infos" class="pt-5">
@@ -64,13 +90,15 @@
         </div> -->
       </div>
       <div class="" style="width: 35%">
-        <div class="" style="position: sticky; top: 10vh">
-          <swiper class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
-            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-          </swiper>
+        <div class="aside-slider" style="position: sticky; top: 10vh">
+          <transition name="fade" @after-leave="afterLeave">
+            <swiper v-if="asideSlider" class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+              <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+            </swiper>
+          </transition>
           <div class="linear-block font-weight-bold py-3 my-5">DISCUSSIONS</div>
           <ul class="list-unstyled mb-0 discuss-list mt-3">
             <li>
@@ -98,26 +126,32 @@
 </template>
 
 <script>
+import ProductNav from '@/components/product/ProductNav.vue'
 import ProductTabInfos from '@/components/product/tabs/ProductTabInfos.vue'
 import ProductTabActivities from '@/components/product/tabs/ProductTabActivities.vue'
 import ProductTabLiving from '@/components/product/tabs/ProductTabLiving.vue'
 import ProductTabProgram from '@/components/product/tabs/ProductTabProgram.vue'
 import ProductTabReviews from '@/components/product/tabs/ProductTabReviews.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import VueEasyLightbox from 'vue-easy-lightbox'
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import gsap from 'gsap'
 SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
+gsap.registerPlugin(ScrollTrigger)
 
 export default {
   name: 'ProductContent',
   components: {
+    ProductNav,
     ProductTabInfos,
     ProductTabActivities,
     ProductTabLiving,
     ProductTabProgram,
     ProductTabReviews,
     ProductTabTips,
+    VueEasyLightbox,
     Swiper,
     SwiperSlide
   },
@@ -126,6 +160,10 @@ export default {
   // emits: ['slide-is-up', 'slide-is-down'],
   data() {
     return {
+      asideSlider: false,
+      imgs: ['https://via.placeholder.com/450.png/', 'https://via.placeholder.com/300.png/', 'https://via.placeholder.com/150.png/', 'https://via.placeholder.com/450.png/'], // Img Url , string or Array of string
+      visible: false,
+      index: 0, // default: 0
       clickedInfos: false,
       clickedActivities: false,
       clickedLiving: false,
@@ -147,29 +185,48 @@ export default {
     }
   },
   watch: {
-    // navIsActive(newVal) {
-    //   console.log(newVal)
-    //   if (newVal === true) {
-    //     gsap.set('.header--product', { height: window.innerHeight, ease: 'power3.out' })
-    //   }
-    // },
-    // slideIsUp(newVal) {
-    //   let that = this
-    //   if (newVal === true) {
-    //     this.$emit('slide-is-up')
-    //     window.removeEventListener('scroll', that.handleScrollDown)
-    //     window.addEventListener('scroll', that.handleScrollUp)
-    //   }
-    //   if (newVal === false) {
-    //     this.$emit('slide-is-down')
-    //     window.removeEventListener('scroll', that.handleScrollUp)
-    //     setTimeout(function () {
-    //       window.addEventListener('scroll', that.handleScrollDown)
-    //     }, 1000) // wait for scrollTo to finish
-    //   }
-    // }
+    asideSlider(newVal) {
+      if (newVal === true) this.asideGsap()
+    }
   },
   methods: {
+    afterLeave() {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+    initGsap() {
+      let that = this
+      gsap.set('.main-slider .swiper-slide__img', { height: window.innerHeight * 0.5 + 'px' })
+      gsap.to(['.swiper-slide__img', '.swiper-container'], {
+        scrollTrigger: {
+          pin: true,
+          pinSpacing: false,
+          trigger: '.swiper-container',
+          start: 'top 102',
+          end: 'bottom 102', //
+          scrub: true,
+          onLeave: () => (that.asideSlider = true)
+        },
+        height: '0px',
+        ease: 'none'
+      })
+      gsap.set('.pin-spacer', { backgroundColor: '#fcfcfc' })
+    },
+    asideGsap() {
+      console.log('ok1')
+      document.addEventListener('wheel', (e) => {
+        if (e.deltaY < 0 && window.scrollY < window.innerHeight * 0.5) {
+          gsap.set(['.swiper-container', '.main-slider .swiper-slide__img'], { height: window.innerHeight * 0.5 + 'px' })
+          this.asideSlider = false
+        }
+      })
+    },
+    showImg(index) {
+      this.index = index
+      this.visible = true
+    },
+    handleHide() {
+      this.visible = false
+    },
     renderSwiperFraction(currentClass, totalClass) {
       return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
       <span style="${this.currentPaginationStyle}">.</span>
@@ -177,7 +234,8 @@ export default {
     },
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView()
-    }
+    },
+    mounted() {}
     // scroll to top when user reaches top of content (wheel up)
     // handleScrollUp() {
     //   let contentTop = window.innerHeight * 0.9
@@ -201,6 +259,9 @@ export default {
 </script>
 
 <style scoped>
+.aside-slider .swiper-slide__img {
+  height: 20vh;
+}
 .reply-container {
   font-size: 0.8rem;
   color: #292f33;
@@ -220,11 +281,9 @@ export default {
 .swiper-button-next {
   color: #292f33;
 }
-.swiper-slide img {
+.swiper-slide__img {
   display: block;
   width: 100%;
-  height: 100%;
-  max-height: 25vh;
   object-fit: cover;
 }
 .nav-link {

@@ -204,6 +204,10 @@ export default {
         })
       }
     }
+  },
+  mounted() {
+    console.log('mounted')
+    this.$emit('mounted')
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="pre-booking-footer sticky-bottom w-100 flex-column" :class="[slideIsUp ? 'd-flex' : 'd-none']" style="position: sticky; bottom: 0">
-    <div :class="[openBooking ? 'd-flex' : 'd-none']" class="booking-session align-items-center">
+  <div class="pre-booking-footer d-flex sticky-bottom flex-column" style="position: sticky; bottom: 0; width: 100%">
+    <div class="d-none booking-session align-items-center">
       <h2 class="session-head border-right border-white">CRÉER UNE SESSION</h2>
       <ul class="text-uppercase list-unstyled year-list border-right border-white px-3">
         <li><a href="#" class="text-reset active">2020</a></li>
@@ -161,31 +161,7 @@
                 <div class="registrants">
                   <ul class="list-unstyled registrants-list mb-0 d-flex">
                     <li>
-                      <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/3.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#" data-toggle="tooltip" data-placement="top" title="Nicolas | Grand-Est"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/3.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#" data-toggle="tooltip" data-placement="top" title="Nicolas | Grand-Est"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" /></a>
-                    </li>
-                    <li>
-                      <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/3.jpg')" /></a>
+                      <a href="#"><img height="40" class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /></a>
                     </li>
                   </ul>
                 </div>
@@ -211,29 +187,14 @@
     </div>
     <div @click="openBooking = !openBooking" class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
-      <div class="row flex-1 mx-0 text-center">
-        <div class="col-3 border-right center-col inactive" style="background-color: #ebebeb">
+      <div class="row no-gutters flex-1 mx-0 text-center">
+        <div class="col-3 border-right center-col" style="background-color: #fafafa">
           <div class="d-inline-block text-left">
-            <h6 class="int-count"><strong class="">1800 TRIPPERS</strong> Intéressés</h6>
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-3 mb-0">
-              <li>
-                <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/3.jpg')" /> </a>
-              </li>
-              <li>
-                <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" /> </a>
-              </li>
-              <li class="">
-                <a href="#" class="d-flex align-items-center justify-content-center" data-toggle="tooltip" data-placement="top" title="Intéresse toi et retrouve moi dans tes envies !"><i class="fas fa-heart"></i></a>
-              </li>
+              <span style="font-family: Oswald, sans-serif; font-size: 0.75rem"
+                ><span color="#292f33">Ca te titille?</span> <span style="font-weight: bold">Rejoint les 12 intéressés :</span><br />
+                <InlineAvatars :avatars="[1, 2]" :heart="true" heartheight="40px" heartwidth="40px" spacing="-10px" border-color="white" :outline="true" :count="false" mt="0rem" mb="0rem" />
+              </span>
             </ul>
           </div>
           <h6 class="premier-text mb-0 font-weight-bold d-none"><img class="mic_icon" fluid :src="require('@/assets/images/mic-w.png')" />Sois le premier !</h6>
@@ -242,11 +203,8 @@
           <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
             <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
               <div class="text-right text--grey">
-                <div class="d-inline-block pb-2" style="border-bottom: 1px dashed rgba(41, 47, 51, 0.35)">
-                  <InlineSvg :src="require('@/assets/svg/date-search.svg')" height="24" style="vertical-align: text-bottom" class="mr-2" />
-                  Sélectionne une session
-                </div>
-                <div class="text-uppercase pt-2"><span class="text--pink">4 sessions</span>&nbsp;disponibles</div>
+                <div class="d-inline-block pb-0">Sélectionne une session</div>
+                <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px"><span class="text--pink">4 sessions</span>&nbsp;disponibles</div>
               </div>
               <i class="fa fa-chevron-down ml-3 mb-1 arrow"></i>
             </div>
@@ -267,38 +225,46 @@
             <i class="fa fa-chevron-down ml-5"></i>
           </div>
         </div>
-        <div class="col-3 border-right center-col flex-column inactive">
+        <div class="col-3 border-right center-col flex-column">
           <div class="d-inline-block text-center w-100" style="border-left: 1px dashed #b4b4b4; border-right: 1px dashed #b4b4b4">
             <h5 class="premier-text mb-0 letter-space-1">
               <img class="mr-2 icons" fluid :src="require('@/assets/images/places.png')" />Participants
               <form class="d-inline-flex align-items-center align-bottom ml-3">
-                <div class="value-button decrease inactive" id="countDecrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                <input class="count-number" type="number" id="countNumber" value="1" max="3" />
-                <div class="value-button increase" id="countIncrease" onclick="increaseValue()" value="Increase Value">+</div>
-                <i class="fa fa-times text-danger h4 mb-0 count-cross"></i>
+                <div class="value-button decrease" @click="decrementCounter">-</div>
+                <span class="px-3 text--bold text--16">{{ count }}</span>
+                <div class="value-button increase" @click="count++">+</div>
               </form>
             </h5>
-            <p class="text-danger font-weight-bold text-transform-none mb-0 capacity-msg">Capacité max du groupe atteint</p>
           </div>
         </div>
         <div class="col-2 center-col inactive">
-          <h6 class="tot-amount text-left">PRIX total : <strong class="d-block">1990 &euro;</strong></h6>
+          <span class="tot-amount text-left">PRIX total : <strong class="d-block">1990 &euro;</strong></span>
         </div>
       </div>
-      <button class="btn border-0 rounded-0 reserve-btn ml-auto inactive btn-dark">Réserver</button>
+      <button class="btn border-0 pr-4 rounded-0 reserve-btn btn-pink">Réserver</button>
     </div>
   </div>
 </template>
 <script>
+import InlineAvatars from '@/components/elements/InlineAvatars.vue'
+
 export default {
   name: 'ProductFooter',
+  components: {
+    InlineAvatars
+  },
   data() {
     return {
+      count: 0,
       openBooking: false,
       slideIsUp: false
     }
   },
   methods: {
+    decrementCounter() {
+      if (this.count === 0) return
+      this.count--
+    },
     showDays() {
       // get date
       var start = $('#datepicker-range-start').val()
@@ -408,7 +374,11 @@ export default {
 </script>
 
 <style>
+.value-button:hover {
+  box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.8);
+}
 .reserve-btn {
   min-width: 200px !important;
+  height: 80px !important;
 }
 </style>

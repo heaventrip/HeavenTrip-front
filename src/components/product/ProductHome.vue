@@ -4,6 +4,7 @@
     <transition name="fade" @after-enter="afterEnter" @before-enter="beforeEnter">
       <Header ref="header" v-if="header" :course="course" />
       <div v-else>
+        <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
         <ProductContent :course="course" ref="productContent" />
         <ProductFooter ref="productFooter" />
@@ -18,6 +19,7 @@
 import Header from '@/components/header/Header.vue'
 import ProductContent from '@/components/product/ProductContent.vue'
 import ProductFooter from '@/components/product/ProductFooter.vue'
+import ProductNav from '@/components/product/ProductNav.vue'
 // import ProductSection from '@/components/product/ProductSection.vue'
 // import ProductModal from '@/components/product/ProductModal.vue'
 
@@ -26,6 +28,7 @@ export default {
   components: {
     Header,
     ProductContent,
+    // ProductNav,
     ProductFooter
     // ProductSection,
     // ProductModal
@@ -76,6 +79,7 @@ export default {
       //entered product content
       if (this.header === false) {
         document.body.removeAttribute('style')
+        this.$refs.productContent.initGsap()
       }
     },
     beforeEnter() {
