@@ -9,6 +9,7 @@
                 <h6 v-if="pForm === 'login'" class="modal-heading mb-0"><span>CONNEXION</span></h6>
                 <h6 v-if="pForm === 'signup'" class="modal-heading mb-0"><span>INSCRIPTION</span></h6>
                 <h6 v-if="pForm === 'password'" class="modal-heading mb-0"><span>REINITIALISER LE MOT DE PASSE</span></h6>
+                <h6 v-if="pForm === 'profile'" class="modal-heading mb-0"><span>COMPLETE TON PROFIL</span></h6>
                 <div class="border-left border-white text-white cancel-block d-lg-none" data-dismiss="modal" aria-label="Close">
                   <i class="fa fa-times h5 mb-0"></i>
                 </div>
@@ -17,6 +18,7 @@
                 <FormLogin v-if="pForm === 'login'" @login-success="$emit('login-success')" @clicked-signup="pForm = 'signup'" @clicked-password-forgotten="pForm = 'password'" />
                 <FormSignup v-if="pForm === 'signup'" @clicked-existing-account="pForm = 'login'" @submitted-form="pForm = 'login'" />
                 <Password v-if="pForm === 'password'" @password-updated="pForm = 'login'" @clicked-password-retrieved="pForm = 'login'" />
+                <Profile v-if="pForm === 'profile'" />
               </div>
             </div>
             <div v-if="form === 'password'" class="right-part dark-content-body d-flex flex-column justify-content-center">
@@ -108,6 +110,7 @@
 import FormSignup from '@/components/connection/FormSignup.vue'
 import FormLogin from '@/components/connection/FormLogin.vue'
 import Password from '@/components/connection/Password.vue'
+import Profile from '@/components/connection/Profile.vue'
 
 export default {
   name: 'ConnectionModal',
@@ -115,7 +118,8 @@ export default {
   components: {
     FormSignup,
     FormLogin,
-    Password
+    Password,
+    Profile
   },
   props: ['whichForm'],
   data() {

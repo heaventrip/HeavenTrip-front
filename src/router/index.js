@@ -6,7 +6,7 @@ import Home from '@/views/Home.vue'
 import ProductHome from '@/components/product/ProductHome.vue'
 import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
 import SearchHome from '@/components/search/SearchHome.vue'
-import LoginHeader from '@/components/connection/LoginHeader.vue'
+import Profile from '@/components/connection/Profile.vue'
 import ConnectionModal from '@/components/connection/ConnectionModal.vue'
 import Terms from '@/components/legal/Terms.vue'
 import Legal from '@/components/legal/Legal.vue'
@@ -46,12 +46,12 @@ const routes = [
     meta: {
       allowAnonymous: true
     }
+  },
+  {
+    path: '/login',
+    name: 'Profile',
+    component: Profile
   }
-  // {
-  //   path: '/login',
-  //   name: 'LoginHeader',
-  //   component: LoginHeader
-  // }
   // {
   //   path: '/terms',
   //   name: 'Terms',
@@ -66,7 +66,15 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      if (to.name === 'SearchHome') return { behavior: 'smooth', top: window.innerHeight }
+      if (to.name === 'Home') return { behavior: 'smooth', top: 0 }
+    }
+  }
 })
 
 router.beforeEach((to, from, next) => {

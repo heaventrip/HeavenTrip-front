@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
+  <div class="modal fade show" id="profile" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered login-modal profile-modal">
       <div class="modal-content border-0 rounded-0">
         <div class="modal-body p-0 border-0">
@@ -11,13 +11,13 @@
           </div>
           <div class="modal-content-body modal-content-body-small bg-white">
             <div style="position: absolute">
-              <button style="" id="btn1">1</button>
-              <button style="" id="btn2">2</button>
-              <button style="" id="btn3">3</button>
-              <button style="" id="btn4">4</button>
+              <button @click="step = 1">1</button>
+              <button @click="step = 2">2</button>
+              <button @click="step = 3">3</button>
+              <button @click="step = 4">4</button>
             </div>
             <div class="text-center mobile-vh">
-              <div id="step--1" class="centered-vh">
+              <div v-show="step === 1" class="centered-vh">
                 <h6 class="profile-head">
                   <span class="d-lg-block">Ton espace client te permet d’avoir une page spéciale Tripper "public"</span>
                   Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.
@@ -32,7 +32,7 @@
                   </div>
                 </form>
               </div>
-              <div id="step--2" class="centered-vh">
+              <div v-show="step === 2" class="centered-vh">
                 <h6 class="profile-head mb-5 mt-md-0">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
@@ -107,7 +107,7 @@
                   </div> -->
                 </div>
               </div>
-              <div id="step--3" class="centered-vh">
+              <div v-show="step === 3" class="centered-vh">
                 <h6 class="profile-head">Ultra rapide, une petite bio, tes passions, un proverbe préféré ?</h6>
                 <div class="row">
                   <div class="col-12 col-lg-12 mx-auto">
@@ -120,7 +120,7 @@
                   </div>
                 </div>
               </div>
-              <div id="step--4" class="centered-vh">
+              <div v-show="step === 4" class="centered-vh">
                 <div class="row justify-content-center align-items-center mt-4">
                   <img class="d-inline-block mr-5 my-4" fluid :src="require('@/assets/images/mic_light.png')" />
                   <h6 class="text-uppercase text-white font-weight-normal text-left">
@@ -153,6 +153,7 @@
 
 <script>
 import MyUpload from 'vue-image-crop-upload'
+import '../../assets/css/upload.css' // overwrites default
 
 export default {
   name: 'Profile',
@@ -161,6 +162,7 @@ export default {
   },
   data() {
     return {
+      step: 1,
       gender: '',
       description: '',
       show: true,
@@ -224,35 +226,34 @@ export default {
       })
   },
   mounted() {
-    $('#step--1').hide()
-    $('#step--2').hide()
-    $('#step--3').hide()
-    $('#step--4').hide()
-
-    $('#btn1').on('click', function () {
-      $('#step--1').show()
-      $('#step--2').hide()
-      $('#step--3').hide()
-      $('#step--4').hide()
-    })
-    $('#btn2').on('click', function () {
-      $('#step--1').hide()
-      $('#step--2').show()
-      $('#step--3').hide()
-      $('#step--4').hide()
-    })
-    $('#btn3').on('click', function () {
-      $('#step--1').hide()
-      $('#step--2').hide()
-      $('#step--3').show()
-      $('#step--4').hide()
-    })
-    $('#btn4').on('click', function () {
-      $('#step--1').hide()
-      $('#step--2').hide()
-      $('#step--3').hide()
-      $('#step--4').show()
-    })
+    // $('#step--1').hide()
+    // $('#step--2').hide()
+    // $('#step--3').hide()
+    // $('#step--4').hide()
+    // $('#btn1').on('click', function () {
+    //   $('#step--1').show()
+    //   $('#step--2').hide()
+    //   $('#step--3').hide()
+    //   $('#step--4').hide()
+    // })
+    // $('#btn2').on('click', function () {
+    //   $('#step--1').hide()
+    //   $('#step--2').show()
+    //   $('#step--3').hide()
+    //   $('#step--4').hide()
+    // })
+    // $('#btn3').on('click', function () {
+    //   $('#step--1').hide()
+    //   $('#step--2').hide()
+    //   $('#step--3').show()
+    //   $('#step--4').hide()
+    // })
+    // $('#btn4').on('click', function () {
+    //   $('#step--1').hide()
+    //   $('#step--2').hide()
+    //   $('#step--3').hide()
+    //   $('#step--4').show()
+    // })
   }
 }
 </script>

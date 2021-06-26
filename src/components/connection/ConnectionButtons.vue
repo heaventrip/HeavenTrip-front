@@ -4,7 +4,7 @@
       <div class="dropdown login-dropdown">
         <button style="color: #292f33" class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class="login-img mr-2" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-          MARION <span class="l-name"> .K</span>
+          {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
         </button>
         <div class="dropdown-menu text-uppercase" style="" aria-labelledby="dropdownMenu2">
@@ -14,7 +14,7 @@
               <span class="font-weight-bold text-danger ml-1">(2)</span>
             </button>
           </div>
-          <div class="account-dropdown-item">
+          <!-- <div class="account-dropdown-item">
             <button class="dropdown-item" type="button">
               Mes séjours
               <div class="position-relative ml-auto">
@@ -22,10 +22,10 @@
                 <div class="notify-number">1</div>
               </div>
             </button>
-          </div>
-          <div class="account-dropdown-item">
+          </div> -->
+          <!-- <div class="account-dropdown-item">
             <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
-          </div>
+          </div> -->
           <div class="account-dropdown-item">
             <button class="dropdown-item account-page-link" type="button">Mon compte</button>
           </div>
@@ -47,7 +47,7 @@
       <div class="dropdown login-dropdown">
         <button class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class="login-img mr-2" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-          MARION <span class="l-name"> .K</span>
+          {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
         </button>
         <div class="dropdown-menu text-uppercase py-3" style="" aria-labelledby="dropdownMenu2">
@@ -57,7 +57,7 @@
               <span class="font-weight-bold text-danger ml-1">(2)</span>
             </button>
           </div>
-          <div class="account-dropdown-item">
+          <!-- <div class="account-dropdown-item">
             <button class="dropdown-item" type="button">
               Mes séjours
               <div class="position-relative ml-auto">
@@ -68,9 +68,10 @@
           </div>
           <div class="account-dropdown-item">
             <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
-          </div>
+          </div> -->
           <div class="account-dropdown-item">
-            <button class="dropdown-item account-page-link" type="button">Mon compte</button>
+            <button @click="openModal('profile')" class="dropdown-item account-page-link" type="button">Mon compte</button>
+            <!-- <Profile v-if="showProfileModal" /> -->
           </div>
           <div class="account-dropdown-item">
             <button @click="logOut" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
@@ -105,8 +106,11 @@ export default {
   },
   data() {
     return {
+      firstName: '',
+      lastName: '',
       agencyIsActive: false,
       showModal: false,
+      showProfileModal: false,
       form: ''
     }
   },
@@ -117,6 +121,12 @@ export default {
           this.handleModalClose()
         }, 100)
       }
+    },
+    firstName(newVal) {
+      this.firstName = newVal
+    },
+    lastName(newVal) {
+      this.lastName = newVal
     }
   },
   methods: {
@@ -149,6 +159,10 @@ export default {
         })
       }
     }
+  },
+  mounted() {
+    this.firstName = localStorage.getItem('user.firstName') || ''
+    this.lastName = localStorage.getItem('user.lastName') || ''
   }
 }
 </script>

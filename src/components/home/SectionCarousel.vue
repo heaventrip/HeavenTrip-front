@@ -68,7 +68,7 @@
               <span class="separator"></span>
             </div>
             <p class="mb-0 d-none d-md-inline-block">
-              <span class="font-weight-bold d-none d-lg-inline-block">(Prénom),</span>
+              <span class="font-weight-bold d-none d-lg-inline-block">{{ firstName }},</span>
               sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y v! sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y voir les autres Trippers interesses ou inscrits et chater avec eux !
             </p>
           </div>
@@ -181,6 +181,7 @@ export default {
   },
   data() {
     return {
+      firstName: '',
       animFinished: true,
       cardsAnimLeft: null,
       cardsAnimRight: null,
@@ -236,6 +237,9 @@ export default {
   watch: {
     cardsAnimLeft() {
       console.log('changed')
+    },
+    firstName(newVal) {
+      this.firstName = newVal
     }
   },
   methods: {
@@ -401,6 +405,8 @@ export default {
         x: (i) => i * 600 + this.currentViewportWidth * 0.15 // left offset of 10vw
       })
     })
+
+    this.firstName = localStorage.getItem('user.firstName')
   }
 }
 </script>

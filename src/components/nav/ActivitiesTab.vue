@@ -3,7 +3,7 @@
     <div v-for="category in sportCategories" :key="category" class="sports-block" v-show="category.name === activeCategory">
       <div class="row no-gutters align-items-center justify-content-start py-3 my-xl-3">
         <div v-for="(sport, index) in category.sports.slice(0, 3)" :key="sport" class="col-3" :class="[category.sports.length === 1 && index === 0 ? 'offset-3' : '', category.sports.length === 2 && index === 0 ? 'offset-1' : '']">
-          <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 100 100">
+          <svg @mouseenter="setBgImg" xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 100 100">
             <g id="Calque_2" data-name="Calque 2">
               <g id="Calque_1-2" data-name="Calque 1">
                 <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
@@ -52,6 +52,7 @@ export default {
   name: 'ActivitiesTab',
   data() {
     return {
+      imgSrc: '',
       loaded: false,
       clickedMultiActivity: false,
       sportCategories: [],
@@ -65,7 +66,10 @@ export default {
     }
   },
   methods: {
-    addSportPicto(svg) {}
+    addSportPicto(svg) {},
+    setBgImg() {
+      document.querySelector('.header-bg-image').setAttribute('src', this.imgSrc)
+    }
   },
   created() {
     this.$axios.get('/sport-categories').then((res) => {
@@ -73,6 +77,12 @@ export default {
       this.$parent.sportCategories = res.data.sportCategories
       this.loaded = true
     })
+    // working contentful auth
+    const client = this.$contentful.createClient({
+      space: '8dtxc3nuj0tn',
+      accessToken: 'QJST-plHn1kmliJnkzNZebXG0wecPQwtxH1hg9YDYek'
+    })
+    client.getAssets().then((res) => (this.imgSrc = `https:${res.items[0].fields.file.url}?q=80`))
   }
 }
 </script>

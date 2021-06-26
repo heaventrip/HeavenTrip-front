@@ -24,7 +24,7 @@
       <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
     </li>
     <li class="nav-item" role="presentation">
-      <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link active" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
+      <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
     </li>
     <li class="nav-item" role="presentation">
       <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
