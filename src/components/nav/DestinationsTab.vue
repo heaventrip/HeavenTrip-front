@@ -11,7 +11,7 @@
           <h5 class="wrapper-list-subhead">{{ country.name }}</h5>
           <ul class="list-unstyled wrapper-innerlist pb-5">
             <li v-for="spot in country.spots" :key="spot">
-              <a href="#"><i class="fa fa-chevron-right arrow-left"></i>{{ spot.name }}</a>
+              <router-link :to="{ name: 'SearchHome', query: { spot: spot.id } }"> <i class="fa fa-chevron-right arrow-left"></i>{{ spot.name }} </router-link>
             </li>
           </ul>
         </div>
@@ -22,7 +22,7 @@
           <h5 class="wrapper-list-subhead">{{ region.name }}</h5>
           <ul class="list-unstyled wrapper-innerlist pb-5">
             <li v-for="spot in region.spots" :key="spot">
-              <a href="#"><i class="fa fa-chevron-right arrow-left"></i>{{ spot.name }}</a>
+              <router-link :to="{ name: 'SearchHome', query: { spot: spot.id } }"> <i class="fa fa-chevron-right arrow-left"></i>{{ spot.name }} </router-link>
             </li>
           </ul>
         </div>

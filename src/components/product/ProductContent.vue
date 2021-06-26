@@ -13,23 +13,23 @@
     <div style="position: fixed; top: 0px; z-index: 2; width: 100vw">
       <ProductNav />
       <ul style="height: 6vh" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
-        <li class="nav-item" role="presentation">
-          <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
+        <li class="nav-item" role="presentation" type="button">
+          <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
         </li>
-        <li class="nav-item" role="presentation">
-          <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link active" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
+        <li class="nav-item" role="presentation" type="button">
+          <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
         </li>
-        <li class="nav-item" role="presentation">
-          <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
+        <li class="nav-item" role="presentation" type="button">
+          <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-living-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
         </li>
-        <li class="nav-item" role="presentation">
-          <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-programe-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
+        <li class="nav-item" role="presentation" type="button">
+          <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-program-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
         </li>
-        <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation" type="button">
           <a @click.prevent="scrollToSection('product-tab-tips').scrollIntoView()" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
         </li>
-        <li class="nav-item" role="presentation">
-          <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-opinion-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
+        <li class="nav-item" role="presentation" type="button">
+          <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-reviews-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
         </li>
       </ul>
     </div>
@@ -193,6 +193,41 @@ export default {
     afterLeave() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
+    initTabsGsap() {
+      let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
+
+      tabs.forEach((_, index) => {
+        let scrollDownTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: `#product-tab-${tabs[index]}`,
+            start: 'top 102',
+            end: 'bottom bottom',
+            markers: true,
+            onToggle: () => console.log('scrolldown')
+          },
+          ease: 'none'
+        })
+        scrollDownTl.to(`#pills-${tabs[index]}-tab`, { className: '+=active' })
+        if (index !== 0) {
+          scrollDownTl.to(`#pills-${tabs[index - 1]}-tab`, { className: '-=active' }, '<')
+        }
+
+        // let scrollUpTl = gsap.timeline({
+        //   scrollTrigger: {
+        //     trigger: `#product-tab-${tabs[index]}`,
+        //     start: 'bottom bottom',
+        //     end: 'top bottom',
+        //     markers: true,
+        //     onToggle: () => console.log('scrollup')
+        //   },
+        //   ease: 'none'
+        // })
+        // scrollUpTl.to(`#pills-${tabs[index]}-tab`, { className: '+=active' })
+        // if (index !== tabs.length - 1) {
+        //   scrollUpTl.to(`#pills-${tabs[index + 1]}-tab`, { className: '-=active' }, '<')
+        // }
+      })
+    },
     initGsap() {
       let that = this
       gsap.set('.main-slider .swiper-slide__img', { height: window.innerHeight * 0.5 + 'px' })
@@ -234,8 +269,7 @@ export default {
     },
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView()
-    },
-    mounted() {}
+    }
     // scroll to top when user reaches top of content (wheel up)
     // handleScrollUp() {
     //   let contentTop = window.innerHeight * 0.9

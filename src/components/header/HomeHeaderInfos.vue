@@ -30,7 +30,9 @@
       </div>
       <div class="row no-gutters">
         <div class="col-4">
-          <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" />
+          <Button @click="$router.push({ name: 'ProductHome', params: { id: featuredCourse.id, showDateBtn: true } })" text="voir les <br /> dates" color="transparent" size=".8rem" />
+          <!-- NOTE old version toggling session menu -->
+          <!-- <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" /> -->
         </div>
         <div class="col-8 bg block--white">
           <div class="block__content">
@@ -81,8 +83,8 @@ export default {
       this.$emit('toggled-sessions')
     }
   },
-  created() {
-    this.$axios.get('/courses', { params: { featured: true } }).then((res) => (this.featuredCourse = res.data.course))
+  async created() {
+    await this.$axios.get('/courses', { params: { featured: true } }).then((res) => (this.featuredCourse = res.data.course))
   }
 }
 </script>

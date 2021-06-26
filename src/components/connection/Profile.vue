@@ -17,7 +17,7 @@
               <button @click="step = 4">4</button>
             </div>
             <div class="text-center mobile-vh">
-              <div v-if="step === 1" class="centered-vh">
+              <div v-show="step === 1" class="centered-vh">
                 <h6 class="profile-head">
                   <span class="d-lg-block">Ton espace client te permet d’avoir une page spéciale Tripper "public"</span>
                   Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.
@@ -32,7 +32,7 @@
                   </div>
                 </form>
               </div>
-              <div v-else-if="step === 2" class="centered-vh">
+              <div v-show="step === 2" class="centered-vh">
                 <h6 class="profile-head mb-5 mt-md-0">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
@@ -107,7 +107,7 @@
                   </div> -->
                 </div>
               </div>
-              <div v-else-if="step === 3" class="centered-vh">
+              <div v-show="step === 3" class="centered-vh">
                 <h6 class="profile-head">Ultra rapide, une petite bio, tes passions, un proverbe préféré ?</h6>
                 <div class="row">
                   <div class="col-12 col-lg-12 mx-auto">
@@ -120,7 +120,7 @@
                   </div>
                 </div>
               </div>
-              <div v-else-if="step === 4" class="centered-vh">
+              <div v-show="step === 4" class="centered-vh">
                 <div class="row justify-content-center align-items-center mt-4">
                   <img class="d-inline-block mr-5 my-4" fluid :src="require('@/assets/images/mic_light.png')" />
                   <h6 class="text-uppercase text-white font-weight-normal text-left">
@@ -153,6 +153,7 @@
 
 <script>
 import MyUpload from 'vue-image-crop-upload'
+import '../../assets/css/upload.css' // overwrites default
 
 export default {
   name: 'Profile',

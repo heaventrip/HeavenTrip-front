@@ -99,7 +99,7 @@
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div v-if="activitySelection.value.length + countrySelection.value.length > 0" class="filter-container spot-filter">
+              <div v-if="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="filter-container spot-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
@@ -444,12 +444,11 @@ export default {
     }
   },
   watch: {
-    // queryParams: {
-    //   immediate: true,
-    //   handler(val) {
-    //     this.countrySelection.value.push(2, 3, 4)
-    //   }
-    // },
+    $route() {
+      if (this.$route.query) {
+        // this.submitSearchForm()
+      }
+    },
     normalResults(val) {
       if (val !== []) {
         let arr = []
@@ -575,6 +574,8 @@ export default {
         else this.$refs.levelMultiselect.select(queryParams.level)
       }
     })
+
+    if (queryParams) this.submitSearchForm()
   },
   mounted() {
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {

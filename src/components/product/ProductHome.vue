@@ -80,6 +80,12 @@ export default {
       if (this.header === false) {
         document.body.removeAttribute('style')
         this.$refs.productContent.initGsap()
+
+        if (this.$route.params.showDateBtn) {
+          // tell productfooter to open at specific date
+        }
+
+        this.$refs.productContent.initTabsGsap()
       }
     },
     beforeEnter() {
@@ -106,6 +112,13 @@ export default {
     }
   },
   watch: {
+    $route(to, from) {
+      if (from.name !== 'Home') return
+
+      if (this.$route.$params.showDateBtn) {
+        this.header = false
+      }
+    },
     header(newVal) {
       if (newVal === true) {
         this.listenScrollUp()
