@@ -4,8 +4,8 @@
       <!-- FIXME intégrer border color ET outline -->
       <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="require('@/assets/images/t4.png')" />
     </div>
-    <div v-if="pHeart" :style="[pSpacing, pHeartwidth, pHeartheight]">
-      <InlineSvg :src="require('@/assets/svg/heart-logo-light.svg')" />
+    <div v-if="pHeart" style="border-radius: 50%" :class="pOutlineColor" :style="[pSpacing, pHeartwidth, pHeartheight]">
+      <InlineSvg :src="require(`@/assets/svg/heart-logo-${heartColor}.svg`)" />
     </div>
     <div class="avatar-count" v-if="pCount">+1.5k</div>
   </div>
@@ -14,7 +14,7 @@
 <script>
 export default {
   name: 'InlineAvatars',
-  props: ['height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width', 'mt', 'mb', 'heartwidth', 'heartheight', 'count'],
+  props: ['height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width', 'mt', 'mb', 'heart-color', 'heartwidth', 'heartheight', 'count'],
   data() {
     return {
       pCount: this.count,
@@ -55,10 +55,13 @@ export default {
   font-weight: 400;
 }
 .small-avatar--grey {
-  outline: 4px solid #292f33;
+  outline: 6px solid #292f33;
 }
 .small-avatar--white {
-  outline: 4px solid #fff;
+  outline: 6px solid #fff;
+}
+.small-avatar--light-white {
+  outline: 6px solid #fcfcfc;
 }
 
 .small-avatar--violet {

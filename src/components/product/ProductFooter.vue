@@ -1,7 +1,7 @@
 <template>
   <div class="pre-booking-footer d-flex sticky-bottom flex-column" style="position: sticky; bottom: 0; width: 100%">
-    <div class="d-none booking-session align-items-center">
-      <h2 class="session-head border-right border-white">CRÉER UNE SESSION</h2>
+    <div class="booking-session align-items-center" :class="[showSessions ? 'd-flex' : 'd-none']">
+      <h2 class="session-head border-right border-white">CRÉER UNE DATE</h2>
       <ul class="text-uppercase list-unstyled year-list border-right border-white px-3">
         <li><a href="#" class="text-reset active">2020</a></li>
         <li><a href="#" class="text-reset">2021</a></li>
@@ -83,7 +83,7 @@
         </li>
       </ul>
     </div>
-    <div class="tab-content">
+    <div v-show="showSessions" class="tab-content">
       <div class="tab-pane fade" id="jan" role="tabpanel" aria-labelledby="jan-tab">qwerty</div>
       <div class="tab-pane fade" id="feb" role="tabpanel" aria-labelledby="feb-tab">asdfgh</div>
       <div class="tab-pane fade" id="mar" role="tabpanel" aria-labelledby="mar-tab">zxcvbn</div>
@@ -101,6 +101,7 @@
                 <div class="text-right mr-4">
                   <h6 class="text-uppercase mb-0 font-weight-normal tripper-text"><strong>TRIPPER</strong> inscrit</h6>
                   <h6 class="text-uppercase text-danger mb-0 tripper-count">2 tripper pour confirmer LE départ</h6>
+                  <span class="cancel-info-text">annulation sans frais jusqu’au 22/10/2021</span>
                 </div>
                 <div class="registrants">
                   <h6 class="premier-text mb-0 font-weight-bold text-uppercase"><img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !</h6>
@@ -109,7 +110,7 @@
                   <img fluid :src="require('@/assets/images/timer_d.png')" />
                   8 jours - 7 nuits
                 </h6>
-                <h6 class="amount-per mb-0"><strong>1 990€</strong>/pers.</h6>
+                <h6 class="amount-per mb-0"><strong>1 990€ </strong>/pers.</h6>
                 <button class="btn choose-btn">CHOISIR</button>
               </div>
             </li>
@@ -123,7 +124,7 @@
                 <a href="#" class="register-count mb-0"> <strong>7 places</strong> restantes</a>
                 <div class="text-right mr-4">
                   <h6 class="text-uppercase mb-0 font-weight-normal tripper-text"><strong>TRIPPERS</strong> inscrits</h6>
-                  <h6 class="text-uppercase text-danger mb-0 tripper-count">1 tripper pour confirmer LE départ</h6>
+                  <h6 class="text-uppercase mb-0 tripper-count date-confirmed">Départ confirmé</h6>
                 </div>
                 <div class="registrants">
                   <ul class="list-unstyled registrants-list mb-0 d-flex">
@@ -142,7 +143,7 @@
                   <img fluid :src="require('@/assets/images/timer_d.png')" />
                   8 jours - 7 nuits
                 </h6>
-                <h6 class="amount-per mb-0"><strong>1 990€</strong>/pers.</h6>
+                <h6 class="amount-per mb-0"><strong>1 990€ </strong>/pers.</h6>
                 <button class="btn choose-btn">CHOISIR</button>
               </div>
             </li>
@@ -169,7 +170,7 @@
                   <img fluid :src="require('@/assets/images/timer_d.png')" />
                   8 jours - 7 nuits
                 </h6>
-                <h6 class="amount-per mb-0"><strong>1 990€</strong>/pers.</h6>
+                <h6 class="amount-per mb-0"><strong>1 990€ </strong>/pers.</h6>
                 <button class="btn choose-btn">CHOISIR</button>
               </div>
             </li>
@@ -187,28 +188,27 @@
     </div>
     <div @click="openBooking = !openBooking" class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
-      <div class="row no-gutters flex-1 mx-0 text-center">
-        <div class="col-3 border-right center-col" style="background-color: #fafafa">
+      <div class="d-flex justify-content-between flex-1 mx-0 text-center" :style="[showSessions ? 'color: #fff; background-color: #292f33' : '']">
+        <div class="left-avatar-block border-right center-col" :style="[showSessions ? '' : 'background-color: #fafafa']">
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-3 mb-0">
               <span style="font-family: Oswald, sans-serif; font-size: 0.75rem"
                 ><span color="#292f33">Ca te titille?</span> <span style="font-weight: bold">Rejoint les 12 intéressés :</span><br />
-                <InlineAvatars :avatars="[1, 2]" :heart="true" heartheight="40px" heartwidth="40px" spacing="-10px" border-color="white" :outline="true" :count="false" mt="0rem" mb="0rem" />
+                <InlineAvatars :avatars="[1, 2, 1, 1, 1, 1, 1, 1, 1, 1]" :heart="true" heartheight="40px" heartwidth="40px" spacing="-6px" :heart-color="showSessions ? 'white' : 'grey'" :outline="true" :outline-color="showSessions ? 'grey' : 'light-white'" :count="false" mt="0.3rem" mb="0rem" />
               </span>
             </ul>
           </div>
           <h6 class="premier-text mb-0 font-weight-bold d-none"><img class="mic_icon" fluid :src="require('@/assets/images/mic-w.png')" />Sois le premier !</h6>
         </div>
-        <div class="col-4 border-right center-col datepicker-col" id="depart_datepick">
+        <div @click="showSessions = !showSessions" class="fg-1 border-right center-col datepicker-col" id="depart_datepick" style="padding: 0 3rem" type="button">
           <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
             <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
-              <div class="text-right text--grey">
-                <div class="d-inline-block pb-0">Sélectionne une session</div>
-                <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px"><span class="text--pink">4 sessions</span>&nbsp;disponibles</div>
+              <div class="text-right" :class="{ 'text--grey': !showSessions }">
+                <div class="d-inline-block pb-0">Sélectionne une session :</div>
+                <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px"><span class="text--pink" style="font-weight: bold">4 sessions</span>&nbsp;&nbsp;disponibles</div>
               </div>
-              <i class="fa fa-chevron-down ml-3 mb-1 arrow"></i>
             </div>
-            <InlineSvg :src="require('@/assets/svg/arrow-right.svg')" transform="rotate(90)" height="24" fill="#292f33" />
+            <InlineSvg class="ml-4" :src="require('@/assets/svg/arrow-right.svg')" :transform="[showSessions ? 'rotate(90)' : 'rotate(270)']" height="24" :fill="showSessions ? '#fff' : '#292f33'" />
           </div>
           <div class="d-none">
             <div class="d-none text-right">
@@ -225,19 +225,20 @@
             <i class="fa fa-chevron-down ml-5"></i>
           </div>
         </div>
-        <div class="col-3 border-right center-col flex-column">
-          <div class="d-inline-block text-center w-100" style="border-left: 1px dashed #b4b4b4; border-right: 1px dashed #b4b4b4">
+        <div class="center-col flex-column px-5" style="position: relative; top: 35%; height: min-content; border-left: 1px dashed #b4b4b4; border-right: 1px dashed #b4b4b4">
+          <div class="d-inline-block text-center w-100">
             <h5 class="premier-text mb-0 letter-space-1">
-              <img class="mr-2 icons" fluid :src="require('@/assets/images/places.png')" />Participants
+              <!-- <img class="mr-2 icons" fluid :src="require('@/assets/images/places.png')" /> -->
+              Participants :
               <form class="d-inline-flex align-items-center align-bottom ml-3">
-                <div class="value-button decrease" @click="decrementCounter">-</div>
+                <div class="value-button decrease" style="user-select: none" @click="decrementCounter">-</div>
                 <span class="px-3 text--bold text--16">{{ count }}</span>
-                <div class="value-button increase" @click="count++">+</div>
+                <div class="value-button increase" style="user-select: none" @click="count++">+</div>
               </form>
             </h5>
           </div>
         </div>
-        <div class="col-2 center-col inactive">
+        <div class="center-col inactive px-5">
           <span class="tot-amount text-left">PRIX total : <strong class="d-block">1990 &euro;</strong></span>
         </div>
       </div>
@@ -255,14 +256,21 @@ export default {
   },
   data() {
     return {
-      count: 0,
+      count: 1,
+      showSessions: false,
       openBooking: false,
       slideIsUp: false
     }
   },
+  watch: {
+    showSessions(val) {
+      if (val === true) this.$emit('show-sessions')
+      if (val === false) this.$emit('hide-sessions')
+    }
+  },
   methods: {
     decrementCounter() {
-      if (this.count === 0) return
+      if (this.count <= 1) return
       this.count--
     },
     showDays() {
@@ -374,11 +382,19 @@ export default {
 </script>
 
 <style>
+.date-confirmed {
+  color: #7ec754;
+}
+.cancel-info-text {
+  font-family: Oswald, sans-serif;
+  font-size: 0.8rem;
+  color: #b4b4b4;
+}
 .value-button:hover {
   box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.8);
 }
 .reserve-btn {
   min-width: 200px !important;
-  height: 80px !important;
+  height: 90px !important;
 }
 </style>

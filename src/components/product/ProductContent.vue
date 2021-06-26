@@ -34,19 +34,7 @@
       </ul>
     </div>
     <div class="main-slider">
-      <swiper
-        v-if="!asideSlider"
-        :slidesPerView="3"
-        :spaceBetween="5"
-        :slidesPerGroup="3"
-        :loop="true"
-        :loopFillGroupWithBlank="false"
-        :pagination="{
-          clickable: true
-        }"
-        :navigation="true"
-        class="mySwiper"
-      >
+      <swiper v-if="!asideSlider" :slidesPerView="3" :spaceBetween="5" :slidesPerGroup="3" :loop="true" :loopFillGroupWithBlank="false" :navigation="true" class="mySwiper">
         <swiper-slide v-for="(imgSrc, index) in imgs" :key="imgSrc" @click="showImg(index)">
           <img class="swiper-slide__img" :src="imgSrc" />
         </swiper-slide>
@@ -56,7 +44,7 @@
       </swiper>
       <vue-easy-lightbox v-if="!asideSlider" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="handleHide"></vue-easy-lightbox>
     </div>
-    <div class="product-content d-flex justify-content-around">
+    <div class="product-content d-flex justify-content-around" style="padding-top: 50px">
       <div class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
         <div id="product-tab-infos" class="pt-5">
           <ProductTabInfos :course="course" />
@@ -234,8 +222,7 @@ export default {
     },
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView()
-    },
-    mounted() {}
+    }
     // scroll to top when user reaches top of content (wheel up)
     // handleScrollUp() {
     //   let contentTop = window.innerHeight * 0.9
@@ -261,6 +248,7 @@ export default {
 <style scoped>
 .aside-slider .swiper-slide__img {
   height: 20vh;
+  margin-top: 50px;
 }
 .reply-container {
   font-size: 0.8rem;

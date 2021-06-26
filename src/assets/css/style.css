@@ -1611,10 +1611,10 @@ a.bg-danger:hover {
 .pre-booking-footer .order-tab-list > li .choose-btn {
   font-size: 13px;
   font-weight: bold;
-  background-color: #d9345a;
-  border: none;
-  border-radius: 4px;
-  color: #ffffff;
+  background-color: white;
+  border: 1px solid #292f33;
+  border-radius: 3px;
+  color: #292f33;
   padding: 18px 32px;
   letter-spacing: 0.65px;
   text-transform: uppercase;
@@ -1622,6 +1622,7 @@ a.bg-danger:hover {
 }
 .pre-booking-footer .order-tab-list > li .choose-btn:hover {
   background-color: #292f33;
+  color: #fff
 }
 .pre-booking-footer .order-tab-list > li .amount-per {
   font-size: 1.25rem;
@@ -3002,7 +3003,7 @@ input[type='number']::-webkit-outer-spin-button {
   color: #ffffff;
   font-size: 1.125rem;
   font-weight: 700;
-  background-color: #d9345a;
+  background-color: #b4b4b4;
   margin: 0;
   display: flex;
   align-self: stretch;
@@ -3027,8 +3028,7 @@ input[type='number']::-webkit-outer-spin-button {
   display: flex;
   width: 100%;
   text-align: center;
-  background-color: #292f33;
-  color: #fff;
+  background-color: #fff;
   align-self: stretch;
 }
 .booking-session .booking-session-list li {
@@ -3037,8 +3037,8 @@ input[type='number']::-webkit-outer-spin-button {
 .booking-session .booking-session-list li a {
   font-family: 'Muli', sans-serif;
   font-weight: 400;
-  font-size: 0.875rem;
-  color: #fff;
+  font-size: 0.8rem;
+  color: #292f33;
   width: 100%;
   height: 100%;
   display: flex;
@@ -3048,8 +3048,8 @@ input[type='number']::-webkit-outer-spin-button {
   border-radius: 0;
 }
 .booking-session .booking-session-list li a.active {
-  background-color: #ffc300;
-  color: #292f33;
+  background-color: #292f33;
+  color: #fff;
   font-weight: 900;
 }
 

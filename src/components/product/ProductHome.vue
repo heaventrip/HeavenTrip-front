@@ -6,8 +6,8 @@
       <div v-else>
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
-        <ProductContent :course="course" ref="productContent" />
-        <ProductFooter ref="productFooter" />
+        <ProductContent :class="{ blur: showSessions }" :course="course" ref="productContent" />
+        <ProductFooter @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
       </div>
     </transition>
   </div>
@@ -36,12 +36,16 @@ export default {
   props: ['id'],
   data() {
     return {
+      showSessions: false,
       course: {},
       header: true,
       showLoginModal: false
     }
   },
   methods: {
+    setShowSessions(status) {
+      this.showSessions = status
+    },
     jquery() {
       // var x = document.getElementById('center')
       // x.scrollIntoView({ inline: 'center' })
@@ -129,3 +133,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.blur {
+  filter: blur(3px);
+}
+</style>
