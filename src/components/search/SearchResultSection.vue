@@ -1,9 +1,9 @@
 <template>
   <section class="result-section">
-    <div class="search-filter-div bg-white">
-      <a class="px-5 bg-danger d-flex align-items-center justify-content-around text-white home-ref" href="index.html">
+    <div class="search-filter-div bg-white" style="position: sticky; top: 0; z-index: 10">
+      <router-link class="px-5 bg-danger d-flex align-items-center justify-content-around text-white home-ref" to="/">
         <InlineSvg :src="require('@/assets/svg/home.svg')" height="24" fill="#fff" />
-      </a>
+      </router-link>
       <div class="result-div d-flex align-items-center p-3 px-5 pl-lg-5 w-100">
         <h4 class="pr-5 mr-5 mb-0 border-right border-dark count text-right font-weight-normal d-none d-md-block">
           <strong class="h6 d-block font-weight-bold mb-1">MA RECHERCHE</strong>
@@ -26,19 +26,19 @@
         <!-- <div class="btn bg-white text-dark rounded-0 text-uppercase"> <i class="fas fa-sort ml-4 symbol"></i></div>
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Date de depart<i class="fas fa-sort ml-4 symbol"></i></div>
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Durée<i class="fas fa-sort ml-4 symbol"></i></div> -->
-        <div @click="sortByPrice" class="sort-by-button" style="position: relative; flex-grow: 1">
+        <div @click="sortByPrice" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <span>Prix <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
+            <span>Prix <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3 align-middle" /></span>
           </div>
         </div>
-        <div @click="sortByDuration" class="sort-by-button" style="position: relative; flex-grow: 1">
+        <div @click="sortByDate" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <span>Durée <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
+            <span>Date de départ <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3 align-middle" /></span>
           </div>
         </div>
-        <div @click="sortByCountry" class="sort-by-button" style="position: relative; flex-grow: 1">
+        <div @click="sortByDuration" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <span>Pays <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" height="1rem" class="ml-3 align-middle" /></span>
+            <span>Durée <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3 align-middle" /></span>
           </div>
         </div>
       </div>
@@ -63,6 +63,18 @@
             </div> -->
             <div class="py-4 px-5 filter-body bg-white font-weight-normal">
               <div class="text-uppercase mb-4 mt-3 letter">Tu peux encore affiner :</div>
+              <div class="filter-container theme-filter">
+                <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
+                    <span class="search-bar__filter__name">Thématique<i class="fas fa-sort float-right symbol"></i></span>
+                  </div>
+                  <Multiselect class="theme-multiselect" ref="themeMultiselect" @open="setMultiSelect('theme')" v-model="themeSelection.value" v-bind="themeSelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
+                </div>
+                <div class="tags-container"></div>
+              </div>
               <div class="filter-container activity-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
@@ -78,7 +90,7 @@
               <div class="filter-container country-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
-                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
+                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/globe.svg')" height="22" />
                     <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
                   <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
@@ -87,7 +99,7 @@
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container spot-filter">
+              <div v-if="activitySelection.value.length + countrySelection.value.length > 0" class="filter-container spot-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
@@ -126,13 +138,13 @@
               <br />
               <div class="custom-radio-container d-flex justify-content-between">
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="filterdepart" name="room" class="custom-control-input" />
+                  <input v-model="dateConfirmed" type="checkbox" id="filterdepart" name="room" class="custom-control-input" />
                   <label class="custom-control-label" for="filterdepart">Départ confirmé</label>
                 </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="filterplace" name="room" class="custom-control-input" />
+                <!-- <div class="custom-control custom-radio">
+                  <input v-model="lastPlaces" type="checkbox" id="filterplace" name="room" class="custom-control-input" />
                   <label class="custom-control-label" for="filterplace">Dernières places</label>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- <button class="btn btn-block clear-btn border-0 rounded-0">Effacer les 4 critères de sélection</button> -->
@@ -347,12 +359,25 @@ export default {
   },
   data() {
     return {
+      queryParams: '',
+      dateConfirmed: '',
+      lastPlaces: '',
       sortedBy: 'descPrice',
       sessionsArr: [],
       normalResults: [],
       lastSessionResults: [],
       requestedTripResults: [],
       freeSearch: '',
+      themeSelection: {
+        hideSelected: false,
+        noOptionsText: 'La liste est vide',
+        mode: 'tags',
+        value: [],
+        openDirection: 'top',
+        caret: false,
+        options: [],
+        createTag: true
+      },
       activitySelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
@@ -419,6 +444,12 @@ export default {
     }
   },
   watch: {
+    // queryParams: {
+    //   immediate: true,
+    //   handler(val) {
+    //     this.countrySelection.value.push(2, 3, 4)
+    //   }
+    // },
     normalResults(val) {
       if (val !== []) {
         let arr = []
@@ -429,6 +460,11 @@ export default {
             this.sessionsArr = [...new Set(arr)]
           })
         })
+      }
+    },
+    'countrySelection.value': {
+      handler() {
+        console.log(this.countrySelection.value)
       }
     }
   },
@@ -451,25 +487,28 @@ export default {
         this.sortedBy = 'descDuration'
       }
     },
-    sortByCountry() {
-      if (this.sortedBy === 'descCountry') {
+    sortByDate() {
+      if (this.sortedBy === 'descDate') {
         this.normalResults.sort((a, b) => a.country.name.localeCompare(b.country.name)) // ascending order
-        this.sortedBy = 'ascCountry'
+        this.sortedBy = 'ascDate'
       } else {
         this.normalResults.sort((a, b) => b.country.name.localeCompare(a.country.name)) // descending order
-        this.sortedBy = 'descCountry'
+        this.sortedBy = 'descDate'
       }
     },
     submitSearchForm() {
       this.$axios
         .post('/courses/search', {
+          free_search: this.freeSearch,
           q: {
-            // free_search: this.freeSearch,
-            sports_id_in: this.activitySelection.value
-            // spot_country_id_in: this.countrySelection.value,
-            // spot_id_in: this.spotSelection.value,
-            // sessions_month_of_departure_eq: this.monthSelection.value
-          }
+            sports_sport_categories_id_in: this.themeSelection.value,
+            sports_id_in: this.activitySelection.value,
+            level_id_in: this.levelSelection.value,
+            spot_country_id_in: this.countrySelection.value,
+            spot_id_in: this.spotSelection.value,
+            sessions_month_of_departure_in: this.monthSelection.value
+          },
+          sessions_full_eq: this.dateConfirmed
         })
         .then((res) => {
           console.log(res)
@@ -484,25 +523,57 @@ export default {
     }
   },
   async created() {
+    let queryParams = this.$route.query
+
+    this.$axios.get('/sport-categories').then((res) => {
+      res.data.sportCategories.forEach((theme) => {
+        this.themeSelection.options.push({ value: theme.id, label: theme.name })
+      })
+
+      if (queryParams.theme) {
+        if (Array.isArray(queryParams.theme)) queryParams.theme.forEach((id) => this.$refs.themeMultiselect.select(id))
+        else this.$refs.themeMultiselect.select(queryParams.theme)
+      }
+    })
     this.$axios.get('/sports').then((res) => {
       res.data.sports.forEach((sport) => {
         this.activitySelection.options.push({ value: sport.id, label: sport.name })
       })
+
+      if (queryParams.activity) {
+        if (Array.isArray(queryParams.activity)) queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
+        else this.$refs.activityMultiselect.select(queryParams.activity)
+      }
     })
     this.$axios.get('/countries').then((res) => {
       res.data.countries.forEach((country) => {
         this.countrySelection.options.push({ value: country.id, label: country.name })
       })
+
+      if (queryParams.country) {
+        if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
+        else this.$refs.countryMultiselect.select(queryParams.country)
+      }
     })
     this.$axios.get('/spots').then((res) => {
       res.data.spots.forEach((spot) => {
         this.spotSelection.options.push({ value: spot.id, label: spot.name })
       })
+
+      if (queryParams.spot) {
+        if (Array.isArray(queryParams.spot)) queryParams.spot.forEach((id) => this.$refs.spotMultiselect.select(id))
+        else this.$refs.spotMultiselect.select(queryParams.spot)
+      }
     })
     this.$axios.get('/levels').then((res) => {
       res.data.levels.forEach((level) => {
         this.levelSelection.options.push({ value: level.id, label: level.name })
       })
+
+      if (queryParams.level) {
+        if (Array.isArray(queryParams.level)) queryParams.level.forEach((id) => this.$refs.levelMultiselect.select(id))
+        else this.$refs.levelMultiselect.select(queryParams.level)
+      }
     })
   },
   mounted() {

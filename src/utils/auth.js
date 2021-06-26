@@ -16,8 +16,8 @@ export async function loginUser(email, password) {
           }
         })
         .then((res) => {
-          console.log(res.data)
           setAuthToken(res.data.auth_token)
+          setUserInfos(res.data.user)
           resolve()
         })
     } catch (err) {
@@ -34,14 +34,22 @@ export function setAuthToken(token) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   localStorage.setItem(AUTH_TOKEN_KEY, token)
 }
-
 export function getAuthToken() {
   return localStorage.getItem(AUTH_TOKEN_KEY)
+}
+
+export function setUserInfos(user) {
+  localStorage.setItem('user.firstName', user.first_name)
+  localStorage.setItem('user.lastName', user.last_name)
+  localStorage.setItem('user.city', user.city)
 }
 
 export function clearAuthToken() {
   axios.defaults.headers.common['Authorization'] = ''
   localStorage.removeItem(AUTH_TOKEN_KEY)
+  localStorage.removeItem('user.firstName')
+  localStorage.removeItem('user.lastName')
+  localStorage.removeItem('user.city')
 }
 
 export function isLoggedIn() {

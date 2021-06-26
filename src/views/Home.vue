@@ -7,6 +7,29 @@
   <SelectADate />
 </template>
 
+<script>
+import Header from '@/components/header/Header'
+import Footer from '@/components/footer/Footer'
+import MainSection from '@/components/home/MainSection'
+import Profile from '@/components/connection/Profile'
+import SelectADate from '@/components/SelectADate'
+export default {
+  name: 'HomePage',
+  components: {
+    Header,
+    MainSection,
+    Footer,
+    Profile,
+    SelectADate
+  },
+  data() {
+    return {
+      loading: false
+    }
+  }
+}
+</script>
+
 <style scoped>
 .loader {
   /* Loader Div Class */
@@ -25,29 +48,3 @@
   filter: alpha(opacity=40);
 }
 </style>
-
-<script>
-import Header from '@/components/header/Header'
-import Footer from '@/components/footer/Footer'
-import MainSection from '@/components/home/MainSection'
-import Profile from '@/components/connection/Profile'
-import SelectADate from '@/components/SelectADate'
-export default {
-  name: 'HomePage',
-  components: {
-    Header,
-    MainSection,
-    Footer,
-    Profile,
-    SelectADate
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      loading: false
-    }
-  }
-}
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->

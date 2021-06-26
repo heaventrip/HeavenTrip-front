@@ -190,13 +190,6 @@ export default {
       this.token = false
     }
     this.jquery()
-
-    // working contentful auth
-    const client = this.$contentful.createClient({
-      space: '4nx5joo7rzn4',
-      accessToken: 'nbv0vn5HDMDtpCH4M8Z07vc-p6Zk6tCWt-1Z0YcUp9o'
-    })
-    client.getAsset('2tfU1nf8WzcYTiSlj6QpeQ').then((e) => console.log(e))
   }
 }
 </script>

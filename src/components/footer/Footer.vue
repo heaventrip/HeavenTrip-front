@@ -98,30 +98,43 @@
               <div class="col-4 pr-0">
                 <h5 class="text-uppercase list-head">Top destinations</h5>
                 <ul class="list-unstyled" style="line-height: 1">
-                  <li><a href="#">Marac</a></li>
-                  <li><a href="#">Espagne</a></li>
-                  <li><a href="#">Egypte</a></li>
-                  <li><a href="#">France</a></li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { country: countries[0]?.id } }">{{ countries[0]?.name }}</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { country: countries[1]?.id } }">{{ countries[1]?.name }}</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { country: countries[2]?.id } }">{{ countries[2]?.name }}</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { country: countries[3]?.id } }">{{ countries[3]?.name }}</router-link>
+                  </li>
                 </ul>
               </div>
               <div class="col-4">
                 <h5 class="text-uppercase list-head">Top activites</h5>
                 <ul class="list-unstyled" style="line-height: 1">
-                  <li><a href="#">Kitesurf</a></li>
-                  <li><a href="#">Escalade</a></li>
-                  <li><a href="#">Surf</a></li>
-                  <li><a href="#">Yoga</a></li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[0]?.id } }">{{ sports[0]?.name }}</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[1]?.id } }">{{ sports[1]?.name }}</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[2]?.id } }">{{ sports[2]?.name }}</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[3]?.id } }">{{ sports[3]?.name }}</router-link>
+                  </li>
                 </ul>
               </div>
               <div class="col-4">
                 <h5 class="text-uppercase list-head">thematiques</h5>
                 <ul class="list-unstyled" style="line-height: 1">
-                  <li><a href="#">Vent & Mer</a></li>
-                  <li><a href="#">Montagne</a></li>
-                  <li><a href="#">Neige</a></li>
-                  <li><a href="#">A pieds</a></li>
-                  <li><a href="#">Multi-activites</a></li>
-                  <li><a href="#">A Eien-etre</a></li>
+                  <li v-for="theme in themes" :key="theme">
+                    <router-link :to="{ name: 'SearchHome', query: { theme: theme.id } }">{{ theme.name }}</router-link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -134,9 +147,9 @@
               <div class="col-12 col-xl-8 ml-auto pr-0">
                 <h5 class="text-uppercase list-head">A propos</h5>
                 <ul class="list-unstyled" style="line-height: 1">
-                  <li><a href="#">L'agence</a></li>
-                  <li><a href="#">Tourisme responsable</a></li>
-                  <li><a href="#">FAQ</a></li>
+                  <li><a href="javascript:void(0);">L'agence</a></li>
+                  <li><a href="javascript:void(0);">Tourisme responsable</a></li>
+                  <li><a href="javascript:void(0);">FAQ</a></li>
                 </ul>
               </div>
             </div>
@@ -144,9 +157,9 @@
           <div class="col-6 col-md-3 col-xl-1 p-xl-0 order-2 order-md-4 my-4 order-xl-4 positioned-tripcol">
             <h5 class="text-uppercase list-head">Rejoins-nous</h5>
             <ul class="list-unstyled" style="line-height: 1">
-              <li><a href="#">Team Heaven Trip</a></li>
-              <li><a href="#">Moniteur / Guide</a></li>
-              <li><a href="#">Margue et sponsors</a></li>
+              <li><a href="javascript:void(0);">Team Heaven Trip</a></li>
+              <li><a href="javascript:void(0);">Moniteur / Guide</a></li>
+              <li><a href="javascript:void(0);">Marque et sponsors</a></li>
             </ul>
           </div>
           <div class="col-12 order-4 d-block d-md-none">
@@ -158,12 +171,12 @@
             <p class="mb-0 text-left text-sm-center copy-right mr-xl-3">&copy; Tous droits reserves - Heaven Trip 2019 - 2020</p>
             <ul class="list-unstyled mb-0 d-flex justify-content-center bottom-link-list">
               <li>
-                <a href="#"><span class="d-none d-md-inline-block">Conditions generales de vente</span><span class="d-inline-block d-md-none">Nos CGV</span> </a>
+                <a href="javascript:void(0);"><span class="d-none d-md-inline-block">Conditions generales de vente</span><span class="d-inline-block d-md-none">Nos CGV</span> </a>
               </li>
               <li>
-                <a href="#"><span class="d-none d-md-inline-block">Conditions generales d'utilisations</span><span class="d-inline-block d-md-none">Nos CGU</span> </a>
+                <a href="javascript:void(0);"><span class="d-none d-md-inline-block">Conditions generales d'utilisations</span><span class="d-inline-block d-md-none">Nos CGU</span> </a>
               </li>
-              <li><a href="#">Mentions légales</a></li>
+              <li><a href="javascript:void(0);">Mentions légales</a></li>
             </ul>
             <hr class="d-block d-xl-none my-3" />
             <div class="d-flex justify-content-between align-items-center text-uppercase font-weight-bold mail-box" style="flex-grow: 0.2">
@@ -177,13 +190,13 @@
                 écrivez-nous
               </a>
             </div>
-            <div class="btn-group">
+            <!-- <div class="btn-group">
               <button type="button" class="btn dropdown-toggle text-uppercase py-0 border-0 font-weight-bold drpbtn-right text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">fr</button>
               <div class="dropdown-menu text-uppercase">
                 <a class="dropdown-item" href="#">fr</a>
                 <a class="dropdown-item" href="#">en</a>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -195,8 +208,15 @@ export default {
   name: 'Footer',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      countries: {},
+      themes: {},
+      sports: {}
     }
+  },
+  async created() {
+    this.$axios.get('/countries').then((res) => (this.countries = res.data.countries))
+    this.$axios.get('/sports').then((res) => (this.sports = res.data.sports))
+    this.$axios.get('/sport-categories').then((res) => (this.themes = res.data.sportCategories))
   }
 }
 </script>
