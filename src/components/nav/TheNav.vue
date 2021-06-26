@@ -80,7 +80,7 @@
         </div>
         <transition name="nav-fade">
           <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <ActivitiesTab ref="activitiesTab" />
+            <ActivitiesTab @fetched-categ="setCateg" ref="activitiesTab" />
           </div>
         </transition>
         <transition name="nav-fade">
@@ -166,6 +166,9 @@ export default {
     }
   },
   methods: {
+    setCateg(categ) {
+      this.sportCategories = categ
+    },
     dismissNav() {
       ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => {
         this.$data[el] = false

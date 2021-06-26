@@ -181,40 +181,27 @@ export default {
     afterLeave() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
+    isInViewport(element) {
+      const rect = element.getBoundingClientRect()
+      return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    },
     initTabsGsap() {
       let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
 
-      tabs.forEach((_, index) => {
-        let scrollDownTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: `#product-tab-${tabs[index]}`,
-            start: 'top 102',
-            end: 'bottom bottom',
-            markers: true,
-            onToggle: () => console.log('scrolldown')
-          },
-          ease: 'none'
-        })
-        scrollDownTl.to(`#pills-${tabs[index]}-tab`, { className: '+=active' })
-        if (index !== 0) {
-          scrollDownTl.to(`#pills-${tabs[index - 1]}-tab`, { className: '-=active' }, '<')
-        }
-
-        // let scrollUpTl = gsap.timeline({
-        //   scrollTrigger: {
-        //     trigger: `#product-tab-${tabs[index]}`,
-        //     start: 'bottom bottom',
-        //     end: 'top bottom',
-        //     markers: true,
-        //     onToggle: () => console.log('scrollup')
-        //   },
-        //   ease: 'none'
-        // })
-        // scrollUpTl.to(`#pills-${tabs[index]}-tab`, { className: '+=active' })
-        // if (index !== tabs.length - 1) {
-        //   scrollUpTl.to(`#pills-${tabs[index + 1]}-tab`, { className: '-=active' }, '<')
-        // }
-      })
+      // let scrollUpTl = gsap.timeline({
+      //   scrollTrigger: {
+      //     trigger: `#product-tab-${tabs[index]}`,
+      //     start: 'bottom bottom',
+      //     end: 'top bottom',
+      //     markers: true,
+      //     onToggle: () => console.log('scrollup')
+      //   },
+      //   ease: 'none'
+      // })
+      // scrollUpTl.to(`#pills-${tabs[index]}-tab`, { className: '+=active' })
+      // if (index !== tabs.length - 1) {
+      //   scrollUpTl.to(`#pills-${tabs[index + 1]}-tab`, { className: '-=active' }, '<')
+      // }
     },
     initGsap() {
       let that = this

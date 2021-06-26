@@ -28,7 +28,7 @@
               </div>
               <div class="d-flex pad__footer">
                 <div class="pad__footer__review-counter shadow--top">
-                  <Button text="54 avis" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
+                  <Button style="cursor: default" text="54 avis" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
                 </div>
                 <Button class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
               </div>

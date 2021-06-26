@@ -84,25 +84,25 @@ export default {
           .to(staticInfos, { y: '-=45px' }, '<')
           .to(movingInfos, { y: '-=100' }, '<')
           .to(heartIcon, { autoAlpha: 1 }, '<')
+          .to(
+            this.cardsArr.slice(parseInt(card.dataset.index) + 1),
+            {
+              x: '+=50'
+            },
+            '<'
+          )
       }
 
       if (type === 'bigger') {
         this.cardTl.play()
-        gsap.to(this.cardsArr.slice(parseInt(card.dataset.index) + 1), {
-          x: '+=50',
-          duration: 0.5,
-          ease: 'power3.inOut'
-        })
+
         card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
         card.querySelector('.card__footer__price').classList.add('border-0')
       }
+
       if (type === 'smaller') {
         this.cardTl.reverse()
-        gsap.to(this.cardsArr.slice(parseInt(card.dataset.index) + 1), {
-          x: '-=50',
-          duration: 0.5,
-          ease: 'power3.inOut'
-        })
+
         card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
         card.querySelector('.card__footer__price').classList.remove('border-0')
       }

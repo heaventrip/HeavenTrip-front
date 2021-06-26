@@ -5,7 +5,7 @@
       <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="require('@/assets/images/t4.png')" />
     </div>
     <div v-if="pHeart" style="border-radius: 50%" :class="pOutlineColor" :style="[pSpacing, pHeartwidth, pHeartheight]">
-      <InlineSvg :src="require(`@/assets/svg/heart-logo-${heartColor}.svg`)" />
+      <InlineSvg :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
     </div>
     <div class="avatar-count" v-if="pCount">+1.5k</div>
   </div>

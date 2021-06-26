@@ -114,7 +114,7 @@
       </div>
       <div class="d-flex align-items-center mt-4">
         <div class="slider-buttons col-2 text-center">
-          <div @click="slideLeft" style="transform: translateY(-60%)">
+          <div @click="slideLeft" type="button" style="transform: translateY(-60%)">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
@@ -125,7 +125,7 @@
               </g>
             </svg>
           </div>
-          <div @click="slideRight" style="transform: translateY(-40%)">
+          <div @click="slideRight" type="button" style="transform: translateY(-40%)">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
@@ -258,68 +258,81 @@ export default {
       })
     },
     slideLeft() {
-      if (!this.cardsAnimLeft) {
-        let windowWrap = gsap.utils.wrap(0, 600 * 4) // card width * nb of cards
-        let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+      let windowWrap = gsap.utils.wrap(0, 600 * 4) // card width * nb of cards
+      let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
-        // slide all left
-        this.cardsArr.forEach((card) => {
-          tl.to(
-            card,
-            {
-              x: '-=600',
-              ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
-              duration: 1.0,
-              modifiers: {
-                x: (x) => windowWrap(parseFloat(x)) + 'px'
-              }
-            },
-            '<0.08'
-          )
-        })
-
-        // then fade first one and put it at the end
+      // slide all left
+      this.cardsArr.forEach((card, index) => {
         tl.to(
-          this.cardsArr[0],
+          card,
           {
-            opacity: 0,
-            duration: 0.5,
-            ease: 'power2.in',
-            onComplete: () => {
-              gsap.to(this.cardsArr[0], { opacity: 1, duration: 0.5, ease: 'power4.out' })
-              this.cardsArr.push(this.cardsArr.shift())
+            x: '-=600',
+            ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
+            duration: 1.0,
+            modifiers: {
+              x: (x) => windowWrap(parseFloat(x)) + 'px'
             }
           },
-          '0'
+          index === 0 ? '' : '<0.08'
         )
+      })
 
-        this.cardsAnimLeft = tl
-      }
+      // then fade first one and put it at the end
+      tl.to(
+        this.cardsArr[0],
+        {
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.in',
+          onComplete: () => {
+            gsap.to(this.cardsArr[0], { opacity: 1, duration: 0.5, ease: 'power4.out' })
+            this.cardsArr.push(this.cardsArr.shift())
+          }
+        },
+        '0'
+      )
 
       if (this.animFinished) {
-        this.cardsAnimLeft.restart()
+        tl.play()
       }
     },
     slideRight() {
-      if (!this.animRight) {
-        let windowWrap = gsap.utils.wrap(0, 600 * 4)
-        let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+      let windowWrap = gsap.utils.wrap(0, 600 * 4) // card width * nb of cards
+      let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
-        //slide all right
-        this.cardsArr.reverse().forEach((card) => {
-          tl.to(
-            card,
-            {
-              x: '+=600',
-              ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
-              duration: 1.0,
-              modifiers: {
-                x: (x) => windowWrap(parseFloat(x)) + 'px'
-              }
-            },
-            '<0.08'
-          )
-        })
+      // slide all left
+      this.cardsArr.forEach((card, index) => {
+        tl.to(
+          card,
+          {
+            x: '+=600',
+            ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
+            duration: 1.0,
+            modifiers: {
+              x: (x) => windowWrap(parseFloat(x)) + 'px'
+            }
+          },
+          '<'
+        )
+      })
+
+      // then bring back last one
+      // tl.to(
+      //   this.cardsArr[this.cardsArr.length - 1],
+      //   {
+      //     opacity: 1,
+      //     duration: 0.5,
+      //     ease: 'power2.out',
+      //     onComplete: () => {
+      //       // gsap.to(this.cardsArr[this.cardsArr.length - 1], { opacity: 0, duration: 0.5, ease: 'power4.out' })
+      //       this.cardsArr.unshift(this.cardsArr.pop())
+      //     }
+      //   },
+      //   '0'
+      // )
+
+      if (this.animFinished) {
+        tl.play()
       }
     },
     submitSearchForm() {
