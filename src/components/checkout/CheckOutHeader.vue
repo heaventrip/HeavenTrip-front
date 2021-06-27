@@ -67,7 +67,7 @@
 <script>
 export default {
   name: 'CheckOutHeader',
-  props: ['course'],
+  props: ['course', 'session'],
   data() {
     return {}
   }

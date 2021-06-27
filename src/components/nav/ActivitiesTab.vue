@@ -93,6 +93,7 @@ export default {
       this.sportCategories = res.data.sportCategories
       this.$emit('fetched-categ', res.data.sportCategories)
       this.loaded = true
+      console.log(res.data.sportCategories)
     })
     // working contentful auth
     const client = this.$contentful.createClient({

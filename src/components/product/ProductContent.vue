@@ -89,7 +89,7 @@
           </transition>
           <div class="linear-block font-weight-bold py-3 my-5">DISCUSSIONS</div>
           <ul class="list-unstyled mb-0 discuss-list mt-3">
-            <li>
+            <li v-for="msg in course.messages" :key="msg">
               <div class="d-flex mt-3 mb-5" style="padding-left: 2rem">
                 <div class="">
                   <div class="profile-container">
@@ -97,8 +97,10 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <h6 class="discuss-head">Helena Brauer <span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
+                  <h6 class="discuss-head">
+                    {{ msg.user.firstName }} {{ msg.user.lastName }}<span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">{{ msg.createdAt }}</span>
+                  </h6>
+                  <p class="content-desc">{{ msg.content }}</p>
                 </div>
               </div>
             </li>

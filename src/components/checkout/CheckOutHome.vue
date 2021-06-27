@@ -1,7 +1,7 @@
 <template>
   <div>
-    <CheckOutHeader :course="course" />
-    <CheckOutSections :course="course" />
+    <CheckOutHeader :course="course" :session="session" />
+    <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" />
   </div>
 </template>
 <script>
@@ -17,11 +17,15 @@ export default {
   },
   data() {
     return {
-      course: ''
+      course: null,
+      session: null,
+      participantsNb: 0
     }
   },
   async created() {
-    this.$axios.get(`/courses/${this.$props.productId}`).then((res) => (this.course = res.data.course))
+    await this.$axios.get(`/courses/${this.$props.productId}`).then((res) => (this.course = res.data.course))
+    await this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => (this.session = res.data.session))
+    this.participantsNb = this.$route.params.participantsNb
   }
 }
 </script>

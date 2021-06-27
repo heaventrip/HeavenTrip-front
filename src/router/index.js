@@ -31,10 +31,10 @@ const routes = [
     }
   },
   {
-    path: '/checkout/product/:productId',
+    path: '/checkout/:productId',
     name: 'CheckOutHome',
-    component: CheckOutHome,
     props: true,
+    component: CheckOutHome,
     meta: {
       allowAnonymous: false
     }

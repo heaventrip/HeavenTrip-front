@@ -97,7 +97,7 @@ export default {
     Step5,
     Step6
   },
-  props: ['course'],
+  props: ['course', 'session', 'participantsNb'],
   data() {
     return {
       extraParticipants: [],

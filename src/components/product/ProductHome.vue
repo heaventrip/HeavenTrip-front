@@ -7,7 +7,7 @@
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
         <ProductContent :class="{ blur: showSessions }" :course="course" ref="productContent" />
-        <ProductFooter @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
+        <ProductFooter :course="course" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
       </div>
     </transition>
   </div>
