@@ -95,12 +95,37 @@ export default {
       this.loaded = true
       console.log(res.data.sportCategories)
     })
+
     // working contentful auth
-    const client = this.$contentful.createClient({
-      space: '8dtxc3nuj0tn',
+    const client = this.$contentfulManagement.createClient({
       accessToken: 'QJST-plHn1kmliJnkzNZebXG0wecPQwtxH1hg9YDYek'
     })
-    client.getAssets().then((res) => (this.imgSrc = `https:${res.items[0].fields.file.url}?q=80`))
+    // client.getAssets().then((res) => (this.imgSrc = `https:${res.items[0].fields.file.url}?q=80`))
+
+    client
+      .getSpace('4nx5joo7rzn4')
+      .then((space) =>
+        space.createAssetFromFiles({
+          fields: {
+            title: {
+              'fr-FR': 'Avatar titre'
+            },
+            description: {
+              'fr-FR': 'Avatar description'
+            },
+            file: {
+              'fr-FR': {
+                contentType: 'image/jpeg',
+                fileName: 'monavatar.jpg',
+                file: '<svg><path fill="red" d="M50 50h150v50H50z"/></svg>'
+              }
+            }
+          }
+        })
+      )
+      .then((asset) => asset.processForAllLocales())
+      .then((asset) => asset.publish())
+      .catch(console.error)
   }
 }
 </script>

@@ -14,9 +14,25 @@
             <input v-model="lastName" class="form-control modal-input" type="text" name="" placeholder="Nom" :style="[registerErrors.includes('lastName') && !lastName ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-lg-7">
           <div class="form-group">
             <input v-model="registerEmail" class="form-control modal-input" type="mail" name="register_email" placeholder="Adresse mail" :style="[registerErrors.includes('registerEmail') && !registerEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
+          </div>
+        </div>
+        <div class="col-12 col-lg-5">
+          <div class="form-group">
+            <input
+              v-model="birthDate"
+              type="date"
+              name=""
+              class="form-control modal-input"
+              style="padding-left: 0.5rem"
+              placeholder=" "
+              required
+              datepicker
+              id="birthdate"
+              :style="[registerErrors.includes('registerEmail') && !registerEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+            />
           </div>
         </div>
         <div class="col-12 col-lg-6">
@@ -85,6 +101,7 @@ export default {
   emits: ['clicked-existing-account', 'submitted-form'],
   data() {
     return {
+      birthDate: '',
       registerErrors: [],
       firstName: '',
       lastName: '',
@@ -95,7 +112,7 @@ export default {
   },
   computed: {
     formIsFilled() {
-      return !!(this.firstName && this.lastName && this.registerEmail && this.registerPassword && this.registerPasswordConfirmation)
+      return !!(this.birthDate && this.firstName && this.lastName && this.registerEmail && this.registerPassword && this.registerPasswordConfirmation)
     }
   },
   methods: {
@@ -105,6 +122,7 @@ export default {
 
       if (!this.firstName) err.push('firstName')
       if (!this.lastName) err.push('lastName')
+      if (!this.birthDate) err.push('birthDate')
       if (!this.validEmail(this.registerEmail)) err.push('registerEmail')
       if (this.registerPassword === '') err.push('registerPassword')
       if (this.registerPassword !== this.registerPasswordConfirmation) err.push('registerPasswordConfirmation')
@@ -117,6 +135,7 @@ export default {
             first_name: this.firstName,
             last_name: this.lastName,
             email: this.registerEmail,
+            birth_date: this.birthDate,
             password: this.registerPassword,
             password_confirmation: this.registerPasswordConfirmation
           }
@@ -128,7 +147,8 @@ export default {
           this.registerPasswordConfirmation = ''
           this.$emit('submitted-form')
         })
-        .catch((err) => {
+        .error((err) => {
+          alert(err.response.data.message)
           this.registerErrors.push(err.response.data.message)
         })
       // this.$router.push('/');

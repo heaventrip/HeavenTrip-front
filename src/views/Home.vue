@@ -3,7 +3,7 @@
   <Header />
   <MainSection />
   <Footer />
-  <Profile />
+  <!-- <Profile /> -->
   <SelectADate />
 </template>
 
@@ -11,7 +11,6 @@
 import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 import MainSection from '@/components/home/MainSection'
-import Profile from '@/components/connection/Profile'
 import SelectADate from '@/components/SelectADate'
 export default {
   name: 'HomePage',
@@ -19,7 +18,6 @@ export default {
     Header,
     MainSection,
     Footer,
-    Profile,
     SelectADate
   },
   data() {

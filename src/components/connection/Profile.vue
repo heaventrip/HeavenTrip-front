@@ -29,7 +29,7 @@
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
         </div>
-        <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" url="https://heaventrip-dev.herokuapp.com/api/v1/upload" img-format="jpg"></my-upload>
+        <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" img-format="jpg"></my-upload>
         <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
@@ -107,7 +107,7 @@
       </div>
       <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
     </div>
-    <a class="d-block text-center profile-btm-text" href="#">Je décide de le faire plus tard</a>
+    <a v-if="step <= 4" @click.prevent="step++" class="d-block text-center profile-btm-text" style="color: #292f33" href="#">Je décide de le faire plus tard</a>
   </div>
 </template>
 
@@ -145,6 +145,7 @@ export default {
     cropSuccess(imgDataUrl, field) {
       console.log('-------- crop success --------')
       this.imgDataUrl = imgDataUrl
+      console.log(this.imgDataUrl)
     },
     /**
      * upload success
@@ -185,36 +186,7 @@ export default {
         this.errors.push(err.response.data.message)
       })
   },
-  mounted() {
-    // $('#step--1').hide()
-    // $('#step--2').hide()
-    // $('#step--3').hide()
-    // $('#step--4').hide()
-    // $('#btn1').on('click', function () {
-    //   $('#step--1').show()
-    //   $('#step--2').hide()
-    //   $('#step--3').hide()
-    //   $('#step--4').hide()
-    // })
-    // $('#btn2').on('click', function () {
-    //   $('#step--1').hide()
-    //   $('#step--2').show()
-    //   $('#step--3').hide()
-    //   $('#step--4').hide()
-    // })
-    // $('#btn3').on('click', function () {
-    //   $('#step--1').hide()
-    //   $('#step--2').hide()
-    //   $('#step--3').show()
-    //   $('#step--4').hide()
-    // })
-    // $('#btn4').on('click', function () {
-    //   $('#step--1').hide()
-    //   $('#step--2').hide()
-    //   $('#step--3').hide()
-    //   $('#step--4').show()
-    // })
-  }
+  mounted() {}
 }
 </script>
 
