@@ -29,7 +29,7 @@
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
         </div>
-        <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" img-format="jpg"></my-upload>
+        <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" url="http://localhost:3000/api/v1/upload" v-model="show" :width="300" :height="300" img-format="jpg"></my-upload>
         <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
@@ -144,19 +144,17 @@ export default {
      */
     cropSuccess(imgDataUrl, field) {
       console.log('-------- crop success --------')
-      this.imgDataUrl = imgDataUrl
-      console.log(this.imgDataUrl)
+
+      /**
+       * upload success
+       *
+       * [param] jsonData  server api return data, already json encode
+       * [param] field
+       */
     },
-    /**
-     * upload success
-     *
-     * [param] jsonData  server api return data, already json encode
-     * [param] field
-     */
     cropUploadSuccess(jsonData, field) {
       console.log('-------- upload success --------')
-      console.log(jsonData)
-      console.log('field: ' + field)
+      localStorage.setItem('user.avatarId', jsonData.upload.public_id)
     },
     /**
      * upload fail

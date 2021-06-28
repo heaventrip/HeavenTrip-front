@@ -3,7 +3,7 @@
     <li v-if="isLoggedIn()">
       <div class="dropdown login-dropdown">
         <button style="color: #292f33" class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="login-img mr-2" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+          <img v-show="avatarId" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarId}.jpg`" />
           {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
         </button>
@@ -46,7 +46,7 @@
     <li v-if="isLoggedIn()">
       <div class="dropdown login-dropdown">
         <button class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="login-img mr-2" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+          <img v-show="avatarId" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarId}.jpg`" />
           {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
         </button>
@@ -127,6 +127,9 @@ export default {
     },
     lastName(newVal) {
       this.lastName = newVal
+    },
+    avatarId(newVal) {
+      this.avatarId = newVal
     }
   },
   methods: {
@@ -158,11 +161,18 @@ export default {
           }
         })
       }
+    },
+    getLocalInfos() {
+      this.firstName = localStorage.getItem('user.firstName') || ''
+      this.lastName = localStorage.getItem('user.lastName') || ''
+      this.avatarId = localStorage.getItem('user.avatarId')
     }
   },
   mounted() {
-    this.firstName = localStorage.getItem('user.firstName') || ''
-    this.lastName = localStorage.getItem('user.lastName') || ''
+    this.getLocalInfos()
+  },
+  updated() {
+    this.getLocalInfos()
   }
 }
 </script>

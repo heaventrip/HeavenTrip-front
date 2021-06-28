@@ -1,11 +1,11 @@
 <template>
   <div class="d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
-    <div v-for="(avatar, index) in pAvatars" :key="avatar" :style="[index === 0 ? '' : pSpacing]">
+    <div v-for="(avatarId, index) in ['wb1pauez3a4chagrpyth', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw']" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
       <!-- FIXME intégrer border color ET outline -->
-      <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="require('@/assets/images/t4.png')" />
+      <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
     <div v-if="pHeart" style="border-radius: 50%" :class="pOutlineColor" :style="[pSpacing, pHeartwidth, pHeartheight]">
-      <InlineSvg :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
+      <InlineSvg @click="addToWishlist" :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
     </div>
     <div class="avatar-count" v-if="pCount">+1.5k</div>
   </div>
@@ -43,6 +43,12 @@ export default {
     },
     pHeartheight() {
       return `height: ${this.heartheight}`
+    }
+  },
+  methods: {
+    addToWishlist() {
+      // TODO get id
+      // this.$axios.post('/wishlists', { course: course })
     }
   }
 }
