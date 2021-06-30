@@ -141,7 +141,7 @@ export default {
     ProductTabProgram,
     ProductTabReviews,
     ProductTabTips,
-    VueEasyLightbox,
+    // VueEasyLightbox,
     Swiper,
     SwiperSlide
   },

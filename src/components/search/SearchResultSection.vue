@@ -179,7 +179,7 @@
                     <div class="">
                       <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers inscrits&nbsp;</span><span>aux sessions :</span> </span>
                       <div class="d-flex justify-content-between">
-                        <InlineAvatars :avatars="[1, 2, 3, 4, 5, 6, 7, 8]" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
+                        <InlineAvatars :avatars="avatarKeys" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         <div class="pad__content__price text-right">
                           <div class="pad__content__price__info" style="font-weight: 300">par pers.</div>
                           <div class="pad__content__price__euro">{{ normalResult.price }}&euro;</div>
@@ -359,6 +359,7 @@ export default {
   },
   data() {
     return {
+      avatarKeys: [],
       queryParams: '',
       dateConfirmed: '',
       lastPlaces: '',
@@ -454,12 +455,18 @@ export default {
         let arr = []
         val.forEach((result) => {
           if (!result.sessions) return
+
           result.sessions.forEach((session) => {
-            arr.push(session.dateStart.split('-')[1]) // push month of departure
+            console.log('SESSION:', session)
+            // push month of departure
+            arr.push(session.dateStart.split('-')[1])
             this.sessionsArr = [...new Set(arr)]
+            // retrieve participants
+            // val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
           })
         })
       }
+      console.log('COURSES:', val)
     },
     'countrySelection.value': {
       handler() {

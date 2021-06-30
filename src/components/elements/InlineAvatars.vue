@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
-    <div v-for="(avatarId, index) in ['wb1pauez3a4chagrpyth', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw']" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
+    <div v-for="(avatarId, index) in pAvatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
       <!-- FIXME intégrer border color ET outline -->
       <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
@@ -33,7 +33,7 @@ export default {
       return `margin-bottom: ${this.mb || '0.5rem'};`
     },
     pHeight() {
-      return `height: ${this.height || '40px'};`
+      return `height: ${this.height || '40px'}; width: ${this.height || '40px'}`
     },
     pOutlineColor() {
       return `small-avatar--${this.outlineColor}`

@@ -7,7 +7,7 @@
         <span>ils&nbsp;</span>
         <span class="text--bold">témoignent</span>
       </div>
-      <InlineAvatars height="48px" :heart="false" spacing="15px" :avatars="[1, 2, 3, 4]" />
+      <InlineAvatars height="48px" :heart="false" spacing="15px" :avatars="avatarKeys" />
     </div>
     <div class="reviews__user d-flex flex-column">
       <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
@@ -15,21 +15,21 @@
       <div class="reviews__user-infos mx-auto">
         <span class="text--bold mr-4">
           <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
-          <span class="ml-2">{{ review.user?.city }}</span>
+          <span class="ml-2">{{ activeReview?.user.city }}</span>
         </span>
-        <span class="text--bold">{{ review.user?.firstName }} {{ review.user?.lastName }}</span>
+        <span class="text--bold">{{ activeReview?.user.firstName }} {{ activeReview?.user.lastName }}</span>
       </div>
     </div>
     <div class="reviews__comment">
       <h6 class="text-uppercase">
-        <span>{{ review.session?.course.typeOfCourse }} {{ review.session?.course.sport }}</span>
+        <span>{{ activeReview?.session?.course.typeOfCourse }} {{ activeReview?.session.course.sport }}</span>
         <span class="review-comment__date" style="font-size: 0.8rem">
           <img class="align-baseline mx-2" src="@/assets/svg/arrow-right.svg" style="max-height: 10px" />
-          Session du {{ review.session?.dateStart }}
+          Session du {{ activeReview?.session.dateStart }}
         </span>
       </h6>
       <p class="mb-0">
-        {{ review.comment }}
+        {{ activeReview?.comment }}
       </p>
     </div>
   </div>
@@ -44,11 +44,21 @@ export default {
   },
   data() {
     return {
-      review: {}
+      reviews: [],
+      avatarKeys: [],
+      activeReview: null
     }
   },
-  created() {
-    this.$axios.get('/reviews').then((res) => (this.review = res.data.reviews[0])) // we want only one
+  watch: {
+    reviews(val) {
+      val.forEach((review) => {
+        this.avatarKeys.push(review.user.avatarKey)
+        this.activeReview = val[0]
+      })
+    }
+  },
+  async created() {
+    this.$axios.get('/reviews').then((res) => (this.reviews = res.data.reviews))
   }
 }
 </script>

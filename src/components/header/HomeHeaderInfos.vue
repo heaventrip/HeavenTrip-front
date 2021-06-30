@@ -23,7 +23,7 @@
             <br />
             les <span>{{ featuredCourse.wishlistUsers?.length }} intéressé{{ featuredCourse.wishlistUsers?.length > 1 ? 's' : '' }}</span>
           </span>
-          <InlineAvatars outline-color="violet" :heart="true" spacing="-10px" heartheight="40px" heartwidth="40px" />
+          <InlineAvatars :avatars="avatarKeys" outline-color="violet" :heart="true" spacing="-10px" heartheight="40px" heartwidth="40px" />
           <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
           <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
         </div>
@@ -74,16 +74,15 @@ export default {
   data() {
     return {
       toggledSessions: false,
-      featuredCourse: {}
+      featuredCourse: {},
+      avatarKeys: []
     }
   },
-  computed: {
-    avatarKeys() {
-      if (!this.featuredCourse || !this.featuredCourse.wishlistUsers) return
-      let arr = []
-      console.log(this.featuredCourse.wishlistUsers)
-      this.featuredCourse.wishlistUsers.forEach((user) => arr.push(user.avatarKey))
-      return arr
+  watch: {
+    featuredCourse(val) {
+      if (!val.wishlistUsers) return
+
+      val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
     }
   },
   methods: {
@@ -94,6 +93,7 @@ export default {
   },
   async created() {
     await this.$axios.get('/courses', { params: { featured: true } }).then((res) => (this.featuredCourse = res.data.course))
+    console.log('C:', this.featuredCourse.wishlistUsers)
   }
 }
 </script>

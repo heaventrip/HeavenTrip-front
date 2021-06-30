@@ -6,7 +6,7 @@
           <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
             <h5 class="pad__header__title">Votre coup de coeur</h5>
             <div style="width: min-content">
-              <InlineAvatars :avatars="[1, 2, 3, 4]" heartwidth="40px" :heart="true" spacing="-5px" border-color="grey" />
+              <InlineAvatars :avatars="avatarKeys" heartwidth="40px" :heart="true" spacing="-5px" border-color="grey" />
             </div>
           </div>
           <div class="d-flex">
@@ -57,6 +57,19 @@ export default {
     InlineAvatars,
     Button,
     InlineProductInfos
+  },
+  props: ['course'],
+  data() {
+    return {
+      avatarKeys: []
+    }
+  },
+  watch: {
+    course(val) {
+      if (!val.wishlistUsers) return
+
+      val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+    }
   }
 }
 </script>

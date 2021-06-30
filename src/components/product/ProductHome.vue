@@ -2,7 +2,7 @@
   <div class="main-product-content">
     <!-- <Header v-if="loaded" @nav-is-active="$refs.productContent.navIsActive = true" :course="course" /> -->
     <transition name="fade" @after-enter="afterEnter" @before-enter="beforeEnter">
-      <Header ref="header" v-if="header" :course="course" />
+      <ProductHeader ref="header" v-if="header" :course="course" />
       <div v-else>
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Header from '@/components/header/Header.vue'
+import ProductHeader from '@/components/header/ProductHeader.vue'
 import ProductContent from '@/components/product/ProductContent.vue'
 import ProductFooter from '@/components/product/ProductFooter.vue'
 import ProductNav from '@/components/product/ProductNav.vue'
@@ -26,7 +26,7 @@ import ProductNav from '@/components/product/ProductNav.vue'
 export default {
   name: 'ProductHome',
   components: {
-    Header,
+    ProductHeader,
     ProductContent,
     // ProductNav,
     ProductFooter
@@ -108,7 +108,7 @@ export default {
     },
     listenScrollDown() {
       let that = this
-      document.querySelector('.header').addEventListener('wheel', (e) => {
+      document.querySelector('.header--product').addEventListener('wheel', (e) => {
         if (e.deltaY > 0) {
           that.header = false
         }
