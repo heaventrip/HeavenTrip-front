@@ -11,57 +11,54 @@
   </div> -->
   <div>
     <div style="position: fixed; top: 0px; z-index: 2; width: 100vw">
-      <ProductNav />
-      <ul style="height: 6vh" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
+      <ProductNav :course="course" />
+      <ul style="height: 50px" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
         <li class="nav-item" role="presentation" type="button">
           <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
         </li>
         <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
+          <a @click.prevent="scrollToSection('product-tab-activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
         </li>
         <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-living-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
+          <a @click.prevent="scrollToSection('product-tab-living')" class="nav-link" id="pills-living-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
         </li>
         <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-program-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
+          <a @click.prevent="scrollToSection('product-tab-program')" class="nav-link" id="pills-program-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
         </li>
         <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-tips').scrollIntoView()" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
+          <a @click.prevent="scrollToSection('product-tab-tips')" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
         </li>
         <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-reviews-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
+          <a @click.prevent="scrollToSection('product-tab-reviews')" class="nav-link" id="pills-reviews-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
         </li>
       </ul>
     </div>
-    <div class="main-slider">
+    <!-- <div class="main-slider">
       <swiper v-if="!asideSlider" :slidesPerView="3" :spaceBetween="5" :slidesPerGroup="3" :loop="true" :loopFillGroupWithBlank="false" :navigation="true" class="mySwiper">
         <swiper-slide v-for="(imgSrc, index) in imgs" :key="imgSrc" @click="showImg(index)">
           <img class="swiper-slide__img" :src="imgSrc" />
         </swiper-slide>
-        <!-- <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-      <swiper-slide><img :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-      <swiper-slide><img :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide> -->
       </swiper>
       <vue-easy-lightbox v-if="!asideSlider" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="handleHide"></vue-easy-lightbox>
-    </div>
-    <div class="product-content d-flex justify-content-around" style="padding-top: 50px">
-      <div class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
-        <div id="product-tab-infos" class="pt-5">
+    </div> -->
+    <div class="product-content d-flex justify-content-around">
+      <div class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 0rem 3rem 3.5rem 3rem; min-height: 100vh">
+        <div id="product-tab-infos" class="product-section pt-5">
           <ProductTabInfos :course="course" />
         </div>
-        <div id="product-tab-activities" style="padding-top: 4rem">
+        <div id="product-tab-activities" class="product-section" style="padding-top: 4rem">
           <ProductTabActivities :course="course" />
         </div>
-        <div id="product-tab-living" style="padding-top: 4rem">
+        <div id="product-tab-living" class="product-section" style="padding-top: 4rem">
           <ProductTabLiving :course="course" />
         </div>
-        <div id="product-tab-program" style="padding-top: 4rem">
+        <div id="product-tab-program" class="product-section" style="padding-top: 4rem">
           <ProductTabProgram :course="course" />
         </div>
-        <div id="product-tab-tips" style="padding-top: 4rem">
+        <div id="product-tab-tips" class="product-section" style="padding-top: 4rem">
           <ProductTabTips :course="course" />
         </div>
-        <div id="product-tab-reviews" style="padding-top: 4rem; min-height: 100vh">
+        <div id="product-tab-reviews" class="product-section" style="padding-top: 4rem; min-height: 100vh">
           <ProductTabReviews :course="course" />
         </div>
         <!-- <div class="w-50" id="pills-info" aria-labelledby="pills-info-tab">
@@ -78,7 +75,7 @@
         </div> -->
       </div>
       <div class="" style="width: 35%">
-        <div class="aside-slider" style="position: sticky; top: 10vh">
+        <div class="aside-slider">
           <transition name="fade" @after-leave="afterLeave">
             <swiper v-if="asideSlider" class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
               <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
@@ -245,7 +242,7 @@ export default {
       <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
     },
     scrollToSection(el) {
-      document.querySelector(`#${el}`).scrollIntoView()
+      document.querySelector(`#${el}`).scrollIntoView({ behavior: 'smooth' })
     }
     // scroll to top when user reaches top of content (wheel up)
     // handleScrollUp() {
@@ -265,11 +262,36 @@ export default {
     //     this.slideIsUp = true
     //   }, 800)
     // }
+  },
+  mounted() {
+    let sectionNames = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
+    let sections = Array.from(document.querySelectorAll('.product-section'))
+    let navLinks = Array.from(document.querySelectorAll('.nav-link'))
+
+    document.addEventListener('scroll', () => {
+      const threshold = 100
+      const viewportTop = window.scrollY + threshold
+
+      for (const [id, section] of sections.entries()) {
+        const sectionTop = section.offsetTop
+        const sectionBottom = sectionTop + section.clientHeight
+
+        if (viewportTop <= sectionBottom && viewportTop >= sectionTop) {
+          const previousActive = document.querySelector('.nav-link.active')
+          if (previousActive) previousActive.classList.remove('active')
+          navLinks[id].classList.toggle('active', true)
+        }
+      }
+    })
   }
 }
 </script>
 
 <style scoped>
+.aside-slider {
+  position: sticky;
+  top: calc(100px + 5vh); /* nav height + extra space */
+}
 .aside-slider .swiper-slide__img {
   height: 20vh;
   margin-top: 50px;
@@ -303,6 +325,7 @@ export default {
 }
 .product-content {
   background-color: #fcfcfc;
+  padding-top: 100px; /* nav height  */
 }
 .slider {
   background-color: #fcfcfc;

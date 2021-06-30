@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'InlineAvatars',
+  name: 'Tag',
   props: ['color', 'text'],
   data() {
     return {

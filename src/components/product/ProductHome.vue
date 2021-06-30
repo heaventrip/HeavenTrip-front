@@ -2,7 +2,7 @@
   <div class="main-product-content">
     <!-- <Header v-if="loaded" @nav-is-active="$refs.productContent.navIsActive = true" :course="course" /> -->
     <transition name="fade" @after-enter="afterEnter" @before-enter="beforeEnter">
-      <ProductHeader ref="header" v-if="header" :course="course" />
+      <ProductHeader ref="header" v-if="header" :course="course" @clicked-tab="handleClickedTab" />
       <div v-else>
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
@@ -36,6 +36,7 @@ export default {
   props: ['id'],
   data() {
     return {
+      clickedFromHeader: false,
       showSessions: false,
       course: {},
       header: true,
@@ -43,6 +44,11 @@ export default {
     }
   },
   methods: {
+    handleClickedTab(tab) {
+      this.clickedTab = tab
+      this.header = false // go to content
+    },
+    scrollToTab(tab) {},
     setShowSessions(status) {
       this.showSessions = status
     },
@@ -84,12 +90,16 @@ export default {
       if (this.header === false) {
         document.body.removeAttribute('style')
         this.$refs.productContent.initGsap()
+        this.$refs.productContent.initTabsGsap()
 
         if (this.$route.params.showDateBtn) {
           // tell productfooter to open at specific date
         }
 
-        this.$refs.productContent.initTabsGsap()
+        if (this.clickedTab) {
+          this.$refs.productContent.scrollToSection(`product-tab-${this.clickedTab}`)
+          this.clickedTab = ''
+        }
       }
     },
     beforeEnter() {
