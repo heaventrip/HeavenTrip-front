@@ -13,24 +13,26 @@
             <div class="d-inline-block" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
               <div class="pad__content shadow--right">
                 <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
-                  <span class="pad__content__title__sport">yoggi & surf</span>
-                  <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>îles canaries</span>
+                  <span class="pad__content__title__sport">{{ highlightedCourse?.sports[0].name }}</span>
+                  <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ highlightedCourse?.spot.name }}</span>
                 </div>
                 <div class="pad__content__sports d-flex align-items-center justify-content-center tooltip-div mt-4">
                   <InlineSvg class="mr-4" :src="require('@/assets/svg/surf.svg')" height="22" />
                   <InlineSvg class="mr-4" :src="require('@/assets/svg/yoga.svg')" height="22" />
                   <InlineSvg class="mr-4" :src="require('@/assets/svg/mat.svg')" height="22" />
-                  <span class="ml-auto euro"><strong>750&euro;</strong>/pers. </span>
+                  <span class="ml-auto euro"
+                    ><strong>{{ highlightedCourse?.price }}&euro;</strong>/pers.
+                  </span>
                 </div>
                 <div class="d-flex align-items-center social-info">
-                  <InlineProductInfos :infos="['France', '7 jours', 'Tous niveaux', '10 places']" icon="globe" color="#292f33" />
+                  <InlineProductInfos :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]" :icons="['globe', 'timer', 'ring', 'people']" color="#292f33" />
                 </div>
               </div>
               <div class="d-flex pad__footer">
                 <div class="pad__footer__review-counter shadow--top">
-                  <Button style="cursor: default" text="54 avis" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
+                  <Button style="cursor: default" :text="`${reviewsNb} avis`" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
                 </div>
-                <Button class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
+                <Button @click="$router.push({ path: `/product/${highlightedCourse.id}` })" class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
               </div>
             </div>
             <!-- TODO changement de content au hover, et hover en gris -->
@@ -58,18 +60,29 @@ export default {
     Button,
     InlineProductInfos
   },
-  props: ['course'],
   data() {
     return {
-      avatarKeys: []
+      avatarKeys: [],
+      highlightedCourse: null,
+      reviewsNb: 0
     }
   },
   watch: {
-    course(val) {
-      if (!val.wishlistUsers) return
+    highlightedCourse(val) {
+      if (val.sessions) {
+        this.reviewsNb = 0
+        val.sessions.forEach((sess) => {
+          this.reviewsNb += sess.reviews.length
+        })
+      }
 
-      val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+      if (val.wishlistUsers) {
+        val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+      }
     }
+  },
+  async created() {
+    await this.$axios.get('/courses', { params: { highlighted: true } }).then((res) => (this.highlightedCourse = res.data.course))
   }
 }
 </script>

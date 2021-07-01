@@ -7,11 +7,15 @@
         <span>ils&nbsp;</span>
         <span class="text--bold">témoignent</span>
       </div>
-      <InlineAvatars height="48px" :heart="false" spacing="15px" :avatars="avatarKeys" />
+      <div class="d-flex align-items-center">
+        <div v-for="(avatarId, index) in avatarKeys" :key="avatarId" :style="[index === 0 ? '' : 'margin-left: 15px']">
+          <img @mouseover="setReviewActive(avatarId)" class="rounded-circle" height="50" width="50" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" type="button" />
+        </div>
+      </div>
     </div>
     <div class="reviews__user d-flex flex-column">
       <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
-      <img :src="require('@/assets/images/avatar.png')" class="reviews__user-avatar rounded-circle" />
+      <img :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`" class="reviews__user-avatar rounded-circle" rel="preload" />
       <div class="reviews__user-infos mx-auto">
         <span class="text--bold mr-4">
           <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
@@ -36,25 +40,33 @@
 </template>
 
 <script>
-import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 export default {
   name: 'SectionReviews',
-  components: {
-    InlineAvatars
-  },
   data() {
     return {
       reviews: [],
       avatarKeys: [],
-      activeReview: null
+      activeReview: null,
+      preloadedAvatars: []
+    }
+  },
+  methods: {
+    setReviewActive(avatarId) {
+      if (this.activeReview.user.avatarKey === avatarId) return
+
+      this.activeReview = this.reviews.find((review) => review.user.avatarKey === avatarId) || this.reviews[0]
+    },
+    preloadImage(url) {
+      new Image().src = url
     }
   },
   watch: {
     reviews(val) {
       val.forEach((review) => {
         this.avatarKeys.push(review.user.avatarKey)
-        this.activeReview = val[0]
+        this.preloadImage(`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${review.user.avatarKey}.jpg`)
       })
+      this.activeReview = val[0]
     }
   },
   async created() {
@@ -81,6 +93,7 @@ export default {
 .reviews__user-avatar {
   border: 15px solid #fff;
   border-radius: 50%;
+  object-fit: cover;
 }
 .reviews__user {
   margin-left: 12rem;
