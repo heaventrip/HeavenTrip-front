@@ -101,8 +101,9 @@ export default {
     }
   },
   async created() {
-    await this.$axios.get('/courses', { params: { featured: true } }).then((res) => (this.featuredCourse = res.data.course))
-    console.log('C:', this.featuredCourse.wishlistUsers)
+    await this.$axios.get('/courses', { params: { featured: true } }).then((res) => {
+      this.featuredCourse = res.data.course
+    })
   }
 }
 </script>

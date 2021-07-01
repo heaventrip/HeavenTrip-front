@@ -12,7 +12,7 @@
       </svg>
     </svg>
     <div class="head-block ml-4">
-      <p class="sub-heading mb-2">{{ course.sports[0] ? course.sports[0].name : 'Sport' }}</p>
+      <p class="sub-heading mb-2">{{ course.sports ? course.sports[0].name : 'Sport' }}</p>
       <h4 class="heading mb-0">Activités & spot</h4>
     </div>
   </div>
@@ -23,29 +23,25 @@
         <p class="sub-heading mb-2">Activités & Spot</p>
         <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
       </div>
-      <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto"><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /></span>
+      <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto">
+        <InlineSvg class="img_icon" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" />
+      </span>
     </div>
     <div class="d-flex align-items-center" style="margin-left: -2rem; margin-right: -2rem">
-      <ul class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab " role="tablist">
-        <li class="nav-item fg-1" role="presentation">
-          <a class="nav-link active ml-0" id="pills-act1-tab" data-toggle="pill" href="#pills-act1" role="tab" aria-controls="pills-solo" aria-selected="true">BUNGALOW SOLO</a>
-        </li>
-        <li class="nav-item fg-1" role="presentation">
-          <a class="nav-link" id="pills-act2-tab" data-toggle="pill" href="#pills-act2" role="tab" aria-controls="pills-duo" aria-selected="false">BUNGALOW DUO</a>
-        </li>
-        <li class="nav-item fg-1" role="presentation">
-          <a class="nav-link mr-0" id="pills-act3-tab" data-toggle="pill" href="#pills-act3" role="tab" aria-controls="pills-vip" aria-selected="false">BUNGALOW VIP</a>
+      <ul v-if="course.multisport" class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab " role="tablist">
+        <li v-for="(sport, index) in course.sports" :key="sport" class="nav-item fg-1" role="presentation">
+          <a class="nav-link active m-0" :id="`pills-act${index}-tab`" data-toggle="pill" :href="`#pills-act${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ sport.name }}</a>
         </li>
       </ul>
     </div>
     <div class="tab-content" style="margin-left: -2rem; margin-right: -2rem">
-      <div class="tab-pane fade show active" id="pills-act1" role="tabpanel" aria-labelledby="pills-act1-tab">
+      <div v-for="(sport, index) in course.sports" :key="sport" class="tab-pane fade show active" :id="`pills-act${index}`" role="tabpanel" :aria-labelledby="`pills-act${index}-tab`">
         <div class="card-body">
           <div class="pri-activity-block">
             <div class="box bg-dark m-0">
               <h5 class="head text-uppercase mb-0 d-inline-block">
-                <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-                ski freeride
+                <InlineSvg class="head-pin-icon d-inline-block" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+                {{ sport.name }}
               </h5>
               <ul class="list-unstyled list mt-3 mb-0">
                 <li>
@@ -77,102 +73,10 @@
             </div>
             <div class="brown-div">
               <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-              <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
-            </div>
-            <div class="img-block">
-              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="pills-act2" role="tabpanel" aria-labelledby="pills-act2-tab">
-        <div class="card-body">
-          <div class="pri-activity-block">
-            <div class="box bg-dark m-0">
-              <h5 class="head text-uppercase mb-0 d-inline-block">
-                <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-                ski freeride
-              </h5>
-              <ul class="list-unstyled list mt-3 mb-0">
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    COURS DE PERFECTIONNEMENT :
-                    <strong class="text-white ml-2"> 20H</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Sessions :
-                    <strong class="text-white ml-2"> 4</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Tendance :
-                    <strong class="text-white ml-2"> 60% hors piste</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Tendance :
-                    <strong class="text-white ml-2"> 60% hors piste</strong></a
-                  >
-                </li>
-              </ul>
-              <!-- <a href="#" class="corner-link">+</a> -->
-            </div>
-            <div class="brown-div">
-              <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-              <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
-            </div>
-            <div class="img-block">
-              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="pills-act3" role="tabpanel" aria-labelledby="pills-act3-tab">
-        <div class="card-body">
-          <div class="pri-activity-block">
-            <div class="box bg-dark m-0">
-              <h5 class="head text-uppercase mb-0 d-inline-block">
-                <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-                ski freeride
-              </h5>
-              <ul class="list-unstyled list mt-3 mb-0">
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    COURS DE PERFECTIONNEMENT :
-                    <strong class="text-white ml-2"> 20H</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Sessions :
-                    <strong class="text-white ml-2"> 4</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Tendance :
-                    <strong class="text-white ml-2"> 60% hors piste</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Tendance :
-                    <strong class="text-white ml-2"> 60% hors piste</strong></a
-                  >
-                </li>
-              </ul>
-              <!-- <a href="#" class="corner-link">+</a> -->
-            </div>
-            <div class="brown-div">
-              <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-              <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">
+                {{ course?.staffs.find((staff) => staff.role === 'Guide').description }}
+              </p>
+              <h6 class="author mb-0">{{ course?.staffs.find((staff) => staff.role === 'Guide').firstName }} {{ course?.staffs.find((staff) => staff.role === 'Guide').firstName }}</h6>
             </div>
             <div class="img-block">
               <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
@@ -191,15 +95,17 @@
             <h4 class="heading mb-0">Le spot</h4>
           </div>
           <i class="fa fa-chevron-down h4 mb-0 arrow text-white d-block d-lg-none"></i>
-          <h6 class="map-head d-none d-lg-flex align-items-center justify-content-end mr-4 m-lg-0 text-danger">
-            VOIR SUR <br />LA MAP<span class="img-block"><img class="img_icon" fluid :src="require('@/assets/images/map_icon.png')" /></span>
+          <h6 @click="openMap" type="button" class="map-head d-none d-lg-flex align-items-center justify-content-end mr-4 m-lg-0 text-danger">
+            VOIR SUR <br />LA MAP<span class="img-block">
+              <InlineSvg class="img_icon" :src="require('@/assets/svg/map-pin.svg')" />
+            </span>
           </h6>
         </div>
       </div>
       <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
         <div class="card-body">
-          <h6 class="map-head d-flex d-lg-none align-items-center justify-content-end mb-3 mr-4">
-            VOIR SUR <br />LA MAP<span class="img-block"><img class="img_icon" fluid :src="require('@/assets/images/map_icon.png')" /></span>
+          <h6 @click="openMap" type="button" class="map-head d-flex d-lg-none align-items-center justify-content-end mb-3 mr-4">
+            VOIR SUR <br />LA MAP<span class="img-block"><InlineSvg class="img_icon" :src="require('@/assets/svg/map-pin.svg')" /></span>
           </h6>
           <p class="content">
             {{ course.spot?.description }}
@@ -308,38 +214,19 @@
         <div class="card-body">
           <p class="content">En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.</p>
           <ul class="activity-list list-unstyled mb-0">
-            <li>
-              <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />Plongée sous-marine</h5>
+            <li v-for="alternative in course.alternatives" :key="alternative">
+              <h5 class="activity-list-head mb-0">
+                <InlineSvg v-if="alternative.picto" class="icon" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
+                {{ alternative.title }}
+              </h5>
               <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                <li class="optional-activity__info-item">Durée : <strong>1 journée</strong></li>
+                <li class="optional-activity__info-item">
+                  Durée : <strong>{{ alternative.duration }} journée{{ alternative.duration > 1 ? 's' : '' }}</strong>
+                </li>
                 <li class="optional-activity__info-item">plongée : <strong>2</strong></li>
-                <li class="optional-activity__info-item">Niveaux requis : <strong>aucun</strong></li>
-                <li class="optional-activity__info-item--price"><strong>60€</strong>/pers.</li>
-              </ul>
-            </li>
-            <li>
-              <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SUP-PADDLE</h5>
-              <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                <li class="optional-activity__info-item">Durée : <strong>2h</strong></li>
-                <li class="optional-activity__info-item">Tendance : <strong>eau calme</strong></li>
-                <li class="optional-activity__info-item--price"><strong>15€</strong>/pers.</li>
-              </ul>
-            </li>
-            <li>
-              <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SPA TRADITIONNEL</h5>
-              <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                <li class="optional-activity__info-item">Durée : <strong>1/2 journée</strong></li>
-                <li class="optional-activity__info-item">plongée : <strong>2</strong></li>
-                <li class="optional-activity__info-item">Niveaux requis : <strong>aucun</strong></li>
-                <li class="optional-activity__info-item--price"><strong>60€</strong>/pers.</li>
-              </ul>
-            </li>
-            <li>
-              <h5 class="activity-list-head mb-0"><img class="icon" fluid :src="require('@/assets/images/yoga-pink.png')" />SUP-PADDLE</h5>
-              <ul class="list-unstyled text-uppercase activity-content-list mb-0">
-                <li class="optional-activity__info-item">Durée : <strong>2h</strong></li>
-                <li class="optional-activity__info-item">Tendance : <strong>eau calme</strong></li>
-                <li class="optional-activity__info-item--price"><strong>15€</strong>/pers.</li>
+                <li class="optional-activity__info-item--price">
+                  <strong>{{ alternative.price }}€</strong>/pers.
+                </li>
               </ul>
             </li>
           </ul>
@@ -355,6 +242,13 @@ export default {
   data() {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    openMap() {
+      let escapedSpot = this.$props.course.spot.name.replace(/\s/g, '+')
+      let url = 'https://www.google.com/maps?q=' + escapedSpot
+      window.open(url)
     }
   }
 }

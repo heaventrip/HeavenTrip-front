@@ -44,7 +44,7 @@ export default {
 }
 .article__image {
   width: 100%;
-  max-height: calc(40vh * 0.3);
+  max-height: calc(40vh * 0.25);
   object-fit: cover;
   border-radius: 1%;
   margin-bottom: 1rem;

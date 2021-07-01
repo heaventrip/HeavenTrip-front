@@ -77,12 +77,17 @@ export default {
       }
 
       if (val.wishlistUsers) {
-        val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+        val.wishlistUsers.forEach((user, index) => {
+          if (index > 5) return
+          this.avatarKeys.push(user.avatarKey)
+        })
       }
     }
   },
   async created() {
-    await this.$axios.get('/courses', { params: { highlighted: true } }).then((res) => (this.highlightedCourse = res.data.course))
+    await this.$axios.get('/courses', { params: { highlighted: true } }).then((res) => {
+      this.highlightedCourse = res.data.course
+    })
   }
 }
 </script>

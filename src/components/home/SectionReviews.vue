@@ -26,7 +26,7 @@
     </div>
     <div class="reviews__comment">
       <h6 class="text-uppercase">
-        <span>{{ activeReview?.session?.course.typeOfCourse }} {{ activeReview?.session.course.sport }}</span>
+        <span>{{ activeReview?.session?.course.typeOfCourse }} {{ activeReview?.session.course.sports }}</span>
         <span class="review-comment__date" style="font-size: 0.8rem">
           <img class="align-baseline mx-2" src="@/assets/svg/arrow-right.svg" style="max-height: 10px" />
           Session du {{ activeReview?.session.dateStart }}

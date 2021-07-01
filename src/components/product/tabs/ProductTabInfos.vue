@@ -12,7 +12,7 @@
       </svg>
     </svg>
     <div class="head-block ml-4">
-      <p class="sub-heading mb-2">{{ course.sports[0] ? course.sports[0].name : 'Sport' }}</p>
+      <p class="sub-heading mb-2">{{ course.sports ? course.sports[0].name : 'Sport' }}</p>
       <h4 class="heading mb-0">RECAP DU STAGE</h4>
     </div>
   </div>
@@ -23,17 +23,16 @@
         <p class="sub-heading mb-2">Récap du stage</p>
         <h4 class="heading mb-0">POUR FAIRE COURT...</h4>
       </div>
-      <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto"><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /></span>
+      <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto">
+        <InlineSvg v-if="course.sports && course.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" />
+      </span>
     </div>
     <div class="card-body">
       <h6 class="activity-head d-flex d-lg-none align-items-center mb-3">
         Les activités inclues :
-        <span class="img-block d-flex ml-auto"
-          ><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/yoga-dark.png')" /><img class="img_icon" fluid :src="require('@/assets/images/head-pin-dark.png')" /><img
-            class="img_icon"
-            fluid
-            :src="require('@/assets/images/yoga-dark.png')"
-        /></span>
+        <span class="img-block d-flex ml-auto">
+          <InlineSvg v-if="course.sports && course.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" />
+        </span>
       </h6>
       <p class="content mt-3 mb-4">
         {{ course.description }}
@@ -100,8 +99,8 @@
         <div class="col-12 col-lg-6">
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
-              <InlineSvg :src="require(`@/assets/svg/intensity-${course.level.step}.svg`)" height="150px" />
-              <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
+              <InlineSvg v-if="course.level.step" :src="require(`@/assets/svg/intensity-${course.level.step}.svg`)" height="150px" />
+              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
@@ -116,7 +115,7 @@
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
               <InlineSvg :src="require(`@/assets/svg/intensity-${course.intensity.step}.svg`)" height="150px" />
-              <InlineSvg :src="require('@/assets/svg/picto-ski.svg')" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
+              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">

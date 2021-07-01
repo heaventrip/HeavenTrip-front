@@ -12,7 +12,7 @@
       </svg>
     </svg>
     <div class="head-block ml-4">
-      <p class="sub-heading mb-2">{{ course.sports[0] ? course.sports[0].name : 'Sport' }}</p>
+      <p class="sub-heading mb-2">{{ course.sports ? course.sports[0].name : 'Sport' }}</p>
       <h4 class="heading mb-0">Tips & astuces</h4>
     </div>
   </div>

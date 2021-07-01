@@ -17,7 +17,7 @@
           <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
           <h1 class="heading text-uppercase mb-2">
             <!-- <router-link :to="{ name: 'CheckOutHome', params: { productId: course.id } }"> -->
-            <span style="color: #fff; font-weight: bold">{{ course.sports ? course.sports[0]?.name : '' }}</span>
+            <span style="color: #fff; font-weight: bold">{{ course.sports ? course.sports[0].name : '' }}</span>
             <!-- </router-link> -->
           </h1>
           <h5 class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>Serre-Chevalier</h5>
