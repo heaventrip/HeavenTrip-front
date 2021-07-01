@@ -6,7 +6,7 @@
           <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
             <h5 class="pad__header__title">Votre coup de coeur</h5>
             <div style="width: min-content">
-              <InlineAvatars :avatars="avatarKeys" heartwidth="40px" :heart="true" spacing="-5px" border-color="grey" />
+              <InlineAvatars :avatars="avatarKeys" heartwidth="40px" :heart="true" spacing="-5px" border-color="grey" :course-id="highlightedCourse?.id" />
             </div>
           </div>
           <div class="d-flex">

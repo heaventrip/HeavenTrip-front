@@ -3,9 +3,12 @@
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
-      <transition name="fade">
-        <InlineSvg class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" style="opacity: 0; position: absolute; top: 7%; right: 7%" height="20" />
-      </transition>
+      <div @click="addToWishlist" type="button" class="card-block__heart-icon" style="opacity: 0; position: absolute; top: 7%; right: 7%; z-index: 5">
+        <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d9345a" height="20" />
+        <InlineSvg v-else :src="require('@/assets/svg/heart-outline.svg')" height="20" />
+      </div>
+      <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d9345a" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
+      <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->
       <a href="/product">
         <img class="card__bg-image img-responsive img-fill" :src="require('@/assets/images/s1.png')" alt="" />
       </a>
@@ -57,7 +60,8 @@ export default {
       hovered: false,
       cardTl: null,
       cardsArr: [],
-      avatarKeys: []
+      avatarKeys: [],
+      wishlisted: false
     }
   },
   components: {
@@ -73,6 +77,15 @@ export default {
     }
   },
   methods: {
+    addToWishlist() {
+      console.log('wishlisting')
+      if (!this.wishlisted)
+        this.$axios
+          .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
+          .then(() => (this.wishlisted = true))
+          .catch((err) => console.log(err))
+      else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
+    },
     transformCard(type, event) {
       let card = event.target
 
@@ -117,6 +130,12 @@ export default {
   },
   mounted() {
     this.cardsArr = gsap.utils.toArray('.card-block')
+
+    // check if course is already wishlisted
+    this.$axios
+      .get('/wishlists', { wishlist: { courseId: this.$props.course.id } })
+      .then(() => (this.wishlisted = true))
+      .catch(() => (this.wishlisted = false))
   }
 }
 </script>

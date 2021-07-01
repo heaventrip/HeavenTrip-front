@@ -96,7 +96,20 @@
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-3 mb-0">
               <span style="font-family: Oswald, sans-serif; font-size: 0.75rem"
                 ><span color="#292f33">Ca te titille?</span> <span style="font-weight: bold">Rejoint les 12 intéressés :</span><br />
-                <InlineAvatars :avatars="[1, 2, 1, 1, 1, 1, 1, 1, 1, 1]" :heart="true" heartheight="40px" heartwidth="40px" spacing="-6px" :heart-color="showSessions ? 'white' : 'grey'" :outline="true" :outline-color="showSessions ? 'grey' : 'light-white'" :count="false" mt="0.3rem" mb="0rem" />
+                <InlineAvatars
+                  :course-id="course?.id"
+                  :avatars="[1, 2, 1, 1, 1, 1, 1, 1, 1, 1]"
+                  :heart="true"
+                  heartheight="40px"
+                  heartwidth="40px"
+                  spacing="-6px"
+                  :heart-color="showSessions ? 'white' : 'grey'"
+                  :outline="true"
+                  :outline-color="showSessions ? 'grey' : 'light-white'"
+                  :count="false"
+                  mt="0.3rem"
+                  mb="0rem"
+                />
               </span>
             </ul>
           </div>

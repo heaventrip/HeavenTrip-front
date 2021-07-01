@@ -4,8 +4,11 @@
       <!-- FIXME intégrer border color ET outline -->
       <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
-    <div v-if="pHeart" style="border-radius: 50%" :class="pOutlineColor" :style="[pSpacing, pHeartwidth, pHeartheight]">
-      <InlineSvg @click="addToWishlist" :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
+    <div v-if="pHeart" @click="addToWishlist" style="border-radius: 50%" type="button" :class="pOutlineColor" :style="[pSpacing, pHeartwidth, pHeartheight]">
+      <transition name="fade" mode="out-in">
+        <img v-if="wishlisted && userAvatarId" class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
+        <InlineSvg v-else :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
+      </transition>
     </div>
     <div class="avatar-count" v-if="pCount">+1.5k</div>
   </div>
@@ -14,12 +17,14 @@
 <script>
 export default {
   name: 'InlineAvatars',
-  props: ['height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width', 'mt', 'mb', 'heart-color', 'heartwidth', 'heartheight', 'count'],
+  props: ['course-id', 'height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width', 'mt', 'mb', 'heart-color', 'heartwidth', 'heartheight', 'count'],
   data() {
     return {
       pCount: this.count,
       pHeart: this.heart,
-      pAvatars: this.avatars
+      pAvatars: this.avatars,
+      wishlisted: false,
+      userAvatarId: ''
     }
   },
   computed: {
@@ -47,9 +52,22 @@ export default {
   },
   methods: {
     addToWishlist() {
-      // TODO get id
-      // this.$axios.post('/wishlists', { course: course })
+      if (!this.wishlisted)
+        this.$axios
+          .post('/wishlists', { wishlist: { courseId: this.$props.courseId } })
+          .then(() => (this.wishlisted = true))
+          .catch((err) => console.log(err))
+      else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.courseId } }).then(() => (this.wishlisted = false))
     }
+  },
+  mounted() {
+    this.userAvatarId = localStorage.getItem('user.avatarId')
+
+    // check if course is already wishlisted
+    this.$axios
+      .get('/wishlists', { wishlist: { courseId: this.$props.courseId } })
+      .then(() => (this.wishlisted = true))
+      .catch(() => (this.wishlisted = false))
   }
 }
 </script>
