@@ -79,8 +79,11 @@
             </h3>
             <p class="para mb-3">Ne manque surtout pas toute l'actualite sur nos offres !</p>
             <form class="d-flex">
-              <input class="form-control mail_input" type="text" name="" placeholder="Mon adresse email..." style="border-top-left-radius: 2px; border-bottom-left-radius: 2px" />
-              <button class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4" style="border-top-right-radius: 2px; border-bottom-right-radius: 2px">s'abonner</button>
+              <input v-model="newsletterEmail" class="form-control mail_input" type="text" name="" placeholder="Mon adresse email..." style="border-top-left-radius: 2px; border-bottom-left-radius: 2px" />
+              <transition name="fade" mode="out-in">
+                <button v-if="newsletterSubscribed" @click.prevent class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4 text-nowrap" style="border-top-right-radius: 2px; border-bottom-right-radius: 2px">tu es abonné !</button>
+                <button v-else @click.prevent="submitNewsletterForm" class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4" style="border-top-right-radius: 2px; border-bottom-right-radius: 2px">s'abonner</button>
+              </transition>
             </form>
           </div>
         </div>
@@ -210,7 +213,19 @@ export default {
     return {
       countries: {},
       themes: {},
-      sports: {}
+      sports: {},
+      newsletterEmail: '',
+      newsletterSubscribed: false
+    }
+  },
+  methods: {
+    submitNewsletterForm() {
+      if (!this.newsletterEmail) return
+
+      this.$axios.post('/newsletters', { email: this.newsletterEmail }).then(() => {
+        this.newsletterEmail = ''
+        this.newsletterSubscribed = true
+      })
     }
   },
   async created() {
