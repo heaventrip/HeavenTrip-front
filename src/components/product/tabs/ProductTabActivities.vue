@@ -56,9 +56,9 @@
             <div class="brown-div">
               <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
               <p class="content pt-3" style="border-top: 1px dashed #ffffff66">
-                {{ course?.staffs.find((staff) => staff.role === 'Guide').description }}
+                {{ course?.staffs?.find((staff) => staff.role === 'Guide').description }}
               </p>
-              <h6 class="author mb-0">{{ course?.staffs.find((staff) => staff.role === 'Guide').firstName }} {{ course?.staffs.find((staff) => staff.role === 'Guide').firstName }}</h6>
+              <h6 class="author mb-0">{{ course?.staffs?.find((staff) => staff.role === 'Guide').firstName }} {{ course?.staffs?.find((staff) => staff.role === 'Guide').firstName }}</h6>
             </div>
             <div class="img-block">
               <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />

@@ -33,30 +33,22 @@
           <div class="d-flex align-items-center mb-4">
             <!-- <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5> -->
             <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab " role="tablist">
-              <li class="nav-item" role="presentation">
-                <a class="nav-link active ml-0" id="pills-solo-tab" data-toggle="pill" href="#pills-solo" role="tab" aria-controls="pills-solo" aria-selected="true">BUNGALOW SOLO</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="nav-link" id="pills-duo-tab" data-toggle="pill" href="#pills-duo" role="tab" aria-controls="pills-duo" aria-selected="false">BUNGALOW DUO</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="nav-link mr-0" id="pills-vip-tab" data-toggle="pill" href="#pills-vip" role="tab" aria-controls="pills-vip" aria-selected="false">BUNGALOW VIP</a>
+              <li v-for="(room, index) in course.rooms" :key="room" class="nav-item" role="presentation">
+                <a class="nav-link m-0" :class="[index === 0 ? 'active' : '']" id="pills-solo-tab" data-toggle="pill" :href="`#pills-room-${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ room.title }}</a>
               </li>
             </ul>
           </div>
-          <div class="stay-dropdown d-block d-lg-none">
+          <!-- <div class="stay-dropdown d-block d-lg-none">
             <select class="form-control select-place">
               <option value="#pills-solo">BUNGALOW SOLO</option>
               <option value="#pills-duo">BUNGALOW DUO</option>
               <option value="#pills-vip">BUNGALOW VIP</option>
             </select>
-          </div>
+          </div> -->
           <div class="tab-content">
-            <div class="tab-pane fade show active" id="pills-solo" role="tabpanel" aria-labelledby="pills-solo-tab">
-              <p class="content"></p>
+            <div class="tab-pane fade" v-for="(room, index) in course.rooms" :key="room" :class="[index === 0 ? 'show active' : '']" id="pills-solo" role="tabpanel" aria-labelledby="pills-solo-tab">
+              <p class="content">{{ course.description }}</p>
             </div>
-            <div class="tab-pane fade" id="pills-duo" role="tabpanel" aria-labelledby="pills-duo-tab">qwertyu</div>
-            <div class="tab-pane fade" id="pills-vip" role="tabpanel" aria-labelledby="pills-vip-tab">qwertyu</div>
           </div>
           <ul class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
             <li>
