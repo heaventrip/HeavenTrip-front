@@ -4,7 +4,7 @@
     <a href="#" class="text-reset text-decoration-none font-weight-500 d-none d-lg-flex align-items-center align-self-stretch px-3 bg-danger descriptif-link border-right border-white"><i class="fa fa-chevron-left mr-3 h6 mb-0"></i> Activités</a>
     <div>
       <h5 class="nav_heading text-uppercase mb-0 ml-4">
-        <strong>{{ course.sports[0]?.name }}</strong
+        <strong>{{ course?.sports[0].name }}</strong
         ><i class="fa fa-caret-right mx-3 d-none d-lg-inline-block"></i><span class="d-block d-lg-inline-block sub-head">{{ course.spot?.name }}</span>
       </h5>
     </div>

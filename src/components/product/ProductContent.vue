@@ -86,7 +86,7 @@
           </transition>
           <div class="linear-block font-weight-bold py-3 my-5">DISCUSSIONS</div>
           <ul class="list-unstyled mb-0 discuss-list mt-3">
-            <li v-for="msg in course.messages" :key="msg">
+            <li v-for="msg in messages" :key="msg">
               <div class="d-flex mt-3 mb-5" style="padding-left: 2rem">
                 <div class="">
                   <div class="profile-container">
@@ -102,10 +102,10 @@
               </div>
             </li>
           </ul>
-          <div class="d-flex align-items-center pr-3" style="border: 1px solid #ebebeb">
-            <textarea placeholder="Tape ici ton message..." class="reply-container form-control p-3" rows="1"></textarea>
+          <form @submit.prevent="submitMessageForm" class="d-flex align-items-center pr-3" style="border: 1px solid #ebebeb">
+            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control p-3" rows="1"></textarea>
             <InlineSvg :src="require('@/assets/svg/send.svg')" class="ml-3" height="20" />
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -147,7 +147,10 @@ export default {
   // emits: ['slide-is-up', 'slide-is-down'],
   data() {
     return {
-      asideSlider: false,
+      messages: [],
+      messageSentSuccess: true,
+      inputMessage: '',
+      asideSlider: true,
       imgs: ['https://via.placeholder.com/450.png/', 'https://via.placeholder.com/300.png/', 'https://via.placeholder.com/150.png/', 'https://via.placeholder.com/450.png/'], // Img Url , string or Array of string
       visible: false,
       index: 0, // default: 0
@@ -171,12 +174,13 @@ export default {
         font-size: 1rem;`
     }
   },
-  watch: {
-    asideSlider(newVal) {
-      if (newVal === true) this.asideGsap()
-    }
+  created() {
+    this.fetchMessages()
   },
   methods: {
+    fetchMessages() {
+      this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages))
+    },
     afterLeave() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
@@ -184,9 +188,16 @@ export default {
       const rect = element.getBoundingClientRect()
       return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     },
-    initTabsGsap() {
-      let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
+    submitMessageForm() {
+      if (!this.inputMessage) return
 
+      this.$axios
+        .post('/messages', { message: { courseId: this.$props.courseId } })
+        .then(() => this.fetchMessages())
+        .catch((err) => alert(err))
+    },
+    initTabsGsap() {
+      // let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
       // let scrollUpTl = gsap.timeline({
       //   scrollTrigger: {
       //     trigger: `#product-tab-${tabs[index]}`,
@@ -202,33 +213,33 @@ export default {
       //   scrollUpTl.to(`#pills-${tabs[index + 1]}-tab`, { className: '-=active' }, '<')
       // }
     },
-    initGsap() {
-      let that = this
-      gsap.set('.main-slider .swiper-slide__img', { height: window.innerHeight * 0.5 + 'px' })
-      gsap.to(['.swiper-slide__img', '.swiper-container'], {
-        scrollTrigger: {
-          pin: true,
-          pinSpacing: false,
-          trigger: '.swiper-container',
-          start: 'top 102',
-          end: 'bottom 102', //
-          scrub: true,
-          onLeave: () => (that.asideSlider = true)
-        },
-        height: '0px',
-        ease: 'none'
-      })
-      gsap.set('.pin-spacer', { backgroundColor: '#fcfcfc' })
-    },
-    asideGsap() {
-      console.log('ok1')
-      document.addEventListener('wheel', (e) => {
-        if (e.deltaY < 0 && window.scrollY < window.innerHeight * 0.5) {
-          gsap.set(['.swiper-container', '.main-slider .swiper-slide__img'], { height: window.innerHeight * 0.5 + 'px' })
-          this.asideSlider = false
-        }
-      })
-    },
+    // initGsap() {
+    //   let that = this
+    //   gsap.set('.main-slider .swiper-slide__img', { height: window.innerHeight * 0.5 + 'px' })
+    //   gsap.to(['.swiper-slide__img', '.swiper-container'], {
+    //     scrollTrigger: {
+    //       pin: true,
+    //       pinSpacing: false,
+    //       trigger: '.swiper-container',
+    //       start: 'top 102',
+    //       end: 'bottom 102', //
+    //       scrub: true,
+    //       onLeave: () => (that.asideSlider = true)
+    //     },
+    //     height: '0px',
+    //     ease: 'none'
+    //   })
+    //   gsap.set('.pin-spacer', { backgroundColor: '#fcfcfc' })
+    // },
+    // asideGsap() {
+    //   console.log('ok1')
+    //   document.addEventListener('wheel', (e) => {
+    //     if (e.deltaY < 0 && window.scrollY < window.innerHeight * 0.5) {
+    //       gsap.set(['.swiper-container', '.main-slider .swiper-slide__img'], { height: window.innerHeight * 0.5 + 'px' })
+    //       this.asideSlider = false
+    //     }
+    //   })
+    // },
     showImg(index) {
       this.index = index
       this.visible = true

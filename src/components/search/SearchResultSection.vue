@@ -162,7 +162,7 @@
                 <div class="d-flex flex-column justify-content-between shadow--right" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
                   <div class="pad__content">
                     <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
-                      <span class="pad__content__title__sport">{{ normalResult.sports[0]?.name }}</span>
+                      <span class="pad__content__title__sport">{{ normalResult?.sports[0].name }}</span>
                       <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ normalResult.spot.name }}</span>
                     </div>
                     <div class="pad__content__sports d-flex align-items-center tooltip-div">

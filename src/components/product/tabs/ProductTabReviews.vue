@@ -30,65 +30,26 @@
       <div id="collapseTen" class="collapse show" aria-labelledby="headingTen"></div>
     </div>
   </div>
-  <div class="linear-block mt-2">
+  <div v-for="review in reviews" :key="review" class="linear-block my-2">
     <div class="card-body">
       <div class="review__block d-flex align-items-center">
         <div class="review__block-left d-flex flex-column align-items-center mr-5">
           <img class="review__block-left__avatar" :src="require('@/assets/images/ui_faces/1.jpg')" height="100" />
-          <div class="review__block-left__date">25 Avril 2020</div>
+          <div class="review__block-left__date">{{ new Date(review.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</div>
         </div>
         <div class="review__block-right">
           <div class="review__block-right__top-infos d-flex justify-content-between">
-            <div class="review__block-right__user-name">Remi Flemming</div>
+            <div class="review__block-right__user-name">{{ review.user.firstName }} {{ review.user.lastName }}</div>
             <div class="review__block-right__user-infos">
               <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
-              Nice
+              {{ review.user.city }}
             </div>
             <div class="review__block__stars"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
-            <div class="review__block__user-profile-link"><span>Voir profil</span></div>
+            <!-- <div class="review__block__user-profile-link"><span>Voir profil</span></div> -->
           </div>
-          <div class="review__block-right__text-content">aaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaa</div>
+          <div class="review__block-right__text-content">{{ review.comment }}</div>
         </div>
       </div>
-      <!-- <div class="linear-block mb-0">
-                      <div class="avatar">
-                        <div class="row">
-                          <div class="col-12 col-lg-10 ml-auto">
-                            <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1">
-                              <img class="user-icon d-inline-block mx-auto" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                              <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
-                                <strong>Remi Flemming</strong>
-                                <span class="d-block d-lg-inline-block"><span class="mx-3 d-none d-lg-inline-block">|</span> <i class="fas fa-map-marker-alt mr-2"></i>Nice <span class="mx-3">|</span> 2 séjours</span>
-                                <div class="text-warning text-right small star-container"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
-                                <a class="ml-auto user-profile-link text-reset d-none d-lg-inline-block" href="#">VOIR PROFIL <img class="align-baseline ml-2" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></a>
-                              </div>
-                            </h5>
-                            <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est trop cooooool Et hop encore une ligne pour la marmotte ! Toussa toussa toussa Toussa toussa toussa c’est Charlie qui.</p>
-                            <div class="text-right date">25 avril 2020</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 col-lg-10 mx-auto">
-                        <div class="linear-block plain-block my-5">
-                          <img class="align-text-bottom ml-n4" fluid :src="require('@/assets/images/svg/noun_Reply.svg')" />
-                          <div class="row">
-                            <div class="col-12 col-lg-9 ml-auto">
-                              <h5 class="star-head mb-2 pb-2 d-flex d-lg-block flex-1 mt-4">
-                                <img class="user-icon d-inline-block" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                                <div class="d-flex align-items-lg-center flex-column flex-lg-row ml-2 ml-lg-0">
-                                  <strong>Réponse de Marion :</strong>
-                                  <div class="text-right date-text ml-auto">25 avril 2020</div>
-                                </div>
-                              </h5>
-                              <p class="content mb-0">C'est en vivant des émotions puissantes ensemble, que chacun de nous se sent vraiment vivant. Toussa toussa toussa c’est</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <a class="view-more-btn full_width mt-4" data-toggle="collapse" href="#viewMoreBlog" role="button" aria-expanded="false" aria-controls="viewMoreBlog">AFFICHER ENCORE PLUS D’AVIS (24) <i class="fas fa-chevron-down ml-2"></i></a> -->
     </div>
   </div>
 </template>
@@ -98,8 +59,11 @@ export default {
   props: ['course'],
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      reviews: null
     }
+  },
+  async created() {
+    this.$axios.get('/reviews', { courseId: this.$props.course.id }).then((res) => (this.reviews = res.data.reviews))
   }
 }
 </script>
@@ -119,6 +83,7 @@ export default {
   font-weight: 600;
   width: 65%;
   margin-bottom: 0.5rem;
+  white-space: nowrap;
 }
 .review__block__user-profile-link {
   height: min-content;

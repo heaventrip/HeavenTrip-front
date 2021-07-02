@@ -89,8 +89,8 @@ export default {
       //entered product content
       if (this.header === false) {
         document.body.removeAttribute('style')
-        this.$refs.productContent.initGsap()
-        this.$refs.productContent.initTabsGsap()
+        // this.$refs.productContent.initGsap()
+        // this.$refs.productContent.initTabsGsap()
 
         if (this.$route.params.showDateBtn) {
           // tell productfooter to open at specific date

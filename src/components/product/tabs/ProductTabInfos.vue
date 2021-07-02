@@ -43,7 +43,7 @@
             <h5 class="content-head">Tu vas adorer :</h5>
             <ul class="list-unstyled text-uppercase content-list">
               <li v-for="willLove in course.willLoves" :key="willLove">
-                <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>{{ willLove.name }}</a>
+                <a @click.prevent class="text-reset" style="cursor: default" href=""><i class="fas fa-plus mr-2"></i>{{ willLove.name }}</a>
               </li>
             </ul>
           </div>
@@ -228,6 +228,7 @@ export default {
   font-family: Muli, sans-serif;
 }
 .review__block-right__top-infos {
+  white-space: nowrap;
   font-size: 0.875rem;
   font-family: Oswald, sans-serif;
   font-weight: 600;

@@ -62,7 +62,7 @@
         <div class="block__item">
           <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/people.svg`)" height="20" />
           <span class="block__text-content">
-            <div class="block__text-content__title">Taille du groupe</div>
+            <div class="block__text-content__title">Groupe</div>
             <div>Content</div>
           </span>
         </div>

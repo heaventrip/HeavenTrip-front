@@ -1,8 +1,8 @@
 // import decode from 'jwt-decode'
 import axios from 'axios'
 
-const REST_ENDPOINT = 'https://heaventrip-dev.herokuapp.com/api/v1'
-// const REST_ENDPOINT = 'http://localhost:3000/api/v1'
+// const REST_ENDPOINT = 'https://heaventrip-dev.herokuapp.com/api/v1'
+const REST_ENDPOINT = 'http://localhost:3000/api/v1'
 const AUTH_TOKEN_KEY = 'authToken'
 
 export async function loginUser(email, password) {

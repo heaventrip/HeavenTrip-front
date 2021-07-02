@@ -100,23 +100,12 @@
     </div>
   </div>
   <div class="linear-block mt-2">
-    <div class="image-flexbox px-3 mb-3">
-      <div class="row galary-grid">
-        <div class="col-12 col-lg img-container py-3 mb-0">
-          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-        </div>
-        <div class="col-12 col-lg img-container py-3 mb-0">
-          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-        </div>
-        <div class="col-12 col-lg-5 img-container py-3 mb-0">
-          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-        </div>
-        <div class="col-12 col-lg img-container py-3 mb-0">
-          <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-          <div class="overlay-count">+21</div>
-        </div>
-      </div>
-    </div>
+    <swiper :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
+      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
+      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+    </swiper>
     <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   </div>
   <div class="linear-block mb-0">
@@ -206,9 +195,17 @@
     </div>
   </div>
 </template>
+
 <script>
+import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+
 export default {
   name: 'ProductTabLiving',
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   props: ['course'],
   data() {
     return {

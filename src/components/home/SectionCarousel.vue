@@ -48,8 +48,7 @@
               <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
             </button>
             <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-4 rounded-right border-0">
-              <span class="d-none d-lg-inline-block"><a href="/search" class="text-link">rechercher</a></span
-              ><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
+              <span class="d-none d-lg-inline-block">rechercher</span><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
             </button>
           </div>
           <div class="tags-container d-flex justify-content-center">
@@ -336,16 +335,17 @@ export default {
       }
     },
     submitSearchForm() {
-      this.$axios
-        .post('/courses/search', {
-          q: {
-            free_search: this.freeSearch,
-            spot_country_id_eq: this.countrySelection.value,
-            sports_id_in: this.activitySelection.value,
-            sessions_month_of_departure_eq: this.monthSelection.value
-          }
-        })
-        .then((res) => console.log(res))
+      this.$router.push({ name: 'SearchHome', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
+      // this.$axios
+      //   .post('/courses/search', {
+      //     q: {
+      //       free_search: this.freeSearch,
+      //       spot_country_id_eq: this.countrySelection.value,
+      //       sports_id_in: this.activitySelection.value,
+      //       sessions_month_of_departure_eq: this.monthSelection.value
+      //     }
+      //   })
+      //   .then((res) => console.log(res))
     },
     setMultiSelect(which) {
       this.setBgGrey(which)
