@@ -3,31 +3,29 @@
     <div class="row">
       <div class="col-12 col-lg-7">
         <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button>
-        <Step5Module1 />
-        <Step5Module2 />
-        <Step5Module3 />
+        <CheckoutWizardPayment :course="course" />
+        <CheckoutWizardSuccess />
       </div>
       <div class="col-12 col-lg-5 ml-auto">
-        <Step5Module4 :extraParticipants="$parent.extraParticipants" :booker="$parent.booker" />
+        <CheckoutWizardRecap :extraParticipants="$parent.extraParticipants" :booker="$parent.booker" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { loadStripe } from '@stripe/stripe-js'
-import Step5Module1 from './Step5Module1.vue'
-import Step5Module2 from './Step5Module2.vue'
-import Step5Module3 from './Step5Module3.vue'
-import Step5Module4 from './Step5Module4.vue'
+// import { loadStripe } from '@stripe/stripe-js'
+import CheckoutWizardPayment from './wizard/CheckoutWizardPayment.vue'
+import CheckoutWizardSuccess from './wizard/CheckoutWizardSuccess.vue'
+import CheckoutWizardRecap from './wizard/CheckoutWizardRecap.vue'
 export default {
   name: 'Step5',
   components: {
-    // Step5Module1,
-    Step5Module2,
-    Step5Module3,
-    Step5Module4
+    CheckoutWizardPayment,
+    CheckoutWizardSuccess,
+    CheckoutWizardRecap
   },
+  props: ['course'],
   methods: {
     // async processPayment() {
     //   const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')

@@ -6,7 +6,7 @@
           <div class="col-12 col-xl-4 p-0 bg-image h-100 position-relative">
             <div class="d-flex justify-content-between align-items-center trip-list-div text-white px-3">
               <ul class="list-unstyled mb-0 d-flex align-items-center text-uppercase">
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/globe.svg')" />{{ productId }}</li>
+                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/globe.svg')" />test</li>
                 <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/timer.svg')" />nuits</li>
                 <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/ring.svg')" />confirmé</li>
               </ul>
@@ -58,10 +58,10 @@
               </ul>
               <div class="tab-content" id="">
                 <!-- <Step1 /> -->
-                <Step2 />
-                <Step3 />
-                <Step4 />
-                <Step5 />
+                <CheckoutWizardParticipants />
+                <CheckoutWizardForm />
+                <CheckoutWizardForm2 />
+                <Step5 :course="course" />
                 <Step6 />
                 <div class="text-right next-step-div pt-4" data-toggle="buttons" role="tablist">
                   <button class="btn text-uppercase prev-step-btn" data-toggle="tab" role="tab" href="#step2">1</button>
@@ -81,9 +81,9 @@
 
 <script>
 // import Step1 from './Step1.vue'
-import Step2 from './Step2.vue'
-import Step3 from './Step3.vue'
-import Step4 from './Step4.vue'
+import CheckoutWizardParticipants from './wizard/CheckoutWizardParticipants.vue'
+import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
+import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import Step5 from './Step5.vue'
 import Step6 from './Step6.vue'
 
@@ -91,9 +91,9 @@ export default {
   name: 'CheckOutSections',
   components: {
     // Step1,
-    Step2,
-    Step3,
-    Step4,
+    CheckoutWizardParticipants,
+    CheckoutWizardForm,
+    CheckoutWizardForm2,
     Step5,
     Step6
   },
@@ -136,6 +136,7 @@ export default {
       const AUTH_TOKEN_KEY = 'authToken'
       let token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.post(
+        '/reservations',
         {
           booker: this.booker,
           extraParticipants: this.extraParticipants

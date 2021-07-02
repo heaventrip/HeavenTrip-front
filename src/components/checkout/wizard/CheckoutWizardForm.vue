@@ -285,7 +285,7 @@
 import { VueCollapsiblePanelGroup, VueCollapsiblePanel } from '@dafcoe/vue-collapsible-panel'
 
 export default {
-  name: 'Step3',
+  name: 'CheckoutWizardForm',
   components: {
     VueCollapsiblePanelGroup,
     VueCollapsiblePanel

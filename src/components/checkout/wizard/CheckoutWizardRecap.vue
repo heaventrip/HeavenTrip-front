@@ -128,7 +128,7 @@
 
 <script>
 export default {
-  name: 'Step5Module4',
+  name: 'CheckoutWizardRecap',
   props: ['booker', 'extraParticipants']
 }
 </script>
