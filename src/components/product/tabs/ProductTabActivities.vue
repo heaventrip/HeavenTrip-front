@@ -40,33 +40,15 @@
           <div class="pri-activity-block">
             <div class="box bg-dark m-0">
               <h5 class="head text-uppercase mb-0 d-inline-block">
-                <InlineSvg class="head-pin-icon d-inline-block" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+                <InlineSvg class="head-pin-icon d-inline-block" v-if="course.sports" :src="require(`@/assets/svg/${sport.picto}.svg`)" height="30" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
                 {{ sport.name }}
               </h5>
               <ul class="list-unstyled list mt-3 mb-0">
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    COURS DE PERFECTIONNEMENT :
-                    <strong class="text-white ml-2"> 20H</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Sessions :
-                    <strong class="text-white ml-2"> 4</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Tendance :
-                    <strong class="text-white ml-2"> 60% hors piste</strong></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="text-decoration-none">
-                    Tendance :
-                    <strong class="text-white ml-2"> 60% hors piste</strong></a
-                  >
+                <li v-for="sportInfo in sport.sportInfos" :key="sportInfo">
+                  <a href="#" @click.prevent class="text-decoration-none">
+                    {{ sportInfo.title }}
+                    <strong class="text-white ml-2">{{ sportInfo.description }}</strong>
+                  </a>
                 </li>
               </ul>
               <!-- <a href="#" class="corner-link">+</a> -->
@@ -135,62 +117,18 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-12 col-lg-4">
+        <div v-for="includedCourse in includedCourses" :key="includedCourse" class="col-12 col-lg-4">
           <div class="box bg-white">
             <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
-              <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-              YOGA
+              <InlineSvg v-if="includedCourse.picto" class="head-pin-icon d-inline-block" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
+              {{ includedCourse.title }}
             </h5>
             <ul class="list-unstyled list mt-3 mb-0">
-              <li>
+              <li v-for="info in includedCourse.alternativeInfos" :key="info">
                 <a href="#" class="text-decoration-none">
-                  HEURES DE PRATIQUE :
-                  <strong class="text-dark ml-2"> 20H</strong></a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-decoration-none">
-                  Séances :
-                  <strong class="text-dark ml-2"> 3</strong></a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-decoration-none">
-                  Type :
-                  <strong class="text-dark ml-2">
-                    Ashtanga
-                    <i class="fas fa-info-circle text-dark ml-2 h5 align-middle mb-0"></i></strong
-                ></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 col-lg-4">
-          <div class="box bg-white">
-            <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
-              <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/yoga-pink.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-              YOGA
-            </h5>
-            <ul class="list-unstyled list mt-3 mb-0">
-              <li>
-                <a href="#" class="text-decoration-none">
-                  HEURES DE PRATIQUE :
-                  <strong class="text-dark ml-2"> 20H</strong></a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-decoration-none">
-                  Séances :
-                  <strong class="text-dark ml-2"> 3</strong></a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-decoration-none">
-                  Type :
-                  <strong class="text-dark ml-2">
-                    Ashtanga
-                    <i class="fas fa-info-circle text-dark ml-2 h5 align-middle mb-0"></i></strong
-                ></a>
+                  {{ info.title }}
+                  <strong class="text-dark ml-2">{{ info.description }}</strong>
+                </a>
               </li>
             </ul>
           </div>
@@ -214,7 +152,7 @@
         <div class="card-body">
           <p class="content">En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.</p>
           <ul class="activity-list list-unstyled mb-0">
-            <li v-for="alternative in course.alternatives" :key="alternative">
+            <li v-for="alternative in altCourses" :key="alternative">
               <h5 class="activity-list-head mb-0">
                 <InlineSvg v-if="alternative.picto" class="icon" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
                 {{ alternative.title }}
@@ -241,7 +179,14 @@ export default {
   props: ['course'],
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      includedCourses: null,
+      altCourses: null
+    }
+  },
+  watch: {
+    course(val) {
+      this.includedCourses = val.alternatives.filter((el) => el.isIncluded)
+      this.altCourses = val.alternatives.filter((el) => el.isOption)
     }
   },
   methods: {
