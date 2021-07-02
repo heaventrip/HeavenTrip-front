@@ -15,8 +15,8 @@
         <div class="form-group">
           <label class="form-label text-uppercase font-weight-bold mt-3 d-block">Quel camp ?</label>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label @click="saveGender(female)" class="btn text-white border-0 rounded-0 btn-lg px-4"> <input type="radio" /> Femme </label>
-            <label @click="saveGender(male)" class="btn text-white border-0 rounded-0 btn-lg px-4 group-btn"> <input type="radio" /> Homme </label>
+            <label @click="saveGender(female)" class="btn border-0 rounded-0 btn-lg px-4"> <input type="radio" /> Femme </label>
+            <label @click="saveGender(male)" class="btn border-0 rounded-0 btn-lg px-4 group-btn"> <input type="radio" /> Homme </label>
           </div>
         </div>
       </form>

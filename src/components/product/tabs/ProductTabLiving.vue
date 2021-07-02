@@ -201,7 +201,22 @@ export default {
   props: ['course'],
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      currentPaginationStyle: `
+        font-family: Oswald, sans-serif;
+        font-weight: 800;
+        font-size: 2rem;
+        color: #fff;`,
+      totalPaginationStyle: `
+        font-family: Oswald, sans-serif;
+        color: rgba(250, 250, 250, 0.7);
+        font-size: 1rem;`
+    }
+  },
+  methods: {
+    renderSwiperFraction(currentClass, totalClass) {
+      return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
+      <span style="${this.currentPaginationStyle}">.</span>
+      <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
     }
   }
 }

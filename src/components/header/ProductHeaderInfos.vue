@@ -20,27 +20,27 @@
             <span style="color: #fff; font-weight: bold">{{ course.sports ? course.sports[0].name : '' }}</span>
             <!-- </router-link> -->
           </h1>
-          <h5 class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>Serre-Chevalier</h5>
+          <h5 class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>{{ course?.spot?.name }}</h5>
         </div>
       </div>
     </div>
     <div class="header__bottom-infos d-flex flex-column align-items-center">
       <div class="block d-flex align-items-center text-uppercase justify-content-between">
         <div class="block__item">
-          <Tag text="4 départs" color="white" style="width: min-content" />
+          <Tag :text="`${course.sessions?.length} départs`" color="white" style="width: min-content" />
         </div>
         <div class="block__item">
           <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/globe.svg`)" />
           <span class="block__text-content">
             <div class="block__text-content__title">Pays</div>
-            <div>Content</div>
+            <div>{{ course.country?.name }}</div>
           </span>
         </div>
         <div class="block__item">
           <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/spot.svg`)" />
           <span class="block__text-content">
             <div class="block__text-content__title">Spot</div>
-            <div>Content</div>
+            <div>{{ course.spot?.name }}</div>
           </span>
         </div>
       </div>
@@ -49,21 +49,21 @@
           <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/timer.svg`)" />
           <span class="block__text-content">
             <div class="block__text-content__title">Durée</div>
-            <div>Content</div>
+            <div>{{ course.duration?.name }}</div>
           </span>
         </div>
         <div class="block__item">
           <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/intensity-2-dark.svg`)" height="20" />
           <span class="block__text-content">
             <div class="block__text-content__title">Niveau</div>
-            <div>Content</div>
+            <div>{{ course.level?.name }}</div>
           </span>
         </div>
         <div class="block__item">
           <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/people.svg`)" height="20" />
           <span class="block__text-content">
             <div class="block__text-content__title">Groupe</div>
-            <div>Content</div>
+            <div>{{ course.max }}</div>
           </span>
         </div>
       </div>

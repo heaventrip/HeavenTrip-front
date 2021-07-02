@@ -7,22 +7,19 @@ const AUTH_TOKEN_KEY = 'authToken'
 
 export async function loginUser(email, password) {
   return new Promise((resolve, reject) => {
-    try {
-      axios
-        .post(`${REST_ENDPOINT}/login`, {
-          user: {
-            email: email,
-            password: password
-          }
-        })
-        .then((res) => {
-          setAuthToken(res.data.auth_token)
-          setUserInfos(res.data.user)
-          resolve()
-        })
-    } catch (err) {
-      console.log(err)
-    }
+    axios
+      .post(`${REST_ENDPOINT}/login`, {
+        user: {
+          email: email,
+          password: password
+        }
+      })
+      .then((res) => {
+        setAuthToken(res.data.auth_token)
+        setUserInfos(res.data.user)
+        resolve()
+      })
+      .catch((err) => reject(err))
   })
 }
 

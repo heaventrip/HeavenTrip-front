@@ -1,7 +1,7 @@
 <template>
   <div class="pre-booking-footer d-flex sticky-bottom flex-column" style="position: sticky; bottom: 0; width: 100%">
     <div class="booking-session align-items-center" :class="[showSessions ? 'd-flex' : 'd-none']">
-      <h2 class="session-head border-right border-white">CRÉER UNE DATE</h2>
+      <h2 @click="createRequest" class="session-head border-right border-white">CRÉER UNE DATE</h2>
       <ul class="text-uppercase list-unstyled year-list border-right border-white px-3">
         <li><a href="#" class="text-reset active">2020</a></li>
         <li><a href="#" class="text-reset">2021</a></li>
@@ -94,22 +94,9 @@
         <div class="left-avatar-block border-right center-col" :style="[showSessions ? '' : 'background-color: #fafafa']">
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-3 mb-0">
-              <span style="font-family: Oswald, sans-serif; font-size: 0.75rem"
-                ><span color="#292f33">Ca te titille?</span> <span style="font-weight: bold">Rejoint les 12 intéressés :</span><br />
-                <InlineAvatars
-                  :course-id="course?.id"
-                  :avatars="[1, 2, 1, 1, 1, 1, 1, 1, 1, 1]"
-                  :heart="true"
-                  heartheight="40px"
-                  heartwidth="40px"
-                  spacing="-6px"
-                  :heart-color="showSessions ? 'white' : 'grey'"
-                  :outline="true"
-                  :outline-color="showSessions ? 'grey' : 'light-white'"
-                  :count="false"
-                  mt="0.3rem"
-                  mb="0rem"
-                />
+              <span style="font-family: Oswald, sans-serif; font-size: 0.75rem">
+                <span color="#292f33">Ca te titille?</span> <span style="font-weight: bold">Rejoint les {{ course.wishlistUsers?.length }} intéressé{{ course.wishlistUsers?.length > 1 ? 's' : '' }} :</span><br />
+                <InlineAvatars :course-id="course?.id" :avatars="avatarKeys" :heart="true" heartheight="40px" heartwidth="40px" spacing="-6px" :heart-color="showSessions ? 'white' : 'grey'" :outline="true" :outline-color="showSessions ? 'grey' : 'light-white'" :count="false" mt="0.3rem" mb="0rem" />
               </span>
             </ul>
           </div>
@@ -177,6 +164,7 @@ export default {
   },
   data() {
     return {
+      avatarKeys: [],
       choice: null,
       choseBtn: false,
       participantsNb: 1,
@@ -192,9 +180,22 @@ export default {
     showSessions(val) {
       if (val === true) this.$emit('show-sessions')
       if (val === false) this.$emit('hide-sessions')
+    },
+    course: {
+      immediate: true,
+      handler(val) {
+        if (val.wishlistUsers) {
+          val.wishlistUsers.forEach((user) => {
+            this.avatarKeys.push(user.avatarKey)
+          })
+        }
+      }
     }
   },
   methods: {
+    createRequest() {
+      this.$axios.post('/requests', { courseId: this.$props.course.id })
+    },
     clickedChoseBtn(session) {
       this.choseBtn = true
       this.choice = session
