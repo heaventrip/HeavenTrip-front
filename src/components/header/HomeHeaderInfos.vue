@@ -4,7 +4,7 @@
       <div>
         <div style="width: 115%">
           <div class="top-block d-flex align-items-center" style="width: 100%">
-            <svg xmlns="http://www.w3.org/2000/svg" height="144" viewBox="0 0 100 100">
+            <svg xmlns="http://www.w3.org/2000/svg" height="180" viewBox="0 0 100 100">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
                   <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
@@ -23,7 +23,7 @@
           </div>
           <div class="d-flex">
             <Tag text="4 départs" color="white" class="product-infos__tag" height="30px" />
-            <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" pr="0rem" :border-top="false" color="white" icon="globe" pt="0rem" />
+            <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :icons="['globe', 'timer', 'intensity-2-white', 'people']" pr="0rem" :border-top="false" color="white" icon="globe" pt="0rem" />
           </div>
         </div>
         <div class="d-inline-flex d-lg-flex align-items-center justify-content-between pb-3 trippers-div">
