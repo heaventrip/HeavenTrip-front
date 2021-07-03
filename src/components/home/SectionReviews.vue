@@ -17,11 +17,10 @@
       <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
       <img :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`" class="reviews__user-avatar rounded-circle" rel="preload" />
       <div class="reviews__user-infos mx-auto">
-        <span class="text--bold mr-4">
-          <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
+        <span class="d-inline-block text--bold pr-3" style="border-right: 1px dashed #7c7c7c">
           <span class="ml-2">{{ activeReview?.user.city }}</span>
         </span>
-        <span class="text--bold">{{ activeReview?.user.firstName }} {{ activeReview?.user.lastName }}</span>
+        <span class="text--bold pl-3">{{ activeReview?.user.firstName }} {{ activeReview?.user.lastName }}</span>
       </div>
     </div>
     <div class="reviews__comment">

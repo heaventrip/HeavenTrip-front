@@ -17,9 +17,7 @@
                   <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ highlightedCourse?.spot.name }}</span>
                 </div>
                 <div class="pad__content__sports d-flex align-items-center justify-content-center tooltip-div mt-4">
-                  <InlineSvg class="mr-4" :src="require('@/assets/svg/surf.svg')" height="22" />
-                  <InlineSvg class="mr-4" :src="require('@/assets/svg/yoga.svg')" height="22" />
-                  <InlineSvg class="mr-4" :src="require('@/assets/svg/mat.svg')" height="22" />
+                  <InlineSvg v-for="includedCourse in highlightedCourse?.alternatives.filter((el) => el.isIncluded)" :key="includedCourse" class="mr-4" :src="require(`@/assets/svg/${includedCourse?.picto || 'surf'}.svg`)" height="22" />
                   <span class="ml-auto euro"
                     ><strong>{{ highlightedCourse?.price }}&euro;</strong>/pers.
                   </span>

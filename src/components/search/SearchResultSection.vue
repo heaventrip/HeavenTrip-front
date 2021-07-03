@@ -61,9 +61,8 @@
                 </select>
               </div>
             </div> -->
-            <div class="py-4 px-5 filter-body bg-white font-weight-normal">
-              <div class="text-uppercase mb-4 mt-3 letter">Tu peux encore affiner :</div>
-              <div class="filter-container theme-filter">
+            <div class="filter-body bg-white font-weight-normal">
+              <div class="px-5 filter-container theme-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
@@ -75,7 +74,8 @@
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container activity-filter">
+              <div class="text-uppercase mb-4 mt-3 letter">Tu peux encore affiner :</div>
+              <div class="px-5 filter-container activity-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
@@ -87,7 +87,7 @@
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container country-filter">
+              <div class="px-5 filter-container country-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/globe.svg')" height="22" />
@@ -99,7 +99,7 @@
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div v-if="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="filter-container spot-filter">
+              <div v-if="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="px-5 filter-container spot-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
@@ -111,7 +111,7 @@
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container month-filter">
+              <div class="px-5 filter-container month-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
@@ -123,7 +123,7 @@
                 </div>
                 <div class="tags-container"></div>
               </div>
-              <div class="filter-container level-filter">
+              <div class="px-5 filter-container level-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />

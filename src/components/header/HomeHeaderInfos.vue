@@ -122,7 +122,7 @@ export default {
   letter-spacing: 1px;
 }
 .headsport {
-  font-weight: 400;
+  font-weight: 500 !important;
   font-size: 3.5rem !important;
   letter-spacing: 3px !important;
 }
