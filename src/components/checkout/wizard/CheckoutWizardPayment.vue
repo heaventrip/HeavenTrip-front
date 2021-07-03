@@ -90,7 +90,7 @@ export default {
   methods: {
     async processPayment() {
       const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
-      fetch('http://localhost:3000/api/v1/stripe-session', {
+      fetch('https://heaventrip-dev.herokuapp.com/api/v1/stripe-session', {
         method: 'POST'
       })
         .then(function (response) {
