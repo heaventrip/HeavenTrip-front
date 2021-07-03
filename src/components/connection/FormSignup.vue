@@ -63,12 +63,12 @@
         </button>
       </div>
     </div>
-    <p class="recaptcha text-center mb-0">
+    <!-- <p class="recaptcha text-center mb-0">
       Ce site est protégé par reCAPTCHA.
       <span class="highlights">La politique de confidentialité</span>
       et les
       <span class="highlights">conditions d'utilisation</span> de Google s'appliquent.
-    </p>
+    </p> -->
   </div>
 </template>
 
