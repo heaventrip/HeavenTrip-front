@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center justify-content-center" style="margin-bottom: 5rem">
+  <div class="d-flex align-items-center justify-content-center" style="margin: 5vh auto">
     <svg xmlns="http://www.w3.org/2000/svg" fill="#292f33" height="130" viewBox="0 0 1192.975 1192.752">
       <path
         d="M922.67,1021.59l-8.031,6.627c-93.359,77.049-211.9,119.483-333.788,119.483-.854,0-1.715,0-2.567-.006-141.628-.692-275.123-56.4-375.892-156.857C4.543,793.6-10.455,486.108,167.5,275.583l6.751-7.985-31.929-32.17-8.044,9.47A561.006,561.006,0,0,0,32.541,421.506,570.515,570.515,0,0,0,.123,624.269C3.191,774.608,63.744,916.086,170.629,1022.64c109.286,108.948,254.068,169.358,407.7,170.1.952,0,1.9.008,2.846.008a570.306,570.306,0,0,0,192.7-33.271,564.467,564.467,0,0,0,171.155-97.745l9.586-7.97Z"
@@ -17,14 +17,15 @@
     </div>
   </div>
   <div class="linear-block plain-block pb-0">
-    <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start">
+    <div class="head-block mb-5 d-flex justify-content-center justify-content-lg-start">
       <!-- <div class="product__nav__section-number"><span>01</span></div> -->
       <div class="">
         <p class="sub-heading mb-2">Récap du stage</p>
         <h4 class="heading mb-0">POUR FAIRE COURT...</h4>
       </div>
       <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto">
-        <InlineSvg v-if="course.sports && course.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" />
+        <div style="width: 1px; height: 1.5rem; border-left: 1px dashed #292f33"></div>
+        <InlineSvg v-if="course.sports && course.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="60" />
       </span>
     </div>
     <div class="card-body">
@@ -37,7 +38,7 @@
       <p class="content mt-3 mb-4">
         {{ course.description }}
       </p>
-      <div class="row" style="margin-left: -2rem; margin-right: -2rem">
+      <div class="row" style="margin-left: -3rem; margin-right: -3rem">
         <div class="col-9 col-lg-12 p-0">
           <div class="like-div">
             <h5 class="content-head">Tu vas adorer :</h5>
