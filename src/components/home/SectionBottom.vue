@@ -1,13 +1,21 @@
 <template>
   <section class="articles-section">
-    <div class="d-flex h-100 justify-content-around align-items-center">
-      <div v-for="article in articles" :key="article" class="article">
-        <a :href="article.link">
+    <div class="d-flex flex-column align-items-center" style="margin-bottom: 4rem">
+      <span>Notre blog</span>
+      <div class="text-uppercase" style="font-size: 1.5rem; margin-bottom: 1rem">
+        <span>derniers &nbsp;</span>
+        <span class="text--bold">articles</span>
+      </div>
+    </div>
+    <div class="d-flex h-100 justify-content-center">
+      <div v-for="(article, index) in articles" :key="article" class="article" :style="[index === 1 ? 'margin: 0 3rem' : '']">
+        <a :href="article.link" style="position: relative">
           <img class="article__image" :src="article._embedded['wp:featuredmedia']['0'].source_url" rel="preload" />
+          <div class="bg-pink text-white text-uppercase px-3" style="position: absolute; bottom: 0; left: 0; height: 2rem; line-height: 2rem">{{ article._embedded['wp:term']['0']['0'].name }}</div>
         </a>
         <div class="article__header__text-content">
           <div class="article__header__title">{{ article.title.rendered }}</div>
-          <div class="article__excerpt d-none d-lg-block" v-html="article.excerpt.rendered"></div>
+          <div class="article__small-infos">{{ new Date(article.date).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</div>
         </div>
       </div>
     </div>
@@ -31,10 +39,8 @@ export default {
 
 <style scoped>
 .articles-section {
-  margin-top: 5rem;
-  padding-bottom: 2rem;
+  margin: 6rem 0;
   height: min-content;
-  box-shadow: 0px -1px 4px rgba(41, 47, 54, 0.5);
 }
 .article {
   display: flex;
@@ -43,13 +49,21 @@ export default {
   height: 100%;
 }
 .article__image {
-  width: 100%;
-  max-height: calc(40vh * 0.25);
+  width: 300px;
+  height: 250px;
   object-fit: cover;
-  border-radius: 1%;
-  margin-bottom: 1rem;
+  border-radius: 3%;
 }
 .article__header__text-content {
-  padding: 0 1rem;
+  max-width: 300px;
+}
+.article__header__title {
+  margin-top: 1rem;
+  color: #292f33;
+  font-weight: 800;
+}
+.article__small-infos {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
 }
 </style>

@@ -1887,11 +1887,9 @@ a.bg-danger:hover {
   top: 22px;
 }
 .main-product-content .activity-head .img_icon {
-  height: 30px;
+  height: 40px;
   position: relative;
   margin-left: 20px;
-  border-left: 2px dotted #292f3373;
-  padding-left: 20px;
 }
 .main-product-content .activity-head .img_icon:first-child {
   margin-left: 0;
@@ -2460,7 +2458,7 @@ a.bg-danger:hover {
   overflow: hidden;
 }
 .discuss-list li {
-  margin-bottom: 45px;
+  margin-bottom: 1.5rem;
   color: #131313;
 }
 .discuss-list .profile-container,
@@ -2728,7 +2726,7 @@ button.Zebra_DatePicker_Icon {
 .main-product-content .narrow-header-pills.nav-pills .nav-link {
   border-radius: 0.25rem;
   padding: 30px 0 26px;
-  color: #b4b4b4;
+  color: #cecece;
   font-size: 0.875rem;
 }
 .main-product-content .narrow-header-pills.nav-pills .nav-link:hover {
@@ -5504,10 +5502,10 @@ a.descriptif-link.bg-danger:hover {
     border-bottom: 1px solid hsla(0, 0%, 98%, 0.5);
   }
   .main-product-content .linear-block {
-    margin-top: 4rem;
+    margin-top: 6rem;
     margin-bottom: 4rem;
-    padding: 2rem 2rem;
-    box-shadow: 0 0 5px #ebebeb;
+    padding: 3rem 3rem;
+    box-shadow: 0 0 2px #ebebeb;
     /* border: 1px solid #ebebeb; */
     background-color: #fff;
   }
@@ -5526,7 +5524,7 @@ a.descriptif-link.bg-danger:hover {
     background-color: #292f33;
     color: #fff;
     align-items: center;
-    padding: 23px 30px;
+    padding: 23px 3rem;
     display: flex;
     align-items: center;
   }

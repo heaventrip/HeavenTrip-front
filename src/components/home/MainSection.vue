@@ -3,8 +3,8 @@
     <main>
       <SectionCarousel />
       <SectionMap />
-      <SectionMiddle />
       <SectionReviews />
+      <SectionMiddle />
       <SectionBottom />
     </main>
   </div>

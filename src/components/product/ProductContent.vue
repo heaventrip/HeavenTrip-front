@@ -9,30 +9,7 @@
       <option value="#pills-opinion">Vos avis</option>
     </select>
   </div> -->
-  <div>
-    <div style="position: fixed; top: 0px; z-index: 2; width: 100vw">
-      <ProductNav :course="course" />
-      <ul style="height: 50px" class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
-        <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
-        </li>
-        <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
-        </li>
-        <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-living')" class="nav-link" id="pills-living-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
-        </li>
-        <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-program')" class="nav-link" id="pills-program-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
-        </li>
-        <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-tips')" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
-        </li>
-        <li class="nav-item" role="presentation" type="button">
-          <a @click.prevent="scrollToSection('product-tab-reviews')" class="nav-link" id="pills-reviews-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
-        </li>
-      </ul>
-    </div>
+  <div class="product-content-content">
     <!-- <div class="main-slider">
       <swiper v-if="!asideSlider" :slidesPerView="3" :spaceBetween="5" :slidesPerGroup="3" :loop="true" :loopFillGroupWithBlank="false" :navigation="true" class="mySwiper">
         <swiper-slide v-for="(imgSrc, index) in imgs" :key="imgSrc" @click="showImg(index)">
@@ -41,8 +18,31 @@
       </swiper>
       <vue-easy-lightbox v-if="!asideSlider" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="handleHide"></vue-easy-lightbox>
     </div> -->
-    <div class="product-content d-flex justify-content-around">
-      <div class="w-50 tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="position: relative; padding: 0rem 3rem 3.5rem 3rem; min-height: 100vh">
+    <div class="product-content d-flex">
+      <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
+        <div style="position: fixed; top: 0px; right: 0; left: 0; width: calc(65vw + 2rem); z-index: 2">
+          <ProductNav :course="course" />
+          <ul style="height: 100px; background-color: white" class="nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
+            <li class="nav-item" role="presentation" type="button">
+              <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
+            </li>
+            <li class="nav-item" role="presentation" type="button">
+              <a @click.prevent="scrollToSection('product-tab-activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">Activités & spot</a>
+            </li>
+            <li class="nav-item" role="presentation" type="button">
+              <a @click.prevent="scrollToSection('product-tab-living')" class="nav-link" id="pills-living-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">Vie sur place</a>
+            </li>
+            <li class="nav-item" role="presentation" type="button">
+              <a @click.prevent="scrollToSection('product-tab-program')" class="nav-link" id="pills-program-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">Programme</a>
+            </li>
+            <li class="nav-item" role="presentation" type="button">
+              <a @click.prevent="scrollToSection('product-tab-tips')" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">Tips & astuces</a>
+            </li>
+            <li class="nav-item" role="presentation" type="button">
+              <a @click.prevent="scrollToSection('product-tab-reviews')" class="nav-link" id="pills-reviews-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">Vos avis </a>
+            </li>
+          </ul>
+        </div>
         <div id="product-tab-infos" class="product-section pt-5">
           <ProductTabInfos :course="course" />
         </div>
@@ -62,50 +62,55 @@
           <ProductTabReviews :course="course" />
         </div>
         <!-- <div class="w-50" id="pills-info" aria-labelledby="pills-info-tab">
-        </div>
-        <div class="w-50" id="pills-activityspot" aria-labelledby="pills-activityspot-tab">
-        </div>
-        <div class="w-50" id="pills-place" aria-labelledby="pills-place-tab">
-        </div>
-        <div class="w-50" id="pills-programe" aria-labelledby="pills-programe-tab">
-        </div>
-        <div class="w-50" id="pills-tips" aria-labelledby="pills-tips-tab">
-        </div>
-        <div class="w-50" id="pills-opinion" aria-labelledby="pills-opinion-tab">
-        </div> -->
       </div>
-      <div class="" style="width: 35%">
+      <div class="w-50" id="pills-activityspot" aria-labelledby="pills-activityspot-tab">
+      </div>
+      <div class="w-50" id="pills-place" aria-labelledby="pills-place-tab">
+      </div>
+      <div class="w-50" id="pills-programe" aria-labelledby="pills-programe-tab">
+      </div>
+      <div class="w-50" id="pills-tips" aria-labelledby="pills-tips-tab">
+      </div>
+      <div class="w-50" id="pills-opinion" aria-labelledby="pills-opinion-tab">
+      </div> -->
+      </div>
+      <div class="gallery-comment-block">
         <div class="aside-slider">
           <transition name="fade" @after-leave="afterLeave">
-            <swiper v-if="asideSlider" class="mb-4" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
+            <swiper v-if="asideSlider" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
               <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
               <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
               <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
               <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
             </swiper>
           </transition>
-          <div class="linear-block font-weight-bold py-3 my-5">DISCUSSIONS</div>
-          <ul class="list-unstyled mb-0 discuss-list mt-3">
-            <li v-for="msg in messages" :key="msg">
-              <div class="d-flex mt-3 mb-5" style="padding-left: 2rem">
-                <div class="">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
+          <div style="padding: 1rem; padding-left: 1rem; padding-top: 2rem">
+            <div style="padding-left: 2rem">
+              <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
+              <ul class="list-unstyled mb-0 discuss-list mt-3">
+                <li v-for="msg in messages" :key="msg">
+                  <div class="d-flex">
+                    <div class="">
+                      <div class="profile-container">
+                        <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
+                      </div>
+                    </div>
+                    <div class="ml-4 pt-2">
+                      <h6 class="discuss-head">
+                        {{ msg.user.firstName }} {{ msg.user.lastName }}<span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">{{ new Date(msg.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
+                      </h6>
+                      <p class="content-desc">{{ msg.content }}</p>
+                    </div>
                   </div>
-                </div>
-                <div class="ml-4">
-                  <h6 class="discuss-head">
-                    {{ msg.user.firstName }} {{ msg.user.lastName }}<span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">{{ msg.createdAt }}</span>
-                  </h6>
-                  <p class="content-desc">{{ msg.content }}</p>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <form @submit.prevent="submitMessageForm" class="d-flex align-items-center pr-3" style="border: 1px solid #ebebeb">
-            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control p-3" rows="1"></textarea>
-            <InlineSvg :src="require('@/assets/svg/send.svg')" class="ml-3" height="20" />
-          </form>
+                </li>
+              </ul>
+            </div>
+            <form @submit.prevent="submitMessageForm" class="d-flex align-items-center" style="background-color: #fcfcfc">
+              <label class="message-input-label">
+                <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="1"> </textarea>
+              </label>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -299,13 +304,69 @@ export default {
 </script>
 
 <style scoped>
+.message-input-label {
+  position: relative;
+  width: 100%;
+}
+
+.message-input-label:before {
+  content: '';
+  position: absolute;
+  right: 2rem;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: url('../../assets/svg/send.svg') center / contain no-repeat;
+}
+.reply-container {
+  width: 85%;
+  overflow: visible !important;
+}
+.reply-container::placeholder {
+  color: #292f33;
+  font-weight: 500;
+}
+.reply-container:focus {
+  outline: none;
+  color: #292f33;
+  height: 6rem;
+}
+@media only screen and (max-width: 2000px) {
+  .product-content {
+    justify-content: space-between;
+  }
+  .gallery-comment-block {
+    width: 35vw;
+    margin-left: auto;
+  }
+  .main-tab {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (min-width: 2000px) {
+  .gallery-comment-block {
+  }
+  .main-tab {
+  }
+}
+.main-tab {
+  position: relative;
+  padding: 0rem 0rem 3.5rem 0rem;
+  min-height: 100vh;
+}
+.gallery-comment-block {
+  padding-left: 2rem;
+}
 .aside-slider {
+  top: 0;
   position: sticky;
-  top: calc(100px + 5vh); /* nav height + extra space */
+  background-color: white;
+  box-shadow: 0 0 3px #ebebeb;
 }
 .aside-slider .swiper-slide__img {
-  height: 20vh;
-  margin-top: 50px;
+  height: 25vh;
 }
 .reply-container {
   font-size: 0.8rem;
@@ -336,7 +397,7 @@ export default {
 }
 .product-content {
   background-color: #fcfcfc;
-  padding-top: 100px; /* nav height  */
+  padding-left: 1rem;
 }
 .slider {
   background-color: #fcfcfc;
