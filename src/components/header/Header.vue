@@ -28,7 +28,8 @@
     </div>
     <ConnectionButtons />
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
-    <TheNav @changed-tab="setActiveTab" />
+    <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
+    <TheNav v-else @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
     <ProductHeaderInfos v-else-if="currentRoute('ProductHome') && !navIsActive" ref="productHeaderInfos" :course="course" />
     <SearchHeaderInfos v-else-if="currentRoute('SearchHome') && !navIsActive" />
@@ -95,6 +96,7 @@
 
 <script>
 import TheNav from '@/components/nav/TheNav.vue'
+import TheNavSticky from '@/components/nav/TheNavSticky.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeHeaderInfos from './HomeHeaderInfos.vue'
 import ProductHeaderInfos from '@/components/header/ProductHeaderInfos.vue'
@@ -105,6 +107,7 @@ export default {
   name: 'Header',
   components: {
     TheNav,
+    TheNavSticky,
     ConnectionButtons,
     HomeHeaderInfos,
     ProductHeaderInfos,
@@ -114,6 +117,7 @@ export default {
   props: ['course'],
   data() {
     return {
+      navSticky: false,
       token: true,
       toggleSessions: false,
       agencyIsActive: false,
@@ -140,12 +144,15 @@ export default {
     currentRoute(route) {
       return this.$route.name === route
     },
+    resetTabs() {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+    },
     // setNavStatus(status) {
     //   this.navIsActive = status
     // },
     setActiveTab(clickedTab) {
       let varName = clickedTab + 'IsActive'
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      this.resetTabs()
       this.$data[varName] = true
     },
     logout(event) {
@@ -190,6 +197,11 @@ export default {
       this.token = false
     }
     this.jquery()
+
+    document.addEventListener('scroll', () => {
+      if (window.scrollY > document.querySelector('.header').clientHeight) this.navSticky = true
+      else this.navSticky = false
+    })
   }
 }
 </script>

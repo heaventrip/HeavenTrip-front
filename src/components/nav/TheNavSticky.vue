@@ -105,7 +105,7 @@ import DestinationsTab from '@/components/nav/DestinationsTab.vue'
 import gsap from 'gsap'
 
 export default {
-  name: 'Nav',
+  name: 'TheNavSticky',
   emits: ['changed-nav-status', 'changed-tab'],
   components: {
     AgencyTab,
@@ -147,7 +147,7 @@ export default {
       if (newVal === true) {
         this.$emit('changed-tab', 'agency')
         // this.changeBgFilter(this.bgFilter.light)
-        document.body.style.position = 'fixed'
+        // document.body.style.position = 'fixed'
         document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
           el.classList.toggle('navbar-grey', true)
@@ -156,7 +156,7 @@ export default {
       }
       if (newVal === false) {
         this.$refs.agencyTab.resetTabs()
-        document.body.style.position = 'static' // reset
+        // document.body.style.position = 'static' // reset
         document.querySelector('#header_nav').removeAttribute('style')
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
           el.classList.toggle('navbar-grey', false)
@@ -247,8 +247,10 @@ export default {
   color: white !important;
 }
 .navbar {
+  position: fixed;
+  width: 100vw;
   height: 70px; /* easier to manipulate with fixed height */
-  z-index: 1;
+  z-index: 11;
 }
 .tab-content.main-wrapper {
   z-index: 1;
