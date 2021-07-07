@@ -16,7 +16,7 @@
       <h4 class="heading mb-0">Activités & spot</h4>
     </div>
   </div>
-  <div class="d-flex mb-5 mt-2">
+  <div class="d-flex" style="margin: 6rem 0rem">
     <div class="linear-block p-0 m-0 w-100">
       <div class="card-body d-flex" style="box-shadow: 0 0 2px #ebebeb; height: 340px">
         <div class="guide-word__image">
@@ -52,12 +52,63 @@
   <div class="linear-block p-0 mt-2">
     <div class="card-body d-flex">
       <div class="activity-word__text">
+        <div class="head-block subhead-block d-flex">
+          <!-- <div class="product__nav__section-number"><span>02</span></div> -->
+          <div class="">
+            <p class="sub-heading mb-2">Activités & Spot</p>
+            <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
+          </div>
+        </div>
+        <h6 class="head text-uppercase pb-1" style="width: 100%">{{ course.sports[0].name }}</h6>
+        <p class="content">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+        <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+          <li style="border-bottom: none; padding-bottom: 0">
+            <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
+              Type :
+              <strong class="text-dark ml-2"> BUNGALOW SOLO </strong></a
+            >
+          </li>
+          <li style="border-bottom: none; padding-bottom: 0">
+            <a href="#" @click.prevent style="cursor: default" class="text-decoration-none">
+              Lieu :
+              <strong class="text-dark ml-2"> EL Gouna</strong></a
+            >
+          </li>
+          <li style="border-bottom: none; padding-bottom: 0">
+            <a href="#" @click.prevent style="cursor: default" class="text-decoration-none">
+              Situation :
+              <strong class="text-dark ml-2"> proximité du spot</strong></a
+            >
+          </li>
+          <li style="border-bottom: none; padding-bottom: 0">
+            <a href="#" @click.prevent style="cursor: default" class="text-decoration-none">
+              Capacités :
+              <strong class="text-dark ml-2"> 10</strong></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- multiact -->
+  <div v-show="false" class="linear-block p-0 mt-2">
+    <div class="card-body d-flex">
+      <div class="activity-word__text">
+        <div class="head-block subhead-block d-flex">
+          <!-- <div class="product__nav__section-number"><span>02</span></div> -->
+          <div class="">
+            <p class="sub-heading mb-2">Activités & Spot</p>
+            <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
+          </div>
+        </div>
         <h6 class="head text-uppercase pb-3" style="width: 100%; border-bottom: 1px dashed #b4b4b4">{{ course.sports[0].name }}</h6>
         <p class="content pt-3" style="border-top: 1px dashed #ffffff66; line-height: 24px">
           Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.
         </p>
       </div>
       <div class="activity-word__list box m-0">
+        <InlineSvg class="img_icon w-100 ml-auto mb-3" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" fill="white" height="40" />
         <ul class="list-unstyled list mb-0">
           <li>
             <a href="#" class="text-decoration-none">
@@ -140,6 +191,35 @@
       </div>
     </div>
   </div>
+  <div class="linear-block py-0" style="background-color: #fcfcfc; box-shadow: none">
+    <div class="head-block subhead-block d-flex">
+      <div class="">
+        <p class="sub-heading mb-2">Activités & Spot</p>
+        <h4 class="heading mb-0">Activités incluses</h4>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div v-for="includedCourse in includedCourses" :key="includedCourse" class="col-12 col-lg-4">
+          <div class="box bg-white my-0" style="padding: 2rem">
+            <div class="head text-uppercase mb-0 d-inline-block text-danger" style="font-size: 1rem; font-weight: 900">
+              <InlineSvg v-if="includedCourse.picto" fill="#d9345a" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
+              <InlineSvg fill="#d9345a" height="10" class="mx-3 d-inline-block" :src="require(`@/assets/svg/triangle-right.svg`)" />
+              <span class="d-inline-block align-middle">{{ includedCourse.title }}</span>
+            </div>
+            <ul class="list-unstyled list mt-3 mb-0">
+              <li style="border-top: 1px dashed #dbdbdbb3" v-for="(info, index) in includedCourse.alternativeInfos" :key="info">
+                <a href="#" @click.prevent style="cursor: default" class="text-decoration-none" :class="[index === includedCourse.alternativeInfos.length - 1 ? 'pb-0' : '']">
+                  {{ info.title }} :
+                  <strong class="text--grey ml-2">{{ info.description }}</strong>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="linear-block">
     <div class="card border-0 rounded-0">
       <div class="head-block subhead-block d-flex">
@@ -164,41 +244,13 @@
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
             <div class="like-div white">
-              <h5 class="content-head">LES + DU SPOT</h5>
-              <ul class="list-unstyled text-uppercase content-list">
-                <li v-for="spotAdvantage in course.sportAdvantages" :key="spotAdvantage">
-                  <a class="text-reset" href="#"><i class="fas fa-plus mr-2"></i>{{ spotAdvantage.name }}</a>
+              <h5 class="content-head text-nowrap pr-3" style="font-weight: 900">LES + DU SPOT :</h5>
+              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
+                <li v-for="spotAdvantage in course?.spot?.spotAdvantages" :key="spotAdvantage">
+                  <a class="text-reset p-0" @click.prevent style="cursor: default" href="#"><i class="fas fa-plus mr-2"></i>{{ spotAdvantage.name }}</a>
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="linear-block" style="background-color: #fcfcfc; box-shadow: none">
-    <div class="head-block subhead-block d-flex">
-      <div class="">
-        <p class="sub-heading mb-2">Activités & Spot</p>
-        <h4 class="heading mb-0">Activités incluses</h4>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div v-for="includedCourse in includedCourses" :key="includedCourse" class="col-12 col-lg-4">
-          <div class="box bg-white">
-            <h5 class="head text-uppercase mb-0 d-inline-block text-danger">
-              <InlineSvg v-if="includedCourse.picto" class="head-pin-icon d-inline-block" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-              {{ includedCourse.title }}
-            </h5>
-            <ul class="list-unstyled list mt-3 mb-0">
-              <li v-for="info in includedCourse.alternativeInfos" :key="info">
-                <a href="#" class="text-decoration-none">
-                  {{ info.title }}
-                  <strong class="text-dark ml-2">{{ info.description }}</strong>
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -218,7 +270,7 @@
         <ul class="activity-list list-unstyled mb-0">
           <li v-for="alternative in altCourses" :key="alternative">
             <h5 class="activity-list-head mb-0">
-              <InlineSvg v-if="alternative.picto" class="icon" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
+              <InlineSvg v-if="alternative.picto" fill="#d9345a" class="icon" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
               {{ alternative.title }}
             </h5>
             <ul class="list-unstyled text-uppercase activity-content-list mb-0">
@@ -248,9 +300,12 @@ export default {
     }
   },
   watch: {
-    course(val) {
-      this.includedCourses = val.alternatives.filter((el) => el.isIncluded)
-      this.altCourses = val.alternatives.filter((el) => el.isOption)
+    course: {
+      immediate: true,
+      handler(val) {
+        this.includedCourses = val.alternatives.filter((el) => el.isIncluded)
+        this.altCourses = val.alternatives.filter((el) => el.isOption)
+      }
     }
   },
   methods: {
@@ -265,8 +320,8 @@ export default {
 
 <style scoped>
 .chapter-block {
-  margin-bottom: 10rem;
-  margin-top: 20rem;
+  margin-bottom: 8rem;
+  margin-top: 13rem;
 }
 .linear-block:last-of-type {
   margin-bottom: 0;
@@ -292,19 +347,12 @@ export default {
   display: inline-block;
   text-align: left;
   padding: 2.5rem 3rem;
-  width: 70%;
+  width: 100%;
   font-weight: 100;
-}
-.activity-word__list {
-  display: inline-block;
-  background-color: #292f33;
-  margin: 0;
-  border: none;
-  width: 30%;
-  padding: 1.5rem;
 }
 .optional-activity__info-item--price {
   border-left: 1px solid #292f33;
+  color: #292f33;
 }
 .product__nav__section-number {
   position: relative;

@@ -2012,7 +2012,7 @@ a.bg-danger:hover {
   font-weight: 400;
   color: #e2e2e2;
   border-bottom: 1px dashed #ffffff4d;
-  padding: 15px 0;
+  padding: 12px 0;
   display: inline-block;
 }
 .box .list li:last-child a {
@@ -5506,7 +5506,7 @@ a.descriptif-link.bg-danger:hover {
   }
   .main-product-content .linear-block {
     margin-top: 6rem;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
     padding: 3rem 3rem;
     box-shadow: 0 0 2px #ebebeb;
     /* border: 1px solid #ebebeb; */
@@ -5542,7 +5542,7 @@ a.descriptif-link.bg-danger:hover {
   }
   .main-product-content .like-div .content-list li a {
     font-size: 12px;
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.03rem;
     padding: 0;
     padding-right: 26px;
     /* border-right: 1px solid #ffffff; */
@@ -5561,7 +5561,7 @@ a.descriptif-link.bg-danger:hover {
     font-size: 0.875rem;
   }
   .main-product-content .like-div.white .content-list li a {
-    border-right: 1px solid #292f33;
+    /* border-right: 1px solid #292f33; */
   }
   .main-product-content .like-div .content-list li:last-child a,
   .main-product-content .like-div.white .content-list li:last-child a {
@@ -5584,8 +5584,8 @@ a.descriptif-link.bg-danger:hover {
   .place-list li:not(:last-child) a {
     border-right: 1px dashed #ebebeb;
     display: block;
-    padding-right: 33px;
-    margin-right: 33px;
+    padding-right: 1.5rem;
+    margin-right: 1.5rem;
   }
   .place-list.f-13 li:not(:last-child) a {
     padding-right: 28px;

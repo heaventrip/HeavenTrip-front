@@ -67,8 +67,8 @@ export default {
 
 <style scoped>
 .chapter-block {
-  margin-bottom: 10rem;
-  margin-top: 20rem;
+  margin-bottom: 8rem;
+  margin-top: 13rem;
 }
 .linear-block:last-of-type {
   margin-bottom: 0;

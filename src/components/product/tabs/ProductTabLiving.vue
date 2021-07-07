@@ -96,7 +96,7 @@
     </swiper>
     <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   </div>
-  <div class="linear-block mb-0">
+  <div class="linear-block mb-0 p-0" style="background-color: rgb(252, 252, 252); box-shadow: none">
     <div class="card border-0 rounded-0">
       <div class="head-block subhead-block d-flex">
         <div class="">
@@ -105,12 +105,9 @@
         </div>
         <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
       </div>
-      <div class="card-body">
-        <p class="content mb-0">{{ course.spot.description }}</p>
-      </div>
     </div>
   </div>
-  <div class="d-flex mb-5 mt-2">
+  <div class="d-flex" style="margin-top: 0.5rem; margin-bottom: 6rem">
     <div class="linear-block p-0 m-0 w-100">
       <div class="card-body d-flex" style="box-shadow: 0 0 2px #ebebeb; height: 340px">
         <div class="guide-word__image">
@@ -199,8 +196,8 @@ export default {
 
 <style scoped>
 .chapter-block {
-  margin-bottom: 10rem;
-  margin-top: 20rem;
+  margin-bottom: 8rem;
+  margin-top: 13rem;
 }
 .linear-block:last-of-type {
   margin-bottom: 0;
