@@ -1,1 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135.6995 135.689"><defs><style>.cls-1,.cls-2,.cls-3,.cls-4{fill:none;}.cls-1{stroke:#ebebeb;stroke-width:5px;}.cls-1,.cls-2{stroke-miterlimit:10;}.cls-2{stroke:#d82558;stroke-linecap:round;stroke-width:14px;}.cls-4{stroke:#fff;stroke-miterlimit:4.001;stroke-width:1.5004px;}</style></defs><g id="Calque_2" data-name="Calque 2"><g id="Calque_1-2" data-name="Calque 1"><path id="Tracé_5223-2" data-name="Tracé 5223-2" class="cls-1" d="M67.855,7a60.8445,60.8445,0,0,1,0,121.689h-.0105A60.8445,60.8445,0,0,1,67.8445,7Z"/><path id="Tracé_5223-2-2" data-name="Tracé 5223-2" class="cls-2" d="M67.8445,7h.0105a60.8445,60.8445,0,0,1,0,121.689h-.0105A60.8445,60.8445,0,0,1,7,67.8445"/><g id="Ellipse_101" data-name="Ellipse 101"><circle class="cls-3" cx="6.6986" cy="69.6998" r="2.8047"/><circle class="cls-4" cx="6.6986" cy="69.6998" r="2.0545"/></g></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 146.0288 146.189">
+  <defs>
+    <style>
+      .cls-1,
+      .cls-2,
+      .cls-3,
+      .cls-4 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #ebebeb;
+        stroke-width: 5px;
+      }
+
+      .cls-1,
+      .cls-2 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        stroke: #d82558;
+        stroke-linecap: round;
+        stroke-width: 16px;
+        filter: drop-shadow(0px 2px 3px #7c7c7c80)
+      }
+
+      .cls-4 {
+        stroke: #fff;
+        stroke-width: 4.5px;
+      }
+    </style>
+  </defs>
+  <g id="Calque_2" data-name="Calque 2">
+    <g id="Calque_1-2" data-name="Calque 1">
+      <path id="Tracé_5223-2" data-name="Tracé 5223-2" class="cls-1"
+        d="M67.855,7a60.8445,60.8445,0,0,1,0,121.689h-.0105A60.8445,60.8445,0,0,1,67.8445,7Z" />
+      <path id="Tracé_5223-2-2" data-name="Tracé 5223-2" class="cls-2"
+        d="M67.8445,7h.0105a60.8445,60.8445,0,0,1,0,121.689h-.0105A60.8445,60.8445,0,0,1,7,67.8445" />
+      <g id="Ellipse_101" data-name="Ellipse 101">
+        <circle class="cls-3" cx="6.6986" cy="69.6998" r="2.8047" />
+        <circle class="cls-4" cx="6.6986" cy="69.6998" r="2.0545" />
+      </g>
+    </g>
+  </g>
+</svg>

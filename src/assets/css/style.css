@@ -1852,7 +1852,7 @@ a.bg-danger:hover {
   font-size: 1.125rem;
   font-weight: bold;
   text-transform: uppercase;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 .main-product-content .content-head.equip {
   letter-spacing: 1.6px;
@@ -1868,7 +1868,7 @@ a.bg-danger:hover {
 }
 .main-product-content .content-list.equip li a {
   font-family: 'Muli', sans-serif;
-  padding: 9px 0;
+  padding: 8px 0;
   font-weight: 500;
   margin-left: 0;
   border-bottom: 1px dashed #7c7c7ca6;
@@ -1895,6 +1895,9 @@ a.bg-danger:hover {
   margin-left: 0;
   border-left: none;
   padding-left: 0;
+}
+.main-product-content .subhead-block {
+  margin-bottom: 3rem;
 }
 .left-border {
   border-left: 1px solid #292f33;

@@ -19,8 +19,9 @@
       <vue-easy-lightbox v-if="!asideSlider" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="handleHide"></vue-easy-lightbox>
     </div> -->
     <div class="product-content d-flex">
+      <div class="whitespace-big-screen"></div>
       <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
-        <div style="position: fixed; top: 0px; right: 0; left: 0; width: calc(65vw + 2rem); z-index: 2">
+        <div class="product-nav-tabs">
           <ProductNav :course="course" />
           <ul style="height: 100px; background-color: white" class="nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
             <li class="nav-item" role="presentation" type="button">
@@ -43,22 +44,22 @@
             </li>
           </ul>
         </div>
-        <div id="product-tab-infos" class="product-section pt-5">
+        <div id="product-tab-infos" class="product-section" style="padding-top: 10rem">
           <ProductTabInfos :course="course" />
         </div>
-        <div id="product-tab-activities" class="product-section" style="padding-top: 4rem">
+        <div id="product-tab-activities" class="product-section">
           <ProductTabActivities :course="course" />
         </div>
-        <div id="product-tab-living" class="product-section" style="padding-top: 4rem">
+        <div id="product-tab-living" class="product-section">
           <ProductTabLiving :course="course" />
         </div>
-        <div id="product-tab-program" class="product-section" style="padding-top: 4rem">
+        <div id="product-tab-program" class="product-section">
           <ProductTabProgram :course="course" />
         </div>
-        <div id="product-tab-tips" class="product-section" style="padding-top: 4rem">
+        <div id="product-tab-tips" class="product-section">
           <ProductTabTips :course="course" />
         </div>
-        <div id="product-tab-reviews" class="product-section" style="padding-top: 4rem; min-height: 100vh">
+        <div id="product-tab-reviews" class="product-section" style="min-height: 100vh">
           <ProductTabReviews :course="course" />
         </div>
         <!-- <div class="w-50" id="pills-info" aria-labelledby="pills-info-tab">
@@ -308,7 +309,6 @@ export default {
   position: relative;
   width: 100%;
 }
-
 .message-input-label:before {
   content: '';
   position: absolute;
@@ -331,27 +331,9 @@ export default {
   color: #292f33;
   height: 6rem;
 }
-@media only screen and (max-width: 2000px) {
-  .product-content {
-    justify-content: space-between;
-  }
-  .gallery-comment-block {
-    width: 35vw;
-    margin-left: auto;
-  }
-  .main-tab {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media only screen and (min-width: 2000px) {
-  .gallery-comment-block {
-  }
-  .main-tab {
-  }
-}
+
 .main-tab {
+  max-width: 1000px;
   position: relative;
   padding: 0rem 0rem 3.5rem 0rem;
   min-height: 100vh;
@@ -420,5 +402,63 @@ export default {
 .fade--in--content {
   transition: opacity 0.8s ease 0.4s;
   opacity: 1;
+}
+@media only screen and (max-width: 2000px) {
+  .whitespace-big-screen {
+    display: none;
+  }
+  .product-nav-tabs {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    left: 0;
+    width: calc(65vw + 2rem);
+    z-index: 2;
+  }
+  .nav--big-screen {
+    display: none;
+  }
+  .product-content {
+    justify-content: space-between;
+  }
+  .gallery-comment-block {
+    width: 35vw;
+    margin-left: auto;
+  }
+  .main-tab {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media only screen and (min-width: 2000px) {
+  .whitespace-big-screen {
+    height: 100px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 1;
+    box-shadow: 0px 3px 6px #00000005;
+  }
+  .product-nav-tabs {
+    position: relative;
+    width: 120%;
+    margin-left: -10%;
+  }
+  .product-content {
+    justify-content: center;
+  }
+  .gallery-comment-block {
+    max-width: 900px;
+    margin-left: 4rem;
+  }
+  .main-tab {
+    margin-right: 4rem;
+  }
+  .aside-slider {
+    z-index: 5;
+  }
 }
 </style>

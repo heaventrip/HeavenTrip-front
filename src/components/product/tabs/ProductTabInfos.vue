@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center justify-content-center" style="margin: 5vh auto">
+  <div class="chapter-block d-flex align-items-center justify-content-center">
     <svg xmlns="http://www.w3.org/2000/svg" fill="#292f33" height="130" viewBox="0 0 1192.975 1192.752">
       <path
         d="M922.67,1021.59l-8.031,6.627c-93.359,77.049-211.9,119.483-333.788,119.483-.854,0-1.715,0-2.567-.006-141.628-.692-275.123-56.4-375.892-156.857C4.543,793.6-10.455,486.108,167.5,275.583l6.751-7.985-31.929-32.17-8.044,9.47A561.006,561.006,0,0,0,32.541,421.506,570.515,570.515,0,0,0,.123,624.269C3.191,774.608,63.744,916.086,170.629,1022.64c109.286,108.948,254.068,169.358,407.7,170.1.952,0,1.9.008,2.846.008a570.306,570.306,0,0,0,192.7-33.271,564.467,564.467,0,0,0,171.155-97.745l9.586-7.97Z"
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="linear-block plain-block pb-0">
-    <div class="head-block mb-5 d-flex justify-content-center justify-content-lg-start">
+    <div class="head-block subhead-block d-flex">
       <!-- <div class="product__nav__section-number"><span>01</span></div> -->
       <div class="">
         <p class="sub-heading mb-2">Récap du stage</p>
@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="linear-block product__overview__details-block">
-    <div class="head-block d-flex justify-content-center justify-content-lg-start">
+    <div class="head-block subhead-block d-flex">
       <div class="">
         <p class="sub-heading mb-2">Suis-je prêt ?</p>
         <h4 class="heading mb-0">Niveau & intensité</h4>
@@ -101,30 +101,30 @@
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
               <InlineSvg v-if="course.level.step" :src="require(`@/assets/svg/intensity-${course.level.step}.svg`)" height="150px" />
-              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
+              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d9345a" style="left: 34%; top: 34%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
                 Niveau : <strong class="ml-2">{{ course.level.step }}</strong
-                >/4
+                >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course.level.name }} <i class="fas fa-info-circle text-pink ml-2"></i></h6>
+              <h6 class="status-text mb-0">{{ course.level.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>
         <div class="col-12 col-lg-6">
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
-              <InlineSvg :src="require(`@/assets/svg/intensity-${course.intensity.step}.svg`)" height="150px" />
-              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="50%" fill="#d9345a" style="left: 25%; top: 25%; position: absolute" />
+              <InlineSvg :src="require(`@/assets/svg/intensity-1.svg`)" height="150px" />
+              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d9345a" style="left: 34%; top: 34%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
                 Intensité physique :
                 <strong class="ml-2">{{ course.intensity.step }}</strong
-                >/4
+                >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course.intensity.name }} <i class="fas fa-info-circle text-pink ml-2"></i></h6>
+              <h6 class="status-text mb-0">{{ course.intensity.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>
@@ -132,33 +132,42 @@
     </div>
   </div>
   <div class="linear-block">
-    <div class="head-block mb-4 d-flex justify-content-center justify-content-lg-start mb-0 mb-lg-3 mt-lg-5">
+    <div class="head-block subhead-block d-flex">
       <div class="">
-        <p class="sub-heading mb-2">Bon a savoir…</p>
+        <p class="sub-heading mb-2">Bon à savoir…</p>
         <h4 class="heading mb-0">Prestations & équipements</h4>
       </div>
     </div>
     <div class="card-body py-0 p-lg-0">
       <div class="row">
         <div class="col-12 col-lg-6">
-          <h5 class="content-head equip"><i class="far fa-check-circle mr-2 h4 align-text-top mb-0"></i>EST INCLUS :</h5>
-          <ul class="list-unstyled content-list equip">
+          <div class="content-head equip mb-2">
+            <i class="far fa-check-circle mr-2 h5 align-text-top mb-0"></i>
+            <span class="d-inline-block" style="vertical-align: baseline">EST INCLUS :</span>
+          </div>
+          <ul class="list-unstyled content-list equip mb-4">
             <li v-for="includedService in course.includedServices" :key="includedService">
               <a class="text-reset" href="#">{{ includedService.name }}</a>
             </li>
           </ul>
-        </div>
-        <div class="col-12 col-lg-6">
-          <h5 class="content-head equip"><i class="far fa-times-circle mr-2 h4 align-text-top mb-0"></i>Non INCLUS :</h5>
-          <ul class="list-unstyled content-list equip">
-            <li v-for="excludedService in course.excludedServices" :key="excludedService">
-              <a class="text-reset" href="#">{{ excludedService.name }}</a>
-            </li>
-          </ul>
-          <h5 class="content-head equip"><i class="far fa-dot-circle mr-2 h4 align-text-top mb-0"></i>En options :</h5>
-          <ul class="list-unstyled content-list equip">
+          <div class="content-head equip mb-2">
+            <i class="far fa-dot-circle mr-2 mr-2 h5 align-text-top mb-0"></i>
+            <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
+          </div>
+          <ul class="list-unstyled content-list equip mb-0">
             <li v-for="extraService in course.extraServices" :key="extraService">
               <a class="text-reset" href="#">{{ extraService.name }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 4rem">
+          <div class="content-head equip mb-2">
+            <i class="far fa-times-circle mr-2 h5 align-text-top mb-0"></i>
+            <span class="d-inline-block" style="vertical-align: baseline">Non INCLUS :</span>
+          </div>
+          <ul class="list-unstyled content-list equip mb-0">
+            <li v-for="(excludedService, index) in course.excludedServices" :key="excludedService">
+              <a class="text-reset" :class="[index === course.excludedServices.length - 1 ? 'pb-0' : '']" href="#">{{ excludedService.name }}</a>
             </li>
           </ul>
         </div>
@@ -213,6 +222,13 @@ export default {
 </script>
 
 <style scoped>
+.chapter-block {
+  margin-bottom: 10rem;
+  margin-top: 20rem;
+}
+.linear-block:last-of-type {
+  margin-bottom: 0;
+}
 .level-modal {
   position: fixed;
   top: 50%;

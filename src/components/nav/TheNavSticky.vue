@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-start">
+  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-start" :class="[activitiesIsActive || destinationsIsActive ? 'navbar-filter--grey' : '', agencyIsActive ? 'navvbar-filter--white' : '']">
     <a class="navbar-brand pl-sm-5 pl-lg-0" href="/">
       <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" width="180" />
       <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" width="180" />
@@ -251,6 +251,29 @@ export default {
   width: 100vw;
   height: 70px; /* easier to manipulate with fixed height */
   z-index: 11;
+  background-color: #292f33;
+}
+.navbar-filter--grey::after {
+  content: '';
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #292f33;
+  opacity: 0.9;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+.navbar-filter--white::after {
+  content: '';
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  opacity: 0.8;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
 .tab-content.main-wrapper {
   z-index: 1;
