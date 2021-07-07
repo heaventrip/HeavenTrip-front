@@ -118,50 +118,58 @@
       </div>
     </div>
   </div>
-  <div class="linear-block p-0 mt-2">
-    <div class="card-body">
-      <div class="pri-activity-block">
-        <div class="box bg-dark m-0">
-          <h5 class="head text-uppercase mb-0 d-inline-block">
-            <img class="head-pin-icon d-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-            ski freeride
-          </h5>
-          <ul class="list-unstyled list mt-3 mb-0">
-            <li>
-              <a href="#" class="text-decoration-none">
-                COURS DE PERFECTIONNEMENT :
-                <strong class="text-white ml-2"> 20H</strong></a
-              >
-            </li>
-            <li>
-              <a href="#" class="text-decoration-none">
-                Sessions :
-                <strong class="text-white ml-2"> 4</strong></a
-              >
-            </li>
-            <li>
-              <a href="#" class="text-decoration-none">
-                Tendance :
-                <strong class="text-white ml-2"> 60% hors piste</strong></a
-              >
-            </li>
-            <li>
-              <a href="#" class="text-decoration-none">
-                Tendance :
-                <strong class="text-white ml-2"> 60% hors piste</strong></a
-              >
-            </li>
-          </ul>
-          <!-- <a href="#" class="corner-link">+</a> -->
-        </div>
-        <div class="brown-div">
-          <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-          <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-          <h6 class="author mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
-        </div>
-        <div class="img-block">
+  <div class="d-flex mb-5 mt-2">
+    <div class="linear-block p-0 m-0">
+      <div class="card-body d-flex">
+        <div class="guide-word__image">
           <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
         </div>
+        <div class="guide-word__text">
+          <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
+          <p class="content pt-3 text-white" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+          <h6 class="author text-white mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column" style="width: 100px">
+      <div @mouseover="tab = 1" class="bg-dark" style="height: 50px; width: 100%">a</div>
+      <div @mouseover="tab = 2" class="bg-white" style="height: 50px; width: 100%">b</div>
+    </div>
+  </div>
+  <div class="linear-block p-0 mt-2">
+    <div class="card-body d-flex align-items-center">
+      <div class="activity-word__text">
+        <h6 class="head text-uppercase py-3" style="width: 100%; border-bottom: 1px dashed #b4b4b4">DESCRIPTION ACTIVITE</h6>
+        <p class="content pt-3" style="border-top: 1px dashed #ffffff66">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+      </div>
+      <div class="activity-word__list box m-0">
+        <ul class="list-unstyled list mt-3 mb-0">
+          <li>
+            <a href="#" class="text-decoration-none">
+              COURS DE PERFECTIONNEMENT :
+              <strong class="text-white ml-2"> 20H</strong></a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-decoration-none">
+              Sessions :
+              <strong class="text-white ml-2"> 4</strong></a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-decoration-none">
+              Tendance :
+              <strong class="text-white ml-2"> 60% hors piste</strong></a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-decoration-none">
+              Tendance :
+              <strong class="text-white ml-2"> 60% hors piste</strong></a
+            >
+          </li>
+        </ul>
+        <!-- <a href="#" class="corner-link">+</a> -->
       </div>
     </div>
   </div>
@@ -201,6 +209,7 @@ export default {
   props: ['course'],
   data() {
     return {
+      tab: 1,
       currentPaginationStyle: `
         font-family: Oswald, sans-serif;
         font-weight: 800;
@@ -223,6 +232,29 @@ export default {
 </script>
 
 <style scoped>
+.guide-word__image {
+  display: inline-block;
+  width: 30%;
+}
+.guide-word__text {
+  display: inline-block;
+  background-color: #292f33;
+  text-align: left;
+  padding: 2rem;
+  width: 70%;
+}
+.activity-word__text {
+  display: inline-block;
+  text-align: left;
+  width: 70%;
+  padding: 1.5rem;
+}
+.activity-word__list {
+  display: inline-block;
+  background-color: #292f33;
+  margin: 0;
+  border: none;
+}
 .product__nav__section-number {
   position: relative;
   width: 3rem;
