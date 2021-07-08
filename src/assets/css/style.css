@@ -1846,7 +1846,7 @@ a.bg-danger:hover {
   font-weight: 400;
 }
 .main-product-content .card-body .content {
-  letter-spacing: 0;
+  letter-spacing: 0.03rem;
 }
 .main-product-content .content-head {
   font-size: 1.125rem;
@@ -5640,7 +5640,8 @@ a.descriptif-link.bg-danger:hover {
     margin-left: 25px;
   }
   .main-product-content .activity-list .activity-content-list li:last-child {
-    margin-left: auto;
+    padding-left: 1rem;
+    margin-left: 3rem;
   }
   .block-separator {
     border: 1px solid #ebebeb;

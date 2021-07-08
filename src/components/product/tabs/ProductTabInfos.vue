@@ -35,7 +35,7 @@
           <InlineSvg v-if="course.sports && course.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" />
         </span>
       </h6>
-      <p class="content mt-3 mb-4">
+      <p class="content mt-3" style="margin-bottom: 2.5rem">
         {{ course.description }}
       </p>
       <div class="row" style="margin-left: -3rem; margin-right: -3rem">

@@ -87,15 +87,13 @@
       </div>
     </div>
   </div>
-  <div class="linear-block mt-2">
-    <swiper :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
-      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-      <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-    </swiper>
-    <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
-  </div>
+  <swiper :slidesPerView="3" :spaceBetween="1" :loop="true" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }">
+    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
+  </swiper>
+  <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   <div class="linear-block mb-0 p-0" style="background-color: rgb(252, 252, 252); box-shadow: none">
     <div class="card border-0 rounded-0">
       <div class="head-block subhead-block d-flex">
@@ -162,6 +160,7 @@
 <script>
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
 
 export default {
   name: 'ProductTabLiving',
@@ -195,6 +194,17 @@ export default {
 </script>
 
 <style scoped>
+.swiper-pagination {
+  text-align: unset;
+  left: 10px;
+}
+.swiper-slide__img {
+  position: relative;
+  display: block;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
 .chapter-block {
   margin-bottom: 8rem;
   margin-top: 13rem;

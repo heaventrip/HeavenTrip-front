@@ -229,15 +229,14 @@
         </div>
         <i class="fa fa-chevron-down h4 mb-0 arrow text-white d-block d-lg-none"></i>
         <h6 @click="openMap" type="button" class="map-head d-flex align-items-center justify-content-end text-danger ml-auto">
-          VOIR SUR <br />LA MAP<span class="img-block">
-            <InlineSvg class="img_icon" :src="require('@/assets/svg/map-pin.svg')" />
+          <span class="img-block">
+            <InlineSvg class="img_icon" height="40" :src="require('@/assets/svg/mapsearch.svg')" />
           </span>
+          <!-- TODO add hover -->
+          <span style="margin-left: 0.5rem; color: #292f33; text-align: left"> VOIR SUR <br />LA MAP </span>
         </h6>
       </div>
       <div class="card-body">
-        <h6 @click="openMap" type="button" class="map-head d-flex d-lg-none align-items-center justify-content-end mb-3 mr-4">
-          VOIR SUR <br />LA MAP<span class="img-block"><InlineSvg class="img_icon" :src="require('@/assets/svg/map-pin.svg')" /></span>
-        </h6>
         <p class="content">
           {{ course.spot?.description }}
         </p>
@@ -268,18 +267,18 @@
       <div class="card-body">
         <p class="content">En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.</p>
         <ul class="activity-list list-unstyled mb-0">
-          <li v-for="alternative in altCourses" :key="alternative">
+          <li v-for="(alternative, index) in altCourses" :key="alternative" :class="[index === altCourses.length - 1 ? 'pb-0' : '']">
             <h5 class="activity-list-head mb-0">
-              <InlineSvg v-if="alternative.picto" fill="#d9345a" class="icon" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
-              {{ alternative.title }}
+              <InlineSvg v-if="alternative.picto" fill="#d9345a" height="35" class="d-inline-block mr-4" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
+              <span class="d-inline-block align-middle">{{ alternative.title }}</span>
             </h5>
-            <ul class="list-unstyled text-uppercase activity-content-list mb-0">
+            <ul class="list-unstyled text-uppercase activity-content-list justify-content-end mb-0">
               <li class="optional-activity__info-item">
-                Durée : <strong>{{ alternative.duration }} journée{{ alternative.duration > 1 ? 's' : '' }}</strong>
+                Durée :&nbsp;&nbsp;<strong>{{ alternative.duration }}journée{{ alternative.duration > 1 ? 's' : '' }}</strong>
               </li>
-              <li class="optional-activity__info-item">plongée : <strong>2</strong></li>
+              <li class="optional-activity__info-item">plongée :&nbsp;&nbsp;<strong>2</strong></li>
               <li class="optional-activity__info-item--price">
-                <strong>{{ alternative.price }}€</strong>/pers.
+                <strong>{{ alternative.price }}€</strong>&nbsp;/pers.
               </li>
             </ul>
           </li>
