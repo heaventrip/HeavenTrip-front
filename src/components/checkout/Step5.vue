@@ -1,13 +1,13 @@
 <template>
-  <div class="tab-pane show active fade login-signup-tab" id="step5" role="tabpanel" aria-labelledby="step5-tab">
-    <div class="row">
-      <div class="col-12 col-lg-6 offset-1">
-        <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button>
+  <div class="login-signup-tab">
+    <div class="row no-gutters">
+      <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem">
+        <!-- <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button> -->
         <CheckoutWizardPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
         <CheckoutWizardSuccess />
       </div>
-      <div class="col-12 col-lg-4 ml-auto">
-        <CheckoutWizardRecap :booker="booker" :extra-participants="extraParticipants" />
+      <div class="col-12 col-lg-4 ml-auto" style="box-shadow: -1px 0px 2px #ebebeb; margin-right: -3rem; position: absolute; right: 0; height: calc(100vh - 181px)">
+        <CheckoutWizardRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
       </div>
     </div>
   </div>

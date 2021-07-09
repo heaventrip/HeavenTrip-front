@@ -684,7 +684,7 @@ a.bg-danger:hover {
   font-size: 0.75rem;
   letter-spacing: 0.6px;
   font-weight: 400;
-  height: 100%;
+  /* height: 100%; */
 }
 .header .profile-menu .profile-link {
   background-color: #fff;
@@ -4158,6 +4158,7 @@ input[type='number']::-webkit-outer-spin-button {
   border-color: hsl(0deg 0% 75% / 60%) !important;
 }
 .checkout-header-div {
+  border-bottom: 1px solid white;
   height: 46px;
   font-size: 0.75rem;
   position: relative;
@@ -4204,7 +4205,6 @@ a.descriptif-link.bg-danger:hover {
   background-color: #793f4e !important;
 }
 .checkout-header-block {
-  border-top: 1px solid white;
   border-bottom: 1px solid white;
   z-index: 2;
 }
@@ -4779,7 +4779,8 @@ a.descriptif-link.bg-danger:hover {
   top: 0.3em;
 }
 .next-step-div .btn.disabled {
-  opacity: 0.2;
+  /* opacity: 0.2; */
+  color: #7c7c7c !important;
 }
 .bank-type {
   font-family: 'Muli', sans-serif;
@@ -5483,7 +5484,7 @@ a.descriptif-link.bg-danger:hover {
     border-bottom: 1px solid #292f33 !important;
   }
   .checkout-header-block-container {
-    padding: 40px 50px 30px;
+    padding: 40px 50px;
     min-height: 170px;
   }
   .result-block {

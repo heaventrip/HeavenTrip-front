@@ -1,6 +1,6 @@
 <template>
   <div class="number-of-tripper-div">
-    <h6 class="tripper-head text-uppercase mb-0">NOMBRE DE TRIPPERS : {{ $parent.$parent.partipantsNb }}</h6>
+    <img class="course-image" :src="require('@/assets/images/beach.jpg')" />
     <div class="accordion" id="tripperaccordion">
       <div class="card border-0">
         <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="tripOne" type="button" data-toggle="collapse" data-target="#tripperOne" aria-expanded="false" aria-controls="tripperOne">
@@ -9,7 +9,7 @@
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
             <span class="view-detail">Voir Détails<i class="fas fa-chevron-down ml-2"></i></span>
-            <strong class="check-amount text-dark d-block">2 220 &euro;</strong>
+            <strong class="check-amount text-dark d-block">{{ course.price }} &euro;</strong>
           </div>
         </div>
         <div id="tripperOne" class="collapse" aria-labelledby="tripOne" data-parent="#tripperaccordion">
@@ -18,8 +18,8 @@
               <li>
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Chambre PRIvé</h6>
-                    <p class="tripper-list-para mb-0">à partager avec Axel</p>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Chambre Privée</h6>
+                    <p class="tripper-list-para mb-0">à partager avec {{ booker.booking.roomMate }}</p>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
                 </div>
@@ -28,23 +28,18 @@
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
                     <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Matériel</h6>
-                    <p class="tripper-list-para mb-0">Avec location</p>
+                    <p class="tripper-list-para mb-0">{{ booker.booking.equipmentRental ? 'Avec' : 'Sans' }} location</p>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0">
-                    <strong>Inclus</strong>
+                    <!-- TODO dynamic price -->
+                    <strong>{{ booker.booking.equipmentRental ? '+10€' : 'Gratuit' }}</strong>
                   </h6>
                 </div>
               </li>
               <li>
-                <div class="trippers-list-div d-flex align-items-center">
+                <div v-for="extraActivity in booker.booking.extraActivities" :key="extraActivity" class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Plongée sous-marine</h6>
-                  </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
-                </div>
-                <div class="trippers-list-div d-flex align-items-center">
-                  <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">SUP-PADDLE</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">{{ extraActivity?.name }}</h6>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
                 </div>
@@ -52,7 +47,7 @@
               <li>
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance multirisque</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance {{ booker.booking.insurance }}</h6>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
                 </div>
@@ -61,8 +56,8 @@
           </div>
         </div>
       </div>
-      <div class="card border-0" v-for="extraParticipant in extraParticipants" :key="extraParticipant">
-        <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="triptwo" type="button" data-toggle="collapse" data-target="#tripperTwo" aria-expanded="false" aria-controls="tripperTwo">
+      <div class="card border-0" v-for="(extraParticipant, index) in extraParticipants" :key="extraParticipant">
+        <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" :id="`trip${index}`" type="button" data-toggle="collapse" :data-target="`#tripper${index}`" aria-expanded="false" aria-controls="tripperTwo">
           <div class="participant-img-container position-relative">
             <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
           </div>
@@ -73,14 +68,14 @@
             <strong class="check-amount text-dark d-block">2 220 &euro;</strong>
           </div>
         </div>
-        <div id="tripperTwo" class="collapse" aria-labelledby="triptwo" data-parent="#tripperaccordion">
+        <div :id="`#tripper${index}`" class="collapse" :aria-labelledby="`trip${index}`" data-parent="#tripperaccordion">
           <div class="card-body">
             <ul class="list-unstyled mb-0 tripper-list">
               <li>
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
                     <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Chambre PRIvé</h6>
-                    <p class="tripper-list-para mb-0">à partager avec Axel</p>
+                    <p class="tripper-list-para mb-0">à partager avec {{ extraParticipant.booking.roomMate }}</p>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
                 </div>
@@ -89,23 +84,17 @@
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
                     <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Matériel</h6>
-                    <p class="tripper-list-para mb-0">Avec location</p>
+                    <p class="tripper-list-para mb-0">{{ extraParticipant.booking.equipmentRental ? 'Avec' : 'Sans' }} location</p>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0">
-                    <strong>Inclus</strong>
+                    <strong>{{ extraParticipant.booking.equipmentRental ? '+10€' : 'Gratuit' }}</strong>
                   </h6>
                 </div>
               </li>
               <li>
-                <div class="trippers-list-div d-flex align-items-center">
+                <div v-for="extraActivity in extraParticipant.booking.extraActivities" :key="extraActivity" class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Plongée sous-marine</h6>
-                  </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
-                </div>
-                <div class="trippers-list-div d-flex align-items-center">
-                  <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">SUP-PADDLE</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">{{ extraActivity?.name }}</h6>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
                 </div>
@@ -113,7 +102,7 @@
               <li>
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance multirisque</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance {{ extraParticipant.booking.insurance }}</h6>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
                 </div>
@@ -129,8 +118,14 @@
 <script>
 export default {
   name: 'CheckoutWizardRecap',
-  props: ['booker', 'extra-participants']
+  props: ['course', 'booker', 'extra-participants']
 }
 </script>
 
-<style></style>
+<style scoped>
+.course-image {
+  object-fit: cover;
+  height: 20vh;
+  width: 100%;
+}
+</style>

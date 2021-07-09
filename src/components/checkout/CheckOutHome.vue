@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CheckOutHeader :course="course" :session="session" :active-step="activeStep" />
+    <CheckOutHeader :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
     <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
   </div>
 </template>
