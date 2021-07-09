@@ -230,9 +230,8 @@ export default {
   opacity: 0;
 }
 #navbarSupportedContent {
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: flex-start;
-  padding-right: 30%;
 }
 .subactivity-nav__item {
   color: rgba(250, 250, 250, 0.3) !important;

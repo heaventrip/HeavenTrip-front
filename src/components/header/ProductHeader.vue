@@ -73,7 +73,8 @@ img {
 .header-product__pics {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  margin-top: 70px; /* top nav height */
+  margin-bottom: 10vh; /* bottom tabs height */
 }
 .header-product__pics img {
   cursor: pointer;

@@ -24,10 +24,37 @@
           <p class="sub-heading mb-2">Vie sur place</p>
           <h4 class="heading mb-0 text-uppercase">Hébergement</h4>
         </div>
-        <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
       </div>
       <div class="card-body">
-        <div class="d-flex align-items-center mb-4">
+        <div v-for="room in course.rooms" :key="room" class="head text-uppercase py-2 d-inline-block mr-5" style="font-weight: 500; cursor: pointer" :class="{ 'room-tab--active': activeRoomTab === room }" @mouseover="activeRoomTab = room">
+          {{ room.title }}
+        </div>
+        <transition name="fade-fast" mode="out-in">
+          <div :key="activeRoomTab">
+            <p class="content">{{ activeRoomTab.title }}</p>
+            <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+              <li style="border-bottom: none; padding-bottom: 0">
+                <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
+                  Nom :
+                  <strong class="text-dark ml-2">{{ activeRoomTab.title }}</strong></a
+                >
+              </li>
+              <li style="border-bottom: none; padding-bottom: 0">
+                <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
+                  Prix :
+                  <strong class="text-dark ml-2">{{ activeRoomTab.price }}</strong></a
+                >
+              </li>
+              <li style="border-bottom: none; padding-bottom: 0">
+                <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
+                  Capacité :
+                  <strong class="text-dark ml-2">{{ activeRoomTab.quantity }} personnes</strong></a
+                >
+              </li>
+            </ul>
+          </div>
+        </transition>
+        <div v-if="false" class="d-flex align-items-center mb-4">
           <!-- <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5> -->
           <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab " role="tablist">
             <li v-for="(room, index) in course.rooms" :key="room" class="nav-item" role="presentation">
@@ -35,19 +62,12 @@
             </li>
           </ul>
         </div>
-        <!-- <div class="stay-dropdown d-block d-lg-none">
-            <select class="form-control select-place">
-              <option value="#pills-solo">BUNGALOW SOLO</option>
-              <option value="#pills-duo">BUNGALOW DUO</option>
-              <option value="#pills-vip">BUNGALOW VIP</option>
-            </select>
-          </div> -->
-        <div class="tab-content">
+        <div v-if="false" class="tab-content">
           <div class="tab-pane fade" v-for="(room, index) in course.rooms" :key="room" :class="[index === 0 ? 'show active' : '']" id="pills-solo" role="tabpanel" aria-labelledby="pills-solo-tab">
-            <p class="content">{{ course.description }}</p>
+            <p class="content">{{ room.description }}</p>
           </div>
         </div>
-        <ul class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+        <ul v-if="false" class="list-unstyled place-list text-uppercase my-3 mb-0 d-flex flex-wrap flex-column flex-lg-row">
           <li>
             <a href="#" class="text-decoration-none">
               Type :
@@ -171,6 +191,7 @@ export default {
   props: ['course'],
   data() {
     return {
+      activeRoomTab: '',
       tab: 1,
       currentPaginationStyle: `
         font-family: Oswald, sans-serif;
@@ -181,6 +202,15 @@ export default {
         font-family: Oswald, sans-serif;
         color: rgba(250, 250, 250, 0.7);
         font-size: 1rem;`
+    }
+  },
+  watch: {
+    course: {
+      immediate: true,
+      handler(val) {
+        // set first one active when loaded
+        this.activeRoomTab = val.rooms[0]
+      }
     }
   },
   methods: {
@@ -194,6 +224,9 @@ export default {
 </script>
 
 <style scoped>
+.room-tab--active {
+  border-bottom: 1px solid #292f33;
+}
 .swiper-pagination {
   text-align: unset;
   left: 10px;

@@ -8,7 +8,6 @@ import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
 import SearchHome from '@/components/search/SearchHome.vue'
 import Profile from '@/components/connection/Profile.vue'
 import ConnectionModal from '@/components/connection/ConnectionModal.vue'
-import Terms from '@/components/legal/Terms.vue'
 import Legal from '@/components/legal/Legal.vue'
 import { isLoggedIn } from '@/utils/auth'
 
@@ -51,17 +50,12 @@ const routes = [
     path: '/login',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/legal',
+    name: 'Legal',
+    component: Legal
   }
-  // {
-  //   path: '/terms',
-  //   name: 'Terms',
-  //   component: Terms
-  // },
-  // {
-  //   path: '/legal',
-  //   name: 'Legal',
-  //   component: Legal
-  // }
 ]
 
 const router = createRouter({

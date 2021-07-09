@@ -1,74 +1,40 @@
 <template>
   <div>
     <main class="checkout-main-container">
-      <div class="container-fluid bg-light h-100">
+      <div class="container-fluid h-100">
         <div class="row h-100">
           <div class="col-12 col-xl-4 p-0 bg-image h-100 position-relative">
-            <div class="d-flex justify-content-between align-items-center trip-list-div text-white px-3">
-              <ul class="list-unstyled mb-0 d-flex align-items-center text-uppercase">
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/globe.svg')" />test</li>
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/timer.svg')" />nuits</li>
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/ring.svg')" />confirmé</li>
-              </ul>
-              <ul class="list-unstyled mb-0 d-flex align-items-center trip-list">
-                <li>
-                  <img class="mr-2 icons" fluid :src="require('@/assets/images/head-pin.png')" />
-                </li>
-                <li>
-                  <img class="mr-2 icons" fluid :src="require('@/assets/svg/yoga.svg')" />
-                </li>
-              </ul>
-            </div>
             <img class="img-fluid checkout-info-img" fluid :src="require('@/assets/images/checkout_bg.jpg')" />
             <div class="d-flex align-items-center share-social-icons text-white">
-              <h6 class="font-weight-normal mr-3 mb-0">Partage un max !</h6>
+              <h6 class="font-weight-normal mr-3 mb-0">Partage à un pote!</h6>
               <a href="#" class="rounded-circle d-inline-block">
-                <img class="mr-2" fluid :src="require('@/assets/images/insta.png')" />
+                <InlineSvg class="mr-2" :src="require('@/assets/svg/instagram-light.svg')" height="30" />
               </a>
               <a href="#" class="rounded-circle d-inline-block">
-                <img class="mr-2" fluid :src="require('@/assets/images/fb.png')" />
-              </a>
-              <a href="#" class="rounded-circle d-inline-block">
-                <img class="mr-2" fluid :src="require('@/assets/images/youtube.png')" />
+                <InlineSvg class="mr-2" :src="require('@/assets/svg/facebook-light.svg')" height="30" />
               </a>
             </div>
           </div>
           <div class="col-12 col-xl-8 p-0 h-100">
-            <div class="checkout-body-content bg-light">
-              <ul class="nav nav-tabs font-weight-bold checkout-steps text-uppercase border-0 d-none" id="" role="tablist">
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step1-tab" data-toggle="tab" href="#step1" role="tab" aria-controls="step1" aria-selected="false"><span class="number-circle">1</span>Connexion </a>
-                  <!-- INSCRIPTION -->
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset active" id="step2-tab" data-toggle="tab" href="#step2" role="tab" aria-controls="step2" aria-selected="false"><span class="number-circle">2</span> PARTICIPANT(s)</a>
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step3-tab" data-toggle="tab" href="#step3" role="tab" aria-controls="step3" aria-selected="false"><span class="number-circle">3</span> OPTIONS</a>
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step4-tab" data-toggle="tab" href="#step4" role="tab" aria-controls="step4" aria-selected="false"><span class="number-circle">4</span> ASSURANCE</a>
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step5-tab" data-toggle="tab" href="#step5" role="tab" aria-controls="step5" aria-selected="true"><span class="number-circle">5</span> PAIEMENT</a>
-                </li>
-                <li class="nav-item flex-grow-1" role="presentation">
-                  <a class="nav-link text-reset active" id="step6-tab" data-toggle="tab" href="#step6" role="tab" aria-controls="step6" aria-selected="true"><span class="number-circle">2</span> ENVOYER MA DEMANDE</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="">
-                <!-- <Step1 /> -->
-                <CheckoutWizardParticipants />
-                <CheckoutWizardForm />
-                <CheckoutWizardForm2 />
-                <Step5 :course="course" />
-                <Step6 />
-                <div class="text-right next-step-div pt-4" data-toggle="buttons" role="tablist">
-                  <button class="btn text-uppercase prev-step-btn" data-toggle="tab" role="tab" href="#step2">1</button>
-                  <button class="btn text-uppercase prev-step-btn" data-toggle="tab" role="tab" href="#step3">2</button>
-                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step4">3</button>
-                  <button class="btn text-uppercase prev-step-btn ml-4" data-toggle="tab" role="tab" href="#step5">4</button>
-                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step6">5</button>
+            <div class="checkout-body-content">
+              <div class="d-flex w-100 py-5">
+                <div class="text-uppercase" style="font-weight: 600">Participants</div>
+                <div class="text-uppercase pr-4 ml-auto" style="font-weight: 400">Options</div>
+                <div class="text-uppercase px-4" style="border-left: 1px dashed #7c7c7c; border-right: 1px dashed #7c7c7c; font-weight: 400">Assurance</div>
+                <div class="text-uppercase pl-4" style="font-weight: 400">Paiement</div>
+              </div>
+              <div class="tab-content">
+                <transition name="fade" mode="out-in">
+                  <CheckoutWizardBooker @complete="bookerComplete = true" @incomplete="bookerComplete = false" @updated-booker="setBooker" v-if="activeStep === 'booker'" />
+                  <CheckoutWizardParticipants v-else-if="activeStep === 'participants'" />
+                  <CheckoutWizardForm v-else-if="activeStep === 'options'" />
+                  <CheckoutWizardForm2 v-else-if="activeStep === 'insurance'" />
+                  <Step5 :course="course" v-else-if="activeStep === 'validation'" />
+                  <Step6 v-else-if="activeStep === 'payment'" />
+                </transition>
+                <div class="d-flex">
+                  <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-auto" style="border-radius: 0">Précédent</button>
+                  <button @click.prevent="nextStep" :disabled="!stepIsComplete(activeStep)" class="btn text-uppercase next-step-btn ml-auto" style="border-radius: 0">étape suivante</button>
                 </div>
               </div>
             </div>
@@ -81,6 +47,7 @@
 
 <script>
 // import Step1 from './Step1.vue'
+import CheckoutWizardBooker from './wizard/CheckoutWizardBooker.vue'
 import CheckoutWizardParticipants from './wizard/CheckoutWizardParticipants.vue'
 import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
@@ -91,6 +58,7 @@ export default {
   name: 'CheckOutSections',
   components: {
     // Step1,
+    CheckoutWizardBooker,
     CheckoutWizardParticipants,
     CheckoutWizardForm,
     CheckoutWizardForm2,
@@ -100,29 +68,21 @@ export default {
   props: ['course', 'session', 'participantsNb'],
   data() {
     return {
+      steps: ['booker', 'participants', 'options', 'insurance'],
+      bookerComplete: false,
+      participantsComplete: false,
+      optionsComplete: false,
+      insuranceComplete: false,
+      activeStep: '',
       extraParticipants: [],
-      booker: {
-        infos: {
-          firstName: '',
-          lastName: '',
-          birthDate: '',
-          phone: '',
-          email: '',
-          gender: '',
-          country: '',
-          city: '',
-          street: '',
-          postalCode: ''
-        },
-        booking: {
-          room: [],
-          roomMate: '',
-          equipmentRental: null,
-          noExtraActivities: false,
-          extraActivities: [],
-          extraNotes: '',
-          insurance: ''
-        }
+      booker: {}
+    }
+  },
+  watch: {
+    course: {
+      immediate: true,
+      handler(val) {
+        this.activeStep = 'booker'
       }
     }
   },
@@ -132,6 +92,22 @@ export default {
     }
   },
   methods: {
+    nextStep() {
+      if (!this.stepIsComplete(this.activeStep)) return
+
+      let currIndex = this.steps.indexOf(this.activeStep)
+      this.activeStep = this.steps[currIndex + 1]
+    },
+    prevStep() {
+      let currIndex = this.steps.indexOf(this.activeStep)
+      this.activeStep = this.steps[currIndex - 1]
+    },
+    stepIsComplete(step) {
+      return this.$data[`${step}Complete`]
+    },
+    setBooker(val) {
+      this.booker = val
+    },
     submitBookingForm() {
       const AUTH_TOKEN_KEY = 'authToken'
       let token = localStorage.getItem(AUTH_TOKEN_KEY)
@@ -147,27 +123,6 @@ export default {
           }
         }
       )
-    },
-    addParticipant() {
-      this.extraParticipants.push({
-        infos: {
-          firstName: '',
-          birthDate: '',
-          email: ''
-        },
-        booking: {
-          room: [],
-          roomMate: '',
-          equipmentRental: null,
-          noExtraActivities: false,
-          extraActivities: [],
-          extraNotes: '',
-          insurance: ''
-        }
-      })
-    },
-    removeParticipant(index) {
-      this.extraParticipants.splice(index, 1)
     }
   },
   mounted() {

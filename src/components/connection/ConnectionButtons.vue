@@ -2,7 +2,7 @@
   <ul v-if="$parent.agencyIsActive" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
     <li v-if="isLoggedIn()">
       <div class="dropdown login-dropdown">
-        <button style="color: #292f33" class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button style="color: #292f33" class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img v-show="avatarId" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarId}.jpg`" />
           {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
@@ -45,7 +45,7 @@
   <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
     <li v-if="isLoggedIn()">
       <div class="dropdown login-dropdown">
-        <button class="btn btn-block rounded-0 border-0 pt-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img v-show="avatarId" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarId}.jpg`" />
           {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />

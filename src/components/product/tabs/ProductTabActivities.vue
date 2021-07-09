@@ -59,34 +59,25 @@
             <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
           </div>
         </div>
-        <h6 class="head text-uppercase pb-1" style="width: 100%">{{ course.sports[0].name }}</h6>
-        <p class="content">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
-        <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
-          <li style="border-bottom: none; padding-bottom: 0">
-            <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
-              Type :
-              <strong class="text-dark ml-2"> BUNGALOW SOLO </strong></a
-            >
-          </li>
-          <li style="border-bottom: none; padding-bottom: 0">
-            <a href="#" @click.prevent style="cursor: default" class="text-decoration-none">
-              Lieu :
-              <strong class="text-dark ml-2"> EL Gouna</strong></a
-            >
-          </li>
-          <li style="border-bottom: none; padding-bottom: 0">
-            <a href="#" @click.prevent style="cursor: default" class="text-decoration-none">
-              Situation :
-              <strong class="text-dark ml-2"> proximité du spot</strong></a
-            >
-          </li>
-          <li style="border-bottom: none; padding-bottom: 0">
-            <a href="#" @click.prevent style="cursor: default" class="text-decoration-none">
-              Capacités :
-              <strong class="text-dark ml-2"> 10</strong></a
-            >
-          </li>
-        </ul>
+        <div v-if="course.multisport" class="w-100 pb-3">
+          <div v-for="sport in course.sports" :key="sport" class="head text-uppercase py-2 d-inline-block mr-5" style="font-weight: 500; cursor: pointer" :class="{ 'sport-tab--active': activeSportTab === sport }" @mouseover="activeSportTab = sport">
+            {{ sport.name }}
+          </div>
+        </div>
+        <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
+        <transition name="fade-fast" mode="out-in">
+          <div :key="activeSportTab">
+            <p class="content">{{ activeSportTab?.description || course.sports[0].description }}</p>
+            <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+              <li v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo" style="border-bottom: none; padding-bottom: 0">
+                <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
+                  {{ sportInfo.title }}
+                  <strong class="text-dark ml-2">{{ sportInfo.description }}</strong></a
+                >
+              </li>
+            </ul>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -295,7 +286,8 @@ export default {
     return {
       tab: 1,
       includedCourses: null,
-      altCourses: null
+      altCourses: null,
+      activeSportTab: ''
     }
   },
   watch: {
@@ -304,6 +296,9 @@ export default {
       handler(val) {
         this.includedCourses = val.alternatives.filter((el) => el.isIncluded)
         this.altCourses = val.alternatives.filter((el) => el.isOption)
+
+        // set first one active when loaded
+        if (val.multisport) this.activeSportTab = val.sports[0]
       }
     }
   },
@@ -318,6 +313,9 @@ export default {
 </script>
 
 <style scoped>
+.sport-tab--active {
+  border-bottom: 1px solid #292f33;
+}
 .chapter-block {
   margin-bottom: 8rem;
   margin-top: 13rem;

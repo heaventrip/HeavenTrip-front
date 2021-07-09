@@ -684,12 +684,14 @@ a.bg-danger:hover {
   font-size: 0.75rem;
   letter-spacing: 0.6px;
   font-weight: 400;
+  height: 100%;
 }
 .header .profile-menu .profile-link {
   background-color: #fff;
   color: #292f33;
   border-radius: 0px 0px 0px 2px;
   font-weight: bold;
+  height: 100%;
 }
 .header .content {
   overflow: hidden;
@@ -3067,6 +3069,7 @@ input[type='number']::-webkit-outer-spin-button {
   font-weight: 500;
   font-family: 'Muli', sans-serif;
   z-index: 2;
+  height: 100%;
 }
 .login-dropdown .btn:hover {
   background-color: transparent;
@@ -3108,6 +3111,7 @@ input[type='number']::-webkit-outer-spin-button {
   font-weight: 500;
   font-family: 'Muli', sans-serif;
   color: #ffffff;
+  height: 60px;
 }
 .login-dropdown .btn .l-name {
   font-weight: 900;
@@ -4260,7 +4264,7 @@ a.descriptif-link.bg-danger:hover {
   object-position: center;
 }
 .checkout-body-content {
-  padding: 3rem;
+  padding: 0rem 3rem 3rem 3rem;
   height: 100%;
   overflow-y: scroll;
 }
@@ -4345,7 +4349,7 @@ a.descriptif-link.bg-danger:hover {
   object-position: center;
 }
 .participants-div {
-  border-right: 0.5px solid #dbdbdb;
+  border-right: 0.5px solid #ebebeb;
   height: 90%;
   display: flex;
   flex-direction: column;
@@ -5337,7 +5341,8 @@ a.descriptif-link.bg-danger:hover {
     padding: 0 111px 160px;
   }
   .header .navbar-dark.main-navbar {
-    padding: 0 111px;
+    /* padding: 0 111px; */
+    padding: 0 0 0 111px;
   }
   .header .wrapper.product-wrapper {
     padding: 0 111px 60px;

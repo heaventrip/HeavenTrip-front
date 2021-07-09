@@ -1,4 +1,7 @@
 <template>
+  <div class="header" style="height: 70px">
+    <TheNavSticky />
+  </div>
   <div class="product-infos__container">
     <div class="header__main-title d-flex align-items-center justify-content-center">
       <div class="product-header-infos__title d-flex align-items-center" style="z-index: 5">
@@ -108,6 +111,7 @@
 </template>
 
 <script>
+import TheNavSticky from '@/components/nav/TheNavSticky.vue'
 import Tag from '@/components/elements/Tag.vue'
 import gsap from 'gsap'
 
@@ -115,6 +119,7 @@ export default {
   name: 'ProductHeaderInfos',
   props: ['course'],
   components: {
+    TheNavSticky,
     Tag
   },
   data() {

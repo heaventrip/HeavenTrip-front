@@ -40,6 +40,14 @@ body.modal-open::after {
   align-items: center;
   z-index: 10;
 }
+.fade-fast-enter-active,
+.fade-fast-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-fast-enter-from,
+.fade-fast-leave-to {
+  opacity: 0;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
