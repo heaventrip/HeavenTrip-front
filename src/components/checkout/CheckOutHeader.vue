@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="checkout-header sticky-header">
-      <div class="checkout-header-div m-flex bg-dark text-white d-flex align-items-center text-uppercase">
+      <div class="checkout-header-div m-flex bg-dark text-white d-flex align-items-center text-uppercase" v-if="activeStep !== 'validation'">
         <a href="#" class="back-to-home-link text-reset text-decoration-none font-weight-500 d-flex align-items-center align-self-stretch bg-danger px-3"><i class="fa fa-home h6 mb-0"></i></a>
         <a href="#" class="descriptif-link text-reset text-decoration-none font-weight-bold d-flex align-items-center align-self-stretch px-3 ml-5" style="border-right: 1px solid white"><i class="fa fa-chevron-left mr-3 h6 mb-0"></i> descriptif</a>
         <div class="mb-0 ml-4 pr-3 border-right font-weight-bold">{{ course?.sports[0].sportCategories[0].name }}</div>
@@ -60,11 +60,17 @@
             </ul>
           </div>
         </div>
-        <div class="ml-auto activity-total d-flex align-items-center total-amount-block">
+        <div class="ml-auto activity-total d-flex align-items-center total-amount-block" style="color: white" :style="{ backgroundColor: activeStep === 'validation' ? '#292f33' : 'rgb(90, 58, 95)' }">
           <h6 class="total-amount text-uppercase mb-0">
             A PARTIR DE :<br /><span class="amount font-weight-bold">{{ course?.price }} &euro;</span>
           </h6>
         </div>
+      </div>
+      <div class="top-infos-container">
+        <div class="top-info">Retour</div>
+        <div class="top-info">aaaaaaaa</div>
+        <div class="top-info">aaaaaaaa</div>
+        <div class="top-info">aaaaaaaa</div>
       </div>
     </div>
   </div>
@@ -72,9 +78,32 @@
 <script>
 export default {
   name: 'CheckOutHeader',
-  props: ['course', 'session'],
+  props: ['course', 'session', 'active-step'],
   data() {
     return {}
   }
 }
 </script>
+
+<style scoped>
+.back-to-home-link {
+  border-right: 1px solid white;
+}
+.top-infos-container {
+  display: flex;
+  width: max-content;
+}
+.top-info {
+  font-weight: 500;
+  font-family: Oswald, sans-serif;
+  padding: 1rem 2rem;
+}
+.top-info:first-of-type {
+  background-color: #292f33;
+  color: white;
+}
+.top-info {
+  background-color: white;
+  color: #292f33;
+}
+</style>

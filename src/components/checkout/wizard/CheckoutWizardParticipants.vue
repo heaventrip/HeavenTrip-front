@@ -55,6 +55,24 @@ export default {
       extraParticipants: []
     }
   },
+  computed: {
+    participantsFilled() {
+      return this.extraParticipants.every((part) => {
+        return part.infos.firstName && part.infos.birthDate && part.infos.email
+      })
+    }
+  },
+  watch: {
+    extraParticipants: {
+      deep: true,
+      handler(val) {
+        this.$emit('updated-participants', val)
+
+        if (this.participantsFilled) this.$emit('complete')
+        else this.$emit('incomplete')
+      }
+    }
+  },
   methods: {
     addParticipant() {
       this.extraParticipants.push({

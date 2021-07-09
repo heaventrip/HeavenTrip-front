@@ -1,7 +1,7 @@
 <template>
   <div>
-    <CheckOutHeader :course="course" :session="session" />
-    <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" />
+    <CheckOutHeader :course="course" :session="session" :active-step="activeStep" />
+    <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
   </div>
 </template>
 <script>
@@ -19,7 +19,13 @@ export default {
     return {
       course: null,
       session: null,
-      participantsNb: 0
+      participantsNb: 0,
+      activeStep: ''
+    }
+  },
+  methods: {
+    setActiveStep(step) {
+      this.activeStep = step
     }
   },
   async created() {

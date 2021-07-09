@@ -1,0 +1,3 @@
+- rgpd
+- search ajax
+- checkout

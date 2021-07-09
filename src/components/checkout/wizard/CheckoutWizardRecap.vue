@@ -129,7 +129,7 @@
 <script>
 export default {
   name: 'CheckoutWizardRecap',
-  props: ['booker', 'extraParticipants']
+  props: ['booker', 'extra-participants']
 }
 </script>
 

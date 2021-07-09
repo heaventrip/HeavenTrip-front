@@ -1,13 +1,13 @@
 <template>
-  <div class="tab-pane fade login-signup-tab" id="step5" role="tabpanel" aria-labelledby="step5-tab">
+  <div class="tab-pane show active fade login-signup-tab" id="step5" role="tabpanel" aria-labelledby="step5-tab">
     <div class="row">
-      <div class="col-12 col-lg-7">
+      <div class="col-12 col-lg-6 offset-1">
         <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button>
-        <CheckoutWizardPayment :course="course" />
+        <CheckoutWizardPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
         <CheckoutWizardSuccess />
       </div>
-      <div class="col-12 col-lg-5 ml-auto">
-        <CheckoutWizardRecap :extraParticipants="$parent.extraParticipants" :booker="$parent.booker" />
+      <div class="col-12 col-lg-4 ml-auto">
+        <CheckoutWizardRecap :booker="booker" :extra-participants="extraParticipants" />
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
     CheckoutWizardSuccess,
     CheckoutWizardRecap
   },
-  props: ['course'],
+  props: ['course', 'booker', 'extra-participants'],
   methods: {
     // async processPayment() {
     //   const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')

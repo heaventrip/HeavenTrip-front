@@ -87,6 +87,7 @@ import { loadStripe } from '@stripe/stripe-js'
 
 export default {
   name: 'CheckoutWizardPayment',
+  props: ['course'],
   methods: {
     async processPayment() {
       const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')

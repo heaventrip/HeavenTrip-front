@@ -102,25 +102,25 @@ export default {
       allowForm: false,
       booker: {
         infos: {
-          firstName: '',
-          lastName: '',
-          birthDate: '',
-          phone: '',
-          email: '',
-          gender: '',
-          country: '',
-          city: '',
-          street: '',
-          postalCode: ''
+          firstName: 'a',
+          lastName: 'a',
+          birthDate: 'a',
+          phone: 'a',
+          email: 'a',
+          gender: 'a',
+          country: 'a',
+          city: 'a',
+          street: 'a',
+          postalCode: 'a'
         },
         booking: {
-          room: [],
-          roomMate: '',
-          equipmentRental: null,
-          noExtraActivities: false,
-          extraActivities: [],
-          extraNotes: '',
-          insurance: ''
+          room: ['a'],
+          roomMate: 'a',
+          equipmentRental: true,
+          noExtraActivities: true,
+          extraActivities: ['a'],
+          extraNotes: 'a',
+          insurance: 'a'
         }
       }
     }
