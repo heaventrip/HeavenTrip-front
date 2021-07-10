@@ -1,24 +1,10 @@
 <template>
   <div class="wrap">
-    <div style="width: 40%; position: relative">
+    <div class="image-container" style="width: 40%; position: relative">
       <img class="big-image" :src="require('@/assets/images/beach.jpg')" />
-      <div class="keywords-container" style="position: absolute; right: 0; top: 50%">
-        <div class="d-flex">
-          <span class="keyword keyword--first-line">Résilience</span>
-          <span class="keyword keyword--first-line">Partage</span>
-          <span class="keyword keyword--first-line">Dépassement</span>
-        </div>
-        <div class="d-flex">
-          <div class="d-flex flex-column">
-            <span class="d-inline-block"><span class="keyword d-inline-block">Fun</span> <span class="keyword d-inline-block">Rencontres</span></span>
-            <span class="d-inline-block"><span class="keyword d-inline-block">Mental</span> <span class="keyword d-inline-block">Volonté</span></span>
-          </div>
-          <div class="keyword keyword--big text-center"><span style="display: inline-block; position: relative; top: 50%; transform: translateY(-50%)">Sports</span></div>
-        </div>
-      </div>
     </div>
-    <div class="d-flex flex-column justify-content-around align-items-center text-white" style="background-color: #292f33; width: 60%">
-      <div class="d-flex align-items-center text-uppercase mt-auto">
+    <div class="d-flex flex-column align-items-center text-white" style="background-color: #292f33; width: 60%">
+      <div class="d-flex align-items-center text-uppercase my-auto">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" height="120" viewBox="0 0 100 100">
             <g id="Calque_2" data-name="Calque 2">
@@ -30,29 +16,48 @@
             <InlineSvg :src="require(`@/assets/svg/check.svg`)" viewBox="-12 -18 50 50" fill="white" />
           </svg>
         </div>
-        <div class="ml-5">
-          <span style="font-weight: 800; font-size: 2.2rem">GOOD TRIP !</span>
-          <br />
-          <span style="font-weight: 400">Votre paiement de 1000 € a été validé</span>
+        <div style="margin-left: 2rem">
+          <div style="font-weight: 800; font-size: 2.2rem; margin-bottom: 0.5rem">GOOD TRIP !</div>
+          <div style="font-weight: 400; letter-spacing: 0.04rem">Votre paiement de 1000 € a été validé</div>
         </div>
       </div>
-      <div class="d-flex mt-auto justify-content-center">
-        <div class="py-3 px-4 mr-1" style="background-color: rgba(58, 63, 66, 0.5)">link</div>
-        <div class="py-3 px-4 mr-1" style="background-color: rgba(58, 63, 66, 0.5)">link</div>
-        <div class="py-3 px-4 mr-1" style="background-color: rgba(58, 63, 66, 0.5)">link</div>
+      <div class="d-flex justify-content-center" style="position: relative; width: 100%; height: 80px; border-top: 1px dashed rgba(255, 255, 255, 0.15); border-bottom: 1px dashed rgba(255, 255, 255, 0.15)">
+        <div class="keywords-container" style="position: absolute; left: 0; transform: translateX(-100%)">
+          <div class="d-flex">
+            <span class="keyword keyword--first-line">Résilience</span>
+            <span class="keyword keyword--first-line">Partage</span>
+            <span class="keyword keyword--first-line">Dépassement</span>
+          </div>
+          <div class="d-flex">
+            <div class="d-flex flex-column">
+              <span class="d-inline-block"><span class="keyword d-inline-block">Fun</span> <span class="keyword d-inline-block">Rencontres</span></span>
+              <span class="d-inline-block"><span class="keyword d-inline-block">Mental</span> <span class="keyword d-inline-block">Volonté</span></span>
+            </div>
+            <div class="keyword keyword--big text-center"><span style="display: inline-block; position: relative; top: 50%; transform: translateY(-50%)">Sports</span></div>
+          </div>
+        </div>
+        <div type="button" class="center-btn px-4 mr-1">
+          <div @click="$router.push({ name: 'Home' })" class="center-btn-text">Retour à l'accueil</div>
+        </div>
+        <div type="button" class="center-btn px-4 mr-1">
+          <div class="center-btn-text">Consulter ma réservation</div>
+        </div>
+        <div type="button" class="center-btn px-4 mr-1">
+          <div class="center-btn-text">Discuter avec les participants</div>
+        </div>
       </div>
-      <div class="d-flex align-items-center justify-content-center mt-auto" style="font-family: Muli, sans-serif; font-size: 0.8rem">
-        <div class="text-right mr-5" style="line-height: 1.8; font-size: 0.8rem; width: 40%">
+      <div class="d-flex align-items-center justify-content-center" style="margin-bottom: 5rem; margin-top: 4rem; font-family: Muli, sans-serif; font-size: 0.8rem">
+        <div class="text-right" style="margin-right: 4rem; letter-spacing: 0.04rem; line-height: 1.8; font-size: 0.8rem; width: 45%">
           Un email de confirmation a été envoyé sur ta boite mail. Tu peux retrouver l'état de ta réservation sur ton espace client. Profites-en pour discuter avec les autres participants via le chat en ligne. Merci pour ta confiance !
         </div>
         <InlineSvg :src="require('@/assets/svg/instagram-light.svg')" height="60" />
         <div class="ml-4">
-          <span style="font-weight: 500">Sportivement,</span>
+          <span style="font-weight: 800">Sportivement,</span>
           <br />
-          <span>La team Heaven Trip</span>
+          <span style="font-weight: 100">La team Heaven Trip</span>
         </div>
       </div>
-      <div class="d-flex justify-content-center align-items-center mt-auto" style="height: 20vh; width: 100%; background-color: #d9345a">
+      <div class="d-flex justify-content-center align-items-center" style="height: 18vh; width: 100%; background-color: #d9345a">
         <span class="text-uppercase text-white mr-4" style="font-family: Oswald, sans-serif">Partage ton stage :</span>
         <InlineSvg :src="require('@/assets/svg/facebook-light.svg')" height="40" class="mr-4" />
         <InlineSvg :src="require('@/assets/svg/instagram-light.svg')" height="40" />
@@ -68,6 +73,23 @@ export default {
 </script>
 
 <style scoped>
+.center-btn,
+.center-btn:active {
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.03rem;
+  font-size: 0.8125rem;
+  background-color: rgba(58, 63, 66, 0.5);
+  transition: background-color 0.5s ease;
+}
+.center-btn:hover {
+  background-color: white;
+  color: #292f33;
+}
+.center-btn-text {
+  position: relative;
+  top: 1.8rem;
+}
 .inline-infos__initial-element {
   text-align: right;
 }
@@ -190,6 +212,15 @@ export default {
   /* object-position: 10px 10px; */
   height: 100%;
   width: 100%;
+}
+.image-container::after {
+  content: '';
+  position: absolute;
+  background-color: hsla(292, 24%, 30%, 0.8);
+  left: 0;
+  /* opacity: 0.6; */
+  width: 100%;
+  height: 100vh; /* corresponds height of image */
 }
 .small-image {
   object-fit: cover;
