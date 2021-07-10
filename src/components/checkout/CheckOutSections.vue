@@ -219,10 +219,14 @@ export default {
 </script>
 
 <style scoped>
-.next-btn:hover {
+.next-btn {
   background-color: white;
   color: #292f33;
   border: 1px solid #292f33;
+}
+.next-btn:hover {
+  background-color: #292f33;
+  color: white;
 }
 .top-infos-container {
   display: flex;
