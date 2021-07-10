@@ -24,7 +24,7 @@
           <div class="checkout-body-content" style="position: relative">
             <div style="position: sticky; top: 0; z-index: 15; outline: 5px solid white" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <div class="d-flex w-100 py-5" style="background: white">
-                <div class="text-uppercase" style="font-weight: 600">Participants</div>
+                <div class="text-uppercase" style="font-weight: 600">Mes infos</div>
                 <div class="text-uppercase pr-4 ml-auto" style="font-weight: 400">Options</div>
                 <div class="text-uppercase px-4" style="border-left: 1px dashed #7c7c7c; border-right: 1px dashed #7c7c7c; font-weight: 400">Assurance</div>
                 <div class="text-uppercase pl-4" style="font-weight: 400">Paiement</div>
@@ -48,7 +48,7 @@
                 </div>
               </div>
             </div>
-            <div class="tab-content">
+            <div class="tab-content mt-2">
               <keep-alive>
                 <CheckoutWizardBooker @complete="bookerComplete = true" @incomplete="bookerComplete = false" @updated-booker="setBooker" v-if="activeStep === 'booker'" />
                 <CheckoutWizardParticipants @complete="participantsComplete = true" @incomplete="participantsComplete = false" @updated-participants="setParticipants" v-else-if="activeStep === 'participants'" />
@@ -59,7 +59,7 @@
               <Step6 v-if="activeStep === 'success'" />
               <div class="d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
                 <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
-                <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button>
+                <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">étape suivante</button>
                 <!-- <button @click.prevent="nextStep" :disabled="!stepIsComplete(activeStep)" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
               </div>
             </div>
@@ -129,7 +129,7 @@ export default {
     course: {
       immediate: true,
       handler(val) {
-        this.activeStep = 'success'
+        this.activeStep = 'booker'
       }
     },
     activeStep: {
@@ -219,6 +219,11 @@ export default {
 </script>
 
 <style scoped>
+.next-btn:hover {
+  background-color: white;
+  color: #292f33;
+  border: 1px solid #292f33;
+}
 .top-infos-container {
   display: flex;
   width: max-content;

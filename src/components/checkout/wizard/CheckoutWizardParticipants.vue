@@ -5,9 +5,7 @@
         <div class="card-header border-0">
           <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center">
             <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-            Participant
-            <i class="fa fa-caret-right mx-3 small align-baseline"></i>
-            {{ index + 2 }}
+            {{ extraParticipant.infos.firstName || 'Participant' }}
             <a @click.prevent="removeParticipant(index, $event)" href="#" class="remove-parti text-decoration-none"
               ><i class="fa fa-times-circle ml-4 mr-2 h6 mb-0"></i>
               retirer ce participant
@@ -19,7 +17,7 @@
             <div class="row">
               <div class="col-12 col-lg-4">
                 <div class="form-group has-float-label pr-5">
-                  <input v-model="extraParticipant.infos.firstName" class="form-control" type="text" />
+                  <input v-model="extraParticipant.infos.firstName" class="form-control" type="text" name="" placeholder=" " />
                   <label>Prénom*</label>
                 </div>
               </div>

@@ -1,79 +1,79 @@
 <template>
   <div class="login-signup-tab">
-    <div class="card border-0 p-3" style="box-shadow: 0 0 2px #ebebeb">
+    <div class="card border-0">
       <div class="card-body">
         <div class="row">
           <div class="col-12 col-lg-4">
             <div class="participants-div align-items-center">
               <img class="img-fluid rounded-circle uploaded-img" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-              <h4 class="head font-weight-bold">
-                PARTICIPANT
-                <i class="fa fa-caret-right mx-3 small align-baseline"></i>1
-                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'visibility: hidden;' : '']"><i class="fas fa-edit mr-2"></i> Modifier</span>
+              <h4 class="head font-weight-bold text-uppercase">
+                {{ booker.infos.firstName || 'Participant' }}
+                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"><i class="fas fa-edit mr-2"></i> Modifier</span>
               </h4>
             </div>
           </div>
           <div class="col-12 col-lg-8">
+            <!-- TODO float labels -->
             <form class="participants-form contact-form pt-5" :class="{ 'form--disallowed': !allowForm }">
               <div class="row">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>Nom*</label>
-                    <input type="text" name="" class="form-control" v-model="booker.infos.lastName" />
+                    <input type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.lastName" />
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>Prénom*</label>
-                    <input type="text" name="" class="form-control" v-model="booker.infos.firstName" />
+                    <input type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.firstName" />
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>DATE DE NAISSANCE*</label>
                     <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="booker.infos.birthDate" />
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group">
-                    <input type="radio" value="femme" v-model="booker.infos.gender" />
-                    <label>Femme</label>
-                    <input type="radio" value="homme" v-model="booker.infos.gender" />
-                    <label>Homme</label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label @click="booker.booking.gender = 'f'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.booking.gender === 'f' ? 'bg-grey text-white' : '']">Femme</label>
+                      <label @click="booker.booking.gender = 'm'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.booking.gender === 'm' ? 'bg-grey text-white' : '']">Homme</label>
+                    </div>
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>Téléphone*</label>
-                    <input type="text" name="" class="form-control" v-model="booker.infos.phone" />
+                    <input type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.phone" />
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>ADRESSE MAIL*</label>
                     <input class="form-control" type="email" name="" v-model="booker.infos.email" />
                     <i class="fa fa-check check-sym d-none"></i>
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>Pays*</label>
                     <input type="text" name="" class="form-control" v-model="booker.infos.country" />
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>Adresse*</label>
                     <input type="text" name="" class="form-control" v-model="booker.infos.street" />
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>VILLE*</label>
                     <input type="text" name="" class="form-control" v-model="booker.infos.city" />
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>Code postal*</label>
                     <input type="text" name="" class="form-control" v-model="booker.infos.postalCode" />
@@ -135,6 +135,7 @@ export default {
     booker: {
       deep: true,
       handler(val) {
+        console.log(val)
         this.$emit('updated-booker', val)
 
         if (this.bookerInfosFilled) this.$emit('complete')
@@ -146,8 +147,16 @@ export default {
 </script>
 
 <style scoped>
+.gender-btn:not(.bg-grey):hover {
+  background-color: #ebebeb;
+  color: #292f33;
+}
+.card {
+  border: none;
+  box-shadow: rgb(240, 240, 240) 0px 0px 6px;
+}
 .form--disallowed {
-  opacity: 0.6;
+  opacity: 0.3;
   pointer-events: none;
 }
 </style>

@@ -254,6 +254,6 @@ export default {
 <style scoped>
 .card {
   border: none;
-  box-shadow: rgb(235, 235, 235) 0px 0px 2px;
+  box-shadow: rgb(240, 240, 240) 0px 0px 6px;
 }
 </style>

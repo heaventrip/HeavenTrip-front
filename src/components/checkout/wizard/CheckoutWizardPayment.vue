@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="card pay-card rounded-0 mb-0 p-0">
-    <button class="stripe-redirect-button" type="button" @click="processPayment" id="checkout-button">Je veux procéder au paiement de {{course.price}} €</button>
+    <button class="stripe-redirect-button" type="button" @click="processPayment" id="checkout-button">Je veux procéder au paiement de {{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</button>
     <!-- <div class="card-body">
       <h6 class="font-weight-bold text-uppercase pay-head">
         Choisissez votre moyen de paiement :
@@ -138,7 +138,6 @@ export default {
 }
 .card {
   border: none;
-  box-shadow: rgb(235, 235, 235) 0px 0px 2px;
-  padding: 1rem;
+  box-shadow: rgb(240, 240, 240) 0px 0px 6px;
 }
 </style>

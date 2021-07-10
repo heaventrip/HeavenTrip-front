@@ -9,7 +9,7 @@
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
             <span class="view-detail">Voir Détails<i class="fas fa-chevron-down ml-2"></i></span>
-            <strong class="check-amount text-dark d-block">{{ course.price }} &euro;</strong>
+            <strong class="check-amount text-dark d-block">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>
           </div>
         </div>
         <div id="tripperOne" class="collapse" aria-labelledby="tripOne" data-parent="#tripperaccordion">

@@ -8,8 +8,8 @@
   <div class="text-center mobile-vh">
     <div v-show="step === 1" class="centered-vh">
       <h6 class="profile-head">
-        <span class="d-lg-block">Ton espace client te permet d’avoir une page spéciale Tripper "public"</span>
-        Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.
+        <span class="d-lg-block" style="font-weight: 400">Ton espace client te permet d’avoir une page spéciale Tripper "public"</span>
+        <span style="font-weight: 400">Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.</span>
       </h6>
       <form>
         <div class="form-group">
