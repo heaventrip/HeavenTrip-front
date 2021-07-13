@@ -4,7 +4,7 @@
     <div class="card-header rounded-0 border-0 p-0 d-flex">
       <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
         <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
-        <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.firstName }}</strong>
+        <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
         <div class="completion-details">
           <ul class="completion-details-list mb-0 list-unstyled d-flex">
             <li>
@@ -255,5 +255,6 @@ export default {
 .card {
   border: none;
   box-shadow: rgb(240, 240, 240) 0px 0px 6px;
+  border-radius: 0 !important;
 }
 </style>

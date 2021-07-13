@@ -131,7 +131,7 @@ export default {
   border: 0;
 }
 .stripe-redirect-button:hover {
-  background: #d9345a;
+  background: #d82558;
 }
 .stripe-redirect-button:active {
   background: #292f33;
@@ -139,5 +139,6 @@ export default {
 .card {
   border: none;
   box-shadow: rgb(240, 240, 240) 0px 0px 6px;
+  border-radius: 0 !important;
 }
 </style>

@@ -154,6 +154,7 @@ export default {
 .card {
   border: none;
   box-shadow: rgb(240, 240, 240) 0px 0px 6px;
+  border-radius: 0 !important;
 }
 .form--disallowed {
   opacity: 0.3;

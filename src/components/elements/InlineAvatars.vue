@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
-    <div v-for="(avatarId, index) in pAvatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
+    <div class="inline-avatar-container" v-for="(avatarId, index) in pAvatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
       <!-- FIXME intégrer border color ET outline -->
-      <img class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
+      <img class="inline-avatar-img rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
     <div v-if="pHeart" @click="addToWishlist" style="border-radius: 50%" type="button" :class="pOutlineColor" :style="[pSpacing, pHeartwidth, pHeartheight]">
       <transition name="fade" mode="out-in">
@@ -89,10 +89,10 @@ export default {
 }
 
 .small-avatar--violet {
-  outline: 4px solid #564559;
+  outline: 3px solid #564559;
 }
 
 .small-avatar--violetfullscreen {
-  outline: 4px solid #705875;
+  outline: 3px solid #705875;
 }
 </style>

@@ -23,7 +23,10 @@
             <span style="color: #fff; font-weight: bold">{{ course.sports ? course.sports[0].name : '' }}</span>
             <!-- </router-link> -->
           </h1>
-          <h5 class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>{{ course?.spot?.name }}</h5>
+          <!-- <h5 v-if="!course.multisport" class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>{{ course?.spot?.name }}</h5>
+          <div v-else>
+            <Tag v-for="course.sports" text=
+          </div> -->
         </div>
       </div>
     </div>
@@ -114,13 +117,14 @@
 import TheNavSticky from '@/components/nav/TheNavSticky.vue'
 import Tag from '@/components/elements/Tag.vue'
 import gsap from 'gsap'
+// import Tag from '../elements/Tag.vue'
 
 export default {
   name: 'ProductHeaderInfos',
   props: ['course'],
   components: {
-    TheNavSticky,
-    Tag
+    TheNavSticky
+    // Tag
   },
   data() {
     return {

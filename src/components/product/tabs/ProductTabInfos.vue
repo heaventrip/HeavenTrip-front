@@ -101,7 +101,7 @@
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
               <InlineSvg v-if="course.level.step" :src="require(`@/assets/svg/intensity-${course.level.step}.svg`)" height="150px" />
-              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d9345a" style="left: 34%; top: 34%; position: absolute" />
+              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
@@ -116,7 +116,7 @@
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
               <InlineSvg :src="require(`@/assets/svg/intensity-1.svg`)" height="150px" />
-              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d9345a" style="left: 34%; top: 34%; position: absolute" />
+              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">

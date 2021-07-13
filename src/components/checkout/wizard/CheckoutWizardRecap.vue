@@ -2,7 +2,7 @@
   <div class="number-of-tripper-div">
     <img class="course-image" :src="require('@/assets/images/beach.jpg')" />
     <div class="accordion" id="tripperaccordion">
-      <div class="card border-0">
+      <div class="card accordion-card border-0">
         <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="tripOne" type="button" data-toggle="collapse" data-target="#tripperOne" aria-expanded="false" aria-controls="tripperOne">
           <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
           <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
@@ -123,9 +123,18 @@ export default {
 </script>
 
 <style scoped>
+.accordion:not(:last-of-type) {
+  border-bottom: 1px solid #ebebea75;
+}
 .course-image {
   object-fit: cover;
   height: 20vh;
   width: 100%;
+}
+.accordion-card {
+  padding: 1rem 1.5rem;
+}
+.tripper-list li {
+  padding: 10px 0;
 }
 </style>

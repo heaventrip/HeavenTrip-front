@@ -4,10 +4,10 @@
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
       <div @click="addToWishlist" type="button" class="card-block__heart-icon" style="opacity: 0; position: absolute; top: 7%; right: 7%; z-index: 5">
-        <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d9345a" height="20" />
+        <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" />
         <InlineSvg v-else :src="require('@/assets/svg/heart-outline.svg')" height="20" />
       </div>
-      <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d9345a" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
+      <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
       <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->
       <a href="/product">
         <img class="card__bg-image img-responsive img-fill" :src="require('@/assets/images/s1.png')" alt="" />

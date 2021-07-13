@@ -57,7 +57,7 @@
           <span style="font-weight: 100">La team Heaven Trip</span>
         </div>
       </div>
-      <div class="d-flex justify-content-center align-items-center" style="height: 18vh; width: 100%; background-color: #d9345a">
+      <div class="d-flex justify-content-center align-items-center" style="height: 18vh; width: 100%; background-color: #d82558">
         <span class="text-uppercase text-white mr-4" style="font-family: Oswald, sans-serif">Partage ton stage :</span>
         <InlineSvg :src="require('@/assets/svg/facebook-light.svg')" height="40" class="mr-4" />
         <InlineSvg :src="require('@/assets/svg/instagram-light.svg')" height="40" />

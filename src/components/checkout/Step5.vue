@@ -6,7 +6,7 @@
         <CheckoutWizardPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
         <CheckoutWizardSuccess />
       </div>
-      <div class="col-12 col-lg-4 ml-auto" style="box-shadow: -1px 0px 2px #ebebeb; margin-right: -3rem; position: absolute; right: 0; height: calc(100vh - 181px)">
+      <div class="col-12 col-lg-4 ml-auto" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px; position: absolute; right: 0; height: calc(100vh - 181px)">
         <CheckoutWizardRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
       </div>
     </div>

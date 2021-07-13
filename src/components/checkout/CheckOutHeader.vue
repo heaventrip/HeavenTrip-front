@@ -6,7 +6,7 @@
       <div class="mb-0 ml-4 pr-4 border-right font-weight-light">{{ course?.sports[0].sportCategories[0].name }}</div>
       <div class="mb-0 ml-3 font-weight-bold">{{ course?.sports[0].name }}</div>
       <p class="ml-auto mb-0 cap-letter font-weight-light mb-0 text-right">Besoin d'un conseil ou d'un renseignement ?</p>
-      <div class="d-flex justify-content-around text-white text-uppercase font-weight-500 mail-box" style="margin-right: 6rem">
+      <div class="d-flex justify-content-around text-white text-uppercase font-weight-500 mail-box" style="margin-right: 4vw">
         <a href="tel:0369316618" class="text-reset text-decoration-none border-right px-4"><img class="mr-3" fluid :src="require('@/assets/images/tel.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/tel_h.png')" />03 69 31 66 18</a>
         <a href="#" class="text-reset text-decoration-none pl-4"><img class="mr-3" fluid :src="require('@/assets/images/chat.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/chat_h.png')" />écrivez-nous</a>
       </div>
@@ -41,27 +41,26 @@
             <span class="d-inline-block align-middle">&nbsp;06/10/2020</span>
           </a>
         </div>
-        <div class="recap-div div-nav-link ml-auto d-none">
-          <h6 class="font-weight-bold text-uppercase recap-head mt-0">recap séjour :</h6>
-          <ul class="list-unstyled font-weight-500 recap-list mt-3 mb-0">
-            <li>
-              <span class="bg-white pr-3">Trippers</span>
-              <span class="bg-white pl-3">2 x 1990 &euro;</span>
-            </li>
-            <li class="flag">
-              <span class="bg-white pr-3">Options séjour</span>
-              <span class="bg-white pl-3">120 &euro;</span>
-            </li>
-            <li class="flag">
-              <span class="bg-white pr-3">Remise spéciale</span>
-              <span class="bg-white pl-3">5 %</span>
-            </li>
-          </ul>
+        <div class="ml-auto" v-if="activeStep !== 'validation'">
+          <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="letter-spacing: 0.05rem; font-size: 0.875rem">à cette session</span> </span>
+          <div class="d-flex justify-content-between">
+            <InlineAvatars
+              :avatars="['wb1pauez3a4chagrpyth', 'j7pyvrb9k40igjtuniwb', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw', 'ers53we5kg0ffyv6csoq', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth']"
+              :heart="false"
+              outline-color="violet"
+              height="40px"
+              spacing="-10px"
+              mt="0.5rem"
+              mb="0rem"
+            />
+          </div>
         </div>
       </div>
       <div class="ml-auto activity-total d-flex align-items-center total-amount-block" style="border-left: 1px solid rgba(255, 255, 255, 0.15); color: white" :style="{ backgroundColor: activeStep === 'validation' ? '#292f33' : 'rgb(90, 58, 95)' }">
-        <div class="total-amount text-uppercase mb-0">
-          PRIX TOTAL :<br /><span class="amount font-weight-bold">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</span>
+        <div class="total-amount text-uppercase mb-0" :style="{ padding: activeStep === 'validation' ? '0 2rem' : '' }">
+          <span v-if="activeStep === 'validation'">Total de la<br />réservation :<br /></span>
+          <span v-else>Prix total :<br /></span>
+          <span class="font-weight-bold" style="font-size: 1.875rem">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</span>
         </div>
       </div>
     </div>
@@ -69,16 +68,58 @@
 </template>
 
 <script>
+import InlineAvatars from '@/components/elements/InlineAvatars.vue'
+import gsap from 'gsap'
+
 export default {
   name: 'CheckOutHeader',
+  components: {
+    InlineAvatars
+  },
   props: ['course', 'session', 'active-step'],
   data() {
-    return {}
+    return {
+      avatarKeys: []
+    }
+  },
+  watch: {
+    session: {
+      immediate: true,
+      handler(val) {
+        val.participants.forEach((user) => this.avatarKeys.push(user.avatarKey))
+      }
+    }
+  },
+  methods: {
+    scaleAvatar(obj, dir) {
+      if (dir === 'up') {
+        gsap.to(obj, { scale: 1.4, duration: 0.2, zIndex: 1, ease: 'none' })
+      } else {
+        gsap.to(obj, { scale: 1, duration: 0.2, zIndex: 0, ease: 'none' })
+      }
+    }
+  },
+  mounted() {
+    let that = this
+
+    document.querySelectorAll('.inline-avatar-container').forEach((img) => {
+      img.addEventListener('mouseenter', (e) => {
+        that.scaleAvatar(e.target, 'up')
+      })
+    })
+    document.querySelectorAll('.inline-avatar-container').forEach((img) => {
+      img.addEventListener('mouseleave', (e) => {
+        that.scaleAvatar(e.target, 'down')
+      })
+    })
   }
 }
 </script>
 
 <style scoped>
+.checkout-header-block-container {
+  padding: 0 4vw;
+}
 .back-to-home-link {
   border-right: 1px solid white;
   transition: all 0.3s ease;

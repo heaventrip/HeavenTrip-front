@@ -40,6 +40,17 @@ body.modal-open::after {
   align-items: center;
   z-index: 10;
 }
+.participant-fade-enter-active {
+  transition: opacity 0.8s;
+}
+.participant-fade-leave-active {
+  transition: opacity 0.3s;
+}
+.participant-fade-enter-from,
+.participant-fade-leave-to {
+  opacity: 0;
+}
+
 .fade-fast-enter-active,
 .fade-fast-leave-active {
   transition: opacity 0.2s;
@@ -48,6 +59,7 @@ body.modal-open::after {
 .fade-fast-leave-to {
   opacity: 0;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
@@ -88,13 +100,13 @@ body.modal-open::after {
   background-color: #fff;
 }
 .bg-pink {
-  background-color: #d9345a;
+  background-color: #d82558;
 }
 .bg-grey {
   background-color: #292f33;
 }
 .text--pink {
-  color: #d9345a;
+  color: #d82558;
 }
 .text--grey {
   color: #292f33;

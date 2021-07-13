@@ -1,3 +1,4 @@
-- rgpd
-- search ajax
-- checkout
+- rgpd => vue cookies
+- search ajax OK
+- mécanique du radio activités
+- copier les styles du form booker sur form participants

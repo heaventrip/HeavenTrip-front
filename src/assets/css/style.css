@@ -341,8 +341,8 @@ a.bg-danger:hover {
   margin-right: 10px;
 }
 .header .wrapper .wrapper-content .wrapper-content-list li:hover .img-container {
-  background-color: #d9345a;
-  border-color: #d9345a;
+  background-color: #d82558;
+  border-color: #d82558;
 }
 .header .wrapper .wrapper-content .wrapper-head-para {
   font-family: Muli, sans-serif;
@@ -414,7 +414,7 @@ a.bg-danger:hover {
 }
 .concept-small-head {
   font-family: 'Muli', sans-serif;
-  color: #d9345a;
+  color: #d82558;
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 25px;
@@ -440,11 +440,11 @@ a.bg-danger:hover {
   margin-bottom: -1px;
 }
 .header .wrapper .tab-header-content .inner-tab-pills .header-pills .nav-link.active {
-  color: #d9345a;
+  color: #d82558;
   font-weight: bold;
   padding-left: 15px;
   position: relative;
-  border-color: #d9345a;
+  border-color: #d82558;
 }
 .header .wrapper .tab-header-content .inner-tab-pills .header-pills .nav-link.active:before {
   content: '';
@@ -452,7 +452,7 @@ a.bg-danger:hover {
   position: absolute;
   width: 6px;
   height: 6px;
-  background-color: #d9345a;
+  background-color: #d82558;
   border-radius: 50%;
   left: 0;
   top: 50%;
@@ -886,7 +886,7 @@ a.bg-danger:hover {
   font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: -0.42px;
-  color: #d9345a;
+  color: #d82558;
   text-decoration: none;
 }
 .date-model .scroll-pill-tab-content .order-tab-list > li .hours-count {
@@ -1477,7 +1477,7 @@ a.bg-danger:hover {
   border: none;
 }
 .header .search-div.navbar-dark .navbar-nav.inner-nav-list .nav-item.active {
-  background-color: #d9345a;
+  background-color: #d82558;
 }
 .header .search-div.navbar-dark .navbar-nav .nav-item.active .nav-link {
   color: #ffffff;
@@ -1533,7 +1533,7 @@ a.bg-danger:hover {
   min-width: 130px;
   height: 121px;
   padding: 15px;
-  background-color: #d9345a;
+  background-color: #d82558;
 }
 .booking-bottom .reserve-btn:hover {
   background-color: #793f4e;
@@ -1826,7 +1826,7 @@ a.bg-danger:hover {
 .main-product-content .view-more-btn {
   font-size: 0.75rem;
   font-weight: 400;
-  color: #d9345a;
+  color: #d82558;
 }
 .main-product-content .view-more-btn.full_width {
   text-transform: uppercase;
@@ -1916,14 +1916,14 @@ a.bg-danger:hover {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1;
-  color: #d9345a;
+  color: #d82558;
 }
 .status-text {
   font-size: 1rem;
   font-weight: bold;
   line-height: 24px;
   letter-spacing: 1.6px;
-  color: #d9345a;
+  color: #d82558;
   text-transform: uppercase;
 }
 .level-text {
@@ -1974,7 +1974,7 @@ a.bg-danger:hover {
   border: 7px solid #ebebeb;
   /*  border-width: 7px 17px 17px 7px;
   border-style: solid;
-  border-color: #EBEBEB #D9345A #D9345A #EBEBEB;*/
+  border-color: #EBEBEB #d82558 #d82558 #EBEBEB;*/
   text-align: center;
   display: flex;
   align-items: center;
@@ -2137,7 +2137,7 @@ a.bg-danger:hover {
   letter-spacing: 1.6px;
   font-size: 1rem;
   font-weight: 400;
-  color: #d9345a;
+  color: #d82558;
 }
 .shadow-box .points li {
   font-size: 0.875rem;
@@ -2208,7 +2208,7 @@ a.bg-danger:hover {
   height: 88px;
   line-height: 88px;
   border-radius: 50%;
-  background-color: #d9345a;
+  background-color: #d82558;
   text-align: center;
   position: absolute;
   top: 50%;
@@ -2363,7 +2363,7 @@ a.bg-danger:hover {
 .main-product-content .activity-list .activity-list-head {
   font-size: 13px;
   letter-spacing: 1.3px;
-  color: #d9345a;
+  color: #d82558;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -2691,13 +2691,13 @@ button.Zebra_DatePicker_Icon {
   margin-top: 4px !important;
 }
 .Zebra_DatePicker .dp_header.dp_actions td {
-  background-color: #d9345a !important;
-  color: #d9345a !important;
+  background-color: #d82558 !important;
+  color: #d82558 !important;
   border-radius: 0 !important;
   padding: 0 30px !important;
 }
 .Zebra_DatePicker .dp_header.dp_actions .dp_caption {
-  background-color: #d9345a !important;
+  background-color: #d82558 !important;
   color: #fff !important;
 }
 .Zebra_DatePicker .dp_header.dp_actions td.dp_previous {
@@ -2756,7 +2756,7 @@ button.Zebra_DatePicker_Icon {
   font-size: 0.875rem;
   line-height: 25px;
   letter-spacing: -0.28px;
-  color: #d9345a;
+  color: #d82558;
   font-weight: 400;
 }
 .main-product-content .tour-head {
@@ -2979,7 +2979,7 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: #fff;
 }
 .int-list li a:hover {
-  background-color: #d9345a;
+  background-color: #d82558;
 }
 
 .booking-session {
@@ -2988,7 +2988,7 @@ input[type='number']::-webkit-outer-spin-button {
 .booking-session .session-head {
   font-size: 0.875rem;
   font-weight: bold;
-  background-color: #d9345a;
+  background-color: #d82558;
   color: #ffffff;
   align-self: stretch;
   margin: 0;
@@ -3154,7 +3154,7 @@ input[type='number']::-webkit-outer-spin-button {
   font-size: 0.5rem;
   width: 15px;
   height: 15px;
-  background-color: #d9345a;
+  background-color: #d82558;
   border-radius: 50%;
   line-height: 15px;
   text-align: center;
@@ -4008,7 +4008,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .footer a:hover,
 .mail-box a:hover {
-  color: #d9345a !important;
+  color: #d82558 !important;
 }
 .footer .divider {
   display: inline-block;
@@ -4194,7 +4194,7 @@ input[type='number']::-webkit-outer-spin-button {
   top: 0;
 }
 .back-to-home-link:hover {
-  background-color: #d9345a !important;
+  background-color: #d82558 !important;
 }
 .back-to-home-link:hover .back-to-home {
   display: inline-block;
@@ -4217,7 +4217,7 @@ a.descriptif-link.bg-danger:hover {
   font-size: 0.875rem;
 }
 .total-amount-block {
-  padding: 0 73px;
+  padding: 0 4vw;
 }
 .total-amount-block .total-amount {
   font-size: 0.75rem;
@@ -4266,10 +4266,11 @@ a.descriptif-link.bg-danger:hover {
   object-position: center;
 }
 .checkout-body-content {
-  padding: 0rem 6rem 6rem 6rem;
+  padding: 0rem 6rem 3rem 6rem;
   height: 100%;
   overflow-y: scroll;
 }
+
 /* width */
 .checkout-body-content::-webkit-scrollbar {
   display: none;
@@ -4329,24 +4330,24 @@ a.descriptif-link.bg-danger:hover {
 }
 .checkout-steps.nav-tabs .nav-link.active {
   font-size: 1rem;
-  color: #d9345a !important;
+  color: #d82558 !important;
   background-color: transparent;
 }
 .checkout-steps.nav-tabs .nav-link.active .number-circle {
   width: 68px;
   height: 68px;
   color: #fff;
-  background-color: #d9345a;
-  border-color: #d9345a;
+  background-color: #d82558;
+  border-color: #d82558;
   margin-right: 16px;
   font-size: 1.75rem;
   line-height: 65px;
 }
 .participant-img {
-  width: 46px;
-  height: 46px;
+  box-shadow: 0px 0px 8px #b4b4b4;
+  outline: 5px solid #fcfcfc;
+  height: 70px;
   border-radius: 50%;
-  border: 1px solid #212529;
   object-fit: cover;
   object-position: center;
 }
@@ -4367,7 +4368,7 @@ a.descriptif-link.bg-danger:hover {
 .tripper-list li .tripper-list-para,
 .tripper-list li,
 .tripper-amount {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 400;
 }
 .participants-div .desc,
@@ -4512,7 +4513,7 @@ a.descriptif-link.bg-danger:hover {
   padding-left: 3.25rem;
 }
 .dotted-border {
-  border-bottom: 1px dashed #dbdbdb;
+  /* border-bottom: 1px dashed #dbdbdb; */
 }
 .custom-control.custom-radio .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
@@ -4549,8 +4550,8 @@ a.descriptif-link.bg-danger:hover {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  border: 4px solid #ebebeb;
-  background-color: #d9345a;
+  border: 4px solid white;
+  background-color: #d82558;
 }
 .custom-control-label::before,
 .custom-checkbox .custom-control-label::before {
@@ -4608,7 +4609,7 @@ a.descriptif-link.bg-danger:hover {
   text-transform: uppercase;
 }
 .other-activity-check .custom-control-label::after {
-  top: 1px;
+  /* top: 1px; */
 }
 .add-participant,
 .remove-parti {
@@ -4658,7 +4659,7 @@ a.descriptif-link.bg-danger:hover {
   display: inline-block;
   margin-bottom: 2rem;
   margin-right: 2.5rem;
-  padding: 1.25rem;
+  padding: 1.75rem 1.25rem;
   padding-right: 2rem;
 }
 .custom-radio-container.inline-blocks .custom-control.custom-radio .custom-control-label {
@@ -4799,13 +4800,13 @@ a.descriptif-link.bg-danger:hover {
   padding: 20px 40px;
 }
 .number-of-tripper-div {
-  box-shadow: 0px 0px 6px #0000000a;
+  /* box-shadow: 0px 0px 6px #0000000a; */
 }
 .number-of-tripper-div .card-header {
   padding: 20px 40px 15px;
 }
 .number-of-tripper-div .card-header .check-amount-head {
-  color: #d9345a;
+  color: #d82558;
 }
 .number-of-tripper-div .card-body {
   padding: 0 40px 20px;
@@ -4860,7 +4861,7 @@ a.descriptif-link.bg-danger:hover {
   background-color: #ffffff;
 }
 .success-check {
-  background-color: #d9345a;
+  background-color: #d82558;
   border: 3px solid #ffffff;
   width: 67px;
   height: 67px;
@@ -5227,7 +5228,7 @@ a.descriptif-link.bg-danger:hover {
   right: 0;
 }
 .sol-selected-display-item-text {
-  color: #d9345a;
+  color: #d82558;
   font-size: 0.75rem;
 }
 .sol-selected-display-item {
@@ -5287,7 +5288,7 @@ a.descriptif-link.bg-danger:hover {
 
 /* Handle */
 .sol-selection::-webkit-scrollbar-thumb {
-  background: #d9345a;
+  background: #d82558;
   border: 2px solid #ebebeb;
 }
 .sol-option .sol-checkbox:checked ~ .sol-label-text,
@@ -5359,11 +5360,12 @@ a.descriptif-link.bg-danger:hover {
   .recap-div {
     margin-right: 5rem;
   }
-  .checkout-body-content {
-    padding: 0rem 6rem 6rem 6rem;
+  /* .checkout-body-content {
+    padding: 0rem 6rem 3rem 6rem;
     height: 100%;
     overflow-y: scroll;
-  }
+  } */
+
   .middle-section {
     padding: 200px 0;
   }
@@ -5530,7 +5532,7 @@ a.descriptif-link.bg-danger:hover {
   .main-product-content .content-head.equip {
     letter-spacing: 1.4px;
     font-size: 0.875rem;
-    color: #d9345a;
+    color: #d82558;
   }
   .main-product-content .like-div {
     display: flex;
@@ -6035,7 +6037,7 @@ a.descriptif-link.bg-danger:hover {
     line-height: 20px;
     width: 26px;
     height: 26px;
-    background-color: #d9345a;
+    background-color: #d82558;
     border-radius: 50%;
     line-height: 26px;
     text-align: center;
@@ -6870,7 +6872,7 @@ a.descriptif-link.bg-danger:hover {
 .main-search-content .activity-list .activity-list-head {
   font-size: 13px;
   letter-spacing: 1.3px;
-  color: #d9345a;
+  color: #d82558;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -6921,8 +6923,8 @@ a.descriptif-link.bg-danger:hover {
   margin-bottom: -1px;
 }
 .c-activity-nav.nav-pills .nav-link.active {
-  color: #d9345a;
-  border-color: #d9345a;
+  color: #d82558;
+  border-color: #d82558;
   background-color: transparent;
 }
 
