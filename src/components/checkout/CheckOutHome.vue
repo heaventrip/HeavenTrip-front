@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <CheckOutHeader :course="course" :session="session" :active-step="activeStep" />
+  <div style="position: fixed; width: 100vw">
+    <CheckOutHeader :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
     <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
   },
   async created() {
     await this.$axios.get(`/courses/${this.$props.productId}`).then((res) => (this.course = res.data.course))
-    await this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => (this.session = res.data.session))
+    await this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => (this.session = res.data.sessions[0]))
     this.participantsNb = this.$route.params.participantsNb
   }
 }

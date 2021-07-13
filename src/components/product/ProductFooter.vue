@@ -79,7 +79,7 @@
                   {{ session.duration }} jours - {{ session.duration - 1 }} nuits
                 </h6>
                 <h6 class="amount-per mb-0">
-                  <strong>{{ course.price }}€ </strong>/pers.
+                  <strong>{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>/pers.
                 </h6>
                 <button @click="clickedChoseBtn(session)" class="btn choose-btn">CHOISIR</button>
               </div>
@@ -145,7 +145,7 @@
         </div>
         <div class="center-col px-5" :class="{ inactive: !choseBtn }">
           <span class="tot-amount text-left"
-            >PRIX total : <strong class="d-block">{{ course.price * participantsNb }} &euro;</strong></span
+            >PRIX total : <strong class="d-block">{{ (course.price * participantsNb).toString()[0] }}&thinsp;{{ (course.price * participantsNb).toString().slice(1) }}&thinsp;&euro;</strong></span
           >
         </div>
       </div>

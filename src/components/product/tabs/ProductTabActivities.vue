@@ -194,8 +194,8 @@
         <div v-for="includedCourse in includedCourses" :key="includedCourse" class="col-12 col-lg-4">
           <div class="box bg-white my-0" style="padding: 2rem">
             <div class="head text-uppercase mb-0 d-inline-block text-danger" style="font-size: 1rem; font-weight: 900">
-              <InlineSvg v-if="includedCourse.picto" fill="#d9345a" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
-              <InlineSvg fill="#d9345a" height="10" class="mx-3 d-inline-block" :src="require(`@/assets/svg/triangle-right.svg`)" />
+              <InlineSvg v-if="includedCourse.picto" fill="#d82558" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
+              <InlineSvg fill="#d82558" height="10" class="mx-3 d-inline-block" :src="require(`@/assets/svg/triangle-right.svg`)" />
               <span class="d-inline-block align-middle">{{ includedCourse.title }}</span>
             </div>
             <ul class="list-unstyled list mt-3 mb-0">
@@ -260,7 +260,7 @@
         <ul class="activity-list list-unstyled mb-0">
           <li v-for="(alternative, index) in altCourses" :key="alternative" :class="[index === altCourses.length - 1 ? 'pb-0' : '']">
             <h5 class="activity-list-head mb-0">
-              <InlineSvg v-if="alternative.picto" fill="#d9345a" height="35" class="d-inline-block mr-4" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
+              <InlineSvg v-if="alternative.picto" fill="#d82558" height="35" class="d-inline-block mr-4" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
               <span class="d-inline-block align-middle">{{ alternative.title }}</span>
             </h5>
             <ul class="list-unstyled text-uppercase activity-content-list justify-content-end mb-0">

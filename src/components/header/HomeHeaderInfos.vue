@@ -46,7 +46,7 @@
         <div class="col-8 bg block--white">
           <div class="block__content">
             <div class="px-2">
-              <span class="euro">{{ featuredCourse.price }}€</span>
+              <span class="euro">{{ featuredCourse?.price }}&thinsp;&euro;</span>
               <span class="euro-pers">/pers.</span>
               <br />
               <span class="text--smaller">Tout inclus (sans transports)</span>
