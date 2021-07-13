@@ -1,14 +1,12 @@
 <template>
-  <div class="login-signup-tab">
-    <div class="row no-gutters">
-      <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem">
-        <!-- <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button> -->
-        <CheckoutWizardPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
-        <CheckoutWizardSuccess />
-      </div>
-      <div class="col-12 col-lg-4 ml-auto" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px; position: absolute; right: 0; height: calc(100vh - 181px)">
-        <CheckoutWizardRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
-      </div>
+  <div class="d-flex w-100">
+    <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem padding-bottom: 4rem;">
+      <!-- <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button> -->
+      <CheckoutWizardPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
+      <CheckoutWizardSuccess />
+    </div>
+    <div class="col-12 col-lg-4 ml-auto p-0" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px">
+      <CheckoutWizardRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
   </div>
 </template>

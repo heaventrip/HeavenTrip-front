@@ -6,49 +6,45 @@
       <div class="top-info">aaaaaaaa</div>
       <div class="top-info">aaaaaaaa</div>
     </div>
-    <div class="container-fluid p-0 h-100">
-      <div class="row no-gutters h-100">
-        <div class="col-12 col-xl-4 p-0 bg-image h-100 position-relative" v-if="activeStep !== 'validation'">
-          <img class="img-fluid checkout-info-img" fluid :src="require('@/assets/images/checkout_bg.jpg')" />
-          <div class="d-flex align-items-center share-social-icons text-white">
-            <h6 class="font-weight-normal mr-3 mb-0">Partage à un pote!</h6>
-            <a href="#" class="rounded-circle d-inline-block">
-              <InlineSvg class="mr-2" :src="require('@/assets/svg/instagram-light.svg')" height="30" />
-            </a>
-            <a href="#" class="rounded-circle d-inline-block">
-              <InlineSvg class="mr-2" :src="require('@/assets/svg/facebook-light.svg')" height="30" />
-            </a>
+    <div class="d-flex h-100 w-100">
+      <div class="col-xl-4 p-0 bg-image h-100 position-relative" v-if="activeStep !== 'validation'">
+        <img class="img-fluid checkout-info-img" fluid :src="require('@/assets/images/checkout_bg.jpg')" />
+        <div class="d-flex align-items-center share-social-icons text-white">
+          <h6 class="font-weight-normal mr-3 mb-0">Partage à un pote!</h6>
+          <a href="#" class="rounded-circle d-inline-block">
+            <InlineSvg class="mr-2" :src="require('@/assets/svg/instagram-light.svg')" height="30" />
+          </a>
+          <a href="#" class="rounded-circle d-inline-block">
+            <InlineSvg class="mr-2" :src="require('@/assets/svg/facebook-light.svg')" height="30" />
+          </a>
+        </div>
+      </div>
+      <div class="checkout-body-content h-100" style="position: relative" :class="[activeStep === 'validation' ? 'col-xl-12 p-0' : 'col-xl-8']">
+        <div class="checkout-progress-bar" style="position: sticky; top: 0; z-index: 15" :class="[activeStep === 'booker' ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']" v-if="activeStep !== 'validation' && activeStep !== 'success'">
+          <div class="d-flex w-100 py-5">
+            <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
+            <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
+            <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
+            <div class="text-uppercase pl-4" style="color: #b4b4b487; font-weight: 600">Paiement</div>
           </div>
         </div>
-        <div class="col-12 p-0 h-100" :class="[activeStep === 'validation' ? 'col-xl-12' : 'col-xl-8']">
-          <div class="checkout-body-content" style="position: relative" :class="[activeStep === 'validation' ? 'p-0' : '']">
-            <div class="checkout-progress-bar" style="position: sticky; top: 0; z-index: 15" :class="[activeStep === 'booker' ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']" v-if="activeStep !== 'validation' && activeStep !== 'success'">
-              <div class="d-flex w-100 py-5">
-                <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
-                <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
-                <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
-                <div class="text-uppercase pl-4" style="color: #b4b4b487; font-weight: 600">Paiement</div>
-              </div>
+        <transition name="fade" mode="out-in" @before-leave="beforeLeave">
+          <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
+            <keep-alive>
+              <CheckoutWizardBooker @complete="bookerComplete = true" @incomplete="bookerComplete = false" @updated-booker="setBooker" v-if="activeStep === 'booker'" />
+              <CheckoutWizardParticipants @complete="participantsComplete = true" @incomplete="participantsComplete = false" @updated-participants="setParticipants" v-else-if="activeStep === 'participants'" :booker="booker" />
+              <CheckoutWizardForm @complete="optionsComplete = true" @incomplete="optionsComplete = false" @updated-participants="setParticipants" @updated-booker="setBooker" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'options'" />
+              <CheckoutWizardForm2 @complete="insuranceComplete = true" @incomplete="insuranceComplete = false" @updated-participants="setParticipants" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'insurance'" />
+            </keep-alive>
+            <Step5 :course="course" :booker="booker" :extra-participants="extraParticipants" v-if="activeStep === 'validation'" />
+            <Step6 v-if="activeStep === 'success'" />
+            <div class="d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
+              <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
+              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn disable" style="border-radius: 0">étape suivante</button>
+              <!-- <button @click.prevent="nextStep" :disabled="!stepIsComplete(activeStep)" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
             </div>
-            <transition name="fade" mode="out-in" @before-leave="beforeLeave">
-              <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
-                <keep-alive>
-                  <CheckoutWizardBooker @complete="bookerComplete = true" @incomplete="bookerComplete = false" @updated-booker="setBooker" v-if="activeStep === 'booker'" />
-                  <CheckoutWizardParticipants @complete="participantsComplete = true" @incomplete="participantsComplete = false" @updated-participants="setParticipants" v-else-if="activeStep === 'participants'" :booker="booker" />
-                  <CheckoutWizardForm @complete="optionsComplete = true" @incomplete="optionsComplete = false" @updated-participants="setParticipants" @updated-booker="setBooker" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'options'" />
-                  <CheckoutWizardForm2 @complete="insuranceComplete = true" @incomplete="insuranceComplete = false" @updated-participants="setParticipants" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'insurance'" />
-                </keep-alive>
-                <Step5 :course="course" :booker="booker" :extra-participants="extraParticipants" v-if="activeStep === 'validation'" />
-                <Step6 v-if="activeStep === 'success'" />
-                <div class="d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
-                  <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
-                  <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn disable" style="border-radius: 0">étape suivante</button>
-                  <!-- <button @click.prevent="nextStep" :disabled="!stepIsComplete(activeStep)" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
-                </div>
-              </div>
-            </transition>
           </div>
-        </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -114,7 +110,7 @@ export default {
     course: {
       immediate: true,
       handler(val) {
-        this.activeStep = 'validation'
+        this.activeStep = 'booker'
       }
     },
     activeStep: {

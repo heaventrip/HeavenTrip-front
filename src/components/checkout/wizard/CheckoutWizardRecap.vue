@@ -3,7 +3,7 @@
     <img class="course-image" :src="require('@/assets/images/beach.jpg')" />
     <div class="accordion" id="tripperaccordion">
       <div class="card accordion-card border-0">
-        <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="tripOne" type="button" data-toggle="collapse" data-target="#tripperOne" aria-expanded="false" aria-controls="tripperOne">
+        <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="tripBooker" type="button" data-toggle="collapse" data-target="#tripperBooker" aria-expanded="false" aria-controls="tripperBooker">
           <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
           <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
           <div class="ml-auto text-right check-amount-head">
@@ -12,7 +12,7 @@
             <strong class="check-amount text-dark d-block">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>
           </div>
         </div>
-        <div id="tripperOne" class="collapse" aria-labelledby="tripOne" data-parent="#tripperaccordion">
+        <div id="tripperBooker" class="collapse" aria-labelledby="tripBooker" data-parent="#tripperaccordion">
           <div class="card-body">
             <ul class="list-unstyled mb-0 tripper-list">
               <li>
@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="card border-0" v-for="(extraParticipant, index) in extraParticipants" :key="extraParticipant">
+      <div class="card accordion-card border-0" v-for="(extraParticipant, index) in extraParticipants" :key="extraParticipant">
         <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" :id="`trip${index}`" type="button" data-toggle="collapse" :data-target="`#tripper${index}`" aria-expanded="false" aria-controls="tripperTwo">
           <div class="participant-img-container position-relative">
             <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
@@ -68,7 +68,7 @@
             <strong class="check-amount text-dark d-block">2 220 &euro;</strong>
           </div>
         </div>
-        <div :id="`#tripper${index}`" class="collapse" :aria-labelledby="`trip${index}`" data-parent="#tripperaccordion">
+        <div :id="`tripper${index}`" class="collapse" :aria-labelledby="`trip${index}`" data-parent="#tripperaccordion">
           <div class="card-body">
             <ul class="list-unstyled mb-0 tripper-list">
               <li>
