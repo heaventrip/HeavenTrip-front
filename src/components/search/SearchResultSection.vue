@@ -68,7 +68,7 @@
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Thématique<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect class="theme-multiselect" ref="themeMultiselect" @open="setMultiSelect('theme')" v-model="themeSelection.value" v-bind="themeSelection" style="width: 100%">
+                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="theme-multiselect" ref="themeMultiselect" @open="setMultiSelect('theme')" v-model="themeSelection.value" v-bind="themeSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -81,7 +81,7 @@
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Activités<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -93,7 +93,7 @@
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/globe.svg')" height="22" />
                     <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
+                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -105,7 +105,7 @@
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
                     <span class="search-bar__filter__name">Spot<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect class="spot-multiselect" ref="spotMultiselect" @open="setMultiSelect('spot')" v-model="spotSelection.value" v-bind="spotSelection" style="width: 100%">
+                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="spot-multiselect" ref="spotMultiselect" @open="setMultiSelect('spot')" v-model="spotSelection.value" v-bind="spotSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -117,7 +117,7 @@
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Mois de départ<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -129,7 +129,7 @@
                     <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__filter__name">Niveau<i class="fas fa-sort float-right symbol"></i></span>
                   </div>
-                  <Multiselect class="level-multiselect" ref="levelMultiselect" @open="setMultiSelect('level')" v-model="levelSelection.value" v-bind="levelSelection" style="width: 100%">
+                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="level-multiselect" ref="levelMultiselect" @open="setMultiSelect('level')" v-model="levelSelection.value" v-bind="levelSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -444,7 +444,16 @@ export default {
       }
     }
   },
+  computed: {
+    selectionIsEmpty() {
+      return this.levelSelection.value.length + this.countrySelection.value.length + this.spotSelection.value.length + this.monthSelection.value.length + this.activitySelection.value.length === 0
+    }
+  },
   watch: {
+    selectionIsEmpty(val) {
+      console.log(val)
+      if (val === true) this.resetFilters()
+    },
     $route() {
       if (this.$route.query) {
         // this.submitSearchForm()
@@ -475,6 +484,12 @@ export default {
     }
   },
   methods: {
+    resetFilters() {
+      this.activitySelection.options.map((el) => (el.disabled = false))
+      this.countrySelection.options.map((el) => (el.disabled = false))
+      this.spotSelection.options.map((el) => (el.disabled = false))
+      this.levelSelection.options.map((el) => (el.disabled = false))
+    },
     sortByPrice() {
       if (this.sortedBy === 'descPrice') {
         this.normalResults.sort((a, b) => a.price - b.price) // ascending order
@@ -502,6 +517,9 @@ export default {
         this.sortedBy = 'descDate'
       }
     },
+    updateSearch() {
+      this.submitSearchForm()
+    },
     submitSearchForm() {
       this.$axios
         .post('/courses/search', {
@@ -517,7 +535,33 @@ export default {
           sessions_full_eq: this.dateConfirmed
         })
         .then((res) => {
+          let themesArr = new Array()
+          let activityArr = new Array()
+          let levelArr = new Array()
+          let countryArr = new Array()
+          let spotArr = new Array()
+          this.resetFilters()
           console.log(res)
+
+          // console.log(res.data.courses[0].sports.map((el) => console.log(el)))
+          res.data.courses.forEach((course) => {
+            activityArr.push(course.sports.map((sport) => sport.id))
+            countryArr.push(course.country.id)
+            spotArr.push(course.spot.id)
+            levelArr.push(course.level.id)
+          })
+          activityArr.flat().forEach((id) => {
+            this.activitySelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+          })
+          countryArr.flat().forEach((id) => {
+            this.countrySelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+          })
+          spotArr.flat().forEach((id) => {
+            this.spotSelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+          })
+          levelArr.flat().forEach((id) => {
+            this.levelSelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+          })
           this.normalResults = res.data.courses
         })
     },
