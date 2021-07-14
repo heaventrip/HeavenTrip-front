@@ -1584,14 +1584,15 @@ a.bg-danger:hover {
   border-right: 1px dashed #ffffff80 !important;
 }
 .pre-booking-footer .info-div {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr 2fr 1fr 1fr 0.75fr;
+  display: flex;
+  /* grid-template-columns: 1fr 1fr 1.5fr 2fr 1fr 1fr 0.75fr; */
   align-items: center;
 }
 .pre-booking-footer .order-tab-list > li {
   border-bottom: 1px dashed #292f33;
   padding: 40px 0;
 }
+
 .pre-booking-footer .order-tab-list > li:last-child {
   border-bottom: none;
 }
@@ -1607,7 +1608,7 @@ a.bg-danger:hover {
   border-radius: 30px;
   background-color: #292f33;
   padding: 11px 13px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   text-transform: uppercase;
 }
 .pre-booking-footer .order-tab-list > li .choose-btn {
@@ -1620,7 +1621,7 @@ a.bg-danger:hover {
   padding: 18px 32px;
   letter-spacing: 0.65px;
   text-transform: uppercase;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 .pre-booking-footer .order-tab-list > li .choose-btn:hover {
   background-color: #292f33;
@@ -1631,17 +1632,18 @@ a.bg-danger:hover {
   font-weight: 400;
   letter-spacing: -0.4px;
   line-height: 30px;
-  border-left: 1px solid #292f33;
   text-align: center;
 }
 .pre-booking-footer .order-tab-list > li .amount-per strong {
   font-size: 1.5rem;
 }
 .pre-booking-footer .order-tab-list > li .hours-count {
+  padding: 0 1rem;
   font-size: 1rem;
   line-height: 26px;
   font-weight: 400;
   border-left: 1px solid #292f33;
+  border-right: 1px solid #292f33;
   text-align: center;
 }
 .pre-booking-footer .order-tab-list > li .tripper-count {
@@ -1652,7 +1654,7 @@ a.bg-danger:hover {
 .pre-booking-footer .order-tab-list > li .tripper-text {
   font-size: 1rem;
   line-height: 24px;
-  letter-spacing: 1.6px;
+  letter-spacing: 0.03rem;
 }
 .pre-booking-footer .registrants .registrants-list li a,
 .pre-booking-footer .registrants .registrants-list li a:hover {
@@ -1668,6 +1670,18 @@ a.bg-danger:hover {
   bottom: 100%;
   box-shadow: 0px -3px 4px #0000000d;
   background-color: #ffffff;
+}
+@media only screen and (max-width: 1440px) {
+  .pre-booking-footer .order-tab-list > li .month-count {
+    font-size: 1rem;
+    font-weight: 700;
+    min-width: 130px;
+  }
+  .pre-booking-footer .order-tab-list > li .tripper-count {
+    font-size: 0.8rem;
+    line-height: 21px;
+    font-weight: 400;
+  }
 }
 
 /*--------------------------product--------------------------------------*/
@@ -3039,7 +3053,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .booking-session .booking-session-list li a {
   font-family: 'Muli', sans-serif;
-  font-weight: 400;
+  font-weight: 800;
   font-size: 0.8rem;
   color: #292f33;
   width: 100%;
@@ -5400,9 +5414,6 @@ a.descriptif-link.bg-danger:hover {
   .container {
     max-width: 1444px;
   }
-  .checkout-main-container {
-    height: calc(100vh - 216px);
-  }
   .owl-carousel .owl-stage-outer {
     height: 460px;
   }
@@ -5484,6 +5495,10 @@ a.descriptif-link.bg-danger:hover {
   .header .navbar-dark .navbar-nav .nav-link.navbar-grey.active,
   .header .navbar-dark .navbar-nav .nav-link.navbar-grey:hover {
     border-bottom: 1px solid #292f33 !important;
+  }
+  .checkout-header-block-container {
+    padding: 40px 50px;
+    min-height: 170px;
   }
   .result-block {
     padding: 108px 0;
@@ -6960,3 +6975,9 @@ a.descriptif-link.bg-danger:hover {
     max-width: 1410px;
   }
 }
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .checkout-main-container {
+    height: calc(100vh - 176px);
+  }
+}
+

@@ -20,9 +20,13 @@
         </div>
       </div>
       <div class="checkout-body-content h-100" style="position: relative" :class="[activeStep === 'validation' ? 'col-xl-12 p-0' : 'col-xl-8']">
-        <div class="checkout-progress-bar" style="position: sticky; top: 0; z-index: 15" :class="[activeStep === 'booker' ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']" v-if="activeStep !== 'validation' && activeStep !== 'success'">
-          <!-- NOTE -->
-          <div class="d-flex w-100 py-2">
+        <div
+          class="checkout-progress-bar"
+          style="position: sticky; top: 0; z-index: 15"
+          :class="[activeStep === 'booker' || activeStep === 'participants' || activeStep === 'insurance' || (activeStep === 'options' && $windowWidth <= 1366) ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']"
+          v-if="activeStep !== 'validation' && activeStep !== 'success'"
+        >
+          <div class="d-flex w-100 py-5">
             <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
             <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
             <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
@@ -41,8 +45,8 @@
             <Step6 v-if="activeStep === 'success'" />
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
-              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn disable" style="border-radius: 0">étape suivante</button>
-              <!-- <button @click.prevent="nextStep" :disabled="!stepIsComplete(activeStep)" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
+              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn disable" style="border-radius: 0">{{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}</button>
+              <!-- <button @click.prevent="nextStep" :class="{ disable: !stepIsComplete(activeStep) }" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
             </div>
           </div>
         </transition>
@@ -96,15 +100,18 @@ export default {
           postalCode: 'a'
         },
         booking: {
-          room: ['a'],
+          room: [],
           roomMate: 'a',
           equipmentRental: true,
           noExtraActivities: true,
-          extraActivities: ['a'],
+          extraActivities: [],
           extraNotes: 'a',
           insurance: 'a'
         }
-      }
+      },
+      bookerInputsChanged: false,
+      updatedBooker: null,
+      updatedExtraParticipants: null
     }
   },
   watch: {
@@ -149,6 +156,8 @@ export default {
     },
     setBooker(val) {
       this.booker = val
+
+      if (this.activeStep === 'booker') this.bookerInputsChanged = true
     },
     setParticipants(val) {
       this.extraParticipants = val
