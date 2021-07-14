@@ -129,12 +129,13 @@ export default {
   letter-spacing: 0.1rem;
   color: white;
   border: 0;
+  transition: all 0.3s ease;
 }
 .stripe-redirect-button:hover {
-  background: #d82558;
+  background-color: #d82558;
 }
 .stripe-redirect-button:active {
-  background: #292f33;
+  background-color: #292f33;
 }
 .card {
   border: none;

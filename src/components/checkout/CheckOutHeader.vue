@@ -120,6 +120,16 @@ export default {
 .checkout-header-block-container {
   padding: 0 4vw;
 }
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .checkout-header-block-container {
+    min-height: 100px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .checkout-header-block-container {
+    min-height: 100px;
+  }
+}
 .back-to-home-link {
   border-right: 1px solid white;
   transition: all 0.3s ease;

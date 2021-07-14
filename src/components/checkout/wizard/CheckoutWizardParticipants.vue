@@ -8,7 +8,7 @@
       <InlineSvg :src="require('@/assets/svg/triangle-right.svg')" height="8" style="margin-left: 1rem; margin-right: 1rem" />
       <div class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</div>
       <div class="ml-auto">
-        <span type="button" class="d-block text-danger text-uppercase" style="font-size: 0.8rem; font-weight: 400"><i class="fas fa-edit mr-2"></i> Mes infos</span>
+        <span type="button" @click="$emit('clicked-my-infos')" class="d-block text-danger text-uppercase" style="font-size: 0.8rem; font-weight: 400"><i class="fas fa-edit mr-2"></i> Mes infos</span>
       </div>
     </div>
     <transition-group name="participant-fade" @enter="test">

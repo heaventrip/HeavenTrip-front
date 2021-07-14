@@ -5485,10 +5485,6 @@ a.descriptif-link.bg-danger:hover {
   .header .navbar-dark .navbar-nav .nav-link.navbar-grey:hover {
     border-bottom: 1px solid #292f33 !important;
   }
-  .checkout-header-block-container {
-    padding: 40px 50px;
-    min-height: 170px;
-  }
   .result-block {
     padding: 108px 0;
   }

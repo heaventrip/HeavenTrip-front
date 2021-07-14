@@ -21,7 +21,8 @@
       </div>
       <div class="checkout-body-content h-100" style="position: relative" :class="[activeStep === 'validation' ? 'col-xl-12 p-0' : 'col-xl-8']">
         <div class="checkout-progress-bar" style="position: sticky; top: 0; z-index: 15" :class="[activeStep === 'booker' ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']" v-if="activeStep !== 'validation' && activeStep !== 'success'">
-          <div class="d-flex w-100 py-5">
+          <!-- NOTE -->
+          <div class="d-flex w-100 py-2">
             <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
             <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
             <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
@@ -32,13 +33,13 @@
           <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
             <keep-alive>
               <CheckoutWizardBooker @complete="bookerComplete = true" @incomplete="bookerComplete = false" @updated-booker="setBooker" v-if="activeStep === 'booker'" />
-              <CheckoutWizardParticipants @complete="participantsComplete = true" @incomplete="participantsComplete = false" @updated-participants="setParticipants" v-else-if="activeStep === 'participants'" :booker="booker" />
+              <CheckoutWizardParticipants @complete="participantsComplete = true" @incomplete="participantsComplete = false" @updated-participants="setParticipants" @clicked-my-infos="activeStep = 'booker'" v-else-if="activeStep === 'participants'" :booker="booker" />
               <CheckoutWizardForm @complete="optionsComplete = true" @incomplete="optionsComplete = false" @updated-participants="setParticipants" @updated-booker="setBooker" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'options'" />
               <CheckoutWizardForm2 @complete="insuranceComplete = true" @incomplete="insuranceComplete = false" @updated-participants="setParticipants" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'insurance'" />
             </keep-alive>
             <Step5 :course="course" :booker="booker" :extra-participants="extraParticipants" v-if="activeStep === 'validation'" />
             <Step6 v-if="activeStep === 'success'" />
-            <div class="d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
+            <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
               <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn disable" style="border-radius: 0">étape suivante</button>
               <!-- <button @click.prevent="nextStep" :disabled="!stepIsComplete(activeStep)" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
