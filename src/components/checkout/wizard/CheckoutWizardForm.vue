@@ -30,188 +30,195 @@
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
     </div>
   </div>
-  <!-- NOTE booker -->
-  <div class="card d-block px-5" :class="[localExtraParticipants.length > 0 ? '' : 'mb-5']">
-    <div class="card-body">
-      <h6 class="font-weight-bold">Quel type de chambre :</h6>
-      <p class="font-weight-500" style="font-family: 0.875rem">Dans la limite des stocks disponibles !</p>
-      <div class="hidable custom-radio-container">
-        <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
-          <label class="">
-            <input v-model="localBooker.booking.room" :value="index" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
-            <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
-              <div>
-                <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
-                <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
-              </div>
-              <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable && extraParticipants.length > 0">
-                <p class="font-weight-500 mb-0">A partager avec :</p>
-                <select v-model="localBooker.booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
-                  <option v-for="extraParticipant in localExtraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
-                </select>
-              </div>
-              <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
-            </span>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="card-body border-top">
-      <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
-      <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
-      <div class="hidable custom-radio-container">
-        <div class="custom-control">
-          <label class="" for="customRadio5">
-            <input v-model="localBooker.booking.equipmentRental" :value="true" type="radio" id="customRadio5" name="materielBooker" class="" />
-            <span class="d-flex align-items-center w-100 dotted-border">
-              <div>
-                <div class="font-weight-bold text-uppercase">avec materiel</div>
-                <p class="font-weight-500 mb-0">Je voyage léger</p>
-              </div>
-              <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
-            </span>
-          </label>
-        </div>
-        <div class="custom-control">
-          <label class="" for="customRadio6">
-            <input v-model="localBooker.booking.equipmentRental" :value="false" type="radio" id="customRadio6" name="materielBooker" class="" />
-            <span class="d-flex align-items-center w-100">
-              <div>
-                <div class="font-weight-bold text-uppercase">sans materiel</div>
-                <p class="font-weight-500 mb-0" style="font-family: 0.875rem">Je préfére venir avec mon matos !</p>
-              </div>
-              <div class="ml-auto font-weight-bold text-uppercase">reduction de 380 &euro;</div>
-            </span>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="card-body border-top">
-      <h6 class="font-weight-bold">Activites en +</h6>
-      <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
-      <div class="hidable">
-        <div class="custom-radio-container inline-blocks py-3">
-          <div class="custom-control custom-radio bg-light rounded border mb-3">
-            <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
-              <input v-model="localBooker.booking.extraActivities" value="1" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
-              <span class="font-weight-bold text-uppercase">
-                <div style="margin-right: 2.25rem">sup-paddle</div>
-                <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
+  <transition name="fade" mode="out-in" @enter="scroll">
+    <!-- NOTE booker -->
+    <div v-if="currForm === 'booker'" class="card card-participant card-booker d-block px-5" :class="[localExtraParticipants.length > 0 ? '' : 'mb-5']">
+      <div class="card-body">
+        <h6 class="font-weight-bold">Quel type de chambre :</h6>
+        <p class="font-weight-500" style="font-family: 0.875rem">Dans la limite des stocks disponibles !</p>
+        <div class="hidable custom-radio-container">
+          <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
+            <label class="">
+              <input v-model="localBooker.booking.room" :value="index" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
+              <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
+                <div>
+                  <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
+                  <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
+                </div>
+                <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable && extraParticipants.length > 0">
+                  <p class="font-weight-500 mb-0">A partager avec :</p>
+                  <select v-model="localBooker.booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
+                    <option v-for="extraParticipant in localExtraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
+                  </select>
+                </div>
+                <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
               </span>
             </label>
           </div>
         </div>
-        <div class="custom-control custom-checkbox other-activity-check">
-          <label class="mb-0" for="exampleCheck3" style="font-weight: 400">
-            <input v-model="localBooker.booking.noExtraActivities" type="checkbox" class="" id="exampleCheck3" />
-            <span>Je ne souhaite pas d'autres activites</span>
-          </label>
+      </div>
+      <div class="card-body border-top">
+        <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
+        <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
+        <div class="hidable custom-radio-container">
+          <div class="custom-control">
+            <label class="" for="customRadio5">
+              <input v-model="localBooker.booking.equipmentRental" :value="true" type="radio" id="customRadio5" name="materielBooker" class="" />
+              <span class="d-flex align-items-center w-100 dotted-border">
+                <div>
+                  <div class="font-weight-bold text-uppercase">avec matériel</div>
+                  <p class="font-weight-500 mb-0">Je voyage léger</p>
+                </div>
+                <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
+              </span>
+            </label>
+          </div>
+          <div class="custom-control">
+            <label class="" for="customRadio6">
+              <input v-model="localBooker.booking.equipmentRental" :value="false" type="radio" id="customRadio6" name="materielBooker" class="" />
+              <span class="d-flex align-items-center w-100">
+                <div>
+                  <div class="font-weight-bold text-uppercase">sans materiel</div>
+                  <p class="font-weight-500 mb-0" style="font-family: 0.875rem">Je préfére venir avec mon matos !</p>
+                </div>
+                <div class="ml-auto font-weight-bold text-uppercase">reduction de 380 &euro;</div>
+              </span>
+            </label>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- <div class="border-top d-none">
-      <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
-      <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-      <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
-      <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
+      <div class="card-body border-top">
+        <h6 class="font-weight-bold">Activites en +</h6>
+        <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
+        <div class="hidable">
+          <div class="custom-radio-container inline-blocks py-3">
+            <div class="custom-control custom-radio bg-light rounded border mb-3">
+              <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
+                <input v-model="localBooker.booking.extraActivities" value="1" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
+                <span class="font-weight-bold text-uppercase">
+                  <div style="margin-right: 2.25rem">sup-paddle</div>
+                  <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="custom-control custom-checkbox other-activity-check">
+            <label class="mb-0" for="exampleCheck3" style="font-weight: 400">
+              <input v-model="localBooker.booking.noExtraActivities" type="checkbox" class="" id="exampleCheck3" />
+              <span>Je ne souhaite pas d'autres activites</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="border-top d-none">
+    <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
+    <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
+    <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+    <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
     </div> -->
-    <div class="card-body border-top">
-      <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
-      <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-      <textarea v-model="localBooker.booking.extraNotes" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+      <div class="card-body border-top">
+        <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
+        <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
+        <textarea v-model="localBooker.booking.extraNotes" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+      </div>
     </div>
-  </div>
-  <!-- NOTE extras -->
-  <div class="card d-block px-5 mb-5" v-for="(extraParticipant, mainLoopIndex) in localExtraParticipants" :key="extraParticipant">
-    <div class="card-body">
-      <h6 class="font-weight-bold">Quel type de chambre :</h6>
-      <p class="font-weight-500">Dans la limite des stocks disponibles !</p>
-      <div class="hidable custom-radio-container">
-        <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
-          <label class="">
-            <input v-model="extraParticipant.booking.room" :value="index" type="radio" :id="`extraPart${mainLoopIndex}-${index}`" :name="`extraPartRoom${mainLoopIndex}-${index}`" class="" />
-            <div class="d-flex align-items-center w-100" :class="{ 'dotted-border': index !== course.rooms.length - 1 }">
-              <span>
-                <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
-                <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
-              </span>
-              <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable">
-                <p class="font-weight-500 mb-0">A partager avec :</p>
-                <select v-model="extraParticipant.booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
-                  <option>{{ booker.infos.firstName }}</option>
-                  <option :disabled="extraParticipantForName === extraParticipant ? true : false" v-for="extraParticipantForName in localExtraParticipants" :key="extraParticipantForName">{{ extraParticipantForName.infos.firstName }}</option>
-                </select>
+    <div v-else>
+      <!-- NOTE extras -->
+      <div class="card card-participant card-extra-participant d-block px-5 mb-5" v-for="(extraParticipant, mainLoopIndex) in localExtraParticipants" :key="extraParticipant">
+        <div class="card-body">
+          <h6 class="font-weight-bold">Quel type de chambre :</h6>
+          <p class="font-weight-500" style="font-family: 0.875rem">Dans la limite des stocks disponibles !</p>
+          <div class="hidable custom-radio-container">
+            <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
+              <label class="">
+                <input v-model="extraParticipant.booking.room" :value="index" type="radio" :id="`extraPart${mainLoopIndex}-${index}`" :name="`extraPartRoom${mainLoopIndex}-${index}`" class="" />
+                <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
+                  <div>
+                    <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
+                    <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
+                  </div>
+                  <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable && extraParticipants.length > 0">
+                    <p class="font-weight-500 mb-0">A partager avec :</p>
+                    <select v-model="extraParticipant.booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
+                      <option>{{ booker.infos.firstName }}</option>
+                      <option v-for="extraParticipant in localExtraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
+                    </select>
+                  </div>
+                  <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="card-body border-top">
+          <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
+          <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
+          <div class="hidable custom-radio-container">
+            <div class="custom-control">
+              <label class="">
+                <input v-model="extraParticipant.booking.equipmentRental" :value="true" type="radio" :id="`extraPart${mainLoopIndex}-with`" :name="`material-extraPart${mainLoopIndex}`" class="" />
+                <span class="d-flex align-items-center w-100 dotted-border">
+                  <div>
+                    <div class="font-weight-bold text-uppercase">avec matériel</div>
+                    <p class="font-weight-500 mb-0">Je voyage léger</p>
+                  </div>
+                  <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
+                </span>
+              </label>
+            </div>
+            <div class="custom-control">
+              <label class="">
+                <input v-model="extraParticipant.booking.equipmentRental" :value="false" type="radio" :id="`extraPart${mainLoopIndex}-without`" :name="`material-extraPart${mainLoopIndex}`" class="" />
+                <div class="d-flex align-items-center w-100">
+                  <span>
+                    <div class="font-weight-bold text-uppercase">sans materiel</div>
+                    <p class="font-weight-500 mb-0">Je préfére venir avec mon matos !</p>
+                  </span>
+                  <div class="ml-auto font-weight-bold text-uppercase">reduction de 380 &euro;</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="card-body border-top">
+          <h6 class="font-weight-bold">Activites en +</h6>
+          <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
+          <div class="hidable">
+            <div class="custom-radio-container inline-blocks py-3">
+              <div class="custom-control custom-radio bg-light rounded border mb-3">
+                <label class="d-flex align-items-center border-0 m-0" for="customRadio8">
+                  <input v-model="extraParticipant.booking.extraActivities" value="1" type="checkbox" id="customRadio8" class="" :disabled="extraParticipant.booking.noExtraActivities" />
+                  <span class="font-weight-bold text-uppercase">
+                    <div style="margin-right: 2.25rem">sup-paddle</div>
+                    <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
+                  </span>
+                </label>
               </div>
-              <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
             </div>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="card-body border-top">
-      <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
-      <p class="font-weight-500">Matériel correspondant uniquement a tan activité principale</p>
-      <div class="hidable custom-radio-container">
-        <div class="custom-control">
-          <label class="">
-            <div class="d-flex align-items-center pb-3 mb-3 dotted-border w-100">
-              <input v-model="extraParticipant.booking.equipmentRental" :value="true" type="radio" :id="`extraPart${mainLoopIndex}-with`" :name="`material-extraPart${mainLoopIndex}`" class="" />
-              <span>
-                <div class="font-weight-bold text-uppercase">avec materiel</div>
-                <p class="font-weight-500 mb-0">Je voyage lègé</p>
-              </span>
-              <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
+            <div class="custom-control custom-checkbox other-activity-check">
+              <label class="mb-0" for="exampleCheck4" style="font-weight: 400">
+                <input v-model="extraParticipant.booking.noExtraActivities" type="checkbox" class="" id="exampleCheck4" />
+                <span>Je ne souhaite pas d'autres activites</span>
+              </label>
             </div>
-          </label>
+          </div>
         </div>
-        <div class="custom-control">
-          <label class="">
-            <input v-model="extraParticipant.booking.equipmentRental" :value="false" type="radio" :id="`extraPart${mainLoopIndex}-without`" :name="`material-extraPart${mainLoopIndex}`" class="" />
-            <div class="d-flex align-items-center w-100">
-              <span>
-                <div class="font-weight-bold text-uppercase">sans materiel</div>
-                <p class="font-weight-500 mb-0">Je préfére venir avec mon matos !</p>
-              </span>
-              <div class="ml-auto font-weight-bold text-uppercase">reduction de 380 &euro;</div>
-            </div>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="card-body border-top">
-      <h6 class="font-weight-bold">Activites en +</h6>
-      <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
-      <div class="hidable custom-radio-container inline-blocks py-3">
-        <div class="custom-control custom-radio bg-light rounded border">
-          <label class="d-flex align-items-center border-0" for="customRadio8">
-            <input v-model="extraParticipant.booking.extraActivities" value="1" type="checkbox" id="customRadio8" class="" :disabled="extraParticipant.booking.noExtraActivities" />
-            <div class="font-weight-bold text-uppercase">
-              sup-paddle<span class="border-left">+ 60&euro;<small class="text-lowercase">/pers.</small></span>
-            </div>
-          </label>
-        </div>
-      </div>
-      <div class="col-12 p-0">
-        <div class="custom-control custom-checkbox other-activity-check">
-          <label class="mb-0" for="exampleCheck4" style="font-weight: 400">je ne souhaite pas d'autres activites</label>
-          <input v-model="extraParticipant.booking.noExtraActivities" type="checkbox" class="" id="exampleCheck4" />
-        </div>
-      </div>
-    </div>
-    <!-- <div class="card-body border-top d-none">
+        <!-- <div class="card-body border-top d-none">
       <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
       <p class="font-weight-500">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
       <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
       <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
-    </div> -->
-    <div class="card-body border-top">
-      <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
-      <p class="font-weight-500">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-      <textarea v-model="extraParticipant.booking.extraNotes" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+      </div> -->
+        <div class="card-body border-top">
+          <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
+          <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
+          <textarea v-model="extraParticipant.booking.extraNotes" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+        </div>
+      </div>
     </div>
-  </div>
+  </transition>
   <div class="card p-0" style="position: relative" v-if="localExtraParticipants.length">
-    <div @click="addParticipant" class="btn-next-participant" type="button">
+    <div @click="nextParticipant" class="btn-next-participant" type="button">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
         <div class="d-inline-block" style="position: relative" data-v-9215de46="">
@@ -229,18 +236,45 @@ export default {
   props: ['booker', 'extra-participants', 'course'],
   data() {
     return {
+      currFormParticipant: 0,
       currFormStep: 0,
+      currForm: 'booker',
       localBooker: this.$props.booker,
       localExtraParticipants: this.$props.extraParticipants
     }
   },
   methods: {
+    initFormDisplay(type) {
+      let mainCard
+      if (type === 'extraParticipant') {
+        mainCard = document.querySelectorAll(`.card-${type}`)[this.currFormParticipant]
+      } else {
+        mainCard = document.querySelector(`.card-${type}`)
+      }
+      let cards = Array.from(mainCard.querySelectorAll('.card-body'))
+      let hiddenCards = cards.splice(1)
+      let buttons = document.querySelector('.nav-buttons-container')
+
+      buttons.style.display = 'none'
+      hiddenCards.forEach((card, index) => {
+        card.querySelector('.hidable').style.display = 'none'
+        card.style.filter = 'opacity(0.2)'
+
+        // only second card is half visible, others are hidden
+        if (index !== 0) card.style.display = 'none'
+      })
+    },
+    scroll() {
+      this.initFormDisplay('extra-participant')
+      document.querySelector('.card-header').scrollIntoView(false) // scroll top of div
+    },
     nextFormStep(step) {
       let nextCard = document.querySelectorAll('.card-body')[step]
       nextCard.querySelector('.hidable').style.display = ''
       nextCard.removeAttribute('style') // remove opacity
 
       if (step === 3) {
+        // TODO only for last participant !
         let buttons = document.querySelector('.nav-buttons-container')
         buttons.style.display = ''
       } else {
@@ -263,11 +297,20 @@ export default {
       let arr = new Array()
       this.localExtraParticipants.forEach((part) => arr.concat(Object.values(part.booking)))
       return arr.every((el) => el && el.length !== 0)
+    },
+    nextParticipant() {
+      if (this.currForm === 'booker') {
+        this.currForm = 'extraParticipant'
+        this.currFormParticipant = 0 // which extra participant is current
+      }
     }
   },
   computed: {
-    roomFilled() {
+    bookerRoomFilled() {
       return this.localBooker.booking.room && this.localBooker.booking.roomMate
+    },
+    bookerNoteFilled() {
+      return this.localBooker.booking.extraNotes
     },
     // equipmentFilled() {
     //   return this.localBooker.booking.equipmentRental === true || this.localBooker.booking.equipmentRental === false
@@ -275,12 +318,21 @@ export default {
     // activitiesFilled() {
     //   return this.localBooker.booking.noExtraActivities !== null || this.localBooker.booking.extraActivities.length
     // },
-    noteFilled() {
-      return this.localBooker.booking.extraNotes
+    extraParticipantRoomFilled() {
+      return this.localExtraParticipants[this.currFormParticipant].booking.room && this.localExtraParticipants[this.currFormParticipant].booking.roomMate
+    },
+    extraParticipantNoteFilled() {
+      return this.localExtraParticipants[this.currFormParticipant].booking.extraNotes
     }
+    // equipmentFilled() {
+    //   return this.localBooker.booking.equipmentRental === true || this.localBooker.booking.equipmentRental === false
+    // },
+    // activitiesFilled() {
+    //   return this.localBooker.booking.noExtraActivities !== null || this.localBooker.booking.extraActivities.length
+    // },
   },
   watch: {
-    roomFilled(val) {
+    bookerRoomFilled(val) {
       if (val) this.nextFormStep(1)
     },
     'localBooker.booking.equipmentRental': {
@@ -293,7 +345,23 @@ export default {
         this.nextFormStep(3)
       }
     },
-    noteFilled(val) {
+    bookerNoteFilled(val) {
+      // if (val) this.nextFormStep(4)
+    },
+    extraParticipantRoomFilled(val) {
+      if (val) this.nextFormStep(1)
+    },
+    'extraParticipant.booking.equipmentRental': {
+      handler(val) {
+        this.nextFormStep(2)
+      }
+    },
+    'extraParticipant.booking.noExtraActivities': {
+      handler(val) {
+        this.nextFormStep(3)
+      }
+    },
+    extraParticipantNoteFilled(val) {
       // if (val) this.nextFormStep(4)
     },
     booker(v) {
@@ -322,18 +390,7 @@ export default {
     }
   },
   mounted() {
-    let cards = Array.from(document.querySelectorAll('.card-body'))
-    let hiddenCards = cards.splice(1)
-    let buttons = document.querySelector('.nav-buttons-container')
-
-    buttons.style.display = 'none'
-    hiddenCards.forEach((card, index) => {
-      card.querySelector('.hidable').style.display = 'none'
-      card.style.filter = 'opacity(0.2)'
-
-      // only second card is half visible, others are hidden
-      if (index !== 0) card.style.display = 'none'
-    })
+    this.initFormDisplay('booker')
   }
 }
 </script>
