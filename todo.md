@@ -1,4 +1,4 @@
 - rgpd => vue cookies
-- search ajax OK
-- mécanique du radio activités
-- copier les styles du form booker sur form participants
+- nullify unselected sess
+- remove scroll event module booking
+- add trippers inscrits session

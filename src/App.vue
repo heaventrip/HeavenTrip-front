@@ -40,6 +40,7 @@ body.modal-open::after {
   align-items: center;
   z-index: 10;
 }
+
 .vertical-slide-up-enter-active,
 .vertical-slide-up-leave-active {
   transition: all 0.3s ease;
@@ -83,6 +84,17 @@ body.modal-open::after {
 }
 .fade-fast-enter-from,
 .fade-fast-leave-to {
+  opacity: 0;
+}
+
+.fade-slow-leave-active,
+.fade-slow-enter-active {
+  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-slow-enter-from,
+.fade-slow-leave-to {
   opacity: 0;
 }
 

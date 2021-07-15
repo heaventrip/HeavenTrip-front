@@ -56,7 +56,7 @@
         </transition>
         <div v-if="false" class="d-flex align-items-center mb-4">
           <!-- <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5> -->
-          <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab " role="tablist">
+          <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab" role="tablist">
             <li v-for="(room, index) in course.rooms" :key="room" class="nav-item" role="presentation">
               <a class="nav-link m-0" :class="[index === 0 ? 'active' : '']" id="pills-solo-tab" data-toggle="pill" :href="`#pills-room-${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ room.title }}</a>
             </li>

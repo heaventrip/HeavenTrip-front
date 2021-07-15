@@ -142,7 +142,7 @@
       </span>
     </div>
     <div class="d-flex align-items-center" style="margin-left: -2rem; margin-right: -2rem">
-      <ul v-if="course.multisport" class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab " role="tablist">
+      <ul v-if="course.multisport" class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab" role="tablist">
         <li v-for="(sport, index) in course.sports" :key="sport" class="nav-item fg-1" role="presentation">
           <a class="nav-link active m-0" :id="`pills-act${index}-tab`" data-toggle="pill" :href="`#pills-act${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ sport.name }}</a>
         </li>

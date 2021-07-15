@@ -91,7 +91,7 @@
       <span>Détails & booking</span>
     </div>
   </div>
-  <ul class="header__bottom-popup-menu bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
+  <ul class="header__bottom-popup-menu bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
     <li class="nav-item" type="button" role="presentation">
       <a @click.prevent="$emit('clicked-tab', 'activities')" class="nav-link p-0" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
     </li>

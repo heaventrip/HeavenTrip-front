@@ -54,75 +54,109 @@
         </li>
       </ul>
     </div>
-    <div v-show="showSessions" class="tab-content">
-      <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
-        <div class="container" style="padding: 0 3rem">
-          <ul class="list-unstyled order-tab-list mb-0 pb-4">
-            <li v-for="(session, sessionIndex) in filterSessions(index + 1)" :key="session">
-              <div class="info-div w-100">
-                <div class="info-div-left d-flex align-items-center justify-content-between">
-                  <h6 v-if="$windowWidth <= 1440" class="month-count mb-0">
-                    {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
-                    <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
-                    {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
-                  </h6>
-                  <h6 v-else class="month-count mb-0">
-                    {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
-                    <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
-                    {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
-                  </h6>
-                  <a href="#" @click.prevent class="register-count date-confirmed mb-0" style="margin: 0 3rem 0 2rem; cursor: default">
-                    <strong>{{ session.max - session.nbOfParticipants }} place{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}</strong>
-                    restante{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}
-                  </a>
-                  <div class="ml-auto text-right mr-4">
-                    <h6 class="text-uppercase mb-0 font-weight-normal tripper-text">
-                      <strong>{{ session.nbOfParticipants }} TRIPPER{{ session.nbOfParticipants > 1 ? 'S' : '' }}</strong> inscrit{{ session.nbOfParticipants > 1 ? 's' : '' }}&nbsp;:
+    <transition name="fade-slow">
+      <div v-show="showSessions" class="tab-content">
+        <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
+          <div class="container" style="padding: 0 3rem">
+            <ul class="list-unstyled order-tab-list mb-0 pb-4">
+              <li v-for="(session, sessionIndex) in filterSessions(index + 1)" :key="session">
+                <div class="info-div w-100">
+                  <div class="info-div-left d-flex align-items-center justify-content-between">
+                    <h6 v-if="$windowWidth <= 1440" class="month-count mb-0">
+                      {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
+                      <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
+                      {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
-                    <h6 class="text-uppercase text-danger mb-0 tripper-count">
-                      <span style="font-weight: 700"> {{ session.min - session.nbOfParticipants }} tripper{{ session.min - session.nbOfParticipants > 1 ? 's' : '' }} </span>
-                      <span> pour confirmer le départ </span>
+                    <h6 v-else class="month-count mb-0">
+                      {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
+                      <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
+                      {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
                     </h6>
-                    <!-- TODO rajouter champ de date limite dans le back -->
-                    <span class="cancel-info-text">il te reste JOURS pour réserver</span>
+                    <a href="#" @click.prevent class="register-count date-confirmed mb-0" style="margin: 0 3rem 0 2rem; cursor: default">
+                      <strong>{{ session.max - session.nbOfParticipants }} place{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}</strong>
+                      restante{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}
+                    </a>
+                    <div class="ml-auto text-right mr-4">
+                      <h6 class="text-uppercase mb-0 font-weight-normal tripper-text">
+                        <strong>{{ session.nbOfParticipants }} TRIPPER{{ session.nbOfParticipants > 1 ? 'S' : '' }}</strong> inscrit{{ session.nbOfParticipants > 1 ? 's' : '' }}&nbsp;:
+                      </h6>
+                      <h6 class="text-uppercase text-danger mb-0 tripper-count">
+                        <span style="font-weight: 700"> {{ session.min - session.nbOfParticipants }} tripper{{ session.min - session.nbOfParticipants > 1 ? 's' : '' }} </span>
+                        <span> pour confirmer le départ </span>
+                      </h6>
+                      <!-- TODO rajouter champ de date limite dans le back -->
+                      <span class="cancel-info-text">il te reste JOURS pour réserver</span>
+                    </div>
+                  </div>
+                  <div class="registrants fg-1" style="width: 20%">
+                    <h6 v-if="sessionIndex === 0" class="premier-text mb-0 font-weight-bold text-uppercase"><img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !</h6>
+                    <InlineAvatars
+                      v-else
+                      :avatars="['wb1pauez3a4chagrpyth', 'j7pyvrb9k40igjtuniwb', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw', 'ers53we5kg0ffyv6csoq', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth']"
+                      :heart="false"
+                      outline-color="white"
+                      outline-width="3px"
+                      height="40px"
+                      spacing="-8px"
+                      mt="0rem"
+                      mb="0rem"
+                    />
+                  </div>
+                  <div class="d-flex align-items-center ml-auto justify-content-between fg-1">
+                    <h6 class="hours-count mb-0 fg-1 ml-5">
+                      <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/timer.svg')" height="20" />
+                      <div v-if="$windowWidth <= 1440" class="d-inline-block align-middle">{{ session.duration }} jour{{ session.duration > 1 ? 's' : '' }}</div>
+                      <div v-else class="d-inline-block align-middle">{{ session.duration }} jours - {{ session.duration - 1 }} nuits</div>
+                    </h6>
+                    <h6 class="amount-per mb-0 fg-3">
+                      <strong>{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>/pers.
+                    </h6>
+                    <!-- <button @click="clickedChoseBtn(session)" class="btn choose-btn ml-3">CHOISIR</button> -->
+                    <button @click="clickedChoseBtn(session)" class="btn choose-btn disable ml-3">OUPS !</button>
                   </div>
                 </div>
-                <div class="registrants fg-1" style="width: 20%">
-                  <h6 v-if="sessionIndex === 0" class="premier-text mb-0 font-weight-bold text-uppercase"><img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !</h6>
-                  <InlineAvatars
-                    v-else
-                    :avatars="['wb1pauez3a4chagrpyth', 'j7pyvrb9k40igjtuniwb', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw', 'ers53we5kg0ffyv6csoq', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth']"
-                    :heart="false"
-                    outline-color="white"
-                    outline-width="3px"
-                    height="40px"
-                    spacing="-8px"
-                    mt="0rem"
-                    mb="0rem"
-                  />
-                </div>
-                <div class="d-flex align-items-center ml-auto justify-content-between fg-1">
-                  <h6 class="hours-count mb-0 fg-1 ml-5">
-                    <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/timer.svg')" height="20" />
-                    <div v-if="$windowWidth <= 1440" class="d-inline-block align-middle">{{ session.duration }} jour{{ session.duration > 1 ? 's' : '' }}</div>
-                    <div v-else class="d-inline-block align-middle">{{ session.duration }} jours - {{ session.duration - 1 }} nuits</div>
-                  </h6>
-                  <h6 class="amount-per mb-0 fg-3">
-                    <strong>{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>/pers.
-                  </h6>
-                  <!-- <button @click="clickedChoseBtn(session)" class="btn choose-btn ml-3">CHOISIR</button> -->
-                  <button @click="clickedChoseBtn(session)" class="btn choose-btn disable ml-3">OUPS !</button>
-                </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <div @click="openBooking = !openBooking" class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff; position: relative; z-index: 10">
+    </transition>
+    <div class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff; position: relative; z-index: 10">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
-      <div class="d-flex justify-content-between flex-1 mx-0 text-center" :style="[showSessions ? 'color: #fff; background-color: #292f33' : '']">
-        <div class="left-avatar-block center-col" :class="{ inactive: showSessions }" :style="[showSessions ? '' : 'background-color: #fafafa']">
+      <div class="d-flex justify-content-between flex-1 mx-0 text-center" style="transition: all 0.2s ease" :style="[showSessions ? 'color: #fff; background-color: #292f33' : 'color: unset; background-color: unset']">
+        <div v-if="choseBtn" class="left-avatar-block center-col" :class="{ inactive: showSessions }" :style="[showSessions ? '' : 'background-color: #fafafa']">
+          <div class="d-inline-block text-left">
+            <ul class="int-list list-unstyled d-inline-flex align-items-center mx-5 mb-0">
+              <div v-if="choice.nbOfParticipants === 0" style="font-family: Oswald, sans-serif; font-size: 0.75rem">
+                <h6 class="premier-text mb-0 font-weight-bold d-none">
+                  <img class="mic_icon" fluid :src="require('@/assets/images/mic-w.png')" />
+                  Sois le premier !
+                </h6>
+              </div>
+              <div v-else style="font-family: Oswald, sans-serif; font-size: 0.75rem">
+                <span v-if="choice.nbOfParticipants > 1">Les</span>
+                <span style="font-weight: bold">{{ choice.nbOfParticipants }} tripper{{ choice.nbOfParticipants > 1 ? 's' : '' }}&nbsp;</span>
+                <span>inscrit{{ choice.nbOfParticipants > 1 ? 's' : '' }} :</span>
+                <br />
+                <InlineAvatars
+                  :course-id="course?.id"
+                  :avatars="avatarKeys"
+                  :heart="true"
+                  heartheight="44px"
+                  heartwidth="44px"
+                  spacing="-6px"
+                  :heart-color="showSessions ? 'white' : 'grey'"
+                  outline-width="4px"
+                  :outline-color="showSessions ? 'grey' : 'light-white'"
+                  :count="false"
+                  mt="0.3rem"
+                  mb="0rem"
+                />
+              </div>
+            </ul>
+          </div>
+        </div>
+        <div v-else class="left-avatar-block center-col" :class="{ inactive: showSessions }" :style="[showSessions ? '' : 'background-color: #fafafa']">
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-5 mb-0">
               <span style="font-family: Oswald, sans-serif; font-size: 0.75rem">
@@ -149,15 +183,26 @@
         <div @click="showSessions = !showSessions" class="fg-1 center-col datepicker-col" id="depart_datepick" style="padding: 0 3rem; border-left: 1px solid rgba(255, 255, 255, 0.1)" type="button">
           <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
             <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
-              <div class="text-right" :class="{ 'text--grey': !showSessions }">
-                <div class="d-inline-block pb-0">Sélectionne une session :</div>
+              <div v-if="choseBtn" class="text-right" :class="{ 'text--grey': !showSessions }">
+                <div class="pb-0">
+                  <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />
+                  <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400">Session :&nbsp;&nbsp;</span>
+                  <span class="d-inline-block align-middle">{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }} au {{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}</span>
+                </div>
+                <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px">
+                  <span class="text--pink" style="font-weight: bold">{{ choice.max - choice.nbOfParticipants }} place{{ choice.max - choice.nbOfParticipants > 1 ? 's' : '' }}</span
+                  >&nbsp;&nbsp;restante{{ choice.max - choice.nbOfParticipants > 1 ? 's' : '' }}
+                </div>
+              </div>
+              <div v-else class="text-right" :class="{ 'text--grey': !showSessions }">
+                <div class="d-inline-block pb-0">{{ availSessions.length ? 'Sélectionne une session :' : 'Sessions complètes :' }}</div>
                 <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px">
                   <span class="text--pink" style="font-weight: bold">{{ availSessions.length }} session{{ availSessions.length > 1 ? 's' : '' }}</span
                   >&nbsp;&nbsp;disponible{{ availSessions.length > 1 ? 's' : '' }}
                 </div>
               </div>
             </div>
-            <InlineSvg class="ml-4" v-show="availSessions.length" :src="require('@/assets/svg/arrow-right.svg')" :transform="[showSessions ? 'rotate(90)' : 'rotate(270)']" height="24" :fill="showSessions ? '#fff' : '#292f33'" />
+            <InlineSvg class="up-down-arrow-svg ml-4" v-show="availSessions.length && !choseBtn" :src="require('@/assets/svg/arrow-right.svg')" :transform="[showSessions ? 'rotate(90)' : 'rotate(270)']" height="24" :fill="showSessions ? '#fff' : '#292f33'" />
           </div>
           <div class="d-none">
             <div class="d-none text-right">
@@ -175,26 +220,35 @@
           </div>
         </div>
         <div class="h-50 center-col flex-column px-5 m-auto" :class="{ inactive: !choseBtn }" :style="[{ borderLeft: showSessions ? '1px dashed white' : '1px dashed black' }, { borderRight: showSessions ? '1px dashed white' : '1px dashed black' }]">
-          <div class="d-flex align-items-center text-center w-100">
+          <div class="d-flex align-items-center text-center w-100" style="position: relative">
             <h5 class="premier-text mb-0 letter-space-1">
               <!-- <img class="mr-2 icons" fluid :src="require('@/assets/images/places.png')" /> -->
               Participants :
-              <form class="d-inline-flex align-items-center align-bottom ml-3">
+              <form class="d-inline-flex align-items-center ml-3" style="vertical-align: sub">
                 <div class="value-button decrease" style="user-select: none; padding-bottom: 4px; padding-left: 1px" :style="[choseBtn ? '' : 'pointer-events: none']" @click="decrementCounter">-</div>
                 <div class="text--bold text--16" style="width: 40px; max-width: 40px">
                   <transition :name="counterSlideDir" mode="out-in">
                     <div :key="participantsNb">{{ participantsNb }}</div>
                   </transition>
                 </div>
-                <div class="value-button increase" style="user-select: none; padding-bottom: 2px; padding-left: 1px" :style="[choseBtn ? '' : 'pointer-events: none']" @click="incrementCounter">+</div>
+                <div
+                  class="value-button increase"
+                  style="user-select: none; padding-bottom: 2px; padding-left: 1px; transition: all 0.5s ease"
+                  :style="[choseBtn ? '' : 'pointer-events: none', participantsNb === 4 ? 'transform: rotate(45deg); color: #d82558; border: 1px solid #d82558; background-color: white !important' : '']"
+                  @click="incrementCounter"
+                >
+                  +
+                </div>
               </form>
             </h5>
+            <div v-show="participantsNb === 4" class="max-participants-msg">4 trippers max. par réservation</div>
           </div>
         </div>
         <div class="center-col px-5" style="min-width: 190px" :class="{ inactive: !choseBtn }">
-          <span class="tot-amount text-left"
-            >PRIX total : <strong class="d-block">{{ (course.price * participantsNb).toString()[0] }}&thinsp;{{ (course.price * participantsNb).toString().slice(1) }}&thinsp;&euro;</strong></span
-          >
+          <span class="tot-amount text-left">
+            PRIX total :
+            <strong class="d-block"> {{ (course.price * participantsNb).toString()[0] }}&thinsp;{{ (course.price * participantsNb).toString().slice(1) }}&thinsp;&euro; </strong>
+          </span>
         </div>
       </div>
       <button
@@ -227,22 +281,38 @@ export default {
       choseBtn: false,
       participantsNb: 1,
       showSessions: false,
-      openBooking: false,
-      slideIsUp: false,
       sessions: this.$props.course.sessions,
       months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
       namedMonths: ['JANVIER', 'FÉVRIER', 'MARS', 'AVRIL', 'MAI', 'JUIN', 'JUILLET', 'AOÛT', 'SEPTEMBRE', 'OCTOBRE', 'NOVEMBRE', 'DÉCEMBRE'],
       availSessions: []
     }
   },
+  computed: {
+    // either session is selected or sessions are open
+    bookingIsActive() {
+      return this.choice !== null || this.showSessions
+    }
+  },
   watch: {
+    // bookingIsActive(val) {
+    //   if (val) document.body.style.overflow = 'hidden'
+    //   else document.body.style.overflow = ''
+    // },
+    choice(val) {
+      if (val !== null) {
+        this.$emit('selected-session')
+        this.showSessions = false
+      }
+    },
     showSessions(val) {
       if (val === true) {
         this.$emit('show-sessions')
         document.querySelector('.product-content').addEventListener('click', this.clickToClose)
+        document.body.style.overflow = 'hidden'
       } else {
         this.$emit('hide-sessions')
         document.querySelector('.product-content').removeEventListener('click', this.clickToClose)
+        document.body.style.overflow = ''
       }
     },
     course: {
@@ -256,10 +326,7 @@ export default {
 
         // display month of first valid session
         // TODO add condition && !session.isFull
-        this.availSessions = val.sessions.filter((session) => {
-          new Date(session.dateStart) > new Date()
-        })
-
+        this.availSessions = val.sessions.filter((session) => new Date(session.dateStart) > new Date())
         if (!this.availSessions.length) return
 
         let monthNb = this.availSessions[0].monthOfDeparture
@@ -402,6 +469,22 @@ export default {
 </script>
 
 <style>
+/* .up-down-arrow-svg {
+  transition: translate 1s ease;
+}
+.up-down-arrow-svg:hover {
+  transform: translateY(-10px) rotate(-90deg);
+} */
+.max-participants-msg {
+  position: absolute;
+  bottom: 0;
+  color: #d82558;
+  font-family: Muli, sans-serif;
+  font-size: 0.75rem;
+  text-transform: none;
+  font-weight: 600;
+  bottom: -1.2rem;
+}
 .date-btn {
   color: #b4b4b480;
   background-color: #ebebeb80;
@@ -433,7 +516,7 @@ export default {
   color: #b4b4b4;
 }
 .value-button:hover {
-  box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.8);
+  /* box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.8); */
 }
 .reserve-btn {
   min-width: 200px !important;
@@ -457,18 +540,18 @@ export default {
 .nav {
   flex-wrap: nowrap;
 }
-.nav-link {
+.booking-session-list .nav-link {
   padding: 0.5rem;
 }
-.nav-link:hover {
+.booking-session-list .nav-link:hover {
   background-color: #b4b4b4;
 }
-.nav-link.empty-sessions {
+.booking-session-list .nav-link.empty-sessions {
   opacity: 0.3;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.nav-link.empty-sessions.active {
+.booking-session-list .nav-link.empty-sessions.active {
   opacity: 1;
 }
 .btn {
@@ -506,5 +589,13 @@ export default {
 }
 .reserve-btn:not(.disable):hover {
   background-color: #292f33;
+}
+@media only screen and (min-width: 1441px) {
+  .container {
+    max-width: 2000px;
+  }
+  .reserve-btn {
+    height: 120px !important;
+  }
 }
 </style>

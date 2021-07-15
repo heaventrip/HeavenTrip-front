@@ -6,8 +6,8 @@
       <div v-else>
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
-        <ProductContent :showed-sessions="showSessions" :course="course" ref="productContent" />
-        <ProductFooter :course="course" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
+        <ProductContent :showed-sessions="showSessions" :selected-session="selectedSession" :course="course" ref="productContent" />
+        <ProductFooter :course="course" @selected-session="selectedSession = true" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
       </div>
     </transition>
   </div>
@@ -36,6 +36,7 @@ export default {
   props: ['id'],
   data() {
     return {
+      selectedSession: false,
       clickedFromHeader: false,
       showSessions: false,
       course: {},

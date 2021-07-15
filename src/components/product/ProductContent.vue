@@ -17,7 +17,7 @@
     <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
       <div class="product-nav-tabs">
         <ProductNav :course="course" />
-        <ul style="height: 100px; background-color: white" class="nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab " role="tablist">
+        <ul style="height: 100px; background-color: white" class="nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation" type="button">
             <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
           </li>
@@ -143,7 +143,7 @@ export default {
     Swiper,
     SwiperSlide
   },
-  props: ['course', 'showed-sessions'],
+  props: ['course', 'showed-sessions', 'selected-session'],
   // props: ['nav-is-active', 'course'],
   // emits: ['slide-is-up', 'slide-is-down'],
   data() {
@@ -277,7 +277,7 @@ export default {
   },
   mounted() {
     let sections = Array.from(document.querySelectorAll('.product-section'))
-    let navLinks = Array.from(document.querySelectorAll('.nav-link'))
+    let navLinks = Array.from(document.querySelectorAll('.product-nav-tabs .nav-link'))
 
     document.addEventListener('scroll', () => {
       const threshold = 100
@@ -288,7 +288,7 @@ export default {
         const sectionBottom = sectionTop + section.clientHeight
 
         if (viewportTop <= sectionBottom && viewportTop >= sectionTop) {
-          const previousActive = document.querySelector('.nav-link.active')
+          const previousActive = document.querySelector('.product-nav-tabs .nav-link.active')
           if (previousActive) previousActive.classList.remove('active')
           navLinks[id].classList.toggle('active', true)
         }

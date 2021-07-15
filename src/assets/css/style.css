@@ -2917,7 +2917,6 @@ button.Zebra_DatePicker_Icon {
   border-radius: 50%;
   font-size: 3rem;
   font-weight: 700;
-  box-shadow: 0px 3px 6px #00000029;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2945,12 +2944,12 @@ input[type='number']::-webkit-outer-spin-button {
   width: 26px;
   height: 26px;
   font-size: 1.5rem;
-  background-color: #ffffff;
+  background-color: white;
   color: #292f33;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid white;
+  border: 1px solid #292f33;
 }
 .booking-bottom .value-button:hover {
   background-color: #292f33;
