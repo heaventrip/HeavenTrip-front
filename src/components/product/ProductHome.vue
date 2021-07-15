@@ -6,7 +6,7 @@
       <div v-else>
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
-        <ProductContent :blur="showSessions" :course="course" ref="productContent" />
+        <ProductContent :showed-sessions="showSessions" :course="course" ref="productContent" />
         <ProductFooter :course="course" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
       </div>
     </transition>

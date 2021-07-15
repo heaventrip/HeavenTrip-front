@@ -40,6 +40,32 @@ body.modal-open::after {
   align-items: center;
   z-index: 10;
 }
+.vertical-slide-up-enter-active,
+.vertical-slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+.vertical-slide-up-enter-from {
+  transform: translateY(20px);
+  opacity: 0;
+}
+.vertical-slide-up-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.vertical-slide-down-enter-active,
+.vertical-slide-down-leave-active {
+  transition: all 0.3s ease;
+}
+.vertical-slide-down-enter-from {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+.vertical-slide-down-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
 .participant-fade-enter-active {
   transition: opacity 0.8s;
 }

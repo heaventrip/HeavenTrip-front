@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
     <div class="inline-avatar-container" v-for="(avatarId, index) in pAvatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
-      <!-- FIXME intégrer border color ET outline -->
       <img class="inline-avatar-img rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
-    <div v-if="pHeart" @click="addToWishlist" style="border-radius: 50%" type="button" :style="[pSpacing, pHeartwidth, pHeartheight, pOutline]">
+    <div v-if="pHeart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[pSpacing, pHeartwidth, pHeartheight, pOutline]">
       <transition name="fade" mode="out-in">
+        <!-- TODO hover sur le coeur + scale -->
         <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
-        <InlineSvg v-else :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
+        <InlineSvg v-else :class="`heart-logo-${heartColor || 'white'}`" :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
       </transition>
     </div>
     <div class="avatar-count" v-if="pCount">+1.5k</div>
@@ -26,7 +26,12 @@ export default {
       pHeart: this.heart,
       pAvatars: this.avatars,
       wishlisted: false,
-      userAvatarId: ''
+      userAvatarId: '',
+      customColors: {
+        'light-white': '#fcfcfc',
+        violetfullscreen: '#705875',
+        grey: '#292f33'
+      }
     }
   },
   computed: {
@@ -43,19 +48,19 @@ export default {
       return `height: ${this.height || '40px'}; width: ${this.height || '40px'}`
     },
     pOutline() {
-      return `outline: ${this.outlineWidth} solid ${this.outlineColor}`
+      return `outline: ${this.outlineWidth || '3px'} solid ${this.customColors[this.outlineColor] || this.outlineColor}`
     },
     pHeartwidth() {
-      return `width: ${this.heartwidth}`
+      return `width: ${this.heartwidth || '44px'}`
     },
     pHeartheight() {
-      return `height: ${this.heartheight}`
+      return `height: ${this.heartheight || '44px'}`
     }
   },
   methods: {
     scaleAvatar(obj, dir) {
       if (dir === 'up') {
-        gsap.to(obj, { scale: 1.4, duration: 0.2, zIndex: 1, outlineWidth: '3px', ease: 'none' })
+        gsap.to(obj, { scale: 1.4, duration: 0.2, zIndex: 2, outlineWidth: '3px', ease: 'none' })
       } else {
         gsap.to(obj, { scale: 1, duration: 0.2, zIndex: 0, outlineWidth: 'initial', ease: 'none' })
       }
@@ -116,5 +121,11 @@ export default {
 
 .small-avatar--violetfullscreen {
   outline: 3px solid #705875;
+}
+.heart-logo-grey .grey:hover {
+  fill: white;
+}
+.heart-logo-grey .white:hover {
+  fill: #292f33;
 }
 </style>

@@ -164,10 +164,10 @@ a.bg-danger:hover {
 }
 .inactive {
   position: relative;
-  opacity: 0.5;
+  opacity: 0.15;
   cursor: default !important;
 }
-.inactive:after {
+/* .inactive:after {
   content: '';
   position: absolute;
   top: 0;
@@ -176,7 +176,7 @@ a.bg-danger:hover {
   bottom: 0;
   background-color: transparent;
   z-index: 1;
-}
+} */
 .zero-opacity .select-toggle {
   cursor: default;
   z-index: -1;
@@ -2949,6 +2949,13 @@ input[type='number']::-webkit-outer-spin-button {
   color: #292f33;
   text-align: center;
   cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid white;
+}
+.booking-bottom .value-button:hover {
+  background-color: #292f33;
+  color: white;
+  border: 1px solid white;
 }
 .booking-bottom .count-number {
   font-size: 1rem;
