@@ -1536,7 +1536,7 @@ a.bg-danger:hover {
   background-color: #d82558;
 }
 .booking-bottom .reserve-btn:hover {
-  background-color: #793f4e;
+  background-color: #d82558;
 }
 .booking-bottom .premier-text,
 .pre-booking-footer .premier-text {
@@ -3047,9 +3047,11 @@ input[type='number']::-webkit-outer-spin-button {
   text-align: center;
   background-color: #fff;
   align-self: stretch;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .booking-session .booking-session-list li {
-  flex: 1;
+  flex-grow: 1;
 }
 .booking-session .booking-session-list li a {
   font-family: 'Muli', sans-serif;

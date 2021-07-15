@@ -6,7 +6,7 @@
       <div v-else>
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
-        <ProductContent :class="{ blur: showSessions }" :course="course" ref="productContent" />
+        <ProductContent :blur="showSessions" :course="course" ref="productContent" />
         <ProductFooter :course="course" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
       </div>
     </transition>
@@ -157,8 +157,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.blur {
-  filter: blur(3px);
-}
-</style>
+<style scoped></style>

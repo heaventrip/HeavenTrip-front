@@ -2,11 +2,11 @@
   <div class="d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
     <div class="inline-avatar-container" v-for="(avatarId, index) in pAvatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
       <!-- FIXME intégrer border color ET outline -->
-      <img class="inline-avatar-img rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
+      <img class="inline-avatar-img rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
-    <div v-if="pHeart" @click="addToWishlist" style="border-radius: 50%" type="button" :class="pOutlineColor" :style="[pSpacing, pHeartwidth, pHeartheight]">
+    <div v-if="pHeart" @click="addToWishlist" style="border-radius: 50%" type="button" :style="[pSpacing, pHeartwidth, pHeartheight, pOutline]">
       <transition name="fade" mode="out-in">
-        <img v-if="wishlisted && userAvatarId" class="rounded-circle" :class="pOutlineColor" :style="pHeight" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
+        <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
         <InlineSvg v-else :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
       </transition>
     </div>
@@ -15,9 +15,11 @@
 </template>
 
 <script>
+import gsap from 'gsap'
+
 export default {
   name: 'InlineAvatars',
-  props: ['course-id', 'height', 'heart', 'spacing', 'avatars', 'outline-color', 'border-width', 'mt', 'mb', 'heart-color', 'heartwidth', 'heartheight', 'count'],
+  props: ['course-id', 'height', 'heart', 'spacing', 'avatars', 'outline-color', 'outline-width', 'border-width', 'mt', 'mb', 'heart-color', 'heartwidth', 'heartheight', 'count'],
   data() {
     return {
       pCount: this.count,
@@ -40,8 +42,8 @@ export default {
     pHeight() {
       return `height: ${this.height || '40px'}; width: ${this.height || '40px'}`
     },
-    pOutlineColor() {
-      return `small-avatar--${this.outlineColor}`
+    pOutline() {
+      return `outline: ${this.outlineWidth} solid ${this.outlineColor}`
     },
     pHeartwidth() {
       return `width: ${this.heartwidth}`
@@ -51,6 +53,13 @@ export default {
     }
   },
   methods: {
+    scaleAvatar(obj, dir) {
+      if (dir === 'up') {
+        gsap.to(obj, { scale: 1.4, duration: 0.2, zIndex: 1, outlineWidth: '3px', ease: 'none' })
+      } else {
+        gsap.to(obj, { scale: 1, duration: 0.2, zIndex: 0, outlineWidth: 'initial', ease: 'none' })
+      }
+    },
     addToWishlist() {
       if (!this.wishlisted)
         this.$axios
@@ -68,6 +77,19 @@ export default {
       .get('/wishlists', { wishlist: { courseId: this.$props.courseId } })
       .then(() => (this.wishlisted = true))
       .catch(() => (this.wishlisted = false))
+
+    let that = this
+
+    document.querySelectorAll('.inline-avatar-container').forEach((img) => {
+      img.addEventListener('mouseenter', (e) => {
+        that.scaleAvatar(e.target, 'up')
+      })
+    })
+    document.querySelectorAll('.inline-avatar-container').forEach((img) => {
+      img.addEventListener('mouseleave', (e) => {
+        that.scaleAvatar(e.target, 'down')
+      })
+    })
   }
 }
 </script>

@@ -57,7 +57,7 @@
     <div v-show="showSessions" class="tab-content">
       <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
         <div class="container" style="padding: 0 3rem">
-          <ul class="list-unstyled order-tab-list">
+          <ul class="list-unstyled order-tab-list mb-0 pb-4">
             <li v-for="(session, sessionIndex) in filterSessions(index + 1)" :key="session">
               <div class="info-div w-100">
                 <div class="info-div-left d-flex align-items-center justify-content-between">
@@ -77,7 +77,7 @@
                   </a>
                   <div class="ml-auto text-right mr-4">
                     <h6 class="text-uppercase mb-0 font-weight-normal tripper-text">
-                      <strong>{{ session.nbOfParticipants }} TRIPPER{{ session.nbOfParticipants > 1 ? 'S' : '' }}</strong> inscrit{{ session.nbOfParticipants > 1 ? 's' : '' }}
+                      <strong>{{ session.nbOfParticipants }} TRIPPER{{ session.nbOfParticipants > 1 ? 'S' : '' }}</strong> inscrit{{ session.nbOfParticipants > 1 ? 's' : '' }}&nbsp;:
                     </h6>
                     <h6 class="text-uppercase text-danger mb-0 tripper-count">
                       <span style="font-weight: 700"> {{ session.min - session.nbOfParticipants }} tripper{{ session.min - session.nbOfParticipants > 1 ? 's' : '' }} </span>
@@ -94,6 +94,7 @@
                     :avatars="['wb1pauez3a4chagrpyth', 'j7pyvrb9k40igjtuniwb', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw', 'ers53we5kg0ffyv6csoq', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth']"
                     :heart="false"
                     outline-color="white"
+                    outline-width="3px"
                     height="40px"
                     spacing="-8px"
                     mt="0rem"
@@ -121,7 +122,7 @@
     <div @click="openBooking = !openBooking" class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff; position: relative; z-index: 10">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
       <div class="d-flex justify-content-between flex-1 mx-0 text-center" :style="[showSessions ? 'color: #fff; background-color: #292f33' : '']">
-        <div class="left-avatar-block border-right center-col" :style="[showSessions ? '' : 'background-color: #fafafa']">
+        <div class="left-avatar-block border-right center-col" :class="{ inactive: !choseBtn }" :style="[showSessions ? '' : 'background-color: #fafafa']">
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-3 mb-0">
               <span style="font-family: Oswald, sans-serif; font-size: 0.75rem">
@@ -179,7 +180,7 @@
           >
         </div>
       </div>
-      <button @click="$router.push({ name: 'CheckOutHome', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })" class="btn border-0 pr-4 rounded-0 reserve-btn btn-pink">Réserver</button>
+      <button @click="$router.push({ name: 'CheckOutHome', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })" class="btn border-0 pr-4 rounded-0 reserve-btn disable">Réserver</button>
     </div>
   </div>
 </template>
@@ -446,5 +447,8 @@ export default {
     min-width: 130px;
     text-align: center;
   }
+}
+.reserve-btn.disable {
+  cursor: default !important;
 }
 </style>

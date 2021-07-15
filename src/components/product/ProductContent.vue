@@ -12,7 +12,7 @@
   <div class="header">
     <TheNavSticky />
   </div>
-  <div class="product-content d-flex">
+  <div class="product-content d-flex" :class="{ blur: blur }">
     <div class="whitespace-big-screen"></div>
     <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
       <div class="product-nav-tabs">
@@ -143,7 +143,7 @@ export default {
     Swiper,
     SwiperSlide
   },
-  props: ['course'],
+  props: ['course', 'blur'],
   // props: ['nav-is-active', 'course'],
   // emits: ['slide-is-up', 'slide-is-down'],
   data() {
@@ -459,5 +459,9 @@ export default {
   .aside-slider {
     z-index: 5;
   }
+}
+.blur {
+  filter: blur(3px) opacity(0.2);
+  top: -70px;
 }
 </style>
