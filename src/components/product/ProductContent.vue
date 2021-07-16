@@ -338,7 +338,7 @@ export default {
 .main-tab {
   max-width: 1000px;
   position: relative;
-  padding: 0rem 0rem 3.5rem 0rem;
+  padding: 0rem 0rem 8rem 0rem;
   min-height: 100vh;
   width: 57vw;
   margin-left: auto;

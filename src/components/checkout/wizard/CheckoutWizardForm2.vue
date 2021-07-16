@@ -77,7 +77,7 @@
           <div class="col-12 col-lg-6">
             <div class="custom-control p-0 pb-3 mt-2">
               <label class="" for="booker-ins1">
-                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins1" name="insurance_plan" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins1" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
               </label>
             </div>
@@ -93,7 +93,7 @@
           <div class="col-12 col-lg-6">
             <div class="custom-control p-0 pb-3 mt-2">
               <label class="" for="booker-ins2">
-                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins2" name="insurance_plan" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins2" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
               </label>
             </div>
@@ -109,7 +109,7 @@
           <div class="col-12">
             <div class="custom-control p-0 pb-2 mt-4">
               <label class="" for="booker-ins3">
-                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins3" name="insurance_plan" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins3" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
               </label>
             </div>
@@ -133,7 +133,7 @@
           <div class="col-12 col-lg-5">
             <div class="custom-control p-0 pb-2 mt-4">
               <label class="" :for="`extraPart${index}-ins1`">
-                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins1`" name="insurance_plan" class="custom-control p-0-input" />
+                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins1`" :name="`insurance_plan_extraPart${index}`" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
                   Rapatriment 60&euro;/pers.
                   <div class="ml-auto">
@@ -153,7 +153,7 @@
           <div class="col-12 col-lg-6 offset-lg-1">
             <div class="custom-control p-0 pb-3 mt-2 mb-4">
               <label class="" :for="`extraPart${index}-ins2`">
-                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins2`" name="insurance_plan" class="custom-control p-0-input" />
+                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins2`" :name="`insurance_plan_extraPart${index}`" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
                   Rapatriment 60&euro;/pers.
                   <div class="ml-auto">
@@ -173,7 +173,7 @@
           <div class="col-12">
             <div class="custom-control p-0 pb-3 mt-2 mb-4">
               <label class="" :for="`extraPart${index}-ins3`">
-                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins3`" name="insurance_plan" class="custom-control p-0-input" />
+                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins3`" :name="`insurance_plan_extraPart${index}`" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
                   Rapatriment 60&euro;/pers.
                   <div class="ml-auto">
@@ -208,7 +208,8 @@ export default {
       return !!this.localBooker.booking.insurance
     },
     participantsInsuranceFilled() {
-      return !!this.localExtraParticipants.booking.insurance
+      let insurancesArr = this.localExtraParticipants.map((part) => part.booking.insurance)
+      return insurancesArr.every((el) => el)
     }
   },
   watch: {

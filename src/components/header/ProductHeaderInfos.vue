@@ -20,13 +20,13 @@
           <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
           <h1 class="heading text-uppercase mb-2">
             <!-- <router-link :to="{ name: 'CheckOutHome', params: { productId: course.id } }"> -->
-            <span style="color: #fff; font-weight: bold; font-size: 3rem">{{ course.sports ? course.sports[0].name : '' }}</span>
+            <span style="color: #fff; font-weight: bold; font-size: 3rem; letter-spacing: 0.03rem">{{ course.sports ? course.sports[0].name : '' }}</span>
             <!-- </router-link> -->
           </h1>
-          <!-- <h5 v-if="!course.multisport" class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>{{ course?.spot?.name }}</h5>
-          <div v-else>
-            <Tag v-for="course.sports" text=
-          </div> -->
+          <h5 v-if="!course.multisport" class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>{{ course?.spot?.name }}</h5>
+          <div class="d-flex" v-else>
+            <Tag class="mr-2" v-for="sport in course.sports" :text="sport.name" color="grey-product-header" :key="sport" />
+          </div>
         </div>
       </div>
     </div>
@@ -169,8 +169,11 @@ export default {
 
 <style scoped>
 .header__main-title {
-  height: 50%;
+  height: 45%;
   margin-top: auto;
+}
+.header__bottom-infos {
+  margin-bottom: auto;
 }
 .scrolldown-icon {
   filter: opacity(0.5);

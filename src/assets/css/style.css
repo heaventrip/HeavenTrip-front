@@ -644,6 +644,9 @@ a.bg-danger:hover {
 .header .navbar-dark .navbar-nav {
   border-bottom: 1px solid hsl(0deg 0% 75% / 40%);
 }
+.header .navbar-dark .sticky-nav.navbar-nav {
+  border: none !important
+}
 .header .navbar-dark .navbar-nav .navbar-grey {
   border-bottom: 1px solid #292f33;
 }
@@ -2028,7 +2031,7 @@ a.bg-danger:hover {
   font-weight: 400;
   color: #e2e2e2;
   border-bottom: 1px dashed #ffffff4d;
-  padding: 12px 0;
+  padding: 1rem 0;
   display: inline-block;
 }
 .box .list li:last-child a {

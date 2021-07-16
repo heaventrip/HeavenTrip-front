@@ -11,8 +11,8 @@
                 <i class="fa fa-times h5 mb-0"></i>
               </div>
             </div>
-            <div class="modal-content-body bg-white" :style="[pForm === 'profile' ? 'height: min-content' : 'height: 600px']">
-              <Profile />
+            <div class="modal-content-body" :style="[pForm === 'profile' ? 'height: min-content' : 'height: 600px', { backgroundColor: reachedSuccess ? '#292f33' : 'white' }]">
+              <Profile @reached-success="reachedSuccess = true" />
             </div>
           </div>
           <!-- NOTE login modals -->
@@ -135,6 +135,7 @@ export default {
   props: ['whichForm'],
   data() {
     return {
+      reachedSuccess: false,
       pForm: this.whichForm || 'signup'
     }
   }

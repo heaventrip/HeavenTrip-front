@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-start">
-    <a class="navbar-brand pl-sm-5 pl-lg-0" href="/">
-      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" width="180" />
-      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" width="180" />
+  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center">
+    <a class="navbar-brand pl-sm-5 pl-lg-0 mr-5" href="/">
+      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" width="160" />
+      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" width="160" />
     </a>
     <!-- NOTE MOBILE ONLY -->
     <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
@@ -39,7 +39,7 @@
           <a @click="onClicked('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>

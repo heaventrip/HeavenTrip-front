@@ -23,7 +23,7 @@
         <div class="row">
           <div class="col-12 col-lg-7 pr-0">
             <div class="custom-control custom-radio pt-3 pb-1">
-              <input type="radio" id="Radio14" name="pay" class="custom-control-input" v-model="deposit" />
+              <input type="radio" id="Radio14" value="deposit" name="pay" class="custom-control-input" v-model="deposit" />
               <label class="custom-control-label" for="Radio14">
                 <div class="d-flex align-items-center" style="font-size: 0.8rem;">
                   Verser un acompte de 30% :
@@ -35,7 +35,7 @@
           </div>
           <div class="col-12 col-lg-5">
             <div class="custom-control custom-radio pt-3">
-              <input type="radio" id="Radio15" name="pay" class="custom-control-input" />
+              <input type="radio" id="Radio15" value="full" name="pay" class="custom-control-input" v-model="deposit" />
               <label class="custom-control-label" for="Radio15">
                 <div class="d-flex align-items-center" style="font-size: 0.8rem;">Payer la totalité</div>
               </label>
@@ -46,7 +46,16 @@
     </div>
   </div>
   <div class="card pay-card rounded-0 mb-0 p-0">
-    <button class="stripe-redirect-button" type="button" @click="processPayment" id="checkout-button">Je veux procéder au paiement de {{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</button>
+    <button class="stripe-redirect-button" type="button" @click="processPayment" id="checkout-button">
+      <transition name="fade-fast" mode="out-in">
+        <span v-if="deposit === 'deposit'">
+          Je veux procéder au paiement de {{ parseInt(course?.price * 0.3) }}&thinsp;&euro;
+        </span>
+        <span v-else>
+          Je veux procéder au paiement de {{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;
+        </span>
+      </transition>
+    </button>
     <!-- <div class="card-body">
       <h6 class="font-weight-bold text-uppercase pay-head">
         Choisissez votre moyen de paiement :
@@ -85,6 +94,11 @@ import { loadStripe } from '@stripe/stripe-js'
 export default {
   name: 'CheckoutWizardPayment',
   props: ['course'],
+  data() {
+    return {
+      deposit: ''
+    }
+  },
   methods: {
     async processPayment() {
       const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')

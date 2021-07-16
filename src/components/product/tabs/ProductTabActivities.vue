@@ -190,8 +190,27 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="row">
-        <div v-for="includedCourse in includedCourses" :key="includedCourse" class="col-12 col-lg-4">
+      <div class="d-flex w-100">
+        <div v-for="includedCourse in includedCourses.splice(0, 3)" :key="includedCourse" class="included-activity-card" style="min-width: 230px">
+          <div class="box bg-white my-0" style="padding: 2rem">
+            <div class="head text-uppercase mb-0 d-inline-block text-danger" style="font-size: 1rem; font-weight: 900">
+              <InlineSvg v-if="includedCourse.picto" fill="#d82558" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
+              <InlineSvg fill="#d82558" height="10" class="mx-3 d-inline-block" :src="require(`@/assets/svg/triangle-right.svg`)" />
+              <span class="d-inline-block align-middle">{{ includedCourse.title }}</span>
+            </div>
+            <ul class="list-unstyled list mt-3 mb-0">
+              <li v-for="(info, index) in includedCourse.alternativeInfos" :key="info">
+                <a href="#" @click.prevent style="cursor: default" class="text-decoration-none" :class="[index === includedCourse.alternativeInfos.length - 1 ? 'pb-0' : '']">
+                  {{ info.title }} :
+                  <strong class="text--grey ml-2">{{ info.description }}</strong>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex w-100" v-if="includedCourses.splice(3, 3).length">
+        <div v-for="includedCourse in includedCourses.splice(3, 3)" :key="includedCourse" class="included-activity-card" style="min-width: 230px">
           <div class="box bg-white my-0" style="padding: 2rem">
             <div class="head text-uppercase mb-0 d-inline-block text-danger" style="font-size: 1rem; font-weight: 900">
               <InlineSvg v-if="includedCourse.picto" fill="#d82558" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
@@ -313,6 +332,15 @@ export default {
 </script>
 
 <style scoped>
+.included-activity-card {
+  min-width: 230px;
+  margin-right: 5px;
+}
+@media only screen and (min-width: 1441px) {
+  .included-activity-card {
+    margin-right: 2rem;
+  }
+}
 .sport-tab--active {
   border-bottom: 1px solid #292f33;
 }

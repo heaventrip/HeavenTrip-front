@@ -33,12 +33,12 @@
           <a href="#" class="text-reset text-decoration-none">
             <InlineSvg :src="require('@/assets/svg/date-search.svg')" fill="white" height="20" class="mr-3 d-inline-block" />
             <span class="d-inline-block align-middle" style="font-weight: 100">départ :&nbsp;</span>
-            <span class="d-inline-block align-middle">&nbsp;06/10/2020</span>
+            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
           <a href="#" class="text-reset text-decoration-none">
             <InlineSvg :src="require('@/assets/svg/date-search.svg')" fill="white" height="20" class="mr-3 d-inline-block" />
             <span class="d-inline-block align-middle" style="font-weight: 100">retour :&nbsp;</span>
-            <span class="d-inline-block align-middle">&nbsp;06/10/2020</span>
+            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
         </div>
         <div class="ml-auto" v-if="activeStep !== 'validation'">

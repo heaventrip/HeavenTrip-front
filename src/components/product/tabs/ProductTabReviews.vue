@@ -18,7 +18,7 @@
   </div>
   <div class="linear-block mb-0">
     <div class="card border-0 rounded-0">
-      <div class="head-block subhead-block d-flex">
+      <div class="head-block subhead-block d-flex mb-0">
         <div class="">
           <p class="sub-heading mb-2">Vos avis</p>
           <h4 class="heading mb-0">Les témoignages</h4>
@@ -35,13 +35,15 @@
           <div class="review__block-left__date">{{ new Date(review.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</div>
         </div>
         <div class="review__block-right">
-          <div class="review__block-right__top-infos d-flex justify-content-between">
-            <div class="review__block-right__user-name">{{ review.user.firstName }} {{ review.user.lastName }}</div>
-            <div class="review__block-right__user-infos">
-              <InlineSvg :src="require('@/assets/svg/spot.svg')" class="reviews__user-infos__spot-svg" />
-              {{ review.user.city }}
+          <div class="review__block-right__top-infos d-flex w-100">
+            <div class="review__block-right__user-name mr-4">{{ review.user.firstName }} {{ review.user.lastName }}</div>
+            <div class="review__block-right__user-infos mr-4">
+              <span class="mr-2">
+                <InlineSvg :src="require('@/assets/svg/country-search.svg')" height="20" fill="#292f33" class="d-inline-block reviews__user-infos__spot-svg" />
+              </span>
+              <span class="d-inline-block align-middle">{{ review.user.city }}</span>
             </div>
-            <div class="review__block__stars"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="far fa-star mr-1"></i></div>
+            <div class="review__block__stars mr-4"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i></div>
             <!-- <div class="review__block__user-profile-link"><span>Voir profil</span></div> -->
           </div>
           <div class="review__block-right__text-content">{{ review.comment }}</div>
@@ -74,7 +76,7 @@ export default {
   margin-bottom: 0;
 }
 .review__block {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   color: #7c7c7c;
 }
 .review__block-right__text-content {
@@ -86,7 +88,7 @@ export default {
   font-family: Oswald, sans-serif;
   font-weight: 600;
   width: 65%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   white-space: nowrap;
 }
 .review__block__user-profile-link {

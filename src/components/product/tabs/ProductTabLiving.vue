@@ -27,28 +27,28 @@
       </div>
       <div class="card-body">
         <div v-for="room in course.rooms" :key="room" class="head text-uppercase py-2 d-inline-block mr-5" style="font-weight: 500; cursor: pointer" :class="{ 'room-tab--active': activeRoomTab === room }" @mouseover="activeRoomTab = room">
-          {{ room.title }}
+          {{ room?.title }}
         </div>
         <transition name="fade-fast" mode="out-in">
           <div :key="activeRoomTab">
-            <p class="content">{{ activeRoomTab.title }}</p>
+            <p class="content">{{ activeRoomTab?.title }}</p>
             <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   Nom :
-                  <strong class="text-dark ml-2">{{ activeRoomTab.title }}</strong></a
+                  <strong class="text-dark ml-2">{{ activeRoomTab?.title }}</strong></a
                 >
               </li>
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   Prix :
-                  <strong class="text-dark ml-2">{{ activeRoomTab.price }}</strong></a
+                  <strong class="text-dark ml-2">{{ activeRoomTab?.price }}</strong></a
                 >
               </li>
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   Capacité :
-                  <strong class="text-dark ml-2">{{ activeRoomTab.quantity }} personnes</strong></a
+                  <strong class="text-dark ml-2">{{ activeRoomTab?.quantity }} personnes</strong></a
                 >
               </li>
             </ul>

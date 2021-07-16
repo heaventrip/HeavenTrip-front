@@ -1,7 +1,7 @@
 <template>
   <div class="reviews-section d-flex justify-content-between align-items-center">
     <InlineSvg class="reviews__quote reviews__quote--right" :src="require('@/assets/svg/right-quote.svg')" opacity="0.1" />
-    <div class="reviews__infos d-flex flex-column align-items-end ml-5">
+    <div class="reviews__infos d-flex flex-column align-items-end ml-5 mr-auto">
       <span>Pour vous</span>
       <div class="text-uppercase" style="font-size: 1.5rem; margin-bottom: 1rem">
         <span>ils&nbsp;</span>
@@ -13,11 +13,11 @@
         </div>
       </div>
     </div>
-    <div class="reviews__user d-flex flex-column">
+    <div class="reviews__user d-flex flex-column ml-auto mr-4">
       <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
       <img height="220" width="220" :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`" class="reviews__user-avatar rounded-circle" rel="preload" />
     </div>
-    <div class="reviews__comment fs-1 pl-3">
+    <div class="reviews__comment fs-1 pl-3 mr-auto">
       <h6 class="text-uppercase mb-3">
         <span class="d-inline-block" style="font-weight: 800">{{ activeReview?.session?.course.typeOfCourse }} {{ activeReview?.session.course.sports }}</span>
         <span class="review-comment__date d-inline-block text-nowrap" style="font-size: 0.8rem; vertical-align: baseline">

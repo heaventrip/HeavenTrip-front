@@ -19,7 +19,7 @@
           </a>
         </div>
       </div>
-      <div class="checkout-body-content h-100" style="position: relative" :class="[activeStep === 'validation' ? 'col-xl-12 p-0' : 'col-xl-8']">
+      <div class="checkout-body-content h-100" style="position: relative; overflow: auto" :class="[activeStep === 'validation' ? 'col-xl-12 p-0' : 'col-xl-8']">
         <div
           class="checkout-progress-bar"
           style="position: sticky; top: 0; z-index: 15"
@@ -45,7 +45,7 @@
             <Step6 v-if="activeStep === 'success'" />
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
-              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn disable" style="border-radius: 0">{{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}</button>
+              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">{{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}</button>
               <!-- <button @click.prevent="nextStep" :class="{ disable: !stepIsComplete(activeStep) }" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
             </div>
           </div>
