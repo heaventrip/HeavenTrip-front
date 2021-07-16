@@ -1,5 +1,8 @@
 <template>
-  <div :class="[tabsActive ? 'd-none' : 'd-flex']" class="agency-content-wrapper flex-column justify-content-center">
+  <NavConcept v-if="conceptIsActive" />
+  <NavTeam v-else-if="teamIsActive" />
+  <NavContact v-else-if="contactIsActive" />
+  <div v-else class="d-flex agency-content-wrapper flex-column justify-content-center">
     <div class="row no-gutters justify-content-center align-items-center">
       <div class="col-3">
         <div class="row align-items-center text-center">
@@ -42,9 +45,6 @@
       <InlineSvg :src="require('@/assets/svg/right-quote.svg')" height="50" opacity="0.06" style="transform: translateY(50%)" />
     </div>
   </div>
-  <NavConcept v-show="conceptIsActive" />
-  <NavTeam v-show="teamIsActive" />
-  <NavContact v-show="contactIsActive" />
 </template>
 
 <script>
@@ -74,8 +74,9 @@ export default {
   },
   watch: {
     tabsActive(newVal) {
+      let visibility = newVal === true ? 'hidden' : 'visible'
       if (document.querySelector('.search')) {
-        document.querySelector('.search').style.visibility = newVal === true ? 'hidden' : 'visible'
+        document.querySelector('.search').style.visibility = visibility
       }
     },
     conceptIsActive(newVal) {
@@ -84,7 +85,6 @@ export default {
         document.querySelector('.header-bg-image').style.filter = 'opacity(0)'
         document.querySelector('.tab-content.main-wrapper').style.top = '0px'
         document.querySelector('.tab-content.main-wrapper').style.zIndex = '-1'
-        document.querySelector('.nav-btn').style.visibility = 'hidden'
         document.querySelector('.navbar-nav').style.position = 'absolute'
         document.querySelector('.navbar-nav').style.left = 'calc(100vw / 12 * 5)' // line up with col-5
       }
@@ -92,22 +92,24 @@ export default {
         document.querySelector('nav').style.position = 'relative' // reset
         document.querySelector('.tab-content.main-wrapper').style.top = '8vh' // initial
         document.querySelector('.tab-content.main-wrapper').style.zIndex = '1' // initial
-        document.querySelector('.nav-btn').style.visibility = 'visible' // initial
         document.querySelector('.navbar-nav').style.position = 'unset' // initial
         document.querySelector('.navbar-nav').style.left = 'unset'
       }
     }
   },
   methods: {
+    resetTabs() {
+      ;['conceptIsActive', 'teamIsActive', 'contactIsActive'].forEach((el) => (this.$data[el] = false))
+    },
     onClicked(tab) {
       let varName = tab + 'IsActive'
 
       // if already active do nothing
       // eslint-disable-next-line prettier/prettier
       if (this.$data[varName] === true) return
-      
+
       // only show the one clicked
-      ;['conceptIsActive', 'teamIsActive', 'contactIsActive'].forEach((el) => (this.$data[el] = false))
+      this.resetTabs()
       this.$data[varName] = true
     }
   }

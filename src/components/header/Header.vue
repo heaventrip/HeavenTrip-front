@@ -2,35 +2,37 @@
   <div
     class="header d-flex flex-column text-white"
     :class="{
-      'header--home': currentRoute('/'),
-      'header-filter--home': !navIsActive && currentRoute('/'),
+      'header--home': currentRoute('Home'),
+      'header-filter--home': !navIsActive && currentRoute('Home'),
       'header-filter--grey': activitiesIsActive || destinationsIsActive,
       'header-filter--light': agencyIsActive,
-      'header--search': currentRoute('/search'),
-      'header-filter--search': !navIsActive && currentRoute('/search'),
-      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/search'),
-      'header-filter--search--light': agencyIsActive && currentRoute('/search'),
-      'header--product': currentRoute('/product'),
-      'header-filter--product': !navIsActive && currentRoute('/product'),
-      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('/product'),
-      'header-filter--product--light': agencyIsActive && currentRoute('/product')
+      'header--search': currentRoute('SearchHome'),
+      'header-filter--search': !navIsActive && currentRoute('SearchHome'),
+      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('SearchHome'),
+      'header-filter--search--light': agencyIsActive && currentRoute('SearchHome'),
+      'header--product': currentRoute('ProductHome'),
+      'header-filter--product': !navIsActive && currentRoute('ProductHome'),
+      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('ProductHome'),
+      'header-filter--product--light': agencyIsActive && currentRoute('ProductHome')
     }"
   >
     <div
       class="header-bg-container"
       :class="{
-        'header-bg-container--home': currentRoute('/'),
-        'header-bg-container--search': currentRoute('/search'),
-        'header-bg-container--product': currentRoute('/product')
+        'header-bg-container--home': currentRoute('Home'),
+        'header-bg-container--search': currentRoute('SearchHome'),
+        'header-bg-container--product': currentRoute('ProductHome')
       }"
     >
-      <img src="@/assets/images/combined.png" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
+      <img src="https://images.ctfassets.net/8dtxc3nuj0tn/5sK3UinfwxgnjROJRYOpZR/7d8f941f09662bc6cfa8bcaa5121f4ea/kitesurf-elgouna-cover" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <ConnectionButtons />
-    <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" />
-    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('/') && !navIsActive" />
-    <ProductHeaderInfos v-else-if="currentRoute('/product') && !navIsActive" ref="productHeaderInfos" />
-    <SearchHeaderInfos v-else-if="currentRoute('/search') && !navIsActive" />
+    <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
+    <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
+    <TheNav v-else @changed-tab="setActiveTab" />
+    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
+    <ProductHeaderInfos v-else-if="currentRoute('ProductHome') && !navIsActive" ref="productHeaderInfos" :course="course" />
+    <SearchHeaderInfos v-else-if="currentRoute('SearchHome') && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
@@ -94,6 +96,7 @@
 
 <script>
 import TheNav from '@/components/nav/TheNav.vue'
+import TheNavSticky from '@/components/nav/TheNavSticky.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeHeaderInfos from './HomeHeaderInfos.vue'
 import ProductHeaderInfos from '@/components/header/ProductHeaderInfos.vue'
@@ -104,17 +107,19 @@ export default {
   name: 'Header',
   components: {
     TheNav,
+    TheNavSticky,
     ConnectionButtons,
     HomeHeaderInfos,
     ProductHeaderInfos,
     SearchHeaderInfos,
     SessionsMenu
   },
+  props: ['course'],
   data() {
     return {
+      navSticky: false,
       token: true,
       toggleSessions: false,
-      // navIsActive: false,
       agencyIsActive: false,
       destinationsIsActive: false,
       activitiesIsActive: false
@@ -127,6 +132,7 @@ export default {
     },
     navIsActive(newVal) {
       if (newVal === true) this.$emit('nav-is-active')
+      console.log('navactive')
     }
   },
   computed: {
@@ -136,14 +142,17 @@ export default {
   },
   methods: {
     currentRoute(route) {
-      return this.$route.path === route
+      return this.$route.name === route
     },
-    setNavStatus(status) {
-      this.navIsActive = status
+    resetTabs() {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
     },
+    // setNavStatus(status) {
+    //   this.navIsActive = status
+    // },
     setActiveTab(clickedTab) {
       let varName = clickedTab + 'IsActive'
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      this.resetTabs()
       this.$data[varName] = true
     },
     logout(event) {
@@ -157,9 +166,9 @@ export default {
     //   $(`#${menu}`).addClass('active')
     // },
     jquery() {
-      $('.selection').select2({
-        minimumResultsForSearch: Infinity
-      })
+      // $('.selection').select2({
+      //   minimumResultsForSearch: Infinity
+      // })
       $('[data-toggle="tooltip"]').tooltip()
       $('.user-circle').hide()
       $('#navbarSupportedContent').on('shown.bs.collapse', function () {
@@ -189,12 +198,10 @@ export default {
     }
     this.jquery()
 
-    // working contentful auth
-    const client = this.$contentful.createClient({
-      space: '4nx5joo7rzn4',
-      accessToken: 'nbv0vn5HDMDtpCH4M8Z07vc-p6Zk6tCWt-1Z0YcUp9o'
+    document.addEventListener('scroll', () => {
+      if (window.scrollY > document.querySelector('.header').clientHeight) this.navSticky = true
+      else this.navSticky = false
     })
-    client.getAsset('2tfU1nf8WzcYTiSlj6QpeQ').then((e) => console.log(e))
   }
 }
 </script>
@@ -213,6 +220,7 @@ export default {
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
+  transition: background-color 0.5s ease-in;
 }
 .header-filter--grey::after {
   content: '';
@@ -222,6 +230,7 @@ export default {
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
+  transition: background-color 0.5s ease-in-out;
 }
 .header-filter--light::after {
   content: '';
@@ -231,6 +240,7 @@ export default {
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
+  transition: background-color 0.5s ease-in-out;
 }
 /* SEARCH */
 .header--search {
@@ -304,7 +314,7 @@ export default {
 }
 .header-bg-container {
   position: absolute;
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   z-index: -1;
 }

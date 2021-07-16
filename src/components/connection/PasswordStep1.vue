@@ -2,8 +2,8 @@
   <p class="content-head">Assure toi de renseigner un mail valide :</p>
   <form>
     <input v-model="email" class="form-control modal-input mb-2" type="text" name="" placeholder="Email" :style="[errors.includes('email') && !validEmail(email) ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
-    <a @click.prevent="$emit('clicked-password-retrieved')" class="password-link d-block text-right mb-5" href="#">J’ai retrouvé mon mot de passe</a>
-    <button @click.prevent="submitForm" class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn">Valider</button>
+    <a @click.stop="$emit('clicked-password-retrieved')" class="password-link d-block text-right mb-5" href="#">J’ai retrouvé mon mot de passe</a>
+    <button @click.stop="submitForm" class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn" :disabled="!formIsFilled">Valider</button>
   </form>
 </template>
 
@@ -15,6 +15,11 @@ export default {
     return {
       email: '',
       errors: []
+    }
+  },
+  computed: {
+    formIsFilled() {
+      return !!this.email
     }
   },
   methods: {

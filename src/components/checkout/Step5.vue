@@ -1,140 +1,125 @@
 <template>
-  <div class="tab-pane fade login-signup-tab" id="step5" role="tabpanel" aria-labelledby="step5-tab">
-    <div class="row">
-      <div class="col-12 col-lg-7">
-        <Step5Module1 />
-        <Step5Module2 />
-        <Step5Module3 />
-      </div>
-      <div class="col-12 col-lg-5 ml-auto">
-        <Step5Module4 />
-      </div>
+  <div class="d-flex w-100">
+    <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem padding-bottom: 4rem; top: 15vh">
+      <!-- <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button> -->
+      <CheckoutWizardPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
+      <CheckoutWizardSuccess />
+    </div>
+    <div class="col-12 col-lg-4 ml-auto p-0" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px">
+      <CheckoutWizardRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
   </div>
 </template>
 
 <script>
-import { loadStripe } from '@stripe/stripe-js'
-import Step5Module1 from './Step5Module1.vue'
-import Step5Module2 from './Step5Module2.vue'
-import Step5Module3 from './Step5Module3.vue'
-import Step5Module4 from './Step5Module4.vue'
+// import { loadStripe } from '@stripe/stripe-js'
+import CheckoutWizardPayment from './wizard/CheckoutWizardPayment.vue'
+import CheckoutWizardSuccess from './wizard/CheckoutWizardSuccess.vue'
+import CheckoutWizardRecap from './wizard/CheckoutWizardRecap.vue'
 export default {
   name: 'Step5',
   components: {
-    Step5Module1,
-    Step5Module2,
-    Step5Module3,
-    Step5Module4
+    CheckoutWizardPayment,
+    CheckoutWizardSuccess,
+    CheckoutWizardRecap
   },
+  props: ['course', 'booker', 'extra-participants'],
   methods: {
-    async processPayment() {
-      const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
-
-      // const response = await fetch("http://localhost:3000/api/v1/secret");
-      // const { client_secret: clientSecret } = await response.json();
-      // // Render the form to collect payment details, then
-      // // call stripe.confirmCardPayment() with the client secret.
-      const clientSecret = 'pi_1IpIgVLutaKCaG86LgQ30D84_secret_LwjUFfypRB3wz4SexQNv7NgrT'
-
-      ;(function () {
-        'use strict'
-
-        const elements = stripe.elements()
-
-        var cardNumber = elements.create('cardNumber', {
-          style: elementStyles,
-          classes: elementClasses
-        })
-        cardNumber.mount('#example2-card-number')
-
-        var cardExpiry = elements.create('cardExpiry', {
-          style: elementStyles,
-          classes: elementClasses
-        })
-        cardExpiry.mount('#example2-card-expiry')
-
-        var cardCvc = elements.create('cardCvc', {
-          style: elementStyles,
-          classes: elementClasses
-        })
-        cardCvc.mount('#example2-card-cvc')
-
-        var form = document.getElementById('payment-form')
-        var errors = document.getElementById('card-errors')
-        form.addEventListener('submit', function (ev) {
-          ev.preventDefault()
-          // If the client secret was rendered server-side as a data-secret attribute
-          // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
-          // eslint-disable-next-line prettier/prettier
-          stripe.confirmCardPayment(clientSecret, {
-              payment_method: {
-                card: cardNumber
-              }
-            })
-            .then(function (result) {
-              // eslint-disable-next-line prettier/prettier
-              document.querySelector(".example2").classList.remove("submitting");
-              if (result.error) {
-                // Show error to your customer (e.g., insufficient funds)
-                // eslint-disable-next-line prettier/prettier
-                errors.textContent = result.error.message;
-              } else {
-                // The payment has been processed!
-                if (result.paymentIntent.status === 'succeeded') {
-                  // eslint-disable-next-line prettier/prettier
-                  console.log(result.paymentIntent);
-                  // Show a success message to your customer
-                  // There's a risk of the customer closing the window before callback
-                  // execution. Set up a webhook or plugin to listen for the
-                  // payment_intent.succeeded event that handles any business critical
-                  // post-payment actions.
-                }
-              }
-            })
-        })
-
-        var elementStyles = {
-          base: {
-            color: '#fff',
-            fontWeight: 600,
-            fontFamily: 'Quicksand, Open Sans, Segoe UI, sans-serif',
-            fontSize: '16px',
-            fontSmoothing: 'antialiased',
-
-            ':focus': {
-              color: '#424770'
-            },
-
-            '::placeholder': {
-              color: '#9BACC8'
-            },
-
-            ':focus::placeholder': {
-              color: '#CFD7DF'
-            }
-          },
-          invalid: {
-            color: '#fff',
-            ':focus': {
-              color: '#FA755A'
-            },
-            '::placeholder': {
-              color: '#FFCCA5'
-            }
-          }
-        }
-
-        var elementClasses = {
-          focus: 'focus',
-          empty: 'empty',
-          invalid: 'invalid'
-        }
-      })()
-    }
+    // async processPayment() {
+    //   const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
+    //   // const response = await fetch("http://localhost:3000/api/v1/secret");
+    //   // const { client_secret: clientSecret } = await response.json();
+    //   // // Render the form to collect payment details, then
+    //   // // call stripe.confirmCardPayment() with the client secret.
+    //   const clientSecret = 'pi_1IpIgVLutaKCaG86LgQ30D84_secret_LwjUFfypRB3wz4SexQNv7NgrT'
+    //   ;(function () {
+    //     'use strict'
+    //     const elements = stripe.elements()
+    //     var cardNumber = elements.create('cardNumber', {
+    //       style: elementStyles,
+    //       classes: elementClasses
+    //     })
+    //     cardNumber.mount('#example2-card-number')
+    //     var cardExpiry = elements.create('cardExpiry', {
+    //       style: elementStyles,
+    //       classes: elementClasses
+    //     })
+    //     cardExpiry.mount('#example2-card-expiry')
+    //     var cardCvc = elements.create('cardCvc', {
+    //       style: elementStyles,
+    //       classes: elementClasses
+    //     })
+    //     cardCvc.mount('#example2-card-cvc')
+    //     var form = document.getElementById('payment-form')
+    //     var errors = document.getElementById('card-errors')
+    //     form.addEventListener('submit', function (ev) {
+    //       ev.preventDefault()
+    //       // If the client secret was rendered server-side as a data-secret attribute
+    //       // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
+    //       // eslint-disable-next-line prettier/prettier
+    //       stripe.confirmCardPayment(clientSecret, {
+    //           payment_method: {
+    //             card: cardNumber
+    //           }
+    //         })
+    //         .then(function (result) {
+    //           // eslint-disable-next-line prettier/prettier
+    //           document.querySelector(".example2").classList.remove("submitting");
+    //           if (result.error) {
+    //             // Show error to your customer (e.g., insufficient funds)
+    //             // eslint-disable-next-line prettier/prettier
+    //             errors.textContent = result.error.message;
+    //           } else {
+    //             // The payment has been processed!
+    //             if (result.paymentIntent.status === 'succeeded') {
+    //               // eslint-disable-next-line prettier/prettier
+    //               console.log(result.paymentIntent);
+    //               // Show a success message to your customer
+    //               // There's a risk of the customer closing the window before callback
+    //               // execution. Set up a webhook or plugin to listen for the
+    //               // payment_intent.succeeded event that handles any business critical
+    //               // post-payment actions.
+    //             }
+    //           }
+    //         })
+    //     })
+    //     var elementStyles = {
+    //       base: {
+    //         color: '#fff',
+    //         fontWeight: 600,
+    //         fontFamily: 'Quicksand, Open Sans, Segoe UI, sans-serif',
+    //         fontSize: '16px',
+    //         fontSmoothing: 'antialiased',
+    //         ':focus': {
+    //           color: '#424770'
+    //         },
+    //         '::placeholder': {
+    //           color: '#9BACC8'
+    //         },
+    //         ':focus::placeholder': {
+    //           color: '#CFD7DF'
+    //         }
+    //       },
+    //       invalid: {
+    //         color: '#fff',
+    //         ':focus': {
+    //           color: '#FA755A'
+    //         },
+    //         '::placeholder': {
+    //           color: '#FFCCA5'
+    //         }
+    //       }
+    //     }
+    //     var elementClasses = {
+    //       focus: 'focus',
+    //       empty: 'empty',
+    //       invalid: 'invalid'
+    //     }
+    //   })()
+    // }
   },
   mounted() {
-    this.processPayment()
+    // this.processPayment()
   }
 }
 </script>

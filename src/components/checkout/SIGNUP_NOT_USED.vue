@@ -32,15 +32,20 @@
                   <div class="row">
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="email" class="form-control" id="mailAddr" placeholder=" " required />
+                        <input v-model="loginEmail" type="email" class="form-control" id="mailAddr" placeholder=" " required />
                         <label for="mailAddr">ADRESSE MAIL*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="password" class="form-control" autocomplete="off" id="mailPass" placeholder=" " required />
+                        <input v-model="loginPassword" type="password" class="form-control" autocomplete="off" id="mailPass" placeholder=" " required />
                         <label for="mailPass">MOT DE PASSE*</label>
-                        <a class="password-link text-right mb-0 d-block mt-2" href="#">Mot de passe oublié</a>
+                        <a @click="showModal = true" class="password-link text-right mb-0 d-block mt-2" href="#">Mot de passe oublié</a>
+                        <teleport to="#modal">
+                          <transition name="fade">
+                            <ConnectionModal v-if="showModal" whichForm="password" />
+                          </transition>
+                        </teleport>
                       </div>
                     </div>
                   </div>
@@ -77,25 +82,25 @@
                       <button class="btn btn-block rounded-0 social-btn"><i class="fab fa-google mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Google</button>
                     </div>
                   </div>
-                  <h6 class="prefer-text text-uppercase font-weight-bold my-5 text-center">
-                    <span>Ou par adresse mail</span>
+                  <h6 class="text-uppercase font-weight-bold my-5 text-center">
+                    <span>INSCRIPTION</span>
                   </h6>
                   <div class="row">
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="text" name="" class="form-control" placeholder=" " required id="last_name" />
+                        <input v-model="registerLastName" type="text" name="" class="form-control" placeholder=" " required id="last_name" />
                         <label for="last_name">Nom*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="text" name="" class="form-control" placeholder=" " required id="first_name" />
+                        <input v-model="registerFirstName" type="text" name="" class="form-control" placeholder=" " required id="first_name" />
                         <label for="first_name">Prénom*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
+                        <input v-model="registerBirthday" type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
                         <label for="date">DATE DE NAISSANCE*</label>
                       </div>
                     </div>
@@ -103,11 +108,11 @@
                       <div class="form-group">
                         <div class="btn-group btn-group-toggle fem-hom-toggle text-capitalize mt-n1" data-toggle="buttons">
                           <div class="btn btn-lg px-4 left-btn text-capitalize">
-                            <input type="radio" name="options" id="option1" />
+                            <input v-model="registerGender" type="radio" name="options" id="option1" />
                             Femme
                           </div>
                           <div class="btn btn-lg px-4 right-btn text-capitalize">
-                            <input type="radio" name="options" id="option2" />
+                            <input v-model="registerGender" type="radio" name="options" id="option2" />
                             Homme
                           </div>
                         </div>
@@ -116,55 +121,55 @@
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="text" name="" class="form-control" placeholder=" " required id="tele" />
+                        <input v-model="registerPhone" type="text" name="" class="form-control" placeholder=" " required id="tele" />
                         <label for="tele">Téléphone*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input class="form-control mail_addr" type="email" name="" value="" placeholder=" " required />
+                        <input v-model="registerEmail" class="form-control mail_addr" type="email" name="" placeholder=" " required />
                         <label for="mail_addr">ADRESSE MAIL*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="text" name="" class="form-control" placeholder=" " required id="pays" />
+                        <input v-model="registerCountry" type="text" name="" class="form-control" placeholder=" " required id="pays" />
                         <label for="pays">Pays*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="text" name="" class="form-control" placeholder=" " required id="addr" />
+                        <input v-model="registerAddress" type="text" name="" class="form-control" placeholder=" " required id="addr" />
                         <label for="addr">Adresse*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input class="form-control" type="password" autocomplete="off" name="" value="" placeholder=" " required id="pass" />
+                        <input v-model="registerPassword" class="form-control" type="password" autocomplete="off" name="" placeholder=" " required id="pass" />
                         <label for="pass">MOT DE PASSE*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input class="form-control" type="password" autocomplete="off" name="" value="" placeholder=" " required id="confirm_pass" />
+                        <input v-model="registerPasswordConfirmation" class="form-control" type="password" autocomplete="off" name="" placeholder=" " required id="confirm_pass" />
                         <label for="confirm_pass">CONFIRMATION MOT DE PASSE*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="text" name="" class="form-control" placeholder=" " required id="ville" />
+                        <input v-model="registerCity" type="text" name="" class="form-control" placeholder=" " required id="ville" />
                         <label for="ville">VILLE*</label>
                       </div>
                     </div>
                     <div class="col-12 col-lg-6">
                       <div class="form-group has-float-label">
-                        <input type="text" name="" class="form-control" placeholder=" " required id="postal_code" />
+                        <input v-model="registerZipCode" type="text" name="" class="form-control" placeholder=" " required id="postal_code" />
                         <label for="postal_code">Code postal*</label>
                       </div>
                     </div>
                     <div class="col-12">
                       <div class="custom-control custom-checkbox mb-0 sameAddrCheck">
-                        <input type="checkbox" class="custom-control-input" id="sameAddr" />
+                        <input v-model="registerSameAddress" type="checkbox" class="custom-control-input" id="sameAddr" />
                         <label class="custom-control-label mb-0 ml-2" for="sameAddr">Cette adresse est la même que l’adresse de facturation</label>
                       </div>
                     </div>
@@ -195,8 +200,12 @@
 </template>
 
 <script>
+import ConnectionModal from '@/components/connection/ConnectionModal.vue'
 export default {
-  name: 'Step1'
+  name: 'Step1',
+  components: {
+    ConnectionModal
+  }
 }
 </script>
 

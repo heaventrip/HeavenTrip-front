@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 138.0288 138.189">
+  <defs>
+    <style>
+      .clas-342132131232,
+      .cls-432843284233824324,
+      .cls-4839432,
+      .cls-43284328423 {
+        fill: none;
+      }
+
+      .clas-342132131232 {
+        stroke: #ebebeb;
+        stroke-width: 5px;
+      }
+
+      .clas-342132131232,
+      .cls-432843284233824324 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-432843284233824324 {
+        stroke: #d82558;
+        stroke-linecap: round;
+        stroke-width: 16px;
+        filter: drop-shadow(0px 2px 3px #7c7c7c80)
+      }
+
+      .cls-43284328423 {
+        stroke: #fff;
+        stroke-width: 4.5px;
+      }
+    </style>
+  </defs>
+  <g id="Calque_2" data-name="Calque 2">
+    <g id="Calque_1-2" data-name="Calque 1">
+      <path id="Tracé_5223-2" data-name="Tracé 5223-2" class="clas-342132131232"
+        d="M63.355,7a60.8445,60.8445,0,0,1,0,121.689h-.0105A60.8445,60.8445,0,0,1,63.3445,7Z" />
+      <path id="Tracé_5223-2-2" data-name="Tracé 5223-2" class="cls-432843284233824324" d="M63.35,7a60.68,60.68,0,0,1,60.679,60.679" />
+      <g id="Ellipse_101" data-name="Ellipse 101">
+        <circle class="cls-4839432" cx="123.9756" cy="65.6444" r="2.8047" />
+        <circle class="cls-43284328423" cx="123.9756" cy="65.6444" r="2.0545" />
+      </g>
+    </g>
+  </g>
+</svg>

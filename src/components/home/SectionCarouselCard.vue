@@ -1,25 +1,28 @@
 <template>
-  <div class="card-block" style="width: 540px" @mouseenter="biggerCard($event)" @mouseleave="smallerCard($event)">
+  <div class="card-block" :data-index="index" style="width: 540px" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
-      <transition name="fade">
-        <InlineSvg v-if="hovered" :src="require('@/assets/svg/heart-outline.svg')" style="position: absolute; top: 7%; right: 7%" height="20" />
-      </transition>
+      <div @click="addToWishlist" type="button" class="card-block__heart-icon" style="opacity: 0; position: absolute; top: 7%; right: 7%; z-index: 5">
+        <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" />
+        <InlineSvg v-else :src="require('@/assets/svg/heart-outline.svg')" height="20" />
+      </div>
+      <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
+      <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->
       <a href="/product">
-        <img class="card__bg-image img-responsive img-fill" :src="require('@/assets/images/s1.png')" alt="" />
+        <img class="card__bg-image img-responsive img-fill" :src="course.cover" alt="" />
       </a>
       <div class="card__footer item-details" style="width: 100%">
-        <div class="content d-flex justify-content-between">
+        <div class="card__footer__static-infos content d-flex justify-content-between">
           <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
             <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
             <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
             <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
               <div class="card__footer__infos__heading d-flex align-items-center">
-                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ pCourse.sports[0]?.name }}</span>
+                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ course?.sports[0].name }}</span>
                 <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
-                <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ pCourse.spot?.name }}</span>
+                <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ course.spot?.name }}</span>
               </div>
               <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
                 <span>inclus :&nbsp;</span>
@@ -29,13 +32,13 @@
           </div>
           <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
             <div class="card__footer__price__info" style="font-weight: 300">par pers.</div>
-            <div class="card__footer__price__euro">{{ pCourse.price }}&euro;</div>
+            <div class="card__footer__price__euro">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</div>
           </div>
         </div>
         <div class="hoverable-div">
           <div class="d-flex">
-            <InlineProductInfos class="InlineProduct" :infos="[pCourse.spot?.country, pCourse?.duration, pCourse?.max, 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
-            <InlineAvatars class="pl-4" :avatars="[1, 2]" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
+            <InlineProductInfos class="InlineProduct" :infos="[course.spot?.country, course?.duration, course?.max, 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
+            <InlineAvatars class="pl-4" :avatars="avatarKeys" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
           </div>
         </div>
       </div>
@@ -47,14 +50,18 @@
 import Tag from '@/components/elements/Tag.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
+import gsap from 'gsap'
 
 export default {
   name: 'SectionCarouselCard',
+  props: ['course', 'index'],
   data() {
     return {
       hovered: false,
-      animFinished: true,
-      pCourse: this.$props.course
+      cardTl: null,
+      cardsArr: [],
+      avatarKeys: [],
+      wishlisted: false
     }
   },
   components: {
@@ -62,32 +69,84 @@ export default {
     InlineProductInfos,
     Tag
   },
-  props: ['course'],
-  methods: {
-    // FIXME check mouse events bug
-    biggerCard(event) {
-      this.hovered = true
-      $(event.target).animate({ width: '+=50px' })
-      $(event.target).find('.content').addClass('hover')
-      $(event.target).find('.hoverable-div').slideDown()
-      $(event.target).find('.card__bg-image').addClass('card__bg-image--hover')
-      $(event.target).find('.card__footer__price').addClass('border-0')
-      // $(event.target).find('.trip-link').animate({ bottom: '+=45px' })
-    },
-    smallerCard(event) {
-      this.hovered = false
-      $(event.target).animate({ width: '-=50px' })
-      $(event.target).find('.content').removeClass('hover')
-      $(event.target).find('.hoverable-div').slideUp()
-      $(event.target).find('.card__bg-image').removeClass('card__bg-image--hover')
-      $(event.target).find('.card__footer__price').removeClass('border-0')
-      // $(event.target).find('.trip-link').animate({ bottom: '-=45px' })
+  watch: {
+    course(val) {
+      if (!val.wishlistUsers) return
+
+      val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
     }
+  },
+  methods: {
+    addToWishlist() {
+      console.log('wishlisting')
+      if (!this.wishlisted)
+        this.$axios
+          .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
+          .then(() => (this.wishlisted = true))
+          .catch((err) => console.log(err))
+      else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
+    },
+    transformCard(type, event) {
+      let card = event.target
+
+      if (!this.cardTl) {
+        let movingInfos = card.querySelector('.hoverable-div')
+        let staticInfos = card.querySelector('.card__footer__static-infos')
+        let heartIcon = card.querySelector('.card-block__heart-icon')
+        this.cardTl = gsap
+          .timeline({
+            defaults: {
+              duration: 0.5,
+              ease: 'power3.inOut'
+            }
+          })
+          .to(card, { width: '590px' })
+          .to(staticInfos, { y: '-=45px' }, '<')
+          .to(movingInfos, { y: '-=100' }, '<')
+          .to(heartIcon, { autoAlpha: 1 }, '<')
+          .to(
+            this.cardsArr.slice(parseInt(card.dataset.index) + 1),
+            {
+              x: '+=50'
+            },
+            '<'
+          )
+      }
+
+      if (type === 'bigger') {
+        this.cardTl.play()
+
+        card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
+        card.querySelector('.card__footer__price').classList.add('border-0')
+      }
+
+      if (type === 'smaller') {
+        this.cardTl.reverse()
+
+        card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
+        card.querySelector('.card__footer__price').classList.remove('border-0')
+      }
+    }
+  },
+  mounted() {
+    this.cardsArr = gsap.utils.toArray('.card-block')
+
+    // check if course is already wishlisted
+    this.$axios
+      .get('/wishlists', { wishlist: { courseId: this.$props.course.id } })
+      .then(() => (this.wishlisted = true))
+      .catch(() => (this.wishlisted = false))
   }
 }
 </script>
 
 <style scoped>
+.card__footer__static-infos {
+  transform: translateY(45px);
+}
+.hoverable-div {
+  transform: translateY(100px);
+}
 .InlineProduct {
   margin-left: 0.6rem;
   margin-right: 0.6rem;

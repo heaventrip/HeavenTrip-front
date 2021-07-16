@@ -1,59 +1,36 @@
 <template>
-  <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered login-modal profile-modal">
-      <div class="modal-content border-0 rounded-0">
-        <div class="modal-body p-0 border-0">
-          <div class="modal-content-head">
-            <h6 class="modal-heading mb-0"><span>COMPLETE TON PROFIL</span></h6>
-            <div class="border-left border-white text-white cancel-block d-lg-none" data-dismiss="modal" aria-label="Close">
-              <i class="fa fa-times h5 mb-0"></i>
-            </div>
+  <!-- <div style="position: absolute">
+    <button @click="step = 1">1</button>
+    <button @click="step = 2">2</button>
+    <button @click="step = 3">3</button>
+    <button @click="step = 4">4</button>
+  </div> -->
+  <div class="text-center mobile-vh">
+    <div v-if="step === 1" class="centered-vh">
+      <h6 class="profile-head">
+        <span class="d-lg-block" style="font-weight: 400">Ton espace client te permet d’avoir une page spéciale Tripper "public"</span>
+        <span style="font-weight: 400">Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.</span>
+      </h6>
+      <div>
+        <div class="div-group">
+          <label class="form-label text-uppercase font-weight-bold mt-5 mb-4 d-block">Quel camp ?</label>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label @click="gender = 'female'" class="btn profile-gender-btn rounded-0 btn-lg px-4"> <input type="radio" name="gender" value="female" /> Femme </label>
+            <label @click="gender = 'male'" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn"> <input type="radio" name="gender" value="male" /> Homme </label>
           </div>
-          <div class="modal-content-body modal-content-body-small bg-white">
-            <div style="position: absolute">
-              <button style="" id="btn1">1</button>
-              <button style="" id="btn2">2</button>
-              <button style="" id="btn3">3</button>
-              <button style="" id="btn4">4</button>
-            </div>
-            <div class="text-center mobile-vh">
-              <div id="step--1" class="centered-vh">
-                <h6 class="profile-head">
-                  <span class="d-lg-block">Ton espace client te permet d’avoir une page spéciale Tripper "public"</span>
-                  Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.
-                </h6>
-                <form>
-                  <div class="form-group">
-                    <label class="form-label text-uppercase font-weight-bold mt-3 d-block">Quel camp ?</label>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label @click="saveGender(female)" class="btn text-white border-0 rounded-0 btn-lg px-4"> <input type="radio" /> Femme </label>
-                      <label @click="saveGender(male)" class="btn text-white border-0 rounded-0 btn-lg px-4 group-btn"> <input type="radio" /> Homme </label>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div id="step--2" class="centered-vh">
-                <h6 class="profile-head mb-5 mt-md-0">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                  <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
-                    <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
-                    <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
-                    <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
-                  </div>
-                  <my-upload
-                    :no-square="true"
-                    langType="en"
-                    field="img"
-                    @crop-success="cropSuccess"
-                    @crop-upload-success="cropUploadSuccess"
-                    @crop-upload-fail="cropUploadFail"
-                    v-model="show"
-                    :width="300"
-                    :height="300"
-                    url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
-                    img-format="jpg"
-                  ></my-upload>
-                  <!-- <div class="ml-2" style="margin-right: auto">
+        </div>
+      </div>
+    </div>
+    <div v-if="step === 2" class="centered-vh">
+      <h6 class="profile-head mb-5 mt-md-0">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
+          <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
+          <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
+          <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
+        </div>
+        <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" url="https://heaventrip-dev.herokuapp.com/api/v1/upload" v-model="show" :width="300" :height="300" img-format="jpg"></my-upload>
+        <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
                         <g id="Groupe_16781" data-name="Groupe 16781" transform="translate(0 0)">
@@ -86,61 +63,57 @@
                           </g>
                         </g></svg
                     ></a>
-                    <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" url="/upload" img-format="jpg"></my-upload>
+                    <my-upload
+                      :no-square="true"
+                      langType="en"
+                      field="img"
+                      @crop-success="cropSuccess"
+                      @crop-upload-success="cropUploadSuccess"
+                      @crop-upload-fail="cropUploadFail"
+                      v-model="show"
+                      :width="300"
+                      :height="300"
+                      url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+                      img-format="jpg"
+                    ></my-upload>
                     <img :src="imgDataUrl" />
                   </div>
                   <div class="col-3 text-center" style="border-left: 1px dashed #b4b4b4">
                     <img :src="require('@/assets/images/avatar_example.png')" />
                     <p class="info-text-small mb-0 mt-1 pb-0">Cadrage conseillé</p>
                   </div> -->
-                </div>
-              </div>
-              <div id="step--3" class="centered-vh">
-                <h6 class="profile-head">Ultra rapide, une petite bio, tes passions, un proverbe préféré ?</h6>
-                <div class="row">
-                  <div class="col-12 col-lg-12 mx-auto">
-                    <h6 class="font-weight-bold text-left">INFOS A PARTAGER</h6>
-                    <p class="sub-text font-weight-normal text-left">Visible sur ta page public par les autres Trippers, tu peux renseigner ou modifier à tout moment tes infos via ton espace client.</p>
-                    <form>
-                      <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Aucune obligation! Fais-toi plaisir !"></textarea>
-                      <button @click="updateProfile" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase">Valider mon inscription</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <div id="step--4" class="centered-vh">
-                <div class="row justify-content-center align-items-center mt-4">
-                  <img class="d-inline-block mr-5 my-4" fluid :src="require('@/assets/images/mic_light.png')" />
-                  <h6 class="text-uppercase text-white font-weight-normal text-left">
-                    <strong class="letter-space text-warning d-block mb-2">Ton compte a bien été crée</strong>
-                    Ému de te compter parmi nous !
-                  </h6>
-                </div>
-                <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
-              </div>
-              <a class="d-block text-center profile-btm-text" href="#">Je décide de le faire plus tard</a>
-            </div>
-          </div>
-          <div class="modal-content-body bg-dark d-none">
-            <div class="text-center mobile-vh">
-              <div class="centered-vh">
-                <img class="d-block mx-auto my-4" fluid :src="require('@/assets/images/mic_light.png')" />
-                <h6 class="text-uppercase text-white font-weight-normal text-center pb-3 pt-2">
-                  <strong class="letter-space text-warning d-block mb-2">Ton compte a bien été créer</strong>
-                  Ému de te compter parmi nous !
-                </h6>
-                <button class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Retourner à l’accueil</button>
-              </div>
-            </div>
-          </div>
+      </div>
+    </div>
+    <div v-if="step === 3" class="centered-vh">
+      <h6 class="profile-head mb-5">Ultra rapide, une petite bio, tes passions, un proverbe préféré ?</h6>
+      <div class="row">
+        <div class="col-12 col-lg-12 mx-auto">
+          <h6 class="font-weight-bold text-left">INFOS A PARTAGER</h6>
+          <p class="sub-text font-weight-normal text-left">Visible sur ta page public par les autres Trippers, tu peux renseigner ou modifier à tout moment tes infos via ton espace client.</p>
+          <form>
+            <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Aucune obligation! Fais-toi plaisir !"></textarea>
+            <button @click="updateProfile" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase">Valider mon inscription</button>
+          </form>
         </div>
       </div>
     </div>
+    <div v-if="step === 4" class="centered-vh">
+      <div class="row justify-content-center align-items-center mt-4">
+        <img class="d-inline-block mr-5 my-4" fluid :src="require('@/assets/images/mic_light.png')" />
+        <h6 class="text-uppercase text-white font-weight-normal text-left">
+          <strong class="letter-space text-white d-block mb-2">Ton compte a bien été crée</strong>
+          Ému de te compter parmi nous !
+        </h6>
+      </div>
+      <button @click.prevent="$parent.$parent.showModal = false" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
+    </div>
+    <a v-if="step <= 4" @click.prevent="step++" class="d-block text-center profile-btm-text mt-4" style="color: #292f33" href="#">Je décide de le faire plus tard</a>
   </div>
 </template>
 
 <script>
 import MyUpload from 'vue-image-crop-upload'
+import '../../assets/css/upload.css' // overwrites default
 
 export default {
   name: 'Profile',
@@ -149,16 +122,22 @@ export default {
   },
   data() {
     return {
+      step: 1,
       gender: '',
       description: '',
       show: true,
       imgDataUrl: ''
     }
   },
-  methods: {
-    saveGender(gender) {
-      this.gender = gender
+  watch: {
+    step(val) {
+      if (val === 4) this.$emit('reached-success')
     },
+    gender() {
+      this.step++
+    }
+  },
+  methods: {
     toggleShow() {
       this.show = !this.show
     },
@@ -170,18 +149,18 @@ export default {
      */
     cropSuccess(imgDataUrl, field) {
       console.log('-------- crop success --------')
-      this.imgDataUrl = imgDataUrl
+
+      /**
+       * upload success
+       *
+       * [param] jsonData  server api return data, already json encode
+       * [param] field
+       */
     },
-    /**
-     * upload success
-     *
-     * [param] jsonData  server api return data, already json encode
-     * [param] field
-     */
     cropUploadSuccess(jsonData, field) {
       console.log('-------- upload success --------')
-      console.log(jsonData)
-      console.log('field: ' + field)
+      localStorage.setItem('user.avatarId', jsonData.upload.public_id)
+      this.$parent.$forceUpdate()
     },
     /**
      * upload fail
@@ -193,60 +172,39 @@ export default {
       console.log('-------- upload fail --------')
       console.log(status)
       console.log('field: ' + field)
+    },
+    updateProfile() {
+      this.$axios
+        .put('/users', {
+          user: {
+            email: this.loginEmail,
+            password: this.loginPassword
+          }
+        })
+        .then((resp) => {
+          alert('Connexion réussie')
+          localStorage.setItem('auth-token', resp.data.auth_token)
+        })
+        .catch((err) => {
+          this.errors.push(err.response.data.message)
+        })
     }
   },
-  updateProfile() {
-    this.$axios
-      .put('/users', {
-        user: {
-          email: this.loginEmail,
-          password: this.loginPassword
-        }
-      })
-      .then((resp) => {
-        alert('Connexion réussie')
-        localStorage.setItem('auth-token', resp.data.auth_token)
-      })
-      .catch((err) => {
-        this.errors.push(err.response.data.message)
-      })
-  },
-  mounted() {
-    $('#step--1').hide()
-    $('#step--2').hide()
-    $('#step--3').hide()
-    $('#step--4').hide()
-
-    $('#btn1').on('click', function () {
-      $('#step--1').show()
-      $('#step--2').hide()
-      $('#step--3').hide()
-      $('#step--4').hide()
-    })
-    $('#btn2').on('click', function () {
-      $('#step--1').hide()
-      $('#step--2').show()
-      $('#step--3').hide()
-      $('#step--4').hide()
-    })
-    $('#btn3').on('click', function () {
-      $('#step--1').hide()
-      $('#step--2').hide()
-      $('#step--3').show()
-      $('#step--4').hide()
-    })
-    $('#btn4').on('click', function () {
-      $('#step--1').hide()
-      $('#step--2').hide()
-      $('#step--3').hide()
-      $('#step--4').show()
-    })
-  }
+  mounted() {}
 }
 </script>
 
 <style scoped>
 .info-text-small {
   white-space: nowrap;
+}
+.profile-gender-btn {
+  border: 1px solid #292f33;
+  transition: all 0.3s ease;
+}
+.profile-gender-btn:hover,
+.profile-gender-btn.active {
+  background-color: #292f33;
+  color: white;
 }
 </style>

@@ -1,150 +1,111 @@
 <template>
-  <div class="stay-dropdown d-block d-lg-none">
+  <!-- <div class="stay-dropdown d-block d-lg-none">
     <select class="form-control select-place">
-      <option selected="" value="#pills-info">INFOS SéJOUR</option>
-      <option value="#pills-activityspot">ACTIVITéS & spot</option>
-      <option value="#pills-place">VIE SUR PLACE</option>
-      <option value="#pills-programe">PROGRAMME</option>
-      <option value="#pills-tips">TIPS & ASTUCES</option>
-      <option value="#pills-opinion">VOS AVIS</option>
+      <option selected="" value="#pills-info">Infos séjour</option>
+      <option value="#pills-activityspot">Activités & spot</option>
+      <option value="#pills-place">Vie sur place</option>
+      <option value="#pills-programe">Programme</option>
+      <option value="#pills-tips">Tips & astuces</option>
+      <option value="#pills-opinion">Vos avis</option>
     </select>
+  </div> -->
+  <div class="header">
+    <TheNavSticky />
   </div>
-  <div style="position: relative">
-    <div class="slider" :class="{ 'slider--up': slidingUp }" v-if="!slideIsUp"></div>
-    <ul
-      :class="{ 'fade--out': slidingUp, 'fade--in--menu': slideIsUp }"
-      style="position: relative"
-      :style="[slideIsUp && !navIsActive ? 'height: 6vh; position: sticky; top: 0px; z-index: 2' : 'height: 10vh']"
-      class="bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center"
-      id="pills-tab "
-      role="tablist"
-    >
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-activities').scrollIntoView()" class="nav-link active" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-living').scrollIntoView()" class="nav-link" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-program').scrollIntoView()" class="nav-link" id="pills-programe-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">04. Programme</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-tips').scrollIntoView()" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">05. Tips & astuces</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a @click.prevent="scrollToSection('product-tab-reviews').scrollIntoView()" class="nav-link" id="pills-opinion-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">06. Vos avis </a>
-      </li>
-    </ul>
-    <div class="product-content d-flex justify-content-around bg-white">
-      <div :class="{ 'fade--out': slidingUp, 'fade--in--content': slideIsUp }" class="w-50 tab-content main-tab d-flex flex-column justify-content-around bg-white" id="pills-tabContent" style="position: relative; padding: 3.5rem 3rem; min-height: 100vh">
-        <div id="product-tab-infos" class="pt-5">
-          <ProductTabInfos />
-        </div>
-        <div id="product-tab-activities" style="padding-top: 4rem">
-          <ProductTabActivities />
-        </div>
-        <div id="product-tab-living" style="padding-top: 4rem">
-          <ProductTabLiving />
-        </div>
-        <div id="product-tab-program" style="padding-top: 4rem">
-          <ProductTabProgram />
-        </div>
-        <div id="product-tab-tips" style="padding-top: 4rem">
-          <ProductTabTips />
-        </div>
-        <div id="product-tab-reviews" style="padding-top: 4rem; min-height: 100vh">
-          <ProductTabReviews />
-        </div>
-        <!-- <div class="w-50" id="pills-info" aria-labelledby="pills-info-tab">
-        </div>
-        <div class="w-50" id="pills-activityspot" aria-labelledby="pills-activityspot-tab">
-        </div>
-        <div class="w-50" id="pills-place" aria-labelledby="pills-place-tab">
-        </div>
-        <div class="w-50" id="pills-programe" aria-labelledby="pills-programe-tab">
-        </div>
-        <div class="w-50" id="pills-tips" aria-labelledby="pills-tips-tab">
-        </div>
-        <div class="w-50" id="pills-opinion" aria-labelledby="pills-opinion-tab">
-        </div> -->
+  <div class="product-content d-flex" :class="{ blur: showedSessions }">
+    <!-- <div class="whitespace-big-screen"></div> -->
+    <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
+      <div class="product-nav-tabs">
+        <ProductNav :course="course" />
+        <ul style="height: 100px; background-color: white; font-weight: 400; padding: 0 7vw" class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation" type="button">
+            <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
+          </li>
+          <li class="nav-item" role="presentation" type="button">
+            <a @click.prevent="scrollToSection('product-tab-activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">Activités & spot</a>
+          </li>
+          <li class="nav-item" role="presentation" type="button">
+            <a @click.prevent="scrollToSection('product-tab-living')" class="nav-link" id="pills-living-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">Vie sur place</a>
+          </li>
+          <li class="nav-item" role="presentation" type="button">
+            <a @click.prevent="scrollToSection('product-tab-program')" class="nav-link" id="pills-program-tab" data-toggle="pill" aria-controls="pills-programe" aria-selected="false">Programme</a>
+          </li>
+          <li class="nav-item" role="presentation" type="button">
+            <a @click.prevent="scrollToSection('product-tab-tips')" class="nav-link" id="pills-tips-tab" data-toggle="pill" aria-controls="pills-tips" aria-selected="false">Tips & astuces</a>
+          </li>
+          <li class="nav-item" role="presentation" type="button">
+            <a @click.prevent="scrollToSection('product-tab-reviews')" class="nav-link" id="pills-reviews-tab" data-toggle="pill" aria-controls="pills-opinion" aria-selected="false">Vos avis </a>
+          </li>
+        </ul>
       </div>
-      <div class="w-25">
-        <div class="" style="position: sticky; top: 10vh">
-          <h6 class="galary-head font-weight-bold mb-0 d-flex">
-            GALERIE PHOTOS
-            <span class="galary-count ml-auto font-weight-normal">24 médias</span>
-          </h6>
-          <div class="form-row galary-grid mt-3 mb-5">
-            <div class="col-8 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
-            <div class="col-4 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
-            <div class="col-4 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
-            <div class="col-8 img-container">
-              <img class="img-fill" fluid :src="require('@/assets/images/unsplashx.png')" />
-            </div>
+      <div id="product-tab-infos" class="product-section" style="">
+        <ProductTabInfos :course="course" />
+      </div>
+      <div id="product-tab-activities" class="product-section">
+        <ProductTabActivities :course="course" />
+      </div>
+      <div id="product-tab-living" class="product-section">
+        <ProductTabLiving :course="course" />
+      </div>
+      <div id="product-tab-program" class="product-section">
+        <ProductTabProgram :course="course" />
+      </div>
+      <div id="product-tab-tips" class="product-section">
+        <ProductTabTips :course="course" />
+      </div>
+      <div id="product-tab-reviews" class="product-section" style="min-height: 100vh">
+        <ProductTabReviews :course="course" />
+      </div>
+      <!-- <div class="w-50" id="pills-info" aria-labelledby="pills-info-tab">
+      </div>
+      <div class="w-50" id="pills-activityspot" aria-labelledby="pills-activityspot-tab">
+      </div>
+      <div class="w-50" id="pills-place" aria-labelledby="pills-place-tab">
+      </div>
+      <div class="w-50" id="pills-programe" aria-labelledby="pills-programe-tab">
+      </div>
+      <div class="w-50" id="pills-tips" aria-labelledby="pills-tips-tab">
+      </div>
+      <div class="w-50" id="pills-opinion" aria-labelledby="pills-opinion-tab">
+      </div> -->
+    </div>
+    <div class="gallery-comment-block">
+      <div class="aside-slider">
+        <transition name="fade" @after-leave="afterLeave">
+          <swiper v-if="asideSlider" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2" /></swiper-slide>
+          </swiper>
+        </transition>
+        <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
+          <div class="messages-container" style="">
+            <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
+            <ul class="list-unstyled mb-0 discuss-list mt-3">
+              <li v-for="msg in messages" :key="msg">
+                <div class="d-flex">
+                  <div class="">
+                    <div class="profile-container">
+                      <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
+                    </div>
+                  </div>
+                  <div class="ml-4 pt-2">
+                    <h6 class="discuss-head">
+                      {{ msg.user.firstName }} {{ msg.user.lastName }}<span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">{{ new Date(msg.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
+                    </h6>
+                    <p class="content-desc">{{ msg.content }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-          <h6 class="galary-head font-weight-bold mb-4 d-flex">
-            DISCUSSIONS
-            <span class="count-circle ml-auto font-weight-normal"><i class="fas fa-ellipsis-h"></i></span>
-          </h6>
-          <ul class="list-unstyled mb-0 discuss-list mt-3">
-            <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
-                  </div>
-                </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
-                  </div>
-                </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="form-row mt-3 mb-5">
-                <div class="col-2">
-                  <div class="profile-container">
-                    <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" />
-                  </div>
-                </div>
-                <div class="col-10">
-                  <h6 class="discuss-head">Helena Brauer <span>Jeudi à 12:37</span></h6>
-                  <p class="content-desc">During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes</p>
-                  <a href="#" class="reply-text text-reset">LUI REPONDRE</a>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <div class="reply-block position-relative pr-4 mb-5">
-            <div class="profile-container float-right">
-              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/2.jpg')" />
-            </div>
-            <textarea class="reply-container form-control pr-5" rows="1">Répondre…</textarea>
-          </div>
+          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #fcfcfc">
+            <label class="message-input-label">
+              <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="1"> </textarea>
+            </label>
+          </form>
         </div>
       </div>
     </div>
@@ -152,6 +113,8 @@
 </template>
 
 <script>
+import TheNavSticky from '@/components/nav/TheNavSticky.vue'
+import ProductNav from '@/components/product/ProductNav.vue'
 import ProductTabInfos from '@/components/product/tabs/ProductTabInfos.vue'
 import ProductTabActivities from '@/components/product/tabs/ProductTabActivities.vue'
 import ProductTabLiving from '@/components/product/tabs/ProductTabLiving.vue'
@@ -159,21 +122,40 @@ import ProductTabProgram from '@/components/product/tabs/ProductTabProgram.vue'
 import ProductTabReviews from '@/components/product/tabs/ProductTabReviews.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import VueEasyLightbox from 'vue-easy-lightbox'
+import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
+gsap.registerPlugin(ScrollTrigger)
 
 export default {
   name: 'ProductContent',
   components: {
+    TheNavSticky,
+    ProductNav,
     ProductTabInfos,
     ProductTabActivities,
     ProductTabLiving,
     ProductTabProgram,
     ProductTabReviews,
-    ProductTabTips
+    ProductTabTips,
+    // VueEasyLightbox,
+    Swiper,
+    SwiperSlide
   },
-  props: ['nav-is-active'],
-  emits: ['slide-is-up', 'slide-is-down'],
+  props: ['course', 'showed-sessions', 'selected-session'],
+  // props: ['nav-is-active', 'course'],
+  // emits: ['slide-is-up', 'slide-is-down'],
   data() {
     return {
+      messages: [],
+      messageSentSuccess: true,
+      inputMessage: '',
+      asideSlider: true,
+      imgs: ['https://via.placeholder.com/450.png/', 'https://via.placeholder.com/300.png/', 'https://via.placeholder.com/150.png/', 'https://via.placeholder.com/450.png/'], // Img Url , string or Array of string
+      visible: false,
+      index: 0, // default: 0
       clickedInfos: false,
       clickedActivities: false,
       clickedLiving: false,
@@ -182,65 +164,240 @@ export default {
       clickedReviews: false,
       slidingUp: false,
       slideIsUp: false,
-      navIsActive: this.$props.navIsActive
+      navIsActive: this.$props.navIsActive,
+      currentPaginationStyle: `
+        font-family: Oswald, sans-serif;
+        font-weight: 800;
+        font-size: 2rem;
+        color: #fff;`,
+      totalPaginationStyle: `
+        font-family: Oswald, sans-serif;
+        color: rgba(250, 250, 250, 0.7);
+        font-size: 1rem;`
     }
   },
-  watch: {
-    navIsActive(newVal) {
-      console.log(newVal)
-      if (newVal === true) {
-        gsap.set('.header--product', { height: window.innerHeight, ease: 'power3.out' })
-      }
-    },
-    slideIsUp(newVal) {
-      let that = this
-      if (newVal === true) {
-        this.$emit('slide-is-up')
-        window.addEventListener('scroll', function scrollListener() {
-          if (window.pageYOffset < 900) {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            window.removeEventListener('scroll', scrollListener)
-            that.slideIsUp = false
-            that.slideIsUp = false
-          }
-        })
-      }
-      if (newVal === false) {
-        this.$emit('slide-is-down')
-        gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out' })
-        // document.querySelector('.header').addEventListener('wheel', (e) => {
-        //   gsap.to('.header--product', { height: window.innerHeight * 0.9, ease: 'power3.out' })
-        // })
-      }
-    }
+  created() {
+    this.fetchMessages()
   },
   methods: {
+    fetchMessages() {
+      this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages))
+    },
+    afterLeave() {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+    isInViewport(element) {
+      const rect = element.getBoundingClientRect()
+      return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    },
+    submitMessageForm() {
+      if (!this.inputMessage) return
+
+      this.$axios
+        .post('/messages', { message: { courseId: this.$props.courseId } })
+        .then(() => this.fetchMessages())
+        .catch((err) => alert(err))
+    },
+    initTabsGsap() {
+      // let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
+      // let scrollUpTl = gsap.timeline({
+      //   scrollTrigger: {
+      //     trigger: `#product-tab-${tabs[index]}`,
+      //     start: 'bottom bottom',
+      //     end: 'top bottom',
+      //     markers: true,
+      //     onToggle: () => console.log('scrollup')
+      //   },
+      //   ease: 'none'
+      // })
+      // scrollUpTl.to(`#pills-${tabs[index]}-tab`, { className: '+=active' })
+      // if (index !== tabs.length - 1) {
+      //   scrollUpTl.to(`#pills-${tabs[index + 1]}-tab`, { className: '-=active' }, '<')
+      // }
+    },
+    // initGsap() {
+    //   let that = this
+    //   gsap.set('.main-slider .swiper-slide__img', { height: window.innerHeight * 0.5 + 'px' })
+    //   gsap.to(['.swiper-slide__img', '.swiper-container'], {
+    //     scrollTrigger: {
+    //       pin: true,
+    //       pinSpacing: false,
+    //       trigger: '.swiper-container',
+    //       start: 'top 102',
+    //       end: 'bottom 102', //
+    //       scrub: true,
+    //       onLeave: () => (that.asideSlider = true)
+    //     },
+    //     height: '0px',
+    //     ease: 'none'
+    //   })
+    //   gsap.set('.pin-spacer', { backgroundColor: '#fcfcfc' })
+    // },
+    // asideGsap() {
+    //   console.log('ok1')
+    //   document.addEventListener('wheel', (e) => {
+    //     if (e.deltaY < 0 && window.scrollY < window.innerHeight * 0.5) {
+    //       gsap.set(['.swiper-container', '.main-slider .swiper-slide__img'], { height: window.innerHeight * 0.5 + 'px' })
+    //       this.asideSlider = false
+    //     }
+    //   })
+    // },
+    showImg(index) {
+      this.index = index
+      this.visible = true
+    },
+    handleHide() {
+      this.visible = false
+    },
+    renderSwiperFraction(currentClass, totalClass) {
+      return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
+      <span style="${this.currentPaginationStyle}">.</span>
+      <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
+    },
     scrollToSection(el) {
-      document.querySelector(`#${el}`).scrollIntoView()
+      document.querySelector(`#${el}`).scrollIntoView({ behavior: 'smooth' })
     }
+    // scroll to top when user reaches top of content (wheel up)
+    // handleScrollUp() {
+    //   let contentTop = window.innerHeight * 0.9
+    //   if (window.pageYOffset < contentTop) {
+    //     window.scrollTo({ top: 0, behavior: 'smooth' })
+    //     gsap.to('.header--product', { height: window.innerHeight, ease: 'power3.out', duration: 1 }) // duration 1000sec same as above
+    //     this.slideIsUp = false
+    //   }
+    // },
+    // first scroll down brings page up (wheel down)
+    // handleScrollDown() {
+    //   this.slidingUp = true
+    //   setTimeout(() => {
+    //     window.scrollTo({ top: window.innerHeight })
+    //     this.slidingUp = false
+    //     this.slideIsUp = true
+    //   }, 800)
+    // }
   },
   mounted() {
-    let tl = gsap.timeline({ duration: 1 })
-    tl.from('.header-bg-image', { scale: 1.2, duration: 10 })
-    tl.to('.header--product', { height: window.innerHeight * 0.9, ease: 'power3.out' }, '<0.2')
-    tl.from('.product-header-infos__title', { opacity: 0, duration: 0.3 }, '<0.7')
+    let sections = Array.from(document.querySelectorAll('.product-section'))
+    let navLinks = Array.from(document.querySelectorAll('.product-nav-tabs .nav-link'))
 
-    document.querySelector('.header').addEventListener('wheel', (e) => {
-      e.preventDefault()
-      this.slidingUp = true
-      setTimeout(() => {
-        this.slideIsUp = true
-        window.scrollTo({ top: window.innerHeight * 0.9 })
-        this.slidingUp = false
-      }, 800)
+    document.addEventListener('scroll', () => {
+      const threshold = 100
+      const viewportTop = window.scrollY + threshold
+
+      for (const [id, section] of sections.entries()) {
+        const sectionTop = section.offsetTop
+        const sectionBottom = sectionTop + section.clientHeight
+
+        if (viewportTop <= sectionBottom && viewportTop >= sectionTop) {
+          const previousActive = document.querySelector('.product-nav-tabs .nav-link.active')
+          if (previousActive) previousActive.classList.remove('active')
+          navLinks[id].classList.toggle('active', true)
+        }
+      }
     })
   }
 }
 </script>
 
 <style scoped>
+.messages-container {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1rem;
+}
+@media only screen and (max-width: 1440px) {
+  .messages-container {
+    padding: 0 1rem;
+  }
+}
+.message-input-label {
+  position: relative;
+  width: 100%;
+}
+.message-input-label:before {
+  content: '';
+  position: absolute;
+  right: 2rem;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: url('../../assets/svg/send.svg') center / contain no-repeat;
+}
+.reply-container {
+  width: 85%;
+  overflow: visible !important;
+}
+.reply-container::placeholder {
+  color: #292f33;
+  font-weight: 500;
+}
+.reply-container:focus {
+  outline: none;
+  color: #292f33;
+  height: 6rem;
+}
+.main-tab {
+  max-width: 1000px;
+  position: relative;
+  padding: 0rem 0rem 8rem 0rem;
+  min-height: 100vh;
+  width: 57vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* .gallery-comment-block {
+  padding-left: 2rem;
+} */
+.aside-slider {
+  top: 71px;
+  width: inherit;
+  position: fixed;
+  background-color: white;
+  box-shadow: 0 0 3px #ebebeb;
+  height: calc(100vh - 71px - 100px - 40px); /* substract top nav and booking footer */
+}
+@media only screen and (min-width: 1441px) {
+  .aside-slider {
+    height: calc(100vh - 71px - 120px - 40px);
+  }
+}
+.aside-slider .swiper-slide__img {
+  height: 25vh;
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+.reply-container {
+  font-size: 0.8rem;
+  color: #292f33;
+  font-weight: 400;
+}
+.profile-container {
+  margin: auto;
+  width: 60px;
+  height: 60px;
+}
+.discuss-head {
+  display: block;
+  color: #292f33;
+  font-size: 0.8rem;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #292f33;
+}
+
+.nav-link {
+  padding: 0.5rem !important;
+}
+.product-content {
+  background-color: #fcfcfc;
+  padding-left: 1rem;
+  position: relative;
+  top: 70px;
+}
 .slider {
-  background-color: #fff;
+  background-color: #fcfcfc;
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -260,5 +417,43 @@ export default {
 .fade--in--content {
   transition: opacity 0.8s ease 0.4s;
   opacity: 1;
+}
+.product-nav-tabs {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  left: 0;
+  width: 70vw;
+  z-index: 2;
+  box-shadow: 0px 3px 6px #00000005;
+}
+.gallery-comment-block {
+  width: 30vw;
+}
+.blur {
+  filter: blur(3px) opacity(0.2);
+  top: -70px;
+}
+@media only screen and (max-width: 2000px) {
+  /* .whitespace-big-screen {
+    display: none;
+  } */
+  .nav--big-screen {
+    display: none;
+  }
+}
+@media only screen and (min-width: 2001px) {
+  /* .whitespace-big-screen {
+    height: 170px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 1;
+  } */
+  .aside-slider {
+    z-index: 2;
+  }
 }
 </style>

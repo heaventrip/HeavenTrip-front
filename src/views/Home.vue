@@ -1,19 +1,34 @@
 <template>
-  <div id="axiosForm">
-    <div class="loader" v-if="loading"></div>
-    <Header />
-    <MainSection />
-    <Footer />
-    <Login :loading="loading" />
-    <Profile />
-    <SelectADate />
-  </div>
+  <div class="loader" v-if="loading"></div>
+  <Header />
+  <MainSection />
+  <Footer />
+  <!-- <Profile /> -->
+  <SelectADate />
 </template>
-<style scoped>
-#axiosForm {
-  /* Components Root Element ID */
-  position: relative;
+
+<script>
+import Header from '@/components/header/Header'
+import Footer from '@/components/footer/Footer'
+import MainSection from '@/components/home/MainSection'
+import SelectADate from '@/components/SelectADate'
+export default {
+  name: 'HomePage',
+  components: {
+    Header,
+    MainSection,
+    Footer,
+    SelectADate
+  },
+  data() {
+    return {
+      loading: false
+    }
+  }
 }
+</script>
+
+<style scoped>
 .loader {
   /* Loader Div Class */
   position: absolute;
@@ -31,30 +46,3 @@
   filter: alpha(opacity=40);
 }
 </style>
-<script>
-import Header from '@/components/header/Header'
-import Footer from '@/components/footer/Footer'
-import MainSection from '@/components/home/MainSection'
-import Login from '@/components/connection/Login'
-import Profile from '@/components/connection/Profile'
-import SelectADate from '@/components/SelectADate'
-export default {
-  name: 'HomePage',
-  components: {
-    Header,
-    MainSection,
-    Footer,
-    Login,
-    Profile,
-    SelectADate
-  },
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      loading: false
-    }
-  }
-}
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->

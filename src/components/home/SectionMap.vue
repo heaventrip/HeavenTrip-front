@@ -1,13 +1,13 @@
 <template>
   <section class="map-section bg-dark text-white pb-5 p-lg-5">
-    <div class="container-fluid">
-      <div class="row">
+    <div class="container-fluid" style="margin: 6rem 0">
+      <div class="row d-none">
         <div class="col-12 col-lg-4 mx-auto pb-lg-5 mt-5 mb-5 mb-lg-0 text-center text-lg-left border-lg-bottom px-0">
           <h6 class="text-warning sub-heading mb-1">Nos activites selon</h6>
           <h2 class="text-uppercase font-weight-normal heading">les <strong>destinations</strong></h2>
         </div>
       </div>
-      <div class="row">
+      <div class="row d-none">
         <div class="col-12 col-md-10 mx-md-auto offset-lg-7 col-lg-5 mr-lg-0 selective-div">
           <div class="d-flex py-3 py-md-4 py-lg-3 absolute-border position-relative">
             <ul class="list-unstyled flex-div mb-0">
@@ -83,7 +83,7 @@
           <img class="img-fluid img-fill" fluid :src="require('@/assets/images/MAPS.png')" />
           <img class="img-fluid centered-img" fluid :src="require('@/assets/images/fr2.png')" />
         </div>
-        <div class="col-12 col-md-10 mx-md-auto col-lg-5 map-content-div">
+        <div class="col-12 col-md-10 mx-md-auto col-lg-5 map-content-div d-none">
           <div class="map-content border-top">
             <div class="zone-div col-12 col-lg-4 mx-auto h-100 flex-column justify-content-center align-items-center text-center">
               <p>Sélectionnez une zone de la map ou dans la liste un pays pour afficher le détails</p>
@@ -191,6 +191,20 @@
               </li>
             </ul>
           </div>
+        </div>
+        <div class="col-5 soon-avail-icon align-self-center text-center">
+          <svg class="" xmlns="http://www.w3.org/2000/svg" height="160" viewBox="0 0 100 100">
+            <g id="Calque_2" data-name="Calque 2">
+              <g id="Calque_1-2" data-name="Calque 1">
+                <path fill="white" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
+                <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
+              </g>
+            </g>
+            <svg viewBox="-13 -22 30 30" fill="white">
+              <text font-family="Muli" font-weight="500">!</text>
+            </svg>
+          </svg>
+          <div class="mt-3" style="font-weight: 500; font-family: Muli, sans-serif; text-transform: uppercase">Bientôt disponible !</div>
         </div>
 
         <!-- <div class="col-12">
@@ -304,7 +318,6 @@ export default {
 
 <style scoped>
 .map-section {
-  filter: blur(4px);
   pointer-events: none;
   cursor: not-allowed;
 }

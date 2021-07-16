@@ -143,8 +143,8 @@
   color: #fff;
   font-size: 0.85rem;
   font-weight: 600;
-  padding: 0 0 0 8px;
-  border-radius: 3px;
+  padding: 0 0.6rem 0 1rem;
+  /* border-radius: 3px; */
   margin-right: 5px;
   /* margin-bottom: 5px; */
   display: flex;
@@ -195,7 +195,7 @@
   right: 0;
   border: 1px solid #e8e8e8;
   margin-top: -1px;
-  max-height: 160px;
+  max-height: 180px !important;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   z-index: 100;
@@ -210,7 +210,7 @@
   /* height: 100px;
   overflow: scroll; */
   scrollbar-width: thin;
-  scrollbar-color: #292f33 white;
+  scrollbar-color: #292f33 #ebebeb;
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -219,13 +219,13 @@
 }
 
 .multiselect-options::-webkit-scrollbar-track {
-  background: white;
+  background: #ebebeb;
 }
 
 .multiselect-options::-webkit-scrollbar-thumb {
   background-color: #292f33;
   border-radius: 10px;
-  border: 5px solid white;
+  border: 5px solid #ebebeb;
 }
 .open-top .multiselect-options {
   transform: translateY(-100%);

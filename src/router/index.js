@@ -6,40 +6,50 @@ import Home from '@/views/Home.vue'
 import ProductHome from '@/components/product/ProductHome.vue'
 import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
 import SearchHome from '@/components/search/SearchHome.vue'
-import LoginHeader from '@/components/connection/LoginHeader.vue'
-import Terms from '@/components/legal/Terms.vue'
+import Profile from '@/components/connection/Profile.vue'
+import ConnectionModal from '@/components/connection/ConnectionModal.vue'
 import Legal from '@/components/legal/Legal.vue'
+import { isLoggedIn } from '@/utils/auth'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'ProductHome',
-    component: ProductHome
+    component: ProductHome,
+    props: true,
+    meta: {
+      allowAnonymous: false
+    }
   },
   {
-    path: '/checkout',
+    path: '/checkout/:productId',
     name: 'CheckOutHome',
-    component: CheckOutHome
+    props: true,
+    component: CheckOutHome,
+    meta: {
+      allowAnonymous: false
+    }
   },
   {
     path: '/search',
     name: 'SearchHome',
-    component: SearchHome
+    component: SearchHome,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/login',
-    name: 'LoginHeader',
-    component: LoginHeader
-  },
-  {
-    path: '/terms',
-    name: 'Terms',
-    component: Terms
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/legal',
@@ -50,7 +60,26 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      if (to.name === 'SearchHome') return { behavior: 'smooth', top: window.innerHeight }
+      if (to.name === 'Home') return { behavior: 'smooth', top: 0 }
+    }
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.allowAnonymous && !isLoggedIn()) {
+    next({
+      path: '/',
+      query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
 })
 
 export default router

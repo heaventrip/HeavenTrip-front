@@ -1,104 +1,182 @@
 <template>
-  <div>
-    <main class="checkout-main-container">
-      <div class="container-fluid bg-light h-100">
-        <div class="row h-100">
-          <div class="col-12 col-xl-4 p-0 bg-image h-100 position-relative">
-            <div class="d-flex justify-content-between align-items-center trip-list-div text-white px-3">
-              <ul class="list-unstyled mb-0 d-flex align-items-center text-uppercase">
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/globe.svg')" />france</li>
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/timer.svg')" />8 j - 7 nuits</li>
-                <li><img class="mr-2 ml-4 icons m-icon" fluid :src="require('@/assets/svg/ring.svg')" />confirmé</li>
-              </ul>
-              <ul class="list-unstyled mb-0 d-flex align-items-center trip-list">
-                <li>
-                  <img class="mr-2 icons" fluid :src="require('@/assets/images/head-pin.png')" />
-                </li>
-                <li>
-                  <img class="mr-2 icons" fluid :src="require('@/assets/svg/yoga.svg')" />
-                </li>
-              </ul>
-            </div>
-            <img class="img-fluid checkout-info-img" fluid :src="require('@/assets/images/checkout_bg.jpg')" />
-            <div class="d-flex align-items-center share-social-icons text-white">
-              <h6 class="font-weight-normal mr-3 mb-0">Partage un max !</h6>
-              <a href="#" class="rounded-circle d-inline-block">
-                <img class="mr-2" fluid :src="require('@/assets/images/insta.png')" />
-              </a>
-              <a href="#" class="rounded-circle d-inline-block">
-                <img class="mr-2" fluid :src="require('@/assets/images/fb.png')" />
-              </a>
-              <a href="#" class="rounded-circle d-inline-block">
-                <img class="mr-2" fluid :src="require('@/assets/images/youtube.png')" />
-              </a>
-            </div>
-          </div>
-          <div class="col-12 col-xl-8 p-0 h-100">
-            <div class="checkout-body-content bg-light">
-              <ul class="nav nav-tabs font-weight-bold checkout-steps text-uppercase border-0 d-none" id="" role="tablist">
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset active" id="step1-tab" data-toggle="tab" href="#step1" role="tab" aria-controls="step1" aria-selected="false"><span class="number-circle">1</span>Connexion </a>
-                  <!-- INSCRIPTION -->
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step2-tab" data-toggle="tab" href="#step2" role="tab" aria-controls="step2" aria-selected="false"><span class="number-circle">2</span> PARTICIPANT(s)</a>
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step3-tab" data-toggle="tab" href="#step3" role="tab" aria-controls="step3" aria-selected="false"><span class="number-circle">3</span> OPTIONS</a>
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step4-tab" data-toggle="tab" href="#step4" role="tab" aria-controls="step4" aria-selected="false"><span class="number-circle">4</span> ASSURANCE</a>
-                </li>
-                <li class="nav-item d-none" role="presentation">
-                  <a class="nav-link text-reset" id="step5-tab" data-toggle="tab" href="#step5" role="tab" aria-controls="step5" aria-selected="true"><span class="number-circle">5</span> PAIEMENT</a>
-                </li>
-                <li class="nav-item flex-grow-1" role="presentation">
-                  <a class="nav-link text-reset active" id="step6-tab" data-toggle="tab" href="#step6" role="tab" aria-controls="step6" aria-selected="true"><span class="number-circle">2</span> ENVOYER MA DEMANDE</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="">
-                <Step1 />
-                <Step2 />
-                <Step3 />
-                <Step4 />
-                <Step5 />
-                <Step6 />
-                <div class="text-right next-step-div pt-4" data-toggle="buttons" role="tablist">
-                  <button class="btn text-uppercase prev-step-btn" data-toggle="tab" role="tab" href="#step3">précédent</button>
-                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step4">etape suivante</button>
-                  <button class="btn text-uppercase prev-step-btn ml-4" data-toggle="tab" role="tab" href="#step5">précédent</button>
-                  <button class="btn text-uppercase next-step-btn ml-4" data-toggle="tab" role="tab" href="#step6">etape suivante</button>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="checkout-main-container" :style="[activeStep === 'validation' ? 'height: calc(100vh - 170px)' : '']">
+    <div class="top-infos-container">
+      <div class="top-info" type="button" @click="nextStep">Retour</div>
+      <div class="top-info">aaaaaaaa</div>
+      <div class="top-info">aaaaaaaa</div>
+      <div class="top-info">aaaaaaaa</div>
+    </div>
+    <div class="d-flex h-100 w-100">
+      <div class="col-xl-4 p-0 bg-image h-100 position-relative" v-if="activeStep !== 'validation'">
+        <img class="img-fluid checkout-info-img" fluid :src="course?.cover" />
+        <div class="d-flex align-items-center share-social-icons text-white">
+          <h6 class="font-weight-normal mr-3 mb-0">Partage à un pote!</h6>
+          <a href="#" class="rounded-circle d-inline-block">
+            <InlineSvg class="mr-2" :src="require('@/assets/svg/instagram-light.svg')" height="30" />
+          </a>
+          <a href="#" class="rounded-circle d-inline-block">
+            <InlineSvg class="mr-2" :src="require('@/assets/svg/facebook-light.svg')" height="30" />
+          </a>
         </div>
       </div>
-    </main>
+      <div class="checkout-body-content h-100" style="position: relative; overflow: auto" :class="[activeStep === 'validation' ? 'col-xl-12 p-0' : 'col-xl-8']">
+        <div
+          class="checkout-progress-bar"
+          style="position: sticky; top: 0; z-index: 15"
+          :class="[activeStep === 'booker' || activeStep === 'participants' || activeStep === 'insurance' || (activeStep === 'options' && $windowWidth <= 1366) ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']"
+          v-if="activeStep !== 'validation' && activeStep !== 'success'"
+        >
+          <div class="d-flex w-100 py-5">
+            <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
+            <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
+            <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
+            <div class="text-uppercase pl-4" style="color: #b4b4b487; font-weight: 600">Paiement</div>
+          </div>
+        </div>
+        <transition name="fade" mode="out-in" @before-leave="beforeLeave">
+          <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
+            <keep-alive>
+              <CheckoutWizardBooker @complete="bookerComplete = true" @incomplete="bookerComplete = false" @updated-booker="setBooker" v-if="activeStep === 'booker'" />
+              <CheckoutWizardParticipants @complete="participantsComplete = true" @incomplete="participantsComplete = false" @updated-participants="setParticipants" @clicked-my-infos="activeStep = 'booker'" v-else-if="activeStep === 'participants'" :booker="booker" />
+              <CheckoutWizardForm @complete="optionsComplete = true" @incomplete="optionsComplete = false" @updated-participants="setParticipants" @updated-booker="setBooker" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'options'" />
+              <CheckoutWizardForm2 @complete="insuranceComplete = true" @incomplete="insuranceComplete = false" @updated-participants="setParticipants" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'insurance'" />
+            </keep-alive>
+            <Step5 :course="course" :booker="booker" :extra-participants="extraParticipants" v-if="activeStep === 'validation'" />
+            <Step6 v-if="activeStep === 'success'" />
+            <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
+              <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
+              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">{{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}</button>
+              <!-- <button @click.prevent="nextStep" :class="{ disable: !stepIsComplete(activeStep) }" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
+            </div>
+          </div>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Step1 from './Step1.vue'
-import Step2 from './Step2.vue'
-import Step3 from './Step3.vue'
-import Step4 from './Step4.vue'
+// import Step1 from './Step1.vue'
+import CheckoutWizardBooker from './wizard/CheckoutWizardBooker.vue'
+import CheckoutWizardParticipants from './wizard/CheckoutWizardParticipants.vue'
+import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
+import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import Step5 from './Step5.vue'
 import Step6 from './Step6.vue'
 
 export default {
   name: 'CheckOutSections',
   components: {
-    Step1,
-    Step2,
-    Step3,
-    Step4,
+    // Step1,
+    CheckoutWizardBooker,
+    CheckoutWizardParticipants,
+    CheckoutWizardForm,
+    CheckoutWizardForm2,
     Step5,
     Step6
   },
+  props: ['course', 'session', 'participantsNb'],
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      transitionEntered: false,
+      steps: ['booker', 'participants', 'options', 'insurance', 'validation', 'success'],
+      bookerComplete: false,
+      participantsComplete: false,
+      optionsComplete: false,
+      insuranceComplete: false,
+      activeStep: '',
+      extraParticipants: [],
+      booker: {
+        infos: {
+          firstName: 'a',
+          lastName: 'a',
+          birthDate: 'a',
+          phone: 'a',
+          email: 'a',
+          gender: 'a',
+          country: 'a',
+          city: 'a',
+          street: 'a',
+          postalCode: 'a'
+        },
+        booking: {
+          room: [],
+          roomMate: 'a',
+          equipmentRental: true,
+          noExtraActivities: true,
+          extraActivities: [],
+          extraNotes: 'a',
+          insurance: 'a'
+        }
+      },
+      bookerInputsChanged: false,
+      updatedBooker: null,
+      updatedExtraParticipants: null
+    }
+  },
+  watch: {
+    course: {
+      immediate: true,
+      handler(val) {
+        this.activeStep = 'booker'
+      }
+    },
+    activeStep: {
+      immediate: true,
+      handler(val) {
+        this.$emit('changed-step', val)
+      }
+    }
+  },
+  computed: {
+    partipantsNb() {
+      return this.booker.length + this.extraParticipants.length
+    },
+    showMenu() {
+      return this.activeStep === 'options' && this.transitionEntered
+    }
+  },
+  methods: {
+    beforeLeave() {
+      console.log('AAAAAAAAAAA')
+      if (this.activeStep === 'options') this.transitionEntered = true
+    },
+    nextStep() {
+      // if (!this.stepIsComplete(this.activeStep)) return
+
+      let currIndex = this.steps.indexOf(this.activeStep)
+      this.activeStep = this.steps[currIndex + 1]
+    },
+    prevStep() {
+      let currIndex = this.steps.indexOf(this.activeStep)
+      this.activeStep = this.steps[currIndex - 1]
+    },
+    stepIsComplete(step) {
+      return this.$data[`${step}Complete`]
+    },
+    setBooker(val) {
+      this.booker = val
+
+      if (this.activeStep === 'booker') this.bookerInputsChanged = true
+    },
+    setParticipants(val) {
+      this.extraParticipants = val
+    },
+    submitBookingForm() {
+      const AUTH_TOKEN_KEY = 'authToken'
+      let token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.post(
+        '/reservations',
+        {
+          booker: this.booker,
+          extraParticipants: this.extraParticipants
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
     }
   },
   mounted() {
@@ -137,3 +215,59 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.tab-content,
+.checkout-progress-bar {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+.checkout-progress-bar {
+  height: 120px;
+}
+.checkout-progress-bar--bg-fade {
+  background: linear-gradient(180deg, rgb(255, 255, 255) 70%, rgba(255, 255, 255, 0) 100%);
+  /* box-shadow: 0px 20px 10px red, 0px 30px 20px red, 0px 76px 60px red; */
+  box-shadow: -10px -5px 5px white, 10px -5px 5px white;
+}
+.checkout-progress-bar--bg-white {
+  background-color: white;
+  outline: 5px solid white;
+}
+.next-btn {
+  background-color: white;
+  color: #292f33;
+  border: 1px solid #292f33;
+}
+.next-btn:hover {
+  background-color: #292f33;
+  color: white;
+}
+.next-btn.disable {
+  color: #ebebeb;
+  border: 1px solid #b4b4b4;
+}
+.next-btn.disable:hover {
+  background-color: white;
+  color: #ebebeb;
+}
+.top-infos-container {
+  display: flex;
+  width: max-content;
+  position: absolute;
+}
+.top-info {
+  font-weight: 500;
+  font-family: Oswald, sans-serif;
+  padding: 1rem 2rem;
+}
+.top-info:first-of-type {
+  background-color: #292f33;
+  color: white;
+}
+.top-info {
+  background-color: white;
+  color: #292f33;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+  <router-view :key="$route.fullPath" />
 </template>
 
 <script>
@@ -28,6 +28,102 @@ body.modal-open::after {
   /* text-align: center; */
   color: #2c3e50;
 }
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(41, 47, 51, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* VERTICAL SLIDE UP */
+.vertical-slide-up-enter-active,
+.vertical-slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+.vertical-slide-up-enter-from {
+  transform: translateY(20px);
+  opacity: 0;
+}
+.vertical-slide-up-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+/* VERTICAL SLIDE DOWN */
+.vertical-slide-down-enter-active,
+.vertical-slide-down-leave-active {
+  transition: all 0.3s ease;
+}
+.vertical-slide-down-enter-from {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+.vertical-slide-down-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* PARTICIPANT FADE */
+.participant-fade-enter-active {
+  transition: opacity 0.8s;
+}
+.participant-fade-leave-active {
+  transition: opacity 0.3s;
+}
+.participant-fade-enter-from,
+.participant-fade-leave-to {
+  opacity: 0;
+}
+
+/* FADE FAST */
+.fade-fast-enter-active,
+.fade-fast-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-fast-enter-from,
+.fade-fast-leave-to {
+  opacity: 0;
+}
+
+/* FADE SLOW */
+.fade-slow-leave-active,
+.fade-slow-enter-active {
+  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+.fade-slow-enter-from,
+.fade-slow-leave-to {
+  opacity: 0;
+}
+
+/* FADE PRODUCT HEADER */
+.fade-product-header-enter-active {
+  transition: opacity 0.3s ease 0.3s;
+}
+.fade-product-header-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-product-header-enter-from,
+.fade-product-header-leave-to {
+  opacity: 0;
+}
+
+/* FADE */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 #nav {
   padding: 30px;
 }
@@ -48,7 +144,7 @@ body.modal-open::after {
   box-shadow: 0px 0px 4px #292f331a !important;
 }
 .shadow--right {
-  box-shadow: 1px 1px 6px rgba(41, 47, 51, 0.04) !important;
+  box-shadow: 1px 3px 6px rgba(41, 47, 51, 0.04) !important;
 }
 .shadow--top {
   box-shadow: 0px -1px 3px rgba(41, 47, 51, 0.03) !important;
@@ -60,13 +156,13 @@ body.modal-open::after {
   background-color: #fff;
 }
 .bg-pink {
-  background-color: #d9345a;
+  background-color: #d82558;
 }
 .bg-grey {
   background-color: #292f33;
 }
 .text--pink {
-  color: #d9345a;
+  color: #d82558;
 }
 .text--grey {
   color: #292f33;
