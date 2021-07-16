@@ -111,8 +111,8 @@
                     <h6 class="amount-per mb-0 fg-3">
                       <strong>{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>/pers.
                     </h6>
-                    <!-- <button @click="clickedChoseBtn(session)" class="btn choose-btn ml-3">CHOISIR</button> -->
-                    <button @click="clickedChoseBtn(session)" class="btn choose-btn disable ml-3">OUPS !</button>
+                    <button @click="clickedChoseBtn(session)" class="btn choose-btn ml-3">CHOISIR</button>
+                    <!-- <button @click="clickedChoseBtn(session)" class="btn choose-btn disable ml-3">OUPS !</button> -->
                   </div>
                 </div>
               </li>
