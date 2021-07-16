@@ -1,11 +1,11 @@
 <template>
-  <div class="header" style="height: 70px">
+  <div class="header">
     <TheNavSticky />
   </div>
   <div class="product-infos__container">
     <div class="header__main-title d-flex align-items-center justify-content-center">
       <div class="product-header-infos__title d-flex align-items-center" style="z-index: 5">
-        <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 100 100">
+        <svg xmlns="http://www.w3.org/2000/svg" height="120" viewBox="0 0 100 100">
           <g id="Calque_2" data-name="Calque 2">
             <g id="Calque_1-2" data-name="Calque 1">
               <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
@@ -16,11 +16,11 @@
         </svg>
         <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
         <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-        <div style="margin-left: 1.5rem; position: relative; top: 4px">
+        <div style="margin-left: 2rem; position: relative; top: 4px">
           <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
           <h1 class="heading text-uppercase mb-2">
             <!-- <router-link :to="{ name: 'CheckOutHome', params: { productId: course.id } }"> -->
-            <span style="color: #fff; font-weight: bold">{{ course.sports ? course.sports[0].name : '' }}</span>
+            <span style="color: #fff; font-weight: bold; font-size: 3rem">{{ course.sports ? course.sports[0].name : '' }}</span>
             <!-- </router-link> -->
           </h1>
           <!-- <h5 v-if="!course.multisport" class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>{{ course?.spot?.name }}</h5>
@@ -36,46 +36,56 @@
           <Tag :text="`${course.sessions?.length} départs`" color="white" style="width: min-content" />
         </div>
         <div class="block__item">
-          <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/globe.svg`)" />
-          <span class="block__text-content">
-            <div class="block__text-content__title">Pays</div>
-            <div>{{ course.country?.name }}</div>
-          </span>
+          <div class="block__item__content">
+            <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/globe.svg`)" height="28" />
+            <span class="block__text-content">
+              <div class="block__text-content__title">Pays</div>
+              <div>{{ course.country?.name }}</div>
+            </span>
+          </div>
         </div>
         <div class="block__item">
-          <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/spot.svg`)" />
-          <span class="block__text-content">
-            <div class="block__text-content__title">Spot</div>
-            <div>{{ course.spot?.name }}</div>
-          </span>
+          <div class="block__item__content">
+            <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/spot.svg`)" height="28" />
+            <span class="block__text-content">
+              <div class="block__text-content__title">Spot</div>
+              <div>{{ course.spot?.name }}</div>
+            </span>
+          </div>
         </div>
       </div>
       <div class="block d-flex align-items-center text-uppercase justify-content-between">
         <div class="block__item">
-          <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/timer.svg`)" />
-          <span class="block__text-content">
-            <div class="block__text-content__title">Durée</div>
-            <div>{{ course.duration?.name }}</div>
-          </span>
+          <div class="block__item__content--first">
+            <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/timer.svg`)" height="28" />
+            <span class="block__text-content">
+              <div class="block__text-content__title">Durée</div>
+              <div>{{ course.duration?.name }}</div>
+            </span>
+          </div>
         </div>
         <div class="block__item">
-          <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/intensity-2-dark.svg`)" height="20" />
-          <span class="block__text-content">
-            <div class="block__text-content__title">Niveau</div>
-            <div>{{ course.level?.name }}</div>
-          </span>
+          <div class="block__item__content">
+            <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/intensity-2-dark.svg`)" height="28" />
+            <span class="block__text-content">
+              <div class="block__text-content__title">Niveau</div>
+              <div>{{ course.level?.name }}</div>
+            </span>
+          </div>
         </div>
         <div class="block__item">
-          <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/people.svg`)" height="20" />
-          <span class="block__text-content">
-            <div class="block__text-content__title">Groupe</div>
-            <div>{{ course.max }}</div>
-          </span>
+          <div class="block__item__content">
+            <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/people.svg`)" height="28" />
+            <span class="block__text-content">
+              <div class="block__text-content__title">Groupe</div>
+              <div>{{ course.max }}</div>
+            </span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="scrolldown-icon" @mouseenter="animateIcon('big')" @mouseleave="animateIcon('small')">
-      <svg id="PICTO_EXPLORE" class="mr-3" xmlns="http://www.w3.org/2000/svg" width="10.61" height="24.495" viewBox="0 0 10.61 24.495">
+    <div class="scrolldown-icon">
+      <svg id="PICTO_EXPLORE" class="mr-3" xmlns="http://www.w3.org/2000/svg" width="13" height="30" viewBox="0 0 10.61 24.495">
         <path
           class="scrolldown-icon__mouse"
           id="Tracé_2498"
@@ -123,8 +133,8 @@ export default {
   name: 'ProductHeaderInfos',
   props: ['course'],
   components: {
-    TheNavSticky
-    // Tag
+    TheNavSticky,
+    Tag
   },
   data() {
     return {
@@ -163,21 +173,24 @@ export default {
   margin-top: auto;
 }
 .scrolldown-icon {
+  filter: opacity(0.5);
   align-self: center;
   color: #fff;
   margin-top: auto;
   margin-bottom: auto;
   text-transform: uppercase;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 200;
   font-family: Oswald, sans-serif;
 }
 .product-infos__container {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding-bottom: 10vh;
+  height: calc(100vh - 70px - 10vh);
+  /* padding-bottom: 10vh */
   justify-content: center;
+  position: relative;
+  top: 70px;
 }
 
 /* Inline infos block */
@@ -187,12 +200,19 @@ export default {
 .block__item:nth-child(2) {
   padding: 0;
   text-align: center;
-  width: 34%;
-  border-left: 1px solid rgba(250, 250, 250, 0.35);
-  border-right: 1px solid rgba(250, 250, 250, 0.35);
+  width: 50%;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
-.block__item:last-child {
-  text-align: right;
+.block__item:first-child {
+  text-align: left;
+}
+.block__item__content {
+  width: max-content;
+  margin-left: 25%;
+}
+.block__text-content div:last-child {
+  font-weight: 500;
 }
 .half-border {
   width: 50%;
@@ -200,25 +220,25 @@ export default {
   background: rgba(250, 250, 250, 0.35);
 }
 .block {
-  width: 55%;
+  width: 58%;
   height: max-content;
-  padding: 1rem 0;
+  padding: 2.5rem 0;
 }
 .block:first-of-type {
-  border-bottom: 1px solid rgba(250, 250, 250, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 .block__text-content {
   margin-left: 0.6rem;
   display: inline-block;
   vertical-align: middle;
-  font-size: 0.75rem;
+  font-size: 0.8175rem;
   letter-spacing: 0.13rem;
   color: #fff;
   text-align: left;
 }
 .block__text-content__title {
   color: rgba(250, 250, 250, 0.6);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
 }
 .block__item__svg {
   fill: #fff;

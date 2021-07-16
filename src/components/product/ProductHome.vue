@@ -1,7 +1,7 @@
 <template>
   <div class="main-product-content">
     <!-- <Header v-if="loaded" @nav-is-active="$refs.productContent.navIsActive = true" :course="course" /> -->
-    <transition name="fade" @after-enter="afterEnter" @before-enter="beforeEnter">
+    <transition name="fade-product-header" @after-enter="afterEnter" @before-enter="beforeEnter">
       <ProductHeader ref="header" v-if="header" :course="course" @clicked-tab="handleClickedTab" />
       <div v-else>
         <!-- <ProductNav /> -->
@@ -20,6 +20,7 @@ import ProductHeader from '@/components/header/ProductHeader.vue'
 import ProductContent from '@/components/product/ProductContent.vue'
 import ProductFooter from '@/components/product/ProductFooter.vue'
 import ProductNav from '@/components/product/ProductNav.vue'
+import gsap from 'gsap'
 // import ProductSection from '@/components/product/ProductSection.vue'
 // import ProductModal from '@/components/product/ProductModal.vue'
 
@@ -41,7 +42,8 @@ export default {
       showSessions: false,
       course: {},
       header: true,
-      showLoginModal: false
+      showLoginModal: false,
+      initialNavHeight: 100
     }
   },
   methods: {
@@ -111,9 +113,18 @@ export default {
     },
     listenScrollUp() {
       let that = this
+
       document.querySelector('.main-product-content').addEventListener('wheel', (e) => {
         if (window.scrollY === 0 && e.deltaY < 0) {
-          that.header = true
+          gsap.to('.product-nav-tabs .nav', { height: '-=35px', duration: '0.3' })
+          gsap.to('.product-nav-tabs .nav .nav-link', { autoAlpha: '-=0.5', duration: '0.6' })
+
+          if (document.querySelector('.product-nav-tabs .nav').clientHeight === 0) {
+            this.header = true
+          }
+        } else {
+          gsap.to('.product-nav-tabs .nav', { height: that.initialNavHeight + 'px', duration: '0.2' })
+          gsap.to('.product-nav-tabs .nav .nav-link', { autoAlpha: '1', duration: '0.2' })
         }
       })
     },
@@ -154,6 +165,8 @@ export default {
     document.body.style.position = 'fixed'
     document.body.style.overflow = 'hidden'
     this.listenScrollDown()
+
+    // get initial height of nav
   }
 }
 </script>

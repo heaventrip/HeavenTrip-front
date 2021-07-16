@@ -234,9 +234,9 @@
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
             <div class="like-div white">
-              <h5 class="content-head text-nowrap pr-3" style="font-weight: 900">LES + DU SPOT :</h5>
               <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
-                <li v-for="spotAdvantage in course?.spot?.spotAdvantages" :key="spotAdvantage">
+                <h5 class="content-head text-nowrap pr-3 fg-3" style="font-weight: 900">LES + DU SPOT :</h5>
+                <li class="text-right fg-1" v-for="spotAdvantage in course?.spot?.spotAdvantages" :key="spotAdvantage">
                   <a class="text-reset p-0" @click.prevent style="cursor: default" href="#"><i class="fas fa-plus mr-2"></i>{{ spotAdvantage.name }}</a>
                 </li>
               </ul>

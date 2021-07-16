@@ -30,7 +30,8 @@ export default {
       customColors: {
         'light-white': '#fcfcfc',
         violetfullscreen: '#705875',
-        grey: '#292f33'
+        grey: '#292f33',
+        violet: '#5a3a5f'
       }
     }
   },

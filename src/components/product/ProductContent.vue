@@ -13,11 +13,11 @@
     <TheNavSticky />
   </div>
   <div class="product-content d-flex" :class="{ blur: showedSessions }">
-    <div class="whitespace-big-screen"></div>
+    <!-- <div class="whitespace-big-screen"></div> -->
     <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
       <div class="product-nav-tabs">
         <ProductNav :course="course" />
-        <ul style="height: 100px; background-color: white" class="nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
+        <ul style="height: 100px; background-color: white; font-weight: 400; padding: 0 7vw" class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation" type="button">
             <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
           </li>
@@ -73,14 +73,14 @@
       <div class="aside-slider">
         <transition name="fade" @after-leave="afterLeave">
           <swiper v-if="asideSlider" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
-            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" width="100%" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" width="100%" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
           </swiper>
         </transition>
-        <div style="padding: 1rem; padding-left: 1rem; padding-top: 2rem">
-          <div style="padding-left: 2rem">
+        <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
+          <div class="messages-container" style="">
             <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
             <ul class="list-unstyled mb-0 discuss-list mt-3">
               <li v-for="msg in messages" :key="msg">
@@ -100,7 +100,7 @@
               </li>
             </ul>
           </div>
-          <form @submit.prevent="submitMessageForm" class="d-flex align-items-center" style="background-color: #fcfcfc">
+          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #fcfcfc">
             <label class="message-input-label">
               <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="1"> </textarea>
             </label>
@@ -299,8 +299,15 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  height: 70px;
+.messages-container {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1rem;
+}
+@media only screen and (max-width: 1440px) {
+  .messages-container {
+    padding: 0 1rem;
+  }
 }
 .message-input-label {
   position: relative;
@@ -333,19 +340,31 @@ export default {
   position: relative;
   padding: 0rem 0rem 3.5rem 0rem;
   min-height: 100vh;
+  width: 57vw;
+  margin-left: auto;
+  margin-right: auto;
 }
-.gallery-comment-block {
+/* .gallery-comment-block {
   padding-left: 2rem;
-}
+} */
 .aside-slider {
-  top: 70px;
+  top: 71px;
   width: inherit;
   position: fixed;
   background-color: white;
   box-shadow: 0 0 3px #ebebeb;
+  height: calc(100vh - 71px - 100px - 40px); /* substract top nav and booking footer */
+}
+@media only screen and (min-width: 1441px) {
+  .aside-slider {
+    height: calc(100vh - 71px - 120px - 40px);
+  }
 }
 .aside-slider .swiper-slide__img {
   height: 25vh;
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }
 .reply-container {
   font-size: 0.8rem;
@@ -366,11 +385,7 @@ export default {
 .swiper-button-next {
   color: #292f33;
 }
-.swiper-slide__img {
-  display: block;
-  width: 100%;
-  object-fit: cover;
-}
+
 .nav-link {
   padding: 0.5rem !important;
 }
@@ -402,66 +417,42 @@ export default {
   transition: opacity 0.8s ease 0.4s;
   opacity: 1;
 }
+.product-nav-tabs {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  left: 0;
+  width: 70vw;
+  z-index: 2;
+  box-shadow: 0px 3px 6px #00000005;
+}
+.gallery-comment-block {
+  width: 30vw;
+}
+.blur {
+  filter: blur(3px) opacity(0.2);
+  top: -70px;
+}
 @media only screen and (max-width: 2000px) {
-  .whitespace-big-screen {
+  /* .whitespace-big-screen {
     display: none;
-  }
-  .product-nav-tabs {
-    position: fixed;
-    top: 70px;
-    right: 0;
-    left: 0;
-    width: calc(65vw + 2rem);
-    z-index: 2;
-  }
+  } */
   .nav--big-screen {
     display: none;
   }
-  .product-content {
-    justify-content: space-between;
-  }
-  .gallery-comment-block {
-    width: 35vw;
-    margin-left: auto;
-  }
-  .main-tab {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
-@media only screen and (min-width: 2000px) {
-  .whitespace-big-screen {
-    height: 100px;
+@media only screen and (min-width: 2001px) {
+  /* .whitespace-big-screen {
+    height: 170px;
     width: 100vw;
     position: fixed;
     top: 0;
     left: 0;
     background: white;
     z-index: 1;
-    box-shadow: 0px 3px 6px #00000005;
-  }
-  .product-nav-tabs {
-    position: relative;
-    width: 120%;
-    margin-left: -10%;
-  }
-  .product-content {
-    justify-content: center;
-  }
-  .gallery-comment-block {
-    max-width: 900px;
-    margin-left: 4rem;
-  }
-  .main-tab {
-    margin-right: 4rem;
-  }
+  } */
   .aside-slider {
-    z-index: 5;
+    z-index: 2;
   }
-}
-.blur {
-  filter: blur(3px) opacity(0.2);
-  top: -70px;
 }
 </style>

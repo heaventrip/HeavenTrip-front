@@ -2742,6 +2742,11 @@ button.Zebra_DatePicker_Icon {
   overflow: hidden;
   /* top: 46px; */
 }
+@media only screen and (min-width: 2000px) {
+  .main-product-content .narrow-header-pills {
+    box-shadow: none;
+  }
+}
 .main-product-content .narrow-header-pills.nav-pills .nav-link {
   border-radius: 0.25rem;
   padding: 30px 0 26px;
@@ -2763,7 +2768,7 @@ button.Zebra_DatePicker_Icon {
   height: 1px;
   width: 100%;
   left: 50%;
-  bottom: 0;
+  bottom: -1.95rem;
   transform: translateX(-50%);
 }
 .main-product-content .tab-small-head {

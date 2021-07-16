@@ -41,6 +41,7 @@ body.modal-open::after {
   z-index: 10;
 }
 
+/* VERTICAL SLIDE UP */
 .vertical-slide-up-enter-active,
 .vertical-slide-up-leave-active {
   transition: all 0.3s ease;
@@ -54,6 +55,7 @@ body.modal-open::after {
   opacity: 0;
 }
 
+/* VERTICAL SLIDE DOWN */
 .vertical-slide-down-enter-active,
 .vertical-slide-down-leave-active {
   transition: all 0.3s ease;
@@ -67,6 +69,7 @@ body.modal-open::after {
   opacity: 0;
 }
 
+/* PARTICIPANT FADE */
 .participant-fade-enter-active {
   transition: opacity 0.8s;
 }
@@ -78,6 +81,7 @@ body.modal-open::after {
   opacity: 0;
 }
 
+/* FADE FAST */
 .fade-fast-enter-active,
 .fade-fast-leave-active {
   transition: opacity 0.2s;
@@ -87,17 +91,30 @@ body.modal-open::after {
   opacity: 0;
 }
 
+/* FADE SLOW */
 .fade-slow-leave-active,
 .fade-slow-enter-active {
   transition: opacity 0.5s ease-in-out;
   transition: opacity 0.2s ease-in-out;
 }
-
 .fade-slow-enter-from,
 .fade-slow-leave-to {
   opacity: 0;
 }
 
+/* FADE PRODUCT HEADER */
+.fade-product-header-enter-active {
+  transition: opacity 0.3s ease 0.3s;
+}
+.fade-product-header-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-product-header-enter-from,
+.fade-product-header-leave-to {
+  opacity: 0;
+}
+
+/* FADE */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
@@ -106,6 +123,7 @@ body.modal-open::after {
 .fade-leave-to {
   opacity: 0;
 }
+
 #nav {
   padding: 30px;
 }
