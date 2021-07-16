@@ -8,7 +8,7 @@
     </div>
     <div class="d-flex h-100 w-100">
       <div class="col-xl-4 p-0 bg-image h-100 position-relative" v-if="activeStep !== 'validation'">
-        <img class="img-fluid checkout-info-img" fluid :src="require('@/assets/images/checkout_bg.jpg')" />
+        <img class="img-fluid checkout-info-img" fluid :src="course?.cover" />
         <div class="d-flex align-items-center share-social-icons text-white">
           <h6 class="font-weight-normal mr-3 mb-0">Partage à un pote!</h6>
           <a href="#" class="rounded-circle d-inline-block">
