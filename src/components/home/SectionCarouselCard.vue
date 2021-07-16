@@ -10,7 +10,7 @@
       <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
       <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->
       <a href="/product">
-        <img class="card__bg-image img-responsive img-fill" :src="require('@/assets/images/s1.png')" alt="" />
+        <img class="card__bg-image img-responsive img-fill" :src="course.cover" alt="" />
       </a>
       <div class="card__footer item-details" style="width: 100%">
         <div class="card__footer__static-infos content d-flex justify-content-between">

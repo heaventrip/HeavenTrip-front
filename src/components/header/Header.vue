@@ -24,7 +24,7 @@
         'header-bg-container--product': currentRoute('ProductHome')
       }"
     >
-      <img src="@/assets/images/combined.png" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
+      <img src="https://images.ctfassets.net/8dtxc3nuj0tn/5sK3UinfwxgnjROJRYOpZR/7d8f941f09662bc6cfa8bcaa5121f4ea/kitesurf-elgouna-cover" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <ConnectionButtons />
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->

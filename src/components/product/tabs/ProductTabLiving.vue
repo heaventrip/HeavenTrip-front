@@ -108,10 +108,10 @@
     </div>
   </div>
   <swiper :slidesPerView="3" :spaceBetween="1" :loop="true" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }">
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7KLjC3NaiA4RjXxEoifCQZ/2de2549c4677ac776dfd21d9a8a0d49f/kitesurf-elgouna-cook2.jpg" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7jcPbN1eXNsFxWfEkwKlUP/5f6367376f5b06a26473e5822ea4ba87/kitesurf-elgouna-groupe2" /></swiper-slide>
   </swiper>
   <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   <div class="linear-block mb-0 p-0" style="background-color: rgb(252, 252, 252); box-shadow: none">

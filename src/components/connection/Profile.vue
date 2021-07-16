@@ -160,6 +160,7 @@ export default {
     cropUploadSuccess(jsonData, field) {
       console.log('-------- upload success --------')
       localStorage.setItem('user.avatarId', jsonData.upload.public_id)
+      this.$parent.$forceUpdate()
     },
     /**
      * upload fail

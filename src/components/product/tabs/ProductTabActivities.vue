@@ -67,15 +67,20 @@
         <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
         <transition name="fade-fast" mode="out-in">
           <div :key="activeSportTab">
-            <p class="content">{{ activeSportTab?.description || course.sports[0].description }}</p>
-            <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+            <p class="content" style="font-family: Muli; line-height: 1.8; font-weight: 400; font-size: 0.875rem">
+              Une journée off sera proposée en fonction des conditions climatiques pour s'octroyer un moment de détente, comme partager avec le groupe une journée de plongée en mer rouge à bord d’un bateau privé. Notre team sera présente toute la semaine pour proposer un accompagnement sur-mesure et
+              répondre à vos envies. Fun, rencontres et progression assurés !!
+            </p>
+            <!-- <p class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">{{ activeSportTab?.description || course.sports[0].description }}</p> -->
+
+            <!-- <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
               <li v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo" style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   {{ sportInfo.title }}
                   <strong class="text-dark ml-2">{{ sportInfo.description }}</strong></a
                 >
               </li>
-            </ul>
+            </ul> -->
           </div>
         </transition>
       </div>
