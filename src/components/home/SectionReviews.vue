@@ -3,21 +3,21 @@
     <InlineSvg class="reviews__quote reviews__quote--right" :src="require('@/assets/svg/right-quote.svg')" opacity="0.1" />
     <div class="reviews__infos d-flex flex-column align-items-end ml-5 mr-auto">
       <span>Pour vous</span>
-      <div class="text-uppercase" style="font-size: 1.5rem; margin-bottom: 1rem">
+      <div class="text-uppercase" style="font-size: 1.5rem; margin-bottom: 1.5rem">
         <span>ils&nbsp;</span>
         <span class="text--bold">témoignent</span>
       </div>
       <div class="d-flex align-items-center">
-        <div v-for="(avatarId, index) in avatarKeys" :key="avatarId" :style="[index === 0 ? '' : 'margin-left: 15px']">
+        <div v-for="(avatarId, index) in avatarKeys" :key="avatarId" :style="[index === 0 ? '' : 'margin-left: 25px']">
           <img @mouseover="setReviewActive(avatarId)" class="sm-avatar rounded-circle" height="50" width="50" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" type="button" :class="[activeAvatar === avatarId ? 'avatar-opacity' : '']" />
         </div>
       </div>
     </div>
     <div class="reviews__user d-flex flex-column ml-auto mr-4">
       <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
-      <img height="220" width="220" :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`" class="reviews__user-avatar rounded-circle" rel="preload" />
+      <img height="240" width="240" :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`" class="reviews__user-avatar rounded-circle" rel="preload" />
     </div>
-    <div class="reviews__comment fs-1 pl-3 mr-auto">
+    <div class="reviews__comment fs-1 pl-3 mr-5">
       <h6 class="text-uppercase mb-3">
         <span class="d-inline-block" style="font-weight: 800">{{ activeReview?.session?.course.typeOfCourse }} {{ activeReview?.session.course.sports }}</span>
         <span class="review-comment__date d-inline-block text-nowrap" style="font-size: 0.8rem; vertical-align: baseline">
@@ -88,11 +88,12 @@ export default {
   position: absolute;
 }
 .reviews__quote--left {
-  transform: translate(-150%, 200%);
+  transform: translate(-110%, 0%);
+  height: 1.4rem;
 }
 .reviews__quote--right {
   opacity: 0.03;
-  height: 80%;
+  height: 70%;
   top: 0px;
   right: -12vw; /* compensates block margin */
 }
@@ -108,7 +109,8 @@ export default {
   margin-left: 12rem;
 }
 .reviews__comment {
-  width: 40%;
+  width: 38%;
+  font-size: 0.875rem;
 }
 .review-comment__date {
   text-transform: uppercase;
@@ -132,6 +134,7 @@ export default {
   position: relative;
   color: #292f33;
   margin: 0 10vw;
-  padding: 8rem 0;
+  padding: 6rem 0;
+  height: 600px;
 }
 </style>

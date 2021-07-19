@@ -24,7 +24,7 @@
         'header-bg-container--product': currentRoute('ProductHome')
       }"
     >
-      <img src="https://images.ctfassets.net/8dtxc3nuj0tn/5sK3UinfwxgnjROJRYOpZR/7d8f941f09662bc6cfa8bcaa5121f4ea/kitesurf-elgouna-cover" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
+      <img src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <ConnectionButtons />
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
@@ -215,8 +215,8 @@ export default {
 .header-filter--home::after {
   content: '';
   position: absolute;
-  background: linear-gradient(to right, #5a3a5f 0%, #5a3a5f62 100%);
-  opacity: 0.6;
+  background: linear-gradient(30deg, rgba(93, 52, 98, 0.98) 0%, rgba(93, 52, 98, 0.82) 40%);
+  opacity: 1;
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
@@ -226,7 +226,7 @@ export default {
   content: '';
   position: absolute;
   background-color: #292f33;
-  opacity: 0.9;
+  opacity: 0.96;
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
@@ -236,7 +236,7 @@ export default {
   content: '';
   position: absolute;
   background-color: #fff;
-  opacity: 0.8;
+  opacity: 0.96;
   width: 100%;
   height: 94vh; /* corresponds height of image */
   z-index: -1;
@@ -308,6 +308,8 @@ export default {
 }
 .header-bg-image {
   z-index: -1;
+  filter: saturate(170%);
+  filter: contrast(140%);
   object-fit: cover;
   height: 105%;
   width: 100%;

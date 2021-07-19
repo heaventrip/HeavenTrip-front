@@ -2,13 +2,24 @@
   <section class="carousel-section">
     <div class="container">
       <div class="search row">
-        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 35px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.15); background-color: rgba(0, 0, 0, 0.15)">
+        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 42px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09)">
           <div class="bg-white d-flex centered-div">
-            <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.4rem 2rem">
+            <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.6rem 2rem">
               <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
               <input v-model="freeSearch" class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>
             <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2">
+              <li class="activity-filter">
+                <div class="position-relative multi-select-filter">
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
+                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
+                    <span class="search-bar__fillter__name">Activités</span>
+                  </div>
+                  <Multiselect class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" @close="setBgWhite('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                    <template v-slot:clear><div></div></template>
+                  </Multiselect>
+                </div>
+              </li>
               <li class="country-filter">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
@@ -32,22 +43,11 @@
                   </Multiselect>
                 </div>
               </li>
-              <li class="activity-filter">
-                <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
-                    <span class="search-bar__fillter__name">Activités</span>
-                  </div>
-                  <Multiselect class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" @close="setBgWhite('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
-                    <template v-slot:clear><div></div></template>
-                  </Multiselect>
-                </div>
-              </li>
             </ul>
             <button class="btn btn-light bg-white text-uppercase search-btn filter-btn px-3 px-sm-4 rounded-right ml-auto border-left d-inline-block d-lg-none">
               <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
             </button>
-            <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-4 rounded-right border-0">
+            <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-5 rounded-right border-0">
               <span class="d-none d-lg-inline-block">rechercher</span><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
             </button>
           </div>
@@ -113,7 +113,7 @@
       </div>
       <div class="d-flex align-items-center mt-4">
         <div class="slider-buttons col-2 text-center">
-          <div @click="slideLeft" type="button" style="transform: translateY(-60%)">
+          <div @click="slideLeft" type="button" style="transform: translateY(-220%); text-align: left; margin-left: 3vw">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
@@ -124,7 +124,7 @@
               </g>
             </svg>
           </div>
-          <div @click="slideRight" type="button" style="transform: translateY(-40%)">
+          <div @click="slideRight" type="button" style="transform: translateY(-170%); text-align: left; margin-left: 3vw">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
@@ -415,7 +415,7 @@ export default {
     this.$nextTick(() => {
       this.cardsArr = gsap.utils.toArray('.card-block')
       gsap.set('.card-block', {
-        x: (i) => i * 600 + this.currentViewportWidth * 0.15 // left offset of 10vw
+        x: (i) => i * 510 + this.currentViewportWidth * 0.09 // left offset of 10vw
       })
     })
 
@@ -428,6 +428,7 @@ export default {
 .search-bar__fillter__name {
   margin-left: 1rem;
   vertical-align: middle;
+  font-size: 0.97rem;
 }
 .centered-div {
   box-shadow: none;
@@ -438,10 +439,10 @@ export default {
   z-index: 2;
 }
 .cards-slider {
-  padding-top: 1rem;
+  padding-top: 2rem;
   position: relative;
-  margin-bottom: 3rem;
-  min-height: 400px;
+  margin-bottom: 6rem;
+  min-height: 420px;
 }
 /* .customers-testimonials .item-details .content.hover::after {
   content: none !important;

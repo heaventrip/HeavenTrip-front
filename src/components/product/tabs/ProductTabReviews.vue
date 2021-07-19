@@ -29,7 +29,7 @@
   </div>
   <div v-for="review in reviews" :key="review" class="linear-block my-2">
     <div class="card-body">
-      <div class="review__block d-flex align-items-center">
+      <div class="review__block d-flex align-items-top">
         <div class="review__block-left d-flex flex-column align-items-center mr-5">
           <img class="review__block-left__avatar" :src="require('@/assets/images/ui_faces/1.jpg')" height="100" />
           <div class="review__block-left__date">{{ new Date(review.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</div>
@@ -99,14 +99,16 @@ export default {
   text-transform: uppercase;
 }
 .review__block-left__avatar {
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.6rem;
   object-fit: cover;
   border-radius: 50%;
+  outline: solid rgba(0, 0, 0, 0.1) 2px;
 }
 .review__block-left__date {
   font-family: Oswald, sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03rem;
 }
 .review__block__stars {
   margin-right: 1.5rem;

@@ -4,19 +4,19 @@
       <div>
         <div style="width: 115%">
           <div class="top-block d-flex align-items-center" style="width: 100%">
-            <svg xmlns="http://www.w3.org/2000/svg" height="180" viewBox="0 0 100 100">
+            <svg xmlns="http://www.w3.org/2000/svg" height="170" viewBox="0 0 100 100">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
                   <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
                   <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
                 </g>
               </g>
-              <InlineSvg v-if="featuredCourse.sports && featuredCourse.sports[0].picto !== null" :src="require(`@/assets/svg/${featuredCourse.sports[0].picto}.svg`)" viewBox="-12 -14 50 50" fill="white" />
+              <InlineSvg v-if="featuredCourse.sports && featuredCourse.sports[0].picto !== null" :src="require(`@/assets/svg/${featuredCourse.sports[0].picto}.svg`)" height="80" viewBox="-12 -20 50 50" fill="white" />
             </svg>
             <!-- <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="top-block__svg d-inline-block" style="max-width: 9rem" /> -->
             <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
             <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-            <div style="width: 115%; margin-left: 2.5rem; position: relative; top: 4px; padding: 2rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
+            <div style="width: 90%; margin-left: 2.5rem; position: relative; top: 1px; padding: 1.4rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
               <h1 class="headsport heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1>
               <h5 class="header-infos__sub-title d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
             </div>
@@ -45,11 +45,11 @@
         </div>
         <div class="col-8 bg block--white">
           <div class="block__content">
-            <div class="px-2">
+            <div class="px-0">
               <span class="euro">{{ featuredCourse?.price }}&thinsp;&euro;</span>
               <span class="euro-pers">/pers.</span>
               <br />
-              <span class="text--smaller">Tout inclus (sans transports)</span>
+              <span class="text--smaller">Prix du stage hors options</span>
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default {
 }
 .headsport {
   font-weight: 500 !important;
-  font-size: 3.5rem !important;
+  font-size: 3rem !important;
   letter-spacing: 3px !important;
 }
 .top-block__svg {
@@ -219,7 +219,7 @@ export default {
   margin-right: 10px;
 }
 .top-block {
-  margin-bottom: 1.8rem;
+  margin-bottom: 0.8rem;
 }
 .list-info {
   border-top: 1px solid rgba(250, 250, 250, 0.35);

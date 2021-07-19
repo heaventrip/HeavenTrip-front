@@ -254,7 +254,7 @@
       <button
         @click="$router.push({ name: 'CheckOutHome', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })"
         class="btn border-0 rounded-0 reserve-btn"
-        :style="{ fontSize: availSessions.length ? '1.25rem' : '1rem' }"
+        :style="{ fontSize: availSessions.length ? '1.4rem' : '1rem' }"
         :class="[{ disable: !choseBtn && availSessions.length }, { 'px-5': !availSessions.length }]"
       >
         {{ availSessions.length ? 'Réserver' : 'Créer une session' }}

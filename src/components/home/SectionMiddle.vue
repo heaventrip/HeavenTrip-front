@@ -17,7 +17,7 @@
                   <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ highlightedCourse?.spot.name }}</span>
                 </div>
                 <div class="pad__content__sports d-flex align-items-center justify-content-center tooltip-div mt-4">
-                  <InlineSvg v-for="includedCourse in highlightedCourse?.alternatives.filter((el) => el.isIncluded)" :key="includedCourse" class="mr-4" :src="require(`@/assets/svg/${includedCourse?.picto || 'surf'}.svg`)" height="22" />
+                  <InlineSvg v-for="includedCourse in highlightedCourse?.alternatives.filter((el) => el.isIncluded)" :key="includedCourse" class="mr-4" :src="require(`@/assets/svg/${includedCourse?.picto || 'surf'}.svg`)" height="28" />
                   <span class="ml-auto euro"
                     ><strong>{{ highlightedCourse?.price }}&euro;</strong>/pers.
                   </span>
@@ -114,7 +114,7 @@ export default {
   font-size: 1.75rem;
 }
 .pad__content__title {
-  margin-bottom: 2.4rem;
+  margin-bottom: 2rem;
 }
 .pad__content__title__spot {
   color: #793f4e !important;
@@ -127,7 +127,7 @@ export default {
 .pad-block {
   margin-left: auto;
   min-width: 500px;
-  margin-right: 20%;
+  margin-right: 10%;
 }
 .pad__header {
   padding: 1.2rem 2rem;
@@ -196,6 +196,6 @@ export default {
 
 .middle-section {
   background: url('../../assets/images/asset-1.png') no-repeat center center / cover;
-  height: 100vh;
+  height: 60vh;
 }
 </style>

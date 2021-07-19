@@ -63,7 +63,7 @@ export default {
 .header-product__infos:after {
   content: '';
   position: absolute;
-  background-color: #5a3a5fde;
+  background-color: rgba(93, 52, 98, 0.93);
   width: 100%;
   height: 100%;
   top: 0;

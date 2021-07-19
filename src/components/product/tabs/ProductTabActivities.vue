@@ -42,10 +42,10 @@
     </div>
     <div class="d-flex flex-column" style="margin-left: 1px">
       <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #ebebeb">
-        <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/bowl2.svg')" :fill="[tab === 1 ? '#fff' : '#292f33']" />
+        <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/bowl2.svg')" :fill="[tab === 1 ? '#fff' : '#5d3462']" />
       </div>
       <div @mouseover="tab = 2" type="button" :class="[tab === 2 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px 1px 2px #ebebeb">
-        <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/kitchenhat.svg')" :fill="[tab === 2 ? '#fff' : '#292f33']" />
+        <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/kitchenhat.svg')" :fill="[tab === 2 ? '#fff' : '#5d3462']" />
       </div>
     </div>
   </div>
@@ -196,7 +196,7 @@
     </div>
     <div class="card-body">
       <div class="d-flex w-100">
-        <div v-for="includedCourse in includedCourses.splice(0, 3)" :key="includedCourse" class="included-activity-card" style="min-width: 230px">
+        <div v-for="includedCourse in includedCourses.splice(0, 3)" :key="includedCourse" class="included-activity-card" style="min-width: 240px">
           <div class="box bg-white my-0" style="padding: 2rem">
             <div class="head text-uppercase mb-0 d-inline-block text-danger" style="font-size: 1rem; font-weight: 900">
               <InlineSvg v-if="includedCourse.picto" fill="#d82558" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
@@ -339,11 +339,11 @@ export default {
 <style scoped>
 .included-activity-card {
   min-width: 230px;
-  margin-right: 5px;
+  margin-right: 3px;
 }
 @media only screen and (min-width: 1441px) {
   .included-activity-card {
-    margin-right: 2rem;
+    margin-right: 1.5rem;
   }
 }
 .sport-tab--active {
@@ -363,11 +363,11 @@ export default {
 }
 .guide-word__image {
   display: inline-block;
-  width: 28%;
+  width: 35%;
 }
 .guide-word__text {
   display: inline-block;
-  background-color: #292f33;
+  background-color: #5d3462;
   text-align: left;
   padding: 2.5rem 3rem;
   width: 72%;

@@ -139,19 +139,21 @@
   padding-right: 9px;
 }
 .multiselect-tag {
+  transform: translateY(3px);
   background: #d82558;
   color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0 0.6rem 0 1rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05rem;
+  font-weight: 300;
+  padding: 0 0.4rem 0 0.8rem;
   /* border-radius: 3px; */
-  margin-right: 5px;
+  margin-right: 1px;
   /* margin-bottom: 5px; */
   display: flex;
   align-items: center;
   cursor: text;
   white-space: nowrap;
-  height: 40px;
+  height: 38px;
 }
 .multiselect-tag i {
   cursor: pointer;
@@ -160,8 +162,8 @@
   content: '×';
   color: #fff;
   /* color: #266d4d; */
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 300;
   padding: 1px 5px;
   margin-left: 3px;
   display: flex;

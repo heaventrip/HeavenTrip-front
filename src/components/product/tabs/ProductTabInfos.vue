@@ -160,7 +160,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 4rem">
+        <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 6rem">
           <div class="content-head equip mb-2">
             <i class="far fa-times-circle mr-2 h5 align-text-top mb-0"></i>
             <span class="d-inline-block" style="vertical-align: baseline">Non INCLUS :</span>

@@ -3,44 +3,38 @@
     <div v-for="category in sportCategories" :key="category" class="sports-block" v-show="category.name === activeCategory">
       <div class="row no-gutters align-items-center justify-content-start py-4 my-xl-3">
         <div v-for="(sport, index) in category.sports.slice(0, 3)" :key="sport" class="col-3" :class="[category.sports.length === 1 && index === 0 ? 'offset-3' : '', category.sports.length === 2 && index === 0 ? 'offset-1' : '']">
-          <svg @mouseenter="animateSvg('enter', $event)" @mouseleave="animateSvg('leave', $event)" xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 100 100">
-            <g id="Calque_2" data-name="Calque 2">
-              <g id="Calque_1-2" data-name="Calque 1">
-                <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
-                <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
-              </g>
+          <svg @mouseenter="animateSvg('enter', $event)" @mouseleave="animateSvg('leave', $event)" xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 100 100">
+            <g xmlns="http://www.w3.org/2000/svg" id="Calque_1-2" data-name="Calque 1">
+              <path d="M60.10836,71.68724A37.4294,37.4294,0,0,1,7.91746,19.49633l-.72386-.72385A38.44534,38.44534,0,0,0,38.41718,79.61064a38.14142,38.14142,0,0,0,22.41533-7.19925Z" fill="#fff" />
+              <path d="M67.56626,12.01851a41.08521,41.08521,0,0,0-56.34375-1.62988l-.49415.44043,4.42725,4.42675.43994-.38574A34.80862,34.80862,0,0,1,64.71518,63.99019l-.38623.44043,4.42676,4.42578.43994-.49414A41.08277,41.08277,0,0,0,67.56626,12.01851Z" fill="#d82558" />
             </g>
-            <InlineSvg v-if="sport.picto !== null" :src="require(`@/assets/svg/${sport.picto}.svg`)" viewBox="-12 -14 50 50" fill="white" />
           </svg>
-          <div class="d-inline-block sport-name ml-2">{{ sport.name }}</div>
+          <InlineSvg v-if="sport.picto !== null" :src="require(`@/assets/svg/${sport.picto}.svg`)" class="svg-activity" height="80" viewBox="70 -26 47 50" fill="white" />
+          <div class="d-inline-block sport-name">{{ sport.name }}</div>
         </div>
       </div>
       <div class="row no-gutters align-items-center justify-content-start py-4 my-xl-3" v-if="category.sports.length > 3">
         <div v-for="sport in category.sports.slice(3, 6)" :key="sport" class="col-3">
-          <svg @mouseenter="animateSvg('enter', $event)" @mouseleave="animateSvg('leave', $event)" xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 100 100">
-            <g id="Calque_2" data-name="Calque 2">
-              <g id="Calque_1-2" data-name="Calque 1">
-                <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
-                <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
-              </g>
+          <svg @mouseenter="animateSvg('enter', $event)" @mouseleave="animateSvg('leave', $event)" xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 100 100">
+            <g xmlns="http://www.w3.org/2000/svg" id="Calque_1-2" data-name="Calque 1">
+              <path d="M60.10836,71.68724A37.4294,37.4294,0,0,1,7.91746,19.49633l-.72386-.72385A38.44534,38.44534,0,0,0,38.41718,79.61064a38.14142,38.14142,0,0,0,22.41533-7.19925Z" fill="#fff" />
+              <path d="M67.56626,12.01851a41.08521,41.08521,0,0,0-56.34375-1.62988l-.49415.44043,4.42725,4.42675.43994-.38574A34.80862,34.80862,0,0,1,64.71518,63.99019l-.38623.44043,4.42676,4.42578.43994-.49414A41.08277,41.08277,0,0,0,67.56626,12.01851Z" fill="#d82558" />
             </g>
-            <InlineSvg v-if="sport.picto !== null" :src="require(`@/assets/svg/${sport.picto}.svg`)" viewBox="-12 -14 50 50" fill="white" />
           </svg>
-          <div class="d-inline-block sport-name ml-2">{{ sport.name }}</div>
+          <InlineSvg v-if="sport.picto !== null" :src="require(`@/assets/svg/${sport.picto}.svg`)" class="svg-activity" height="80" viewBox="70 -26 47 50" fill="white" />
+          <div class="d-inline-block sport-name">{{ sport.name }}</div>
         </div>
       </div>
-      <div class="row no-gutters align-items-center justify-content-start py-4" v-if="category.sports.length > 6">
+      <div class="row no-gutters align-items-center justify-content-start py-4 my-xl-3" v-if="category.sports.length > 6">
         <div v-for="sport in category.sports.slice(6)" :key="sport" class="col-3">
-          <svg @mouseenter="animateSvg('enter', $event)" @mouseleave="animateSvg('leave', $event)" xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 100 100">
-            <g id="Calque_2" data-name="Calque 2">
-              <g id="Calque_1-2" data-name="Calque 1">
-                <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
-                <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
-              </g>
+          <svg @mouseenter="animateSvg('enter', $event)" @mouseleave="animateSvg('leave', $event)" xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 100 100">
+            <g xmlns="http://www.w3.org/2000/svg" id="Calque_1-2" data-name="Calque 1">
+              <path d="M60.10836,71.68724A37.4294,37.4294,0,0,1,7.91746,19.49633l-.72386-.72385A38.44534,38.44534,0,0,0,38.41718,79.61064a38.14142,38.14142,0,0,0,22.41533-7.19925Z" fill="#fff" />
+              <path d="M67.56626,12.01851a41.08521,41.08521,0,0,0-56.34375-1.62988l-.49415.44043,4.42725,4.42675.43994-.38574A34.80862,34.80862,0,0,1,64.71518,63.99019l-.38623.44043,4.42676,4.42578.43994-.49414A41.08277,41.08277,0,0,0,67.56626,12.01851Z" fill="#d82558" />
             </g>
-            <InlineSvg v-if="sport.picto !== null" :src="require(`@/assets/svg/${sport.picto}.svg`)" viewBox="-12 -14 50 50" fill="white" />
           </svg>
-          <div class="d-inline-block sport-name ml-2">{{ sport.name }}</div>
+          <InlineSvg v-if="sport.picto !== null" :src="require(`@/assets/svg/${sport.picto}.svg`)" class="svg-activity" height="80" viewBox="70 -26 47 50" fill="white" />
+          <div class="d-inline-block sport-name">{{ sport.name }}</div>
         </div>
       </div>
     </div>
@@ -77,7 +71,7 @@ export default {
       if (type === 'enter') {
         gsap
           .timeline({ defaults: { duration: 0.3 } })
-          .to(picto, { scale: '1.2' })
+          .to(picto, { scale: '1.1' })
           .to(sportName, { autoAlpha: 0 }, '<')
       }
       if (type === 'leave') {
@@ -133,18 +127,22 @@ export default {
 <style scoped>
 @media (max-width: 2000px) {
   .container {
-    max-width: 75vw;
+    max-width: 100vw;
   }
 }
 @media (max-width: 1800px) {
   .container {
-    max-width: 90vw;
+    max-width: 100vw;
   }
 }
 @media (max-width: 1500px) {
   .container {
     max-width: 100vw;
   }
+}
+.svg-activity {
+  overflow: unset;
+  position: absolute;
 }
 
 .sports-block {
@@ -155,15 +153,18 @@ export default {
   flex-grow: 1;
   padding-left: calc(100% / 4);
   position: relative;
-  bottom: 10%;
+  bottom: 5%;
 }
 
 .container {
   flex-wrap: nowrap !important;
-  padding-bottom: 12vh;
+  padding-bottom: 10vh;
 }
 .sport-name {
-  padding-left: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.04rem;
+  padding-bottom: 0.6rem;
+  vertical-align: text-bottom;
 }
 /* md breakpoint */
 @media (max-width: 1600px) {

@@ -1,5 +1,6 @@
 <template>
-  <div class="card-block" :data-index="index" style="width: 540px" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
+  <!-- FIXME bug carousel -->
+  <div class="card-block" :data-index="index" :style="{ width: cardWidth + 'px' }" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
@@ -61,7 +62,9 @@ export default {
       cardTl: null,
       cardsArr: [],
       avatarKeys: [],
-      wishlisted: false
+      wishlisted: false,
+      cardWidth: 480,
+      cardExpand: 70
     }
   },
   components: {
@@ -100,14 +103,15 @@ export default {
               ease: 'power3.inOut'
             }
           })
-          .to(card, { width: '590px' })
+          // FIXME max width is now 520px so x+= shouldnt be the same
+          .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
           .to(staticInfos, { y: '-=45px' }, '<')
           .to(movingInfos, { y: '-=100' }, '<')
           .to(heartIcon, { autoAlpha: 1 }, '<')
           .to(
             this.cardsArr.slice(parseInt(card.dataset.index) + 1),
             {
-              x: '+=50'
+              x: '+=' + this.cardExpand
             },
             '<'
           )
@@ -198,6 +202,11 @@ export default {
   margin-right: 0.7rem;
   margin-left: 0.8rem;
 }
+.card__footer__infos__heading-sport {
+  font-size: 1.6rem;
+  letter-spacing: 0.04rem;
+}
+
 .card__footer__infos__heading-spot {
   font-weight: normal;
   color: #793f4e;

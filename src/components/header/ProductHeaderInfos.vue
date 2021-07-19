@@ -5,25 +5,25 @@
   <div class="product-infos__container">
     <div class="header__main-title d-flex align-items-center justify-content-center">
       <div class="product-header-infos__title d-flex align-items-center" style="z-index: 5">
-        <svg xmlns="http://www.w3.org/2000/svg" height="120" viewBox="0 0 100 100">
+        <svg xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 100 100">
           <g id="Calque_2" data-name="Calque 2">
             <g id="Calque_1-2" data-name="Calque 1">
               <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
               <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
             </g>
           </g>
-          <InlineSvg v-if="course.sports && course.sports[0].picto !== null" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" viewBox="-12 -14 50 50" fill="white" />
+          <InlineSvg v-if="course.sports && course.sports[0].picto !== null" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="80" viewBox="-12 -21 50 50" fill="white" />
         </svg>
         <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
         <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-        <div style="margin-left: 2rem; position: relative; top: 4px">
+        <div style="margin-left: 3rem; position: relative; top: 4px">
           <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
           <h1 class="heading text-uppercase mb-2">
             <!-- <router-link :to="{ name: 'CheckOutHome', params: { productId: course.id } }"> -->
-            <span style="color: #fff; font-weight: bold; font-size: 3rem; letter-spacing: 0.03rem">{{ course.sports ? course.sports[0].name : '' }}</span>
+            <span style="color: #fff; font-weight: 600; font-size: 3.5rem; letter-spacing: 0.3rem">{{ course.sports ? course.sports[0].name : '' }}</span>
             <!-- </router-link> -->
           </h1>
-          <h5 v-if="!course.multisport" class="text-white header-infos__sub-title text-uppercase d-block"><i class="fas fa-caret-right mr-1"></i>{{ course?.spot?.name }}</h5>
+          <h5 v-if="!course.multisport" class="text-white header-infos__sub-title text-uppercase d-block"></h5>
           <div class="d-flex" v-else>
             <Tag class="mr-2" v-for="sport in course.sports" :text="sport.name" color="grey-product-header" :key="sport" />
           </div>
@@ -77,7 +77,7 @@
           <div class="block__item__content">
             <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/people.svg`)" height="28" />
             <span class="block__text-content">
-              <div class="block__text-content__title">Groupe</div>
+              <div class="block__text-content__title">Capacité</div>
               <div>{{ course.max }}</div>
             </span>
           </div>

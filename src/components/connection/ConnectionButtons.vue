@@ -50,7 +50,7 @@
           {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
         </button>
-        <div class="dropdown-menu text-uppercase py-3" style="" aria-labelledby="dropdownMenu2">
+        <div class="dropdown-menu text-uppercase py-1" style="" aria-labelledby="dropdownMenu2">
           <div class="account-dropdown-item">
             <button class="dropdown-item" type="button">
               Mes ENVIES
@@ -179,10 +179,11 @@ export default {
 
 <style scoped>
 .login-dropdown .dropdown-menu {
-  padding-right: 3rem !important;
+  padding-right: 1.2rem !important;
 }
 .account-dropdown-item:not(:last-of-type) {
-  border-bottom: 1px dashed #7c7c7c;
+  border-bottom: 1px dashed #7c7c7c57;
+  padding: 0 0 0 12px;
 }
 .account-dropdown-item:hover {
   background-color: #292f33;

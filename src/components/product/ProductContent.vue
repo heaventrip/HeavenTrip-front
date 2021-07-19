@@ -17,7 +17,7 @@
     <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
       <div class="product-nav-tabs">
         <ProductNav :course="course" />
-        <ul style="height: 100px; background-color: white; font-weight: 400; padding: 0 7vw" class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
+        <ul style="height: 100px; background-color: white; font-weight: 400; padding: 0 2.3vw" class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation" type="button">
             <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
           </li>
@@ -167,13 +167,16 @@ export default {
       navIsActive: this.$props.navIsActive,
       currentPaginationStyle: `
         font-family: Oswald, sans-serif;
+        text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
         font-weight: 800;
-        font-size: 2rem;
+        font-size: 2.4rem;
         color: #fff;`,
       totalPaginationStyle: `
         font-family: Oswald, sans-serif;
         color: rgba(250, 250, 250, 0.7);
-        font-size: 1rem;`
+        font-size: 1.5rem;
+        vertical-align: sub;
+        `
     }
   },
   created() {
@@ -337,11 +340,11 @@ export default {
   height: 6rem;
 }
 .main-tab {
-  max-width: 1000px;
+  max-width: 1100px;
   position: relative;
   padding: 0rem 0rem 8rem 0rem;
   min-height: 100vh;
-  width: 57vw;
+  width: 53vw;
   margin-left: auto;
   margin-right: auto;
 }
@@ -423,12 +426,13 @@ export default {
   top: 70px;
   right: 0;
   left: 0;
-  width: 70vw;
+  width: 63vw;
   z-index: 2;
   box-shadow: 0px 3px 6px #00000005;
 }
 .gallery-comment-block {
-  width: 30vw;
+  width: 38vw;
+  z-index: 1;
 }
 .blur {
   filter: blur(3px) opacity(0.2);
