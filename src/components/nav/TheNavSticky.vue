@@ -237,6 +237,7 @@ export default {
 #navbarSupportedContent {
   flex-direction: column;
   align-items: flex-start;
+  height: 100%;
 }
 .subactivity-nav__item {
   color: rgba(250, 250, 250, 0.3) !important;

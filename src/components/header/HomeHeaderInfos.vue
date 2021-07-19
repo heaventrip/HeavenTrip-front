@@ -32,7 +32,7 @@
             <br />
             les <span>{{ featuredCourse.wishlistUsers?.length }} intéressé{{ featuredCourse.wishlistUsers?.length > 1 ? 's' : '' }}</span>
           </span>
-          <InlineAvatars :course-id="featuredCourse?.id" :avatars="avatarKeys" outline-color="violetfullscreen" :heart="true" spacing="-10px" heartheight="40px" heartwidth="40px" />
+          <InlineAvatars :course-id="featuredCourse?.id" :avatars="avatarKeys" outline-color="violetfullscreen" :heart="true" spacing="-10px" />
           <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
           <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
         </div>
@@ -91,7 +91,12 @@ export default {
     featuredCourse(val) {
       if (!val.wishlistUsers) return
 
-      val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+      val.wishlistUsers.forEach((user, index) => {
+        // show max 5 avatars
+        if (index > 4) return
+
+        this.avatarKeys.push(user.avatarKey)
+      })
     }
   },
   methods: {

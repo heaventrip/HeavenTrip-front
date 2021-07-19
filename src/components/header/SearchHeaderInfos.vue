@@ -13,7 +13,7 @@
   </div>
   <div class="d-flex flex-column align-items-center">
     <span class="header-infos__mentions__title">Critères sélectionnés :</span>
-    <InlineProductInfos :infos="['france', '7 jours', 'confirmé', '10 places']" color="white" icon="globe" width="30%" :divider="false" pt="1rem" />
+    <InlineProductInfos :infos="['france', '7 jours', 'confirmé', '10 places']" color="white" :icons="['globe', 'timer', 'intensity-2-white', 'people']" width="30%" :divider="false" pt="1rem" />
   </div>
 </template>
 

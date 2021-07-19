@@ -50,14 +50,23 @@
           {{ firstName }} <span class="l-name"> .{{ lastName[0] }}</span>
           <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
         </button>
-        <div class="dropdown-menu text-uppercase py-1" style="" aria-labelledby="dropdownMenu2">
-          <div class="account-dropdown-item">
-            <button class="dropdown-item" type="button">
-              Mes ENVIES
-              <span class="font-weight-bold text-danger ml-1">(2)</span>
-            </button>
-          </div>
-          <!-- <div class="account-dropdown-item">
+        <transition name="fade">
+          <div class="dropdown-menu text-uppercase py-1" style="" aria-labelledby="dropdownMenu2">
+            <div class="account-dropdown-item">
+              <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
+                Mes ENVIES
+                <span class="font-weight-bold text-danger ml-1">(2)</span>
+              </button>
+            </div>
+            <transition name="fade-fast">
+              <div class="wishlists" v-show="showWishlist" :key="showWishlist">
+                <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
+                  <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
+                  {{ wishlist.name }}
+                </div>
+              </div>
+            </transition>
+            <!-- <div class="account-dropdown-item">
             <button class="dropdown-item" type="button">
               Mes séjours
               <div class="position-relative ml-auto">
@@ -69,14 +78,15 @@
           <div class="account-dropdown-item">
             <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
           </div> -->
-          <div class="account-dropdown-item">
-            <button @click="openModal('profile')" class="dropdown-item account-page-link" type="button">Mon compte</button>
-            <!-- <Profile v-if="showProfileModal" /> -->
+            <div class="account-dropdown-item">
+              <button @click="openModal('profile')" class="dropdown-item account-page-link" type="button">Mon compte</button>
+              <!-- <Profile v-if="showProfileModal" /> -->
+            </div>
+            <div class="account-dropdown-item">
+              <button @click="logOut" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
+            </div>
           </div>
-          <div class="account-dropdown-item">
-            <button @click="logOut" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
-          </div>
-        </div>
+        </transition>
       </div>
     </li>
     <li v-if="!isLoggedIn()" type="button">
@@ -111,10 +121,37 @@ export default {
       agencyIsActive: false,
       showModal: false,
       showProfileModal: false,
-      form: ''
+      showWishlist: false,
+      form: '',
+      wishlists: null
     }
   },
   watch: {
+    // showWishlist(val) {
+    //   if (val) {
+    //     if (document.querySelector('.wishlists')) {
+    //       document.querySelector('.wishlists').style.display = ''
+    //       return
+    //     }
+
+    //     let wishlistEl = document.createElement('div')
+    //     wishlistEl.innerHTML = `
+    //       <div class="wishlists" :key="showWishlist">
+    //         <div class="py-4 px-5">1</div>
+    //         <div class="py-4 px-5">1</div>
+    //         <div class="py-4 px-5">1</div>
+    //         <div class="py-4 px-5">1</div>
+    //         <div class="py-4 px-5">1</div>
+    //       </div>
+    //     `
+    //     document.querySelector('.account-dropdown-item').insertAdjacentElement('afterend', wishlistEl)
+    //   } else {
+    //     if (!document.querySelector('.wishlists')) return
+
+    //     document.querySelector('.wishlists').style.display = 'none'
+    //   }
+    // },
+
     showModal(val) {
       if (val === true) {
         setTimeout(() => {
@@ -133,6 +170,14 @@ export default {
     }
   },
   methods: {
+    unwishlistCourse(courseId) {
+      console.log(courseId)
+      this.$axios.delete('/wishlists', { courseId: courseId }).then(() => {
+        document.querySelector(`[data-course='${courseId}']`).remove()
+        alert('deleted')
+        // this.fetchWishlists()
+      })
+    },
     logOut() {
       this.logoutUser()
       this.$forceUpdate()
@@ -166,7 +211,15 @@ export default {
       this.firstName = localStorage.getItem('user.firstName') || ''
       this.lastName = localStorage.getItem('user.lastName') || ''
       this.avatarId = localStorage.getItem('user.avatarId')
+    },
+    fetchWishlists() {
+      this.$axios.get('/users/1/wishlist-courses').then((res) => {
+        this.wishlists = res.data.courses
+      })
     }
+  },
+  created() {
+    this.fetchWishlists()
   },
   mounted() {
     this.getLocalInfos()
@@ -181,9 +234,12 @@ export default {
 .login-dropdown .dropdown-menu {
   padding-right: 1.2rem !important;
 }
-.account-dropdown-item:not(:last-of-type) {
-  border-bottom: 1px dashed #7c7c7c57;
+.account-dropdown-item {
   padding: 0 0 0 12px;
+}
+.account-dropdown-item:not(:last-of-type):not(:first-of-type) {
+  border-bottom: 1px dashed #7c7c7c57;
+  border-top: 1px dashed #7c7c7c57;
 }
 .account-dropdown-item:hover {
   background-color: #292f33;

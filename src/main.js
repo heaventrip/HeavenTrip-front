@@ -13,7 +13,7 @@ import './assets/css/style.css'
 import './assets/css/multiselect.css'
 import 'swiper/swiper-bundle.css'
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
-import '@dafcoe/vue-collapsible-panel/dist/vue-collapsible-panel.css'
+// import '@dafcoe/vue-collapsible-panel/dist/vue-collapsible-panel.css'
 import './assets/css/tooltip.css'
 
 // import "./assets/js/sol.js"; // NOTE used for MULTIPLE SELECTIONS
@@ -28,6 +28,7 @@ import InlineSvg from 'vue-inline-svg'
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
 import axios from 'axios'
 import tooltip from './directives/tooltip.js'
+import VueCollapsiblePanel from '@dafcoe/vue-collapsible-panel'
 import { VueWindowSizePlugin } from 'vue-window-size/option-api'
 
 const app = createApp(App)
@@ -36,6 +37,7 @@ app.component('PerfectScrollbar', PerfectScrollbar)
 app.directive('tooltip', tooltip)
 app.use(router)
 app.use(VueWindowSizePlugin)
+app.use(VueCollapsiblePanel)
 app.mount('#app')
 
 // app.config.globalProperties.$axios = axios.create({ baseURL: 'http://localhost:3000/api/v1' })

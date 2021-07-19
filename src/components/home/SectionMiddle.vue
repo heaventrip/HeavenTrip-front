@@ -6,7 +6,7 @@
           <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
             <h5 class="pad__header__title">Votre coup de coeur</h5>
             <div style="width: min-content">
-              <InlineAvatars :avatars="avatarKeys" heartwidth="40px" :heart="true" spacing="-5px" border-color="grey" :course-id="highlightedCourse?.id" />
+              <InlineAvatars :avatars="avatarKeys" heart-width="40px" :heart="true" spacing="-5px" border-color="grey" :course-id="highlightedCourse?.id" />
             </div>
           </div>
           <div class="d-flex">
@@ -23,7 +23,7 @@
                   </span>
                 </div>
                 <div class="d-flex align-items-center social-info">
-                  <InlineProductInfos :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]" :icons="['globe', 'timer', 'ring', 'people']" color="#292f33" />
+                  <InlineProductInfos :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]" :icons="['globe', 'timer', 'intensity-2-white', 'people']" color="#292f33" />
                 </div>
               </div>
               <div class="d-flex pad__footer">

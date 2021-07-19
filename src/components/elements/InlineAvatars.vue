@@ -1,16 +1,20 @@
 <template>
   <div class="d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
-    <div class="inline-avatar-container" v-for="(avatarId, index) in pAvatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
-      <img class="inline-avatar-img rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
+    <div class="inline-avatar-container" v-for="(avatarId, index) in avatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
+      <img class="inline-avatar-img rounded-circle" :class="{ 'inline-avatar-img--transparent': hoveredHeart }" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
-    <div v-if="pHeart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[pSpacing, pHeartwidth, pHeartheight, pOutline]">
+    <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="pSpacing">
       <transition name="fade" mode="out-in">
-        <!-- TODO hover sur le coeur + scale -->
         <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
-        <InlineSvg v-else :class="`heart-logo-${heartColor || 'white'}`" :src="require(`@/assets/svg/heart-logo-${heartColor || 'white'}.svg`)" />
+        <div v-else style="position: relative" :style="[pHeartWidth, pHeartHeight]" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
+          <transition name="fade">
+            <InlineSvg v-if="hoveredHeart" :class="`heart-logo heart-logo-grey`" :src="require(`@/assets/svg/heart-logo-grey.svg`)" />
+            <InlineSvg v-else :style="pOutline" :class="`heart-logo heart-logo-white`" :src="require(`@/assets/svg/heart-logo-white.svg`)" />
+          </transition>
+        </div>
       </transition>
     </div>
-    <div class="avatar-count" v-if="pCount">+1.5k</div>
+    <div class="avatar-count" v-if="count">+1.5k</div>
   </div>
 </template>
 
@@ -19,17 +23,31 @@ import gsap from 'gsap'
 
 export default {
   name: 'InlineAvatars',
-  props: ['course-id', 'height', 'heart', 'spacing', 'avatars', 'outline-color', 'outline-width', 'border-width', 'mt', 'mb', 'heart-color', 'heartwidth', 'heartheight', 'count'],
+  // eslint-disable-next-line prettier/prettier
+  props: [
+    'course-id',
+    'height',
+    'heart',
+    'spacing',
+    'avatars',
+    'outline-color',
+    'outline-width',
+    'border-width',
+    'mt',
+    'mb',
+    'heart-color',
+    'heart-width',
+    'heart-height',
+    'count'
+  ],
   data() {
     return {
-      pCount: this.count,
-      pHeart: this.heart,
-      pAvatars: this.avatars,
+      hoveredHeart: false,
       wishlisted: false,
       userAvatarId: '',
       customColors: {
         'light-white': '#fcfcfc',
-        violetfullscreen: '#705875',
+        violetfullscreen: '#65446d',
         grey: '#292f33',
         violet: '#5a3a5f'
       }
@@ -51,11 +69,11 @@ export default {
     pOutline() {
       return `outline: ${this.outlineWidth || '3px'} solid ${this.customColors[this.outlineColor] || this.outlineColor}`
     },
-    pHeartwidth() {
-      return `width: ${this.heartwidth || '44px'}`
+    pHeartWidth() {
+      return `width: ${this.heartWidth || '42px'}`
     },
-    pHeartheight() {
-      return `height: ${this.heartheight || '44px'}`
+    pHeartHeight() {
+      return `height: ${this.heartHeight || '42px'}`
     }
   },
   methods: {
@@ -106,27 +124,20 @@ export default {
   font-size: 0.75rem;
   font-weight: 400;
 }
-.small-avatar--grey {
-  outline: 6px solid #292f33;
-}
-.small-avatar--white {
-  outline: 6px solid #fff;
-}
-.small-avatar--light-white {
-  outline: 6px solid #fcfcfc;
-}
-
-.small-avatar--violet {
-  outline: 4px solid #5a3a5f;
-}
-
-.small-avatar--violetfullscreen {
-  outline: 3px solid #705875;
+.heart-logo {
+  border-radius: 50%;
+  position: absolute;
 }
 .heart-logo-grey .grey:hover {
   fill: white;
 }
 .heart-logo-grey .white:hover {
   fill: #292f33;
+}
+.inline-avatar-img {
+  transition: all 0.3s ease;
+}
+.inline-avatar-img--transparent {
+  opacity: 0.5;
 }
 </style>

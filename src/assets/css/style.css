@@ -230,7 +230,7 @@ a.bg-danger:hover {
   font-weight: bold;
   margin-bottom: 14px;
 }
-.header .wrapper .wrapper-list > li {
+.header .wrapper .wrapper-list > li:not(:last-child) {
   margin-right: 115px;
   display: inline-block;
 }

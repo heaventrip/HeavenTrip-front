@@ -189,7 +189,16 @@
                   </div>
                   <div class="d-flex pad__footer">
                     <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="[normalResult.country.name, `${normalResult.duration} jours`, normalResult.level.name, `${normalResult.max} places`]" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
+                      <InlineProductInfos
+                        :infos="[normalResult.country.name, `${normalResult.duration} jours`, normalResult.level.name, `${normalResult.max} places`]"
+                        :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+                        color="#292f33"
+                        pb="0.8rem"
+                        pt="0.8rem"
+                        width="100%"
+                        font-weight="400"
+                        letter-spacing="0.07rem"
+                      />
                     </div>
                   </div>
                 </div>
@@ -253,7 +262,16 @@
                   </div>
                   <div class="d-flex pad__footer">
                     <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="[lastSessionResult.country.name, `${lastSessionResult.duration} jours`, lastSessionResult.level, `${lastSessionResult.max} places`]" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
+                      <InlineProductInfos
+                        :infos="[lastSessionResult.country.name, `${lastSessionResult.duration} jours`, lastSessionResult.level, `${lastSessionResult.max} places`]"
+                        :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+                        color="#292f33"
+                        pb="0.8rem"
+                        pt="0.8rem"
+                        width="100%"
+                        font-weight="400"
+                        letter-spacing="0.07rem"
+                      />
                     </div>
                   </div>
                 </div>
@@ -312,7 +330,16 @@
                   </div>
                   <div class="d-flex pad__footer">
                     <div class="inline-product-infos-container">
-                      <InlineProductInfos :infos="[requestedTripResult.country.name, `${requestedTripResult.duration} jours`, requestedTripResult.level.name]" icon="globe" color="#292f33" pb="0.8rem" pt="0.8rem" width="100%" font-weight="400" letter-spacing="0.07rem" />
+                      <InlineProductInfos
+                        :infos="[requestedTripResult.country.name, `${requestedTripResult.duration} jours`, requestedTripResult.level.name]"
+                        :icons="['globe', 'timer', 'intensity-2-white']"
+                        color="#292f33"
+                        pb="0.8rem"
+                        pt="0.8rem"
+                        width="100%"
+                        font-weight="400"
+                        letter-spacing="0.07rem"
+                      />
                     </div>
                     <Button style="cursor: default" text-color="#292f33" text="Sur devis" background-color="#ebebeb" px="1.5rem" size=".8rem" width="max-content" weight="bold" height="inherit" icon="globe" />
                   </div>

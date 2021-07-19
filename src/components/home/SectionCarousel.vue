@@ -52,7 +52,7 @@
             </button>
           </div>
           <div class="tags-container d-flex justify-content-center">
-            <Button @click="clearFilters" text="<span style='text-transform: lowercase;'>supprimer tous les filtres</span>" background-color="#7c7c7c" text-color="#fff" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="40px" />
+            <Button @click="clearFilters" text="<span style='text-transform: lowercase;'>supprimer tous les filtres</span>" background-color="#7c7c7c" text-color="#fff" style="transform: translateY(3px)" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="38px" />
           </div>
         </div>
       </div>

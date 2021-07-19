@@ -38,7 +38,20 @@
         </div>
         <div class="hoverable-div">
           <div class="d-flex">
-            <InlineProductInfos class="InlineProduct" :infos="[course.spot?.country, course?.duration, course?.max, 'Tout niveaux']" pt="0.8rem" pb="0rem" pr="0.4rem" pl="0.4rem" icon="globe" color="#7c7c7c" width="100%" letter-spacing="0px" icon-margin="8px" justify-content="" />
+            <InlineProductInfos
+              class="InlineProduct"
+              :infos="[course.spot?.country, course?.duration, 'Tout niveaux', course?.max]"
+              pt="0.8rem"
+              pb="0rem"
+              pr="0.4rem"
+              pl="0.4rem"
+              :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+              color="#7c7c7c"
+              width="100%"
+              letter-spacing="0px"
+              icon-margin="8px"
+              justify-content=""
+            />
             <InlineAvatars class="pl-4" :avatars="avatarKeys" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
           </div>
         </div>
