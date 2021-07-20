@@ -3,7 +3,7 @@
   <div v-if="showProfile" class="wrap">
     <InlineSvg @click="showProfile = false" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" height="60" style="position: absolute; top: 30px; left: 30px; z-index: 100" />
     <div class="image-container" style="width: 52%; position: relative">
-      <InlineSvg :src="require('@/assets/svg/logo-white.svg')" style="position: absolute; margin: auto" height="40" />
+      <InlineSvg :src="require('@/assets/svg/logo-white.svg')" style="position: absolute" height="40" />
       <div></div>
       <div></div>
     </div>
