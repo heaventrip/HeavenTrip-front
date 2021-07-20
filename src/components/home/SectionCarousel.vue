@@ -114,7 +114,7 @@
       <div class="d-flex align-items-center mt-4">
         <div class="slider-buttons col-2 text-center">
           <div @click="slideLeft" type="button" style="transform: translateY(-220%); text-align: left; margin-left: 3vw">
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
                   <path id="PICTO_ARROW_RIGHT_1" data-name="PICTO ARROW RIGHT 1" d="M23.56,14.74,17,21.27l6.6,6.53-2,2-8.64-8.53,8.64-8.54Z" />
@@ -125,7 +125,7 @@
             </svg>
           </div>
           <div @click="slideRight" type="button" style="transform: translateY(-170%); text-align: left; margin-left: 3vw">
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 40 40" fill="#292f33">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
                   <path id="PICTO_ARROW_RIGHT_1" data-name="PICTO ARROW RIGHT 1" d="M16.44,25.26,23,18.73l-6.6-6.53,2-2,8.64,8.53-8.64,8.54Z" />

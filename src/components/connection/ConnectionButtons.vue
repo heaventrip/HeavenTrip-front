@@ -79,7 +79,10 @@
             <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
           </div> -->
             <div class="account-dropdown-item">
-              <button @click="openModal('profile')" class="dropdown-item account-page-link" type="button">Mon compte</button>
+              <button @click="openProfile = true" class="dropdown-item account-page-link" type="button">Mon compte</button>
+              <teleport to="#modal">
+                <Profile v-if="openProfile" />
+              </teleport>
               <!-- <Profile v-if="showProfileModal" /> -->
             </div>
             <div class="account-dropdown-item">
@@ -106,16 +109,19 @@
 
 <script>
 import ConnectionModal from '@/components/connection/ConnectionModal.vue'
+import Profile from '@/components/connection/Profile.vue'
 import { isLoggedIn } from '@/utils/auth'
 import { logoutUser } from '@/utils/auth'
 
 export default {
   name: 'ConnectionButtons',
   components: {
-    ConnectionModal
+    ConnectionModal,
+    Profile
   },
   data() {
     return {
+      openProfile: false,
       firstName: '',
       lastName: '',
       agencyIsActive: false,

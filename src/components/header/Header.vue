@@ -215,7 +215,7 @@ export default {
 .header-filter--home::after {
   content: '';
   position: absolute;
-  background: linear-gradient(30deg, rgba(93, 52, 98, 0.98) 0%, rgba(93, 52, 98, 0.82) 40%);
+  background: linear-gradient(30deg, rgba(93, 52, 98, 0.92) 20%, rgba(93, 52, 98, 0.6) 72%);
   opacity: 1;
   width: 100%;
   height: 94vh; /* corresponds height of image */
