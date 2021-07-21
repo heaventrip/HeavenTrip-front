@@ -696,6 +696,7 @@ export default {
 }
 .multi-select-filter {
   box-shadow: 1px 2px 2px rgba(41, 47, 51, 0.05);
+  transition: all 0.3s ease !important;
 }
 .divider {
   display: inline-block;

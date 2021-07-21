@@ -2,14 +2,14 @@
   <section class="carousel-section">
     <div class="container">
       <div class="search row">
-        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 42px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09)">
+        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px">
           <div class="bg-white d-flex centered-div">
-            <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 0px 1.6rem 2rem">
+            <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 2rem 1.6rem 2rem">
               <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
               <input v-model="freeSearch" class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
             </div>
-            <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2">
-              <li class="activity-filter">
+            <ul class="list-unstyled mb-0 search-list d-none d-lg-inline-flex ml-auto flex-2 w-100">
+              <li class="main-filter activity-filter" style="flex-grow: 0.9">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
@@ -20,7 +20,7 @@
                   </Multiselect>
                 </div>
               </li>
-              <li class="country-filter">
+              <li class="main-filter country-filter" style="flex-grow: 0.8">
                 <div class="position-relative multi-select-filter">
                   <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                     <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
@@ -32,10 +32,10 @@
                   </Multiselect>
                 </div>
               </li>
-              <li class="month-filter">
+              <li class="main-filter month-filter" style="flex-grow: 1">
                 <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-                    <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
+                  <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%; padding-right: 1rem">
+                    <InlineSvg class="search-bar__fillter__svg pl-3" :src="require('@/assets/svg/date-search.svg')" height="22" />
                     <span class="search-bar__fillter__name">Mois de départ</span>
                   </div>
                   <Multiselect class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" @close="setBgWhite('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
@@ -47,8 +47,9 @@
             <button class="btn btn-light bg-white text-uppercase search-btn filter-btn px-3 px-sm-4 rounded-right ml-auto border-left d-inline-block d-lg-none">
               <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
             </button>
-            <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-5 rounded-right border-0">
-              <span class="d-none d-lg-inline-block">rechercher</span><img class="mx-2 d-inline-block d-lg-none" fluid :src="require('@/assets/images/search-white.png')" />
+            <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
+              <div class="d-none d-lg-inline-block mb-1">rechercher</div>
+              <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div>
             </button>
           </div>
           <div class="tags-container d-flex justify-content-center">
@@ -425,10 +426,17 @@ export default {
 </script>
 
 <style scoped>
+.multi-select-filter {
+  transition: all 0.3s ease;
+}
+.search-input::placeholder {
+  color: #b4b4b4;
+  letter-spacing: 0.02rem;
+}
 .search-bar__fillter__name {
   margin-left: 1rem;
   vertical-align: middle;
-  font-size: 0.97rem;
+  font-size: 0.875rem;
 }
 .centered-div {
   box-shadow: none;

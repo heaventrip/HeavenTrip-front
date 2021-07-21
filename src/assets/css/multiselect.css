@@ -237,16 +237,17 @@
 .multiselect-option {
   display: flex;
   min-height: 40px;
-  padding: 9px 12px;
+  padding: 9px 18px;
   box-sizing: border-box;
   color: #292f33;
   text-decoration: none;
   align-items: center;
   justify-content: flex-start;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
   text-align: left;
   cursor: pointer;
+  font-size: 0.875rem;
 }
 .multiselect-option span {
   padding: 7px 0;
@@ -278,12 +279,13 @@
 }
 .is-multiple .multiselect-option.is-selected,
 .is-tags .multiselect-option.is-selected {
-  color: #292f33;
-  background: #ebebeb;
+  color: #7c7c7c;
+  background-color: #ebebeb;
 }
 .is-multiple .multiselect-option.is-selected.is-pointed,
 .is-tags .multiselect-option.is-selected.is-pointed {
-  background: #ebebeb;
+  background-color: #ebebeb;
+  color: #7c7c7c;
 }
 .multiselect-no-options,
 .multiselect-no-results {
