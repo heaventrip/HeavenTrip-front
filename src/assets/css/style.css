@@ -3157,6 +3157,7 @@ input[type='number']::-webkit-outer-spin-button {
   width: 20px;
   transform: rotate(-90deg);
   margin-left: 40px;
+  /* margin-right: 25px; */
 }
 .login-dropdown.show .btn {
   background-color: #ffffff;
@@ -5489,7 +5490,7 @@ a.descriptif-link.bg-danger:hover {
   }
   .header .wrapper,
   .header .navbar-dark.main-navbar {
-    padding: 0 60px;
+    padding: 0 90px;
   }
   .middle-section .pad.bg-dark {
     padding: 34px;

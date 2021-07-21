@@ -7,7 +7,7 @@
       <div class="col-3">
         <div class="row align-items-center text-center">
           <div class="big-letters">
-            HE<button @click.prevent="onClicked('concept')" class="btn choose-btn d-inline align-text-bottom">LE CONCEPT</button>
+            HE<button @click.prevent="onClicked('concept')" class="btn choose-btn agency-btn d-inline align-text-bottom">LE CONCEPT</button>
             <div class="text-content concept">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
           </div>
         </div>
@@ -15,7 +15,7 @@
       <div class="col-3">
         <div class="row align-items-center text-center">
           <div class="big-letters">
-            AV<button @click.prevent="onClicked('team')" class="btn choose-btn d-inline align-text-bottom">LA TEAM</button>
+            AV<button @click.prevent="onClicked('team')" class="btn choose-btn agency-btn d-inline align-text-bottom">LA TEAM</button>
             <div class="text-content team">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
           </div>
         </div>
@@ -23,7 +23,7 @@
       <div class="col-3">
         <div class="row align-items-center text-center">
           <div class="big-letters">
-            EN<button @click.prevent="onClicked('contact')" class="btn choose-btn d-inline align-text-bottom">CONTACT</button>
+            EN<button @click.prevent="onClicked('contact')" class="btn choose-btn agency-btn d-inline align-text-bottom">CONTACT</button>
             <div class="text-content team">Si tu as besoin de conseils, de renseignements tu peux nous joindre par téléphone, formulaire ou via les réseaux sociaux</div>
           </div>
         </div>
@@ -137,6 +137,9 @@ export default {
   color: #292f33;
   letter-spacing: 0.5px;
   font-size: 0.875rem;
+}
+.agency-btn {
+  background-color: transparent;
 }
 .text-content {
   position: absolute;

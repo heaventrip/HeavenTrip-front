@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center">
-    <a class="navbar-brand pl-sm-5 pl-lg-0 mr-5" href="/">
-      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" width="160" />
-      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" width="160" />
+  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-baseline">
+    <a class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 5rem; transform: translateY(5px)" href="/">
+      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
+      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
     </a>
     <!-- NOTE MOBILE ONLY -->
     <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
@@ -44,7 +44,7 @@
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
       <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button> -->
-      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content; margin-top: 2rem">
+      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content" :style="{ marginTop: $windowWidth > 1440 ? '2rem' : '1rem' }">
         <li class="nav-item" role="presentation">
           <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer">{{ sportCategories[0]?.name }}</a>
         </li>
@@ -74,9 +74,9 @@
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
-        <div @click="dismissNav" type="button" style="position: absolute; top: 10%; right: 20%; z-index: 10">
-          <InlineSvg v-if="agencyIsActive" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN_DARK.svg')" height="60" />
-          <InlineSvg v-else :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" height="60" />
+        <div @click="dismissNav" type="button" style="position: absolute; top: 20px; right: 8%; z-index: 10">
+          <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/cross.svg')" height="25" />
+          <InlineSvg v-else :src="require('@/assets/svg/cross.svg')" fill="white" height="25" />
         </div>
         <transition name="nav-fade">
           <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
@@ -234,9 +234,11 @@ export default {
   align-items: flex-start;
 }
 .subactivity-nav__item {
+  font-size: 0.8rem !important;
   color: rgba(250, 250, 250, 0.3) !important;
   border: none !important;
   font-family: Muli, sans-serif !important;
+  transition: all 0.3s ease;
 }
 .subactivity-nav__item.active {
   font-weight: 800 !important;
@@ -244,6 +246,11 @@ export default {
 }
 .subactivity-nav__item:hover {
   color: white !important;
+}
+@media only screen and (min-width: 1441px) {
+  .subactivity-nav__item {
+    font-size: 0.875rem !important;
+  }
 }
 .navbar {
   height: 70px; /* easier to manipulate with fixed height */
