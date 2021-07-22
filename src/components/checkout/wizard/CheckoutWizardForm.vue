@@ -443,7 +443,7 @@ export default {
 }
 .card-header {
   position: sticky;
-  /* top: 130px; NOTE */
+  top: 130px;
   box-shadow: 0 20px 40px white;
 }
 .card-body:not(:first-of-type) {

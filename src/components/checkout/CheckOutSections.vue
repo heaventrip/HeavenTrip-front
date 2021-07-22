@@ -21,8 +21,7 @@
       </div>
       <div class="checkout-body-content h-100" style="position: relative" :class="[activeStep === 'validation' ? 'col-xl-12 p-0' : 'col-xl-8']">
         <div class="checkout-progress-bar" style="position: sticky; top: 0; z-index: 15" :class="[activeStep === 'booker' ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']" v-if="activeStep !== 'validation' && activeStep !== 'success'">
-          <!-- NOTE -->
-          <div class="d-flex w-100 py-2">
+          <div class="d-flex w-100 py-5">
             <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
             <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
             <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
@@ -111,7 +110,7 @@ export default {
     course: {
       immediate: true,
       handler(val) {
-        this.activeStep = 'booker'
+        this.activeStep = 'insurance'
       }
     },
     activeStep: {

@@ -122,12 +122,12 @@ export default {
 }
 @media only screen and (min-width: 1200px) and (max-width: 1440px) {
   .checkout-header-block-container {
-    min-height: 100px;
+    min-height: 170px;
   }
 }
 @media only screen and (min-width: 1440px) {
   .checkout-header-block-container {
-    min-height: 100px;
+    min-height: 170px;
   }
 }
 .back-to-home-link {
