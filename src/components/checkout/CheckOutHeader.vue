@@ -13,7 +13,7 @@
     </div>
     <div class="checkout-header-block d-flex shadow-sm block-header position-relative">
       <div class="d-flex align-items-center checkout-header-block-container flex-1 text-white" style="background-color: #5a3a5f">
-        <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 100 100">
+        <svg xmlns="http://www.w3.org/2000/svg" :height="$windowWidth <= 1440 ? 80 : 100" viewBox="0 0 100 100">
           <g id="Calque_2" data-name="Calque 2">
             <g id="Calque_1-2" data-name="Calque 1">
               <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
@@ -26,30 +26,31 @@
           <h2 class="heading text-uppercase mb-2 font-weight-bold" style="">{{ course?.sports[0].name }}</h2>
           <div class="text-uppercase spacing-word"><i class="fas fa-caret-right mr-1"></i> {{ course?.spot?.name }}</div>
         </div>
-        <div class="checkout-header-divider h-75" style="margin: 0 4rem 0 5rem">
+        <div class="checkout-header-divider" style="margin: 0 4rem 0 5rem; height: 40%">
           <span class="line"></span>
         </div>
         <div class="text-uppercase text-white font-weight-500 calender-dates mr-5">
           <a href="#" class="text-reset text-decoration-none">
             <InlineSvg :src="require('@/assets/svg/date-search.svg')" fill="white" height="20" class="mr-3 d-inline-block" />
             <span class="d-inline-block align-middle" style="font-weight: 100">départ :&nbsp;</span>
-            <span class="d-inline-block align-middle">&nbsp;06/10/2020</span>
+            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
           <a href="#" class="text-reset text-decoration-none">
             <InlineSvg :src="require('@/assets/svg/date-search.svg')" fill="white" height="20" class="mr-3 d-inline-block" />
             <span class="d-inline-block align-middle" style="font-weight: 100">retour :&nbsp;</span>
-            <span class="d-inline-block align-middle">&nbsp;06/10/2020</span>
+            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
         </div>
         <div class="ml-auto" v-if="activeStep !== 'validation'">
-          <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="letter-spacing: 0.05rem; font-size: 0.875rem">à cette session</span> </span>
+          <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span> </span>
           <div class="d-flex justify-content-between">
             <InlineAvatars
               :avatars="['wb1pauez3a4chagrpyth', 'j7pyvrb9k40igjtuniwb', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw', 'ers53we5kg0ffyv6csoq', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth']"
               :heart="false"
               outline-color="violet"
+              outline-width="4px"
               height="40px"
-              spacing="-10px"
+              spacing="-8px"
               mt="0.5rem"
               mb="0rem"
             />
@@ -122,7 +123,7 @@ export default {
 }
 @media only screen and (min-width: 1200px) and (max-width: 1440px) {
   .checkout-header-block-container {
-    min-height: 170px;
+    min-height: 130px;
   }
 }
 @media only screen and (min-width: 1440px) {

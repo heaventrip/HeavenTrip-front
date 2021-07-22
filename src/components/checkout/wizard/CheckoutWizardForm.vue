@@ -1,5 +1,4 @@
 <template>
-  <!-- eslint-disable vue/no-mutating-props -->
   <!-- <div class="preview-card border-0 d-none align-items-center text-uppercase flex-row bg-dark text-white px-5 rounded-lg mb-5">
     <span class="font-weight-light mr-5 ml-2">vous êtes {{ $parent.partipantsNb }} trippers</span>
     <ul class="list-unstyled mb-0 font-weight-500 name-list d-flex">
@@ -12,7 +11,7 @@
     <a href="#" class="ml-auto font-weight-light text-reset">modifier</a>
   </div> -->
   <!-- TODO séparer les participants -->
-  <div class="card card-header border-0 p-0 flex-row align-items-center pb-3" style="display: flex; flex-wrap: wrap; outline: 5px solid white; z-index: 15">
+  <div class="card card-header border-0 p-0 flex-row align-items-center pb-3" style="display: flex; flex-wrap: wrap; outline: 5px solid white" :style="{ zIndex: $windowWidth <= 1366 ? '' : '15' }">
     <div class="position-relative">
       <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase">Complète la réservation de :</h6>
     </div>
@@ -39,7 +38,7 @@
         <div class="hidable custom-radio-container">
           <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
             <label class="">
-              <input v-model="localBooker.booking.room" :value="index" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
+              <input v-model="localBooker.booking.room[0]" :value="index" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
               <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
                 <div>
                   <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
@@ -62,8 +61,8 @@
         <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
         <div class="hidable custom-radio-container">
           <div class="custom-control">
-            <label class="" for="customRadio5">
-              <input v-model="localBooker.booking.equipmentRental" :value="true" type="radio" id="customRadio5" name="materielBooker" class="" />
+            <label class="" for="materielBooker-with">
+              <input v-model="localBooker.booking.equipmentRental" :value="true" type="radio" id="materielBooker-with" name="materielBooker" class="" />
               <span class="d-flex align-items-center w-100 dotted-border">
                 <div>
                   <div class="font-weight-bold text-uppercase">avec matériel</div>
@@ -74,8 +73,8 @@
             </label>
           </div>
           <div class="custom-control">
-            <label class="" for="customRadio6">
-              <input v-model="localBooker.booking.equipmentRental" :value="false" type="radio" id="customRadio6" name="materielBooker" class="" />
+            <label class="" for="materielBooker-without">
+              <input v-model="localBooker.booking.equipmentRental" :value="false" type="radio" id="materielBooker-without" name="materielBooker" class="" />
               <span class="d-flex align-items-center w-100">
                 <div>
                   <div class="font-weight-bold text-uppercase">sans materiel</div>
@@ -131,7 +130,7 @@
           <div class="hidable custom-radio-container">
             <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
               <label class="">
-                <input v-model="extraParticipant.booking.room" :value="index" type="radio" :id="`extraPart${mainLoopIndex}-${index}`" :name="`extraPartRoom${mainLoopIndex}-${index}`" class="" />
+                <input v-model="extraParticipant.booking.room[0]" :value="index" type="radio" :id="`extraPart${mainLoopIndex}-${index}`" :name="`extraPartRoom${mainLoopIndex}-${index}`" class="" />
                 <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
                   <div>
                     <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
@@ -155,7 +154,7 @@
           <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
           <div class="hidable custom-radio-container">
             <div class="custom-control">
-              <label class="">
+              <label class="" :for="`extraPart${mainLoopIndex}-with`">
                 <input v-model="extraParticipant.booking.equipmentRental" :value="true" type="radio" :id="`extraPart${mainLoopIndex}-with`" :name="`material-extraPart${mainLoopIndex}`" class="" />
                 <span class="d-flex align-items-center w-100 dotted-border">
                   <div>
@@ -167,15 +166,15 @@
               </label>
             </div>
             <div class="custom-control">
-              <label class="">
+              <label class="" :for="`extraPart${mainLoopIndex}-without`">
                 <input v-model="extraParticipant.booking.equipmentRental" :value="false" type="radio" :id="`extraPart${mainLoopIndex}-without`" :name="`material-extraPart${mainLoopIndex}`" class="" />
-                <div class="d-flex align-items-center w-100">
-                  <span>
+                <span class="d-flex align-items-center w-100">
+                  <div>
                     <div class="font-weight-bold text-uppercase">sans materiel</div>
-                    <p class="font-weight-500 mb-0">Je préfére venir avec mon matos !</p>
-                  </span>
+                    <p class="font-weight-500 mb-0" style="font-family: 0.875rem">Je préfére venir avec mon matos !</p>
+                  </div>
                   <div class="ml-auto font-weight-bold text-uppercase">reduction de 380 &euro;</div>
-                </div>
+                </span>
               </label>
             </div>
           </div>
@@ -186,8 +185,9 @@
           <div class="hidable">
             <div class="custom-radio-container inline-blocks py-3">
               <div class="custom-control custom-radio bg-light rounded border mb-3">
-                <label class="d-flex align-items-center border-0 m-0" for="customRadio8">
-                  <input v-model="extraParticipant.booking.extraActivities" value="1" type="checkbox" id="customRadio8" class="" :disabled="extraParticipant.booking.noExtraActivities" />
+                <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${mainLoopIndex}-activ0`">
+                  <input v-model="extraParticipant.booking.extraActivities" value="1" type="checkbox" :id="`extraPart${mainLoopIndex}-activ0`" class="" :disabled="extraParticipant.booking.noExtraActivities" />
+                  <!-- TODO extracti -->
                   <span class="font-weight-bold text-uppercase">
                     <div style="margin-right: 2.25rem">sup-paddle</div>
                     <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
@@ -196,8 +196,8 @@
               </div>
             </div>
             <div class="custom-control custom-checkbox other-activity-check">
-              <label class="mb-0" for="exampleCheck4" style="font-weight: 400">
-                <input v-model="extraParticipant.booking.noExtraActivities" type="checkbox" class="" id="exampleCheck4" />
+              <label class="mb-0" :for="`extraPart${mainLoopIndex}-noextra`" style="font-weight: 400">
+                <input v-model="extraParticipant.booking.noExtraActivities" type="checkbox" class="" :id="`extraPart${mainLoopIndex}-noextra`" />
                 <span>Je ne souhaite pas d'autres activites</span>
               </label>
             </div>
@@ -307,29 +307,24 @@ export default {
   },
   computed: {
     bookerRoomFilled() {
-      return this.localBooker.booking.room && this.localBooker.booking.roomMate
+      return !!this.localBooker.booking.room.length && !!this.localBooker.booking.roomMate
     },
     bookerNoteFilled() {
-      return this.localBooker.booking.extraNotes
+      return !!this.localBooker.booking.extraNotes
     },
-    // equipmentFilled() {
-    //   return this.localBooker.booking.equipmentRental === true || this.localBooker.booking.equipmentRental === false
-    // },
-    // activitiesFilled() {
-    //   return this.localBooker.booking.noExtraActivities !== null || this.localBooker.booking.extraActivities.length
-    // },
     extraParticipantRoomFilled() {
-      return this.localExtraParticipants[this.currFormParticipant].booking.room && this.localExtraParticipants[this.currFormParticipant].booking.roomMate
+      return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length
+      // return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length && !!this.localExtraParticipants[this.currFormParticipant].booking.roomMate
+    },
+    extraParticipantEquipmentFilled() {
+      return this.localExtraParticipants[this.currFormParticipant].booking.equipmentRental !== null
+    },
+    extraParticipantActivitiesFilled() {
+      return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities || this.localExtraParticipants[this.currFormParticipant].booking.extraActivities.length
     },
     extraParticipantNoteFilled() {
-      return this.localExtraParticipants[this.currFormParticipant].booking.extraNotes
+      return !!this.localExtraParticipants[this.currFormParticipant].booking.extraNotes
     }
-    // equipmentFilled() {
-    //   return this.localBooker.booking.equipmentRental === true || this.localBooker.booking.equipmentRental === false
-    // },
-    // activitiesFilled() {
-    //   return this.localBooker.booking.noExtraActivities !== null || this.localBooker.booking.extraActivities.length
-    // },
   },
   watch: {
     bookerRoomFilled(val) {
@@ -349,27 +344,33 @@ export default {
       // if (val) this.nextFormStep(4)
     },
     extraParticipantRoomFilled(val) {
+      console.log('room changed')
       if (val) this.nextFormStep(1)
     },
-    'extraParticipant.booking.equipmentRental': {
-      handler(val) {
-        this.nextFormStep(2)
-      }
+    extraParticipantEquipmentFilled(val) {
+      console.log('eq changed')
+      if (val) this.nextFormStep(2)
     },
-    'extraParticipant.booking.noExtraActivities': {
-      handler(val) {
-        this.nextFormStep(3)
-      }
+    extraParticipantActivitiesFilled(val) {
+      console.log('act changed')
+      if (val) this.nextFormStep(3)
     },
     extraParticipantNoteFilled(val) {
+      // TODO add btns then show recap
       // if (val) this.nextFormStep(4)
     },
-    booker(v) {
-      console.log(v)
-    },
-    extraParticipants(v) {
-      console.log(v)
-    },
+    // localExtraParticipants: {
+    //   deep: true,
+    //   handler(val) {
+    //     if (val[0].booking.equipmentRental !== null) console.log('RENTAL EXTRAAAAAAAAAAAAAAA')
+    //     this.nextFormStep(2)
+    //   }
+    // },
+    // 'localExtraParticipants[0].booking.noExtraActivities': {
+    //   handler(val) {
+    //     this.nextFormStep(3)
+    //   }
+    // },
     filled(val) {
       if (val) this.$emit('complete')
       else this.$emit('incomplete')
@@ -377,14 +378,13 @@ export default {
     localBooker: {
       deep: true,
       handler(val) {
-        console.log(val, this.bookerBookingFilled())
         this.$emit('updated-booker', val)
       }
     },
     localExtraParticipants: {
       deep: true,
       handler(val) {
-        console.log(val, this.participantsBookingFilled())
+        // if (val[0].booking.room.length > 0) if (val[0].booking.equipmentRental !== null) console.log('RENTAL EXTRAAAAAAAAAAAAAAA')
         this.$emit('updated-participants', val)
       }
     }
@@ -437,9 +437,6 @@ export default {
   max-width: 1200px;
   padding: 1.25rem 2.25rem;
   border-radius: 0 !important;
-}
-.card-booker {
-  background-color: #ebebeb38;
 }
 .card-header {
   position: sticky;

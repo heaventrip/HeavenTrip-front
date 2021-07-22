@@ -155,7 +155,7 @@
             <div class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
               <div class="col-4 col-md-4 p-0">
                 <div class="position-relative w-100 h-100">
-                  <a href="/checkout"><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
+                  <a href="/checkout"><img class="img-fluid img-fill" fluid :src="normalResult?.cover" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
                 </div>
               </div>
               <div class="d-flex fg-1">

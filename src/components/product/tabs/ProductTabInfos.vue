@@ -116,7 +116,7 @@
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
               <InlineSvg :src="require(`@/assets/svg/intensity-1.svg`)" height="150px" />
-              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
+              <InlineSvg :src="require(`@/assets/svg/heartbeat.svg`)" height="35%" fill="#d82558" style="left: 32%; top: 35%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">

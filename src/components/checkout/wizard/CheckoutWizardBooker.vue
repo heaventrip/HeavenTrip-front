@@ -114,11 +114,11 @@ export default {
           postalCode: 'a'
         },
         booking: {
-          room: ['a'],
+          room: [],
           roomMate: 'a',
-          equipmentRental: true,
-          noExtraActivities: true,
-          extraActivities: ['a'],
+          equipmentRental: null,
+          noExtraActivities: null,
+          extraActivities: [],
           extraNotes: 'a',
           insurance: 'a'
         }
@@ -135,7 +135,6 @@ export default {
     booker: {
       deep: true,
       handler(val) {
-        console.log(val)
         this.$emit('updated-booker', val)
 
         if (this.bookerInfosFilled) this.$emit('complete')

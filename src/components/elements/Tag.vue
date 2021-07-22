@@ -34,14 +34,24 @@ export default {
   color: #292f33;
 }
 .tag--grey {
-  background-color: white;
-  color: #292f33;
+  background-color: #292f33;
+  color: white;
   opacity: 60%;
+}
+.tag--grey-product-header {
+  background-color: #292f335d;
+  color: white;
+  opacity: 80%;
 }
 .tag--pink {
   background-color: #d82558;
   color: #fff;
   opacity: 90%;
+}
+.tag--violet {
+  background-color: #5a3a5f;
+  color: #fff;
+  border-radius: 15%;
 }
 .tag__content {
   width: max-content;

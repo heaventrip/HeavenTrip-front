@@ -67,15 +67,20 @@
         <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
         <transition name="fade-fast" mode="out-in">
           <div :key="activeSportTab">
-            <p class="content">{{ activeSportTab?.description || course.sports[0].description }}</p>
-            <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+            <p class="content" style="font-family: Muli; line-height: 1.8; font-weight: 400; font-size: 0.875rem">
+              Une journée off sera proposée en fonction des conditions climatiques pour s'octroyer un moment de détente, comme partager avec le groupe une journée de plongée en mer rouge à bord d’un bateau privé. Notre team sera présente toute la semaine pour proposer un accompagnement sur-mesure et
+              répondre à vos envies. Fun, rencontres et progression assurés !!
+            </p>
+            <!-- <p class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">{{ activeSportTab?.description || course.sports[0].description }}</p> -->
+
+            <!-- <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
               <li v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo" style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   {{ sportInfo.title }}
                   <strong class="text-dark ml-2">{{ sportInfo.description }}</strong></a
                 >
               </li>
-            </ul>
+            </ul> -->
           </div>
         </transition>
       </div>
@@ -142,7 +147,7 @@
       </span>
     </div>
     <div class="d-flex align-items-center" style="margin-left: -2rem; margin-right: -2rem">
-      <ul v-if="course.multisport" class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab " role="tablist">
+      <ul v-if="course.multisport" class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab" role="tablist">
         <li v-for="(sport, index) in course.sports" :key="sport" class="nav-item fg-1" role="presentation">
           <a class="nav-link active m-0" :id="`pills-act${index}-tab`" data-toggle="pill" :href="`#pills-act${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ sport.name }}</a>
         </li>
@@ -190,8 +195,27 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="row">
-        <div v-for="includedCourse in includedCourses" :key="includedCourse" class="col-12 col-lg-4">
+      <div class="d-flex w-100">
+        <div v-for="includedCourse in includedCourses.splice(0, 3)" :key="includedCourse" class="included-activity-card" style="min-width: 230px">
+          <div class="box bg-white my-0" style="padding: 2rem">
+            <div class="head text-uppercase mb-0 d-inline-block text-danger" style="font-size: 1rem; font-weight: 900">
+              <InlineSvg v-if="includedCourse.picto" fill="#d82558" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
+              <InlineSvg fill="#d82558" height="10" class="mx-3 d-inline-block" :src="require(`@/assets/svg/triangle-right.svg`)" />
+              <span class="d-inline-block align-middle">{{ includedCourse.title }}</span>
+            </div>
+            <ul class="list-unstyled list mt-3 mb-0">
+              <li v-for="(info, index) in includedCourse.alternativeInfos" :key="info">
+                <a href="#" @click.prevent style="cursor: default" class="text-decoration-none" :class="[index === includedCourse.alternativeInfos.length - 1 ? 'pb-0' : '']">
+                  {{ info.title }} :
+                  <strong class="text--grey ml-2">{{ info.description }}</strong>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex w-100" v-if="includedCourses.splice(3, 3).length">
+        <div v-for="includedCourse in includedCourses.splice(3, 3)" :key="includedCourse" class="included-activity-card" style="min-width: 230px">
           <div class="box bg-white my-0" style="padding: 2rem">
             <div class="head text-uppercase mb-0 d-inline-block text-danger" style="font-size: 1rem; font-weight: 900">
               <InlineSvg v-if="includedCourse.picto" fill="#d82558" height="35" class="head-pin-icon d-inline-block m-0" :src="require(`@/assets/svg/${includedCourse.picto}.svg`)" />
@@ -234,9 +258,9 @@
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
             <div class="like-div white">
-              <h5 class="content-head text-nowrap pr-3" style="font-weight: 900">LES + DU SPOT :</h5>
               <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
-                <li v-for="spotAdvantage in course?.spot?.spotAdvantages" :key="spotAdvantage">
+                <h5 class="content-head text-nowrap pr-3 fg-3" style="font-weight: 900">LES + DU SPOT :</h5>
+                <li class="text-right fg-1" v-for="spotAdvantage in course?.spot?.spotAdvantages" :key="spotAdvantage">
                   <a class="text-reset p-0" @click.prevent style="cursor: default" href="#"><i class="fas fa-plus mr-2"></i>{{ spotAdvantage.name }}</a>
                 </li>
               </ul>
@@ -313,6 +337,15 @@ export default {
 </script>
 
 <style scoped>
+.included-activity-card {
+  min-width: 230px;
+  margin-right: 5px;
+}
+@media only screen and (min-width: 1441px) {
+  .included-activity-card {
+    margin-right: 2rem;
+  }
+}
 .sport-tab--active {
   border-bottom: 1px solid #292f33;
 }

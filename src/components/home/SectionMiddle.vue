@@ -127,6 +127,7 @@ export default {
 .pad-block {
   margin-left: auto;
   min-width: 500px;
+  margin-right: 20%;
 }
 .pad__header {
   padding: 1.2rem 2rem;

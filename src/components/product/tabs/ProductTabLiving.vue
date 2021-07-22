@@ -27,28 +27,28 @@
       </div>
       <div class="card-body">
         <div v-for="room in course.rooms" :key="room" class="head text-uppercase py-2 d-inline-block mr-5" style="font-weight: 500; cursor: pointer" :class="{ 'room-tab--active': activeRoomTab === room }" @mouseover="activeRoomTab = room">
-          {{ room.title }}
+          {{ room?.title }}
         </div>
         <transition name="fade-fast" mode="out-in">
           <div :key="activeRoomTab">
-            <p class="content">{{ activeRoomTab.title }}</p>
+            <p class="content">{{ activeRoomTab?.title }}</p>
             <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   Nom :
-                  <strong class="text-dark ml-2">{{ activeRoomTab.title }}</strong></a
+                  <strong class="text-dark ml-2">{{ activeRoomTab?.title }}</strong></a
                 >
               </li>
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   Prix :
-                  <strong class="text-dark ml-2">{{ activeRoomTab.price }}</strong></a
+                  <strong class="text-dark ml-2">{{ activeRoomTab?.price }}</strong></a
                 >
               </li>
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   Capacité :
-                  <strong class="text-dark ml-2">{{ activeRoomTab.quantity }} personnes</strong></a
+                  <strong class="text-dark ml-2">{{ activeRoomTab?.quantity }} personnes</strong></a
                 >
               </li>
             </ul>
@@ -56,7 +56,7 @@
         </transition>
         <div v-if="false" class="d-flex align-items-center mb-4">
           <!-- <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5> -->
-          <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab " role="tablist">
+          <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab" role="tablist">
             <li v-for="(room, index) in course.rooms" :key="room" class="nav-item" role="presentation">
               <a class="nav-link m-0" :class="[index === 0 ? 'active' : '']" id="pills-solo-tab" data-toggle="pill" :href="`#pills-room-${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ room.title }}</a>
             </li>
@@ -108,10 +108,10 @@
     </div>
   </div>
   <swiper :slidesPerView="3" :spaceBetween="1" :loop="true" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }">
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach.jpg')" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" :src="require('@/assets/images/beach1.jpg')" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7KLjC3NaiA4RjXxEoifCQZ/2de2549c4677ac776dfd21d9a8a0d49f/kitesurf-elgouna-cook2.jpg" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7jcPbN1eXNsFxWfEkwKlUP/5f6367376f5b06a26473e5822ea4ba87/kitesurf-elgouna-groupe2" /></swiper-slide>
   </swiper>
   <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   <div class="linear-block mb-0 p-0" style="background-color: rgb(252, 252, 252); box-shadow: none">
