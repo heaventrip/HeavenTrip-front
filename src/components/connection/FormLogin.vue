@@ -1,14 +1,14 @@
 <template>
   <div class="form-group has-float-label">
-    <input id="prenom" class="form-control" type="text" name="" placeholder=" " />
-    <label for="prenom">Adresse e-mail</label>
+    <input id="login-email" v-model="email" class="form-control" type="email" name="" placeholder=" " />
+    <label for="login-email">Adresse e-mail</label>
   </div>
   <div class="form-group has-float-label">
-    <input id="emailAddr" class="form-control" type="email" name="" placeholder=" " />
-    <label for="emailAddr">Mot de passe</label>
+    <input id="login-password" v-model="password" class="form-control" type="password" name="" placeholder=" " />
+    <label for="login-password">Mot de passe</label>
   </div>
   <div>
-    <Button class="" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" background-color="#d82558" />
+    <Button :class="{ 'bttn-disabled': !formIsValid }" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
   </div>
 </template>
 
@@ -95,6 +95,11 @@ export default {
   border-radius: 0;
   border: none;
   border-bottom: 1px solid white;
+}
+.bttn-disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
 }
 .slide-enter-active,
 .slide-leave-active {

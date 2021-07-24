@@ -15,14 +15,16 @@
         </div>
         <transition name="fade-fast" mode="out-in">
           <form :key="activeTab">
-            <FormLogin v-if="activeTab === 'signup'" />
-            <Password v-else />
+            <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
+            <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @submitted-form="activeTab = 'infos'" />
+            <FormInfos v-else-if="activeTab === 'infos'" />
+            <Password v-else-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
           </form>
         </transition>
       </div>
       <div class="d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: white">
         <div class="mb-4" style="color: #292f33">Tripper, je suis déjà !</div>
-        <Button text="J'ai déjà un compte" px="1.5rem" size=".8rem" height="50px" width="60%" weight="bold" text-color="#fff" background-color="#292f33" />
+        <Button text="J'ai déjà un compte" px="1.5rem" size=".8rem" height="50px" width="60%" weight="bold" text-color="#fff" color="grey" @clicked="activeTab = 'login'" />
       </div>
     </div>
   </div>
@@ -31,14 +33,18 @@
 <script>
 import Button from '@/components/elements/Button.vue'
 import FormLogin from './FormLogin.vue'
+import FormSignup from './FormSignup.vue'
+import FormInfos from './FormInfos.vue'
 import Password from './Password.vue'
 
 export default {
-  name: 'Profile',
+  name: 'Account',
   components: {
     Button,
-    Password,
-    FormLogin
+    FormLogin,
+    FormSignup,
+    FormInfos,
+    Password
   },
   data() {
     return {

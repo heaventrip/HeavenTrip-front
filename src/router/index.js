@@ -6,7 +6,7 @@ import Home from '@/views/Home.vue'
 import ProductHome from '@/components/product/ProductHome.vue'
 import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
 import SearchHome from '@/components/search/SearchHome.vue'
-import Profile from '@/components/connection/Profile.vue'
+import Account from '@/components/connection/Account.vue'
 import ConnectionModal from '@/components/connection/ConnectionModal.vue'
 import Legal from '@/components/legal/Legal.vue'
 import { isLoggedIn } from '@/utils/auth'
@@ -48,8 +48,8 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Profile',
-    component: Profile
+    name: 'Account',
+    component: Account
   },
   {
     path: '/legal',

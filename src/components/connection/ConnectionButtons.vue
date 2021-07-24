@@ -81,7 +81,7 @@
             <div class="account-dropdown-item">
               <button @click="openProfile = true" class="dropdown-item account-page-link" type="button">Mon compte</button>
               <teleport to="#modal">
-                <Profile v-if="openProfile" />
+                <Account v-if="openProfile" />
               </teleport>
               <!-- <Profile v-if="showProfileModal" /> -->
             </div>
@@ -102,14 +102,14 @@
   <!-- modal -->
   <teleport to="#modal">
     <transition name="fade">
-      <ConnectionModal @login-success="loginSuccess" v-if="showModal" :whichForm="form" />
+      <ConnectionModal v-if="showModal" :whichForm="form" />
     </transition>
   </teleport>
 </template>
 
 <script>
 import ConnectionModal from '@/components/connection/ConnectionModal.vue'
-import Profile from '@/components/connection/Profile.vue'
+import Account from '@/components/connection/Account.vue'
 import { isLoggedIn } from '@/utils/auth'
 import { logoutUser } from '@/utils/auth'
 
@@ -117,7 +117,7 @@ export default {
   name: 'ConnectionButtons',
   components: {
     ConnectionModal,
-    Profile
+    Account
   },
   data() {
     return {
