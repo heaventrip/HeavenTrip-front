@@ -1,5 +1,6 @@
 // import decode from 'jwt-decode'
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 const REST_ENDPOINT = 'https://heaventrip-dev.herokuapp.com/api/v1'
 // const REST_ENDPOINT = 'http://localhost:3000/api/v1'
@@ -16,7 +17,6 @@ export async function loginUser(email, password) {
       })
       .then((res) => {
         setAuthToken(res.data.auth_token)
-        setUserInfos(res.data.user)
         resolve()
       })
       .catch((err) => reject(err))
@@ -35,18 +35,15 @@ export function getAuthToken() {
   return localStorage.getItem(AUTH_TOKEN_KEY)
 }
 
-export function setUserInfos(user) {
-  localStorage.setItem('user.firstName', user.first_name)
-  localStorage.setItem('user.lastName', user.last_name)
-  localStorage.setItem('user.city', user.city)
-}
+// export function setUserInfos(user) {
+//   localStorage.setItem('user.firstName', user.first_name)
+//   localStorage.setItem('user.lastName', user.last_name)
+//   localStorage.setItem('user.city', user.city)
+// }
 
 export function clearAuthToken() {
   axios.defaults.headers.common['Authorization'] = ''
   localStorage.removeItem(AUTH_TOKEN_KEY)
-  localStorage.removeItem('user.firstName')
-  localStorage.removeItem('user.lastName')
-  localStorage.removeItem('user.city')
 }
 
 export function isLoggedIn() {
@@ -54,11 +51,11 @@ export function isLoggedIn() {
   return !!authToken
 }
 
-// export function getUserInfo() {
-//   if (isLoggedIn()) {
-//     return decode(getAuthToken())
-//   }
-// }
+export function getUserInfo() {
+  if (isLoggedIn()) {
+    return jwt_decode(getAuthToken())
+  }
+}
 
 // function getTokenExpirationDate(encodedToken) {
 //   let token = decode(encodedToken)

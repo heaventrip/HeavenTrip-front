@@ -1,8 +1,8 @@
 <template>
   <!-- NOTE this is the new PARENT element for connection screens -->
-  <div v-if="showProfile" class="wrap">
-    <InlineSvg @click="showProfile = false" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" height="60" style="position: absolute; top: 30px; left: 30px; z-index: 100" />
-    <div class="image-container" style="width: 52%; position: relative">
+  <div class="wrapper">
+    <InlineSvg @click.stop="handlePageClose" type="button" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" height="60" style="position: absolute; top: 30px; left: 30px; z-index: 100" />
+    <div class="purple-container" style="width: 52%; position: relative">
       <InlineSvg :src="require('@/assets/svg/logo-white.svg')" style="position: absolute" height="40" />
       <div></div>
       <div></div>
@@ -12,19 +12,26 @@
         <div class="d-flex connection-nav-container mb-5">
           <div @click="activeTab = 'login'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeTab === 'login' }">Connexion</div>
           <div @click="activeTab = 'signup'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeTab === 'signup' }">Inscription</div>
+          <div @click="activeTab = 'infos'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>
+          <div @click="activeTab = 'password'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeTab === 'password' }">Password</div>
+        </div>
+        <div class="d-flex connection-nav-container mb-5" v-if="activeTab === 'infos'">
+          <div @click="activeInfoTab = 'gender'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Sexe</div>
+          <div @click="activeInfoTab = 'avatar'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
+          <div @click="activeInfoTab = 'bio'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Bio</div>
         </div>
         <transition name="fade-fast" mode="out-in">
           <form :key="activeTab">
             <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
             <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @submitted-form="activeTab = 'infos'" />
-            <FormInfos v-else-if="activeTab === 'infos'" />
+            <FormInfos v-else-if="activeTab === 'infos'" @changed-tab="setNewTab" :active-info-tab="activeInfoTab" />
             <Password v-else-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
           </form>
         </transition>
       </div>
       <div class="d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: white">
         <div class="mb-4" style="color: #292f33">Tripper, je suis déjà !</div>
-        <Button text="J'ai déjà un compte" px="1.5rem" size=".8rem" height="50px" width="60%" weight="bold" text-color="#fff" color="grey" @clicked="activeTab = 'login'" />
+        <Button text="J'ai déjà un compte" px="1.5rem" size=".8rem" height="50px" width="60%" weight="bold" text-color="#fff" color="grey" @click="activeTab = 'login'" />
       </div>
     </div>
   </div>
@@ -46,11 +53,31 @@ export default {
     FormInfos,
     Password
   },
+  props: ['new-active-tab'],
   data() {
     return {
-      activeTab: 'signup',
-      showProfile: true
+      activeTab: '',
+      activeInfoTab: 'gender'
     }
+  },
+  watch: {
+    newActiveTab: {
+      immediate: true,
+      handler(val) {
+        this.activeTab = val
+      }
+    }
+  },
+  methods: {
+    setNewTab(val) {
+      this.activeInfoTab = val
+    },
+    handlePageClose() {
+      this.$emit('closed-page')
+    }
+  },
+  mounted() {
+    document.querySelector('.purple-container').addEventListener('click', () => this.handlePageClose(), { once: true })
   }
 }
 </script>
@@ -109,7 +136,7 @@ export default {
   flex-grow: 1;
   text-align: center;
 }
-.wrap {
+.wrapper {
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -124,7 +151,7 @@ export default {
   height: 100%;
   width: 100%;
 }
-.image-container::after {
+.purple-container::after {
   content: '';
   position: absolute;
   background-color: hsla(292, 24%, 30%, 0.95);

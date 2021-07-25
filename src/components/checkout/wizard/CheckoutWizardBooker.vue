@@ -37,8 +37,8 @@
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label @click="booker.booking.gender = 'f'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.booking.gender === 'f' ? 'bg-grey text-white' : '']">Femme</label>
-                      <label @click="booker.booking.gender = 'm'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.booking.gender === 'm' ? 'bg-grey text-white' : '']">Homme</label>
+                      <label @click="booker.infos.gender = 'f'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.infos.gender === 'f' ? 'bg-grey text-white' : '']">Femme</label>
+                      <label @click="booker.infos.gender = 'm'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.infos.gender === 'm' ? 'bg-grey text-white' : '']">Homme</label>
                     </div>
                   </div>
                 </div>

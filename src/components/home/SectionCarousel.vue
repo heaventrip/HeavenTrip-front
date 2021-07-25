@@ -235,12 +235,6 @@ export default {
     }
   },
   watch: {
-    cardsArr: {
-      deep: true,
-      handler(val) {
-        // console.log('OK IT CHANGED')
-      }
-    },
     firstName(newVal) {
       this.firstName = newVal
     }

@@ -24,30 +24,30 @@
     </div>
     <div class="col-12 col-lg-4">
       <div class="form-group has-float-label">
-        <input id="signup-birthDate" v-model="birthDate" class="form-control" type="text" name="" placeholder=" " required datepicker />
+        <input id="signup-birthDate" type="date" name="" class="form-control" placeholder=" " datepicker :min="minBirthDate" required v-model="birthDate" />
         <label for="signup-birthDate">Date de naissance</label>
+        <span class="validity"></span>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-password" v-model="password" class="form-control" type="text" name="" placeholder=" " />
+        <input id="signup-password" v-model="password" class="form-control" type="password" name="" placeholder=" " />
         <label for="signup-password">Mot de passe</label>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-passwordConfirmation" v-model="passwordConfirmation" class="form-control" type="text" name="" placeholder=" " />
+        <input id="signup-passwordConfirmation" v-model="passwordConfirmation" class="form-control" type="password" name="" placeholder=" " />
         <label for="signup-passwordConfirmation">Confirmer le mot de passe</label>
       </div>
     </div>
   </div>
-  <Button :class="{ 'bttn-disabled': !formIsValid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
+  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': !formIsValid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
   <div class="d-flex regist mb-4">
     <div>
       <input id="signup-legal" type="checkbox" v-model="legal" />
-      <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant, tu acceptes nos <span class="text-danger text-decoration-underline">conditions générales d'utilisation</span> </label>
+      <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">conditions générales d'utilisation</router-link> </label>
     </div>
-    <a class="ml-auto acc-text d-none d-lg-block" style="cursor: pointer; font-size: 0.875rem" @click.stop="$emit('clicked-existing-account')">J'ai déjà un compte</a>
   </div>
 </template>
 
@@ -59,7 +59,7 @@ export default {
   components: {
     Button
   },
-  emits: ['clicked-existing-account', 'submitted-form'],
+  emits: ['submitted-form'],
   data() {
     return {
       errors: [],
@@ -85,6 +85,13 @@ export default {
     },
     formIsValid() {
       return this.birthDateIsValid && this.firstNameIsValid && this.lastNameIsValid && this.emailIsValid && this.passwordIsValid && this.passwordConfirmationIsValid && this.legal
+    },
+    minBirthDate() {
+      let currDate = new Date()
+      let minYear = currDate.getFullYear() - 18
+      currDate.setFullYear(minYear)
+      console.log(currDate.toISOString().slice(0, 10))
+      return currDate.toISOString().slice(0, 10)
     }
   },
   watch: {
@@ -153,6 +160,7 @@ export default {
           this.password = ''
           this.passwordConfirmation = ''
           this.$emit('submitted-form')
+          alert('Un mail de confirmation vient de vous être envoyé')
         })
         .catch((err) => (this.errResponse = err.message))
       // this.$router.push('/');
@@ -162,6 +170,9 @@ export default {
 </script>
 
 <style scoped>
+.bttn--pink:hover {
+  border: 1px solid white;
+}
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.15em;
   font-size: 130%;
@@ -183,12 +194,18 @@ export default {
   border: none;
   border-bottom: 1px solid #b4b4b4;
   background-color: transparent;
+  padding-bottom: 0.1rem;
+  color: #fff;
 }
 .form-control:focus {
   background-color: transparent;
   border-radius: 0;
   border: none;
   border-bottom: 1px solid white;
+}
+#signup-birthDate:invalid + span:after {
+  content: 'Désolé, tu dois être majeur !';
+  padding-left: 5px;
 }
 .bttn-disabled {
   pointer-events: none;

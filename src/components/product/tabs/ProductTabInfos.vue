@@ -100,15 +100,15 @@
         <div class="col-12 col-lg-6">
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
-              <InlineSvg v-if="course.level.step" :src="require(`@/assets/svg/intensity-${course.level.step}.svg`)" height="150px" />
-              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
+              <InlineSvg v-if="course?.level.step" :src="require(`@/assets/svg/intensity-${course?.level.step}.svg`)" height="150px" />
+              <InlineSvg v-if="course?.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
-                Niveau : <strong class="ml-2">{{ course.level.step }}</strong
+                Niveau : <strong class="ml-2">{{ course?.level.step }}</strong
                 >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course.level.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
+              <h6 class="status-text mb-0">{{ course?.level.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>
@@ -121,10 +121,10 @@
             <span class="ml-4">
               <h6 class="level-text">
                 Intensité physique :
-                <strong class="ml-2">{{ course.intensity.step }}</strong
+                <strong class="ml-2">{{ course?.intensity.step }}</strong
                 >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course.intensity.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
+              <h6 class="status-text mb-0">{{ course?.intensity.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>

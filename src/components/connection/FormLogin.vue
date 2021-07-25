@@ -8,11 +8,13 @@
     <label for="login-password">Mot de passe</label>
   </div>
   <div>
-    <Button :class="{ 'bttn-disabled': !formIsValid }" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
+    <Button :class="{ 'bttn-disabled': !formIsValid }" @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
   </div>
 </template>
 
 <script>
+import { email, required } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
 import Button from '@/components/elements/Button.vue'
 import { loginUser } from '@/utils/auth'
 
@@ -68,6 +70,9 @@ export default {
 </script>
 
 <style scoped>
+.bttn--pink:hover {
+  border: 1px solid white;
+}
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.15em;
   font-size: 130%;
@@ -89,6 +94,8 @@ export default {
   border: none;
   border-bottom: 1px solid #b4b4b4;
   background-color: transparent;
+  padding-bottom: 0.1rem;
+  color: #fff;
 }
 .form-control:focus {
   background-color: transparent;

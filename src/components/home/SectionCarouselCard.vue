@@ -86,14 +86,6 @@ export default {
     Tag
   },
   watch: {
-    cardsArr: {
-      immediate: true,
-      handler(val) {
-        // document.querySelectorAll('.card-block').forEach((card) => {
-        //   card.gsapTl = this.cardAnim(card)()
-        // })
-      }
-    },
     course(val) {
       if (!val.wishlistUsers) return
 

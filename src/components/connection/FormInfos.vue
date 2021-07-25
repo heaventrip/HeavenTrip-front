@@ -1,6 +1,6 @@
 <template>
   <div class="text-center mobile-vh">
-    <div v-if="step === 1" class="centered-vh">
+    <div v-if="activeInfoTabs[activeStep] === 'gender'" class="centered-vh">
       <div class="profile-head" style="font-size: 0.875rem">
         <span class="" style="font-weight: 500">Ton espace client te permet d’avoir une page spéciale Tripper "public".Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.</span>
       </div>
@@ -13,15 +13,28 @@
         </div>
       </div>
     </div>
-    <div v-if="step === 2" class="centered-vh">
-      <h6 class="profile-head mb-5 mt-md-0">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
+    <div v-else-if="activeInfoTabs[activeStep] === 'avatar'" class="centered-vh">
+      <h6 class="profile-head mb-5 mt-md-0" style="font-size: 0.875rem; line-height: 1.5">Tu verras, sur le site tu pourras voir les photos des intéressés et des participants. Sois pas timide et montre toi !</h6>
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
           <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
         </div>
-        <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" url="https://heaventrip-dev.herokuapp.com/api/v1/upload" v-model="show" :width="300" :height="300" img-format="jpg"></my-upload>
+        <my-upload
+          :no-square="true"
+          :langExt="uploadLang"
+          field="img"
+          @src-file-Set="fileSet"
+          @crop-success="cropSuccess"
+          @crop-upload-success="cropUploadSuccess"
+          @crop-upload-fail="cropUploadFail"
+          url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+          v-model="show"
+          :width="300"
+          :height="300"
+          img-format="jpg"
+        ></my-upload>
         <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
@@ -76,7 +89,7 @@
                   </div> -->
       </div>
     </div>
-    <div v-if="step === 3" class="centered-vh">
+    <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
       <h6 class="profile-head mb-5">Ultra rapide, une petite bio, tes passions, un proverbe préféré ?</h6>
       <div class="row">
         <div class="col-12 col-lg-12 mx-auto">
@@ -84,12 +97,12 @@
           <p class="sub-text font-weight-normal text-left">Visible sur ta page public par les autres Trippers, tu peux renseigner ou modifier à tout moment tes infos via ton espace client.</p>
           <form>
             <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Aucune obligation! Fais-toi plaisir !"></textarea>
-            <button @click="updateProfile" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase">Valider mon inscription</button>
+            <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" @click="activeTab = 'login'" />
           </form>
         </div>
       </div>
     </div>
-    <div v-if="step === 4" class="centered-vh">
+    <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh">
       <div class="row justify-content-center align-items-center mt-4">
         <img class="d-inline-block mr-5 my-4" fluid :src="require('@/assets/images/mic_light.png')" />
         <h6 class="text-uppercase text-white font-weight-normal text-left">
@@ -97,41 +110,86 @@
           Ému de te compter parmi nous !
         </h6>
       </div>
-      <button @click.prevent="$parent.$parent.showModal = false" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
+      <!-- <button @click.prevent="$parent.$parent.showModal = false" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button> -->
     </div>
-    <a v-if="step <= 4" @click.prevent="step++" class="d-block text-center profile-btm-text mt-4" style="color: #292f33" href="#">Je décide de le faire plus tard</a>
+    <a v-if="activeStep < 2" @click.prevent="activeStep++" class="d-block text-center profile-btm-text mt-5" style="color: white; font-size: 0.8rem" href="#">Je décide de le faire plus tard</a>
   </div>
 </template>
 
 <script>
 import MyUpload from 'vue-image-crop-upload'
+import Button from '@/components/elements/Button.vue'
 import '../../assets/css/upload.css' // overwrites default
 
 export default {
   name: 'FormInfos',
+  props: ['active-info-tab'],
   components: {
-    MyUpload
+    MyUpload,
+    Button
   },
   data() {
     return {
-      step: 1,
+      uploadLang: {
+        hint: '',
+        loading: 'Téléchargement en cours...',
+        noSupported: "Ce navigateur n'est pas compatible",
+        success: 'Téléchargé avec succès !',
+        fail: 'Le téléchargement a échoué...',
+        preview: 'Aperçu',
+        btn: {
+          off: 'Annuler',
+          close: 'Fermer',
+          back: 'Retour',
+          save: 'Envoyer'
+        },
+        error: {
+          onlyImg: 'Uniquement des images',
+          outOfSize: "L'image est trop volumineuse",
+          lowestPx: "L'image est trop petite"
+        }
+      },
       gender: '',
       description: '',
       show: true,
-      imgDataUrl: ''
+      imgDataUrl: '',
+      activeInfoTabs: ['gender', 'avatar', 'bio', 'success'],
+      activeStep: 0
     }
   },
   watch: {
-    step(val) {
-      if (val === 4) this.$emit('reached-success')
+    activeInfoTab(val) {
+      this.activeStep = this.activeInfoTabs.indexOf(val)
+
+      if (val === 'avatar') {
+        this.$nextTick(() => {
+          document.querySelector('.vicp-step1 .vicp-operate').style.display = 'none'
+          let buttons = document.querySelector('.vicp-step2 .vicp-operate')
+          console.log('&&&&&&&&&&&&', buttons)
+          buttons.firstChild.innerText = 'Retour'
+          buttons.lastChild.innerText = 'Valider'
+        })
+      }
+    },
+    activeStep(val) {
+      if (val === 3) this.$emit('reached-success')
+      this.$emit('changed-tab', this.activeInfoTabs[this.activeStep])
     },
     gender() {
-      this.step++
+      this.activeStep++
     }
   },
   methods: {
     toggleShow() {
       this.show = !this.show
+    },
+    fileSet() {
+      this.$nextTick(() => {
+        let buttons = document.querySelector('.vicp-step2 .vicp-operate')
+        console.log('************', buttons)
+        buttons.firstChild.innerText = 'Retour'
+        buttons.lastChild.innerText = 'Valider'
+      })
     },
     /**
      * crop success
@@ -181,8 +239,7 @@ export default {
           this.errors.push(err.response.data.message)
         })
     }
-  },
-  mounted() {}
+  }
 }
 </script>
 
@@ -191,12 +248,16 @@ export default {
   white-space: nowrap;
 }
 .profile-gender-btn {
-  border: 1px solid #292f33;
+  border: 1px solid white;
   transition: all 0.3s ease;
+  color: white;
 }
 .profile-gender-btn:hover,
 .profile-gender-btn.active {
-  background-color: #292f33;
-  color: white;
+  background-color: white;
+  color: #292f33;
+}
+.bttn--pink:hover {
+  border: 1px solid white;
 }
 </style>
