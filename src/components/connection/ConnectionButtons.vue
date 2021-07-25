@@ -47,10 +47,10 @@
       </div>
     </li>
     <li v-if="!isLoggedIn()" type="button">
-      <a @click="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block" style="color: #292f33 !important">se connecter</a>
+      <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block" style="color: #292f33 !important">se connecter</a>
     </li>
     <li v-if="!isLoggedIn()" type="button">
-      <a @click="setActiveTab('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
+      <a @click.prevent="setActiveTab('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
     </li>
   </ul>
   <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
@@ -104,10 +104,10 @@
       </div>
     </li>
     <li v-if="!isLoggedIn()" type="button">
-      <a @click="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>
+      <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>
     </li>
     <li v-if="!isLoggedIn()" type="button">
-      <a @click="setActiveTab('signup')" class="px-4 py-4 profile-link font-weight-bold d-inline-block">creér son profil</a>
+      <a @click.prevent="setActiveTab('signup')" class="px-4 py-4 profile-link font-weight-bold d-inline-block">creér son profil</a>
     </li>
   </ul>
   <teleport to="#modal">

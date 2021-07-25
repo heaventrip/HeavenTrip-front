@@ -10,7 +10,12 @@
         </div>
         <div class="left-panel__content p-4">
           <div class="d-flex justify-content-center align-items-center my-auto">
-            <img class="avatar-img mr-3" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+            <div style="position: relative; width: 40%" class="mr-3">
+              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+              <div style="position: absolute; display: flex; border-radius: 50%; box-shadow: rgb(235, 235, 235) 0px 0px 6px; background-color: white; bottom: 0; right: 0; width: 3rem; height: 3rem">
+                <InlineSvg class="m-auto" :src="require('@/assets/svg/camera.svg')" height="30" />
+              </div>
+            </div>
             <div class="text-left">
               <div style="font-size: 1.2rem; font-weight: 200; text-transform: uppercase">{{ currUser?.first_name }}</div>
               <div style="font-size: 1.2rem; font-weight: 500; text-transform: uppercase">{{ currUser?.last_name }}</div>
@@ -236,7 +241,7 @@ export default {
 <style scoped>
 .avatar-img {
   border-radius: 50%;
-  width: 40%;
+  width: 100%;
   border: 1px solid #292f33;
 }
 label {

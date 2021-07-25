@@ -1,4 +1,3 @@
-
 class CookieStorage {
   constructor(defaultOptions) {
     this._defaultOptions = objectExtend(
@@ -6,46 +5,46 @@ class CookieStorage {
         domain: getCookieDomainUrl(),
         expires: null,
         path: '/',
-        secure: false,
+        secure: false
       },
       defaultOptions
-    );
+    )
   }
 
   setItem(key, value) {
-    const options = objectExtend({}, this._defaultOptions);
-    const cookie = formatCookie(key, value, options);
-    this._setCookie(cookie);
+    const options = objectExtend({}, this._defaultOptions)
+    const cookie = formatCookie(key, value, options)
+    this._setCookie(cookie)
   }
 
   getItem(key) {
-    const cookies = parseCookies(this._getCookie());
-    return cookies.hasOwnProperty(key) ? cookies[key] : null;
+    const cookies = parseCookies(this._getCookie())
+    return cookies.hasOwnProperty(key) ? cookies[key] : null
   }
 
   removeItem(key) {
-    const value = '';
-    const defaultOptions = objectExtend({}, this._defaultOptions);
+    const value = ''
+    const defaultOptions = objectExtend({}, this._defaultOptions)
     const options = objectExtend(defaultOptions, {
-      expires: new Date(0),
-    });
-    const cookie = formatCookie(key, value, options);
-    this._setCookie(cookie);
+      expires: new Date(0)
+    })
+    const cookie = formatCookie(key, value, options)
+    this._setCookie(cookie)
   }
 
   _getCookie() {
     try {
-      return $document.cookie === 'undefined' ? '' : $document.cookie;
+      return $document.cookie === 'undefined' ? '' : $document.cookie
     } catch (e) {}
 
-    return '';
+    return ''
   }
 
   _setCookie(cookie) {
     try {
-      $document.cookie = cookie;
+      $document.cookie = cookie
     } catch (e) {}
   }
 }
 
-export default CookieStorage;
+export default CookieStorage

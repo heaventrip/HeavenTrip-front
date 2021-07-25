@@ -46,7 +46,7 @@ app.use(VueCountryRegionSelect)
 app.use(
   VueGtag,
   {
-    property: { id: 'G-GRR7HE400S' }
+    property: { id: 'UA-149270675-1' }
   },
   router
 )
