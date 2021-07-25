@@ -16,12 +16,12 @@ BUG
 - changements d'URLs avec suivant/précédent => voir router history pb? (par ex précédent à partir du checkout ramène sur product)
 
 # general
-- tooltips
+- tooltips 
 - erreurs
 
 # home
-- animatique interne des cards
-- animatique des reviews
+- animatique interne des cards X
+- animatique des reviews X
 - ouvrir connexion menu au hover + rotate icon
 
 # nav

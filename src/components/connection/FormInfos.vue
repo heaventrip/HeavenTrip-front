@@ -8,8 +8,8 @@
       <div class="div-group">
         <label class="form-label text-uppercase font-weight-bold my-4 d-block">Quel camp ?</label>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label @click="gender = 'female'" class="btn profile-gender-btn rounded-0 btn-lg px-4"> <input type="radio" name="gender" value="female" /> Femme </label>
-          <label @click="gender = 'male'" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn"> <input type="radio" name="gender" value="male" /> Homme </label>
+          <label class="btn profile-gender-btn rounded-0 btn-lg px-4"> <input type="radio" v-model="gender" name="gender" value="female" /> Femme </label>
+          <label class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn"> <input type="radio" v-model="gender" name="gender" value="male" /> Homme </label>
         </div>
       </div>
     </div>

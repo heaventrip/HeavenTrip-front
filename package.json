@@ -24,6 +24,7 @@
     "swiper": "^6.7.0",
     "vue": "^3.0.0",
     "vue-easy-lightbox": "^1.2.1",
+    "vue-element-loading": "^3.0.1",
     "vue-gtag": "^2.0.1",
     "vue-gtag-next": "^1.14.0",
     "vue-image-crop-upload": "^3.0.3",

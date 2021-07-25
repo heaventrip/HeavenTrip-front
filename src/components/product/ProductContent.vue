@@ -102,9 +102,12 @@
             </ul>
           </div>
           <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #fcfcfc">
-            <label class="message-input-label">
-              <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="1"> </textarea>
-            </label>
+            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="1"> </textarea>
+            <button class="fg-1 text-center" type="submit">
+              <InlineSvg :src="require('@/assets/svg/send.svg')" height="20" />
+            </button>
+            <!-- <label class="message-input-label">
+            </label> -->
           </form>
         </div>
       </div>
@@ -197,9 +200,9 @@ export default {
       if (!this.inputMessage) return
 
       this.$axios
-        .post('/messages', { message: { courseId: this.$props.courseId } })
+        .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
         .then(() => this.fetchMessages())
-        .catch((err) => alert(err))
+        .catch((err) => console.log(err))
     },
     initTabsGsap() {
       // let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
@@ -303,6 +306,9 @@ export default {
 </script>
 
 <style scoped>
+button {
+  all: unset;
+}
 .messages-container {
   padding-left: 2.5rem;
   padding-right: 2.5rem;

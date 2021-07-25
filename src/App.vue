@@ -1,4 +1,7 @@
 <template>
+  <transition name="fade-faster">
+    <vue-element-loading :active="false" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
+  </transition>
   <router-view :key="$route.fullPath" />
 </template>
 
