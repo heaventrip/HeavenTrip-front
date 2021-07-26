@@ -36,6 +36,7 @@ BUG
 - textarea ajouter bouton envoyer
 - remplacer les curseurs swiper par les notres
 - formulaire créer session module booking (sur mois sans session ou ac sessions complètes)
+- lightbox sur les images
 
 ### IMPERATIF V1 ###
 - mécanique intégration des photos selon tags
