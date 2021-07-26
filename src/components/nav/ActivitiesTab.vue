@@ -93,9 +93,6 @@ export default {
     })
 
     // // working contentful auth
-    // const client = this.$contentfulManagement.createClient({
-    //   accessToken: 'QJST-plHn1kmliJnkzNZebXG0wecPQwtxH1hg9YDYek'
-    // })
     // // client.getAssets().then((res) => (this.imgSrc = `https:${res.items[0].fields.file.url}?q=80`))
 
     // client

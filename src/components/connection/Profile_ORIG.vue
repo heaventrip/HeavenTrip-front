@@ -111,7 +111,7 @@
 
 <script>
 import MyUpload from 'vue-image-crop-upload'
-import '../../assets/css/upload.css' // overwrites default
+// import '../../assets/css/upload.css' // overwrites default
 
 export default {
   name: 'Profile',

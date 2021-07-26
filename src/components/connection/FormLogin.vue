@@ -6,9 +6,10 @@
   <div class="form-group has-float-label">
     <input id="login-password" v-model="password" class="form-control" type="password" name="" placeholder=" " />
     <label for="login-password">Mot de passe</label>
+    <div type="button" @click="$emit('clicked-password-forgotten')" class="mt-2 text-right" style="font-family: Muli, sans-serif; font-size: 0.75rem">Mot de passe oublié</div>
   </div>
   <div>
-    <Button :class="{ 'bttn-disabled': !formIsValid }" @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
+    <Button :class="{ 'bttn-disabled': !formIsValid }" @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" />
   </div>
 </template>
 
@@ -70,8 +71,8 @@ export default {
 </script>
 
 <style scoped>
-.bttn--pink:hover {
-  border: 1px solid white;
+.bttn--white:hover {
+  background-color: #d82558;
 }
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.15em;
