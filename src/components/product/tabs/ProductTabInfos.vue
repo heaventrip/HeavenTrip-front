@@ -147,7 +147,7 @@
           </div>
           <ul class="list-unstyled content-list equip mb-4">
             <li v-for="includedService in course.includedServices" :key="includedService">
-              <a class="text-reset" href="#">{{ includedService.name }}</a>
+              <a class="text-reset" href="#">{{ includedService.title }}</a>
             </li>
           </ul>
           <div class="content-head equip mb-2">
@@ -156,7 +156,7 @@
           </div>
           <ul class="list-unstyled content-list equip mb-0">
             <li v-for="extraService in course.extraServices" :key="extraService">
-              <a class="text-reset" href="#">{{ extraService.name }}</a>
+              <a class="text-reset" href="#">{{ extraService.title }}</a>
             </li>
           </ul>
         </div>
@@ -167,7 +167,7 @@
           </div>
           <ul class="list-unstyled content-list equip mb-0">
             <li v-for="(excludedService, index) in course.excludedServices" :key="excludedService">
-              <a class="text-reset" :class="[index === course.excludedServices.length - 1 ? 'pb-0' : '']" href="#">{{ excludedService.name }}</a>
+              <a class="text-reset" :class="[index === course.excludedServices.length - 1 ? 'pb-0' : '']" href="#">{{ excludedService.title }}</a>
             </li>
           </ul>
         </div>
