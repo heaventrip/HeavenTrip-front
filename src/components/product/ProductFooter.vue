@@ -58,8 +58,42 @@
       <div v-show="showSessions" class="tab-content">
         <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
           <div class="container" style="padding: 0 3rem">
+            <div style="width: 40%">
+              <div class="card__title align-items-center justify-content-between mb-5">
+                <div>Réglages de mon compte</div>
+              </div>
+              <form>
+                <div class="row">
+                  <div class="col-12 col-lg-6">
+                    <div class="form-group has-float-label">
+                      <input id="request-firstName" type="text" name="" placeholder=" " class="form-control" />
+                      <label for="request-firstName">Prénom</label>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-6">
+                    <div class="form-group has-float-label">
+                      <input id="request-lastName" type="text" name="" placeholder=" " class="form-control" />
+                      <label for="request-lastName">Nom</label>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-12">
+                    <div class="form-group has-float-label">
+                      <input id="request-email" type="email" name="" placeholder=" " class="form-control" />
+                      <label for="request-email">Email</label>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-12">
+                    <label>Message</label>
+                    <textarea type="text" name="" placeholder=" " class="form-control"></textarea>
+                  </div>
+                  <div class="col-12 col-lg-12">
+                    <Button text="Envoyer ma demande" color="grey" height="2rem" width="100%" weight="bold" />
+                  </div>
+                </div>
+              </form>
+            </div>
             <ul class="list-unstyled order-tab-list mb-0 pb-4">
-              <li v-for="(session, sessionIndex) in filterSessions(index + 1)" :key="session">
+              <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
                   <div class="info-div-left d-flex align-items-center justify-content-between">
                     <h6 v-if="$windowWidth <= 1440" class="month-count mb-0">
@@ -84,23 +118,12 @@
                         <span style="font-weight: 700"> {{ session.min - session.nbOfParticipants }} tripper{{ session.min - session.nbOfParticipants > 1 ? 's' : '' }} </span>
                         <span> pour confirmer le départ </span>
                       </h6>
-                      <!-- TODO rajouter champ de date limite dans le back -->
-                      <span class="cancel-info-text">il te reste JOURS pour réserver</span>
+                      <span class="cancel-info-text">il te reste {{ session.latestBooking }} jours pour réserver</span>
                     </div>
                   </div>
                   <div class="registrants fg-1" style="width: 20%">
-                    <h6 v-if="sessionIndex === 0" class="premier-text mb-0 font-weight-bold text-uppercase"><img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !</h6>
-                    <InlineAvatars
-                      v-else
-                      :avatars="['wb1pauez3a4chagrpyth', 'j7pyvrb9k40igjtuniwb', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw', 'ers53we5kg0ffyv6csoq', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth']"
-                      :heart="false"
-                      outline-color="white"
-                      outline-width="3px"
-                      height="40px"
-                      spacing="-8px"
-                      mt="0rem"
-                      mb="0rem"
-                    />
+                    <h6 v-if="session.nbOfParticipants === 0" class="premier-text mb-0 font-weight-bold text-uppercase"><img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !</h6>
+                    <InlineAvatars v-else :avatars="getParticipantsAvatarKeys(session)" :heart="false" outline-color="white" outline-width="3px" height="40px" spacing="-8px" mt="0rem" mb="0rem" />
                   </div>
                   <div class="d-flex align-items-center ml-auto justify-content-between fg-1">
                     <h6 class="hours-count mb-0 fg-1 ml-5">
@@ -140,7 +163,7 @@
                 <br />
                 <InlineAvatars
                   :course-id="course?.id"
-                  :avatars="avatarKeys"
+                  :avatars="getParticipantsAvatarKeys(choice)"
                   :heart="true"
                   heart-height="44px"
                   heart-width="44px"
@@ -264,12 +287,14 @@
 </template>
 <script>
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
+import Button from '@/components/elements/Button.vue'
 
 export default {
   name: 'ProductFooter',
   props: ['course'],
   components: {
-    InlineAvatars
+    InlineAvatars,
+    Button
   },
   data() {
     return {
@@ -335,6 +360,10 @@ export default {
     }
   },
   methods: {
+    getParticipantsAvatarKeys(session) {
+      let avatars = new Array()
+      return session.participants?.forEach((user) => avatars.push(user.avatarKey))
+    },
     clickToClose() {
       this.showSessions = false
     },
@@ -468,7 +497,37 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.has-float-label .form-control:placeholder-shown:not(:focus) + label {
+  top: 0.15em;
+  font-size: 130%;
+  color: #292f33;
+  opacity: 1;
+}
+.has-float-label label::after {
+  display: none;
+}
+.has-float-label label {
+  left: 0;
+}
+.form-group {
+  margin-bottom: 2rem;
+}
+.form-control {
+  padding-left: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #b4b4b4;
+  background-color: transparent;
+  padding-bottom: 0.1rem;
+  color: #292f33;
+}
+.form-control:focus {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #b4b4b4;
+}
 /* .up-down-arrow-svg {
   transition: translate 1s ease;
 }

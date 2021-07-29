@@ -1,12 +1,13 @@
 # front
 - rgpd => vue cookies
+
 - nullify unselected sess
 - add trippers inscrits session
 - espace profil
 - dynamisme des cards
 
 # back
-- join table course_id | sport_id | | level_id | description1:text |  description2:text |  description3:text
+(- join table course_id | sport_id | | level_id | description1:text |  description2:text |  description3:text)
 
 __________
 
@@ -16,13 +17,18 @@ BUG
 - changements d'URLs avec suivant/précédent => voir router history pb? (par ex précédent à partir du checkout ramène sur product)
 
 # general
+<<<<<<< HEAD
 - tooltips
 - erreurs "tomato"
+=======
+- erreurs
+>>>>>>> dev2
+
+- tooltips
 
 # home
-- animatique interne des cards
-- animatique des reviews
 - ouvrir connexion menu au hover + rotate icon
+<<<<<<< HEAD
 - search module, si etiquettes faire slider tout le module vers le haut pour tout afficher au dessus ligne flottaison
   + rajouter titre mes filtres + hover sur les etiquettes pour les detete
   + Import method de filtres qui se grisent en fonction de la recherche 
@@ -33,26 +39,36 @@ BUG
   + gerer hover des BTN prev / next  idée : slider l'arrow + opacity sur le circle exterieur
 - Coup de coeur : rajouter bordures blanches   
 
+=======
+- animatique externe des cards @mousevents
+
+- animatique interne des cards X
+- animatique des reviews X
+>>>>>>> dev2
 
 # nav
 - nav à équilibrer
 - nav bars à réaligner
+
 - ajouter fading sur les apparitions
 - revoir les liens
 - gérer les transis ENTRE items et enlever le trou entre les items + voir bottom bar 66deg (aspect continu sans saut)
 
 # product
 - textarea qui sort du cadre sur petit écran
-- textarea ajouter bouton envoyer
 - remplacer les curseurs swiper par les notres
-- formulaire créer session module booking (sur mois sans session ou ac sessions complètes)
+
+- textarea ajouter bouton envoyer
+- lightbox
+(- formulaire créer session module booking (sur mois sans session ou ac sessions complètes))
 
 ### IMPERATIF V1 ###
+- gérer les transitions et chargements de pages/composants etc.
+
 - mécanique intégration des photos selon tags
 - résolution des URLs
 - google analytics + adwords
 - page profile minimale
-- spinner sur recherche et autres endroits le nécessitant
-- gérer les transitions et chargements de pages/composants etc.
-- gestion des origines pour mailerlite (newsletter, signup, wishlist, etc)
 - mail transacs : bienvenue / confirmation de mail / confirmation de résa / confirmation de départ OU infirmation de départ
+- gestion des origines pour mailerlite (newsletter, signup, wishlist, etc)
+- spinner sur recherche et autres endroits le nécessitant

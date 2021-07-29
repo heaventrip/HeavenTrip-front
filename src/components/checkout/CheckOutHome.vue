@@ -1,8 +1,8 @@
 <template>
-  <div style="position: fixed; width: 100vw">
-    <CheckOutHeader :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
-    <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
-  </div>
+  <!-- <div style="position: fixed; width: 100vw"> -->
+  <CheckOutHeader :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
+  <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
+  <!-- </div> -->
 </template>
 <script>
 import CheckOutHeader from '@/components/checkout/CheckOutHeader'

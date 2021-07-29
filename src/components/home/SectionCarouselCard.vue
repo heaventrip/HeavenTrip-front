@@ -1,6 +1,5 @@
 <template>
-  <!-- FIXME bug carousel -->
-  <div class="card-block" :data-index="index" :style="{ width: cardWidth + 'px' }" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
+  <div class="card-block" :class="`card-block-${index}`" :data-index="index" :style="{ width: cardWidth + 'px' }" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
@@ -68,16 +67,17 @@ import gsap from 'gsap'
 
 export default {
   name: 'SectionCarouselCard',
-  props: ['course', 'index'],
+  props: ['course', 'index', 'cards-arr'],
   data() {
     return {
+      animFinished: true,
       hovered: false,
       cardTl: null,
-      cardsArr: [],
       avatarKeys: [],
       wishlisted: false,
-      cardWidth: 480,
-      cardExpand: 70
+      cardWidth: 500,
+      cardExpand: 70,
+      cardsToSlide: []
     }
   },
   components: {
@@ -93,8 +93,22 @@ export default {
     }
   },
   methods: {
+    cardAnim(card, cardsToSlide) {
+      let movingInfos = card.querySelector('.hoverable-div')
+      let staticInfos = card.querySelector('.card__footer__static-infos')
+      let heartIcon = card.querySelector('.card-block__heart-icon')
+
+      let tl = gsap
+        .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
+        .pause()
+        .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
+        .to(staticInfos, { y: '-=45px' }, '<')
+        .to(movingInfos, { y: '-=100' }, '<')
+        .to(heartIcon, { autoAlpha: 1 }, '<')
+        .to(cardsToSlide, { x: '+=70' }, '<')
+      return tl
+    },
     addToWishlist() {
-      console.log('wishlisting')
       if (!this.wishlisted)
         this.$axios
           .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
@@ -105,39 +119,20 @@ export default {
     transformCard(type, event) {
       let card = event.target
 
-      if (!this.cardTl) {
-        let movingInfos = card.querySelector('.hoverable-div')
-        let staticInfos = card.querySelector('.card__footer__static-infos')
-        let heartIcon = card.querySelector('.card-block__heart-icon')
-        this.cardTl = gsap
-          .timeline({
-            defaults: {
-              duration: 0.5,
-              ease: 'power3.inOut'
-            }
-          })
-          // FIXME max width is now 520px so x+= shouldnt be the same
-          .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
-          .to(staticInfos, { y: '-=45px' }, '<')
-          .to(movingInfos, { y: '-=100' }, '<')
-          .to(heartIcon, { autoAlpha: 1 }, '<')
-          .to(
-            this.cardsArr.slice(parseInt(card.dataset.index) + 1),
-            {
-              x: '+=' + this.cardExpand
-            },
-            '<'
-          )
-      }
+      // simultaneously we want it to push the following cards to the right
+      let cardPosition = this.$props.cardsArr.indexOf(card)
+      let cardsToSlide = this.$props.cardsArr.slice(cardPosition + 1)
 
       if (type === 'bigger') {
+        // init timeline here because 'bigger' will always be the first event triggered
+        // and update it whenever another card is hovered
+        this.cardTl = this.cardAnim(card, cardsToSlide)
+
         this.cardTl.play()
 
         card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
         card.querySelector('.card__footer__price').classList.add('border-0')
-      }
-
-      if (type === 'smaller') {
+      } else {
         this.cardTl.reverse()
 
         card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
@@ -146,8 +141,6 @@ export default {
     }
   },
   mounted() {
-    this.cardsArr = gsap.utils.toArray('.card-block')
-
     // check if course is already wishlisted
     this.$axios
       .get('/wishlists', { wishlist: { courseId: this.$props.course.id } })

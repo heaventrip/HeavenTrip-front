@@ -262,18 +262,6 @@ export default {
   width: 72%;
   font-weight: 100;
 }
-.activity-word__text {
-  display: inline-block;
-  text-align: left;
-  width: 72%;
-  padding: 1.5rem;
-}
-.activity-word__list {
-  display: inline-block;
-  background-color: #292f33;
-  margin: 0;
-  border: none;
-}
 .product__nav__section-number {
   position: relative;
   width: 3rem;

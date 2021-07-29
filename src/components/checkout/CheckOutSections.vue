@@ -118,7 +118,7 @@ export default {
     course: {
       immediate: true,
       handler(val) {
-        this.activeStep = 'booker'
+        this.activeStep = 'insurance'
       }
     },
     activeStep: {

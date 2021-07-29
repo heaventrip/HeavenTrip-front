@@ -1,18 +1,21 @@
 <template>
   <div class="form-group has-float-label">
-    <input id="prenom" class="form-control" type="text" name="" placeholder=" " />
-    <label for="prenom">Adresse e-mail</label>
+    <input id="login-email" v-model="email" class="form-control" type="email" name="" placeholder=" " />
+    <label for="login-email">Adresse e-mail</label>
   </div>
   <div class="form-group has-float-label">
-    <input id="emailAddr" class="form-control" type="email" name="" placeholder=" " />
-    <label for="emailAddr">Mot de passe</label>
+    <input id="login-password" v-model="password" class="form-control" type="password" name="" placeholder=" " />
+    <label for="login-password">Mot de passe</label>
+    <div type="button" @click="$emit('clicked-password-forgotten')" class="mt-2 text-right" style="font-family: Muli, sans-serif; font-size: 0.75rem">Mot de passe oublié</div>
   </div>
   <div>
-    <Button class="" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" background-color="#d82558" />
+    <Button :class="{ 'bttn-disabled': !formIsValid }" @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" />
   </div>
 </template>
 
 <script>
+import { email, required } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
 import Button from '@/components/elements/Button.vue'
 import { loginUser } from '@/utils/auth'
 
@@ -68,6 +71,9 @@ export default {
 </script>
 
 <style scoped>
+.bttn--white:hover {
+  background-color: #d82558;
+}
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.15em;
   font-size: 130%;
@@ -89,12 +95,19 @@ export default {
   border: none;
   border-bottom: 1px solid #b4b4b4;
   background-color: transparent;
+  padding-bottom: 0.1rem;
+  color: #fff;
 }
 .form-control:focus {
   background-color: transparent;
   border-radius: 0;
   border: none;
   border-bottom: 1px solid white;
+}
+.bttn-disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
 }
 .slide-enter-active,
 .slide-leave-active {

@@ -53,7 +53,6 @@
     <div class="card-body d-flex">
       <div class="activity-word__text">
         <div class="head-block subhead-block d-flex">
-          <!-- <div class="product__nav__section-number"><span>02</span></div> -->
           <div class="">
             <p class="sub-heading mb-2">Activités & Spot</p>
             <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
@@ -65,79 +64,28 @@
           </div>
         </div>
         <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
-        <transition name="fade-fast" mode="out-in">
-          <div :key="activeSportTab">
-            <p class="content" style="font-family: Muli; line-height: 1.8; font-weight: 400; font-size: 0.875rem">
-              Une journée off sera proposée en fonction des conditions climatiques pour s'octroyer un moment de détente, comme partager avec le groupe une journée de plongée en mer rouge à bord d’un bateau privé. Notre team sera présente toute la semaine pour proposer un accompagnement sur-mesure et
-              répondre à vos envies. Fun, rencontres et progression assurés !!
-            </p>
-            <!-- <p class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">{{ activeSportTab?.description || course.sports[0].description }}</p> -->
-
-            <!-- <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
-              <li v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo" style="border-bottom: none; padding-bottom: 0">
-                <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
-                  {{ sportInfo.title }}
-                  <strong class="text-dark ml-2">{{ sportInfo.description }}</strong></a
-                >
-              </li>
-            </ul> -->
-          </div>
+        <transition name="fade">
+          <p :key="activeSportTab" class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">{{ activeSportTab?.description || course.sports[0].description }}</p>
+        </transition>
+      </div>
+      <div class="activity-word__list box m-0">
+        <transition name="fade">
+          <!-- <InlineSvg class="img_icon w-100 ml-auto mb-3" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" fill="white" height="40" /> -->
+          <ul :key="activeSportTab" class="list-unstyled list mb-0">
+            <li v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo" style="border-bottom: none; padding-bottom: 0">
+              <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
+                {{ sportInfo.title }}
+                <strong class="text-white ml-2">{{ sportInfo.description }}</strong>
+              </a>
+            </li>
+          </ul>
+          <!-- <a href="#" class="corner-link">+</a> -->
         </transition>
       </div>
     </div>
   </div>
-
-  <!-- multiact -->
-  <div v-show="false" class="linear-block p-0 mt-2">
-    <div class="card-body d-flex">
-      <div class="activity-word__text">
-        <div class="head-block subhead-block d-flex">
-          <!-- <div class="product__nav__section-number"><span>02</span></div> -->
-          <div class="">
-            <p class="sub-heading mb-2">Activités & Spot</p>
-            <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
-          </div>
-        </div>
-        <h6 class="head text-uppercase pb-3" style="width: 100%; border-bottom: 1px dashed #b4b4b4">{{ course.sports[0].name }}</h6>
-        <p class="content pt-3" style="border-top: 1px dashed #ffffff66; line-height: 24px">
-          Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.
-        </p>
-      </div>
-      <div class="activity-word__list box m-0">
-        <InlineSvg class="img_icon w-100 ml-auto mb-3" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" fill="white" height="40" />
-        <ul class="list-unstyled list mb-0">
-          <li>
-            <a href="#" class="text-decoration-none">
-              COURS DE PERFECTIONNEMENT :
-              <strong class="text-white ml-2"> 20H</strong></a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none">
-              Sessions :
-              <strong class="text-white ml-2"> 4</strong></a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none">
-              Tendance :
-              <strong class="text-white ml-2"> 60% hors piste</strong></a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none">
-              Tendance :
-              <strong class="text-white ml-2"> 60% hors piste</strong></a
-            >
-          </li>
-        </ul>
-        <!-- <a href="#" class="corner-link">+</a> -->
-      </div>
-    </div>
-  </div>
-  <div v-if="false" class="linear-block pb-0">
+  <!-- <div v-if="false" class="linear-block pb-0">
     <div class="head-block subhead-block d-flex">
-      <!-- <div class="product__nav__section-number"><span>02</span></div> -->
       <div class="">
         <p class="sub-heading mb-2">Activités & Spot</p>
         <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
@@ -170,7 +118,6 @@
                   </a>
                 </li>
               </ul>
-              <!-- <a href="#" class="corner-link">+</a> -->
             </div>
             <div class="brown-div">
               <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
@@ -186,7 +133,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="linear-block py-0" style="background-color: #fcfcfc; box-shadow: none">
     <div class="head-block subhead-block d-flex">
       <div class="">
@@ -376,9 +323,14 @@ export default {
 .activity-word__text {
   display: inline-block;
   text-align: left;
-  padding: 2.5rem 3rem;
-  width: 100%;
-  font-weight: 100;
+  width: 72%;
+  padding: 1.5rem;
+}
+.activity-word__list {
+  display: inline-block;
+  background-color: #292f33;
+  margin: 0;
+  border: none;
 }
 .optional-activity__info-item--price {
   border-left: 1px solid #292f33;

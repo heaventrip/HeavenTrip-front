@@ -100,15 +100,15 @@
         <div class="col-12 col-lg-6">
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
-              <InlineSvg v-if="course.level.step" :src="require(`@/assets/svg/intensity-${course.level.step}.svg`)" height="150px" />
-              <InlineSvg v-if="course.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
+              <InlineSvg v-if="course?.level.step" :src="require(`@/assets/svg/intensity-${course?.level.step}.svg`)" height="150px" />
+              <InlineSvg v-if="course?.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
-                Niveau : <strong class="ml-2">{{ course.level.step }}</strong
+                Niveau : <strong class="ml-2">{{ course?.level.step }}</strong
                 >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course.level.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
+              <h6 class="status-text mb-0">{{ course?.level.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>
@@ -121,10 +121,10 @@
             <span class="ml-4">
               <h6 class="level-text">
                 Intensité physique :
-                <strong class="ml-2">{{ course.intensity.step }}</strong
+                <strong class="ml-2">{{ course?.intensity.step }}</strong
                 >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course.intensity.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
+              <h6 class="status-text mb-0">{{ course?.intensity.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>
@@ -147,7 +147,7 @@
           </div>
           <ul class="list-unstyled content-list equip mb-4">
             <li v-for="includedService in course.includedServices" :key="includedService">
-              <a class="text-reset" href="#">{{ includedService.name }}</a>
+              <a class="text-reset" href="#">{{ includedService.title }}</a>
             </li>
           </ul>
           <div class="content-head equip mb-2">
@@ -156,7 +156,7 @@
           </div>
           <ul class="list-unstyled content-list equip mb-0">
             <li v-for="extraService in course.extraServices" :key="extraService">
-              <a class="text-reset" href="#">{{ extraService.name }}</a>
+              <a class="text-reset" href="#">{{ extraService.title }}</a>
             </li>
           </ul>
         </div>
@@ -167,7 +167,7 @@
           </div>
           <ul class="list-unstyled content-list equip mb-0">
             <li v-for="(excludedService, index) in course.excludedServices" :key="excludedService">
-              <a class="text-reset" :class="[index === course.excludedServices.length - 1 ? 'pb-0' : '']" href="#">{{ excludedService.name }}</a>
+              <a class="text-reset" :class="[index === course.excludedServices.length - 1 ? 'pb-0' : '']" href="#">{{ excludedService.title }}</a>
             </li>
           </ul>
         </div>

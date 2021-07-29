@@ -12,7 +12,7 @@
               </div>
             </div>
             <div class="modal-content-body" :style="[pForm === 'profile' ? 'height: min-content' : 'height: 600px', { backgroundColor: reachedSuccess ? '#292f33' : 'white' }]">
-              <Profile @reached-success="reachedSuccess = true" />
+              <Account @reached-success="reachedSuccess = true" />
             </div>
           </div>
           <!-- NOTE login modals -->
@@ -121,7 +121,7 @@
 import FormSignup from '@/components/connection/FormSignup.vue'
 import FormLogin from '@/components/connection/FormLogin.vue'
 import Password from '@/components/connection/Password.vue'
-import Profile from '@/components/connection/Profile.vue'
+import Account from '@/components/connection/Account.vue'
 
 export default {
   name: 'ConnectionModal',
@@ -130,7 +130,7 @@ export default {
     FormSignup,
     FormLogin,
     Password,
-    Profile
+    Account
   },
   props: ['whichForm'],
   data() {

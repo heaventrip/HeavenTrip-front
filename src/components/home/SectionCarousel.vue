@@ -145,7 +145,7 @@
           </div>
           <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
             <div class="cards-slider d-flex overflow-hidden">
-              <SectionCarouselCard ref="card" v-for="(course, index) in courses" :key="course" :course="course" :index="index" />
+              <SectionCarouselCard v-for="(course, index) in courses" :key="course.id" :course="course" :cards-arr="cardsArr" :index="index" />
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">123456</div>
@@ -181,10 +181,11 @@ export default {
   },
   data() {
     return {
+      nbOfCards: 0,
+      cardMargin: 40,
+      cardWidth: 520,
       firstName: '',
       animFinished: true,
-      cardsAnimLeft: null,
-      cardsAnimRight: null,
       freeSearch: '',
       isMounted: false,
       hovered: false,
@@ -235,30 +236,27 @@ export default {
     }
   },
   watch: {
-    cardsAnimLeft() {
-      console.log('changed')
-    },
     firstName(newVal) {
       this.firstName = newVal
     }
   },
   methods: {
-    shiftCardsRight(index) {
-      this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
-        gsap.to(card, {
-          x: '+=50'
-        })
-      })
-    },
-    shiftCardsLeft(index) {
-      this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
-        gsap.to(card, {
-          x: '-=50'
-        })
-      })
-    },
+    // shiftCardsRight(index) {
+    //   this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
+    //     gsap.to(card, {
+    //       x: '+=50'
+    //     })
+    //   })
+    // },
+    // shiftCardsLeft(index) {
+    //   this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
+    //     gsap.to(card, {
+    //       x: '-=50'
+    //     })
+    //   })
+    // },
     slideLeft() {
-      let windowWrap = gsap.utils.wrap(0, 600 * 4) // card width * nb of cards
+      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
@@ -266,7 +264,7 @@ export default {
         tl.to(
           card,
           {
-            x: '-=600',
+            x: `-=${this.cardWidth + this.cardMargin}`,
             ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
             duration: 1.0,
             modifiers: {
@@ -297,7 +295,7 @@ export default {
       }
     },
     slideRight() {
-      let windowWrap = gsap.utils.wrap(0, 600 * 4) // card width * nb of cards
+      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
@@ -305,7 +303,7 @@ export default {
         tl.to(
           card,
           {
-            x: '+=600',
+            x: `+=${this.cardWidth + this.cardMargin}`,
             ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
             duration: 1.0,
             modifiers: {
@@ -317,19 +315,18 @@ export default {
       })
 
       // then bring back last one
-      // tl.to(
-      //   this.cardsArr[this.cardsArr.length - 1],
-      //   {
-      //     opacity: 1,
-      //     duration: 0.5,
-      //     ease: 'power2.out',
-      //     onComplete: () => {
-      //       // gsap.to(this.cardsArr[this.cardsArr.length - 1], { opacity: 0, duration: 0.5, ease: 'power4.out' })
-      //       this.cardsArr.unshift(this.cardsArr.pop())
-      //     }
-      //   },
-      //   '0'
-      // )
+      tl.to(
+        this.cardsArr[this.cardsArr.length - 1],
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          onComplete: () => {
+            this.cardsArr.unshift(this.cardsArr.pop())
+          }
+        },
+        '0'
+      )
 
       if (this.animFinished) {
         tl.play()
@@ -414,9 +411,12 @@ export default {
       this.courses = res.data.courses
     })
     this.$nextTick(() => {
-      this.cardsArr = gsap.utils.toArray('.card-block')
+      let cardBlocks = document.querySelectorAll('.card-block')
+      this.nbOfCards = cardBlocks.length
+      cardBlocks.forEach((el) => this.cardsArr.push(el))
+
       gsap.set('.card-block', {
-        x: (i) => i * 510 + this.currentViewportWidth * 0.09 // left offset of 10vw
+        x: (i) => i * (this.cardWidth + this.cardMargin) + this.currentViewportWidth * 0.1 // left offset of 10vw
       })
     })
 

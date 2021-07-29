@@ -30,14 +30,26 @@ import axios from 'axios'
 import tooltip from './directives/tooltip.js'
 import VueCollapsiblePanel from '@dafcoe/vue-collapsible-panel'
 import { VueWindowSizePlugin } from 'vue-window-size/option-api'
+import VueGtag from 'vue-gtag-next'
+import VueCountryRegionSelect from 'vue3-country-region-select'
+import VueElementLoading from 'vue-element-loading'
 
 const app = createApp(App)
 app.component('InlineSvg', InlineSvg)
 app.component('PerfectScrollbar', PerfectScrollbar)
+app.component('VueElementLoading', VueElementLoading)
 app.directive('tooltip', tooltip)
 app.use(router)
 app.use(VueWindowSizePlugin)
 app.use(VueCollapsiblePanel)
+app.use(VueCountryRegionSelect)
+app.use(
+  VueGtag,
+  {
+    property: { id: 'UA-149270675-1' }
+  },
+  router
+)
 app.mount('#app')
 
 // app.config.globalProperties.$axios = axios.create({ baseURL: 'http://localhost:3000/api/v1' })
