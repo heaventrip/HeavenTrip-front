@@ -111,7 +111,7 @@
     </li>
   </ul>
   <teleport to="#modal">
-    <Account v-if="isLoggedIn() && showAccountPage" @closed-page="showAccountPage = false" @login-success="loginSuccess" :new-active-tab="activeTab" />
+    <Account v-if="!isLoggedIn() && showAccountPage" @closed-page="showAccountPage = false" @login-success="loginSuccess" :new-active-tab="activeTab" />
   </teleport>
   <teleport to="#modal">
     <AccountInfos v-if="isLoggedIn() && showAccountInfosPage" @closed-page="showAccountInfosPage = false" />

@@ -30,8 +30,7 @@
           <div class="col-12 col-lg-7">
             <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">L’EGYPTE</h5>
             <p class="content">
-              Vous avez un niveau expert avec une bonne expérience de la pratique du hors-piste, vous pouvez descendre toutes les pentes, dans toutes les conditions ‘ Vous maitrisez l’utilisation des appareils de sécurité ‘ Découvrez ce programme hors-piste d’exception pour skier les plus belles
-              pentes des Hautes-Pyrénées
+              {{ course.country.description }}
             </p>
           </div>
         </div>
@@ -122,8 +121,7 @@
       <div class="card-body">
         <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">S’Y RENDRE !</h5>
         <p class="content">
-          En venant du nord de la France, prenez l’autoroute jusqu’à Grenoble, puis RN 91 “Col du Lautaret”. En venant de l’Italie prenez l’autoroute jusqu’à Oulx (35km de Briançon) puis emprunter le Col de Montgenèvre RN 94. En venant du sud de la France, prenez l’autoroute jusqu’au Tallard,
-          Embrun, Briançon RN 94.
+          {{ course.itinerary }}
         </p>
         <ul class="list-unstyled place-list f-13 text-uppercase my-3 mb-0 d-flex flex-wrap" style="border-bottom: 1px dashed #ebebeb">
           <li>
@@ -163,12 +161,7 @@
             <div class="shadow-box">
               <h6 class="head">Indispensable :</h6>
               <ul class="points list-unstyled mb-0">
-                <li>Chausson de nautisme</li>
-                <li>Sac à dos (environ 20L)</li>
-                <li>Crème solaire visage et corps</li>
-                <li>Lunettes de soleil (avec attaches)</li>
-                <li>Un Lycra manche courte ou longue</li>
-                <li>Maillot de bain</li>
+                <li v-for="item in course.necessaryBaggages" :key="item">{{ item.title }}</li>
               </ul>
             </div>
           </div>
@@ -176,9 +169,7 @@
             <div class="shadow-box">
               <h6 class="head">Pour votre confort :</h6>
               <ul class="points list-unstyled mb-0">
-                <li>Une petite pharmacie,contre</li>
-                <li>Un pull et coupe-vent</li>
-                <li>Chaussures de sports</li>
+                <li v-for="item in course.usefulBaggages" :key="item">{{ item.title }}</li>
               </ul>
             </div>
           </div>

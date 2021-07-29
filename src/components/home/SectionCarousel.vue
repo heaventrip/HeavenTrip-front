@@ -181,6 +181,7 @@ export default {
   },
   data() {
     return {
+      nbOfCards: 0,
       cardMargin: 40,
       cardWidth: 520,
       firstName: '',
@@ -255,7 +256,7 @@ export default {
     //   })
     // },
     slideLeft() {
-      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * 3) // card width * nb of cards
+      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
@@ -294,7 +295,7 @@ export default {
       }
     },
     slideRight() {
-      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * 3) // card width * nb of cards
+      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
@@ -410,7 +411,9 @@ export default {
       this.courses = res.data.courses
     })
     this.$nextTick(() => {
-      document.querySelectorAll('.card-block').forEach((el) => this.cardsArr.push(el))
+      let cardBlocks = document.querySelectorAll('.card-block')
+      this.nbOfCards = cardBlocks.length
+      cardBlocks.forEach((el) => this.cardsArr.push(el))
 
       gsap.set('.card-block', {
         x: (i) => i * (this.cardWidth + this.cardMargin) + this.currentViewportWidth * 0.1 // left offset of 10vw
