@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-baseline">
-    <a class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 5rem; transform: translateY(5px)" href="/">
+    <a @mouseover="leavedAllTabs()" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 5rem; transform: translateY(5px)" href="/">
       <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
       <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
     </a>
@@ -30,13 +30,13 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @click="onClicked('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @click="onClicked('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a @click="onClicked('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
@@ -79,17 +79,17 @@
           <InlineSvg v-else :src="require('@/assets/svg/cross.svg')" fill="white" height="25" />
         </div>
         <transition name="nav-fade">
-          <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+          <div v-if="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <ActivitiesTab @fetched-categ="setCateg" ref="activitiesTab" />
           </div>
         </transition>
         <transition name="nav-fade">
-          <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
+          <div v-if="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
             <AgencyTab ref="agencyTab" />
           </div>
         </transition>
         <transition name="nav-fade">
-          <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+          <div v-if="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <DestinationsTab />
           </div>
         </transition>
@@ -178,6 +178,29 @@ export default {
     changeBgFilter(filter) {
       this.headerEl.style.filter = 'blur(3px)'
     },
+
+    onMouseOvered(tab) {
+      let varName = tab + 'IsActive'
+      // if already active do nothing except for agency
+      // eslint-disable-next-line prettier/prettier
+      if (this.$data[varName] === true) {
+        if (!tab === 'agency') return
+
+        this.$refs.agencyTab.resetTabs()
+      }
+      this.leavedAllTabs()
+      this.$data[varName] = true
+    },
+
+    resetTabs() {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+    },
+
+    leavedAllTabs() {
+      this.resetTabs()
+      this.$emit('leaveTabs')
+    },
+
     onClicked(tab) {
       // if (tab === 'destinations') {
       //   let tl = gsap.timeline()

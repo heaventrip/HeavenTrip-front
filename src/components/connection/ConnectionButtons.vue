@@ -1,70 +1,16 @@
 <template>
-  <ul v-if="$parent.agencyIsActive" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
-    <li v-if="isLoggedIn()">
-      <div class="dropdown login-dropdown">
-        <button style="color: #292f33" class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-          {{ currUser?.first_name }} <span class="l-name"> .{{ currUser?.last_name?.[0] }}</span>
-          <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
-        </button>
-        <div class="dropdown-menu text-uppercase" style="" aria-labelledby="dropdownMenu2">
-          <div class="account-dropdown-item">
-            <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">Mes infos</button>
-          </div>
-          <div class="account-dropdown-item">
-            <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
-              Mes envies
-              <span class="font-weight-bold text-danger ml-1">(2)</span>
-            </button>
-          </div>
-          <transition name="fade-fast">
-            <div class="wishlists" v-show="showWishlist" :key="showWishlist">
-              <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
-                <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
-                {{ wishlist.name }}
-              </div>
-            </div>
-          </transition>
-          <!-- <div class="account-dropdown-item">
-            <button class="dropdown-item" type="button">
-              Mes séjours
-              <div class="position-relative ml-auto">
-                <img class="picto-icon" fluid :src="require('@/assets/images/svg/PICTO_CHAT.svg')" />
-                <div class="notify-number">1</div>
-              </div>
-            </button>
-          </div> -->
-          <!-- <div class="account-dropdown-item">
-            <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
-          </div> -->
-          <div class="account-dropdown-item">
-            <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button>
-          </div>
-          <div class="account-dropdown-item">
-            <button @click="logoutUser" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li v-if="!isLoggedIn()" type="button">
-      <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block" style="color: #292f33 !important">se connecter</a>
-    </li>
-    <li v-if="!isLoggedIn()" type="button">
-      <a @click.prevent="setActiveTab('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
-    </li>
-  </ul>
-  <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
-    <li v-if="isLoggedIn()">
-      <div class="dropdown login-dropdown">
-        <button class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-          {{ currUser?.first_name }} <span class="l-name"> .{{ currUser?.last_name?.[0] }}</span>
-          <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
-        </button>
-        <transition name="fade">
-          <div class="dropdown-menu text-uppercase py-1" style="" aria-labelledby="dropdownMenu2">
+  <div>
+    <ul v-if="$parent.agencyIsActive" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
+      <li v-if="isLoggedIn()">
+        <div class="dropdown login-dropdown">
+          <button style="color: #292f33" class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+            {{ currUser?.first_name }} <span class="l-name"> .{{ currUser?.last_name?.[0] }}</span>
+            <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
+          </button>
+          <div class="dropdown-menu text-uppercase" style="" aria-labelledby="dropdownMenu2">
             <div class="account-dropdown-item">
-              <button @click="showAccountInfosPage = true" class="dropdown-item" type="button">Mes infos</button>
+              <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">Mes infos</button>
             </div>
             <div class="account-dropdown-item">
               <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
@@ -88,34 +34,90 @@
                 <div class="notify-number">1</div>
               </div>
             </button>
-          </div>
-          <div class="account-dropdown-item">
+          </div> -->
+            <!-- <div class="account-dropdown-item">
             <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
           </div> -->
             <div class="account-dropdown-item">
               <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button>
-              <!-- <Profile v-if="showProfileModal" /> -->
             </div>
             <div class="account-dropdown-item">
-              <button @click="logOut" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
+              <button @click="logoutUser" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
             </div>
           </div>
-        </transition>
-      </div>
-    </li>
-    <li v-if="!isLoggedIn()" type="button">
-      <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>
-    </li>
-    <li v-if="!isLoggedIn()" type="button">
-      <a @click.prevent="setActiveTab('signup')" class="px-4 py-4 profile-link font-weight-bold d-inline-block">creér son profil</a>
-    </li>
-  </ul>
-  <teleport to="#modal">
-    <Account v-if="!isLoggedIn() && showAccountPage" @closed-page="showAccountPage = false" @login-success="loginSuccess" :new-active-tab="activeTab" />
-  </teleport>
-  <teleport to="#modal">
-    <AccountInfos v-if="isLoggedIn() && showAccountInfosPage" @closed-page="showAccountInfosPage = false" />
-  </teleport>
+        </div>
+      </li>
+      <li v-if="!isLoggedIn()" type="button">
+        <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block" style="color: #292f33 !important">se connecter</a>
+      </li>
+      <li v-if="!isLoggedIn()" type="button">
+        <a @click.prevent="setActiveTab('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
+      </li>
+    </ul>
+    <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
+      <li v-if="isLoggedIn()">
+        <div class="dropdown login-dropdown">
+          <button class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+            {{ currUser?.first_name }} <span class="l-name"> .{{ currUser?.last_name?.[0] }}</span>
+            <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
+          </button>
+          <transition name="fade">
+            <div class="dropdown-menu text-uppercase py-1" style="" aria-labelledby="dropdownMenu2">
+              <div class="account-dropdown-item">
+                <button @click="showAccountInfosPage = true" class="dropdown-item" type="button">Mes infos</button>
+              </div>
+              <div class="account-dropdown-item">
+                <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
+                  Mes envies
+                  <span class="font-weight-bold text-danger ml-1">(2)</span>
+                </button>
+              </div>
+              <transition name="fade-fast">
+                <div class="wishlists" v-show="showWishlist" :key="showWishlist">
+                  <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
+                    <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
+                    {{ wishlist.name }}
+                  </div>
+                </div>
+              </transition>
+              <!-- <div class="account-dropdown-item">
+            <button class="dropdown-item" type="button">
+              Mes séjours
+              <div class="position-relative ml-auto">
+                <img class="picto-icon" fluid :src="require('@/assets/images/svg/PICTO_CHAT.svg')" />
+                <div class="notify-number">1</div>
+              </div>
+            </button>
+          </div>
+          <div class="account-dropdown-item">
+            <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
+          </div> -->
+              <div class="account-dropdown-item">
+                <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button>
+                <!-- <Profile v-if="showProfileModal" /> -->
+              </div>
+              <div class="account-dropdown-item">
+                <button @click="logOut" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
+              </div>
+            </div>
+          </transition>
+        </div>
+      </li>
+      <li v-if="!isLoggedIn()" type="button">
+        <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>
+      </li>
+      <li v-if="!isLoggedIn()" type="button">
+        <a @click.prevent="setActiveTab('signup')" class="px-4 py-4 profile-link font-weight-bold d-inline-block">creér son profil</a>
+      </li>
+    </ul>
+    <teleport to="#modal">
+      <Account v-if="!isLoggedIn() && showAccountPage" @closed-page="showAccountPage = false" @login-success="loginSuccess" :new-active-tab="activeTab" />
+    </teleport>
+    <teleport to="#modal">
+      <AccountInfos v-if="isLoggedIn() && showAccountInfosPage" @closed-page="showAccountInfosPage = false" />
+    </teleport>
+  </div>
 </template>
 
 <script>

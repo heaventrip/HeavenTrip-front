@@ -1,5 +1,6 @@
 <template>
   <div
+    @mouseleave="leavedAllTabs()"
     class="header d-flex flex-column text-white"
     :class="{
       'header--home': currentRoute('Home'),
@@ -26,10 +27,10 @@
     >
       <img src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
-    <ConnectionButtons />
+    <ConnectionButtons @mouseover="leavedAllTabs()" />
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
-    <TheNav v-else @changed-tab="setActiveTab" />
+    <TheNav @leave-tabs="resetTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
     <ProductHeaderInfos v-else-if="currentRoute('ProductHome') && !navIsActive" ref="productHeaderInfos" :course="course" />
     <SearchHeaderInfos v-else-if="currentRoute('SearchHome') && !navIsActive" />
@@ -146,6 +147,10 @@ export default {
     },
     resetTabs() {
       ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+    },
+    leavedAllTabs() {
+      this.resetTabs()
+      this.$refs.theNav.resetTabs()
     },
     // setNavStatus(status) {
     //   this.navIsActive = status
