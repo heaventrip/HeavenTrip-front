@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-baseline">
     <a @mouseover="leavedAllTabs()" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 5rem; transform: translateY(5px)" href="/">
-      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
-      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
+      <InlineSvg class="svg-logo" v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" />
+      <InlineSvg class="svg-logo" v-else :src="require('@/assets/svg/logo-white.svg')" />
     </a>
     <!-- NOTE MOBILE ONLY -->
     <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
@@ -39,12 +39,12 @@
           <a @mouseover="onMouseOvered('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('activity')" class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
       <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button> -->
-      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content" :style="{ marginTop: $windowWidth > 1440 ? '2rem' : '1rem' }">
+      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content">
         <li class="nav-item" role="presentation">
           <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer">{{ sportCategories[0]?.name }}</a>
         </li>
@@ -270,10 +270,27 @@ export default {
 .subactivity-nav__item:hover {
   color: white !important;
 }
-@media only screen and (min-width: 1441px) {
-  .subactivity-nav__item {
-    font-size: 0.875rem !important;
+.svg-logo {
+  width: 140px;
+}
+.navbar-collapse {
+  padding: 0px;
+}
+@media only screen and (min-height: 1000px) {
+  .navbar-collapse ul {
+    margin-top: 1em;
   }
+}
+@media only screen and (min-width: 1439px) {
+  .navbar-collapse {
+    padding: 0px;
+  }
+  .nav-pills {
+    margin-top: 0px !important;
+  }
+  /*.subactivity-nav__item {
+    font-size: 0.875rem !important;
+  }*/
 }
 .navbar {
   height: 70px; /* easier to manipulate with fixed height */
