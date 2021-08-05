@@ -46,7 +46,7 @@
   <div class="d-flex regist mb-4">
     <div>
       <input id="signup-legal" type="checkbox" v-model="legal" />
-      <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">conditions générales d'utilisation</router-link> </label>
+      <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant sur s'inscrire, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label>
     </div>
   </div>
 </template>
@@ -69,7 +69,7 @@ export default {
       email: '',
       password: '',
       passwordConfirmation: '',
-      legal: '',
+      legal: true,
       firstNameIsValid: '',
       lastNameIsValid: '',
       birthDateIsValid: '',
@@ -139,6 +139,9 @@ export default {
 
       return pwConf.length === this.password.length
     },
+    test() {
+      this.$emit('submitted-form')
+    },
     async submitRegisterForm() {
       if (!this.formIsValid) return
       this.$axios
@@ -175,7 +178,7 @@ export default {
 }
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.15em;
-  font-size: 130%;
+  font-size: 100%;
   color: #fff;
   opacity: 1;
 }
@@ -196,6 +199,9 @@ export default {
   background-color: transparent;
   padding-bottom: 0.1rem;
   color: #fff;
+}
+label > .text-danger {
+  font-weight: bold;
 }
 .form-control:focus {
   background-color: transparent;

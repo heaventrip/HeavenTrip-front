@@ -37,22 +37,22 @@
       <div style="position: absolute; width: 100%; display: flex; padding: 2rem">
         <InlineSvg v-if="activeTab === 'infos'" @click="activeTab = 'login'" type="button" :src="require('@/assets/svg/arrow-right.svg')" height="20" fill="white" transform="rotate(180)" />
         <div class="ml-auto d-flex align-items-center">
-          <div v-if="activeTab === 'infos'" style="text-transform: uppercase; text-align: right; color: #7c7c7c; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Complète ton <br />profil</div>
-          <div v-else style="text-transform: uppercase; text-align: right; color: #7c7c7c; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
-          <InlineSvg @click.stop="previousScreen" :src="require('@/assets/svg/logo-small.svg')" height="60" fill="#7c7c7c" />
+          <div class="title-connection" v-if="activeTab === 'infos'" style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Complète ton <br />profil</div>
+          <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
+          <InlineSvg class="title-connection" @click.stop="previousScreen" :src="require('@/assets/svg/logo-small.svg')" height="60" />
         </div>
       </div>
-      <div class="form-container w-50" style="margin-top: 25vh">
-        <div class="d-flex connection-nav-container mb-5" v-if="activeTab === 'infos'">
-          <div @click="activeInfoTab = 'gender'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender ' }">Camp</div>
+      <div class="form-container" style="margin-top: 25vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
+        <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
+          <div @click="activeInfoTab = 'gender'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Camp</div>
           <div @click="activeInfoTab = 'avatar'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
           <div @click="activeInfoTab = 'bio'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
           <div @click="activeInfoTab = 'success'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>
         </div>
         <div class="d-flex connection-nav-container mb-5" v-else>
-          <div @click="activeTab = 'login'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeTab === 'login' }">Connexion</div>
-          <div @click="activeTab = 'signup'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeTab === 'signup' }">Inscription</div>
-          <div @click="activeTab = 'infos'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>
+          <div @click="activeTab = 'login'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'login' }">Connexion</div>
+          <div @click="activeTab = 'signup'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'signup' }">Inscription</div>
+          <div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>
         </div>
         <transition name="fade-fast" mode="out-in">
           <form :key="activeTab">
@@ -69,7 +69,7 @@
       </div>
       <div v-else-if="activeTab === 'signup'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: white">
         <div class="mb-4" style="color: #292f33">Tripper, je suis déjà !</div>
-        <Button text="J'ai déjà un compte" px="1.5rem" size=".8rem" height="50px" width="60%" weight="bold" color="grey" @click="activeTab = 'login'" />
+        <Button id="bttn-have-account" text="J'ai déjà un compte" px="1.5rem" size=".8rem" height="50px" width="60%" weight="bold" color="grey" @click="activeTab = 'login'" />
       </div>
       <InlineSvg v-if="activeTab === 'success'" style="position: absolute; bottom: 2rem; right: 2rem" fill="white" height="60" :src="require('@/assets/svg/logo-small-no-circle.svg')" />
     </div>
@@ -124,7 +124,7 @@ export default {
       tl.to(purpleContainer, { width: '12%', ease: 'power4.out', duration: 0.8 }, '<')
       tl.to(purpleContainer, { backgroundColor: '#d82558', duration: 0.8 }, '<')
       tl.to(purpleContentBlock, { width: '0', duration: 0.8 }, '<')
-      tl.to(purpleSvgsBlock, { width: '100%', duration: 0.8 }, '<')
+      tl.to(purpleSvgsBlock, { width: '100%', marginRight: '0px', duration: 0.8 }, '<')
       tl.to(purpleContentBlock, { autoAlpha: '0', ease: 'power4.out', duration: 0.2 }, '<')
 
       // then hide bottom
@@ -156,6 +156,9 @@ export default {
 .purple-container__content {
   width: 50%;
 }
+.purple-container__svgs {
+  margin-right: 30px;
+}
 .bttn--grey:hover {
   color: #292f33;
   background-color: white;
@@ -169,12 +172,20 @@ export default {
 .purple-container__paragraph {
   font-family: Muli, sans-serif;
   font-weight: light;
+  color: #ffffff8f;
   font-size: 0.85rem;
 }
-
+.title-connection {
+  color: white;
+  fill: white;
+}
+#bttn-have-account:hover {
+  background-color: #d82558;
+}
 .connection-nav-button {
   padding-bottom: 0.5rem;
   font-weight: 700;
+  letter-spacing: 1px;
   font-size: 1rem;
   margin-right: 2rem;
   text-transform: uppercase;
@@ -184,6 +195,9 @@ export default {
 .connection-nav-button--active {
   color: rgba(255, 255, 255);
   border-bottom: 1px solid white;
+}
+.button-sign:hover {
+  color: white;
 }
 .center-btn,
 .center-btn:active {
@@ -245,6 +259,7 @@ export default {
   width: 52%;
 }
 .grey-container {
+  box-shadow: -10px -2px 32px -14px rgb(41 47 51);
   position: relative;
   width: 48%;
 }

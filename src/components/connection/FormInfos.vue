@@ -6,8 +6,8 @@
       <div class="div-group">
         <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn profile-gender-btn rounded-0 btn-lg px-4"> <input type="radio" v-model="gender" name="gender" value="female" /> Femme </label>
-          <label class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn"> <input type="radio" v-model="gender" name="gender" value="male" /> Homme </label>
+          <label @click="setGender('female')" :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4"> <input type="radio" name="gender" /> Femme </label>
+          <label @click="setGender('male')" :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn"> <input type="radio" name="gender" /> Homme </label>
         </div>
       </div>
     </div>
@@ -91,8 +91,8 @@
       </div>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
-      <div class="descr-text">Ultra rapide, une petite bio, tes passions, un proverbe préféré ? C’est informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton espace Trippers.</div>
-      <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
+      <div class="descr-text">Ultra rapide, une petite bio, tes passions, un proverbe préféré ? Ces informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton espace Trippers.</div>
+      <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form>
         <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Tu peux taper ton texte ici..."></textarea>
         <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="activeTab = 'login'" />
@@ -175,6 +175,9 @@ export default {
     toggleShow() {
       this.show = !this.show
     },
+    setGender(val) {
+      this.gender = val
+    },
     fileSet() {
       this.$nextTick(() => {
         let buttons = document.querySelector('.vicp-step2 .vicp-operate')
@@ -239,10 +242,17 @@ export default {
 .bttn--white:hover {
   background-color: #d82558;
 }
+.separator {
+  margin-bottom: 90px;
+}
 .info-textarea {
+  height: 130px;
+  padding-left: 25px;
+  padding-top: 18px;
+  margin-bottom: 50px;
   background: #292f33;
   color: #ebebeb;
-  border: 1px solid #ebebeb;
+  border: 1px solid #ffffff33;
 }
 .descr-text {
   font-family: Muli, sans-serif;
@@ -257,6 +267,10 @@ export default {
   border: 1px solid white;
   transition: all 0.3s ease;
   color: white;
+}
+.profile-gender-btn-selected {
+  background-color: white;
+  color: #292f33;
 }
 .profile-gender-btn:hover,
 .profile-gender-btn.active {

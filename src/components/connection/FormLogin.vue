@@ -76,7 +76,7 @@ export default {
 }
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.15em;
-  font-size: 130%;
+  font-size: 100%;
   color: #fff;
   opacity: 1;
 }
@@ -93,7 +93,7 @@ export default {
   padding-left: 0;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #b4b4b4;
+  border-bottom: 1px solid #ffffff33;
   background-color: transparent;
   padding-bottom: 0.1rem;
   color: #fff;
