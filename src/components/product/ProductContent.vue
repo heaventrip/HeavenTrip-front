@@ -229,7 +229,10 @@ export default {
 
       this.$axios
         .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
-        .then(() => this.fetchMessages())
+        .then((res) => {
+          console.log(res)
+          this.fetchMessages()
+        })
         .catch((err) => console.log(err))
     },
     initTabsGsap() {
