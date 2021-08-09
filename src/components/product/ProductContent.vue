@@ -223,6 +223,10 @@ export default {
     submitMessageForm() {
       if (!this.inputMessage) return
 
+      const AUTH_TOKEN_KEY = 'authToken'
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       this.$axios
         .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
         .then(() => this.fetchMessages())

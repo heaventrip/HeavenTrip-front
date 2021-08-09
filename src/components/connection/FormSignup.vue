@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+  <Button @click="nextFormTest()" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
   <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': !formIsValid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
   <div class="d-flex regist mb-4">
     <div>
@@ -124,6 +125,9 @@ export default {
     }
   },
   methods: {
+    nextFormTest() {
+      this.$emit('submitted-form')
+    },
     validateUserInfo(input) {
       return !!input
     },
