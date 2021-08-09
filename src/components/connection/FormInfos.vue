@@ -23,6 +23,7 @@
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
         </div>
         <my-upload
+          class="upload-container"
           :no-square="true"
           :langExt="uploadLang"
           field="img"
