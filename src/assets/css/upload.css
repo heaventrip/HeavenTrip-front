@@ -30,7 +30,7 @@
     -webkit-transform: scale(1) translatey(0);
             transform: scale(1) translatey(0); } }
 
-.vue-image-crop-upload {
+.vue-image-crop-upload.upload-container {
   /* position: fixed; */
   display: block;
   -webkit-box-sizing: border-box;
@@ -45,7 +45,7 @@
   /* background-color: rgba(0, 0, 0, 0.65); */
   -webkit-tap-highlight-color: transparent;
   -moz-tap-highlight-color: transparent; }
-  .vue-image-crop-upload .vicp-wrap {
+  .vue-image-crop-upload.upload-container .vicp-wrap {
     /* -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23); */
     /* position: fixed; */
@@ -65,11 +65,11 @@
     /* border-radius: 2px; */
     -webkit-animation: vicp 0.12s ease-in;
             animation: vicp 0.12s ease-in; }
-    .vue-image-crop-upload .vicp-wrap .vicp-close {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-close {
       position: absolute;
       right: -30px;
       top: -30px; }
-      .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4 {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-close .vicp-icon4 {
         position: relative;
         display: block;
         width: 30px;
@@ -82,7 +82,7 @@
         -webkit-transform: rotate(0);
             -ms-transform: rotate(0);
                 transform: rotate(0); }
-        .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after, .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::before {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-close .vicp-icon4::after, .vue-image-crop-upload.upload-container .vicp-wrap .vicp-close .vicp-icon4::before {
           -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
                   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
           content: '';
@@ -95,15 +95,15 @@
               -ms-transform: rotate(45deg);
                   transform: rotate(45deg);
           background-color: #fff; }
-        .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-close .vicp-icon4::after {
           -webkit-transform: rotate(-45deg);
               -ms-transform: rotate(-45deg);
                   transform: rotate(-45deg); }
-        .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4:hover {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-close .vicp-icon4:hover {
           -webkit-transform: rotate(90deg);
               -ms-transform: rotate(90deg);
                   transform: rotate(90deg); }
-    .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area {
       position: relative;
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
@@ -115,7 +115,7 @@
       text-align: center;
       border: 1px dashed rgba(250, 250, 250, 0.5);
       overflow: hidden; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 {
         display: block;
         position: relative;
         top: 10px;
@@ -123,7 +123,7 @@
         width: 42px;
         height: 42px;
         overflow: hidden; }
-        .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-arrow {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-arrow {
           display: block;
           margin: 0 auto;
           width: 0;
@@ -131,26 +131,26 @@
           border-bottom: 14.7px solid rgba(250, 250, 250, 0.5);
           border-left: 14.7px solid transparent;
           border-right: 14.7px solid transparent; }
-        .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-body {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-body {
           display: block;
           width: 12.6px;
           height: 14.7px;
           margin: 0 auto;
           background-color: rgba(250, 250, 250, 0.5); }
-        .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-bottom {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 .vicp-icon1-bottom {
           -webkit-box-sizing: border-box;
                   box-sizing: border-box;
           display: block;
           height: 12.6px;
           border: 6px solid rgba(250, 250, 250, 0.5);
           border-top: none; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-hint {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-hint {
         display: block;
         padding: 15px;
         font-size: 14px;
         color: #666;
         line-height: 30px; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-no-supported-hint {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-no-supported-hint {
         display: block;
         position: absolute;
         top: 0;
@@ -163,24 +163,24 @@
         text-align: center;
         color: #666;
         font-size: 14px; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area:hover {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step1 .vicp-drop-area:hover {
         cursor: pointer;
         border-color: rgba(0, 0, 0, 0.1);
         background-color: rgba(0, 0, 0, 0.05); }
-    .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop {
       display: flex;
       align-items: center;
       overflow: hidden; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left {
         float: left; }
-        .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container {
           position: relative;
           display: block;
           width: 240px;
           height: 180px;
           background-color: #e5e5e0;
           overflow: hidden; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img {
             position: absolute;
             display: block;
             cursor: move;
@@ -188,22 +188,22 @@
                -moz-user-select: none;
                 -ms-user-select: none;
                     user-select: none; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade {
             -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
                     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
             position: absolute;
             background-color: rgba(241, 242, 243, 0.8); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-1 {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-1 {
               top: 0;
               left: 0; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-2 {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-img-container .vicp-img-shade.vicp-img-shade-2 {
               bottom: 0;
               right: 0; }
-        .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate {
           position: relative;
           width: 240px;
           height: 18px; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i {
             display: block;
             width: 18px;
             height: 18px;
@@ -215,37 +215,37 @@
             background-color: rgba(0, 0, 0, 0.08);
             color: #fff;
             overflow: hidden; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:hover {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:hover {
               -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
                       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
               cursor: pointer;
               background-color: rgba(0, 0, 0, 0.14); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:first-child {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:first-child {
               float: left; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:last-child {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-rotate i:last-child {
               float: right; }
-        .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range {
           position: relative;
           margin: 30px 0 10px 0;
           width: 240px;
           height: 18px; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5,
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5,
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {
             position: absolute;
             top: 0;
             width: 18px;
             height: 18px;
             border-radius: 100%;
             background-color: rgba(0, 0, 0, 0.08); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5:hover,
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6:hover {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5:hover,
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6:hover {
               -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
                       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
               cursor: pointer;
               background-color: rgba(0, 0, 0, 0.14); }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5 {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5 {
             left: 0; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5::before {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon5::before {
               position: absolute;
               content: '';
               display: block;
@@ -254,9 +254,9 @@
               width: 12px;
               height: 2px;
               background-color: #fff; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6 {
             right: 0; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::before {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::before {
               position: absolute;
               content: '';
               display: block;
@@ -265,7 +265,7 @@
               width: 12px;
               height: 2px;
               background-color: #fff; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::after {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range .vicp-icon6::after {
               position: absolute;
               content: '';
               display: block;
@@ -274,7 +274,7 @@
               width: 2px;
               height: 12px;
               background-color: #fff; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range] {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range] {
             display: block;
             padding-top: 5px;
             margin: 0 auto;
@@ -290,9 +290,9 @@
 							 ---------------------------------------------------------------*/
             /* 轨道
 							 ---------------------------------------------------------------*/ }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus {
               outline: none; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-thumb {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-thumb {
               -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
                       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
               -webkit-appearance: none;
@@ -305,7 +305,7 @@
               border: none;
               -webkit-transition: 0.2s;
               transition: 0.2s; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-thumb {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-thumb {
               box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
               -moz-appearance: none;
                    appearance: none;
@@ -316,7 +316,7 @@
               border: none;
               -webkit-transition: 0.2s;
               transition: 0.2s; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-thumb {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-thumb {
               box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
               appearance: none;
               width: 12px;
@@ -326,21 +326,21 @@
               border-radius: 100%;
               -webkit-transition: 0.2s;
               transition: 0.2s; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-moz-range-thumb {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-moz-range-thumb {
               box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
               width: 14px;
               height: 14px; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-ms-thumb {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-ms-thumb {
               box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
               width: 14px;
               height: 14px; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-webkit-slider-thumb {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:active::-webkit-slider-thumb {
               -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
                       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
               margin-top: -4px;
               width: 14px;
               height: 14px; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-runnable-track {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-webkit-slider-runnable-track {
               -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
                       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
               width: 100%;
@@ -349,7 +349,7 @@
               border-radius: 2px;
               border: none;
               background-color: rgba(41, 47, 51, 0.3); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-track {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-moz-range-track {
               box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
               width: 100%;
               height: 6px;
@@ -357,7 +357,7 @@
               border-radius: 2px;
               border: none;
               background-color: rgba(41,47,51,0.3); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-track {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-track {
               box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
               width: 100%;
               cursor: pointer;
@@ -367,31 +367,31 @@
               height: 6px;
               border-radius: 2px;
               border: none; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-lower {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-lower {
               background-color: rgba(41,47,51,0.3); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-upper {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]::-ms-fill-upper {
               background-color: rgba(68, 170, 119, 0.15); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-webkit-slider-runnable-track {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-webkit-slider-runnable-track {
               background-color: rgba(68, 170, 119, 0.5); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-moz-range-track {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-moz-range-track {
               background-color: rgba(68, 170, 119, 0.5); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-lower {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-lower {
               background-color: rgba(68, 170, 119, 0.45); }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-upper {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-left .vicp-range input[type=range]:focus::-ms-fill-upper {
               background-color: rgba(68, 170, 119, 0.25); }
-      .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right {
         float: right; }
-        .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview {
           height: 150px;
           overflow: hidden; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item {
             position: relative;
             padding: 5px;
             width: 100px;
             height: 100px;
             float: left;
             margin-right: 16px; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item span {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item span {
               position: absolute;
               bottom: -30px;
               width: 100%;
@@ -399,7 +399,7 @@
               color: #bbb;
               display: block;
               text-align: center; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item img {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item img {
               position: absolute;
               display: block;
               top: 0;
@@ -415,11 +415,11 @@
                  -moz-user-select: none;
                   -ms-user-select: none;
                       user-select: none; }
-            .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle {
+            .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle {
               margin-right: 0; }
-              .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle img {
+              .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right .vicp-preview .vicp-preview-item.vicp-preview-item-circle img {
                 border-radius: 100%; }
-    .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step3 .vicp-upload {
       position: relative;
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
@@ -428,17 +428,17 @@
       background-color: rgba(0, 0, 0, 0.03);
       text-align: center;
       border: 1px dashed #ddd; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-loading {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step3 .vicp-upload .vicp-loading {
         display: block;
         padding: 15px;
         font-size: 16px;
         color: #999;
         line-height: 30px; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap {
         margin-top: 12px;
         background-color: rgba(0, 0, 0, 0.08);
         border-radius: 3px; }
-        .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress {
           position: relative;
           display: block;
           height: 5px;
@@ -453,7 +453,7 @@
           background-size: 40px 40px;
           -webkit-animation: vicp_progress 0.5s linear infinite;
                   animation: vicp_progress 0.5s linear infinite; }
-          .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress::after {
+          .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step3 .vicp-upload .vicp-progress-wrap .vicp-progress::after {
             content: '';
             position: absolute;
             display: block;
@@ -466,15 +466,15 @@
                     box-shadow: 0 1px 4px 0 rgba(68, 170, 119, 0.7);
             border-radius: 100%;
             background-color: #4a7; }
-      .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-error,
-      .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-upload .vicp-success {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step3 .vicp-upload .vicp-error,
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-step3 .vicp-upload .vicp-success {
         height: 100px;
         line-height: 100px; }
-    .vue-image-crop-upload .vicp-wrap .vicp-operate {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-operate {
       /* position: absolute; */
       right: 20px;
       bottom: 20px; }
-      .vue-image-crop-upload .vicp-wrap .vicp-operate a {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-operate a {
         position: relative;
         float: left;
         display: block;
@@ -493,10 +493,10 @@
            -moz-user-select: none;
             -ms-user-select: none;
                 user-select: none; }
-        .vue-image-crop-upload .vicp-wrap .vicp-operate a:hover {
+        .vue-image-crop-upload.upload-container .vicp-wrap .vicp-operate a:hover {
           background-color: rgba(0, 0, 0, 0.03); }
-    .vue-image-crop-upload .vicp-wrap .vicp-error,
-    .vue-image-crop-upload .vicp-wrap .vicp-success {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-error,
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-success {
       display: block;
       font-size: 14px;
       line-height: 24px;
@@ -504,15 +504,15 @@
       color: #d10;
       text-align: center;
       vertical-align: top; }
-    .vue-image-crop-upload .vicp-wrap .vicp-success {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-success {
       color: #4a7; }
-    .vue-image-crop-upload .vicp-wrap .vicp-icon3 {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-icon3 {
       position: relative;
       display: inline-block;
       width: 20px;
       height: 20px;
       top: 4px; }
-      .vue-image-crop-upload .vicp-wrap .vicp-icon3::after {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-icon3::after {
         position: absolute;
         top: 3px;
         left: 6px;
@@ -525,13 +525,13 @@
             -ms-transform: rotate(45deg);
                 transform: rotate(45deg);
         content: ''; }
-    .vue-image-crop-upload .vicp-wrap .vicp-icon2 {
+    .vue-image-crop-upload.upload-container .vicp-wrap .vicp-icon2 {
       position: relative;
       display: inline-block;
       width: 20px;
       height: 20px;
       top: 4px; }
-      .vue-image-crop-upload .vicp-wrap .vicp-icon2::after, .vue-image-crop-upload .vicp-wrap .vicp-icon2::before {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-icon2::after, .vue-image-crop-upload.upload-container .vicp-wrap .vicp-icon2::before {
         content: '';
         position: absolute;
         top: 9px;
@@ -542,7 +542,7 @@
         -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
                 transform: rotate(45deg); }
-      .vue-image-crop-upload .vicp-wrap .vicp-icon2::after {
+      .vue-image-crop-upload.upload-container .vicp-wrap .vicp-icon2::after {
         -webkit-transform: rotate(-45deg);
             -ms-transform: rotate(-45deg);
                 transform: rotate(-45deg); }

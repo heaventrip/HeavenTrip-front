@@ -76,8 +76,7 @@ export default {
       avatarKeys: [],
       wishlisted: false,
       cardWidth: 500,
-      cardExpand: 70,
-      cardsToSlide: []
+      cardExpand: 70
     }
   },
   components: {
@@ -116,18 +115,39 @@ export default {
           .catch((err) => console.log(err))
       else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
     },
+    cardsToSlide(card) {
+      const cardPosition = this.$props.cardsArr.indexOf(card)
+      return this.$props.cardsArr.slice(cardPosition + 1)
+    },
+
+    // transformCard(type, event) {
+    //   let card = event.target
+
+    //   // simultaneously we want it to push the following cards to the right
+
+    //   if (type === 'bigger') {
+    //     // init timeline here because 'bigger' will always be the first event triggered
+    //     // and update it whenever another card is hovered
+    //     this.cardTl = this.cardAnim(card, cardsToSlide)
+
+    //     this.cardTl.play()
+
+    //     card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
+    //     card.querySelector('.card__footer__price').classList.add('border-0')
+    //   } else {
+    //     this.cardTl.reverse()
+
+    //     card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
+    //     card.querySelector('.card__footer__price').classList.remove('border-0')
+    //   }
+    // },
     transformCard(type, event) {
       let card = event.target
-
-      // simultaneously we want it to push the following cards to the right
       let cardPosition = this.$props.cardsArr.indexOf(card)
       let cardsToSlide = this.$props.cardsArr.slice(cardPosition + 1)
 
       if (type === 'bigger') {
-        // init timeline here because 'bigger' will always be the first event triggered
-        // and update it whenever another card is hovered
-        this.cardTl = this.cardAnim(card, cardsToSlide)
-
+        this.cardTl = card.tl(cardsToSlide)
         this.cardTl.play()
 
         card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
@@ -146,6 +166,26 @@ export default {
       .get('/wishlists', { wishlist: { courseId: this.$props.course.id } })
       .then(() => (this.wishlisted = true))
       .catch(() => (this.wishlisted = false))
+
+    let cards = document.querySelectorAll('.card-block')
+
+    cards.forEach((card) => {
+      let movingInfos = card.querySelector('.hoverable-div')
+      let staticInfos = card.querySelector('.card__footer__static-infos')
+      let heartIcon = card.querySelector('.card-block__heart-icon')
+
+      const tl = (cardsToSlide) => {
+        return gsap
+          .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
+          .pause()
+          .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
+          .to(staticInfos, { y: '-=45px' }, '<')
+          .to(movingInfos, { y: '-=100' }, '<')
+          .to(heartIcon, { autoAlpha: 1 }, '<')
+          .to(cardsToSlide, { x: '+=70' }, '<')
+      }
+      card.tl = tl
+    })
   }
 }
 </script>
