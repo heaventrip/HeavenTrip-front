@@ -4,7 +4,7 @@
       <div class="row">
         <div class="pad-block rounded text-white p-0">
           <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
-            <h5 class="pad__header__title">Votre coup de coeur</h5>
+            <h5 class="pad__header__title">Coup de cœur des intéressés</h5>
             <div style="width: min-content">
               <InlineAvatars :avatars="avatarKeys" heart-width="40px" :heart="true" spacing="-5px" border-color="grey" :course-id="highlightedCourse?.id" />
             </div>
@@ -127,7 +127,7 @@ export default {
 .pad-block {
   margin-left: auto;
   min-width: 500px;
-  margin-right: 10%;
+  margin-right: 8%;
 }
 .pad__header {
   padding: 1.2rem 2rem;
@@ -193,8 +193,14 @@ export default {
   background-color: #d82558;
   border-color: #d82558;
 }
-
+.container {
+  align-self: center;
+}
 .middle-section {
+  display: flex;
+  min-height: 530px;
+  border-top: 25px solid #ffffff70;
+  border-bottom: 25px solid #ffffff70;
   background: url('../../assets/images/asset-1.png') no-repeat center center / cover;
   height: 60vh;
 }

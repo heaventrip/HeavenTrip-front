@@ -158,7 +158,6 @@ export default {
 .row {
   padding: 1px;
 }
-
 @media (max-width: 2000px) {
   .container {
     max-width: 100vw;
