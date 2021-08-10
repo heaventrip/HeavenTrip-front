@@ -164,4 +164,9 @@ export default {
   height: calc(100% - 10vh);
   position: relative;
 }
+@media only screen and (max-width: 1380px) {
+  .big-letters {
+    font-size: 169px;
+  }
+}
 </style>

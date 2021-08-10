@@ -42,8 +42,9 @@ export default {
   flex-direction: row-reverse;
 }
 .right .message-content {
-  background-color: #292f33;
+  background-color: #5a3a5f;
   color: white;
+  float: right;
 }
 .right .message-container {
   margin-right: 15px;

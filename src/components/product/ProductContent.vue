@@ -83,9 +83,27 @@
         <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
           <div class="messages-container" style="">
             <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
+            <Message
+              :user="{
+                firstName: 'Geoff',
+                lastName: 'M'
+              }"
+              content="cc cest le Jo"
+              createdAt="2021-08-05T11:13:32.612Z"
+              position="right"
+            />
+            <Message
+              :user="{
+                firstName: 'Maria',
+                lastName: 'Golo'
+              }"
+              content="ergerg grzzdf zefzefzefzef ze fzefsd f z efzefzef zef "
+              createdAt="2021-08-05T11:13:32.612Z"
+              position="left"
+            />
             <ul class="list-unstyled mb-0 discuss-list mt-3">
               <li v-for="msg in messages" :key="msg">
-                <Message :user="msg.user" :content="msg.content" :createdAt="msg.createdAt" position="left" />
+                <Message :user="msg.user" :content="msg.content" :createdAt="msg.createdAt" position="right" />
               </li>
             </ul>
           </div>

@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center pr-0 pl-5" :class="[activitiesIsActive || destinationsIsActive ? 'navbar-filter--grey' : '', agencyIsActive ? 'navbar-filter--white' : '']">
-    <div class="" style="margin-right: 5rem">
+    <div @click="onClickNavLogo()" class="navbar-logo" style="margin-right: 5rem">
       <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="#292f33" />
       <InlineSvg v-else :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="white" />
     </div>
@@ -171,6 +171,9 @@ export default {
     }
   },
   methods: {
+    onClickNavLogo() {
+      this.$router.push('/')
+    },
     setCateg(categ) {
       this.sportCategories = categ
     },
@@ -265,6 +268,9 @@ export default {
   height: 70px; /* easier to manipulate with fixed height */
   z-index: 11;
   background-color: #292f33;
+}
+.navbar-logo {
+  cursor: pointer;
 }
 .navbar-filter--grey::after {
   content: '';
