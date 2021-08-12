@@ -17,7 +17,7 @@
       </div>
       <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
+        <div class="d-flex flex-column justify-content-center text-right mr-1">
           <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
@@ -38,7 +38,12 @@
             img-format="jpg"
           ></my-upload>
         </div>
-        <!-- <div class="ml-2" style="margin-right: auto">
+        <div class="advises-avatar">
+          <img src="@/assets/images/ui_faces/4.jpg" />
+          <p class="upload-text">Cadrage conseillé</p>
+        </div>
+      </div>
+      <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
                         <g id="Groupe_16781" data-name="Groupe 16781" transform="translate(0 0)">
@@ -90,7 +95,6 @@
                     <img :src="require('@/assets/images/avatar_example.png')" />
                     <p class="info-text-small mb-0 mt-1 pb-0">Cadrage conseillé</p>
                   </div> -->
-      </div>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
       <div class="descr-text">Ultra rapide, une petite bio, tes passions, un proverbe préféré ? Ces informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton espace Trippers.</div>
@@ -243,6 +247,19 @@ export default {
 <style scoped>
 .bttn--white:hover {
   background-color: #d82558;
+}
+.advises-avatar {
+  padding-left: 40px;
+  border-left: 1px solid #54595c;
+}
+.advises-avatar p {
+  margin: 0px;
+  margin-top: 3px;
+}
+.advises-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 .separator {
   margin-bottom: 90px;
