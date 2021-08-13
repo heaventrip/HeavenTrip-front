@@ -16,6 +16,16 @@
       <h4 class="heading mb-0">Programme</h4>
     </div>
   </div>
+  <DailyProgramCard
+    title="Jour 1"
+    :transports="transports"
+    principalTitle="Matin :"
+    principalContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
+  Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
+    hiddenTitle="Aprés-midi :"
+    hiddenContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
+  Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
+  />
   <div v-for="(dayProgram, index) in course.programs" :key="dayProgram" class="linear-block py-0 mb-0">
     <h5 class="tour-head text-uppercase d-flex flex-column flex-lg-row align-items-start align-items-lg-center border-0">
       <span class="font-weight-bold text-danger">Jour {{ index + 1 }}</span>
@@ -44,12 +54,29 @@
   </div>
 </template>
 <script>
+import DailyProgramCard from '@/components/product/tabs/DailyProgramCard.vue'
+
 export default {
   name: 'ProductTabProgram',
+  components: {
+    DailyProgramCard
+  },
   props: ['course'],
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      transports: [
+        {
+          pictoUrl: '@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg',
+          text: 'VOL pour',
+          strongText: 'HURGHADA'
+        },
+        {
+          pictoUrl: '@/assets/images/svg/Picto_transfert_navette.svg',
+          text: 'Transferts VERS EL GOUNA :',
+          strongText: '18H 19H 20H'
+        }
+      ]
     }
   }
 }
