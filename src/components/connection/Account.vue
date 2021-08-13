@@ -44,10 +44,10 @@
       </div>
       <div class="form-container" style="margin-top: 25vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
         <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
-          <div @click="activeInfoTab = 'gender'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Camp</div>
-          <div @click="activeInfoTab = 'avatar'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
-          <div @click="activeInfoTab = 'bio'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
-          <div @click="activeInfoTab = 'success'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>
+          <div @click="activeInfoTabByName('gender')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Camp</div>
+          <div @click="activeInfoTabByName('avatar')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
+          <div @click="activeInfoTabByName('bio')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
+          <div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>
         </div>
         <div class="d-flex connection-nav-container mb-5" v-else>
           <div @click="activeTab = 'login'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'login' }">Connexion</div>
@@ -58,7 +58,7 @@
           <form :key="activeTab">
             <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
             <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @submitted-form="showInfoScreen" />
-            <FormInfos v-else-if="activeTab === 'infos'" @changed-tab="setNewInfoTab" :active-info-tab="activeInfoTab" />
+            <FormInfos v-else-if="activeTab === 'infos'" @changed-tab="setNewInfoTab" :active-info-tab="activeInfoTab" ref="formInfos" />
             <Password v-else-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
           </form>
         </transition>
@@ -111,6 +111,14 @@ export default {
     }
   },
   methods: {
+    activeInfoTabByName(tabName) {
+      console.log(tabName)
+      console.log(this.$refs.formInfos.stepper[tabName].authorize)
+      if (this.$refs.formInfos.stepper[tabName].authorize) {
+        console.log('pass')
+        this.activeInfoTab = tabName
+      }
+    },
     showInfoScreen() {
       let purpleContainer = document.querySelector('.purple-container')
       let greyContainer = document.querySelector('.grey-container')

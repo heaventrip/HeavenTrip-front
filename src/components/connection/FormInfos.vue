@@ -38,6 +38,7 @@
             img-format="jpg"
           ></my-upload>
         </div>
+        <div class="final-avatar"><img :src="imgDataUrl" /></div>
         <div class="advises-avatar">
           <img src="@/assets/images/ui_faces/4.jpg" />
           <p class="upload-text">Cadrage conseillé</p>
@@ -150,6 +151,23 @@ export default {
           lowestPx: "L'image est trop petite"
         }
       },
+
+      //authorize : access authorized, the user can access the step
+      //valid : the step is validated, the user can go to the next step
+      stepper: {
+        gender: {
+          authorize: true,
+          valid: false
+        },
+        avatar: {
+          authorize: false,
+          valid: false
+        },
+        bio: {
+          authorize: false,
+          valid: false
+        }
+      },
       gender: '',
       description: '',
       show: true,
@@ -174,6 +192,7 @@ export default {
       this.$emit('changed-tab', this.activeInfoTabs[this.activeStep])
     },
     gender() {
+      this.stepper.avatar.authorize = true
       this.activeStep++
     }
   },
@@ -183,6 +202,7 @@ export default {
     },
     setGender(val) {
       this.gender = val
+      this.stepper.gender.valid = true
     },
     fileSet() {
       this.$nextTick(() => {
@@ -211,6 +231,7 @@ export default {
     cropUploadSuccess(jsonData, field) {
       console.log('-------- upload success --------')
       localStorage.setItem('user.avatarId', jsonData.upload.public_id)
+      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${localStorage['user.avatarId']}.jpg`
       this.$parent.$forceUpdate()
     },
     /**
@@ -247,6 +268,19 @@ export default {
 <style scoped>
 .bttn--white:hover {
   background-color: #d82558;
+}
+.final-avatar {
+  height: 170px;
+  width: 170px;
+  border-radius: 100%;
+  background-color: #d82558;
+  position: absolute;
+  margin-left: 165px;
+}
+.final-avatar img {
+  width: inherit;
+  height: inherit;
+  border-radius: 100%;
 }
 .advises-avatar {
   padding-left: 40px;

@@ -142,12 +142,12 @@
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area {
   align-self: center;
   position: relative;
-  margin-left: 140px;
+  margin-left: 165px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 35px;
-  height: 140px;
-  width: 140px;
+  height: 170px;
+  width: 170px;
   border-radius: 50%;
   /* background-color: #b4b4b4; */
   text-align: center;
@@ -156,7 +156,7 @@
 }
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area .vicp-icon1 {
-  display: block;
+  display: none;
   position: relative;
   top: 10px;
   margin: 0 auto 6px;
