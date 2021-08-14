@@ -124,10 +124,17 @@
       <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form>
         <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Tu peux taper ton texte ici..."></textarea>
-        <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="activeTab = 'login'" />
+        <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="validateTheInscription()" />
       </form>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh">
+      <div class="descr-text">Un e-mail de confirmation vous a été envoyé a l'adresse (mail du user), merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur Heaven Trip. A tout de suite !</div>
+      <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
+      <form>
+        <Button text="RENVOYER LA CONFIRMATION DE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation()" />
+      </form>
+    </div>
+    <!--<div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh">
       <div class="d-flex flex-column justify-content-center align-items-center mt-4">
         <InlineSvg :src="require('@/assets/svg/circle-mic.svg')" />
         <h6 class="text-uppercase text-white font-weight-normal text-center">
@@ -135,8 +142,8 @@
           <div class="text--pink letter-space" style="font-size: 1.5rem; font-weight: 600">Compte en cours de création...</div>
         </h6>
       </div>
-      <!-- <button @click.prevent="$parent.$parent.showModal = false" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button> -->
-    </div>
+      <button @click.prevent="$parent.$parent.showModal = false" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
+    </div>-->
   </div>
 </template>
 
@@ -188,6 +195,10 @@ export default {
         bio: {
           authorize: false,
           valid: false
+        },
+        success: {
+          authorize: false,
+          valid: false
         }
       },
       gender: '',
@@ -226,11 +237,23 @@ export default {
     setGender(val) {
       this.gender = val
       this.stepper.gender.valid = true
+      this.$emit('gender-is-valided')
     },
     validateTheAvatar() {
       this.stepper.avatar.valid = true
       this.stepper.bio.authorize = true
+      this.$emit('avatar-is-valided')
       this.activeStep++
+    },
+    validateTheInscription() {
+      this.activeTab = 'login'
+      this.stepper.bio.valid = true
+      this.stepper.success.authorize = true
+      this.$emit('success')
+      this.activeStep++
+    },
+    resendEmailConfirmation() {
+      //todo: resend email confirmation
     },
     fileSet() {
       this.$nextTick(() => {

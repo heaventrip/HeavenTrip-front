@@ -42,14 +42,14 @@
       </div>
     </div>
   </div>
-  <Button @click="nextFormTest()" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
-  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': !formIsValid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
-  <div class="d-flex regist mb-4">
+  <div class="d-flex regist mb-1">
     <div>
-      <input id="signup-legal" type="checkbox" v-model="legal" />
+      <!--    <input id="signup-legal" type="checkbox" v-model="legal" /> -->
       <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant sur s'inscrire, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label>
     </div>
   </div>
+  <Button @click="nextFormTest()" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
+  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': !formIsValid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
 </template>
 
 <script>
@@ -253,5 +253,8 @@ label > .text-danger {
 .modal-input--error {
   color: #ff0000;
   border-left: 4px solid #ff0000;
+}
+.password-link {
+  font-size: 0.7rem;
 }
 </style>
