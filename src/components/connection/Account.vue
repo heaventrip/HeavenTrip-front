@@ -112,10 +112,7 @@ export default {
   },
   methods: {
     activeInfoTabByName(tabName) {
-      console.log(tabName)
-      console.log(this.$refs.formInfos.stepper[tabName].authorize)
       if (this.$refs.formInfos.stepper[tabName].authorize) {
-        console.log('pass')
         this.activeInfoTab = tabName
       }
     },

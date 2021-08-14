@@ -65,7 +65,7 @@
           <p class="upload-text">Cadrage conseillé</p>
         </div>
       </div>
-      <label v-if="showAvatarValidationButton" @click="setGender('male')" class="btn avatar-validation-btn rounded-0 btn-lg px-4"> Valider ma photo de profil </label>
+      <label v-if="showAvatarValidationButton" @click="validateTheAvatar()" class="btn avatar-validation-btn rounded-0 btn-lg px-4"> Valider ma photo de profil </label>
       <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
@@ -227,6 +227,11 @@ export default {
       this.gender = val
       this.stepper.gender.valid = true
     },
+    validateTheAvatar() {
+      this.stepper.avatar.valid = true
+      this.stepper.bio.authorize = true
+      this.activeStep++
+    },
     fileSet() {
       this.$nextTick(() => {
         let buttons = document.querySelector('.vicp-step2 .vicp-operate')
@@ -243,7 +248,7 @@ export default {
      */
     cropSuccess(imgDataUrl, field) {
       console.log('-------- crop success --------')
-
+      this.showAvatarValidationButton = false
       /**
        * upload success
        *
