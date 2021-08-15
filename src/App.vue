@@ -1,13 +1,20 @@
 <template>
   <transition name="fade-faster">
-    <vue-element-loading :active="false" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
+    <router-view :key="$route.fullPath" />
   </transition>
-  <router-view :key="$route.fullPath" />
+  <transition>
+    <vue-element-loading :active="!loaded" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
+  </transition>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      loaded: false
+    }
+  }
 }
 </script>
 

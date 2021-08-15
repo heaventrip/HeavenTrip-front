@@ -121,7 +121,6 @@
 </template>
 
 <script>
-import ConnectionModal from '@/components/connection/ConnectionModal.vue'
 import Account from '@/components/connection/Account.vue'
 import AccountInfos from '@/components/connection/AccountInfos.vue'
 import { isLoggedIn } from '@/utils/auth'
@@ -131,7 +130,6 @@ import { getUserInfo } from '@/utils/auth'
 export default {
   name: 'ConnectionButtons',
   components: {
-    // ConnectionModal,
     Account,
     AccountInfos
   },

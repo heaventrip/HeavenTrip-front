@@ -1,5 +1,7 @@
 <template>
-  <Header />
+  <keep-alive>
+    <component :is="'Header'"></component>
+  </keep-alive>
   <MainSection />
   <Footer />
   <!-- <Profile /> -->

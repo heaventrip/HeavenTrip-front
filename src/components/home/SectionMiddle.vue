@@ -1,45 +1,41 @@
 <template>
   <section class="middle-section">
-    <div class="container">
-      <div class="row">
-        <div class="pad-block rounded text-white p-0">
-          <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
-            <h5 class="pad__header__title">Votre coup de coeur</h5>
-            <div style="width: min-content">
-              <InlineAvatars :avatars="avatarKeys" heart-width="40px" :heart="true" spacing="-5px" border-color="grey" :course-id="highlightedCourse?.id" />
+    <div class="pad-block rounded text-white p-0">
+      <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
+        <h5 class="pad__header__title">Votre coup de coeur</h5>
+        <div style="width: min-content">
+          <InlineAvatars :avatars="avatarKeys" heart-width="40px" :heart="true" spacing="-5px" border-color="grey" :course-id="highlightedCourse?.id" />
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="d-inline-block" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
+          <div class="pad__content shadow--right">
+            <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
+              <span class="pad__content__title__sport">{{ highlightedCourse?.sports[0].name }}</span>
+              <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ highlightedCourse?.spot.name }}</span>
+            </div>
+            <div class="pad__content__sports d-flex align-items-center justify-content-center tooltip-div mt-4">
+              <InlineSvg v-for="includedCourse in highlightedCourse?.alternatives.filter((el) => el.isIncluded)" :key="includedCourse" class="mr-4" :src="require(`@/assets/svg/${includedCourse?.picto || 'surf'}.svg`)" height="28" />
+              <span class="ml-auto euro"
+                ><strong>{{ highlightedCourse?.price }}&euro;</strong>/pers.
+              </span>
+            </div>
+            <div class="d-flex align-items-center social-info">
+              <InlineProductInfos :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]" :icons="['globe', 'timer', 'intensity-2-white', 'people']" color="#292f33" />
             </div>
           </div>
-          <div class="d-flex">
-            <div class="d-inline-block" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
-              <div class="pad__content shadow--right">
-                <div class="text-uppercase pad__content__title font-weight-bold d-flex align-items-center">
-                  <span class="pad__content__title__sport">{{ highlightedCourse?.sports[0].name }}</span>
-                  <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ highlightedCourse?.spot.name }}</span>
-                </div>
-                <div class="pad__content__sports d-flex align-items-center justify-content-center tooltip-div mt-4">
-                  <InlineSvg v-for="includedCourse in highlightedCourse?.alternatives.filter((el) => el.isIncluded)" :key="includedCourse" class="mr-4" :src="require(`@/assets/svg/${includedCourse?.picto || 'surf'}.svg`)" height="28" />
-                  <span class="ml-auto euro"
-                    ><strong>{{ highlightedCourse?.price }}&euro;</strong>/pers.
-                  </span>
-                </div>
-                <div class="d-flex align-items-center social-info">
-                  <InlineProductInfos :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]" :icons="['globe', 'timer', 'intensity-2-white', 'people']" color="#292f33" />
-                </div>
-              </div>
-              <div class="d-flex pad__footer">
-                <div class="pad__footer__review-counter shadow--top">
-                  <Button style="cursor: default" :text="`${reviewsNb} avis`" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
-                </div>
-                <Button @click="$router.push({ path: `/product/${highlightedCourse.id}` })" class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
-              </div>
+          <div class="d-flex pad__footer">
+            <div class="pad__footer__review-counter shadow--top">
+              <Button style="cursor: default" :text="`${reviewsNb} avis`" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
             </div>
-            <!-- TODO changement de content au hover, et hover en gris -->
-            <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
-              <div class="pad__content__month-block shadow"><span>Mai</span></div>
-              <div class="pad__content__month-block shadow"><span>Juil</span></div>
-              <div class="pad__content__month-block shadow"><span>Août</span></div>
-            </div>
+            <Button @click="$router.push({ path: `/product/${highlightedCourse.id}` })" class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
           </div>
+        </div>
+        <!-- TODO changement de content au hover, et hover en gris -->
+        <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
+          <div class="pad__content__month-block shadow"><span>Mai</span></div>
+          <div class="pad__content__month-block shadow"><span>Juil</span></div>
+          <div class="pad__content__month-block shadow"><span>Août</span></div>
         </div>
       </div>
     </div>
@@ -196,6 +192,8 @@ export default {
 
 .middle-section {
   background: url('../../assets/images/asset-1.png') no-repeat center center / cover;
-  height: 60vh;
+  height: 90vh;
+  display: flex;
+  align-items: center;
 }
 </style>

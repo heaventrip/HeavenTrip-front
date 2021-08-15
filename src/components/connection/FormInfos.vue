@@ -22,21 +22,22 @@
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
         </div>
-        <my-upload
-          class="upload-container"
-          :no-square="true"
-          :langExt="uploadLang"
-          field="img"
-          @src-file-Set="fileSet"
-          @crop-success="cropSuccess"
-          @crop-upload-success="cropUploadSuccess"
-          @crop-upload-fail="cropUploadFail"
-          url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
-          v-model="show"
-          :width="300"
-          :height="300"
-          img-format="jpg"
-        ></my-upload>
+        <div class="upload-container">
+          <my-upload
+            :no-square="true"
+            :langExt="uploadLang"
+            field="img"
+            @src-file-Set="fileSet"
+            @crop-success="cropSuccess"
+            @crop-upload-success="cropUploadSuccess"
+            @crop-upload-fail="cropUploadFail"
+            url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+            v-model="show"
+            :width="300"
+            :height="300"
+            img-format="jpg"
+          ></my-upload>
+        </div>
         <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">

@@ -72,14 +72,15 @@
     <div class="gallery-comment-block">
       <div class="aside-slider">
         <transition name="fade" @after-leave="afterLeave">
-          <swiper v-if="asideSlider" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2" /></swiper-slide>
+          <swiper v-if="asideSlider" @after-init="setCustomButtons" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" @click="showImg(0)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" @click="showImg(1)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" @click="showImg(2)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin" @click="showImg(3)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2" @click="showImg(4)" /></swiper-slide>
           </swiper>
         </transition>
+        <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
         <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
           <div class="messages-container" style="">
             <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
@@ -143,7 +144,7 @@ export default {
     ProductTabProgram,
     ProductTabReviews,
     ProductTabTips,
-    // VueEasyLightbox,
+    VueEasyLightbox,
     Swiper,
     SwiperSlide
   },
@@ -156,7 +157,13 @@ export default {
       messageSentSuccess: true,
       inputMessage: '',
       asideSlider: true,
-      imgs: ['https://via.placeholder.com/450.png/', 'https://via.placeholder.com/300.png/', 'https://via.placeholder.com/150.png/', 'https://via.placeholder.com/450.png/'], // Img Url , string or Array of string
+      imgs: [
+        'https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2'
+      ],
       visible: false,
       index: 0, // default: 0
       clickedInfos: false,
@@ -199,6 +206,10 @@ export default {
     submitMessageForm() {
       if (!this.inputMessage) return
 
+      const AUTH_TOKEN_KEY = 'authToken'
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       this.$axios
         .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
         .then((res) => {
@@ -206,6 +217,10 @@ export default {
           this.fetchMessages()
         })
         .catch((err) => console.log(err))
+    },
+    showImg(index) {
+      this.index = index
+      this.visible = true
     },
     initTabsGsap() {
       // let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
@@ -251,21 +266,22 @@ export default {
     //     }
     //   })
     // },
-    showImg(index) {
-      this.index = index
-      this.visible = true
-    },
     handleHide() {
       this.visible = false
     },
     renderSwiperFraction(currentClass, totalClass) {
-      return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
-      <span style="${this.currentPaginationStyle}">.</span>
-      <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
+      return `
+        <div style="text-align: left; margin-left: 1rem">
+          <span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
+          <span style="${this.currentPaginationStyle}">.</span>
+          <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>
+        </div>
+      `
     },
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView({ behavior: 'smooth' })
-    }
+    },
+    setCustomButtons() {}
     // scroll to top when user reaches top of content (wheel up)
     // handleScrollUp() {
     //   let contentTop = window.innerHeight * 0.9
@@ -286,6 +302,8 @@ export default {
     // }
   },
   mounted() {
+    this.setCustomButtons()
+
     let sections = Array.from(document.querySelectorAll('.product-section'))
     let navLinks = Array.from(document.querySelectorAll('.product-nav-tabs .nav-link'))
 
@@ -309,6 +327,12 @@ export default {
 </script>
 
 <style scoped>
+.customized-prev {
+  display: none !important;
+}
+.customized-next {
+  display: none !important;
+}
 button {
   all: unset;
 }
@@ -394,10 +418,6 @@ button {
   color: #292f33;
   font-size: 0.8rem;
 }
-.swiper-button-prev,
-.swiper-button-next {
-  color: #292f33;
-}
 
 .nav-link {
   padding: 0.5rem !important;
@@ -408,7 +428,7 @@ button {
   position: relative;
   top: 70px;
 }
-.slider {
+/* .slider {
   background-color: #fcfcfc;
   position: absolute;
   width: 100vw;
@@ -429,7 +449,8 @@ button {
 .fade--in--content {
   transition: opacity 0.8s ease 0.4s;
   opacity: 1;
-}
+} */
+
 .product-nav-tabs {
   position: fixed;
   top: 70px;

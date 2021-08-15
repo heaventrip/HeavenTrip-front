@@ -155,9 +155,10 @@ export default {
     }
   },
   async created() {
+    this.$root.loaded = false
     await this.$axios.get(`/courses/${this.id}`).then((res) => {
       this.course = res.data.course
-      this.loaded = true
+      this.$root.loaded = true
     })
   },
   mounted() {

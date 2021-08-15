@@ -93,32 +93,16 @@ export default {
       console.log(res.data.sportCategories)
     })
 
-    // // working contentful auth
-    // // client.getAssets().then((res) => (this.imgSrc = `https:${res.items[0].fields.file.url}?q=80`))
+    // NOTE working flow to get tag
+    // const client = this.$contentful.createClient({
+    //   space: '8dtxc3nuj0tn',
+    //   environment: 'master',
+    //   accessToken: 'QJST-plHn1kmliJnkzNZebXG0wecPQwtxH1hg9YDYek'
+    // })
 
     // client
-    //   .getSpace('4nx5joo7rzn4')
-    //   .then((space) =>
-    //     space.createAssetFromFiles({
-    //       fields: {
-    //         title: {
-    //           'fr-FR': 'Avatar titre'
-    //         },
-    //         description: {
-    //           'fr-FR': 'Avatar description'
-    //         },
-    //         file: {
-    //           'fr-FR': {
-    //             contentType: 'image/jpeg',
-    //             fileName: 'monavatar.jpg',
-    //             file: '<svg><path fill="red" d="M50 50h150v50H50z"/></svg>'
-    //           }
-    //         }
-    //       }
-    //     })
-    //   )
-    //   .then((asset) => asset.processForAllLocales())
-    //   .then((asset) => asset.publish())
+    //   .getAssets({ 'metadata.tags.sys.id[all]': 'essaouira' })
+    //   .then((entries) => console.log(entries))
     //   .catch(console.error)
   }
 }

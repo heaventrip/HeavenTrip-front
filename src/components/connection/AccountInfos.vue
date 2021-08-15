@@ -234,6 +234,7 @@ export default {
   },
   async created() {
     this.currUser = await this.getUserInfo()
+    console.log('&&&&&&&&&&&', this.$root)
   }
 }
 </script>

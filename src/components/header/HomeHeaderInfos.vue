@@ -106,8 +106,10 @@ export default {
     }
   },
   async created() {
+    this.$root.loaded = false
     await this.$axios.get('/courses', { params: { featured: true } }).then((res) => {
       this.featuredCourse = res.data.course
+      this.$root.loaded = true
     })
   }
 }
