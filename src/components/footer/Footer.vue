@@ -102,16 +102,16 @@
                 <h5 class="text-uppercase list-head">Top destinations</h5>
                 <ul class="list-unstyled" style="line-height: 1">
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[0]?.id } }">{{ countries[0]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[0]?.id } }">{{ countries[0]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[1]?.id } }">{{ countries[1]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[1]?.id } }">{{ countries[1]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[2]?.id } }">{{ countries[2]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[2]?.id } }">{{ countries[2]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[3]?.id } }">{{ countries[3]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[3]?.id } }">{{ countries[3]?.name }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -119,16 +119,16 @@
                 <h5 class="text-uppercase list-head">Top activites</h5>
                 <ul class="list-unstyled" style="line-height: 1">
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[0]?.id } }">{{ sports[0]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[0]?.id } }">{{ sports[0]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[1]?.id } }">{{ sports[1]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[1]?.id } }">{{ sports[1]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[2]?.id } }">{{ sports[2]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[2]?.id } }">{{ sports[2]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[3]?.id } }">{{ sports[3]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[3]?.id } }">{{ sports[3]?.name }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -136,7 +136,7 @@
                 <h5 class="text-uppercase list-head">thematiques</h5>
                 <ul class="list-unstyled" style="line-height: 1">
                   <li v-for="theme in themes" :key="theme">
-                    <router-link :to="{ name: 'SearchHome', query: { theme: theme.id } }">{{ theme.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { theme: theme.id } }">{{ theme.name }}</router-link>
                   </li>
                 </ul>
               </div>

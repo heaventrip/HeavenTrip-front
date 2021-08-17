@@ -18,8 +18,8 @@
 </template>
 <script>
 import TheNavSticky from '@/components/nav/TheNavSticky'
-import LegalUse from './LegalUse.vue'
-import LegalSales from './LegalSales.vue'
+import LegalUse from '@/components/legal/LegalUse.vue'
+import LegalSales from '@/components/legal/LegalSales.vue'
 import Footer from '@/components/footer/Footer'
 
 export default {

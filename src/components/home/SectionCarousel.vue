@@ -333,7 +333,7 @@ export default {
       }
     },
     submitSearchForm() {
-      this.$router.push({ name: 'SearchHome', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
+      this.$router.push({ name: 'Search', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
       // this.$axios
       //   .post('/courses/search', {
       //     q: {

@@ -7,22 +7,22 @@
       'header-filter--home': !navIsActive && currentRoute('Home'),
       'header-filter--grey': activitiesIsActive || destinationsIsActive,
       'header-filter--light': agencyIsActive,
-      'header--search': currentRoute('SearchHome'),
-      'header-filter--search': !navIsActive && currentRoute('SearchHome'),
-      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('SearchHome'),
-      'header-filter--search--light': agencyIsActive && currentRoute('SearchHome'),
-      'header--product': currentRoute('ProductHome'),
-      'header-filter--product': !navIsActive && currentRoute('ProductHome'),
-      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('ProductHome'),
-      'header-filter--product--light': agencyIsActive && currentRoute('ProductHome')
+      'header--search': currentRoute('Search'),
+      'header-filter--search': !navIsActive && currentRoute('Search'),
+      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Search'),
+      'header-filter--search--light': agencyIsActive && currentRoute('Search'),
+      'header--product': currentRoute('Product'),
+      'header-filter--product': !navIsActive && currentRoute('Product'),
+      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Product'),
+      'header-filter--product--light': agencyIsActive && currentRoute('Product')
     }"
   >
     <div
       class="header-bg-container"
       :class="{
         'header-bg-container--home': currentRoute('Home'),
-        'header-bg-container--search': currentRoute('SearchHome'),
-        'header-bg-container--product': currentRoute('ProductHome')
+        'header-bg-container--search': currentRoute('Search'),
+        'header-bg-container--product': currentRoute('Product')
       }"
     >
       <img src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
@@ -32,8 +32,8 @@
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
     <TheNav @leave-tabs="resetTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
-    <ProductHeaderInfos v-else-if="currentRoute('ProductHome') && !navIsActive" ref="productHeaderInfos" :course="course" />
-    <SearchHeaderInfos v-else-if="currentRoute('SearchHome') && !navIsActive" />
+    <ProductHeaderInfos v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course" />
+    <SearchHeaderInfos v-else-if="currentRoute('Search') && !navIsActive" />
     <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
@@ -123,13 +123,14 @@ export default {
       toggleSessions: false,
       agencyIsActive: false,
       destinationsIsActive: false,
-      activitiesIsActive: false
+      activitiesIsActive: false,
+      modalBackgroundView: ''
     }
   },
   watch: {
+    // store background view when modal opens
     $route(to, from) {
-      console.log('to', to)
-      console.log('from', from)
+      if (to.name === 'Account') this.modalBackgroundView = from.name
     },
     navIsActive(newVal) {
       if (newVal === true) this.$emit('nav-is-active')
@@ -143,7 +144,8 @@ export default {
   },
   methods: {
     currentRoute(route) {
-      return this.$route.name === route
+      if (this.$route.name === 'Account') return this.modalBackgroundView === route
+      else return this.$route.name === route
     },
     resetTabs() {
       ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))

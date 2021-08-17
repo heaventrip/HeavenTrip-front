@@ -25,7 +25,7 @@ import gsap from 'gsap'
 // import ProductModal from '@/components/product/ProductModal.vue'
 
 export default {
-  name: 'ProductHome',
+  name: 'Product',
   components: {
     ProductHeader,
     ProductContent,

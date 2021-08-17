@@ -1,5 +1,5 @@
 <template>
-  <div class="card-block" :class="`card-block-${index}`" :data-index="index" :style="{ width: cardWidth + 'px' }" @mouseenter="transformCard('bigger', $event)" @mouseleave="transformCard('smaller', $event)">
+  <div class="card-block" :class="`card-block-${index}`" :data-index="index" :style="{ width: cardWidth + 'px' }" @mouseenter="biggerCard($event)" @mouseleave="smallerCard">
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
@@ -76,7 +76,10 @@ export default {
       avatarKeys: [],
       wishlisted: false,
       cardWidth: 500,
-      cardExpand: 70
+      cardExpand: 70,
+      activeCard: '',
+      anim: '',
+      cardsToSlide: ''
     }
   },
   components: {
@@ -89,6 +92,10 @@ export default {
       if (!val.wishlistUsers) return
 
       val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+    },
+    activeCard(newVal) {
+      this.cardsToSlide = this.getCardsToSlide(newVal)
+      this.anim = this.activeCard.tl(this.cardsToSlide)
     }
   },
   methods: {
@@ -115,7 +122,7 @@ export default {
           .catch((err) => console.log(err))
       else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
     },
-    cardsToSlide(card) {
+    getCardsToSlide(card) {
       const cardPosition = this.$props.cardsArr.indexOf(card)
       return this.$props.cardsArr.slice(cardPosition + 1)
     },
@@ -141,23 +148,18 @@ export default {
     //     card.querySelector('.card__footer__price').classList.remove('border-0')
     //   }
     // },
-    transformCard(type, event) {
-      let card = event.target
-      let cardPosition = this.$props.cardsArr.indexOf(card)
-      let cardsToSlide = this.$props.cardsArr.slice(cardPosition + 1)
+    biggerCard(event) {
+      this.activeCard = event.target
+      this.anim.play()
 
-      if (type === 'bigger') {
-        this.cardTl = card.tl(cardsToSlide)
-        this.cardTl.play()
+      this.activeCard.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
+      this.activeCard.querySelector('.card__footer__price').classList.add('border-0')
+    },
+    smallerCard() {
+      this.anim.reverse()
 
-        card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
-        card.querySelector('.card__footer__price').classList.add('border-0')
-      } else {
-        this.cardTl.reverse()
-
-        card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
-        card.querySelector('.card__footer__price').classList.remove('border-0')
-      }
+      this.activeCard.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
+      this.activeCard.querySelector('.card__footer__price').classList.remove('border-0')
     }
   },
   mounted() {

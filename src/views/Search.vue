@@ -11,7 +11,7 @@ import SearchResultSection from '@/components/search/SearchResultSection.vue'
 import Footer from '@/components/footer/Footer.vue'
 
 export default {
-  name: 'SearchHome',
+  name: 'Search',
   components: {
     Header,
     SearchResultSection,

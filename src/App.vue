@@ -1,9 +1,10 @@
 <template>
-  <transition name="fade-faster">
-    <router-view :key="$route.fullPath" />
+  <transition name="fade">
+    <router-view :route="routeWithModal" />
   </transition>
+
   <transition>
-    <vue-element-loading :active="!loaded" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
+    <vue-element-loading :active="false" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
   </transition>
 </template>
 
@@ -12,7 +13,26 @@ export default {
   name: 'App',
   data() {
     return {
-      loaded: false
+      loaded: false,
+      backgroundView: null
+    }
+  },
+  computed: {
+    routeWithModal() {
+      if (this.backgroundView) {
+        return this.$router.resolve(this.backgroundView)
+      } else {
+        return this.$route
+      }
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        if (to.name === 'Account') this.backgroundView = from
+        else this.backgroundView = null
+      }
     }
   }
 }

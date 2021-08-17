@@ -3,13 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 // import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 import Home from '@/views/Home.vue'
-import ProductHome from '@/components/product/ProductHome.vue'
+import Profile from '@/views/Profile.vue'
+import Product from '@/views/Product.vue'
+import Search from '@/views/Search.vue'
 import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
-import SearchHome from '@/components/search/SearchHome.vue'
 import Account from '@/components/connection/Account.vue'
-import AccountInfos from '@/components/connection/AccountInfos.vue'
 // import ConnectionModal from '@/components/connection/ConnectionModal.vue'
-import Legal from '@/components/legal/Legal.vue'
+import Legal from '@/views/Legal.vue'
 import { isLoggedIn } from '@/utils/auth'
 
 const routes = [
@@ -22,9 +22,17 @@ const routes = [
     }
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      allowAnonymous: true
+    }
+  },
+  {
     path: '/product/:id',
-    name: 'ProductHome',
-    component: ProductHome,
+    name: 'Product',
+    component: Product,
     props: true,
     meta: {
       allowAnonymous: false
@@ -41,8 +49,8 @@ const routes = [
   },
   {
     path: '/search',
-    name: 'SearchHome',
-    component: SearchHome,
+    name: 'Search',
+    component: Search,
     meta: {
       allowAnonymous: true
     }
@@ -51,14 +59,6 @@ const routes = [
     path: '/login',
     name: 'Account',
     component: Account,
-    meta: {
-      allowAnonymous: true
-    }
-  },
-  {
-    path: '/account-infos',
-    name: 'AccountInfos',
-    component: AccountInfos,
     meta: {
       allowAnonymous: true
     }
@@ -80,7 +80,7 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     } else {
-      if (to.name === 'SearchHome') return { behavior: 'smooth', top: window.innerHeight }
+      if (to.name === 'Search') return { behavior: 'smooth', top: window.innerHeight }
       if (to.name === 'Home') return { behavior: 'smooth', top: 0 }
     }
   }

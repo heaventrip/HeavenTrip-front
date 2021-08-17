@@ -10,7 +10,7 @@
           </button>
           <div class="dropdown-menu text-uppercase" style="" aria-labelledby="dropdownMenu2">
             <div class="account-dropdown-item">
-              <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">Mes infos</button>
+              <router-link :to="{ name: 'Profile' }" class="dropdown-item">Mes infos</router-link>
             </div>
             <div class="account-dropdown-item">
               <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
@@ -65,7 +65,7 @@
           <transition name="fade">
             <div class="dropdown-menu text-uppercase py-1" style="" aria-labelledby="dropdownMenu2">
               <div class="account-dropdown-item">
-                <button @click="showAccountInfosPage = true" class="dropdown-item" type="button">Mes infos</button>
+                <router-link :to="{ name: 'Profile' }" class="dropdown-item">Mes infos</router-link>
               </div>
               <div class="account-dropdown-item">
                 <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
@@ -94,7 +94,8 @@
             <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
           </div> -->
               <div class="account-dropdown-item">
-                <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button>
+                <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link">Mon compte</router-link>
+                <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
                 <!-- <Profile v-if="showProfileModal" /> -->
               </div>
               <div class="account-dropdown-item">
@@ -112,17 +113,20 @@
       </li>
     </ul>
     <teleport to="#modal">
-      <Account v-if="!isLoggedIn() && showAccountPage" @closed-page="showAccountPage = false" @login-success="loginSuccess" :new-active-tab="activeTab" />
+      <transition name="fade">
+        <div v-if="$route.name === 'Account'">
+          <Account @closed-page="showAccountPage = false" @login-success="loginSuccess" :new-active-tab="activeTab" />
+        </div>
+      </transition>
     </teleport>
-    <teleport to="#modal">
-      <AccountInfos v-if="isLoggedIn() && showAccountInfosPage" @closed-page="showAccountInfosPage = false" />
-    </teleport>
+    <!-- <teleport to="#modal">
+      <Profile v-if="isLoggedIn() && showProfilePage" @closed-page="showProfilePage = false" />
+    </teleport> -->
   </div>
 </template>
 
 <script>
 import Account from '@/components/connection/Account.vue'
-import AccountInfos from '@/components/connection/AccountInfos.vue'
 import { isLoggedIn } from '@/utils/auth'
 import { logoutUser } from '@/utils/auth'
 import { getUserInfo } from '@/utils/auth'
@@ -130,14 +134,13 @@ import { getUserInfo } from '@/utils/auth'
 export default {
   name: 'ConnectionButtons',
   components: {
-    Account,
-    AccountInfos
+    Account
   },
   data() {
     return {
       activeTab: 'login',
       showAccountPage: false,
-      showAccountInfosPage: false,
+      showProfilePage: false,
       firstName: '',
       lastName: '',
       agencyIsActive: false,
@@ -179,7 +182,7 @@ export default {
         // document.querySelector('#modal').innerHTML = ''
       }
     },
-    showAccountInfosPage(val) {
+    showProfilePage(val) {
       if (val) document.body.style.overflowY = 'hidden'
       else {
         document.body.style.overflowY = ''

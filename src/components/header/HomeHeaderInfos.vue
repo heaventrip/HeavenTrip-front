@@ -39,7 +39,7 @@
       </div>
       <div class="row no-gutters">
         <div class="col-4">
-          <Button @click="$router.push({ name: 'ProductHome', params: { id: featuredCourse.id, showDateBtn: true } })" text="voir les <br /> dates" color="transparent" size=".8rem" />
+          <Button @click="$router.push({ name: 'Product', params: { id: featuredCourse.id, showDateBtn: true } })" text="voir les <br /> dates" color="transparent" size=".8rem" />
           <!-- NOTE old version toggling session menu -->
           <!-- <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" /> -->
         </div>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="col-6 ml-auto">
-          <router-link :to="{ name: 'ProductHome', params: { id: featuredCourse.id } }">
+          <router-link :to="{ name: 'Product', params: { id: featuredCourse.id } }">
             <div class="bttn bttn--pink">
               <div class="bttn__text">Détails<i class="fa fa-chevron-right ml-3"></i></div>
             </div>

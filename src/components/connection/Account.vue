@@ -99,7 +99,8 @@ export default {
   data() {
     return {
       activeTab: '',
-      activeInfoTab: 'gender'
+      activeInfoTab: 'gender',
+      fromRoute: ''
     }
   },
   watch: {
@@ -107,6 +108,12 @@ export default {
       immediate: true,
       handler(val) {
         this.activeTab = val
+      }
+    },
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        this.fromRoute = from
       }
     }
   },
@@ -142,7 +149,8 @@ export default {
       this.activeInfoTab = val
     },
     handlePageClose() {
-      this.$emit('closed-page')
+      if (this.fromRoute) this.$router.back()
+      else this.$router.push({ name: 'Home' })
     }
   },
   created() {

@@ -173,24 +173,17 @@
 
 <script>
 import Button from '@/components/elements/Button.vue'
-import FormLogin from './FormLogin.vue'
-import FormSignup from './FormSignup.vue'
-import FormInfos from './FormInfos.vue'
-import Password from './Password.vue'
 import { logoutUser } from '@/utils/auth'
 import { getUserInfo } from '@/utils/auth'
 
 export default {
-  name: 'AccountInfos',
+  name: 'Profile',
   components: {
     Button
-    // FormLogin,
-    // FormSignup,
-    // FormInfos,
-    // Password
   },
   data() {
     return {
+      fromRoute: '',
       currUser: null,
       allowForm: false,
       allowForm2: false,
@@ -224,17 +217,25 @@ export default {
       }
     }
   },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        this.fromRoute = from
+      }
+    }
+  },
   methods: {
     getUserInfo() {
       return getUserInfo()
     },
     handlePageClose() {
-      this.$emit('closed-page')
+      if (this.fromRoute) this.$router.back()
+      else this.$router.push({ name: 'Home' })
     }
   },
   async created() {
     this.currUser = await this.getUserInfo()
-    console.log('&&&&&&&&&&&', this.$root)
   }
 }
 </script>
