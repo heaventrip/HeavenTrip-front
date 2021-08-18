@@ -15,9 +15,18 @@
           <h4 class="ml-auto mb-0 selected-filter-count text-right font-weight-normal text-uppercase"><span class="d-block mb-2">2 FILTRES</span> sélectionnés</h4>
         </div>
         <ul class="list-unstyled mb-0 text-uppercase d-none d-lg-flex align-items-center filter-list font-weight-normal">
-          <li class="d-none"><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/surf_dark.png')" />SURF</li>
-          <li class="mr-3"><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/globe_dark.png')" />FRANCE</li>
-          <li class="mr-3"><img class="mr-2 ml-3 icons" fluid :src="require('@/assets/images/cal.png')" />Décembre</li>
+          <li class="d-none">
+            <InlineSvg class="mr-4" :src="require('@/assets/svg/date-search.svg')" height="22" />
+            SURF
+          </li>
+          <li class="mr-4">
+            <InlineSvg class="mr-2" :src="require('@/assets/svg/globe.svg')" height="22" />
+            FRANCE
+          </li>
+          <li class="mr-4">
+            <InlineSvg class="mr-2" :src="require('@/assets/svg/date-search.svg')" height="22" />
+            Décembre
+          </li>
         </ul>
       </div>
       <a class="px-3 bg-dark d-flex d-lg-none align-items-center justify-content-around text-white menu-ref border-left" href="index.html"><img fluid :src="require('@/assets/images/mob-menu.png')" /></a>
@@ -28,17 +37,17 @@
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Durée<i class="fas fa-sort ml-4 symbol"></i></div> -->
         <div @click="sortByPrice" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <span>Prix <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3 align-middle" /></span>
+            <div><span class="align-middle">Prix</span><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" /></div>
           </div>
         </div>
         <div @click="sortByDate" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <span>Date de départ <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3 align-middle" /></span>
+            <div><span class="align-middle">Date de départ</span><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" /></div>
           </div>
         </div>
         <div @click="sortByDuration" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <span>Durée <InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3 align-middle" /></span>
+            <div><span class="align-middle">Durée</span><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" /></div>
           </div>
         </div>
       </div>
@@ -51,106 +60,96 @@
               <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
               <input v-model="freeSearch" id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
             </div>
-            <!-- <div class="py-4 px-5 theme-div">
-              <div class="theme-dropdown position-relative">
-                <select class="form-control select-theme border-0 rounded-0 text-capitalize">
-                  <option selected="" value="" disabled="" hidden="">Thématiques</option>
-                  <option value="">qwerty</option>
-                  <option value="">asdfgh</option>
-                  <option value="">sdfghj</option>
-                </select>
-              </div>
-            </div> -->
-            <div class="filter-body bg-white font-weight-normal">
-              <div class="px-5 filter-container theme-filter">
-                <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
-                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
-                    <span class="search-bar__filter__name">Thématique<i class="fas fa-sort float-right symbol"></i></span>
+            <div class="bg-white filter-body">
+              <div class="filter-container theme-filter">
+                <div class="position-relative multi-select-filter" style="box-shadow: none; border-bottom: 1px solid rgba(41, 47, 51, 0.06); height: 4rem">
+                  <div class="d-flex align-items-center justify-content-around" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <span class="search-bar__filter__name">Thématique sportive</span>
+                    <i class="fas fa-sort symbol"></i>
                   </div>
                   <Multiselect @select="updateSearch" @deselect="updateSearch" class="theme-multiselect" ref="themeMultiselect" @open="setMultiSelect('theme')" v-model="themeSelection.value" v-bind="themeSelection" style="width: 100%">
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
-                <div class="tags-container"></div>
               </div>
-              <div class="text-uppercase mb-4 mt-3 letter">Tu peux encore affiner :</div>
-              <div class="px-5 filter-container activity-filter">
-                <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
-                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
-                    <span class="search-bar__filter__name">Activités<i class="fas fa-sort float-right symbol"></i></span>
+              <div class="d-flex flex-column font-weight-normal px-5 my-4">
+                <div class="text-uppercase mb-4 mt-3 letter" style="font-weight: 500">Je filtre si je veux :</div>
+                <div class="filter-container activity-filter">
+                  <div class="position-relative multi-select-filter">
+                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                      <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
+                      <span class="search-bar__filter__name">Activités<i class="fas fa-sort float-right symbol"></i></span>
+                    </div>
+                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                      <template v-slot:clear><div></div></template>
+                    </Multiselect>
                   </div>
-                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
-                    <template v-slot:clear><div></div></template>
-                  </Multiselect>
+                  <div class="tags-container"></div>
                 </div>
-                <div class="tags-container"></div>
-              </div>
-              <div class="px-5 filter-container country-filter">
-                <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
-                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/globe.svg')" height="22" />
-                    <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
+                <div class="filter-container country-filter">
+                  <div class="position-relative multi-select-filter">
+                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                      <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/globe.svg')" height="22" />
+                      <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
+                    </div>
+                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
+                      <template v-slot:clear><div></div></template>
+                    </Multiselect>
                   </div>
-                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
-                    <template v-slot:clear><div></div></template>
-                  </Multiselect>
+                  <div class="tags-container"></div>
                 </div>
-                <div class="tags-container"></div>
-              </div>
-              <div v-if="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="px-5 filter-container spot-filter">
-                <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
-                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
-                    <span class="search-bar__filter__name">Spot<i class="fas fa-sort float-right symbol"></i></span>
+                <div v-if="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="filter-container spot-filter">
+                  <div class="position-relative multi-select-filter">
+                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                      <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
+                      <span class="search-bar__filter__name">Spot<i class="fas fa-sort float-right symbol"></i></span>
+                    </div>
+                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="spot-multiselect" ref="spotMultiselect" @open="setMultiSelect('spot')" v-model="spotSelection.value" v-bind="spotSelection" style="width: 100%">
+                      <template v-slot:clear><div></div></template>
+                    </Multiselect>
                   </div>
-                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="spot-multiselect" ref="spotMultiselect" @open="setMultiSelect('spot')" v-model="spotSelection.value" v-bind="spotSelection" style="width: 100%">
-                    <template v-slot:clear><div></div></template>
-                  </Multiselect>
+                  <div class="tags-container"></div>
                 </div>
-                <div class="tags-container"></div>
-              </div>
-              <div class="px-5 filter-container month-filter">
-                <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
-                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
-                    <span class="search-bar__filter__name">Mois de départ<i class="fas fa-sort float-right symbol"></i></span>
+                <div class="filter-container month-filter">
+                  <div class="position-relative multi-select-filter">
+                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                      <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
+                      <span class="search-bar__filter__name">Mois de départ<i class="fas fa-sort float-right symbol"></i></span>
+                    </div>
+                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                      <template v-slot:clear><div></div></template>
+                    </Multiselect>
                   </div>
-                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
-                    <template v-slot:clear><div></div></template>
-                  </Multiselect>
+                  <div class="tags-container"></div>
                 </div>
-                <div class="tags-container"></div>
-              </div>
-              <div class="px-5 filter-container level-filter">
-                <div class="position-relative multi-select-filter">
-                  <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
-                    <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
-                    <span class="search-bar__filter__name">Niveau<i class="fas fa-sort float-right symbol"></i></span>
+                <div class="filter-container level-filter">
+                  <div class="position-relative multi-select-filter">
+                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                      <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/intensity-2-dark.svg')" height="22" />
+                      <span class="search-bar__filter__name">Niveau<i class="fas fa-sort float-right symbol"></i></span>
+                    </div>
+                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="level-multiselect" ref="levelMultiselect" @open="setMultiSelect('level')" v-model="levelSelection.value" v-bind="levelSelection" style="width: 100%">
+                      <template v-slot:clear><div></div></template>
+                    </Multiselect>
                   </div>
-                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="level-multiselect" ref="levelMultiselect" @open="setMultiSelect('level')" v-model="levelSelection.value" v-bind="levelSelection" style="width: 100%">
-                    <template v-slot:clear><div></div></template>
-                  </Multiselect>
+                  <div class="tags-container"></div>
                 </div>
-                <div class="tags-container"></div>
-              </div>
-              <br />
-              <div class="custom-radio-container d-flex justify-content-between">
-                <div class="custom-control custom-radio">
-                  <input v-model="dateConfirmed" type="checkbox" id="filterdepart" name="room" class="custom-control-input" />
-                  <label class="custom-control-label" for="filterdepart">Départ confirmé</label>
+                <div class="custom-radio-container d-flex justify-content-between">
+                  <div class="custom-control custom-radio">
+                    <input v-model="dateConfirmed" type="checkbox" id="filterdepart" name="room" class="custom-control-input" />
+                    <label class="custom-control-label" for="filterdepart">Départ confirmé</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input v-model="lastPlaces" type="checkbox" id="filterplace" name="room" class="custom-control-input" />
+                    <label class="custom-control-label" for="filterplace">Dernières places</label>
+                  </div>
                 </div>
-                <!-- <div class="custom-control custom-radio">
-                  <input v-model="lastPlaces" type="checkbox" id="filterplace" name="room" class="custom-control-input" />
-                  <label class="custom-control-label" for="filterplace">Dernières places</label>
-                </div> -->
               </div>
             </div>
             <!-- <button class="btn btn-block clear-btn border-0 rounded-0">Effacer les 4 critères de sélection</button> -->
             <button @click="submitSearchForm" class="btn btn-block clear-btn border-0 rounded-0">Rechercher</button>
           </div>
-          <div class="d-flex flex-column col-12 col-lg-8 ml-auto">
+          <div class="d-flex flex-column col-12 col-lg-8 mx-auto">
             <!-- NOTE NORMAL -->
             <div class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
               <div class="col-4 col-md-4 p-0">
@@ -657,7 +656,7 @@ export default {
   },
   mounted() {
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
-      tagContainer.closest('.filter-container').querySelector('.tags-container').append(tagContainer)
+      tagContainer.closest('.filter-container').querySelector('.tags-container')?.append(tagContainer)
     })
   }
 }
@@ -689,13 +688,14 @@ export default {
 .search-bar__filter__name {
   margin-left: 1rem;
   vertical-align: middle;
+  font-weight: 400;
 }
 
 .tags-container {
   height: 2.5rem;
 }
 .multi-select-filter {
-  box-shadow: 1px 2px 2px rgba(41, 47, 51, 0.05);
+  box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.08);
   transition: all 0.3s ease !important;
 }
 .divider {

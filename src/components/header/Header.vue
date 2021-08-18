@@ -334,6 +334,6 @@ export default {
   height: 100vh;
 }
 .header-bg-container--search {
-  height: 100%;
+  height: 100vh;
 }
 </style>

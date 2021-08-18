@@ -84,21 +84,27 @@
         <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
           <div class="messages-container" style="">
             <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
+            <Message
+              :user="{
+                firstName: 'Geoff',
+                lastName: 'M'
+              }"
+              content="cc cest le Jo"
+              createdAt="2021-08-05T11:13:32.612Z"
+              position="right"
+            />
+            <Message
+              :user="{
+                firstName: 'Maria',
+                lastName: 'Golo'
+              }"
+              content="ergerg grzzdf zefzefzefzef ze fzefsd f z efzefzef zef "
+              createdAt="2021-08-05T11:13:32.612Z"
+              position="left"
+            />
             <ul class="list-unstyled mb-0 discuss-list mt-3">
               <li v-for="msg in messages" :key="msg">
-                <div class="d-flex">
-                  <div class="">
-                    <div class="profile-container">
-                      <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
-                    </div>
-                  </div>
-                  <div class="ml-4 pt-2">
-                    <h6 class="discuss-head">
-                      {{ msg.user.firstName }} {{ msg.user.lastName }}<span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">{{ new Date(msg.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
-                    </h6>
-                    <p class="content-desc">{{ msg.content }}</p>
-                  </div>
-                </div>
+                <Message :user="msg.user" :content="msg.content" :createdAt="msg.createdAt" position="right" />
               </li>
             </ul>
           </div>
@@ -125,6 +131,7 @@ import ProductTabLiving from '@/components/product/tabs/ProductTabLiving.vue'
 import ProductTabProgram from '@/components/product/tabs/ProductTabProgram.vue'
 import ProductTabReviews from '@/components/product/tabs/ProductTabReviews.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
+import Message from '@/components/product/Message.vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VueEasyLightbox from 'vue-easy-lightbox'
@@ -145,6 +152,7 @@ export default {
     ProductTabReviews,
     ProductTabTips,
     VueEasyLightbox,
+    Message,
     Swiper,
     SwiperSlide
   },
@@ -194,7 +202,41 @@ export default {
   },
   methods: {
     fetchMessages() {
-      this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages))
+      this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
+      /* this.messages = [
+        {
+          user: {
+            firstName: 'Geoff',
+            lastName: 'M'
+          },
+          content: 'cc cest le Jo',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        },
+        {
+          user: {
+            firstName: 'Marie',
+            lastName: 'Dag'
+          },
+          content: 'zefazef rvzefz zefzefzef',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        },
+        {
+          user: {
+            firstName: 'Bonie',
+            lastName: 'M'
+          },
+          content: 'zefazef rvzefz zefzefzezev fjghjyhjlhk dfsgdsfgdf',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        },
+        {
+          user: {
+            firstName: 'Marie',
+            lastName: 'Dag'
+          },
+          content: 'zefazef rvzefz zefzefzef zefazef rvzefz zefzefzef zefazef rvzefz zefzefzefzefazef rvzefz zefzefzef',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        }
+      ] */
     },
     afterLeave() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -337,6 +379,7 @@ button {
   all: unset;
 }
 .messages-container {
+  overflow-y: scroll;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
   padding-top: 1rem;

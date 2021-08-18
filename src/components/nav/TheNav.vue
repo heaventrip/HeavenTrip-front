@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-baseline">
-    <a @mouseover="leavedAllTabs()" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 5rem; transform: translateY(5px)" href="/">
+    <a @mouseover="leavedAllTabs()" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 0px; padding-right: 5rem; transform: translateY(5px)" href="/">
       <InlineSvg class="svg-logo" v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" />
       <InlineSvg class="svg-logo" v-else :src="require('@/assets/svg/logo-white.svg')" />
     </a>
@@ -30,16 +30,28 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities">
+            <span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations">
+            <span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="!!agencyIsActive ? '' : onMouseOvered('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency">
+            <span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('activity')" class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('activity')" class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity">
+            <span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>

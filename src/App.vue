@@ -30,8 +30,17 @@ export default {
     $route: {
       immediate: true,
       handler(to, from) {
-        if (to.name === 'Account') this.backgroundView = from
-        else this.backgroundView = null
+        if (to.name === 'Account') {
+          this.backgroundView = from
+
+          document.querySelector('#app').style.filter = 'blur(3px)'
+          document.body.style.overflowY = 'hidden'
+        } else {
+          this.backgroundView = null
+
+          document.querySelector('#app').style.filter = ''
+          document.body.style.overflowY = ''
+        }
       }
     }
   }
@@ -40,6 +49,7 @@ export default {
 
 <style>
 body {
+  height: 100vh;
   width: 100vw;
   overflow-x: hidden;
 }

@@ -1,57 +1,62 @@
 <template>
   <p class="text-left content-head mb-4">Merci de remplir tous les champs pour valider votre inscription :</p>
-  <transition name="slide">
-    <div v-if="errResponse" class="error-container">{{ errResponse }}</div>
-  </transition>
   <div class="row">
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-firstName" v-model="firstName" class="form-control" type="text" name="" placeholder=" " />
+        <input id="signup-firstName" v-model="firstName" class="form-control" :class="{ 'field-error': v$.firstName.$error }" type="text" name="" placeholder=" " />
         <label for="signup-firstName">Prénom </label>
+        <div v-if="v$.firstName.$errors.length" class="field-error-message">{{ v$.firstName.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-lastName" v-model="lastName" class="form-control" type="text" name="" placeholder=" " />
+        <input id="signup-lastName" v-model="lastName" class="form-control" :class="{ 'field-error': v$.lastName.$error }" type="text" name="" placeholder=" " />
         <label for="signup-lastName">Nom</label>
+        <div v-if="v$.lastName.$errors.length" class="field-error-message">{{ v$.lastName.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-8">
       <div class="form-group has-float-label">
-        <input id="signup-email" v-model="email" class="form-control" type="text" name="" placeholder=" " />
+        <input id="signup-email" v-model="email" class="form-control" :class="{ 'field-error': v$.email.$error }" type="text" name="" placeholder=" " />
         <label for="signup-email">Adresse e-mail</label>
+        <div v-if="v$.email.$errors.length" class="field-error-message">{{ v$.email.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-4">
       <div class="form-group has-float-label">
-        <input id="signup-birthDate" type="date" name="" class="form-control" placeholder=" " datepicker :min="minBirthDate" required v-model="birthDate" />
+        <input id="signup-birthDate" type="date" name="" class="form-control" :class="{ 'field-error': v$.birthDate.$error }" placeholder=" " datepicker :min="minBirthDate" required v-model="birthDate" />
         <label for="signup-birthDate">Date de naissance</label>
+        <div v-if="v$.birthDate.$errors.length" class="field-error-message">{{ v$.birthDate.$errors[0].$message }}</div>
         <span class="validity"></span>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-password" v-model="password" class="form-control" type="password" name="" placeholder=" " />
+        <input id="signup-password" v-model="password" class="form-control" :class="{ 'field-error': v$.password.$error }" type="password" name="" placeholder=" " />
         <label for="signup-password">Mot de passe</label>
+        <div v-if="v$.password.$errors.length" class="field-error-message">{{ v$.password.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-passwordConfirmation" v-model="passwordConfirmation" class="form-control" type="password" name="" placeholder=" " />
+        <input id="signup-passwordConfirmation" v-model="passwordConfirmation" class="form-control" :class="{ 'field-error': v$.passwordConfirmation.$error }" type="password" name="" placeholder=" " />
         <label for="signup-passwordConfirmation">Confirmer le mot de passe</label>
+        <div v-if="v$.passwordConfirmation.$errors.length" class="field-error-message">{{ v$.passwordConfirmation.$errors[0].$message }}</div>
       </div>
     </div>
   </div>
-  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': !formIsValid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
-  <div class="d-flex regist mb-4">
+  <div class="d-flex regist mb-1">
     <div>
-      <input id="signup-legal" type="checkbox" v-model="legal" />
+      <!--    <input id="signup-legal" type="checkbox" v-model="legal" /> -->
       <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant sur s'inscrire, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label>
     </div>
   </div>
+  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': v$.$invalid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
 </template>
 
 <script>
+import { email, required, minLength, sameAs, helpers } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
 import Button from '@/components/elements/Button.vue'
 
 export default {
@@ -60,6 +65,9 @@ export default {
     Button
   },
   emits: ['submitted-form'],
+  setup() {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
       errors: [],
@@ -69,23 +77,35 @@ export default {
       email: '',
       password: '',
       passwordConfirmation: '',
-      legal: true,
-      firstNameIsValid: '',
-      lastNameIsValid: '',
-      birthDateIsValid: '',
-      emailIsValid: '',
-      passwordIsValid: '',
-      passwordConfirmationIsValid: '',
-      errResponse: ''
+      legal: true
+    }
+  },
+  validations() {
+    return {
+      firstName: {
+        required: helpers.withMessage('Ce champ est requis', required)
+      },
+      lastName: {
+        required: helpers.withMessage('Ce champ est requis', required)
+      },
+      birthDate: {
+        required: helpers.withMessage('Ce champ est requis', required)
+      },
+      email: {
+        required: helpers.withMessage('Ce champ est requis', required),
+        email: helpers.withMessage("L'email doit être au format xxx@xxx.xxx", email)
+      },
+      password: {
+        required: helpers.withMessage('Ce champ est requis', required),
+        minLength: helpers.withMessage('5 caractères minimum sont requis', minLength(5))
+      },
+      passwordConfirmation: {
+        required: helpers.withMessage('Ce champ est requis', required),
+        sameAs: helpers.withMessage("Le mot de passe n'est pas identique", sameAs(this.password))
+      }
     }
   },
   computed: {
-    formIsEmpty() {
-      return !this.birthDate && !this.firstName && !this.lastName && !this.email && !this.password && !this.passwordConfirmation
-    },
-    formIsValid() {
-      return this.birthDateIsValid && this.firstNameIsValid && this.lastNameIsValid && this.emailIsValid && this.passwordIsValid && this.passwordConfirmationIsValid && this.legal
-    },
     minBirthDate() {
       let currDate = new Date()
       let minYear = currDate.getFullYear() - 18
@@ -94,56 +114,11 @@ export default {
       return currDate.toISOString().slice(0, 10)
     }
   },
-  watch: {
-    legal(v) {
-      console.log(v)
-    },
-    firstName(val) {
-      if (this.validateUserInfo(val)) this.firstNameIsValid = true
-      else this.firstNameIsValid = false
-    },
-    lastName(val) {
-      if (this.validateUserInfo(val)) this.lastNameIsValid = true
-      else this.lastNameIsValid = false
-    },
-    birthDate(val) {
-      if (this.validateUserInfo(val)) this.birthDateIsValid = true
-      else this.birthDateIsValid = false
-    },
-    email(val) {
-      if (this.validateEmail(val)) this.emailIsValid = true
-      else this.emailIsValid = false
-    },
-    password(val) {
-      if (this.validatePassword(val)) this.passwordIsValid = true
-      else this.passwordIsValid = false
-    },
-    passwordConfirmation(val) {
-      if (this.validatePasswordConfirmation(val)) this.passwordConfirmationIsValid = true
-      else this.passwordConfirmationIsValid = false
-    }
-  },
   methods: {
-    validateUserInfo(input) {
-      return !!input
-    },
-    validateEmail(email) {
-      var regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return regexp.test(email)
-    },
-    validatePassword(pw) {
-      return pw.length > 5
-    },
-    validatePasswordConfirmation(pwConf) {
-      if (!this.passwordIsValid) return
-
-      return pwConf.length === this.password.length
-    },
-    test() {
-      this.$emit('submitted-form')
-    },
     async submitRegisterForm() {
-      if (!this.formIsValid) return
+      this.v$.touch()
+      if (this.v$.$error) return
+
       this.$axios
         .post('/registration', {
           user: {
@@ -227,27 +202,16 @@ label > .text-danger {
   transform: translateY(2rem);
   opacity: 0;
 }
-.error-container {
+.field-error {
+  border-bottom: 1px solid tomato !important;
+}
+.field-error-message {
   position: absolute;
-  top: -2.5rem;
-  height: 2rem;
-  line-height: 2rem;
-  font-weight: 300;
   font-family: Muli, sans-serif;
-  font-size: 0.8rem;
-  padding: 0 1rem;
-  width: 100%;
-  background-color: #fff8f8;
-  border-left: 4px solid red;
+  color: tomato;
+  font-size: 0.6rem;
 }
-.error-field {
-  background-color: #fff8f8;
-}
-.errors {
-  color: #ff0000;
-}
-.modal-input--error {
-  color: #ff0000;
-  border-left: 4px solid #ff0000;
+.password-link {
+  font-size: 0.7rem;
 }
 </style>

@@ -4,13 +4,13 @@
     <InlineSvg @click.stop="handlePageClose" v-if="activeTab !== 'infos'" type="button" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" height="60" style="position: absolute; top: 30px; left: 30px; z-index: 100" />
     <div class="purple-container align-items-center" style="position: relative">
       <div class="purple-container__content mx-auto d-flex flex-column h-100">
-        <InlineSvg :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" style="" />
+        <InlineSvg :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
         <div class="mt-auto d-flex flex-column" style="padding-bottom: 8vh; border-bottom: 1px dashed rgba(250, 250, 250, 0.2)">
-          <div class="d-flex align-items-center mb-5" style="color: white">
+          <div class="d-flex align-items-center mb-3 mb-xl-5" style="color: white">
             <div class="purple-container__paragraph-nb mr-4">01</div>
             <div class="purple-container__paragraph">La team d’Heaven Trip conçois de toute pièce les stages sportifs ce qui nous permet de te proposer des expériences hors normes a travers des programmes soutenus et personnalisables.</div>
           </div>
-          <div class="d-flex mb-5" style="color: white">
+          <div class="d-flex mb-3 mb-xl-5" style="color: white">
             <div class="purple-container__paragraph-nb mr-4">02</div>
             <div class="purple-container__paragraph">En solo, en couple, entre potes ? Ici tu intègres un petit groupe avec lequel tu vas partager la totalité de ton stage sportif. Pas d’hôtel ni de buffet à volonté, panique pas ! On te laisse découvrir les coulisses…</div>
           </div>
@@ -24,41 +24,39 @@
           <InlineAvatars :avatars="[]" />
         </div>
       </div>
-      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-5">
-        <InlineSvg :src="require('@/assets/svg/surf.svg')" height="60" fill="#292f33" />
-        <InlineSvg :src="require('@/assets/svg/kitesurf.svg')" height="60" fill="#292f33" />
-        <InlineSvg :src="require('@/assets/svg/paddle.svg')" height="60" fill="#292f33" />
-        <InlineSvg :src="require('@/assets/svg/climbing.svg')" height="60" fill="#292f33" />
-        <InlineSvg :src="require('@/assets/svg/ski-mask.svg')" height="60" fill="#292f33" />
-        <InlineSvg :src="require('@/assets/svg/freeride.svg')" height="60" fill="#292f33" />
+      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2 px-xl-5">
+        <InlineSvg :src="require('@/assets/svg/surf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
+        <InlineSvg :src="require('@/assets/svg/kitesurf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
+        <InlineSvg :src="require('@/assets/svg/paddle.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
+        <InlineSvg :src="require('@/assets/svg/climbing.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
+        <InlineSvg :src="require('@/assets/svg/ski-mask.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
+        <InlineSvg :src="require('@/assets/svg/freeride.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
       </div>
     </div>
     <div class="grey-container d-flex flex-column align-items-center text-white" style="background-color: #292f33">
-      <div style="position: absolute; width: 100%; display: flex; padding: 2rem">
-        <InlineSvg v-if="activeTab === 'infos'" @click="activeTab = 'login'" type="button" :src="require('@/assets/svg/arrow-right.svg')" height="20" fill="white" transform="rotate(180)" />
-        <div class="ml-auto d-flex align-items-center">
-          <div class="title-connection" v-if="activeTab === 'infos'" style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Complète ton <br />profil</div>
-          <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
-          <InlineSvg class="title-connection" @click.stop="previousScreen" :src="require('@/assets/svg/logo-small.svg')" height="60" />
-        </div>
+      <InlineSvg style="position: absolute; top: 2rem; left: 2rem" v-if="activeTab === 'infos'" @click="activeTab = 'login'" type="button" :src="require('@/assets/svg/arrow-right.svg')" height="20" fill="white" transform="rotate(180)" />
+      <div class="d-flex align-items-center" style="position: absolute; top: 2rem; right: 2rem">
+        <div class="title-connection" v-if="activeTab === 'infos'" style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Complète ton <br />profil</div>
+        <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
+        <InlineSvg class="title-connection" @click.stop="previousScreen" :src="require('@/assets/svg/logo-small.svg')" height="60" />
       </div>
-      <div class="form-container" style="margin-top: 25vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
+      <div class="form-container" style="margin-top: 15vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
         <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
-          <div @click="activeInfoTab = 'gender'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Camp</div>
-          <div @click="activeInfoTab = 'avatar'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
-          <div @click="activeInfoTab = 'bio'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
-          <div @click="activeInfoTab = 'success'" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>
+          <div v-if="!isSuccess" @click="activeInfoTabByName('gender')" type="button" :style="{ color: genderIsValid ? '#d82558' : '#ffffff' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Camp</div>
+          <div v-if="!isSuccess" @click="activeInfoTabByName('avatar')" type="button" :style="{ color: avatarIsValid ? '#d82558' : genderIsValid ? '#ffffff' : '' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
+          <div v-if="!isSuccess" @click="activeInfoTabByName('bio')" type="button" :style="{ color: avatarIsValid ? '#ffffff' : '' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
+          <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
         </div>
         <div class="d-flex connection-nav-container mb-5" v-else>
           <div @click="activeTab = 'login'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'login' }">Connexion</div>
           <div @click="activeTab = 'signup'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'signup' }">Inscription</div>
-          <div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>
+          <!--<div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
         </div>
         <transition name="fade-fast" mode="out-in">
           <form :key="activeTab">
             <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
             <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @submitted-form="showInfoScreen" />
-            <FormInfos v-else-if="activeTab === 'infos'" @changed-tab="setNewInfoTab" :active-info-tab="activeInfoTab" />
+            <FormInfos v-else-if="activeTab === 'infos'" @changed-tab="setNewInfoTab" @gender-is-valided="genderIsValid = true" @avatar-is-valided="avatarIsValid = true" @success="isSuccess = true" :active-info-tab="activeInfoTab" ref="formInfos" />
             <Password v-else-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
           </form>
         </transition>
@@ -100,7 +98,10 @@ export default {
     return {
       activeTab: '',
       activeInfoTab: 'gender',
-      fromRoute: ''
+      fromRoute: '',
+      genderIsValid: false,
+      avatarIsValid: false,
+      isSuccess: false
     }
   },
   watch: {
@@ -118,6 +119,11 @@ export default {
     }
   },
   methods: {
+    activeInfoTabByName(tabName) {
+      if (this.$refs.formInfos.stepper[tabName].authorize) {
+        this.activeInfoTab = tabName
+      }
+    },
     showInfoScreen() {
       let purpleContainer = document.querySelector('.purple-container')
       let greyContainer = document.querySelector('.grey-container')
@@ -163,6 +169,11 @@ export default {
 <style scoped>
 .purple-container__content {
   width: 50%;
+}
+@media only screen and (max-width: 1200px) {
+  .purple-container__content {
+    width: 60%;
+  }
 }
 .purple-container__svgs {
   margin-right: 30px;
@@ -255,6 +266,7 @@ export default {
   left: 0;
   position: fixed;
   z-index: 100;
+  overflow: auto;
 }
 .big-image {
   object-fit: cover;

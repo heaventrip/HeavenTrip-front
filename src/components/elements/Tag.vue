@@ -67,4 +67,10 @@ export default {
   top: 50%;
   transform: translateY(-50%); */
 }
+@media (max-width: 1441px) {
+  .tag__content {
+    font-size: 0.73rem;
+    font-weight: 600;
+  }
+}
 </style>

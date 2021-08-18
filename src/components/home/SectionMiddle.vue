@@ -123,7 +123,7 @@ export default {
 .pad-block {
   margin-left: auto;
   min-width: 500px;
-  margin-right: 10%;
+  margin-right: 8%;
 }
 .pad__header {
   padding: 1.2rem 2rem;
@@ -189,8 +189,14 @@ export default {
   background-color: #d82558;
   border-color: #d82558;
 }
-
+.container {
+  align-self: center;
+}
 .middle-section {
+  display: flex;
+  min-height: 530px;
+  border-top: 25px solid #ffffff70;
+  border-bottom: 25px solid #ffffff70;
   background: url('../../assets/images/asset-1.png') no-repeat center center / cover;
   height: 90vh;
   display: flex;

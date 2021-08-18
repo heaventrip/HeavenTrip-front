@@ -76,40 +76,30 @@
       </div>
     </div>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="col-12 mx-auto text-center d-block d-md-none">
-              <form>
-                <div class="form-group">
-                  <select class="form-control select-place">
-                    <option selected="" disabled="" hidden="">Nos inspirations</option>
-                    <option value="#pills-home">Nos inspirations</option>
-                    <option value="#pills-profile">Dernières places</option>
-                    <option value="#pills-contact">Multi-activités</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div class="col-12 col-sm-10 col-lg-4 order-lg-2 d-none d-md-block ml-auto">
-              <ul class="nav nav-pills mb-0 justify-content-center" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Dernières places</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Multi-activités</a>
-                </li>
-              </ul>
-            </div>
-            <div class="offset-lg-2 col-lg-6 align-self-center order-lg-1 d-none d-lg-block">
-              <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
-                <span class="bg-white position-relative pl-4"><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></span>
-              </div>
-            </div>
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="ml-auto">
+          <transition :name="counterSlideDir" mode="out-in">
+            <span class="slider-counter__current" :key="cardsArr[0]">{{ parseInt(cardsArr[0]?.dataset.index) + 1 }}</span>
+          </transition>
+          <span class="slider-counter__current mx-1">.</span>
+          <sup
+            ><span class="slider-counter__total">{{ nbOfCards }}</span></sup
+          >
+        </div>
+        <div class="ml-5 w-50">
+          <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
+            <span class="bg-white position-relative pl-4"><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></span>
           </div>
+        </div>
+        <div class="mx-auto">
+          <ul class="nav nav-pills mb-0 justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Multi-activités</a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="d-flex align-items-center mt-4">
@@ -140,10 +130,7 @@
           </div>
         </div>
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
-          <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem"></div>
-          </div>
-          <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="cards-slider d-flex overflow-hidden">
               <SectionCarouselCard v-for="(course, index) in courses" :key="course.id" :course="course" :cards-arr="cardsArr" :index="index" />
             </div>
@@ -181,6 +168,7 @@ export default {
   },
   data() {
     return {
+      counterSlideDir: 'vertical-slide-up',
       nbOfCards: 0,
       cardMargin: 40,
       cardWidth: 520,
@@ -256,6 +244,7 @@ export default {
     //   })
     // },
     slideLeft() {
+      this.counterSlideDir = 'vertical-slide-up'
       let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
@@ -295,6 +284,7 @@ export default {
       }
     },
     slideRight() {
+      this.counterSlideDir = 'vertical-slide-down'
       let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
@@ -460,4 +450,18 @@ export default {
   font-size: unset;
   border-bottom-left-radius: unset;
 } */
+.slider-counter__current {
+  font-family: Oswald, sans-serif;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  font-size: 2.4rem;
+  color: #292f33;
+  display: inline-block;
+}
+.slider-counter__total {
+  font-family: Oswald, sans-serif;
+  color: #292f33;
+  font-size: 1.5rem;
+  vertical-align: sub;
+}
 </style>

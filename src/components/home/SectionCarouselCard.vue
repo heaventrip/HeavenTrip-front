@@ -88,14 +88,18 @@ export default {
     Tag
   },
   watch: {
+    cardsArr(val) {
+      console.log(val)
+    },
     course(val) {
       if (!val.wishlistUsers) return
 
       val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
     },
     activeCard(newVal) {
-      this.cardsToSlide = this.getCardsToSlide(newVal)
-      this.anim = this.activeCard.tl(this.cardsToSlide)
+      // console.log('AAAAAAAAAAAAAAAAAA', newVal)
+      // this.cardsToSlide = this.getCardsToSlide(newVal)
+      // this.anim = this.activeCard.tl(this.cardsToSlide)
     }
   },
   methods: {
@@ -124,6 +128,7 @@ export default {
     },
     getCardsToSlide(card) {
       const cardPosition = this.$props.cardsArr.indexOf(card)
+      console.log(this.$props.cardsArr.slice(cardPosition + 1))
       return this.$props.cardsArr.slice(cardPosition + 1)
     },
 
@@ -150,13 +155,13 @@ export default {
     // },
     biggerCard(event) {
       this.activeCard = event.target
-      this.anim.play()
+      this.activeCard.tl.play()
 
       this.activeCard.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
       this.activeCard.querySelector('.card__footer__price').classList.add('border-0')
     },
     smallerCard() {
-      this.anim.reverse()
+      this.activeCard.tl.reverse()
 
       this.activeCard.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
       this.activeCard.querySelector('.card__footer__price').classList.remove('border-0')
@@ -176,16 +181,14 @@ export default {
       let staticInfos = card.querySelector('.card__footer__static-infos')
       let heartIcon = card.querySelector('.card-block__heart-icon')
 
-      const tl = (cardsToSlide) => {
-        return gsap
-          .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
-          .pause()
-          .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
-          .to(staticInfos, { y: '-=45px' }, '<')
-          .to(movingInfos, { y: '-=100' }, '<')
-          .to(heartIcon, { autoAlpha: 1 }, '<')
-          .to(cardsToSlide, { x: '+=70' }, '<')
-      }
+      const tl = gsap
+        .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
+        .pause()
+        .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
+        .to(staticInfos, { y: '-=45px' }, '<')
+        .to(movingInfos, { y: '-=100' }, '<')
+        .to(heartIcon, { autoAlpha: 1 }, '<')
+      // .to(cards, { x: '+=70' }, '<')
       card.tl = tl
     })
   }
