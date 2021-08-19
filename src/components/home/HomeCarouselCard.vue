@@ -66,7 +66,7 @@ import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 import gsap from 'gsap'
 
 export default {
-  name: 'SectionCarouselCard',
+  name: 'HomeCarouselCard',
   props: ['course', 'index', 'cards-arr'],
   data() {
     return {

@@ -49,20 +49,20 @@ ____________________________________________
 ### PLANNING
 
 JEUDI
-+ optimisation routing
+> optimisation routing
   - gestion modals
   - affichage spinner
   - gestions requêtes async
 
 VENDREDI
-+ finalisation et vérification des erreurs + tooltips
+> finalisation et vérification des erreurs + tooltips
 + animatiques
   - terminer le carousel (bug inexplicable question à poser sur le forum)
   - terminer les reviews
   - rajouter titre dynamique après stage dans review
 
 SAMEDI
-+ finalisation du front /search
+> finalisation du front /search
 + links (ceux qui manquent)
 + curseurs swiper à customiser (pas réussi l'autre fois)
 + revoir l'ajout à la wishlist
@@ -80,14 +80,14 @@ ___________________________
 - Régle général d'affichage du prix
 - Bug pictos barre de recherche
 - Croix des filtres à gauche + lien sur tout le bouton
-- Faire en sorte de monter la recherche avec filtres
+> Faire en sorte de monter la recherche avec filtres
 
-- Filtres carousel : Nos inspirations / Multiactivités
-- Mettre compteur carousel (+ si poss nprogress)
+> Filtres carousel : Nos inspirations / Multiactivités
+> Mettre compteur carousel (+ si poss nprogress)
 - Anim survol boutons carousel
 - Icone dynamique sur la card + voir XD pour les changements card
 
-- Lien home dans la navbar
+> Lien home dans la navbar
 - Version dark du dropdown connection
 - Tag nb de médias
 - Lightbox du product header => pouvoir voir tout l'album
@@ -102,12 +102,12 @@ ___________________________
 - Modal product zone blanche + large
 
 - Revoir le header recherche de façon générale avec mention dernière place
-- Centrer la shadow sur le filtre pour renforcer le contour
+> Centrer la shadow sur le filtre pour renforcer le contour
 - Revoir si les cards sont corrects (devis/normal/dernière place)
 - Mettre les label
 - Liserets plus léger et revoir les typo du prix + ponctuations
-- Hover du actualités : afficher les 3 articles dedans (avec fond blanc) et reprendre un bouton blanc/bg-dark en full largeur en dessous pour accéder au blog
-- Rajouter "+ 15€ de frais de gestions" après checkbox card dans checkout
+> Hover du actualités : afficher les 3 articles dedans (avec fond blanc) et reprendre un bouton blanc/bg-dark en full largeur en dessous pour accéder au blog
+> Rajouter "+ 15€ de frais de gestions" après checkbox card dans checkout
 
 IMPORTANT : bloquer les mobiles/tablettes
 IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail

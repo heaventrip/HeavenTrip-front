@@ -1,19 +1,23 @@
 <template>
-  <transition name="fade">
-    <router-view :route="routeWithModal" />
-  </transition>
+  <router-view :route="routeWithModal" v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
 
   <transition>
-    <vue-element-loading :active="false" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
+    <vue-element-loading :active="initialLoading" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
   </transition>
 </template>
 
 <script>
+import { START_LOCATION } from 'vue-router'
+
 export default {
   name: 'App',
   data() {
     return {
-      loaded: false,
+      initialLoading: false,
       backgroundView: null
     }
   },
@@ -30,6 +34,8 @@ export default {
     $route: {
       immediate: true,
       handler(to, from) {
+        if (from === START_LOCATION) this.initialLoading = true
+
         if (to.name === 'Account') {
           this.backgroundView = from
 
@@ -50,7 +56,7 @@ export default {
 <style>
 body {
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   overflow-x: hidden;
 }
 body.modal-open::after {
@@ -62,10 +68,6 @@ body.modal-open::after {
   background-color: rgba(41, 47, 51, 0.2);
 }
 #app {
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-  /* text-align: center; */
   color: #2c3e50;
 }
 .modal__backdrop {
@@ -163,7 +165,6 @@ body.modal-open::after {
 .fade-leave-to {
   opacity: 0;
 }
-
 #nav {
   padding: 30px;
 }

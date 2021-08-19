@@ -27,26 +27,28 @@
       </div>
     </div>
   </div>
-  <div v-for="review in reviews" :key="review" class="linear-block my-2">
-    <div class="card-body">
-      <div class="review__block d-flex align-items-top">
-        <div class="review__block-left d-flex flex-column align-items-center mr-5">
-          <img class="review__block-left__avatar" :src="require('@/assets/images/ui_faces/1.jpg')" height="100" />
-          <div class="review__block-left__date">{{ new Date(review.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</div>
-        </div>
-        <div class="review__block-right">
-          <div class="review__block-right__top-infos d-flex w-100">
-            <div class="review__block-right__user-name mr-4">{{ review.user.firstName }} {{ review.user.lastName }}</div>
-            <div class="review__block-right__user-infos mr-4">
-              <span class="mr-2">
-                <InlineSvg :src="require('@/assets/svg/country-search.svg')" height="20" fill="#292f33" class="d-inline-block reviews__user-infos__spot-svg" />
-              </span>
-              <span class="d-inline-block align-middle">{{ review.user.city }}</span>
-            </div>
-            <div class="review__block__stars mr-4"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i></div>
-            <!-- <div class="review__block__user-profile-link"><span>Voir profil</span></div> -->
+  <div v-if="reviews">
+    <div v-for="review in reviews" :key="review" class="linear-block my-2">
+      <div class="card-body">
+        <div class="review__block d-flex align-items-top">
+          <div class="review__block-left d-flex flex-column align-items-center mr-5">
+            <img class="review__block-left__avatar" :src="require('@/assets/images/ui_faces/1.jpg')" height="100" />
+            <div class="review__block-left__date">{{ new Date(review.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</div>
           </div>
-          <div class="review__block-right__text-content">{{ review.comment }}</div>
+          <div class="review__block-right">
+            <div class="review__block-right__top-infos d-flex w-100">
+              <div class="review__block-right__user-name mr-4">{{ review.user.firstName }} {{ review.user.lastName }}</div>
+              <div class="review__block-right__user-infos mr-4">
+                <span class="mr-2">
+                  <InlineSvg :src="require('@/assets/svg/country-search.svg')" height="20" fill="#292f33" class="d-inline-block reviews__user-infos__spot-svg" />
+                </span>
+                <span class="d-inline-block align-middle">{{ review.user.city }}</span>
+              </div>
+              <div class="review__block__stars mr-4"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i></div>
+              <!-- <div class="review__block__user-profile-link"><span>Voir profil</span></div> -->
+            </div>
+            <div class="review__block-right__text-content">{{ review.comment }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -61,7 +63,7 @@ export default {
       reviews: null
     }
   },
-  async created() {
+  created() {
     this.$axios.get('/reviews', { courseId: this.$props.course.id }).then((res) => (this.reviews = res.data.reviews))
   }
 }

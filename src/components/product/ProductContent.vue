@@ -102,7 +102,7 @@
               createdAt="2021-08-05T11:13:32.612Z"
               position="left"
             />
-            <ul class="list-unstyled mb-0 discuss-list mt-3">
+            <ul class="list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
                 <Message :user="msg.user" :content="msg.content" :createdAt="msg.createdAt" position="right" />
               </li>

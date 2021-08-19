@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'Step5Module3'
+  name: 'CheckoutWizardValidationModule3'
 }
 </script>
 

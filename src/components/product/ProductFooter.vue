@@ -58,40 +58,6 @@
       <div v-show="showSessions" class="tab-content">
         <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
           <div class="container" style="padding: 0 3rem">
-            <div style="width: 40%">
-              <div class="card__title align-items-center justify-content-between mb-5">
-                <div>Réglages de mon compte</div>
-              </div>
-              <form>
-                <div class="row">
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group has-float-label">
-                      <input id="request-firstName" type="text" name="" placeholder=" " class="form-control" />
-                      <label for="request-firstName">Prénom</label>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group has-float-label">
-                      <input id="request-lastName" type="text" name="" placeholder=" " class="form-control" />
-                      <label for="request-lastName">Nom</label>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-12">
-                    <div class="form-group has-float-label">
-                      <input id="request-email" type="email" name="" placeholder=" " class="form-control" />
-                      <label for="request-email">Email</label>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-12">
-                    <label>Message</label>
-                    <textarea type="text" name="" placeholder=" " class="form-control"></textarea>
-                  </div>
-                  <div class="col-12 col-lg-12">
-                    <Button text="Envoyer ma demande" color="grey" height="2rem" width="100%" weight="bold" />
-                  </div>
-                </div>
-              </form>
-            </div>
             <ul class="list-unstyled order-tab-list mb-0 pb-4">
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
@@ -275,7 +241,7 @@
         </div>
       </div>
       <button
-        @click="$router.push({ name: 'CheckOutHome', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })"
+        @click="$router.push({ name: 'Checkout', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })"
         class="btn border-0 rounded-0 reserve-btn"
         :style="{ fontSize: availSessions.length ? '1.4rem' : '1rem' }"
         :class="[{ disable: !choseBtn && availSessions.length }, { 'px-5': !availSessions.length }]"
@@ -287,14 +253,12 @@
 </template>
 <script>
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
-import Button from '@/components/elements/Button.vue'
 
 export default {
   name: 'ProductFooter',
   props: ['course'],
   components: {
-    InlineAvatars,
-    Button
+    InlineAvatars
   },
   data() {
     return {

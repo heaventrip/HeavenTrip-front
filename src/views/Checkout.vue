@@ -1,19 +1,19 @@
 <template>
   <!-- <div style="position: fixed; width: 100vw"> -->
-  <CheckOutHeader :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
-  <CheckOutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
+  <CheckoutHeader :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
+  <CheckoutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
   <!-- </div> -->
 </template>
 <script>
-import CheckOutHeader from '@/components/checkout/CheckOutHeader'
-import CheckOutSections from '@/components/checkout/CheckOutSections'
+import CheckoutHeader from '@/components/checkout/CheckoutHeader'
+import CheckoutSections from '@/components/checkout/CheckoutSections'
 
 export default {
-  name: 'CheckOutHome',
+  name: 'Checkout',
   props: ['productId'],
   components: {
-    CheckOutHeader,
-    CheckOutSections
+    CheckoutHeader,
+    CheckoutSections
   },
   data() {
     return {

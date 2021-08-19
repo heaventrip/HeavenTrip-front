@@ -1,23 +1,32 @@
 <template>
   <Header />
-  <MainSection />
+  <HomeCarousel />
+  <HomeMap />
+  <HomeReviews />
+  <HomeHighlight />
+  <HomeArticles />
   <Footer />
-  <!-- <Profile /> -->
-  <SelectADate />
 </template>
 
 <script>
-import Header from '@/components/header/Header'
-import Footer from '@/components/footer/Footer'
-import MainSection from '@/components/home/MainSection'
-import SelectADate from '@/components/SelectADate'
+import Header from '@/components/header/Header.vue'
+import Footer from '@/components/footer/Footer.vue'
+import HomeCarousel from '@/components/home/HomeCarousel.vue'
+import HomeMap from '@/components/home/HomeMap.vue'
+import HomeHighlight from '@/components/home/HomeHighlight.vue'
+import HomeReviews from '@/components/home/HomeReviews.vue'
+import HomeArticles from '@/components/home/HomeArticles.vue'
+
 export default {
   name: 'HomePage',
   components: {
     Header,
-    MainSection,
-    Footer,
-    SelectADate
+    HomeCarousel,
+    HomeMap,
+    HomeHighlight,
+    HomeReviews,
+    HomeArticles,
+    Footer
   }
 }
 </script>

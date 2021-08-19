@@ -40,7 +40,7 @@ export default {
       selectedSession: false,
       clickedFromHeader: false,
       showSessions: false,
-      course: {},
+      course: null,
       header: true,
       showLoginModal: false,
       initialNavHeight: 100
@@ -154,11 +154,10 @@ export default {
       }
     }
   },
-  async created() {
-    this.$root.loaded = false
-    await this.$axios.get(`/courses/${this.id}`).then((res) => {
+  created() {
+    this.$axios.get(`/courses/${this.id}`).then((res) => {
       this.course = res.data.course
-      this.$root.loaded = true
+      this.$root.initialLoading = false
     })
   },
   mounted() {

@@ -2,7 +2,7 @@
   <section class="carousel-section">
     <div class="container">
       <div class="search row">
-        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px">
+        <div class="search-bar col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px">
           <div class="bg-white d-flex centered-div">
             <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 2rem 1.6rem 2rem">
               <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
@@ -132,7 +132,7 @@
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="cards-slider d-flex overflow-hidden">
-              <SectionCarouselCard v-for="(course, index) in courses" :key="course.id" :course="course" :cards-arr="cardsArr" :index="index" />
+              <HomeCarouselCard v-for="(course, index) in courses" :key="course.id" :course="course" :cards-arr="cardsArr" :index="index" />
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">123456</div>
@@ -153,21 +153,22 @@
 
 <script>
 import Multiselect from '@vueform/multiselect'
-import SectionCarouselCard from '@/components/home/SectionCarouselCard.vue'
+import HomeCarouselCard from '@/components/home/HomeCarouselCard.vue'
 import Button from '@/components/elements/Button.vue'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 gsap.registerPlugin(CustomEase)
 
 export default {
-  name: 'SectionCarousel',
+  name: 'HomeCarousel',
   components: {
-    SectionCarouselCard,
+    HomeCarouselCard,
     Button,
     Multiselect
   },
   data() {
     return {
+      slideUpSearchBar: null,
       counterSlideDir: 'vertical-slide-up',
       nbOfCards: 0,
       cardMargin: 40,
@@ -223,9 +224,32 @@ export default {
       }
     }
   },
+  computed: {
+    totalSelectedNb() {
+      return this.activitySelection.value.length + this.monthSelection.value.length
+    }
+  },
   watch: {
     firstName(newVal) {
       this.firstName = newVal
+    },
+    'activitySelection.value': {
+      deep: true,
+      handler(val) {
+        if (window.scrollY > 25) return
+
+        if (val.length) this.slideUpSearchBar.play()
+        else if (!this.monthSelection.value.length) this.slideUpSearchBar.reverse()
+      }
+    },
+    'monthSelection.value': {
+      deep: true,
+      handler(val) {
+        if (window.scrollY > 25) return
+
+        if (val.length) this.slideUpSearchBar.play()
+        else if (!this.activitySelection.value.length) this.slideUpSearchBar.reverse()
+      }
     }
   },
   methods: {
@@ -374,7 +398,7 @@ export default {
       el.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
     }
   },
-  async mounted() {
+  mounted() {
     this.currentViewportWidth = window.innerWidth
     // gsap.utils.toArray('.card-block').forEach((card, index) => {
     //   gsap.set(card, { x: 550 * index })
@@ -397,7 +421,7 @@ export default {
         this.activitySelection.options.push({ value: sport.id, label: sport.name })
       })
     })
-    await this.$axios.get('/courses').then((res) => {
+    this.$axios.get('/courses').then((res) => {
       this.courses = res.data.courses
     })
     this.$nextTick(() => {
@@ -411,6 +435,8 @@ export default {
     })
 
     this.firstName = localStorage.getItem('user.firstName')
+
+    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <div class="header">
     <TheNavSticky />
   </div>
-  <div class="product-infos__container">
+  <div class="product-infos__container" v-if="course">
     <div class="header__main-title d-flex align-items-center justify-content-center">
       <div class="product-header-infos__title d-flex align-items-center" style="z-index: 5">
         <svg xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 100 100">
@@ -19,7 +19,7 @@
         <div style="margin-left: 3rem; position: relative; top: 4px">
           <!-- <h1 class="heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1> -->
           <h1 class="heading text-uppercase mb-2">
-            <!-- <router-link :to="{ name: 'CheckOutHome', params: { productId: course.id } }"> -->
+            <!-- <router-link :to="{ name: 'Checkout', params: { productId: course.id } }"> -->
             <span style="color: #fff; font-weight: 600; font-size: 3.5rem; letter-spacing: 0.3rem">{{ course.sports ? course.sports[0].name : '' }}</span>
             <!-- </router-link> -->
           </h1>

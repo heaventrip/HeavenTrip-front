@@ -1,6 +1,6 @@
 <template>
   <section class="middle-section">
-    <div class="pad-block rounded text-white p-0">
+    <div class="pad-block rounded text-white p-0" v-if="highlightedCourse">
       <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
         <h5 class="pad__header__title">Votre coup de coeur</h5>
         <div style="width: min-content">
@@ -48,7 +48,7 @@ import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 import Button from '@/components/elements/Button.vue'
 
 export default {
-  name: 'SectionMiddle',
+  name: 'HomeHighlight',
   components: {
     InlineAvatars,
     Button,
@@ -78,8 +78,8 @@ export default {
       }
     }
   },
-  async created() {
-    await this.$axios.get('/courses', { params: { highlighted: true } }).then((res) => {
+  created() {
+    this.$axios.get('/courses', { params: { highlighted: true } }).then((res) => {
       this.highlightedCourse = res.data.course
     })
   }

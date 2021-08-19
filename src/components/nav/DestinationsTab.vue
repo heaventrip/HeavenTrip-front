@@ -4,7 +4,7 @@
       <a href="#header_nav" class="text-reset pr-3"><i class="fas fa-chevron-left"></i></a>
       . destination
     </h4>
-    <ul class="list-unstyled wrapper-list d-flex flex-wrap">
+    <ul class="list-unstyled wrapper-list d-flex flex-wrap" v-if="continents && franceCountry">
       <li v-for="continent in continents" :key="continent">
         <h4 class="wrapper-list-head">{{ continent.name }}</h4>
         <div v-for="country in continent.countries" :key="country" :class="[country.name === 'France' ? 'd-none' : '']">
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       continents: [],
-      franceCountry: {}
+      franceCountry: null
     }
   },
   created() {

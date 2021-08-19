@@ -598,7 +598,7 @@ export default {
       })
     }
   },
-  async created() {
+  created() {
     let queryParams = this.$route.query
 
     this.$axios.get('/sport-categories').then((res) => {

@@ -117,7 +117,7 @@
 
 <script>
 export default {
-  name: 'CheckoutWizardRecap',
+  name: 'CheckoutWizardValidationRecap',
   props: ['course', 'booker', 'extra-participants']
 }
 </script>

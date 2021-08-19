@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-baseline">
     <a @mouseover="leavedAllTabs()" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 0px; padding-right: 5rem; transform: translateY(5px)" href="/">
-      <InlineSvg class="svg-logo" v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" />
+      <InlineSvg class="svg-logo" v-if="agencyIsActive || newsIsActive" :src="require('@/assets/svg/logo-dark.svg')" />
       <InlineSvg class="svg-logo" v-else :src="require('@/assets/svg/logo-white.svg')" />
     </a>
     <!-- NOTE MOBILE ONLY -->
@@ -48,7 +48,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('activity')" class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity">
+          <a @mouseover="onMouseOvered('news')" class="nav-link" id="pills-news-tab" type="button" data-toggle="pill" href="#pills-news">
             <span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
@@ -91,18 +91,25 @@
           <InlineSvg v-else :src="require('@/assets/svg/cross.svg')" fill="white" height="25" />
         </div>
         <transition name="nav-fade">
-          <div v-if="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+          <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <ActivitiesTab @fetched-categ="setCateg" ref="activitiesTab" />
           </div>
         </transition>
         <transition name="nav-fade">
-          <div v-if="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
+          <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
             <AgencyTab ref="agencyTab" />
           </div>
         </transition>
         <transition name="nav-fade">
-          <div v-if="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+          <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <DestinationsTab />
+          </div>
+        </transition>
+        <transition name="nav-fade">
+          <div v-show="newsIsActive" id="pills-news" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+            <keep-alive>
+              <component :is="'HomeArticles'" :in-nav="true"></component>
+            </keep-alive>
           </div>
         </transition>
       </div>
@@ -114,6 +121,7 @@
 import AgencyTab from '@/components/nav/AgencyTab.vue'
 import ActivitiesTab from '@/components/nav/ActivitiesTab.vue'
 import DestinationsTab from '@/components/nav/DestinationsTab.vue'
+import HomeArticles from '@/components/home/HomeArticles.vue'
 import gsap from 'gsap'
 
 export default {
@@ -122,7 +130,8 @@ export default {
   components: {
     AgencyTab,
     ActivitiesTab,
-    DestinationsTab
+    DestinationsTab,
+    HomeArticles
   },
   data() {
     return {
@@ -130,6 +139,7 @@ export default {
       activitiesIsActive: false,
       destinationsIsActive: false,
       agencyIsActive: false,
+      newsIsActive: false,
       sportCategories: []
       // bgFilter: {
       //   light: 'opacity(0.4)',
@@ -139,7 +149,7 @@ export default {
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
     }
   },
   watch: {
@@ -175,6 +185,23 @@ export default {
           el.style.color = '#fff'
         })
       }
+    },
+    newsIsActive: function (newVal) {
+      if (newVal === true) {
+        this.$emit('changed-tab', 'news')
+
+        document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+          el.classList.toggle('navbar-grey', true)
+          el.style.color = '#292f33'
+        })
+      } else {
+        document.querySelector('#header_nav').removeAttribute('style')
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+          el.classList.toggle('navbar-grey', false)
+          el.style.color = '#fff'
+        })
+      }
     }
   },
   methods: {
@@ -182,7 +209,7 @@ export default {
       this.sportCategories = categ
     },
     dismissNav() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => {
         this.$data[el] = false
         this.$parent[el] = false
       })
@@ -205,7 +232,7 @@ export default {
     },
 
     resetTabs() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
     },
 
     leavedAllTabs() {
@@ -245,7 +272,7 @@ export default {
       }
 
       // only show the one clicked
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
       this.$data[varName] = true
     }
   },

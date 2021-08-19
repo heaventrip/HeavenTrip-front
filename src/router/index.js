@@ -1,15 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import Vue from 'vue'
-// import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
+import { START_LOCATION } from 'vue-router'
 import Home from '@/views/Home.vue'
 import Profile from '@/views/Profile.vue'
 import Product from '@/views/Product.vue'
 import Search from '@/views/Search.vue'
-import CheckOutHome from '@/components/checkout/CheckOutHome.vue'
-import Account from '@/components/connection/Account.vue'
-// import ConnectionModal from '@/components/connection/ConnectionModal.vue'
+import Checkout from '@/views/Checkout.vue'
 import Legal from '@/views/Legal.vue'
+import Account from '@/components/connection/Account.vue'
 import { isLoggedIn } from '@/utils/auth'
 
 const routes = [
@@ -40,9 +37,9 @@ const routes = [
   },
   {
     path: '/checkout/:productId',
-    name: 'CheckOutHome',
+    name: 'Checkout',
     props: true,
-    component: CheckOutHome,
+    component: Checkout,
     meta: {
       allowAnonymous: false
     }
@@ -89,7 +86,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (!to.meta.allowAnonymous && !isLoggedIn()) {
     next({
-      path: '/',
+      path: '/login',
       query: { redirect: to.fullPath }
     })
   } else {

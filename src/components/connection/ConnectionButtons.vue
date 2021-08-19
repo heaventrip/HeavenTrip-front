@@ -226,7 +226,7 @@ export default {
     async loginSuccess() {
       this.currUser = await this.getUserInfo()
       this.showAccountPage = false
-      this.$forceUpdate()
+      this.$router.push(this.$route.query.redirect || '/')
     },
     isLoggedIn() {
       return isLoggedIn()

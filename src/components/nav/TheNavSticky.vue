@@ -39,7 +39,7 @@
           <a @click="onClicked('agency')" class="nav-link border-0 nav__item" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active border-0 nav__item" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('news')" class="nav-link border-0 nav__item" id="pills-news-tab" data-toggle="pill" href="#pills-news"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
@@ -93,6 +93,13 @@
             <DestinationsTab />
           </div>
         </transition>
+        <transition name="nav-fade">
+          <div v-show="newsIsActive" id="pills-news" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+            <keep-alive>
+              <component :is="'HomeArticles'"></component>
+            </keep-alive>
+          </div>
+        </transition>
       </div>
     </div>
     <div class="">
@@ -106,6 +113,7 @@ import AgencyTab from '@/components/nav/AgencyTab.vue'
 import ActivitiesTab from '@/components/nav/ActivitiesTab.vue'
 import DestinationsTab from '@/components/nav/DestinationsTab.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
+import HomeArticles from '@/components/home/HomeArticles.vue'
 import gsap from 'gsap'
 
 export default {
@@ -115,7 +123,8 @@ export default {
     AgencyTab,
     ActivitiesTab,
     DestinationsTab,
-    ConnectionButtons
+    ConnectionButtons,
+    HomeArticles
   },
   data() {
     return {
@@ -123,6 +132,7 @@ export default {
       activitiesIsActive: false,
       destinationsIsActive: false,
       agencyIsActive: false,
+      newsIsActive: false,
       sportCategories: []
       // bgFilter: {
       //   light: 'opacity(0.4)',
@@ -132,7 +142,7 @@ export default {
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
     }
   },
   watch: {
@@ -168,6 +178,12 @@ export default {
           el.style.color = '#fff'
         })
       }
+    },
+    newsIsActive: function (newVal) {
+      if (newVal === true) {
+        this.$emit('changed-tab', 'news')
+        // this.changeBgFilter(this.bgFilter.dark)
+      }
     }
   },
   methods: {
@@ -178,7 +194,7 @@ export default {
       this.sportCategories = categ
     },
     dismissNav() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => {
         this.$data[el] = false
         this.$parent[el] = false
       })
@@ -218,7 +234,7 @@ export default {
       }
 
       // only show the one clicked
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
       this.$data[varName] = true
     }
   },

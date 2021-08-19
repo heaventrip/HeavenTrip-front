@@ -6,15 +6,15 @@
       'header--home': currentRoute('Home'),
       'header-filter--home': !navIsActive && currentRoute('Home'),
       'header-filter--grey': activitiesIsActive || destinationsIsActive,
-      'header-filter--light': agencyIsActive,
+      'header-filter--light': agencyIsActive || newsIsActive,
       'header--search': currentRoute('Search'),
       'header-filter--search': !navIsActive && currentRoute('Search'),
       'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Search'),
-      'header-filter--search--light': agencyIsActive && currentRoute('Search'),
+      'header-filter--search--light': (agencyIsActive || newsIsActive) && currentRoute('Search'),
       'header--product': currentRoute('Product'),
       'header-filter--product': !navIsActive && currentRoute('Product'),
       'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Product'),
-      'header-filter--product--light': agencyIsActive && currentRoute('Product')
+      'header-filter--product--light': (agencyIsActive || newsIsActive) && currentRoute('Product')
     }"
   >
     <div
@@ -27,14 +27,14 @@
     >
       <img src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
-    <ConnectionButtons @mouseover="leavedAllTabs()" />
+    <ConnectionButtons :nav-sticky="navSticky" @mouseover="leavedAllTabs()" />
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
     <TheNav @leave-tabs="resetTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
     <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
     <ProductHeaderInfos v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course" />
     <SearchHeaderInfos v-else-if="currentRoute('Search') && !navIsActive" />
-    <div class="search-div navbar-dark bg-white text-dark d-none">
+    <!-- <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
         <button class="rounded-0 btn search-cancel" type="button">
@@ -88,10 +88,10 @@
         <p class="font-weight-bold">Slide droite vers la gauche avec un effet escalier (chaque ligne arrive en décalée) et une transition progressive sur l’opacité.</p>
         <p class="font-weight-bold">La validation d’un item fait office de validation Et permet de revenir à l’écran précédent.</p>
       </div>
-    </div>
-    <div class="pre-booking-footer sticky-bottom d-none d-lg-block" v-if="toggleSessions">
+    </div> -->
+    <!-- <div class="pre-booking-footer sticky-bottom d-none d-lg-block" v-if="toggleSessions">
       <SessionsMenu />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -102,7 +102,6 @@ import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeHeaderInfos from './HomeHeaderInfos.vue'
 import ProductHeaderInfos from '@/components/header/ProductHeaderInfos.vue'
 import SearchHeaderInfos from '@/components/header/SearchHeaderInfos.vue'
-import SessionsMenu from '@/components/SessionsMenu.vue'
 
 export default {
   name: 'Header',
@@ -112,8 +111,7 @@ export default {
     ConnectionButtons,
     HomeHeaderInfos,
     ProductHeaderInfos,
-    SearchHeaderInfos,
-    SessionsMenu
+    SearchHeaderInfos
   },
   props: ['course'],
   data() {
@@ -124,6 +122,7 @@ export default {
       agencyIsActive: false,
       destinationsIsActive: false,
       activitiesIsActive: false,
+      newsIsActive: false,
       modalBackgroundView: ''
     }
   },
@@ -139,7 +138,7 @@ export default {
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
     }
   },
   methods: {
@@ -148,7 +147,7 @@ export default {
       else return this.$route.name === route
     },
     resetTabs() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
     },
     leavedAllTabs() {
       this.resetTabs()

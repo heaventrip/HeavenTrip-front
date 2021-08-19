@@ -1,6 +1,6 @@
 <template>
   <section class="articles-section">
-    <div class="d-flex flex-column align-items-center" style="margin-bottom: 4rem">
+    <div class="d-flex flex-column align-items-center" style="margin-bottom: 4rem" :style="[inNav ? 'color: #292f33' : '']">
       <span>Notre blog</span>
       <div class="text-uppercase" style="font-size: 1.5rem; margin-bottom: 1rem">
         <span>derniers &nbsp;</span>
@@ -24,15 +24,20 @@
 
 <script>
 export default {
-  name: 'SectionBottom',
+  name: 'HomeArticles',
   data() {
     return {
       articles: []
     }
   },
-  async created() {
+  props: ['in-nav'],
+  created() {
+    console.log('OKKKKKKKKKKKKKKKKKKKKKKKK')
     // fetch last 3
-    await this.$axios.get('https://blog.yourheaventrip.com/wp-json/wp/v2/posts?_embed&filter[orderby]=date&order=desc').then((res) => (this.articles = res.data.slice(-3)))
+    this.$axios.get('https://blog.yourheaventrip.com/wp-json/wp/v2/posts?_embed&filter[orderby]=date&order=desc').then((res) => (this.articles = res.data.slice(-3)))
+  },
+  activated() {
+    console.log('activvvvvvvvvvvvvvvvvvvvvv')
   }
 }
 </script>

@@ -73,7 +73,7 @@ import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import gsap from 'gsap'
 
 export default {
-  name: 'CheckOutHeader',
+  name: 'CheckoutHeader',
   components: {
     InlineAvatars
   },

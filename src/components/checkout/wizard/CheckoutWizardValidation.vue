@@ -2,26 +2,23 @@
   <div class="d-flex w-100">
     <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem padding-bottom: 4rem; top: 15vh">
       <!-- <button @click="$parent.submitBookingForm">VALIDER LA RESERVATION</button> -->
-      <CheckoutWizardPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
-      <CheckoutWizardSuccess />
+      <CheckoutWizardValidationPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
     <div class="col-12 col-lg-4 ml-auto p-0" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px">
-      <CheckoutWizardRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
+      <CheckoutWizardValidationRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
   </div>
 </template>
 
 <script>
 // import { loadStripe } from '@stripe/stripe-js'
-import CheckoutWizardPayment from './wizard/CheckoutWizardPayment.vue'
-import CheckoutWizardSuccess from './wizard/CheckoutWizardSuccess.vue'
-import CheckoutWizardRecap from './wizard/CheckoutWizardRecap.vue'
+import CheckoutWizardValidationPayment from './CheckoutWizardValidationPayment.vue'
+import CheckoutWizardValidationRecap from './CheckoutWizardValidationRecap.vue'
 export default {
-  name: 'Step5',
+  name: 'CheckoutWizardValidation',
   components: {
-    CheckoutWizardPayment,
-    CheckoutWizardSuccess,
-    CheckoutWizardRecap
+    CheckoutWizardValidationPayment,
+    CheckoutWizardValidationRecap
   },
   props: ['course', 'booker', 'extra-participants'],
   methods: {

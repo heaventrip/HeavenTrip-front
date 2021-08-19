@@ -1,23 +1,13 @@
 <template>
-  <div class="d-flex align-items-center tag" :class="pColor">
-    <div class="tag__content">{{ pText }}</div>
+  <div class="d-flex align-items-center tag" :class="`tag--${color}`">
+    <div class="tag__content">{{ text }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Tag',
-  props: ['color', 'text'],
-  data() {
-    return {
-      pText: this.text
-    }
-  },
-  computed: {
-    pColor() {
-      return `tag--${this.color}`
-    }
-  }
+  props: ['color', 'text']
 }
 </script>
 

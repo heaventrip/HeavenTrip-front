@@ -1,6 +1,6 @@
 <template>
   <transition name="fade-fast">
-    <div class="container flex-column align-items-center h-100" :key="activeCategory" v-if="loaded">
+    <div class="container flex-column align-items-center h-100" :key="activeCategory" v-if="sportCategories">
       <div v-for="category in sportCategories" :key="category" class="sports-block" v-show="category.name === activeCategory">
         <div class="row no-gutters align-items-center justify-content-start my-xl-3">
           <div v-for="(sport, index) in category.sports.slice(0, 3)" :key="sport" class="col-3" :class="[category.sports.length === 1 && index === 0 ? 'offset-3' : '', category.sports.length === 2 && index === 0 ? 'offset-1' : '']">
@@ -52,7 +52,6 @@ export default {
   data() {
     return {
       imgSrc: '',
-      loaded: false,
       clickedMultiActivity: false,
       sportCategories: [],
       activeCategory: 'Vent & mer',
@@ -89,8 +88,6 @@ export default {
     this.$axios.get('/sport-categories').then((res) => {
       this.sportCategories = res.data.sportCategories
       this.$emit('fetched-categ', res.data.sportCategories)
-      this.loaded = true
-      console.log(res.data.sportCategories)
     })
 
     // NOTE working flow to get tag

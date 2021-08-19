@@ -1,6 +1,6 @@
 <template>
   <div class="activitie-card d-flex align-items-center align-items-lg-end w-100 mt-auto">
-    <div class="content d-flex align-items-center justify-content-between w-100 mt-5 mt-lg-0">
+    <div class="content d-flex align-items-center justify-content-between w-100 mt-5 mt-lg-0" v-if="featuredCourse">
       <div>
         <div style="width: 115%">
           <div class="top-block d-flex align-items-center" style="width: 100%">
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       toggledSessions: false,
-      featuredCourse: {},
+      featuredCourse: null,
       avatarKeys: []
     }
   },
@@ -105,11 +105,10 @@ export default {
       this.$emit('toggled-sessions')
     }
   },
-  async created() {
-    this.$root.loaded = false
-    await this.$axios.get('/courses', { params: { featured: true } }).then((res) => {
+  created() {
+    this.$axios.get('/courses', { params: { featured: true } }).then((res) => {
       this.featuredCourse = res.data.course
-      this.$root.loaded = true
+      this.$root.initialLoading = false
     })
   }
 }
