@@ -31,9 +31,11 @@
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
     <TheNav @leave-tabs="resetTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
-    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
-    <ProductHeaderInfos v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course" />
-    <SearchHeaderInfos v-else-if="currentRoute('Search') && !navIsActive" />
+    <keep-alive>
+      <component :is="'HomeHeaderInfos'" @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive"></component>
+      <component :is="'ProductHeaderInfos'" v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course"></component>
+      <component :is="'SearchHeaderInfos'" v-else-if="currentRoute('Search') && !navIsActive"></component>
+    </keep-alive>
     <!-- <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>

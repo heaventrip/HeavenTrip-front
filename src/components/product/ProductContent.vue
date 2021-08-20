@@ -109,8 +109,8 @@
             </ul>
           </div>
           <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #fcfcfc">
-            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="1"> </textarea>
-            <button class="fg-1 text-center" type="submit">
+            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="2"> </textarea>
+            <button class="ml-3 fg-1 text-center" type="submit">
               <InlineSvg :src="require('@/assets/svg/send.svg')" height="20" />
             </button>
             <!-- <label class="message-input-label">
@@ -195,6 +195,11 @@ export default {
         font-size: 1.5rem;
         vertical-align: sub;
         `
+    }
+  },
+  watch: {
+    visible(val) {
+      this.$emit('active-lightbox', val)
     }
   },
   created() {
@@ -383,6 +388,7 @@ button {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
   padding-top: 1rem;
+  overscroll-behavior: none;
 }
 @media only screen and (max-width: 1440px) {
   .messages-container {
@@ -413,7 +419,6 @@ button {
 .reply-container:focus {
   outline: none;
   color: #292f33;
-  height: 6rem;
 }
 .main-tab {
   max-width: 1100px;

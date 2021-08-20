@@ -131,7 +131,7 @@
       </div>
     </div>
   </div>
-  <div class="linear-block">
+  <div class="linear-block mb-0">
     <div class="head-block subhead-block d-flex">
       <div class="">
         <p class="sub-heading mb-2">Bon à savoir…</p>
@@ -143,27 +143,18 @@
         <div class="col-12 col-lg-6">
           <div class="content-head equip mb-2">
             <i class="far fa-check-circle mr-2 h5 align-text-top mb-0"></i>
-            <span class="d-inline-block" style="vertical-align: baseline">EST INCLUS :</span>
+            <span class="d-inline-block" style="vertical-align: baseline">Est inclus :</span>
           </div>
           <ul class="list-unstyled content-list equip mb-4">
             <li v-for="includedService in course.includedServices" :key="includedService">
               <a class="text-reset" href="#">{{ includedService.title }}</a>
             </li>
           </ul>
-          <div class="content-head equip mb-2">
-            <i class="far fa-dot-circle mr-2 mr-2 h5 align-text-top mb-0"></i>
-            <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
-          </div>
-          <ul class="list-unstyled content-list equip mb-0">
-            <li v-for="extraService in course.extraServices" :key="extraService">
-              <a class="text-reset" href="#">{{ extraService.title }}</a>
-            </li>
-          </ul>
         </div>
         <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 6rem">
           <div class="content-head equip mb-2">
             <i class="far fa-times-circle mr-2 h5 align-text-top mb-0"></i>
-            <span class="d-inline-block" style="vertical-align: baseline">Non INCLUS :</span>
+            <span class="d-inline-block" style="vertical-align: baseline">Non inclus :</span>
           </div>
           <ul class="list-unstyled content-list equip mb-0">
             <li v-for="(excludedService, index) in course.excludedServices" :key="excludedService">
@@ -173,6 +164,17 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="linear-block mt-2">
+    <div class="content-head equip mb-2">
+      <i class="far fa-dot-circle mr-2 mr-2 h5 align-text-top mb-0"></i>
+      <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
+    </div>
+    <ul class="list-unstyled content-list equip mb-0">
+      <li v-for="extraService in course.extraServices" :key="extraService">
+        <a class="text-reset" href="#">{{ extraService.title }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 <script>

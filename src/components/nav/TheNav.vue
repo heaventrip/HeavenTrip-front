@@ -92,17 +92,23 @@
         </div>
         <transition name="nav-fade">
           <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <ActivitiesTab @fetched-categ="setCateg" ref="activitiesTab" />
+            <keep-alive>
+              <component :is="'ActivitiesTab'" ref="activitiesTab" @fetched-categ="setCateg"></component>
+            </keep-alive>
           </div>
         </transition>
         <transition name="nav-fade">
           <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
-            <AgencyTab ref="agencyTab" />
+            <keep-alive>
+              <component :is="'AgencyTab'" ref="agencyTab"></component>
+            </keep-alive>
           </div>
         </transition>
         <transition name="nav-fade">
           <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <DestinationsTab />
+            <keep-alive>
+              <component :is="'DestinationsTab'"></component>
+            </keep-alive>
           </div>
         </transition>
         <transition name="nav-fade">

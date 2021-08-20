@@ -1,7 +1,7 @@
 <template>
   <router-view :route="routeWithModal" v-slot="{ Component }">
     <transition name="fade">
-      <component :is="Component"></component>
+      <component :is="Component" :key="$route.fullPath"></component>
     </transition>
   </router-view>
 
@@ -56,7 +56,7 @@ export default {
 <style>
 body {
   height: 100vh;
-  /* width: 100vw; */
+  width: 100vw;
   overflow-x: hidden;
 }
 body.modal-open::after {

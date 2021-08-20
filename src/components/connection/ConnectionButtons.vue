@@ -1,74 +1,23 @@
 <template>
   <div>
-    <ul v-if="$parent.agencyIsActive" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
+    <ul v-if="$parent.agencyIsActive || $parent.newsIsActive" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
       <li v-if="isLoggedIn()">
-        <div class="dropdown login-dropdown">
-          <button style="color: #292f33" class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown login-dropdown" :class="{ 'bg-white': toggleDropdown }">
+          <button class="btn btn-block rounded-0 border-0" @click.prevent="toggleDropdown = !toggleDropdown">
             <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-            {{ currUser?.first_name }} <span class="l-name"> .{{ currUser?.last_name?.[0] }}</span>
-            <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
-          </button>
-          <div class="dropdown-menu text-uppercase" style="" aria-labelledby="dropdownMenu2">
-            <div class="account-dropdown-item">
-              <router-link :to="{ name: 'Profile' }" class="dropdown-item">Mes infos</router-link>
-            </div>
-            <div class="account-dropdown-item">
-              <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
-                Mes envies
-                <span class="font-weight-bold text-danger ml-1">(2)</span>
-              </button>
-            </div>
-            <transition name="fade-fast">
-              <div class="wishlists" v-show="showWishlist" :key="showWishlist">
-                <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
-                  <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
-                  {{ wishlist.name }}
-                </div>
-              </div>
-            </transition>
-            <!-- <div class="account-dropdown-item">
-            <button class="dropdown-item" type="button">
-              Mes séjours
-              <div class="position-relative ml-auto">
-                <img class="picto-icon" fluid :src="require('@/assets/images/svg/PICTO_CHAT.svg')" />
-                <div class="notify-number">1</div>
-              </div>
-            </button>
-          </div> -->
-            <!-- <div class="account-dropdown-item">
-            <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
-          </div> -->
-            <div class="account-dropdown-item">
-              <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button>
-            </div>
-            <div class="account-dropdown-item">
-              <button @click="logoutUser" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block" style="color: #292f33 !important">se connecter</a>
-      </li>
-      <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="setActiveTab('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
-      </li>
-    </ul>
-    <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
-      <li v-if="isLoggedIn()">
-        <div class="dropdown login-dropdown">
-          <button class="btn btn-block rounded-0 border-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-            {{ currUser?.first_name }} <span class="l-name"> .{{ currUser?.last_name?.[0] }}</span>
-            <img class="menu-icon" fluid :src="require('@/assets/images/menu.png')" />
+            <span :class="{ 'text-dark': toggleDropdown }"
+              >{{ currUser?.first_name }}
+              <span class="l-name" style="margin-right: 40px"> .{{ currUser?.last_name?.[0] }} </span>
+            </span>
+            <InlineSvg :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" />
           </button>
           <transition name="fade">
-            <div class="dropdown-menu text-uppercase py-1" style="" aria-labelledby="dropdownMenu2">
-              <div class="account-dropdown-item">
-                <router-link :to="{ name: 'Profile' }" class="dropdown-item">Mes infos</router-link>
+            <div class="dropdown-menu text-uppercase p-0" :class="{ 'd-block': toggleDropdown }">
+              <div class="account-dropdown-item p-0">
+                <router-link :to="{ name: 'Profile' }" class="dropdown-item p-3">Mes infos</router-link>
               </div>
-              <div class="account-dropdown-item">
-                <button @click.stop="showWishlist = !showWishlist" class="dropdown-item" type="button">
+              <div class="account-dropdown-item p-0">
+                <button @click.stop="showWishlist = !showWishlist" class="dropdown-item p-3" type="button">
                   Mes envies
                   <span class="font-weight-bold text-danger ml-1">(2)</span>
                 </button>
@@ -81,35 +30,72 @@
                   </div>
                 </div>
               </transition>
-              <!-- <div class="account-dropdown-item">
-            <button class="dropdown-item" type="button">
-              Mes séjours
-              <div class="position-relative ml-auto">
-                <img class="picto-icon" fluid :src="require('@/assets/images/svg/PICTO_CHAT.svg')" />
-                <div class="notify-number">1</div>
-              </div>
-            </button>
-          </div>
-          <div class="account-dropdown-item">
-            <button class="dropdown-item trip-page-link" type="button">Ma page Tripper</button>
-          </div> -->
-              <div class="account-dropdown-item">
-                <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link">Mon compte</router-link>
+              <div class="account-dropdown-item p-0">
+                <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link p-3">Mon compte</router-link>
                 <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
                 <!-- <Profile v-if="showProfileModal" /> -->
               </div>
-              <div class="account-dropdown-item">
-                <button @click="logOut" class="dropdown-item logout-page-link" type="button">se déconnecter</button>
+              <div class="account-dropdown-item p-0">
+                <button @click="logOut" class="dropdown-item logout-page-link p-3" type="button">se déconnecter</button>
               </div>
             </div>
           </transition>
         </div>
       </li>
       <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>
+        <a @click.prevent="setActiveTab('login')" class="text-reset px-4 py-4 d-inline-block" style="color: #292f33 !important">se connecter</a>
       </li>
       <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="setActiveTab('signup')" class="px-4 py-4 profile-link font-weight-bold d-inline-block">creér son profil</a>
+        <a @click.prevent="setActiveTab('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
+      </li>
+    </ul>
+    <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
+      <li v-if="isLoggedIn()">
+        <div class="dropdown login-dropdown" :class="{ 'bg-white': toggleDropdown }">
+          <button class="btn btn-block rounded-0 border-0" @click.prevent="toggleDropdown = !toggleDropdown">
+            <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+            <span :class="{ 'text-dark': toggleDropdown }"
+              >{{ currUser?.first_name }}
+              <span class="l-name" style="margin-right: 40px"> .{{ currUser?.last_name?.[0] }} </span>
+            </span>
+            <InlineSvg :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
+          </button>
+          <transition name="fade-fast">
+            <div v-if="toggleDropdown" class="dropdown-menu text-uppercase p-0" :class="{ 'd-block': toggleDropdown }">
+              <div class="account-dropdown-item p-0">
+                <router-link :to="{ name: 'Profile' }" class="dropdown-item p-3">Mes infos</router-link>
+              </div>
+              <div class="account-dropdown-item p-0">
+                <button @click.stop="showWishlist = !showWishlist" class="dropdown-item p-3" type="button">
+                  Mes envies
+                  <span class="font-weight-bold text-danger ml-1">(2)</span>
+                </button>
+              </div>
+              <transition name="fade-fast">
+                <div class="wishlists" v-show="showWishlist" :key="showWishlist">
+                  <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
+                    <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
+                    {{ wishlist.name }}
+                  </div>
+                </div>
+              </transition>
+              <div class="account-dropdown-item p-0">
+                <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link p-3">Mon compte</router-link>
+                <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
+                <!-- <Profile v-if="showProfileModal" /> -->
+              </div>
+              <div class="account-dropdown-item p-0">
+                <button @click="logOut" class="dropdown-item logout-page-link p-3" type="button">se déconnecter</button>
+              </div>
+            </div>
+          </transition>
+        </div>
+      </li>
+      <li v-if="!isLoggedIn()" type="button">
+        <a @click.prevent="$router.push('/login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>
+      </li>
+      <li v-if="!isLoggedIn()" type="button">
+        <a @click.prevent="$router.push('/login')" class="px-4 py-4 profile-link font-weight-bold d-inline-block">creér son profil</a>
       </li>
     </ul>
     <teleport to="#modal">
@@ -138,6 +124,7 @@ export default {
   },
   data() {
     return {
+      toggleDropdown: false,
       activeTab: 'login',
       showAccountPage: false,
       showProfilePage: false,
@@ -274,12 +261,6 @@ export default {
 </script>
 
 <style scoped>
-.login-dropdown .dropdown-menu {
-  padding-right: 1.2rem !important;
-}
-.account-dropdown-item {
-  padding: 0 0 0 12px;
-}
 .account-dropdown-item:not(:last-of-type) {
   border-bottom: 1px dashed #7c7c7c57;
 }

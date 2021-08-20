@@ -150,7 +150,8 @@
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column" style="margin-left: 1px">
+    <!-- NOTE functional tabs but disabled for now -->
+    <div v-if="false" class="d-flex flex-column" style="margin-left: 1px">
       <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #ebebeb">
         <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/bowl2.svg')" :fill="[tab === 1 ? '#fff' : '#292f33']" />
       </div>

@@ -90,11 +90,11 @@ ___________________________
 > Lien home dans la navbar
 - Version dark du dropdown connection
 - Tag nb de médias
-- Lightbox du product header => pouvoir voir tout l'album
+> Lightbox du product header => pouvoir voir tout l'album
 - Bug overscroll chat
 - Remplacer les boutons par le composant button donc ac fading etc ("détails et recherche")
-- Prendre comme référence de flexbox les mentions "les + du spot" à appliquer à "tu vas adorer"
-- Séparer les services en options des inclus/exclus
+> Prendre comme référence de flexbox les mentions "les + du spot" à appliquer à "tu vas adorer"
+> Séparer les services en options des inclus/exclus
 - Voir new design activité principale sur XD
 - Dans activités incluses séparer le prix à droite (cf XD)
 - Compteur à mettre à gauche sur slider hébergement + autoplay
