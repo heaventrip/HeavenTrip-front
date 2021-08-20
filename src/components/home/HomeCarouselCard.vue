@@ -1,5 +1,5 @@
 <template>
-  <div class="card-block" :class="`card-block-${index}`" :data-index="index" :style="{ width: cardWidth + 'px' }" @mouseenter="biggerCard($event)" @mouseleave="smallerCard">
+  <div class="card-block" :style="{ width: cardWidth + 'px' }">
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
@@ -78,7 +78,7 @@ export default {
       cardWidth: 500,
       cardExpand: 70,
       activeCard: '',
-      anim: '',
+      tl: null,
       cardsToSlide: ''
     }
   },
@@ -88,35 +88,27 @@ export default {
     Tag
   },
   watch: {
-    cardsArr(val) {
-      console.log(val)
-    },
     course(val) {
       if (!val.wishlistUsers) return
 
       val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
-    },
-    activeCard(newVal) {
-      // console.log('AAAAAAAAAAAAAAAAAA', newVal)
-      // this.cardsToSlide = this.getCardsToSlide(newVal)
-      // this.anim = this.activeCard.tl(this.cardsToSlide)
     }
   },
   methods: {
-    cardAnim(card, cardsToSlide) {
-      let movingInfos = card.querySelector('.hoverable-div')
-      let staticInfos = card.querySelector('.card__footer__static-infos')
-      let heartIcon = card.querySelector('.card-block__heart-icon')
+    setTimeline() {
+      let movingInfos = this.$el.querySelector('.hoverable-div')
+      let staticInfos = this.$el.querySelector('.card__footer__static-infos')
+      let heartIcon = this.$el.querySelector('.card-block__heart-icon')
 
-      let tl = gsap
+      const tl = gsap
         .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
         .pause()
-        .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
+        .to(this.$el, { width: this.cardWidth + this.cardExpand + 'px' })
         .to(staticInfos, { y: '-=45px' }, '<')
         .to(movingInfos, { y: '-=100' }, '<')
         .to(heartIcon, { autoAlpha: 1 }, '<')
-        .to(cardsToSlide, { x: '+=70' }, '<')
-      return tl
+      // .to(cards, { x: '+=70' }, '<')
+      this.tl = tl
     },
     addToWishlist() {
       if (!this.wishlisted)
@@ -131,66 +123,30 @@ export default {
       console.log(this.$props.cardsArr.slice(cardPosition + 1))
       return this.$props.cardsArr.slice(cardPosition + 1)
     },
+    biggerCard() {
+      this.tl.play()
 
-    // transformCard(type, event) {
-    //   let card = event.target
-
-    //   // simultaneously we want it to push the following cards to the right
-
-    //   if (type === 'bigger') {
-    //     // init timeline here because 'bigger' will always be the first event triggered
-    //     // and update it whenever another card is hovered
-    //     this.cardTl = this.cardAnim(card, cardsToSlide)
-
-    //     this.cardTl.play()
-
-    //     card.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
-    //     card.querySelector('.card__footer__price').classList.add('border-0')
-    //   } else {
-    //     this.cardTl.reverse()
-
-    //     card.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
-    //     card.querySelector('.card__footer__price').classList.remove('border-0')
-    //   }
-    // },
-    biggerCard(event) {
-      this.activeCard = event.target
-      this.activeCard.tl.play()
-
-      this.activeCard.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
-      this.activeCard.querySelector('.card__footer__price').classList.add('border-0')
+      this.cardBgImage.classList.add('card__bg-image--hover')
+      this.cardFooterPrice.classList.add('border-0')
     },
     smallerCard() {
-      this.activeCard.tl.reverse()
+      this.tl.reverse()
 
-      this.activeCard.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
-      this.activeCard.querySelector('.card__footer__price').classList.remove('border-0')
+      this.cardBgImage.classList.remove('card__bg-image--hover')
+      this.cardFooterPrice.classList.remove('border-0')
     }
   },
-  mounted() {
+  created() {
     // check if course is already wishlisted
     this.$axios
       .get('/wishlists', { wishlist: { courseId: this.$props.course.id } })
       .then(() => (this.wishlisted = true))
       .catch(() => (this.wishlisted = false))
-
-    let cards = document.querySelectorAll('.card-block')
-
-    cards.forEach((card) => {
-      let movingInfos = card.querySelector('.hoverable-div')
-      let staticInfos = card.querySelector('.card__footer__static-infos')
-      let heartIcon = card.querySelector('.card-block__heart-icon')
-
-      const tl = gsap
-        .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
-        .pause()
-        .to(card, { width: this.cardWidth + this.cardExpand + 'px' })
-        .to(staticInfos, { y: '-=45px' }, '<')
-        .to(movingInfos, { y: '-=100' }, '<')
-        .to(heartIcon, { autoAlpha: 1 }, '<')
-      // .to(cards, { x: '+=70' }, '<')
-      card.tl = tl
-    })
+  },
+  mounted() {
+    this.setTimeline()
+    this.cardBgImage = this.$el.querySelector('.card__bg-image')
+    this.cardFooterPrice = this.$el.querySelector('.card__footer__price')
   }
 }
 </script>

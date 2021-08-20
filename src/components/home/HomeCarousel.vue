@@ -79,7 +79,7 @@
       <div class="d-flex align-items-center justify-content-center w-100">
         <div class="ml-auto">
           <transition :name="counterSlideDir" mode="out-in">
-            <span class="slider-counter__current" :key="cardsArr[0]">{{ parseInt(cardsArr[0]?.dataset.index) + 1 }}</span>
+            <span class="slider-counter__current">{{ parseInt(cardsRef[0]?.index) + 1 }}</span>
           </transition>
           <span class="slider-counter__current mx-1">.</span>
           <sup
@@ -132,7 +132,17 @@
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="cards-slider d-flex overflow-hidden">
-              <HomeCarouselCard v-for="(course, index) in courses" :key="course.id" :course="course" :cards-arr="cardsArr" :index="index" />
+              <HomeCarouselCard
+                v-for="(course, index) in courses"
+                @mouseenter="cardsRef[index].biggerCard()"
+                @mouseleave="cardsRef[index].smallerCard()"
+                :index="index"
+                :ref="(card) => cardsRef.push(card)"
+                :course="course"
+                :cards-arr="cardsArr"
+                :key="course.id"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
+              />
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">123456</div>
@@ -168,6 +178,7 @@ export default {
   },
   data() {
     return {
+      cardsRef: [],
       slideUpSearchBar: null,
       counterSlideDir: 'vertical-slide-up',
       nbOfCards: 0,
@@ -253,59 +264,55 @@ export default {
     }
   },
   methods: {
-    // shiftCardsRight(index) {
-    //   this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
-    //     gsap.to(card, {
-    //       x: '+=50'
-    //     })
-    //   })
+    // biggerCard(id) {
+    //   this.activeCard = event.target
+    //   this.activeCard.tl.play()
+
+    //   this.activeCard.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
+    //   this.activeCard.querySelector('.card__footer__price').classList.add('border-0')
     // },
-    // shiftCardsLeft(index) {
-    //   this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
-    //     gsap.to(card, {
-    //       x: '-=50'
-    //     })
-    //   })
+    // smallerCard(id) {
+    //   this.activeCard.tl.reverse()
+
+    //   this.activeCard.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
+    //   this.activeCard.querySelector('.card__footer__price').classList.remove('border-0')
     // },
     slideLeft() {
-      this.counterSlideDir = 'vertical-slide-up'
-      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
-      let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
-
-      // slide all left
-      this.cardsArr.forEach((card, index) => {
-        tl.to(
-          card,
-          {
-            x: `-=${this.cardWidth + this.cardMargin}`,
-            ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
-            duration: 1.0,
-            modifiers: {
-              x: (x) => windowWrap(parseFloat(x)) + 'px'
-            }
-          },
-          index === 0 ? '' : '<0.08'
-        )
-      })
-
-      // then fade first one and put it at the end
-      tl.to(
-        this.cardsArr[0],
-        {
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power2.in',
-          onComplete: () => {
-            gsap.to(this.cardsArr[0], { opacity: 1, duration: 0.5, ease: 'power4.out' })
-            this.cardsArr.push(this.cardsArr.shift())
-          }
-        },
-        '0'
-      )
-
-      if (this.animFinished) {
-        tl.play()
-      }
+      // this.counterSlideDir = 'vertical-slide-up'
+      // let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
+      // let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+      // // slide all left
+      // this.cardsRef.forEach((card, index) => {
+      //   tl.to(
+      //     card,
+      //     {
+      //       x: `-=${this.cardWidth + this.cardMargin}`,
+      //       ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
+      //       duration: 1.0,
+      //       modifiers: {
+      //         x: (x) => windowWrap(parseFloat(x)) + 'px'
+      //       }
+      //     },
+      //     index === 0 ? '' : '<0.08'
+      //   )
+      // })
+      // // then fade first one and put it at the end
+      // tl.to(
+      //   this.cardsRef[0],
+      //   {
+      //     opacity: 0,
+      //     duration: 0.5,
+      //     ease: 'power2.in',
+      //     onComplete: () => {
+      //       gsap.to(this.cardsRef[0], { opacity: 1, duration: 0.5, ease: 'power4.out' })
+      //       this.cardsRef.push(this.cardsRef.shift())
+      //     }
+      //   },
+      //   '0'
+      // )
+      // if (this.animFinished) {
+      //   tl.play()
+      // }
     },
     slideRight() {
       this.counterSlideDir = 'vertical-slide-down'
@@ -313,7 +320,7 @@ export default {
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
-      this.cardsArr.forEach((card, index) => {
+      this.cardsRef.forEach((card, index) => {
         tl.to(
           card,
           {
@@ -327,24 +334,25 @@ export default {
           '<'
         )
       })
+      console.log(tl)
 
-      // then bring back last one
-      tl.to(
-        this.cardsArr[this.cardsArr.length - 1],
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          onComplete: () => {
-            this.cardsArr.unshift(this.cardsArr.pop())
-          }
-        },
-        '0'
-      )
+      // // then bring back last one
+      // tl.to(
+      //   this.cardsRef[this.cardsRef.length - 1],
+      //   {
+      //     opacity: 1,
+      //     duration: 0.5,
+      //     ease: 'power2.out',
+      //     onComplete: () => {
+      //       this.cardsRef.unshift(this.cardsRef.pop())
+      //     }
+      //   },
+      //   '0'
+      // )
 
-      if (this.animFinished) {
-        tl.play()
-      }
+      tl.play()
+      // if (this.animFinished) {
+      // }
     },
     submitSearchForm() {
       this.$router.push({ name: 'Search', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
@@ -398,11 +406,18 @@ export default {
       el.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
     }
   },
+  beforeUpdate() {
+    this.cardsRef = []
+  },
+  updated() {
+    this.$nextTick(() => {
+      this.nbOfCards = this.cardsRef.length
+    })
+  },
   mounted() {
     this.currentViewportWidth = window.innerWidth
-    // gsap.utils.toArray('.card-block').forEach((card, index) => {
-    //   gsap.set(card, { x: 550 * index })
-    // })
+    this.firstName = localStorage.getItem('user.firstName')
+    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
 
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').prepend(tagContainer)
@@ -424,19 +439,6 @@ export default {
     this.$axios.get('/courses').then((res) => {
       this.courses = res.data.courses
     })
-    this.$nextTick(() => {
-      let cardBlocks = document.querySelectorAll('.card-block')
-      this.nbOfCards = cardBlocks.length
-      cardBlocks.forEach((el) => this.cardsArr.push(el))
-
-      gsap.set('.card-block', {
-        x: (i) => i * (this.cardWidth + this.cardMargin) + this.currentViewportWidth * 0.1 // left offset of 10vw
-      })
-    })
-
-    this.firstName = localStorage.getItem('user.firstName')
-
-    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
   }
 }
 </script>
