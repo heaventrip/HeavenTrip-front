@@ -20,7 +20,8 @@ export default {
       course: null,
       session: null,
       participantsNb: 0,
-      activeStep: ''
+      activeStep: '',
+      avatarKeys: []
     }
   },
   methods: {
@@ -28,10 +29,11 @@ export default {
       this.activeStep = step
     }
   },
-  async created() {
-    await this.$axios.get(`/courses/${this.$props.productId}`).then((res) => (this.course = res.data.course))
-    await this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => (this.session = res.data.sessions[0]))
+  created() {
+    this.$axios.get(`/courses/${this.$props.productId}`).then((res) => (this.course = res.data.course))
+    this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => (this.session = res.data.sessions[0]))
     this.participantsNb = this.$route.params.participantsNb
+    this.avatarKeys = this.$route.params.avatarKeys
   }
 }
 </script>

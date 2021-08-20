@@ -62,17 +62,17 @@
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
                   <div class="info-div-left d-flex align-items-center justify-content-between">
-                    <h6 v-if="$windowWidth <= 1440" class="month-count mb-0">
+                    <h6 v-if="$windowWidth <= 1500" class="month-count mb-0">
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
                     <h6 v-else class="month-count mb-0">
-                      {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
+                      {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
-                      {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
+                      {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
-                    <a href="#" @click.prevent class="register-count date-confirmed mb-0" style="margin: 0 3rem 0 2rem; cursor: default">
+                    <a href="#" @click.prevent class="register-count date-confirmed mb-0" style="margin: 0 3rem 0 2rem; cursor: default; white-space: nowrap">
                       <strong>{{ session.max - session.nbOfParticipants }} place{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}</strong>
                       restante{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}
                     </a>
@@ -176,7 +176,7 @@
                 <div class="pb-0">
                   <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />
                   <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400">Session :&nbsp;&nbsp;</span>
-                  <span class="d-inline-block align-middle">{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }} au {{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}</span>
+                  <span class="d-inline-block align-middle">{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }} au {{ new Date(choice.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}</span>
                 </div>
                 <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px">
                   <span class="text--pink" style="font-weight: bold">{{ choice.max - choice.nbOfParticipants }} place{{ choice.max - choice.nbOfParticipants > 1 ? 's' : '' }}</span
