@@ -49,7 +49,7 @@
             </button>
             <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
               <div class="d-none d-lg-inline-block mb-1">rechercher</div>
-              <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div>
+              <!-- <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div> -->
             </button>
           </div>
           <div class="tags-container d-flex justify-content-center">

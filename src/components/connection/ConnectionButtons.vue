@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul v-if="$parent.agencyIsActive || $parent.newsIsActive" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
+    <ul v-if="$parent.agencyIsActive || $parent.newsIsActive || $parent.name === 'TheNavSticky'" class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
       <li v-if="isLoggedIn()">
-        <div class="dropdown login-dropdown" :class="{ 'bg-white': toggleDropdown }">
+        <div class="dropdown login-dropdown" :class="{ 'bg-dark': toggleDropdown }">
           <button class="btn btn-block rounded-0 border-0" @click.prevent="toggleDropdown = !toggleDropdown">
             <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
             <span :class="{ 'text-dark': toggleDropdown }"

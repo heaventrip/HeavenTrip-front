@@ -7,7 +7,7 @@
       <div class="result-div d-flex align-items-center p-3 px-5 pl-lg-5 w-100">
         <h4 class="pr-5 mr-5 mb-0 border-right border-dark count text-right font-weight-normal d-none d-md-block">
           <strong class="h6 d-block font-weight-bold mb-1">MA RECHERCHE</strong>
-          12 séjours
+          {{ normalResults.length }} séjour{{ normalResults.length > 1 ? 's' : '' }}
         </h4>
         <div class="d-md-flex align-items-center d-lg-none flex-1">
           <img class="mr-3 ml-4 head-img d-none d-md-block" fluid :src="require('@/assets/images/head-pin.png')" />
@@ -150,8 +150,9 @@
             <button @click="submitSearchForm" class="btn btn-block clear-btn border-0 rounded-0">Rechercher</button>
           </div>
           <div class="d-flex flex-column col-12 col-lg-8 mx-auto">
+            <vue-element-loading :active="loading" spinner="spinner" color="#d82558" background-color="transparent" />
             <!-- NOTE NORMAL -->
-            <div class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
+            <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
               <div class="col-4 col-md-4 p-0">
                 <div class="position-relative w-100 h-100">
                   <a href="/checkout"><img class="img-fluid img-fill" fluid :src="normalResult?.cover" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
@@ -360,7 +361,8 @@
                 </div>
               </div>
             </div>
-            <div class="position-relative d-flex justify-content-center">
+            <!-- NOTE disabled for now because pagination not set up in ransack -->
+            <div v-if="false" class="position-relative d-flex justify-content-center">
               <Button text="J'en veux plus" px="1.5rem" size=".8rem" width="100%" weight="bold" text-color="#292f33" background-color="#292f331a" />
             </div>
           </div>
@@ -385,6 +387,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       avatarKeys: [],
       queryParams: '',
       dateConfirmed: '',
@@ -547,6 +550,7 @@ export default {
       this.submitSearchForm()
     },
     submitSearchForm() {
+      this.loading = true
       this.$axios
         .post('/courses/search', {
           free_search: this.freeSearch,
@@ -567,7 +571,6 @@ export default {
           let countryArr = new Array()
           let spotArr = new Array()
           this.resetFilters()
-          console.log(res)
 
           // console.log(res.data.courses[0].sports.map((el) => console.log(el)))
           res.data.courses.forEach((course) => {
@@ -589,6 +592,7 @@ export default {
             this.levelSelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
           })
           this.normalResults = res.data.courses
+          this.loading = false
         })
     },
     setMultiSelect(which) {
@@ -658,6 +662,7 @@ export default {
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       tagContainer.closest('.filter-container').querySelector('.tags-container')?.append(tagContainer)
     })
+    this.$root.initialLoading = false
   }
 }
 </script>
