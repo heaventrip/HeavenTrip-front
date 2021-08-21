@@ -58,55 +58,21 @@
       <div v-show="showSessions" class="tab-content">
         <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
           <div class="container" style="padding: 0 3rem">
-            <div style="width: 40%">
-              <div class="card__title align-items-center justify-content-between mb-5">
-                <div>Réglages de mon compte</div>
-              </div>
-              <form>
-                <div class="row">
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group has-float-label">
-                      <input id="request-firstName" type="text" name="" placeholder=" " class="form-control" />
-                      <label for="request-firstName">Prénom</label>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group has-float-label">
-                      <input id="request-lastName" type="text" name="" placeholder=" " class="form-control" />
-                      <label for="request-lastName">Nom</label>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-12">
-                    <div class="form-group has-float-label">
-                      <input id="request-email" type="email" name="" placeholder=" " class="form-control" />
-                      <label for="request-email">Email</label>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-12">
-                    <label>Message</label>
-                    <textarea type="text" name="" placeholder=" " class="form-control"></textarea>
-                  </div>
-                  <div class="col-12 col-lg-12">
-                    <Button text="Envoyer ma demande" color="grey" height="2rem" width="100%" weight="bold" />
-                  </div>
-                </div>
-              </form>
-            </div>
             <ul class="list-unstyled order-tab-list mb-0 pb-4">
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
                   <div class="info-div-left d-flex align-items-center justify-content-between">
-                    <h6 v-if="$windowWidth <= 1440" class="month-count mb-0">
+                    <h6 v-if="$windowWidth <= 1500" class="month-count mb-0">
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
                     <h6 v-else class="month-count mb-0">
-                      {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
+                      {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
-                      {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}
+                      {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
-                    <a href="#" @click.prevent class="register-count date-confirmed mb-0" style="margin: 0 3rem 0 2rem; cursor: default">
+                    <a href="#" @click.prevent class="register-count date-confirmed mb-0" style="margin: 0 3rem 0 2rem; cursor: default; white-space: nowrap">
                       <strong>{{ session.max - session.nbOfParticipants }} place{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}</strong>
                       restante{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}
                     </a>
@@ -210,7 +176,7 @@
                 <div class="pb-0">
                   <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />
                   <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400">Session :&nbsp;&nbsp;</span>
-                  <span class="d-inline-block align-middle">{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }} au {{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long' }) }}</span>
+                  <span class="d-inline-block align-middle">{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }} au {{ new Date(choice.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}</span>
                 </div>
                 <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px">
                   <span class="text--pink" style="font-weight: bold">{{ choice.max - choice.nbOfParticipants }} place{{ choice.max - choice.nbOfParticipants > 1 ? 's' : '' }}</span
@@ -275,7 +241,7 @@
         </div>
       </div>
       <button
-        @click="$router.push({ name: 'CheckOutHome', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })"
+        @click="$router.push({ name: 'Checkout', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })"
         class="btn border-0 rounded-0 reserve-btn"
         :style="{ fontSize: availSessions.length ? '1.4rem' : '1rem' }"
         :class="[{ disable: !choseBtn && availSessions.length }, { 'px-5': !availSessions.length }]"
@@ -287,14 +253,12 @@
 </template>
 <script>
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
-import Button from '@/components/elements/Button.vue'
 
 export default {
   name: 'ProductFooter',
   props: ['course'],
   components: {
-    InlineAvatars,
-    Button
+    InlineAvatars
   },
   data() {
     return {

@@ -44,16 +44,7 @@
         <div class="ml-auto" v-if="activeStep !== 'validation'">
           <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span> </span>
           <div class="d-flex justify-content-between">
-            <InlineAvatars
-              :avatars="['wb1pauez3a4chagrpyth', 'j7pyvrb9k40igjtuniwb', 'k4jpldbzp2cq6m6pjgip', 'yow5loelun43c3xbdbiw', 'ers53we5kg0ffyv6csoq', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth', 'wb1pauez3a4chagrpyth']"
-              :heart="false"
-              outline-color="violet"
-              outline-width="4px"
-              height="40px"
-              spacing="-8px"
-              mt="0.5rem"
-              mb="0rem"
-            />
+            <InlineAvatars :avatars="avatarKeys" :heart="false" outline-color="violet" outline-width="4px" height="40px" spacing="-8px" mt="0.5rem" mb="0rem" />
           </div>
         </div>
       </div>
@@ -73,7 +64,7 @@ import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import gsap from 'gsap'
 
 export default {
-  name: 'CheckOutHeader',
+  name: 'CheckoutHeader',
   components: {
     InlineAvatars
   },
@@ -87,7 +78,7 @@ export default {
     session: {
       immediate: true,
       handler(val) {
-        val.participants.forEach((user) => this.avatarKeys.push(user.avatarKey))
+        val?.participants?.forEach((user) => this.avatarKeys.push(user.avatarKey))
       }
     }
   },

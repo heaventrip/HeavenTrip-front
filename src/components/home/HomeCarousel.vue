@@ -2,7 +2,7 @@
   <section class="carousel-section">
     <div class="container">
       <div class="search row">
-        <div class="col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px">
+        <div class="search-bar col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px">
           <div class="bg-white d-flex centered-div">
             <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 2rem 1.6rem 2rem">
               <InlineSvg class="search-bar__fillter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
@@ -49,7 +49,7 @@
             </button>
             <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
               <div class="d-none d-lg-inline-block mb-1">rechercher</div>
-              <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div>
+              <!-- <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div> -->
             </button>
           </div>
           <div class="tags-container d-flex justify-content-center">
@@ -76,40 +76,30 @@
       </div>
     </div>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="col-12 mx-auto text-center d-block d-md-none">
-              <form>
-                <div class="form-group">
-                  <select class="form-control select-place">
-                    <option selected="" disabled="" hidden="">Nos inspirations</option>
-                    <option value="#pills-home">Nos inspirations</option>
-                    <option value="#pills-profile">Dernières places</option>
-                    <option value="#pills-contact">Multi-activités</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div class="col-12 col-sm-10 col-lg-4 order-lg-2 d-none d-md-block ml-auto">
-              <ul class="nav nav-pills mb-0 justify-content-center" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Dernières places</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Multi-activités</a>
-                </li>
-              </ul>
-            </div>
-            <div class="offset-lg-2 col-lg-6 align-self-center order-lg-1 d-none d-lg-block">
-              <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
-                <span class="bg-white position-relative pl-4"><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></span>
-              </div>
-            </div>
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="ml-auto">
+          <transition :name="counterSlideDir" mode="out-in">
+            <span class="slider-counter__current">{{ parseInt(cardsRef[0]?.index) + 1 }}</span>
+          </transition>
+          <span class="slider-counter__current mx-1">.</span>
+          <sup
+            ><span class="slider-counter__total">{{ nbOfCards }}</span></sup
+          >
+        </div>
+        <div class="ml-5 w-50">
+          <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
+            <span class="bg-white position-relative pl-4"><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></span>
           </div>
+        </div>
+        <div class="mx-auto">
+          <ul class="nav nav-pills mb-0 justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Multi-activités</a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="d-flex align-items-center mt-4">
@@ -140,12 +130,19 @@
           </div>
         </div>
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
-          <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <div class="cards-slider d-flex overflow-hidden" style="position: relative; width: 100%; height: 40vh; margin-bottom: 3rem"></div>
-          </div>
-          <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="cards-slider d-flex overflow-hidden">
-              <SectionCarouselCard v-for="(course, index) in courses" :key="course.id" :course="course" :cards-arr="cardsArr" :index="index" />
+              <HomeCarouselCard
+                v-for="(course, index) in courses"
+                @mouseenter="cardsRef[index].biggerCard()"
+                @mouseleave="cardsRef[index].smallerCard()"
+                :index="index"
+                :ref="(card) => cardsRef.push(card)"
+                :course="course"
+                :cards-arr="cardsArr"
+                :key="course.id"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
+              />
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">123456</div>
@@ -166,21 +163,24 @@
 
 <script>
 import Multiselect from '@vueform/multiselect'
-import SectionCarouselCard from '@/components/home/SectionCarouselCard.vue'
+import HomeCarouselCard from '@/components/home/HomeCarouselCard.vue'
 import Button from '@/components/elements/Button.vue'
 import { gsap } from 'gsap'
 import { CustomEase } from 'gsap/CustomEase'
 gsap.registerPlugin(CustomEase)
 
 export default {
-  name: 'SectionCarousel',
+  name: 'HomeCarousel',
   components: {
-    SectionCarouselCard,
+    HomeCarouselCard,
     Button,
     Multiselect
   },
   data() {
     return {
+      cardsRef: [],
+      slideUpSearchBar: null,
+      counterSlideDir: 'vertical-slide-up',
       nbOfCards: 0,
       cardMargin: 40,
       cardWidth: 520,
@@ -235,71 +235,92 @@ export default {
       }
     }
   },
+  computed: {
+    totalSelectedNb() {
+      return this.activitySelection.value.length + this.monthSelection.value.length
+    }
+  },
   watch: {
     firstName(newVal) {
       this.firstName = newVal
+    },
+    'activitySelection.value': {
+      deep: true,
+      handler(val) {
+        if (window.scrollY > 25) return
+
+        if (val.length) this.slideUpSearchBar.play()
+        else if (!this.monthSelection.value.length) this.slideUpSearchBar.reverse()
+      }
+    },
+    'monthSelection.value': {
+      deep: true,
+      handler(val) {
+        if (window.scrollY > 25) return
+
+        if (val.length) this.slideUpSearchBar.play()
+        else if (!this.activitySelection.value.length) this.slideUpSearchBar.reverse()
+      }
     }
   },
   methods: {
-    // shiftCardsRight(index) {
-    //   this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
-    //     gsap.to(card, {
-    //       x: '+=50'
-    //     })
-    //   })
+    // biggerCard(id) {
+    //   this.activeCard = event.target
+    //   this.activeCard.tl.play()
+
+    //   this.activeCard.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
+    //   this.activeCard.querySelector('.card__footer__price').classList.add('border-0')
     // },
-    // shiftCardsLeft(index) {
-    //   this.cardsArr.slice(parseInt(index) + 1).forEach((card) => {
-    //     gsap.to(card, {
-    //       x: '-=50'
-    //     })
-    //   })
+    // smallerCard(id) {
+    //   this.activeCard.tl.reverse()
+
+    //   this.activeCard.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
+    //   this.activeCard.querySelector('.card__footer__price').classList.remove('border-0')
     // },
     slideLeft() {
-      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
-      let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
-
-      // slide all left
-      this.cardsArr.forEach((card, index) => {
-        tl.to(
-          card,
-          {
-            x: `-=${this.cardWidth + this.cardMargin}`,
-            ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
-            duration: 1.0,
-            modifiers: {
-              x: (x) => windowWrap(parseFloat(x)) + 'px'
-            }
-          },
-          index === 0 ? '' : '<0.08'
-        )
-      })
-
-      // then fade first one and put it at the end
-      tl.to(
-        this.cardsArr[0],
-        {
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power2.in',
-          onComplete: () => {
-            gsap.to(this.cardsArr[0], { opacity: 1, duration: 0.5, ease: 'power4.out' })
-            this.cardsArr.push(this.cardsArr.shift())
-          }
-        },
-        '0'
-      )
-
-      if (this.animFinished) {
-        tl.play()
-      }
+      // this.counterSlideDir = 'vertical-slide-up'
+      // let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
+      // let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+      // // slide all left
+      // this.cardsRef.forEach((card, index) => {
+      //   tl.to(
+      //     card,
+      //     {
+      //       x: `-=${this.cardWidth + this.cardMargin}`,
+      //       ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
+      //       duration: 1.0,
+      //       modifiers: {
+      //         x: (x) => windowWrap(parseFloat(x)) + 'px'
+      //       }
+      //     },
+      //     index === 0 ? '' : '<0.08'
+      //   )
+      // })
+      // // then fade first one and put it at the end
+      // tl.to(
+      //   this.cardsRef[0],
+      //   {
+      //     opacity: 0,
+      //     duration: 0.5,
+      //     ease: 'power2.in',
+      //     onComplete: () => {
+      //       gsap.to(this.cardsRef[0], { opacity: 1, duration: 0.5, ease: 'power4.out' })
+      //       this.cardsRef.push(this.cardsRef.shift())
+      //     }
+      //   },
+      //   '0'
+      // )
+      // if (this.animFinished) {
+      //   tl.play()
+      // }
     },
     slideRight() {
+      this.counterSlideDir = 'vertical-slide-down'
       let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
-      this.cardsArr.forEach((card, index) => {
+      this.cardsRef.forEach((card, index) => {
         tl.to(
           card,
           {
@@ -313,27 +334,28 @@ export default {
           '<'
         )
       })
+      console.log(tl)
 
-      // then bring back last one
-      tl.to(
-        this.cardsArr[this.cardsArr.length - 1],
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          onComplete: () => {
-            this.cardsArr.unshift(this.cardsArr.pop())
-          }
-        },
-        '0'
-      )
+      // // then bring back last one
+      // tl.to(
+      //   this.cardsRef[this.cardsRef.length - 1],
+      //   {
+      //     opacity: 1,
+      //     duration: 0.5,
+      //     ease: 'power2.out',
+      //     onComplete: () => {
+      //       this.cardsRef.unshift(this.cardsRef.pop())
+      //     }
+      //   },
+      //   '0'
+      // )
 
-      if (this.animFinished) {
-        tl.play()
-      }
+      tl.play()
+      // if (this.animFinished) {
+      // }
     },
     submitSearchForm() {
-      this.$router.push({ name: 'SearchHome', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
+      this.$router.push({ name: 'Search', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
       // this.$axios
       //   .post('/courses/search', {
       //     q: {
@@ -384,11 +406,18 @@ export default {
       el.querySelector('.search-bar__fillter__svg').style.fill = '#292f33'
     }
   },
-  async mounted() {
+  beforeUpdate() {
+    this.cardsRef = []
+  },
+  updated() {
+    this.$nextTick(() => {
+      this.nbOfCards = this.cardsRef.length
+    })
+  },
+  mounted() {
     this.currentViewportWidth = window.innerWidth
-    // gsap.utils.toArray('.card-block').forEach((card, index) => {
-    //   gsap.set(card, { x: 550 * index })
-    // })
+    this.firstName = localStorage.getItem('user.firstName')
+    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
 
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').prepend(tagContainer)
@@ -407,20 +436,9 @@ export default {
         this.activitySelection.options.push({ value: sport.id, label: sport.name })
       })
     })
-    await this.$axios.get('/courses').then((res) => {
+    this.$axios.get('/courses').then((res) => {
       this.courses = res.data.courses
     })
-    this.$nextTick(() => {
-      let cardBlocks = document.querySelectorAll('.card-block')
-      this.nbOfCards = cardBlocks.length
-      cardBlocks.forEach((el) => this.cardsArr.push(el))
-
-      gsap.set('.card-block', {
-        x: (i) => i * (this.cardWidth + this.cardMargin) + this.currentViewportWidth * 0.1 // left offset of 10vw
-      })
-    })
-
-    this.firstName = localStorage.getItem('user.firstName')
   }
 }
 </script>
@@ -460,4 +478,18 @@ export default {
   font-size: unset;
   border-bottom-left-radius: unset;
 } */
+.slider-counter__current {
+  font-family: Oswald, sans-serif;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  font-size: 2.4rem;
+  color: #292f33;
+  display: inline-block;
+}
+.slider-counter__total {
+  font-family: Oswald, sans-serif;
+  color: #292f33;
+  font-size: 1.5rem;
+  vertical-align: sub;
+}
 </style>

@@ -1,18 +1,61 @@
 <template>
-  <transition name="fade-faster">
-    <vue-element-loading :active="false" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
+  <router-view :route="routeWithModal" v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" :key="$route.fullPath"></component>
+    </transition>
+  </router-view>
+
+  <transition>
+    <vue-element-loading :active="initialLoading" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
   </transition>
-  <router-view :key="$route.fullPath" />
 </template>
 
 <script>
+import { START_LOCATION } from 'vue-router'
+
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      initialLoading: false,
+      backgroundView: null
+    }
+  },
+  computed: {
+    routeWithModal() {
+      if (this.backgroundView) {
+        return this.$router.resolve(this.backgroundView)
+      } else {
+        return this.$route
+      }
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        if (from === START_LOCATION) this.initialLoading = true
+
+        if (to.name === 'Account') {
+          this.backgroundView = from
+
+          document.querySelector('#app').style.filter = 'blur(3px)'
+          document.body.style.overflowY = 'hidden'
+        } else {
+          this.backgroundView = null
+
+          document.querySelector('#app').style.filter = ''
+          document.body.style.overflowY = ''
+        }
+      }
+    }
+  }
 }
 </script>
 
 <style>
 body {
+  height: 100vh;
   width: 100vw;
   overflow-x: hidden;
 }
@@ -25,10 +68,6 @@ body.modal-open::after {
   background-color: rgba(41, 47, 51, 0.2);
 }
 #app {
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-  /* text-align: center; */
   color: #2c3e50;
 }
 .modal__backdrop {
@@ -126,7 +165,6 @@ body.modal-open::after {
 .fade-leave-to {
   opacity: 0;
 }
-
 #nav {
   padding: 30px;
 }

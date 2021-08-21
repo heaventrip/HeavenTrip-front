@@ -100,43 +100,43 @@
             <div class="row">
               <div class="col-4 pr-0">
                 <h5 class="text-uppercase list-head">Top destinations</h5>
-                <ul class="list-unstyled" style="line-height: 1">
+                <ul class="list-unstyled" style="line-height: 1" v-if="countries">
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[0]?.id } }">{{ countries[0]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[0]?.id } }">{{ countries[0]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[1]?.id } }">{{ countries[1]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[1]?.id } }">{{ countries[1]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[2]?.id } }">{{ countries[2]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[2]?.id } }">{{ countries[2]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { country: countries[3]?.id } }">{{ countries[3]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { country: countries[3]?.id } }">{{ countries[3]?.name }}</router-link>
                   </li>
                 </ul>
               </div>
               <div class="col-4">
                 <h5 class="text-uppercase list-head">Top activites</h5>
-                <ul class="list-unstyled" style="line-height: 1">
+                <ul class="list-unstyled" style="line-height: 1" v-if="sports">
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[0]?.id } }">{{ sports[0]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[0]?.id } }">{{ sports[0]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[1]?.id } }">{{ sports[1]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[1]?.id } }">{{ sports[1]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[2]?.id } }">{{ sports[2]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[2]?.id } }">{{ sports[2]?.name }}</router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'SearchHome', query: { activity: sports[3]?.id } }">{{ sports[3]?.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { activity: sports[3]?.id } }">{{ sports[3]?.name }}</router-link>
                   </li>
                 </ul>
               </div>
               <div class="col-4">
                 <h5 class="text-uppercase list-head">thematiques</h5>
-                <ul class="list-unstyled" style="line-height: 1">
+                <ul class="list-unstyled" style="line-height: 1" v-if="themes">
                   <li v-for="theme in themes" :key="theme">
-                    <router-link :to="{ name: 'SearchHome', query: { theme: theme.id } }">{{ theme.name }}</router-link>
+                    <router-link :to="{ name: 'Search', query: { theme: theme.id } }">{{ theme.name }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -211,9 +211,9 @@ export default {
   name: 'Footer',
   data() {
     return {
-      countries: {},
-      themes: {},
-      sports: {},
+      countries: null,
+      themes: null,
+      sports: null,
       newsletterEmail: '',
       newsletterSubscribed: false
     }
@@ -228,7 +228,7 @@ export default {
       })
     }
   },
-  async created() {
+  created() {
     this.$axios.get('/countries').then((res) => (this.countries = res.data.countries))
     this.$axios.get('/sports').then((res) => (this.sports = res.data.sports))
     this.$axios.get('/sport-categories').then((res) => (this.themes = res.data.sportCategories))

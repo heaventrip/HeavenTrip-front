@@ -72,38 +72,45 @@
     <div class="gallery-comment-block">
       <div class="aside-slider">
         <transition name="fade" @after-leave="afterLeave">
-          <swiper v-if="asideSlider" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2" /></swiper-slide>
+          <swiper v-if="asideSlider" @after-init="setCustomButtons" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" @click="showImg(0)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" @click="showImg(1)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" @click="showImg(2)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin" @click="showImg(3)" /></swiper-slide>
+            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2" @click="showImg(4)" /></swiper-slide>
           </swiper>
         </transition>
+        <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
         <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
           <div class="messages-container" style="">
             <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
-            <ul class="list-unstyled mb-0 discuss-list mt-3">
+            <Message
+              :user="{
+                firstName: 'Geoff',
+                lastName: 'M'
+              }"
+              content="cc cest le Jo"
+              createdAt="2021-08-05T11:13:32.612Z"
+              position="right"
+            />
+            <Message
+              :user="{
+                firstName: 'Maria',
+                lastName: 'Golo'
+              }"
+              content="ergerg grzzdf zefzefzefzef ze fzefsd f z efzefzef zef "
+              createdAt="2021-08-05T11:13:32.612Z"
+              position="left"
+            />
+            <ul class="list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
-                <div class="d-flex">
-                  <div class="">
-                    <div class="profile-container">
-                      <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" />
-                    </div>
-                  </div>
-                  <div class="ml-4 pt-2">
-                    <h6 class="discuss-head">
-                      {{ msg.user.firstName }} {{ msg.user.lastName }}<span class="ml-2" style="font-size: 0.75rem; color: #b4b4b4">{{ new Date(msg.createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
-                    </h6>
-                    <p class="content-desc">{{ msg.content }}</p>
-                  </div>
-                </div>
+                <Message :user="msg.user" :content="msg.content" :createdAt="msg.createdAt" position="right" />
               </li>
             </ul>
           </div>
           <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #fcfcfc">
-            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="1"> </textarea>
-            <button class="fg-1 text-center" type="submit">
+            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="2"> </textarea>
+            <button class="ml-3 fg-1 text-center" type="submit">
               <InlineSvg :src="require('@/assets/svg/send.svg')" height="20" />
             </button>
             <!-- <label class="message-input-label">
@@ -124,6 +131,7 @@ import ProductTabLiving from '@/components/product/tabs/ProductTabLiving.vue'
 import ProductTabProgram from '@/components/product/tabs/ProductTabProgram.vue'
 import ProductTabReviews from '@/components/product/tabs/ProductTabReviews.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
+import Message from '@/components/product/Message.vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VueEasyLightbox from 'vue-easy-lightbox'
@@ -143,7 +151,8 @@ export default {
     ProductTabProgram,
     ProductTabReviews,
     ProductTabTips,
-    // VueEasyLightbox,
+    VueEasyLightbox,
+    Message,
     Swiper,
     SwiperSlide
   },
@@ -156,7 +165,13 @@ export default {
       messageSentSuccess: true,
       inputMessage: '',
       asideSlider: true,
-      imgs: ['https://via.placeholder.com/450.png/', 'https://via.placeholder.com/300.png/', 'https://via.placeholder.com/150.png/', 'https://via.placeholder.com/450.png/'], // Img Url , string or Array of string
+      imgs: [
+        'https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2'
+      ],
       visible: false,
       index: 0, // default: 0
       clickedInfos: false,
@@ -182,12 +197,51 @@ export default {
         `
     }
   },
+  watch: {
+    visible(val) {
+      this.$emit('active-lightbox', val)
+    }
+  },
   created() {
     this.fetchMessages()
   },
   methods: {
     fetchMessages() {
-      this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages))
+      this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
+      /* this.messages = [
+        {
+          user: {
+            firstName: 'Geoff',
+            lastName: 'M'
+          },
+          content: 'cc cest le Jo',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        },
+        {
+          user: {
+            firstName: 'Marie',
+            lastName: 'Dag'
+          },
+          content: 'zefazef rvzefz zefzefzef',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        },
+        {
+          user: {
+            firstName: 'Bonie',
+            lastName: 'M'
+          },
+          content: 'zefazef rvzefz zefzefzezev fjghjyhjlhk dfsgdsfgdf',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        },
+        {
+          user: {
+            firstName: 'Marie',
+            lastName: 'Dag'
+          },
+          content: 'zefazef rvzefz zefzefzef zefazef rvzefz zefzefzef zefazef rvzefz zefzefzefzefazef rvzefz zefzefzef',
+          createdAt: '2021-08-05T11:13:32.612Z'
+        }
+      ] */
     },
     afterLeave() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -199,10 +253,21 @@ export default {
     submitMessageForm() {
       if (!this.inputMessage) return
 
+      const AUTH_TOKEN_KEY = 'authToken'
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       this.$axios
         .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
-        .then(() => this.fetchMessages())
+        .then((res) => {
+          console.log(res)
+          this.fetchMessages()
+        })
         .catch((err) => console.log(err))
+    },
+    showImg(index) {
+      this.index = index
+      this.visible = true
     },
     initTabsGsap() {
       // let tabs = ['infos', 'activities', 'living', 'program', 'tips', 'reviews']
@@ -248,21 +313,22 @@ export default {
     //     }
     //   })
     // },
-    showImg(index) {
-      this.index = index
-      this.visible = true
-    },
     handleHide() {
       this.visible = false
     },
     renderSwiperFraction(currentClass, totalClass) {
-      return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
-      <span style="${this.currentPaginationStyle}">.</span>
-      <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
+      return `
+        <div style="text-align: left; margin-left: 1rem">
+          <span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
+          <span style="${this.currentPaginationStyle}">.</span>
+          <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>
+        </div>
+      `
     },
     scrollToSection(el) {
       document.querySelector(`#${el}`).scrollIntoView({ behavior: 'smooth' })
-    }
+    },
+    setCustomButtons() {}
     // scroll to top when user reaches top of content (wheel up)
     // handleScrollUp() {
     //   let contentTop = window.innerHeight * 0.9
@@ -283,6 +349,8 @@ export default {
     // }
   },
   mounted() {
+    this.setCustomButtons()
+
     let sections = Array.from(document.querySelectorAll('.product-section'))
     let navLinks = Array.from(document.querySelectorAll('.product-nav-tabs .nav-link'))
 
@@ -306,13 +374,21 @@ export default {
 </script>
 
 <style scoped>
+.customized-prev {
+  display: none !important;
+}
+.customized-next {
+  display: none !important;
+}
 button {
   all: unset;
 }
 .messages-container {
+  overflow-y: scroll;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
   padding-top: 1rem;
+  overscroll-behavior: none;
 }
 @media only screen and (max-width: 1440px) {
   .messages-container {
@@ -343,7 +419,6 @@ button {
 .reply-container:focus {
   outline: none;
   color: #292f33;
-  height: 6rem;
 }
 .main-tab {
   max-width: 1100px;
@@ -391,10 +466,6 @@ button {
   color: #292f33;
   font-size: 0.8rem;
 }
-.swiper-button-prev,
-.swiper-button-next {
-  color: #292f33;
-}
 
 .nav-link {
   padding: 0.5rem !important;
@@ -405,7 +476,7 @@ button {
   position: relative;
   top: 70px;
 }
-.slider {
+/* .slider {
   background-color: #fcfcfc;
   position: absolute;
   width: 100vw;
@@ -426,7 +497,8 @@ button {
 .fade--in--content {
   transition: opacity 0.8s ease 0.4s;
   opacity: 1;
-}
+} */
+
 .product-nav-tabs {
   position: fixed;
   top: 70px;

@@ -41,8 +41,8 @@
               <CheckoutWizardForm @complete="optionsComplete = true" @incomplete="optionsComplete = false" @updated-participants="setParticipants" @updated-booker="setBooker" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'options'" />
               <CheckoutWizardForm2 @complete="insuranceComplete = true" @incomplete="insuranceComplete = false" @updated-participants="setParticipants" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'insurance'" />
             </keep-alive>
-            <Step5 :course="course" :booker="booker" :extra-participants="extraParticipants" v-if="activeStep === 'validation'" />
-            <Step6 v-if="activeStep === 'success'" />
+            <CheckoutWizardValidation :course="course" :booker="booker" :extra-participants="extraParticipants" v-if="activeStep === 'validation'" />
+            <CheckoutSuccess v-if="activeStep === 'success'" />
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
               <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">{{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}</button>
@@ -61,19 +61,18 @@ import CheckoutWizardBooker from './wizard/CheckoutWizardBooker.vue'
 import CheckoutWizardParticipants from './wizard/CheckoutWizardParticipants.vue'
 import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
-import Step5 from './Step5.vue'
-import Step6 from './Step6.vue'
+import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
+import CheckoutSuccess from './CheckoutSuccess.vue'
 
 export default {
-  name: 'CheckOutSections',
+  name: 'CheckoutSections',
   components: {
-    // Step1,
     CheckoutWizardBooker,
     CheckoutWizardParticipants,
     CheckoutWizardForm,
     CheckoutWizardForm2,
-    Step5,
-    Step6
+    CheckoutWizardValidation,
+    CheckoutSuccess
   },
   props: ['course', 'session', 'participantsNb'],
   data() {
@@ -118,7 +117,7 @@ export default {
     course: {
       immediate: true,
       handler(val) {
-        this.activeStep = 'insurance'
+        this.activeStep = 'booker'
       }
     },
     activeStep: {

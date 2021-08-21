@@ -235,7 +235,7 @@
 
 <script>
 export default {
-  name: 'SectionMap',
+  name: 'HomeMap',
   mounted() {
     $('.select-dropdown .cancel,.grid-list,.hoverable-div,.view-link,.centered-img').hide()
     $('.map-section .city-head .select-toggle').removeAttr('data-toggle')

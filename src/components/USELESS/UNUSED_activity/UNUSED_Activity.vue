@@ -25,7 +25,7 @@ import ActivitySection from '@/components/product/ActivitySection'
 import ActivityModal from '@/components/activity/ActivityModal'
 
 export default {
-  name: 'ProductHome',
+  name: 'Product',
   mounted() {
     $(function () {
       $('.select-place').select2({

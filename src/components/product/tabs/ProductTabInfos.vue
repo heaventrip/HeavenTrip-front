@@ -44,7 +44,7 @@
             <h5 class="content-head">Tu vas adorer :</h5>
             <ul class="list-unstyled text-uppercase content-list">
               <li v-for="willLove in course.willLoves" :key="willLove">
-                <a @click.prevent class="text-reset" style="cursor: default" href=""><i class="fas fa-plus mr-2"></i>{{ willLove.name }}</a>
+                <a @click.prevent class="text-reset" style="cursor: default" href=""><i class="fas fa-plus mr-2"></i>{{ willLove?.name }}</a>
               </li>
             </ul>
           </div>
@@ -100,12 +100,12 @@
         <div class="col-12 col-lg-6">
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
-              <InlineSvg v-if="course?.level.step" :src="require(`@/assets/svg/intensity-${course?.level.step}.svg`)" height="150px" />
+              <InlineSvg v-if="course?.level?.step" :src="require(`@/assets/svg/intensity-${course?.level?.step}.svg`)" height="150px" />
               <InlineSvg v-if="course?.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
             </div>
             <span class="ml-4">
               <h6 class="level-text">
-                Niveau : <strong class="ml-2">{{ course?.level.step }}</strong
+                Niveau : <strong class="ml-2">{{ course?.level?.step }}</strong
                 >&nbsp;/4
               </h6>
               <h6 class="status-text mb-0">{{ course?.level.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
@@ -124,14 +124,14 @@
                 <strong class="ml-2">{{ course?.intensity.step }}</strong
                 >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course?.intensity.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
+              <h6 class="status-text mb-0">{{ course?.intensity?.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="linear-block">
+  <div class="linear-block mb-0">
     <div class="head-block subhead-block d-flex">
       <div class="">
         <p class="sub-heading mb-2">Bon à savoir…</p>
@@ -143,27 +143,18 @@
         <div class="col-12 col-lg-6">
           <div class="content-head equip mb-2">
             <i class="far fa-check-circle mr-2 h5 align-text-top mb-0"></i>
-            <span class="d-inline-block" style="vertical-align: baseline">EST INCLUS :</span>
+            <span class="d-inline-block" style="vertical-align: baseline">Est inclus :</span>
           </div>
           <ul class="list-unstyled content-list equip mb-4">
             <li v-for="includedService in course.includedServices" :key="includedService">
               <a class="text-reset" href="#">{{ includedService.title }}</a>
             </li>
           </ul>
-          <div class="content-head equip mb-2">
-            <i class="far fa-dot-circle mr-2 mr-2 h5 align-text-top mb-0"></i>
-            <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
-          </div>
-          <ul class="list-unstyled content-list equip mb-0">
-            <li v-for="extraService in course.extraServices" :key="extraService">
-              <a class="text-reset" href="#">{{ extraService.title }}</a>
-            </li>
-          </ul>
         </div>
         <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 6rem">
           <div class="content-head equip mb-2">
             <i class="far fa-times-circle mr-2 h5 align-text-top mb-0"></i>
-            <span class="d-inline-block" style="vertical-align: baseline">Non INCLUS :</span>
+            <span class="d-inline-block" style="vertical-align: baseline">Non inclus :</span>
           </div>
           <ul class="list-unstyled content-list equip mb-0">
             <li v-for="(excludedService, index) in course.excludedServices" :key="excludedService">
@@ -173,6 +164,17 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="linear-block mt-2">
+    <div class="content-head equip mb-2">
+      <i class="far fa-dot-circle mr-2 mr-2 h5 align-text-top mb-0"></i>
+      <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
+    </div>
+    <ul class="list-unstyled content-list equip mb-0">
+      <li v-for="extraService in course.extraServices" :key="extraService">
+        <a class="text-reset" href="#">{{ extraService.title }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 <script>

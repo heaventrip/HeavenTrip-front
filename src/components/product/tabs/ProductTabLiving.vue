@@ -108,11 +108,12 @@
     </div>
   </div>
   <swiper :slidesPerView="3" :spaceBetween="1" :loop="true" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }">
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7KLjC3NaiA4RjXxEoifCQZ/2de2549c4677ac776dfd21d9a8a0d49f/kitesurf-elgouna-cook2.jpg" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7jcPbN1eXNsFxWfEkwKlUP/5f6367376f5b06a26473e5822ea4ba87/kitesurf-elgouna-groupe2" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg" @click="showImg(0)" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" @click="showImg(1)" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7KLjC3NaiA4RjXxEoifCQZ/2de2549c4677ac776dfd21d9a8a0d49f/kitesurf-elgouna-cook2.jpg" @click="showImg(2)" /></swiper-slide>
+    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7jcPbN1eXNsFxWfEkwKlUP/5f6367376f5b06a26473e5822ea4ba87/kitesurf-elgouna-groupe2.jpg" @click="showImg(3)" /></swiper-slide>
   </swiper>
+  <vue-easy-lightbox style="z-index: 2" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
   <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   <div class="linear-block mb-0 p-0" style="background-color: rgb(252, 252, 252); box-shadow: none">
     <div class="card border-0 rounded-0">
@@ -149,7 +150,8 @@
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column" style="margin-left: 1px">
+    <!-- NOTE functional tabs but disabled for now -->
+    <div v-if="false" class="d-flex flex-column" style="margin-left: 1px">
       <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #ebebeb">
         <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/bowl2.svg')" :fill="[tab === 1 ? '#fff' : '#292f33']" />
       </div>
@@ -178,6 +180,7 @@
 </template>
 
 <script>
+import VueEasyLightbox from 'vue-easy-lightbox'
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
@@ -186,11 +189,20 @@ export default {
   name: 'ProductTabLiving',
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    VueEasyLightbox
   },
   props: ['course'],
   data() {
     return {
+      index: 0,
+      visible: false,
+      imgs: [
+        'https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/7KLjC3NaiA4RjXxEoifCQZ/2de2549c4677ac776dfd21d9a8a0d49f/kitesurf-elgouna-cook2.jpg',
+        'https://images.ctfassets.net/8dtxc3nuj0tn/7jcPbN1eXNsFxWfEkwKlUP/5f6367376f5b06a26473e5822ea4ba87/kitesurf-elgouna-groupe2.jpg'
+      ],
       activeRoomTab: '',
       tab: 1,
       currentPaginationStyle: `
@@ -218,6 +230,10 @@ export default {
       return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
       <span style="${this.currentPaginationStyle}">.</span>
       <sup><span style="${this.totalPaginationStyle}" class="${totalClass}"></span></sup>`
+    },
+    showImg(index) {
+      this.index = index
+      this.visible = true
     }
   }
 }

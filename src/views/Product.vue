@@ -6,8 +6,8 @@
       <div v-else>
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
-        <ProductContent :showed-sessions="showSessions" :selected-session="selectedSession" :course="course" ref="productContent" />
-        <ProductFooter :course="course" @selected-session="selectedSession = true" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
+        <ProductContent :showed-sessions="showSessions" :selected-session="selectedSession" :course="course" @active-lightbox="setLightboxStatus" ref="productContent" />
+        <ProductFooter v-if="!activeLightbox" :course="course" @selected-session="selectedSession = true" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
       </div>
     </transition>
   </div>
@@ -25,7 +25,7 @@ import gsap from 'gsap'
 // import ProductModal from '@/components/product/ProductModal.vue'
 
 export default {
-  name: 'ProductHome',
+  name: 'Product',
   components: {
     ProductHeader,
     ProductContent,
@@ -37,16 +37,20 @@ export default {
   props: ['id'],
   data() {
     return {
+      activeLightbox: false,
       selectedSession: false,
       clickedFromHeader: false,
       showSessions: false,
-      course: {},
+      course: null,
       header: true,
       showLoginModal: false,
       initialNavHeight: 100
     }
   },
   methods: {
+    setLightboxStatus(val) {
+      this.activeLightbox = val
+    },
     handleClickedTab(tab) {
       this.clickedTab = tab
       this.header = false // go to content
@@ -154,10 +158,10 @@ export default {
       }
     }
   },
-  async created() {
-    await this.$axios.get(`/courses/${this.id}`).then((res) => {
+  created() {
+    this.$axios.get(`/courses/${this.id}`).then((res) => {
       this.course = res.data.course
-      this.loaded = true
+      this.$root.initialLoading = false
     })
   },
   mounted() {

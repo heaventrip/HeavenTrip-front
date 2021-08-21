@@ -6,8 +6,8 @@
       <div class="div-group">
         <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn profile-gender-btn rounded-0 btn-lg px-4"> <input type="radio" v-model="gender" name="gender" value="female" /> Femme </label>
-          <label class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn"> <input type="radio" v-model="gender" name="gender" value="male" /> Homme </label>
+          <label @click="setGender('female')" :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4"> <input type="radio" name="gender" /> Femme </label>
+          <label @click="setGender('male')" :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn"> <input type="radio" name="gender" /> Homme </label>
         </div>
       </div>
     </div>
@@ -17,26 +17,56 @@
       </div>
       <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="col-4 d-flex flex-column justify-content-center text-right mr-1">
+        <div class="d-flex flex-column justify-content-center text-right mr-1">
           <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
         </div>
-        <my-upload
-          :no-square="true"
-          :langExt="uploadLang"
-          field="img"
-          @src-file-Set="fileSet"
-          @crop-success="cropSuccess"
-          @crop-upload-success="cropUploadSuccess"
-          @crop-upload-fail="cropUploadFail"
-          url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
-          v-model="show"
-          :width="300"
-          :height="300"
-          img-format="jpg"
-        ></my-upload>
-        <!-- <div class="ml-2" style="margin-right: auto">
+        <div class="upload-container">
+          <my-upload
+            :no-square="true"
+            :langExt="uploadLang"
+            field="img"
+            @src-file-Set="fileSet"
+            @crop-success="cropSuccess"
+            @crop-upload-success="cropUploadSuccess"
+            @crop-upload-fail="cropUploadFail"
+            url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+            v-model="show"
+            :width="300"
+            :height="300"
+            img-format="jpg"
+          ></my-upload>
+        </div>
+        <div class="principal-img">
+          <img v-if="imgDataUrl" :src="imgDataUrl" />
+          <svg class="svg-avatar" v-if="!imgDataUrl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.333 152.34">
+            <path
+              id="Tracé_5342"
+              data-name="Tracé 5342"
+              d="M76.167,152.34a76.162,76.162,0,0,0,12.855-1.166,43.914,43.914,0,0,1,16.311-72.408,30.593,30.593,0,0,0,1.529-4.658c1.57-6.357,1.154-11.941-.943-12.463a1.317,1.317,0,0,0-.621.029c.475-5.139.328-10-1.131-12.111-4.547-6.5-4.933-12.24-11.823-14.718-6.873-2.484,1.4-11.408,1.4-11.408s-29.435.826-35.71,11.4c-3.685,6.181-5.466,8.22-10.007,14.724-1.465,2.115-1.506,6.99-.879,12.123a1.473,1.473,0,0,0-.762-.035c-2.1.521-2.525,6.105-.955,12.463,1.488,5.994,4.2,10.47,6.246,10.523,1.266,7.06,3.34,13.576,6.9,17.173,8.788,8.894-8.788,17.789-8.788,17.789s-5.49,2.314-6.105,2.566c-3.867,1.67-9.093,4-14.155,6.474A70.264,70.264,0,1,1,146.474,76.17a69.1,69.1,0,0,1-.545,8.437,44.928,44.928,0,0,1,5.238,4.418,76.127,76.127,0,1,0-75,63.315Z"
+              fill="#fff"
+            />
+          </svg>
+          <svg class="svg-plus" v-if="!imgDataUrl" xmlns="http://www.w3.org/2000/svg" width="33.773" height="33.773" viewBox="0 0 33.773 33.773">
+            <path
+              id="Tracé_5887"
+              data-name="Tracé 5887"
+              d="M66.681,50.294h-14.2v-14.2a1.092,1.092,0,0,0-2.185,0v14.2h-14.2a1.092,1.092,0,0,0,0,2.185h14.2v14.2a1.092,1.092,0,1,0,2.185,0v-14.2h14.2a1.092,1.092,0,1,0,0-2.185Z"
+              transform="translate(-34.5 -34.5)"
+              fill="#fff"
+              stroke="#fff"
+              stroke-width="1"
+            />
+          </svg>
+        </div>
+        <div class="advises-avatar">
+          <img src="@/assets/images/ui_faces/4.jpg" />
+          <p class="upload-text">Cadrage conseillé</p>
+        </div>
+      </div>
+      <label v-if="showAvatarValidationButton" @click="validateTheAvatar()" class="btn avatar-validation-btn rounded-0 btn-lg px-4"> Valider ma photo de profil </label>
+      <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">
                         <g id="Groupe_16781" data-name="Groupe 16781" transform="translate(0 0)">
@@ -88,17 +118,23 @@
                     <img :src="require('@/assets/images/avatar_example.png')" />
                     <p class="info-text-small mb-0 mt-1 pb-0">Cadrage conseillé</p>
                   </div> -->
-      </div>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
-      <div class="descr-text">Ultra rapide, une petite bio, tes passions, un proverbe préféré ? C’est informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton espace Trippers.</div>
-      <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
+      <div class="descr-text">Ultra rapide, une petite bio, tes passions, un proverbe préféré ? Ces informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton espace Trippers.</div>
+      <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form>
         <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Tu peux taper ton texte ici..."></textarea>
-        <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="activeTab = 'login'" />
+        <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="validateTheInscription()" />
       </form>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh">
+      <div class="descr-text">Un e-mail de confirmation vous a été envoyé a l'adresse (mail du user), merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur Heaven Trip. A tout de suite !</div>
+      <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
+      <form>
+        <Button text="RENVOYER LA CONFIRMATION DE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation()" />
+      </form>
+    </div>
+    <!--<div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh">
       <div class="d-flex flex-column justify-content-center align-items-center mt-4">
         <InlineSvg :src="require('@/assets/svg/circle-mic.svg')" />
         <h6 class="text-uppercase text-white font-weight-normal text-center">
@@ -106,8 +142,8 @@
           <div class="text--pink letter-space" style="font-size: 1.5rem; font-weight: 600">Compte en cours de création...</div>
         </h6>
       </div>
-      <!-- <button @click.prevent="$parent.$parent.showModal = false" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button> -->
-    </div>
+      <button @click.prevent="$parent.$parent.showModal = false" class="btn btn-danger border-0 rounded-0 modal-btn btn-block text-uppercase mt-5">Fermer</button>
+    </div>-->
   </div>
 </template>
 
@@ -136,7 +172,7 @@ export default {
           off: 'Annuler',
           close: 'Fermer',
           back: 'Retour',
-          save: 'Envoyer'
+          save: 'Valider'
         },
         error: {
           onlyImg: 'Uniquement des images',
@@ -144,9 +180,31 @@ export default {
           lowestPx: "L'image est trop petite"
         }
       },
+
+      //authorize : access authorized, the user can access the step
+      //valid : the step is validated, the user can go to the next step
+      stepper: {
+        gender: {
+          authorize: true,
+          valid: false
+        },
+        avatar: {
+          authorize: false,
+          valid: false
+        },
+        bio: {
+          authorize: false,
+          valid: false
+        },
+        success: {
+          authorize: false,
+          valid: false
+        }
+      },
       gender: '',
       description: '',
       show: true,
+      showAvatarValidationButton: false,
       imgDataUrl: '',
       activeInfoTabs: ['gender', 'avatar', 'bio', 'success'],
       activeStep: 0
@@ -168,12 +226,34 @@ export default {
       this.$emit('changed-tab', this.activeInfoTabs[this.activeStep])
     },
     gender() {
+      this.stepper.avatar.authorize = true
       this.activeStep++
     }
   },
   methods: {
     toggleShow() {
       this.show = !this.show
+    },
+    setGender(val) {
+      this.gender = val
+      this.stepper.gender.valid = true
+      this.$emit('gender-is-valided')
+    },
+    validateTheAvatar() {
+      this.stepper.avatar.valid = true
+      this.stepper.bio.authorize = true
+      this.$emit('avatar-is-valided')
+      this.activeStep++
+    },
+    validateTheInscription() {
+      this.activeTab = 'login'
+      this.stepper.bio.valid = true
+      this.stepper.success.authorize = true
+      this.$emit('success')
+      this.activeStep++
+    },
+    resendEmailConfirmation() {
+      //todo: resend email confirmation
     },
     fileSet() {
       this.$nextTick(() => {
@@ -191,7 +271,7 @@ export default {
      */
     cropSuccess(imgDataUrl, field) {
       console.log('-------- crop success --------')
-
+      this.showAvatarValidationButton = false
       /**
        * upload success
        *
@@ -201,7 +281,9 @@ export default {
     },
     cropUploadSuccess(jsonData, field) {
       console.log('-------- upload success --------')
+      this.showAvatarValidationButton = true
       localStorage.setItem('user.avatarId', jsonData.upload.public_id)
+      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${localStorage['user.avatarId']}.jpg`
       this.$parent.$forceUpdate()
     },
     /**
@@ -239,10 +321,58 @@ export default {
 .bttn--white:hover {
   background-color: #d82558;
 }
+.svg-plus,
+.svg-avatar {
+  position: absolute;
+  right: 0px;
+}
+.svg-plus {
+  margin-top: 115px;
+  margin-right: 20px;
+  width: 37px;
+  height: 37px;
+}
+.btn-avatar-validation {
+  width: 230px;
+  position: absolute;
+  margin-top: 391px;
+}
+.principal-img {
+  height: 170px;
+  width: 170px;
+  border-radius: 100%;
+  position: relative;
+  margin-right: 80px;
+}
+.principal-img img {
+  width: inherit;
+  height: inherit;
+  border-radius: 100%;
+}
+.advises-avatar {
+  padding-left: 40px;
+  border-left: 1px solid #54595c;
+}
+.advises-avatar p {
+  margin: 0px;
+  margin-top: 3px;
+}
+.advises-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.separator {
+  margin-bottom: 90px;
+}
 .info-textarea {
+  height: 130px;
+  padding-left: 25px;
+  padding-top: 18px;
+  margin-bottom: 50px;
   background: #292f33;
   color: #ebebeb;
-  border: 1px solid #ebebeb;
+  border: 1px solid #ffffff33;
 }
 .descr-text {
   font-family: Muli, sans-serif;
@@ -253,10 +383,29 @@ export default {
 .info-text-small {
   white-space: nowrap;
 }
+.avatar-validation-btn {
+  transition: all 0.3s ease;
+  color: #292f33;
+  margin: initial;
+  margin-left: 314px;
+  margin-top: 58px;
+  width: 285px;
+  background-color: white;
+}
+.avatar-validation-btn:hover,
+.avatar-validation-btn.active {
+  border: 1px solid white;
+  background-color: #292f33;
+  color: white;
+}
 .profile-gender-btn {
   border: 1px solid white;
   transition: all 0.3s ease;
   color: white;
+}
+.profile-gender-btn-selected {
+  background-color: white;
+  color: #292f33;
 }
 .profile-gender-btn:hover,
 .profile-gender-btn.active {

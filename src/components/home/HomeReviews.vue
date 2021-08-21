@@ -1,5 +1,5 @@
 <template>
-  <div class="reviews-section d-flex justify-content-between align-items-center">
+  <div class="reviews-section d-flex justify-content-between align-items-center" v-if="reviews">
     <InlineSvg class="reviews__quote reviews__quote--right" :src="require('@/assets/svg/right-quote.svg')" opacity="0.1" />
     <div class="reviews__infos d-flex flex-column align-items-end ml-5 mr-auto">
       <span>Pour vous</span>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'SectionReviews',
+  name: 'HomeReviews',
   data() {
     return {
       reviews: [],
@@ -73,7 +73,7 @@ export default {
       this.activeReview = val[0]
     }
   },
-  async created() {
+  created() {
     this.$axios.get('/reviews').then((res) => (this.reviews = res.data.reviews))
   }
 }

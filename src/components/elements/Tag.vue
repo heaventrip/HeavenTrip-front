@@ -1,23 +1,13 @@
 <template>
-  <div class="d-flex align-items-center tag" :class="pColor">
-    <div class="tag__content">{{ pText }}</div>
+  <div class="d-flex align-items-center tag" :class="`tag--${color}`">
+    <div class="tag__content">{{ text }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Tag',
-  props: ['color', 'text'],
-  data() {
-    return {
-      pText: this.text
-    }
-  },
-  computed: {
-    pColor() {
-      return `tag--${this.color}`
-    }
-  }
+  props: ['color', 'text']
 }
 </script>
 
@@ -66,5 +56,11 @@ export default {
   /* position: relative;
   top: 50%;
   transform: translateY(-50%); */
+}
+@media (max-width: 1441px) {
+  .tag__content {
+    font-size: 0.73rem;
+    font-weight: 600;
+  }
 }
 </style>

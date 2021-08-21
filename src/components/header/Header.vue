@@ -1,39 +1,42 @@
 <template>
   <div
+    @mouseleave="leavedAllTabs()"
     class="header d-flex flex-column text-white"
     :class="{
       'header--home': currentRoute('Home'),
       'header-filter--home': !navIsActive && currentRoute('Home'),
       'header-filter--grey': activitiesIsActive || destinationsIsActive,
-      'header-filter--light': agencyIsActive,
-      'header--search': currentRoute('SearchHome'),
-      'header-filter--search': !navIsActive && currentRoute('SearchHome'),
-      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('SearchHome'),
-      'header-filter--search--light': agencyIsActive && currentRoute('SearchHome'),
-      'header--product': currentRoute('ProductHome'),
-      'header-filter--product': !navIsActive && currentRoute('ProductHome'),
-      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('ProductHome'),
-      'header-filter--product--light': agencyIsActive && currentRoute('ProductHome')
+      'header-filter--light': agencyIsActive || newsIsActive,
+      'header--search': currentRoute('Search'),
+      'header-filter--search': !navIsActive && currentRoute('Search'),
+      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Search'),
+      'header-filter--search--light': (agencyIsActive || newsIsActive) && currentRoute('Search'),
+      'header--product': currentRoute('Product'),
+      'header-filter--product': !navIsActive && currentRoute('Product'),
+      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Product'),
+      'header-filter--product--light': (agencyIsActive || newsIsActive) && currentRoute('Product')
     }"
   >
     <div
       class="header-bg-container"
       :class="{
         'header-bg-container--home': currentRoute('Home'),
-        'header-bg-container--search': currentRoute('SearchHome'),
-        'header-bg-container--product': currentRoute('ProductHome')
+        'header-bg-container--search': currentRoute('Search'),
+        'header-bg-container--product': currentRoute('Product')
       }"
     >
       <img src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
-    <ConnectionButtons />
+    <ConnectionButtons :nav-sticky="navSticky" @mouseover="leavedAllTabs()" />
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
-    <TheNav v-else @changed-tab="setActiveTab" />
-    <HomeHeaderInfos @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive" />
-    <ProductHeaderInfos v-else-if="currentRoute('ProductHome') && !navIsActive" ref="productHeaderInfos" :course="course" />
-    <SearchHeaderInfos v-else-if="currentRoute('SearchHome') && !navIsActive" />
-    <div class="search-div navbar-dark bg-white text-dark d-none">
+    <TheNav @leave-tabs="resetTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
+    <keep-alive>
+      <component :is="'HomeHeaderInfos'" @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive"></component>
+      <component :is="'ProductHeaderInfos'" v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course"></component>
+      <component :is="'SearchHeaderInfos'" v-else-if="currentRoute('Search') && !navIsActive"></component>
+    </keep-alive>
+    <!-- <div class="search-div navbar-dark bg-white text-dark d-none">
       <div class="header-block text-uppercase d-flex justify-content-between align-items-center text-white">
         <h3 class="search-head">MA RECHERCHE</h3>
         <button class="rounded-0 btn search-cancel" type="button">
@@ -87,10 +90,10 @@
         <p class="font-weight-bold">Slide droite vers la gauche avec un effet escalier (chaque ligne arrive en décalée) et une transition progressive sur l’opacité.</p>
         <p class="font-weight-bold">La validation d’un item fait office de validation Et permet de revenir à l’écran précédent.</p>
       </div>
-    </div>
-    <div class="pre-booking-footer sticky-bottom d-none d-lg-block" v-if="toggleSessions">
+    </div> -->
+    <!-- <div class="pre-booking-footer sticky-bottom d-none d-lg-block" v-if="toggleSessions">
       <SessionsMenu />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -101,7 +104,6 @@ import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeHeaderInfos from './HomeHeaderInfos.vue'
 import ProductHeaderInfos from '@/components/header/ProductHeaderInfos.vue'
 import SearchHeaderInfos from '@/components/header/SearchHeaderInfos.vue'
-import SessionsMenu from '@/components/SessionsMenu.vue'
 
 export default {
   name: 'Header',
@@ -111,8 +113,7 @@ export default {
     ConnectionButtons,
     HomeHeaderInfos,
     ProductHeaderInfos,
-    SearchHeaderInfos,
-    SessionsMenu
+    SearchHeaderInfos
   },
   props: ['course'],
   data() {
@@ -122,13 +123,15 @@ export default {
       toggleSessions: false,
       agencyIsActive: false,
       destinationsIsActive: false,
-      activitiesIsActive: false
+      activitiesIsActive: false,
+      newsIsActive: false,
+      modalBackgroundView: ''
     }
   },
   watch: {
+    // store background view when modal opens
     $route(to, from) {
-      console.log('to', to)
-      console.log('from', from)
+      if (to.name === 'Account') this.modalBackgroundView = from.name
     },
     navIsActive(newVal) {
       if (newVal === true) this.$emit('nav-is-active')
@@ -137,15 +140,20 @@ export default {
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
     }
   },
   methods: {
     currentRoute(route) {
-      return this.$route.name === route
+      if (this.$route.name === 'Account') return this.modalBackgroundView === route
+      else return this.$route.name === route
     },
     resetTabs() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
+    },
+    leavedAllTabs() {
+      this.resetTabs()
+      this.$refs.theNav.resetTabs()
     },
     // setNavStatus(status) {
     //   this.navIsActive = status
@@ -327,6 +335,6 @@ export default {
   height: 100vh;
 }
 .header-bg-container--search {
-  height: 100%;
+  height: 100vh;
 }
 </style>

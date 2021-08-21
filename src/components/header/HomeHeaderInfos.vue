@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex align-items-center align-items-lg-end w-100 mt-auto" style="padding: 0 130px">
-    <div class="content d-flex align-items-center justify-content-between w-100 mt-5 mt-lg-0">
+  <div class="activitie-card d-flex align-items-center align-items-lg-end w-100 mt-auto">
+    <div class="content d-flex align-items-center justify-content-between w-100 mt-5 mt-lg-0" v-if="featuredCourse">
       <div>
         <div style="width: 115%">
           <div class="top-block d-flex align-items-center" style="width: 100%">
@@ -16,7 +16,7 @@
             <!-- <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="top-block__svg d-inline-block" style="max-width: 9rem" /> -->
             <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
             <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
-            <div style="width: 90%; margin-left: 2.5rem; position: relative; top: 1px; padding: 1.4rem 0; border-bottom: 1px solid rgba(250, 250, 250, 0.3)">
+            <div class="title-activities">
               <h1 class="headsport heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1>
               <h5 class="header-infos__sub-title d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
             </div>
@@ -39,7 +39,7 @@
       </div>
       <div class="row no-gutters">
         <div class="col-4">
-          <Button @click="$router.push({ name: 'ProductHome', params: { id: featuredCourse.id, showDateBtn: true } })" text="voir les <br /> dates" color="transparent" size=".8rem" />
+          <Button @click="$router.push({ name: 'Product', params: { id: featuredCourse.id, showDateBtn: true } })" text="voir les <br /> dates" color="transparent" size=".8rem" />
           <!-- NOTE old version toggling session menu -->
           <!-- <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" /> -->
         </div>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="col-6 ml-auto">
-          <router-link :to="{ name: 'ProductHome', params: { id: featuredCourse.id } }">
+          <router-link :to="{ name: 'Product', params: { id: featuredCourse.id } }">
             <div class="bttn bttn--pink">
               <div class="bttn__text">Détails<i class="fa fa-chevron-right ml-3"></i></div>
             </div>
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       toggledSessions: false,
-      featuredCourse: {},
+      featuredCourse: null,
       avatarKeys: []
     }
   },
@@ -105,15 +105,24 @@ export default {
       this.$emit('toggled-sessions')
     }
   },
-  async created() {
-    await this.$axios.get('/courses', { params: { featured: true } }).then((res) => {
+  created() {
+    this.$axios.get('/courses', { params: { featured: true } }).then((res) => {
       this.featuredCourse = res.data.course
+      this.$root.initialLoading = false
     })
   }
 }
 </script>
 
 <style scoped>
+.title-activities {
+  width: 90%;
+  margin-left: 2.5rem;
+  position: relative;
+  top: 1px;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.3);
+}
 .text--smaller {
   font-size: 0.9rem;
 }
@@ -125,6 +134,7 @@ export default {
   font-size: 1.4rem;
   font-weight: 400;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .headsport {
   font-weight: 500 !important;
@@ -249,5 +259,45 @@ export default {
 }
 .bottom-left-text span:last-child {
   font-weight: bold;
+}
+.activitie-card {
+  padding: 0 130px;
+}
+@media (max-width: 1441px) {
+  .activitie-card {
+    padding: 0 70px;
+  }
+  .product-infos__tag {
+    margin-right: 1.9rem;
+  }
+  .top-block {
+    width: 90%;
+    margin-bottom: 0rem;
+  }
+  .top-block > svg:first-child {
+    width: 21%;
+  }
+  .bottom-left-text {
+    font-size: 0.7rem;
+  }
+  .headsport {
+    font-size: 2.1rem !important;
+    letter-spacing: 0.03rem !important;
+  }
+  .title-activities {
+    margin-left: 1.5rem;
+  }
+  .header-infos__sub-title {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.03rem;
+  }
+  .block--white,
+  .bttn--transparent {
+    height: 65px !important;
+  }
+  .bttn--pink {
+    height: 55px;
+  }
 }
 </style>

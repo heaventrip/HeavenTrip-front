@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center pr-0 pl-5" :class="[activitiesIsActive || destinationsIsActive ? 'navbar-filter--grey' : '', agencyIsActive ? 'navbar-filter--white' : '']">
-    <div class="" style="margin-right: 5rem">
+    <div @click="onClickNavLogo()" class="navbar-logo" style="margin-right: 5rem">
       <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="#292f33" />
       <InlineSvg v-else :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="white" />
     </div>
@@ -39,12 +39,12 @@
           <a @click="onClicked('agency')" class="nav-link border-0 nav__item" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active border-0 nav__item" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('news')" class="nav-link border-0 nav__item" id="pills-news-tab" data-toggle="pill" href="#pills-news"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
         </li>
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
         <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button> -->
-      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content; margin-top: 2rem; border-bottom: none !important">
+      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content; border-bottom: none !important">
         <li class="nav-item" role="presentation">
           <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer border-0">{{ sportCategories[0]?.name }}</a>
         </li>
@@ -93,6 +93,13 @@
             <DestinationsTab />
           </div>
         </transition>
+        <transition name="nav-fade">
+          <div v-show="newsIsActive" id="pills-news" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+            <keep-alive>
+              <component :is="'HomeArticles'"></component>
+            </keep-alive>
+          </div>
+        </transition>
       </div>
     </div>
     <div class="">
@@ -106,6 +113,7 @@ import AgencyTab from '@/components/nav/AgencyTab.vue'
 import ActivitiesTab from '@/components/nav/ActivitiesTab.vue'
 import DestinationsTab from '@/components/nav/DestinationsTab.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
+import HomeArticles from '@/components/home/HomeArticles.vue'
 import gsap from 'gsap'
 
 export default {
@@ -115,7 +123,8 @@ export default {
     AgencyTab,
     ActivitiesTab,
     DestinationsTab,
-    ConnectionButtons
+    ConnectionButtons,
+    HomeArticles
   },
   data() {
     return {
@@ -123,6 +132,7 @@ export default {
       activitiesIsActive: false,
       destinationsIsActive: false,
       agencyIsActive: false,
+      newsIsActive: false,
       sportCategories: []
       // bgFilter: {
       //   light: 'opacity(0.4)',
@@ -132,7 +142,7 @@ export default {
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
     }
   },
   watch: {
@@ -168,14 +178,23 @@ export default {
           el.style.color = '#fff'
         })
       }
+    },
+    newsIsActive: function (newVal) {
+      if (newVal === true) {
+        this.$emit('changed-tab', 'news')
+        // this.changeBgFilter(this.bgFilter.dark)
+      }
     }
   },
   methods: {
+    onClickNavLogo() {
+      this.$router.push('/')
+    },
     setCateg(categ) {
       this.sportCategories = categ
     },
     dismissNav() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => {
         this.$data[el] = false
         this.$parent[el] = false
       })
@@ -215,7 +234,7 @@ export default {
       }
 
       // only show the one clicked
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
       this.$data[varName] = true
     }
   },
@@ -265,6 +284,9 @@ export default {
   height: 70px; /* easier to manipulate with fixed height */
   z-index: 11;
   background-color: #292f33;
+}
+.navbar-logo {
+  cursor: pointer;
 }
 .navbar-filter--grey::after {
   content: '';

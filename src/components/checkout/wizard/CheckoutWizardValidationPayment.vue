@@ -92,7 +92,7 @@
 import { loadStripe } from '@stripe/stripe-js'
 
 export default {
-  name: 'CheckoutWizardPayment',
+  name: 'CheckoutWizardValidationPayment',
   props: ['course'],
   data() {
     return {

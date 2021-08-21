@@ -1,30 +1,30 @@
 <template>
   <div>
     <main>
-      <SectionCarousel />
-      <SectionMap />
-      <SectionReviews />
-      <SectionMiddle />
-      <SectionBottom />
+      <HomeCarousel />
+      <HomeMap />
+      <HomeReviews />
+      <HomeHighlight />
+      <HomeArticles />
     </main>
   </div>
 </template>
 
 <script>
-import SectionCarousel from './SectionCarousel.vue'
-import SectionMap from './SectionMap.vue'
-import SectionMiddle from './SectionMiddle.vue'
-import SectionReviews from './SectionReviews.vue'
-import SectionBottom from './SectionBottom.vue'
+import HomeCarousel from '../home/HomeCarousel.vue'
+import HomeMap from '../home/HomeMap.vue'
+import HomeHighlight from '../home/HomeHighlight.vue'
+import HomeReviews from '../home/HomeReviews.vue'
+import HomeArticles from '../home/HomeArticles.vue'
 
 export default {
   name: 'MainSection',
   components: {
-    SectionCarousel,
-    SectionMap,
-    SectionMiddle,
-    SectionReviews,
-    SectionBottom
+    HomeCarousel,
+    HomeMap,
+    HomeHighlight,
+    HomeReviews,
+    HomeArticles
   },
   methods: {
     jquery() {
@@ -94,30 +94,30 @@ export default {
       //     }
       //   ]
       // })
-      var width = $(window).width()
-      if (width >= 1100) {
-        // $('.customers-testimonials')
-        //   .on('mouseenter', '.shadow-effect', function () {
-        //     $(this).parent().animate({ width: '+=50px' })
-        //     $(this).parent().find('.content').addClass('hover')
-        //     $(this).parent().find('.hoverable-div').slideDown()
-        //     $(this).parent().find('.trip-link').animate({ bottom: '+=45px' })
-        //   })
-        //   .on('mouseleave', '.shadow-effect', function () {
-        //     $(this).parent().animate({ width: '-=50px' })
-        //     $(this).parent().find('.content').removeClass('hover')
-        //     $(this).parent().find('.hoverable-div').slideUp()
-        //     $(this).parent().find('.trip-link').animate({ bottom: '-=45px' })
-        //   })
-      }
-      if (width >= 792) {
-        $('#header_nav.navbar-nav .nav-link').on('click', function (e) {
-          e.preventDefault()
-          $('.home-wrapper').removeClass('active')
-          var wrapper_id = $(this).attr('href').split('=')
-          $('.home-wrapper' + wrapper_id + '').addClass('active')
-        })
-      }
+      // var width = $(window).width()
+      // if (width >= 1100) {
+      // $('.customers-testimonials')
+      //   .on('mouseenter', '.shadow-effect', function () {
+      //     $(this).parent().animate({ width: '+=50px' })
+      //     $(this).parent().find('.content').addClass('hover')
+      //     $(this).parent().find('.hoverable-div').slideDown()
+      //     $(this).parent().find('.trip-link').animate({ bottom: '+=45px' })
+      //   })
+      //   .on('mouseleave', '.shadow-effect', function () {
+      //     $(this).parent().animate({ width: '-=50px' })
+      //     $(this).parent().find('.content').removeClass('hover')
+      //     $(this).parent().find('.hoverable-div').slideUp()
+      //     $(this).parent().find('.trip-link').animate({ bottom: '-=45px' })
+      //   })
+      // }
+      // if (width >= 792) {
+      //   $('#header_nav.navbar-nav .nav-link').on('click', function (e) {
+      //     e.preventDefault()
+      //     $('.home-wrapper').removeClass('active')
+      //     var wrapper_id = $(this).attr('href').split('=')
+      //     $('.home-wrapper' + wrapper_id + '').addClass('active')
+      //   })
+      // }
       // NOTE MOBILE
       //
       // if (width < 692) {
@@ -140,7 +140,6 @@ export default {
       //     var ag_forward_id = $(this).attr('href').split('=')
       //     $('.main-wrapper .tab-pane' + ag_forward_id + '').addClass('active')
       //     $('#agence_pills').hide()
-
       //     if ($('.inner-tab-content.tab-content>.tab-pane').hasClass('show')) {
       //       $('.inner-tab-content.tab-content>.tab-pane.show').addClass('active')
       //     }

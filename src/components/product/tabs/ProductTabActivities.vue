@@ -49,15 +49,15 @@
       </div>
     </div>
   </div>
-  <div class="linear-block p-0 mt-2">
-    <div class="card-body d-flex">
-      <div class="activity-word__text">
-        <div class="head-block subhead-block d-flex">
-          <div class="">
-            <p class="sub-heading mb-2">Activités & Spot</p>
-            <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
-          </div>
+  <div class="linear-block">
+    <div class="card border-0 rounded-0">
+      <div class="head-block subhead-block d-flex">
+        <div class="">
+          <p class="sub-heading mb-2">Activités & Spot</p>
+          <h4 class="heading mb-0">Activité principale</h4>
         </div>
+      </div>
+      <div class="card-body">
         <div v-if="course.multisport" class="w-100 pb-3">
           <div v-for="sport in course.sports" :key="sport" class="head text-uppercase py-2 d-inline-block mr-5" style="font-weight: 500; cursor: pointer" :class="{ 'sport-tab--active': activeSportTab === sport }" @mouseover="activeSportTab = sport">
             {{ sport.name }}
@@ -67,73 +67,23 @@
         <transition name="fade">
           <p :key="activeSportTab" class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">{{ activeSportTab?.description || course.sports[0].description }}</p>
         </transition>
-      </div>
-      <div class="activity-word__list box m-0">
-        <transition name="fade">
-          <!-- <InlineSvg class="img_icon w-100 ml-auto mb-3" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" fill="white" height="40" /> -->
-          <ul :key="activeSportTab" class="list-unstyled list mb-0">
-            <li v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo" style="border-bottom: none; padding-bottom: 0">
-              <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
-                {{ sportInfo.title }}
-                <strong class="text-white ml-2">{{ sportInfo.description }}</strong>
-              </a>
-            </li>
-          </ul>
-          <!-- <a href="#" class="corner-link">+</a> -->
-        </transition>
-      </div>
-    </div>
-  </div>
-  <!-- <div v-if="false" class="linear-block pb-0">
-    <div class="head-block subhead-block d-flex">
-      <div class="">
-        <p class="sub-heading mb-2">Activités & Spot</p>
-        <h4 class="heading mb-0 text-uppercase">Activité principale</h4>
-      </div>
-      <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto">
-        <InlineSvg class="img_icon" v-if="course.sports" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" />
-      </span>
-    </div>
-    <div class="d-flex align-items-center" style="margin-left: -2rem; margin-right: -2rem">
-      <ul v-if="course.multisport" class="nav nav-pills text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav m-0 w-100" id="pills-tab" role="tablist">
-        <li v-for="(sport, index) in course.sports" :key="sport" class="nav-item fg-1" role="presentation">
-          <a class="nav-link active m-0" :id="`pills-act${index}-tab`" data-toggle="pill" :href="`#pills-act${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ sport.name }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="tab-content" style="margin-left: -2rem; margin-right: -2rem">
-      <div v-for="(sport, index) in course.sports" :key="sport" class="tab-pane fade show active" :id="`pills-act${index}`" role="tabpanel" :aria-labelledby="`pills-act${index}-tab`">
-        <div class="card-body">
-          <div class="pri-activity-block">
-            <div class="box bg-dark m-0">
-              <h5 class="head text-uppercase mb-0 d-inline-block">
-                <InlineSvg class="head-pin-icon d-inline-block" v-if="course.sports" :src="require(`@/assets/svg/${sport.picto}.svg`)" height="30" /><i class="fas fa-caret-right mx-3 pr-1 h4 mb-0"></i>
-                {{ sport.name }}
-              </h5>
-              <ul class="list-unstyled list mt-3 mb-0">
-                <li v-for="sportInfo in sport.sportInfos" :key="sportInfo">
-                  <a href="#" @click.prevent class="text-decoration-none">
-                    {{ sportInfo.title }}
-                    <strong class="text-white ml-2">{{ sportInfo.description }}</strong>
+        <div class="row">
+          <div class="col-9 col-lg-12 mx-auto">
+            <div class="like-div white">
+              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
+                <li class="fg-1" v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo">
+                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
+                    {{ sportInfo.title }} :
+                    <strong class="text-dark ml-2">{{ sportInfo.description }}</strong>
                   </a>
                 </li>
               </ul>
-            </div>
-            <div class="brown-div">
-              <h6 class="head text-uppercase text-white py-2 mb-1" style="width: max-content; margin-left: auto; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-              <p class="content pt-3" style="border-top: 1px dashed #ffffff66">
-                {{ course?.staffs?.find((staff) => staff.role === 'Guide').description }}
-              </p>
-              <h6 class="author mb-0">{{ course?.staffs?.find((staff) => staff.role === 'Guide').firstName }} {{ course?.staffs?.find((staff) => staff.role === 'Guide').firstName }}</h6>
-            </div>
-            <div class="img-block">
-              <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
   <div class="linear-block py-0" style="background-color: #fcfcfc; box-shadow: none">
     <div class="head-block subhead-block d-flex">
       <div class="">

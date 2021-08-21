@@ -15,7 +15,7 @@
     "@vuelidate/validators": "^2.0.0-alpha.18",
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.21.2",
-    "contentful": "^8.3.7",
+    "contentful": "^8.4.2",
     "contentful-management": "^7.25.1",
     "core-js": "^3.6.5",
     "gsap": "file:gsap-bonus.tgz",
@@ -31,7 +31,7 @@
     "vue-inline-svg": "^3.0.0-beta.3",
     "vue-router": "^4.0.0-0",
     "vue-window-size": "^1.1.2",
-    "vue3-carousel": "^0.1.21",
+    "vue3-carousel": "^0.1.25",
     "vue3-country-region-select": "^1.0.0",
     "vue3-perfect-scrollbar": "^1.5.5"
   },

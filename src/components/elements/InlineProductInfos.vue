@@ -1,8 +1,8 @@
 <template>
-  <div class="block d-flex align-items-center text-uppercase" :class="[pJustifyContent || 'justify-content-between', pClass]" :style="[borderTopStyle, borderBottomStyle, paddingYStyle, widthStyle]">
-    <div class="block__item" v-for="(info, index) in pInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === pInfos.length - 1 ? '' : paddingRightStyle]">
-      <InlineSvg v-if="icons" :src="require(`@/assets/svg/${icons[index]}.svg`)" :fill="pColor" />
-      <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle, { color: pColor }, fontWeightStyle]">{{ info }}</span>
+  <div class="block d-flex align-items-center text-uppercase" :class="[justifyContent || 'justify-content-between', extraClass]" :style="[borderTopStyle, borderBottomStyle, widthStyle]">
+    <div class="block__item" v-for="(info, index) in filteredInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === filteredInfos.length - 1 ? '' : paddingRightStyle]">
+      <InlineSvg v-if="icons" :src="require(`@/assets/svg/${icons[index]}.svg`)" :fill="color" />
+      <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle, fontWeightStyle, { color: color }]">{{ info }}</span>
     </div>
   </div>
 </template>
@@ -10,17 +10,9 @@
 <script>
 export default {
   name: 'InlineProductInfos',
-  props: ['font-weight', 'infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icon', 'icons', 'icon-margin', 'width', 'divider', 'justify-content', 'letter-spacing'],
-  data() {
-    return {
-      pIcon: this.icon,
-      pColor: this.color,
-      pJustifyContent: this.justifyContent,
-      pClass: this.extraClass
-    }
-  },
+  props: ['font-weight', 'infos', 'border-top', 'border-bottom', 'pt', 'pb', 'pr', 'pl', 'extra-class', 'color', 'icons', 'icon-margin', 'width', 'divider', 'justify-content', 'letter-spacing'],
   computed: {
-    pInfos() {
+    filteredInfos() {
       return this.infos.filter((val) => val) // remove undefined values
     },
     dividerStyle() {
@@ -74,6 +66,7 @@ export default {
   line-height: 2;
   width: 100%;
   height: max-content;
+  padding-bottom: 1.5rem;
 }
 .block__text-content {
   margin-left: 0.6rem;
@@ -81,5 +74,16 @@ export default {
   vertical-align: middle;
   font-size: 0.8rem;
   letter-spacing: 0.08rem;
+}
+@media (max-width: 1441px) {
+  .block {
+    width: 72%;
+    padding-bottom: 1.1rem;
+  }
+  .block__text-content {
+    margin-left: 0.7rem;
+    font-size: 0.73rem;
+    letter-spacing: 0.03rem;
+  }
 }
 </style>

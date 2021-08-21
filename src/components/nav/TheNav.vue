@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-baseline">
-    <a class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 5rem; transform: translateY(5px)" href="/">
-      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-dark.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
-      <InlineSvg v-else :src="require('@/assets/svg/logo-white.svg')" :width="$windowWidth > 1440 ? '160' : '140'" />
+    <a @mouseover="leavedAllTabs()" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 0px; padding-right: 5rem; transform: translateY(5px)" href="/">
+      <InlineSvg class="svg-logo" v-if="agencyIsActive || newsIsActive" :src="require('@/assets/svg/logo-dark.svg')" />
+      <InlineSvg class="svg-logo" v-else :src="require('@/assets/svg/logo-white.svg')" />
     </a>
     <!-- NOTE MOBILE ONLY -->
     <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
@@ -30,21 +30,33 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @click="onClicked('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities">
+            <span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
         <li class="nav-item">
-          <a @click="onClicked('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations">
+            <span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
         <li class="nav-item">
-          <a @click="onClicked('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="!!agencyIsActive ? '' : onMouseOvered('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency">
+            <span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="pills-activity-tab" type="button" data-toggle="pill" href="#pills-activity"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @mouseover="onMouseOvered('news')" class="nav-link" id="pills-news-tab" type="button" data-toggle="pill" href="#pills-news">
+            <span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
+            <div class="nav-annim-border"></div>
+          </a>
         </li>
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
       <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button> -->
-      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content" :style="{ marginTop: $windowWidth > 1440 ? '2rem' : '1rem' }">
+      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content">
         <li class="nav-item" role="presentation">
           <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer">{{ sportCategories[0]?.name }}</a>
         </li>
@@ -80,17 +92,30 @@
         </div>
         <transition name="nav-fade">
           <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <ActivitiesTab @fetched-categ="setCateg" ref="activitiesTab" />
+            <keep-alive>
+              <component :is="'ActivitiesTab'" ref="activitiesTab" @fetched-categ="setCateg"></component>
+            </keep-alive>
           </div>
         </transition>
         <transition name="nav-fade">
           <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
-            <AgencyTab ref="agencyTab" />
+            <keep-alive>
+              <component :is="'AgencyTab'" ref="agencyTab"></component>
+            </keep-alive>
           </div>
         </transition>
         <transition name="nav-fade">
           <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <DestinationsTab />
+            <keep-alive>
+              <component :is="'DestinationsTab'"></component>
+            </keep-alive>
+          </div>
+        </transition>
+        <transition name="nav-fade">
+          <div v-show="newsIsActive" id="pills-news" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+            <keep-alive>
+              <component :is="'HomeArticles'" :in-nav="true"></component>
+            </keep-alive>
           </div>
         </transition>
       </div>
@@ -102,6 +127,7 @@
 import AgencyTab from '@/components/nav/AgencyTab.vue'
 import ActivitiesTab from '@/components/nav/ActivitiesTab.vue'
 import DestinationsTab from '@/components/nav/DestinationsTab.vue'
+import HomeArticles from '@/components/home/HomeArticles.vue'
 import gsap from 'gsap'
 
 export default {
@@ -110,7 +136,8 @@ export default {
   components: {
     AgencyTab,
     ActivitiesTab,
-    DestinationsTab
+    DestinationsTab,
+    HomeArticles
   },
   data() {
     return {
@@ -118,6 +145,7 @@ export default {
       activitiesIsActive: false,
       destinationsIsActive: false,
       agencyIsActive: false,
+      newsIsActive: false,
       sportCategories: []
       // bgFilter: {
       //   light: 'opacity(0.4)',
@@ -127,7 +155,7 @@ export default {
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive
+      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
     }
   },
   watch: {
@@ -163,6 +191,23 @@ export default {
           el.style.color = '#fff'
         })
       }
+    },
+    newsIsActive: function (newVal) {
+      if (newVal === true) {
+        this.$emit('changed-tab', 'news')
+
+        document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+          el.classList.toggle('navbar-grey', true)
+          el.style.color = '#292f33'
+        })
+      } else {
+        document.querySelector('#header_nav').removeAttribute('style')
+        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+          el.classList.toggle('navbar-grey', false)
+          el.style.color = '#fff'
+        })
+      }
     }
   },
   methods: {
@@ -170,7 +215,7 @@ export default {
       this.sportCategories = categ
     },
     dismissNav() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => {
         this.$data[el] = false
         this.$parent[el] = false
       })
@@ -178,6 +223,29 @@ export default {
     changeBgFilter(filter) {
       this.headerEl.style.filter = 'blur(3px)'
     },
+
+    onMouseOvered(tab) {
+      let varName = tab + 'IsActive'
+      // if already active do nothing except for agency
+      // eslint-disable-next-line prettier/prettier
+      if (this.$data[varName] === true) {
+        if (!tab === 'agency') return
+
+        this.$refs.agencyTab.resetTabs()
+      }
+      this.leavedAllTabs()
+      this.$data[varName] = true
+    },
+
+    resetTabs() {
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
+    },
+
+    leavedAllTabs() {
+      this.resetTabs()
+      this.$emit('leaveTabs')
+    },
+
     onClicked(tab) {
       // if (tab === 'destinations') {
       //   let tl = gsap.timeline()
@@ -210,7 +278,7 @@ export default {
       }
 
       // only show the one clicked
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive'].forEach((el) => (this.$data[el] = false))
+      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
       this.$data[varName] = true
     }
   },
@@ -247,10 +315,27 @@ export default {
 .subactivity-nav__item:hover {
   color: white !important;
 }
-@media only screen and (min-width: 1441px) {
-  .subactivity-nav__item {
-    font-size: 0.875rem !important;
+.svg-logo {
+  width: 140px;
+}
+.navbar-collapse {
+  padding: 0px;
+}
+@media only screen and (min-height: 1000px) {
+  .navbar-collapse ul {
+    margin-top: 1em;
   }
+}
+@media only screen and (min-width: 1439px) {
+  .navbar-collapse {
+    padding: 0px;
+  }
+  .nav-pills {
+    margin-top: 0px !important;
+  }
+  /*.subactivity-nav__item {
+    font-size: 0.875rem !important;
+  }*/
 }
 .navbar {
   height: 70px; /* easier to manipulate with fixed height */
