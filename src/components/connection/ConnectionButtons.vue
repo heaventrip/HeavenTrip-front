@@ -51,35 +51,31 @@
     </ul>
     <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right mr-3">
       <li v-if="isLoggedIn()">
-        <div @click.prevent="toggleDropdown = !toggleDropdown" style="cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="d-flex align-items-center">
-          <img v-show="currUser?.avatar_key" height="40" style="border-radius: 50%" :style="toggleDropdown ? 'border: 1px solid #292f33' : 'border: 1px solid white'" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-          <div class="d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="toggleDropdown ? 'color: #292f33' : ''">
+        <div @click.prevent="toggleDropdown = !toggleDropdown" style="cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
+          <img class="avatar-block" v-show="currUser?.avatar_key" height="40" style="border-radius: 50%" :style="toggleDropdown ? 'border: 1px solid #292f33' : 'border: 1px solid white'" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+          <div class="name-block d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="toggleDropdown ? 'color: #292f33' : ''">
             <div>{{ currUser?.first_name }}</div>
             <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.last_name }}</div>
             <div v-else style="font-weight: 700">.{{ currUser?.last_name?.[0] }}</div>
           </div>
-          <InlineSvg class="ml-auto" :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
+          <InlineSvg class="connection-icon ml-auto" :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
         </div>
-        <transition @before-enter="left = false" @after-leave="left = true" :name="toggleDropdown ? 'connection-slide-down' : 'connection-slide-up'">
-          <div :key="toggleDropdown" :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown }" class="flex-column pb-2" style="position: absolute; padding-top: 60px; width: 250px; top: 10px" :style="toggleDropdown ? 'color: #292f33' : ''">
-            <transition name="fade" :duration="1000">
-              <div v-show="left">
-                <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
-                <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
-              </div>
-            </transition>
-            <transition name="fade" :duration="2000">
-              <div v-show="left">
-                <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes envies</div>
-                <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
-              </div>
-            </transition>
-            <transition name="fade" :duration="3000">
-              <div v-show="left" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
-                <InlineSvg :src="require('@/assets/svg/disconnect.svg')" height="20" :fill="toggleDropdown ? '#292f33' : 'white'" />
-                <span class="ml-2 align-middle">Se déconnecter</span>
-              </div>
-            </transition>
+        <transition :name="toggleDropdown ? 'connection-slide-down' : 'connection-slide-up'">
+          <div
+            :key="toggleDropdown"
+            :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown }"
+            class="flex-column"
+            style="position: absolute; padding-top: 60px; width: 250px; top: 10px; border-left: 3px solid white; border-right: 5px solid white; padding-bottom: 3px"
+            :style="toggleDropdown ? 'color: #292f33' : ''"
+          >
+            <div class="menu-item" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
+            <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
+            <div class="menu-item" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes envies</div>
+            <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
+            <div class="menu-item menu-item-disconnect" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+              <InlineSvg class="disconnect-icon" :src="require('@/assets/svg/disconnect.svg')" height="20" />
+              <span class="ml-2 align-middle">Se déconnecter</span>
+            </div>
           </div>
         </transition>
       </li>
@@ -254,6 +250,28 @@ export default {
 </script>
 
 <style scoped>
+.connection-icon,
+.name-block,
+.avatar-block {
+  transition: all 0.3s ease;
+}
+.menu-item {
+  transition: background-color 0.3s ease;
+}
+.btttn:hover .connection-icon {
+  transform: rotate(-90deg);
+}
+.menu-item-disconnect:hover .disconnect-icon {
+  fill: white;
+}
+.btttn:hover .name-block,
+.btttn:hover .avatar-block {
+  filter: opacity(0.5);
+}
+.menu-item:hover {
+  background-color: #292f33;
+  color: white;
+}
 .account-dropdown-item:not(:last-of-type) {
   border-bottom: 1px dashed #7c7c7c57;
 }
