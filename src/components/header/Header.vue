@@ -30,7 +30,7 @@
     <ConnectionButtons :nav-sticky="navSticky" @mouseover="leavedAllTabs()" />
     <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
-    <TheNav @leave-tabs="resetTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
+    <TheNav @leave-tabs="leavedAllTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
     <keep-alive>
       <component :is="'HomeHeaderInfos'" @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive"></component>
       <component :is="'ProductHeaderInfos'" v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course"></component>
@@ -144,6 +144,9 @@ export default {
     }
   },
   methods: {
+    test() {
+      console.log('test')
+    },
     currentRoute(route) {
       if (this.$route.name === 'Account') return this.modalBackgroundView === route
       else return this.$route.name === route

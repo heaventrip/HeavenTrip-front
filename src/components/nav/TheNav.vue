@@ -233,7 +233,8 @@ export default {
 
         this.$refs.agencyTab.resetTabs()
       }
-      this.leavedAllTabs()
+      //this.leavedAllTabs()
+      this.resetTabs()
       this.$data[varName] = true
     },
 
