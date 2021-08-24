@@ -49,47 +49,31 @@
         <a @click.prevent="setActiveTab('signup')" href="#" class="px-4 py-4 profile-link font-weight-bold d-inline-block" style="color: #fff; background-color: #292f33">creér son profil</a>
       </li>
     </ul>
-    <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right">
+    <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right mr-3">
       <li v-if="isLoggedIn()">
-        <div class="dropdown login-dropdown" :class="{ 'bg-white': toggleDropdown }">
-          <button class="btn btn-block rounded-0 border-0" @click.prevent="toggleDropdown = !toggleDropdown">
-            <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-            <span :class="{ 'text-dark': toggleDropdown }"
-              >{{ currUser?.first_name }}
-              <span class="l-name" style="margin-right: 40px"> .{{ currUser?.last_name?.[0] }} </span>
-            </span>
-            <InlineSvg :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
-          </button>
-          <transition name="fade-fast">
-            <div v-if="toggleDropdown" class="dropdown-menu text-uppercase p-0" :class="{ 'd-block': toggleDropdown }">
-              <div class="account-dropdown-item p-0">
-                <router-link :to="{ name: 'Profile' }" class="dropdown-item p-3">Mes infos</router-link>
-              </div>
-              <div class="account-dropdown-item p-0">
-                <button @click.stop="showWishlist = !showWishlist" class="dropdown-item p-3" type="button">
-                  Mes envies
-                  <span class="font-weight-bold text-danger ml-1">(2)</span>
-                </button>
-              </div>
-              <transition name="fade-fast">
-                <div class="wishlists" v-show="showWishlist" :key="showWishlist">
-                  <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
-                    <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
-                    {{ wishlist.name }}
-                  </div>
-                </div>
-              </transition>
-              <div class="account-dropdown-item p-0">
-                <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link p-3">Mon compte</router-link>
-                <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
-                <!-- <Profile v-if="showProfileModal" /> -->
-              </div>
-              <div class="account-dropdown-item p-0">
-                <button @click="logOut" class="dropdown-item logout-page-link p-3" type="button">se déconnecter</button>
+        <div @click.prevent="toggleDropdown = !toggleDropdown" style="cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="d-flex align-items-center">
+          <img v-show="currUser?.avatar_key" height="40" style="border-radius: 50%" :style="toggleDropdown ? 'border: 1px solid #292f33' : 'border: 1px solid white'" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+          <div class="d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="toggleDropdown ? 'color: #292f33' : ''">
+            <div>{{ currUser?.first_name }}</div>
+            <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.last_name }}</div>
+            <div v-else style="font-weight: 700">.{{ currUser?.last_name?.[0] }}</div>
+          </div>
+          <InlineSvg class="ml-auto" :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
+        </div>
+        <transition :name="toggleDropdown ? 'connection-slide-down' : 'connection-slide-up'">
+          <transition>
+            <div :key="toggleDropdown" :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown }" class="flex-column pb-2" style="position: absolute; padding-top: 60px; width: 250px; top: 10px" :style="toggleDropdown ? 'color: #292f33' : ''">
+              <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
+              <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
+              <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes envies</div>
+              <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
+              <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+                <InlineSvg :src="require('@/assets/svg/disconnect.svg')" height="20" :fill="toggleDropdown ? '#292f33' : 'white'" />
+                <span class="ml-2 align-middle">Se déconnecter</span>
               </div>
             </div>
           </transition>
-        </div>
+        </transition>
       </li>
       <li v-if="!isLoggedIn()" type="button">
         <a @click.prevent="$router.push('/login')" class="text-reset px-4 py-4 d-inline-block">se connecter</a>

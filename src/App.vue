@@ -84,6 +84,30 @@ body.modal-open::after {
 }
 
 /* VERTICAL SLIDE UP */
+.connection-slide-up-enter-active,
+.connection-slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+.connection-slide-up-enter-from {
+  transform: translateY(300px);
+}
+.connection-slide-up-leave-to {
+  transform: translateY(-300px);
+}
+
+/* connection SLIDE DOWN */
+.connection-slide-down-enter-active,
+.connection-slide-down-leave-active {
+  transition: all 0.3s ease;
+}
+.connection-slide-down-enter-from {
+  transform: translateY(-300px);
+}
+.connection-slide-down-leave-to {
+  transform: translateY(300px);
+}
+
+/* VERTICAL SLIDE UP */
 .vertical-slide-up-enter-active,
 .vertical-slide-up-leave-active {
   transition: all 0.3s ease;

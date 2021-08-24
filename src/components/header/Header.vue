@@ -145,6 +145,7 @@ export default {
   },
   methods: {
     currentRoute(route) {
+      // NOTE revoir condition avec /login
       if (this.$route.name === 'Account') return this.modalBackgroundView === route
       else return this.$route.name === route
     },
