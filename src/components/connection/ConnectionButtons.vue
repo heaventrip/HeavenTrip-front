@@ -60,19 +60,27 @@
           </div>
           <InlineSvg class="ml-auto" :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
         </div>
-        <transition :name="toggleDropdown ? 'connection-slide-down' : 'connection-slide-up'">
-          <transition>
-            <div :key="toggleDropdown" :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown }" class="flex-column pb-2" style="position: absolute; padding-top: 60px; width: 250px; top: 10px" :style="toggleDropdown ? 'color: #292f33' : ''">
-              <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
-              <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
-              <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes envies</div>
-              <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
-              <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+        <transition @before-enter="left = false" @after-leave="left = true" :name="toggleDropdown ? 'connection-slide-down' : 'connection-slide-up'">
+          <div :key="toggleDropdown" :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown }" class="flex-column pb-2" style="position: absolute; padding-top: 60px; width: 250px; top: 10px" :style="toggleDropdown ? 'color: #292f33' : ''">
+            <transition name="fade" :duration="1000">
+              <div v-show="left">
+                <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
+                <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
+              </div>
+            </transition>
+            <transition name="fade" :duration="2000">
+              <div v-show="left">
+                <div style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes envies</div>
+                <div style="width: 70%; border-bottom: 1px solid #ebebeb; margin-left: 1.8rem"></div>
+              </div>
+            </transition>
+            <transition name="fade" :duration="3000">
+              <div v-show="left" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
                 <InlineSvg :src="require('@/assets/svg/disconnect.svg')" height="20" :fill="toggleDropdown ? '#292f33' : 'white'" />
                 <span class="ml-2 align-middle">Se déconnecter</span>
               </div>
-            </div>
-          </transition>
+            </transition>
+          </div>
         </transition>
       </li>
       <li v-if="!isLoggedIn()" type="button">
@@ -118,7 +126,8 @@ export default {
       showWishlist: false,
       form: '',
       wishlists: null,
-      currUser: null
+      currUser: null,
+      left: false
     }
   },
   watch: {

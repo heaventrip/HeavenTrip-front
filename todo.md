@@ -10,7 +10,6 @@
 
 __________
 
-BUG
 - entre clique sur agence et clique bouton recherche (photo agrandie et module disparait)
 > checkout booker prochain encart déjà sélectionné?
 > changements d'URLs avec suivant/précédent => voir router history pb? (par ex précédent à partir du checkout ramène sur product)
@@ -111,6 +110,7 @@ ___________________________
 
 IMPORTANT : bloquer les mobiles/tablettes
 IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail
+IMPORTANT : revoir les navIsActive ActivitiesIsActive etc.
 
 
 
