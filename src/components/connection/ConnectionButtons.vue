@@ -68,11 +68,11 @@
             style="position: absolute; z-index: 2; padding-top: 60px; width: 250px; top: 0px; border-left: 3px solid white; border-right: 5px solid white; padding-bottom: 3px"
             :style="toggleDropdown ? 'color: #292f33' : ''"
           >
-            <div class="menu-item" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
+            <div @click="$router.push({ name: 'Profile' })" class="menu-item" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
             <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
             <div class="menu-item" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes envies</div>
             <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
-            <div class="menu-item menu-item-disconnect" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+            <div @click="logOut" class="menu-item menu-item-disconnect" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <InlineSvg class="disconnect-icon" :src="require('@/assets/svg/disconnect.svg')" height="20" />
               <span class="ml-2 align-middle">Se déconnecter</span>
             </div>
@@ -257,6 +257,7 @@ export default {
 }
 .menu-item {
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 .btttn:hover .connection-icon {
   transform: rotate(-90deg);
