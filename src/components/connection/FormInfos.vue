@@ -128,7 +128,7 @@
       </form>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh success-block">
-      <div class="descr-text">Un e-mail de confirmation vous a été envoyé a l'adresse (mail du user), merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur Heaven Trip. A tout de suite !</div>
+      <div class="descr-text">Un e-mail de confirmation vous a été envoyé a l'adresse {{ email ? email : '' }}, merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur Heaven Trip. A tout de suite !</div>
       <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form>
         <Button text="RENVOYER LA CONFIRMATION DE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation()" />
@@ -154,7 +154,7 @@ import '../../assets/css/upload.css' // overwrites default
 
 export default {
   name: 'FormInfos',
-  props: ['active-info-tab'],
+  props: ['active-info-tab', 'email'],
   components: {
     MyUpload,
     Button
@@ -389,6 +389,12 @@ export default {
   padding-top: 90px;
 }
 .avatar-validation-btn {
+  height: 48px;
+  font-size: 0.9rem;
+  letter-spacing: 0.03px;
+  padding-top: 12px;
+  text-transform: uppercase;
+  font-weight: 400;
   transition: all 0.3s ease;
   color: #292f33;
   margin: initial;

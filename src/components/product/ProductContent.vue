@@ -84,7 +84,7 @@
         <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
           <div class="messages-container" style="">
             <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
-            <Message
+            <!-- <Message
               :user="{
                 firstName: 'Geoff',
                 lastName: 'M'
@@ -101,10 +101,10 @@
               content="ergerg grzzdf zefzefzefzef ze fzefsd f z efzefzef zef "
               createdAt="2021-08-05T11:13:32.612Z"
               position="left"
-            />
+            /> -->
             <ul class="list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
-                <Message :user="msg.user" :content="msg.content" :createdAt="msg.createdAt" position="right" />
+                <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
           </div>
@@ -137,6 +137,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { getUserInfo } from '@/utils/auth'
 SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
 gsap.registerPlugin(ScrollTrigger)
 
@@ -206,6 +207,12 @@ export default {
     this.fetchMessages()
   },
   methods: {
+    isCurrentUser(user) {
+      if (!user) {
+        return false
+      }
+      return this.getUserInfo().id === user.id
+    },
     fetchMessages() {
       this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
       /* this.messages = [
@@ -313,6 +320,9 @@ export default {
     //     }
     //   })
     // },
+    getUserInfo() {
+      return getUserInfo()
+    },
     handleHide() {
       this.visible = false
     },
@@ -382,6 +392,19 @@ export default {
 }
 button {
   all: unset;
+}
+.messages-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: #ebebeb;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: #292f33;
+  border-radius: 10px;
+  border: 5px solid #ebebeb;
 }
 .messages-container {
   overflow-y: scroll;
