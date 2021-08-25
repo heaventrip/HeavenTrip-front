@@ -149,32 +149,37 @@ export default {
     activeTab(newVal, oldVal) {
       this.$emit('changed-tab', newVal)
 
+      if (newVal === 'agency') {
+        document.body.style.position = 'fixed'
+      }
+      if (oldVal === 'agency') {
+        document.body.style.position = 'static'
+        this.$refs.agencyTab.resetTabs()
+      }
+
       // no restyling needed when going from agency to news or activities to destinations
       if (['agency', 'news'].includes(newVal) && ['agency', 'news'].includes(oldVal)) return
       if (['activities', 'destinations'].includes(newVal) && ['activities', 'destinations'].includes(oldVal)) return
 
-      if (newVal === 'agency' || newVal === 'news') {
-        document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
-        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
-          el.classList.toggle('navbar-grey', true)
-          el.style.color = '#292f33'
-        })
-      }
-
-      if (newVal === 'activities' || newVal === 'destinations') {
-        if (oldVal === 'agency') {
-          this.$refs.agencyTab.resetTabs()
-        }
-
-        document.querySelector('#header_nav').removeAttribute('style')
-        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
-          el.classList.toggle('navbar-grey', false)
-          el.style.color = '#fff'
-        })
-      }
+      if (newVal === 'agency' || newVal === 'news') this.setDarkTheme()
+      if (newVal === 'activities' || newVal === 'destinations') this.setLightTheme()
     }
   },
   methods: {
+    setLightTheme() {
+      document.querySelector('#header_nav').removeAttribute('style')
+      document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+        el.classList.toggle('navbar-grey', false)
+        el.style.color = '#fff'
+      })
+    },
+    setDarkTheme() {
+      document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
+      document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+        el.classList.toggle('navbar-grey', true)
+        el.style.color = '#292f33'
+      })
+    },
     onClickNavLogo() {
       this.$router.push('/')
     },

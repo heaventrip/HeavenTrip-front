@@ -30,25 +30,25 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" href="#pills-activities">
+          <a @mouseover="onMouseOvered('activities')" class="nav-link" :class="{ active: activeTab === 'activities' }" id="pills-activities-tab" type="button">
             <span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('destinations')" class="nav-link" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations">
+          <a @mouseover="onMouseOvered('destinations')" class="nav-link" :class="{ active: activeTab === 'destinations' }" id="pills-destinations-tab" type="button">
             <span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('agency')" class="nav-link" id="pills-agency-tab" data-toggle="pill" href="#pills-agency">
+          <a @mouseover="onMouseOvered('agency')" class="nav-link" :class="{ active: activeTab === 'agency' }" id="pills-agency-tab" type="button">
             <span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
         </li>
         <li class="nav-item">
-          <a @mouseover="onMouseOvered('news')" class="nav-link" id="pills-news-tab" type="button" data-toggle="pill" href="#pills-news">
+          <a @mouseover="onMouseOvered('news')" class="nav-link" :class="{ active: activeTab === 'news' }" id="pills-news-tab" type="button">
             <span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
@@ -151,37 +151,43 @@ export default {
   },
   watch: {
     activeTab(newVal, oldVal) {
+      if (newVal === 'agency') {
+        document.body.style.position = 'fixed'
+      }
+      if (oldVal === 'agency') {
+        document.body.style.position = 'static'
+        this.$refs.agencyTab.resetTabs()
+      }
+
+      if (!newVal) {
+        document.body.style.position = 'static'
+        this.setLightTheme()
+        return
+      }
+
       // no restyling needed when going from agency to news or activities to destinations
       if (['agency', 'news'].includes(newVal) && ['agency', 'news'].includes(oldVal)) return
       if (['activities', 'destinations'].includes(newVal) && ['activities', 'destinations'].includes(oldVal)) return
 
-      if (newVal === 'agency' || newVal === 'news') {
-        if (oldVal === 'agency') {
-          document.body.style.position = 'fixed'
-        }
-
-        document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
-        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
-          el.classList.toggle('navbar-grey', true)
-          el.style.color = '#292f33'
-        })
-      }
-
-      if (newVal === 'activities' || newVal === 'destinations') {
-        if (oldVal === 'agency') {
-          this.$refs.agencyTab.resetTabs()
-          document.body.style.position = 'static'
-        }
-
-        document.querySelector('#header_nav').removeAttribute('style')
-        document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
-          el.classList.toggle('navbar-grey', false)
-          el.style.color = '#fff'
-        })
-      }
+      if (newVal === 'agency' || newVal === 'news') this.setDarkTheme()
+      if (newVal === 'activities' || newVal === 'destinations') this.setLightTheme()
     }
   },
   methods: {
+    setLightTheme() {
+      document.querySelector('#header_nav').removeAttribute('style')
+      document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+        el.classList.toggle('navbar-grey', false)
+        el.style.color = '#fff'
+      })
+    },
+    setDarkTheme() {
+      document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
+      document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
+        el.classList.toggle('navbar-grey', true)
+        el.style.color = '#292f33'
+      })
+    },
     setCateg(categ) {
       this.sportCategories = categ
     },
@@ -195,17 +201,7 @@ export default {
     },
 
     leftAllTabs() {
-      document.body.style.position = 'static'
       this.$emit('left-all-tabs')
-    },
-
-    onClicked(tab) {
-      // if already active do nothing except for agency
-      if (this.$props.activeTab === tab && tab !== 'agency') return
-
-      if (tab === 'agency') this.$refs.agencyTab.resetTabs()
-
-      this.$emit('changed-tab', tab)
     }
   },
   unmounted() {
