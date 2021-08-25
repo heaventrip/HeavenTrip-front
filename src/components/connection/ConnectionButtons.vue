@@ -51,7 +51,7 @@
     </ul>
     <ul v-else class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right mr-3">
       <li v-if="isLoggedIn()">
-        <div @click.prevent="toggleDropdown = !toggleDropdown" style="cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
+        <div @click.prevent="toggleDropdown = !toggleDropdown" style="position: relative; z-index: 3; cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
           <img class="avatar-block" v-show="currUser?.avatar_key" height="40" style="border-radius: 50%" :style="toggleDropdown ? 'border: 1px solid #292f33' : 'border: 1px solid white'" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
           <div class="name-block d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="toggleDropdown ? 'color: #292f33' : ''">
             <div>{{ currUser?.first_name }}</div>
@@ -65,7 +65,7 @@
             :key="toggleDropdown"
             :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown }"
             class="flex-column"
-            style="position: absolute; padding-top: 60px; width: 250px; top: 10px; border-left: 3px solid white; border-right: 5px solid white; padding-bottom: 3px"
+            style="position: absolute; z-index: 2; padding-top: 60px; width: 250px; top: 0px; border-left: 3px solid white; border-right: 5px solid white; padding-bottom: 3px"
             :style="toggleDropdown ? 'color: #292f33' : ''"
           >
             <div class="menu-item" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">Mes infos</div>
