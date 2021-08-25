@@ -183,7 +183,6 @@ export default {
   width: 100%;
   height: 94vh;
   z-index: -1;
-  transition: background-color 0.5s ease-in;
 }
 .header-filter--grey::after {
   content: '';
@@ -193,17 +192,15 @@ export default {
   width: 100%;
   height: 94vh;
   z-index: -1;
-  transition: background-color 0.5s ease-in-out;
 }
 .header-filter--light::after {
   content: '';
   position: absolute;
-  background-color: #fff;
+  background: #fff;
   opacity: 0.96;
   width: 100%;
   height: 94vh;
   z-index: -1;
-  transition: background-color 0.5s ease-in-out;
 }
 /* SEARCH */
 .header--search {
