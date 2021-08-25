@@ -40,23 +40,23 @@
         <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
         <InlineSvg class="title-connection" @click.stop="previousScreen" :src="require('@/assets/svg/logo-small.svg')" height="60" />
       </div>
-      <div class="form-container" style="margin-top: 15vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
+      <div class="form-container" style="margin-top: 21vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
         <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
           <div v-if="!isSuccess" @click="activeInfoTabByName('gender')" type="button" :style="{ color: genderIsValid ? '#d82558' : '#ffffff' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Camp</div>
           <div v-if="!isSuccess" @click="activeInfoTabByName('avatar')" type="button" :style="{ color: avatarIsValid ? '#d82558' : genderIsValid ? '#ffffff' : '' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
           <div v-if="!isSuccess" @click="activeInfoTabByName('bio')" type="button" :style="{ color: avatarIsValid ? '#ffffff' : '' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
         </div>
-        <div class="d-flex connection-nav-container mb-5" v-else>
+        <div class="d-flex connection-nav-container" style="margin-bottom: 40px" v-else>
           <div @click="activeTab = 'login'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'login' }">Connexion</div>
           <div @click="activeTab = 'signup'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'signup' }">Inscription</div>
           <!--<div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
         </div>
         <transition name="fade-fast" mode="out-in">
-          <form :key="activeTab">
+          <form :key="activeTab" :style="[activeTab === 'login' ? 'margin-top: 90px ' : '']">
             <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
             <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @submitted-form="showInfoScreen" />
-            <FormInfos v-else-if="activeTab === 'infos'" @changed-tab="setNewInfoTab" @gender-is-valided="genderIsValid = true" @avatar-is-valided="avatarIsValid = true" @success="isSuccess = true" :active-info-tab="activeInfoTab" ref="formInfos" />
+            <FormInfos v-else-if="activeTab === 'infos'" :email="email" @changed-tab="setNewInfoTab" @gender-is-valided="genderIsValid = true" @avatar-is-valided="avatarIsValid = true" @success="isSuccess = true" :active-info-tab="activeInfoTab" ref="formInfos" />
             <Password v-else-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
           </form>
         </transition>
@@ -101,7 +101,8 @@ export default {
       fromRoute: '',
       genderIsValid: false,
       avatarIsValid: false,
-      isSuccess: false
+      isSuccess: false,
+      email: ''
     }
   },
   watch: {
