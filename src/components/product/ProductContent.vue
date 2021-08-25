@@ -82,8 +82,8 @@
         </transition>
         <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
         <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
+          <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
           <div class="messages-container" @wheel.stop style="">
-            <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
             <!-- <Message
               :user="{
                 firstName: 'Geoff',
@@ -401,6 +401,8 @@ button {
   border: 5px solid #ebebeb;
 }
 .messages-container {
+  display: flex;
+  flex-direction: column-reverse;
   overflow-y: scroll;
   padding-left: 2.5rem;
   padding-right: 2.5rem;

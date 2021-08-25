@@ -42,8 +42,26 @@
       </div>
       <div class="form-container" style="margin-top: 21vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
         <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
-          <div v-if="!isSuccess" @click="activeInfoTabByName('gender')" type="button" :style="{ color: genderIsValid ? '#d82558' : '#ffffff' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'gender' }">Camp</div>
-          <div v-if="!isSuccess" @click="activeInfoTabByName('avatar')" type="button" :style="{ color: avatarIsValid ? '#d82558' : genderIsValid ? '#ffffff' : '' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'avatar' }">Photo de profil</div>
+          <div
+            v-if="!isSuccess"
+            @click="activeInfoTabByName('gender')"
+            type="button"
+            :style="{ color: genderIsValid ? '#d82558' : '#ffffff' }"
+            class="connection-nav-button"
+            :class="[{ 'connection-nav-button--active': activeInfoTab === 'gender' && !genderIsValid }, { 'connection-nav-button--valid--active': activeInfoTab === 'gender' && genderIsValid }]"
+          >
+            Camp
+          </div>
+          <div
+            v-if="!isSuccess"
+            @click="activeInfoTabByName('avatar')"
+            type="button"
+            :style="{ color: avatarIsValid ? '#d82558' : genderIsValid ? '#ffffff' : '' }"
+            class="connection-nav-button"
+            :class="[{ 'connection-nav-button--active': activeInfoTab === 'avatar' && !avatarIsValid }, { 'connection-nav-button--valid--active': activeInfoTab === 'avatar' && avatarIsValid }]"
+          >
+            Photo de profil
+          </div>
           <div v-if="!isSuccess" @click="activeInfoTabByName('bio')" type="button" :style="{ color: avatarIsValid ? '#ffffff' : '' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
         </div>
@@ -216,6 +234,9 @@ export default {
 .connection-nav-button--active {
   color: rgba(255, 255, 255);
   border-bottom: 1px solid white;
+}
+.connection-nav-button--valid--active {
+  border-bottom: 1px solid #d82558;
 }
 .button-sign:hover {
   color: white;
