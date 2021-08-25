@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-baseline">
-    <a @mouseover="leavedAllTabs()" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 0px; padding-right: 5rem; transform: translateY(5px)" href="/">
+    <a @mouseover="leftAllTabs" class="navbar-brand pl-sm-5 pl-lg-0" style="margin-right: 0px; padding-right: 5rem; transform: translateY(5px)" href="/">
       <InlineSvg class="svg-logo" v-if="['agency', 'news'].includes(activeTab)" :src="require('@/assets/svg/logo-dark.svg')" />
       <InlineSvg class="svg-logo" v-else :src="require('@/assets/svg/logo-white.svg')" />
     </a>
@@ -86,10 +86,10 @@
         <a href="#" class="d-inline-block hashtag font-weight-normal">EN</a>
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
-        <div @click="dismissNav" type="button" style="position: absolute; top: 20px; right: 8%; z-index: 10">
+        <!-- <div type="button" style="position: absolute; top: 20px; right: 8%; z-index: 10">
           <InlineSvg v-if="activeTab === 'agency'" :src="require('@/assets/svg/cross.svg')" height="25" />
           <InlineSvg v-else :src="require('@/assets/svg/cross.svg')" fill="white" height="25" />
-        </div>
+        </div> -->
         <transition name="nav-fade">
           <div v-show="activeTab === 'activities'" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <keep-alive>
@@ -131,7 +131,8 @@ import HomeArticles from '@/components/home/HomeArticles.vue'
 
 export default {
   name: 'Nav',
-  emits: ['changed-nav-status', 'changed-tab'],
+  emits: ['changed-tab', 'left-all-tabs'],
+  props: ['active-tab'],
   components: {
     AgencyTab,
     ActivitiesTab,
@@ -140,29 +141,21 @@ export default {
   },
   data() {
     return {
-      // headerEl: '',
-      // activitiesIsActive: false,
-      // destinationsIsActive: false,
-      // agencyIsActive: false,
-      // newsIsActive: false,
-      activeTab: '',
       sportCategories: []
-      // bgFilter: {
-      //   light: 'opacity(0.4)',
-      //   dark: 'brightness(0.5)'
-      // }
     }
   },
   computed: {
     navIsActive() {
-      return !!this.activeTab
+      return !!this.$props.activeTab
     }
   },
   watch: {
     activeTab(newVal, oldVal) {
-      this.$emit('changed-tab', newVal)
+      // no restyling needed when going from agency to news or activities to destinations
+      if (['agency', 'news'].includes(newVal) && ['agency', 'news'].includes(oldVal)) return
+      if (['activities', 'destinations'].includes(newVal) && ['activities', 'destinations'].includes(oldVal)) return
 
-      if (['agency', 'news'].includes(newVal) && !['agency', 'news'].includes(oldVal)) {
+      if (newVal === 'agency' || newVal === 'news') {
         if (oldVal === 'agency') {
           document.body.style.position = 'fixed'
         }
@@ -174,7 +167,7 @@ export default {
         })
       }
 
-      if (['agency', 'news'].includes(oldVal) && !['agency', 'news'].includes(newVal)) {
+      if (newVal === 'activities' || newVal === 'destinations') {
         if (oldVal === 'agency') {
           this.$refs.agencyTab.resetTabs()
           document.body.style.position = 'static'
@@ -192,45 +185,31 @@ export default {
     setCateg(categ) {
       this.sportCategories = categ
     },
-    dismissNav() {
-      this.activeTab = false
-      this.$parent.activeTab = false
-    },
-    changeBgFilter(filter) {
-      this.headerEl.style.filter = 'blur(3px)'
-    },
-
     onMouseOvered(tab) {
       // if already active do nothing except for agency
-      if (this.activeTab === tab && tab !== 'agency') return
+      if (this.$props.activeTab === tab && tab !== 'agency') return
 
       if (tab === 'agency') this.$refs.agencyTab.resetTabs()
 
-      this.leavedAllTabs()
-      this.activeTab = tab
+      this.$emit('changed-tab', tab)
     },
 
-    // resetTabs() {
-    //   ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
-    // },
-
-    leavedAllTabs() {
-      // this.resetTabs()
-      this.$emit('leaveTabs')
+    leftAllTabs() {
+      document.body.style.position = 'static'
+      this.$emit('left-all-tabs')
     },
 
     onClicked(tab) {
       // if already active do nothing except for agency
-      if (this.activeTab === tab && tab !== 'agency') return
+      if (this.$props.activeTab === tab && tab !== 'agency') return
 
       if (tab === 'agency') this.$refs.agencyTab.resetTabs()
 
-      this.leavedAllTabs()
-      this.activeTab = tab
+      this.$emit('changed-tab', tab)
     }
   },
   unmounted() {
-    this.$parent.resetTabs()
+    this.leftAllTabs()
   }
 }
 </script>

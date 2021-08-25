@@ -200,6 +200,7 @@ export default {
 }
 #bttn-have-account:hover {
   background-color: #d82558;
+  color: white;
 }
 .connection-nav-button {
   padding-bottom: 0.5rem;

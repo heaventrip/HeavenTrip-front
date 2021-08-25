@@ -1,6 +1,6 @@
 <template>
   <div
-    @mouseleave="leavedAllTabs()"
+    @mouseleave="leftAllTabs"
     class="header d-flex flex-column text-white"
     :class="{
       'header--home': currentRoute('Home'),
@@ -27,10 +27,9 @@
     >
       <img src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
-    <ConnectionButtons :nav-sticky="navSticky" @mouseover="leavedAllTabs()" />
-    <!-- <TheNav @changed-nav-status="setNavStatus" @changed-tab="setActiveTab" /> -->
-    <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" class="test" />
-    <TheNav @leave-tabs="resetTabs()" ref="theNav" v-else @changed-tab="setActiveTab" />
+    <ConnectionButtons :nav-sticky="navSticky" @mouseover="leftAllTabs" />
+    <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" />
+    <TheNav v-else :activeTab="activeTab" @left-all-tabs="leftAllTabs" @changed-tab="setActiveTab" />
     <keep-alive>
       <component :is="'HomeHeaderInfos'" @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive"></component>
       <component :is="'ProductHeaderInfos'" v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course"></component>
@@ -121,10 +120,6 @@ export default {
       navSticky: false,
       token: true,
       toggleSessions: false,
-      // agencyIsActive: false,
-      // destinationsIsActive: false,
-      // activitiesIsActive: false,
-      // newsIsActive: false,
       activeTab: '',
       modalBackgroundView: ''
     }
@@ -149,53 +144,15 @@ export default {
       if (this.$route.name === 'Account') return this.modalBackgroundView === route
       else return this.$route.name === route
     },
-    resetTabs() {
+    leftAllTabs() {
       this.activeTab = ''
     },
-    leavedAllTabs() {
-      this.resetTabs()
-      this.$refs.theNav.resetTabs()
-    },
-    // setNavStatus(status) {
-    //   this.navIsActive = status
-    // },
     setActiveTab(clickedTab) {
       this.activeTab = clickedTab
     },
     logout(event) {
       localStorage.removeItem('user-token')
       window.location.reload()
-    },
-    // displayMenu(menu) {
-    //   $('#pills-activites').removeClass('active')
-    //   $('#pills-agence').removeClass('active')
-    //   $('#pills-destination').removeClass('active')
-    //   $(`#${menu}`).addClass('active')
-    // },
-    jquery() {
-      // $('.selection').select2({
-      //   minimumResultsForSearch: Infinity
-      // })
-      $('[data-toggle="tooltip"]').tooltip()
-      $('.user-circle').hide()
-      $('#navbarSupportedContent').on('shown.bs.collapse', function () {
-        $('.navbar').css({
-          'border-bottom': 'none',
-          'background-color': '#292F33'
-        })
-        $('.user-circle').show()
-        $('.header .navbar-dark .navbar-brand .logo').css('max-width', '100px')
-        $('body').css('overflow', 'hidden')
-      })
-      $('#navbarSupportedContent').on('hidden.bs.collapse', function () {
-        $('.navbar').css({
-          'border-bottom': '1px solid hsla(0,0%,98%,.5)',
-          'background-color': 'transparent'
-        })
-        $('.user-circle').hide()
-        $('.header .navbar-dark .navbar-brand .logo').css('max-width', '130px')
-        $('body').css('overflow', 'visible')
-      })
     }
   },
   mounted() {
@@ -203,7 +160,6 @@ export default {
     if (!token_val) {
       this.token = false
     }
-    // this.jquery()
 
     document.addEventListener('scroll', () => {
       if (window.scrollY > document.querySelector('.header').clientHeight) this.navSticky = true

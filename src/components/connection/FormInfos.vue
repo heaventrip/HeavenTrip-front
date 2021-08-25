@@ -127,7 +127,7 @@
         <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="validateTheInscription()" />
       </form>
     </div>
-    <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh">
+    <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh success-block">
       <div class="descr-text">Un e-mail de confirmation vous a été envoyé a l'adresse (mail du user), merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur Heaven Trip. A tout de suite !</div>
       <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form>
@@ -342,7 +342,8 @@ export default {
   width: 170px;
   border-radius: 100%;
   position: relative;
-  margin-right: 80px;
+  margin-right: 10px;
+  /* margin-right: 80px; */
 }
 .principal-img img {
   width: inherit;
@@ -379,9 +380,13 @@ export default {
   font-size: 0.85rem;
   text-align: left;
   line-height: 1.6;
+  letter-spacing: 0.03rem;
 }
 .info-text-small {
   white-space: nowrap;
+}
+.success-block {
+  padding-top: 90px;
 }
 .avatar-validation-btn {
   transition: all 0.3s ease;
