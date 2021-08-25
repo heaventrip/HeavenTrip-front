@@ -10,7 +10,6 @@
 
 __________
 
-BUG
 - entre clique sur agence et clique bouton recherche (photo agrandie et module disparait)
 > checkout booker prochain encart déjà sélectionné?
 > changements d'URLs avec suivant/précédent => voir router history pb? (par ex précédent à partir du checkout ramène sur product)
@@ -108,9 +107,11 @@ ___________________________
 - Liserets plus léger et revoir les typo du prix + ponctuations
 > Hover du actualités : afficher les 3 articles dedans (avec fond blanc) et reprendre un bouton blanc/bg-dark en full largeur en dessous pour accéder au blog
 > Rajouter "+ 15€ de frais de gestions" après checkbox card dans checkout
+- scroll des filtres pareil que connection
 
 IMPORTANT : bloquer les mobiles/tablettes
 IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail
+IMPORTANT : revoir les navIsActive ActivitiesIsActive etc.
 
 
 
