@@ -137,7 +137,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { getUserInfo } from '@/utils/auth'
+import { isCurrentUser } from '@/utils/auth'
 SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
 gsap.registerPlugin(ScrollTrigger)
 
@@ -208,10 +208,7 @@ export default {
   },
   methods: {
     isCurrentUser(user) {
-      if (!user) {
-        return false
-      }
-      return this.getUserInfo().id === user.id
+      return isCurrentUser(user)
     },
     fetchMessages() {
       this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages

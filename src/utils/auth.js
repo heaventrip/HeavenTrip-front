@@ -57,6 +57,13 @@ export function getUserInfo() {
   }
 }
 
+export function isCurrentUser(user) {
+  if (!user) {
+    return false
+  }
+  return getUserInfo().id === user.id
+}
+
 // function getTokenExpirationDate(encodedToken) {
 //   let token = decode(encodedToken)
 //   if (!token.exp) {

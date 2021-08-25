@@ -1,8 +1,16 @@
 <template>
   <section class="middle-section">
+    <div class="messages-container">
+      <h2>DERNIERS <strong>MESSAGES</strong></h2>
+      <ul class="list-unstyled mb-0 discuss-list mt-3" v-if="messages">
+        <li v-for="msg in messages" :key="msg">
+          <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" coloring="over" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
+        </li>
+      </ul>
+    </div>
     <div class="pad-block rounded text-white p-0" v-if="highlightedCourse">
       <div class="pad__header shadow--bottom rounded-top d-flex justify-content-between align-items-center">
-        <h5 class="pad__header__title">Votre coup de coeur</h5>
+        <h5 class="pad__header__title">Coup de cœur des intéressés</h5>
         <div style="width: min-content">
           <InlineAvatars :avatars="avatarKeys" heart-width="40px" :heart="true" spacing="-5px" border-color="grey" :course-id="highlightedCourse?.id" />
         </div>
@@ -46,19 +54,23 @@
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 import Button from '@/components/elements/Button.vue'
+import Message from '@/components/product/Message.vue'
+import { isCurrentUser } from '@/utils/auth'
 
 export default {
   name: 'HomeHighlight',
   components: {
     InlineAvatars,
     Button,
-    InlineProductInfos
+    InlineProductInfos,
+    Message
   },
   data() {
     return {
       avatarKeys: [],
       highlightedCourse: null,
-      reviewsNb: 0
+      reviewsNb: 0,
+      messages: []
     }
   },
   watch: {
@@ -78,15 +90,45 @@ export default {
       }
     }
   },
+  methods: {
+    isCurrentUser(user) {
+      return isCurrentUser(user)
+    },
+    fetchMessages(courseId) {
+      console.log('sdfsdf', courseId)
+      this.$axios.get('/messages', { message: { courseId: courseId } }).then((res) => {
+        let messages = res.data.messages
+        if (messages.length > 3) {
+          for (let i = messages.length - 1; i > messages.length - 4; i--) {
+            this.messages.unshift(messages[i])
+          }
+        } else {
+          this.messages = messages
+        }
+        console.log(this.messages)
+      })
+      //for (let i = messages.length - 1; i > messages.length - 4; i--) {}
+    }
+  },
   created() {
     this.$axios.get('/courses', { params: { highlighted: true } }).then((res) => {
       this.highlightedCourse = res.data.course
+      this.fetchMessages(res.data.course.id)
     })
   }
 }
 </script>
 
 <style scoped>
+.messages-container {
+  margin-left: 12%;
+  margin-right: 12%;
+  width: 550px;
+}
+.messages-container h2 {
+  letter-spacing: 0.03rem;
+  margin-bottom: 80px;
+}
 .pad__content__sports {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -194,6 +236,7 @@ export default {
 }
 .middle-section {
   display: flex;
+  max-height: 1000px;
   min-height: 530px;
   border-top: 25px solid #ffffff70;
   border-bottom: 25px solid #ffffff70;
