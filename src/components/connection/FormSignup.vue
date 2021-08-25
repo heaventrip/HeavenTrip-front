@@ -48,10 +48,12 @@
   <div class="d-flex regist mb-1">
     <div>
       <!--    <input id="signup-legal" type="checkbox" v-model="legal" /> -->
-      <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant sur s'inscrire, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label>
+      <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant sur poursuivre l'inscription, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label>
     </div>
   </div>
-  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': v$.$invalid }" text="S'inscrire" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
+  <Button @click="$emit('submitted-form')" text="Passer(dev)" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
+
+  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': v$.$invalid }" text="Poursuivre l'inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
 </template>
 
 <script>

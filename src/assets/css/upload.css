@@ -88,6 +88,7 @@
 }
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-close {
+  display: none;
   position: absolute;
   right: -30px;
   top: -30px;
@@ -143,7 +144,8 @@
   border: none;
   align-self: center;
   position: relative;
-  margin-left: 165px;
+  margin-left: 200px;
+  /* margin-left: 165px; */
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 35px;
@@ -218,7 +220,7 @@
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-drop-area:hover {
   cursor: pointer;
   border-color: rgba(0, 0, 0, 0.1);
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.342);
 }
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step2 {
@@ -226,7 +228,8 @@
 }
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop {
-  margin-left: 140px;
+  margin-left: 170px;
+  /* margin-left: 140px; */
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -516,7 +519,8 @@
   background-color: #292f33;
   display: flex;
   float: right;
-  margin-left: 112px;
+  margin-left: 82px;
+  /* margin-left: 112px; */
   margin-top: 15px;
 }
 
