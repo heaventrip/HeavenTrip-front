@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center pr-0 pl-5" :class="[activitiesIsActive || destinationsIsActive ? 'navbar-filter--grey' : '', agencyIsActive ? 'navbar-filter--white' : '']">
-    <div @click="onClickNavLogo()" class="navbar-logo" style="margin-right: 5rem">
-      <InlineSvg v-if="agencyIsActive" :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="#292f33" />
+  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center pr-0 pl-5" :class="[['activities', 'destinations'].includes(activeTab) ? 'navbar-filter--grey' : '', activeTab === 'agency' ? 'navbar-filter--white' : '']">
+    <div @click="onClickNavLogo" class="navbar-logo" style="margin-right: 5rem">
+      <InlineSvg v-if="['agency', 'news'].includes(activeTab)" :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="#292f33" />
       <InlineSvg v-else :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="white" />
     </div>
     <!-- NOTE MOBILE ONLY -->
@@ -44,7 +44,7 @@
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
         <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button> -->
-      <ul v-if="activitiesIsActive && sportCategories !== []" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content; border-bottom: none !important">
+      <ul v-if="activeTab === 'activities' && sportCategories.length" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content; border-bottom: none !important">
         <li class="nav-item" role="presentation">
           <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer border-0">{{ sportCategories[0]?.name }}</a>
         </li>
@@ -75,26 +75,26 @@
       </div>
       <div class="tab-content main-wrapper" :class="{ 'd-none': !navIsActive }">
         <div @click="dismissNav" type="button" style="position: absolute; top: 10%; right: 20%; z-index: 10">
-          <InlineSvg v-if="agencyIsActive" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN_DARK.svg')" height="60" />
+          <InlineSvg v-if="['agency', 'news'].includes(activeTab)" :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN_DARK.svg')" height="60" />
           <InlineSvg v-else :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')" height="60" />
         </div>
         <transition name="nav-fade">
-          <div v-show="activitiesIsActive" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+          <div v-show="activeTab === 'activities'" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <ActivitiesTab @fetched-categ="setCateg" ref="activitiesTab" />
           </div>
         </transition>
         <transition name="nav-fade">
-          <div v-show="agencyIsActive" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
+          <div v-show="activeTab === 'agency'" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
             <AgencyTab ref="agencyTab" />
           </div>
         </transition>
         <transition name="nav-fade">
-          <div v-show="destinationsIsActive" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+          <div v-show="activeTab === 'destinations'" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <DestinationsTab />
           </div>
         </transition>
         <transition name="nav-fade">
-          <div v-show="newsIsActive" id="pills-news" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
+          <div v-show="activeTab === 'news'" id="pills-news" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
             <keep-alive>
               <component :is="'HomeArticles'"></component>
             </keep-alive>
@@ -114,7 +114,6 @@ import ActivitiesTab from '@/components/nav/ActivitiesTab.vue'
 import DestinationsTab from '@/components/nav/DestinationsTab.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeArticles from '@/components/home/HomeArticles.vue'
-import gsap from 'gsap'
 
 export default {
   name: 'TheNavSticky',
@@ -129,10 +128,11 @@ export default {
   data() {
     return {
       // headerEl: '',
-      activitiesIsActive: false,
-      destinationsIsActive: false,
-      agencyIsActive: false,
-      newsIsActive: false,
+      // activitiesIsActive: false,
+      // destinationsIsActive: false,
+      // agencyIsActive: false,
+      // newsIsActive: false,
+      activeTab: '',
       sportCategories: []
       // bgFilter: {
       //   light: 'opacity(0.4)',
@@ -142,47 +142,35 @@ export default {
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
+      return !!this.activeTab
     }
   },
   watch: {
-    activitiesIsActive: function (newVal) {
-      if (newVal === true) {
-        this.$emit('changed-tab', 'activities')
-        // this.changeBgFilter(this.bgFilter.dark)
-      }
-    },
-    destinationsIsActive: function (newVal) {
-      if (newVal === true) {
-        this.$emit('changed-tab', 'destinations')
-        // this.changeBgFilter(this.bgFilter.dark)
-      }
-    },
-    agencyIsActive: function (newVal) {
-      if (newVal === true) {
-        this.$emit('changed-tab', 'agency')
-        // this.changeBgFilter(this.bgFilter.light)
-        // document.body.style.position = 'fixed'
+    activeTab(newVal, oldVal) {
+      this.$emit('changed-tab', newVal)
+
+      // no restyling needed when going from agency to news or activities to destinations
+      if (['agency', 'news'].includes(newVal) && ['agency', 'news'].includes(oldVal)) return
+      if (['activities', 'destinations'].includes(newVal) && ['activities', 'destinations'].includes(oldVal)) return
+
+      if (newVal === 'agency' || newVal === 'news') {
         document.querySelector('#header_nav').style.borderBottom = '1px solid #292f3399'
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
           el.classList.toggle('navbar-grey', true)
           el.style.color = '#292f33'
         })
       }
-      if (newVal === false) {
-        this.$refs.agencyTab.resetTabs()
-        // document.body.style.position = 'static' // reset
+
+      if (newVal === 'activities' || newVal === 'destinations') {
+        if (oldVal === 'agency') {
+          this.$refs.agencyTab.resetTabs()
+        }
+
         document.querySelector('#header_nav').removeAttribute('style')
         document.querySelectorAll('.navbar-nav .nav-link').forEach((el) => {
           el.classList.toggle('navbar-grey', false)
           el.style.color = '#fff'
         })
-      }
-    },
-    newsIsActive: function (newVal) {
-      if (newVal === true) {
-        this.$emit('changed-tab', 'news')
-        // this.changeBgFilter(this.bgFilter.dark)
       }
     }
   },
@@ -194,52 +182,27 @@ export default {
       this.sportCategories = categ
     },
     dismissNav() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => {
-        this.$data[el] = false
-        this.$parent[el] = false
-      })
+      this.activeTab = false
+      this.$parent.activeTab = false
     },
     changeBgFilter(filter) {
       this.headerEl.style.filter = 'blur(3px)'
     },
     onClicked(tab) {
-      // if (tab === 'destinations') {
-      //   let tl = gsap.timeline()
-
-      //   tl.to(`#pills-activities`, {
-      //     autoAlpha: 0,
-      //     duration: 1,
-      //     ease: 'power3.inOut'
-      //   }).to('#pills-destinations', {
-      //     autoAlpha: 1,
-      //     duration: 1,
-      //     ease: 'power3.inOut'
-      //   })
-      // }
-      // these must be reset so user lands back on menu later
-      // if (tab === 'agency') {
-      //   this.$refs.agencyTab.conceptIsActive = false
-      //   this.$refs.agencyTab.teamIsActive = false
-      //   this.$refs.agencyTab.contactIsActive = false
-      // }
-
-      let varName = tab + 'IsActive'
-
       // if already active do nothing except for agency
-      // eslint-disable-next-line prettier/prettier
-      if (this.$data[varName] === true) {
-        if (!tab === 'agency') return
+      if (this.activeTab === tab && tab !== 'agency') return
 
-        this.$refs.agencyTab.resetTabs()
-      }
+      if (tab === 'agency') this.$refs.agencyTab.resetTabs()
 
-      // only show the one clicked
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
-      this.$data[varName] = true
+      this.activeTab = tab
+    },
+    leavedAllTabs() {
+      this.activeTab = ''
     }
   },
   unmounted() {
-    if (this.$parent.resetTabs) this.$parent.resetTabs()
+    this.leavedAllTabs
+    if (this.$parent.leavedAllTabs) this.$parent.leavedAllTabs()
   }
 }
 </script>
