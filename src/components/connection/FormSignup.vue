@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     async submitRegisterForm() {
-      this.v$.touch()
+      this.v$.$touch()
       if (this.v$.$error) return
 
       this.$axios

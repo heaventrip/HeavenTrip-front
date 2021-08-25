@@ -5,16 +5,16 @@
     :class="{
       'header--home': currentRoute('Home'),
       'header-filter--home': !navIsActive && currentRoute('Home'),
-      'header-filter--grey': activitiesIsActive || destinationsIsActive,
-      'header-filter--light': agencyIsActive || newsIsActive,
+      'header-filter--grey': ['activities', 'destinations'].includes(activeTab),
+      'header-filter--light': ['agency', 'news'].includes(activeTab),
       'header--search': currentRoute('Search'),
       'header-filter--search': !navIsActive && currentRoute('Search'),
-      'header-filter--search--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Search'),
-      'header-filter--search--light': (agencyIsActive || newsIsActive) && currentRoute('Search'),
+      'header-filter--search--grey': ['activities', 'destinations'].includes(activeTab) && currentRoute('Search'),
+      'header-filter--search--light': ['agency', 'news'].includes(activeTab) && currentRoute('Search'),
       'header--product': currentRoute('Product'),
       'header-filter--product': !navIsActive && currentRoute('Product'),
-      'header-filter--product--grey': (activitiesIsActive || destinationsIsActive) && currentRoute('Product'),
-      'header-filter--product--light': (agencyIsActive || newsIsActive) && currentRoute('Product')
+      'header-filter--product--grey': ['activities', 'destinations'].includes(activeTab) && currentRoute('Product'),
+      'header-filter--product--light': ['agency', 'news'].includes(activeTab) && currentRoute('Product')
     }"
   >
     <div
@@ -121,10 +121,11 @@ export default {
       navSticky: false,
       token: true,
       toggleSessions: false,
-      agencyIsActive: false,
-      destinationsIsActive: false,
-      activitiesIsActive: false,
-      newsIsActive: false,
+      // agencyIsActive: false,
+      // destinationsIsActive: false,
+      // activitiesIsActive: false,
+      // newsIsActive: false,
+      activeTab: '',
       modalBackgroundView: ''
     }
   },
@@ -135,12 +136,11 @@ export default {
     },
     navIsActive(newVal) {
       if (newVal === true) this.$emit('nav-is-active')
-      console.log('navactive')
     }
   },
   computed: {
     navIsActive() {
-      return this.activitiesIsActive || this.destinationsIsActive || this.agencyIsActive || this.newsIsActive
+      return !!this.activeTab
     }
   },
   methods: {
@@ -149,7 +149,7 @@ export default {
       else return this.$route.name === route
     },
     resetTabs() {
-      ;['activitiesIsActive', 'destinationsIsActive', 'agencyIsActive', 'newsIsActive'].forEach((el) => (this.$data[el] = false))
+      this.activeTab = ''
     },
     leavedAllTabs() {
       this.resetTabs()
@@ -159,9 +159,7 @@ export default {
     //   this.navIsActive = status
     // },
     setActiveTab(clickedTab) {
-      let varName = clickedTab + 'IsActive'
-      this.resetTabs()
-      this.$data[varName] = true
+      this.activeTab = clickedTab
     },
     logout(event) {
       localStorage.removeItem('user-token')
@@ -204,7 +202,7 @@ export default {
     if (!token_val) {
       this.token = false
     }
-    this.jquery()
+    // this.jquery()
 
     document.addEventListener('scroll', () => {
       if (window.scrollY > document.querySelector('.header').clientHeight) this.navSticky = true
@@ -226,7 +224,7 @@ export default {
   background: linear-gradient(30deg, rgba(93, 52, 98, 0.92) 20%, rgba(93, 52, 98, 0.6) 72%);
   opacity: 1;
   width: 100%;
-  height: 94vh; /* corresponds height of image */
+  height: 94vh;
   z-index: -1;
   transition: background-color 0.5s ease-in;
 }
@@ -236,7 +234,7 @@ export default {
   background-color: #292f33;
   opacity: 0.96;
   width: 100%;
-  height: 94vh; /* corresponds height of image */
+  height: 94vh;
   z-index: -1;
   transition: background-color 0.5s ease-in-out;
 }
@@ -246,7 +244,7 @@ export default {
   background-color: #fff;
   opacity: 0.96;
   width: 100%;
-  height: 94vh; /* corresponds height of image */
+  height: 94vh;
   z-index: -1;
   transition: background-color 0.5s ease-in-out;
 }
@@ -261,7 +259,7 @@ export default {
   background-color: #5a3a5fb3;
   /* opacity: 0.6; */
   width: 100%;
-  height: 100vh; /* corresponds height of image */
+  height: 100vh;
   z-index: -1;
 }
 .header-filter--search--grey::after {
@@ -270,7 +268,7 @@ export default {
   background-color: #292f33;
   opacity: 0.9;
   width: 100%;
-  height: 100vh; /* corresponds height of image */
+  height: 100vh;
   z-index: -1;
 }
 .header-filter--search--light::after {
@@ -279,7 +277,7 @@ export default {
   background-color: #fff;
   opacity: 0.8;
   width: 100%;
-  height: 100vh; /* corresponds height of image */
+  height: 100vh;
   z-index: -1;
 }
 /* PRODUCT */
@@ -293,7 +291,7 @@ export default {
   background-color: #5a3a5fb3;
   /* opacity: 0.6; */
   width: 100%;
-  height: 100vh; /* corresponds height of image */
+  height: 100vh;
   z-index: -1;
 }
 .header-filter--product--grey::after {
@@ -302,7 +300,7 @@ export default {
   background-color: #292f33;
   opacity: 0.9;
   width: 100%;
-  height: 100vh; /* corresponds height of image */
+  height: 100vh;
   z-index: -1;
 }
 .header-filter--product--light::after {
@@ -311,7 +309,7 @@ export default {
   background-color: #fff;
   opacity: 0.8;
   width: 100%;
-  height: 100vh; /* corresponds height of image */
+  height: 100vh;
   z-index: -1;
 }
 .header-bg-image {
