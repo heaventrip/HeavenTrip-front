@@ -317,9 +317,6 @@ export default {
     //     }
     //   })
     // },
-    getUserInfo() {
-      return getUserInfo()
-    },
     handleHide() {
       this.visible = false
     },
