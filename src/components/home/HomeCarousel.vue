@@ -84,7 +84,6 @@
                 :index="index"
                 :ref="(card) => cardsRef.push(card)"
                 :course="course"
-                :cards-arr="cardsArr"
                 :key="course.id"
                 :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
               />
@@ -130,99 +129,98 @@ export default {
       animFinished: true,
       courses: [],
       currentViewportWidth: '',
-      cardsArr: []
+      firstCardIndex: 0,
+      leftSlideTl: null,
+      rightSlideTl: null
+    }
+  },
+  computed: {
+    windowWrap() {
+      return gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards)
     }
   },
   methods: {
-    // biggerCard(id) {
-    //   this.activeCard = event.target
-    //   this.activeCard.tl.play()
-
-    //   this.activeCard.querySelector('.card__bg-image').classList.add('card__bg-image--hover')
-    //   this.activeCard.querySelector('.card__footer__price').classList.add('border-0')
-    // },
-    // smallerCard(id) {
-    //   this.activeCard.tl.reverse()
-
-    //   this.activeCard.querySelector('.card__bg-image').classList.remove('card__bg-image--hover')
-    //   this.activeCard.querySelector('.card__footer__price').classList.remove('border-0')
-    // },
-    slideLeft() {
-      // this.counterSlideDir = 'vertical-slide-up'
-      // let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
-      // let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
-      // // slide all left
-      // this.cardsRef.forEach((card, index) => {
-      //   tl.to(
-      //     card,
-      //     {
-      //       x: `-=${this.cardWidth + this.cardMargin}`,
-      //       ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
-      //       duration: 1.0,
-      //       modifiers: {
-      //         x: (x) => windowWrap(parseFloat(x)) + 'px'
-      //       }
-      //     },
-      //     index === 0 ? '' : '<0.08'
-      //   )
-      // })
-      // // then fade first one and put it at the end
-      // tl.to(
-      //   this.cardsRef[0],
-      //   {
-      //     opacity: 0,
-      //     duration: 0.5,
-      //     ease: 'power2.in',
-      //     onComplete: () => {
-      //       gsap.to(this.cardsRef[0], { opacity: 1, duration: 0.5, ease: 'power4.out' })
-      //       this.cardsRef.push(this.cardsRef.shift())
-      //     }
-      //   },
-      //   '0'
-      // )
-      // if (this.animFinished) {
-      //   tl.play()
-      // }
-    },
-    slideRight() {
-      this.counterSlideDir = 'vertical-slide-down'
-      let windowWrap = gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards) // card width * nb of cards
+    initLeftSlideTl() {
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
       this.cardsRef.forEach((card, index) => {
         tl.to(
-          card,
+          card.$el,
+          {
+            x: `-=${this.cardWidth + this.cardMargin}`,
+            ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
+            duration: 1,
+            modifiers: {
+              x: (x) => this.windowWrap(parseFloat(x)) + 'px'
+            }
+          },
+          index === 0 ? '' : '<0.08'
+        )
+      })
+      // and fade first one and put it at the end
+      tl.to(
+        this.cardsRef[0].$el,
+        {
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.in',
+          onComplete: () => {
+            gsap.to(this.cardsRef[0].$el, { opacity: 1, duration: 0.5, ease: 'power4.out' })
+            this.cardsRef.push(this.cardsRef.shift())
+          }
+        },
+        '0'
+      )
+      this.leftSlideTl = tl
+    },
+    initRightSlideTl() {
+      let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+
+      // slide all right
+      this.cardsRef.forEach((card, index) => {
+        tl.to(
+          card.$el,
           {
             x: `+=${this.cardWidth + this.cardMargin}`,
             ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
             duration: 1.0,
             modifiers: {
-              x: (x) => windowWrap(parseFloat(x)) + 'px'
+              x: (x) => this.windowWrap(parseFloat(x)) + 'px'
             }
           },
           '<'
         )
       })
-      console.log(tl)
 
-      // // then bring back last one
-      // tl.to(
-      //   this.cardsRef[this.cardsRef.length - 1],
-      //   {
-      //     opacity: 1,
-      //     duration: 0.5,
-      //     ease: 'power2.out',
-      //     onComplete: () => {
-      //       this.cardsRef.unshift(this.cardsRef.pop())
-      //     }
-      //   },
-      //   '0'
-      // )
+      // and bring back last one
+      tl.to(
+        this.cardsRef[this.cardsRef.length - 1].$el,
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          onComplete: () => {
+            this.cardsRef.unshift(this.cardsRef.pop())
+          }
+        },
+        '0'
+      )
+      this.rightSlideTl = tl
+    },
+    slideLeft() {
+      this.counterSlideDir = 'vertical-slide-up'
 
-      tl.play()
-      // if (this.animFinished) {
-      // }
+      if (this.animFinished) {
+        this.leftSlideTl.play()
+      }
+    },
+    slideRight() {
+      this.counterSlideDir = 'vertical-slide-down'
+
+      if (this.animFinished) {
+        this.rightSlideTl.play()
+      }
     }
   },
   beforeUpdate() {
@@ -231,11 +229,14 @@ export default {
   updated() {
     this.$nextTick(() => {
       this.nbOfCards = this.cardsRef.length
+      this.initLeftSlideTl()
+      this.initRightSlideTl()
     })
   },
   mounted() {
     this.currentViewportWidth = window.innerWidth
     this.firstName = localStorage.getItem('user.firstName')
+
     this.$axios.get('/courses').then((res) => {
       this.courses = res.data.courses
     })
