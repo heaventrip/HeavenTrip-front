@@ -34,11 +34,11 @@
       </div>
     </div>
     <div class="grey-container d-flex flex-column align-items-center text-white" style="background-color: #292f33">
-      <InlineSvg style="position: absolute; top: 2rem; left: 2rem" v-if="activeTab === 'infos'" @click="activeTab = 'login'" type="button" :src="require('@/assets/svg/arrow-right.svg')" height="20" fill="white" transform="rotate(180)" />
+      <InlineSvg style="position: absolute; top: 2rem; left: 2rem" v-if="activeTab === 'infos'" @click="previousScreen" type="button" :src="require('@/assets/svg/arrow-right.svg')" height="20" fill="white" transform="rotate(180)" />
       <div class="d-flex align-items-center" style="position: absolute; top: 2rem; right: 2rem">
         <div class="title-connection" v-if="activeTab === 'infos'" style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Complète ton <br />profil</div>
         <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
-        <InlineSvg class="title-connection" @click.stop="previousScreen" :src="require('@/assets/svg/logo-small.svg')" height="60" />
+        <InlineSvg class="title-connection" :src="require('@/assets/svg/logo-small.svg')" height="60" />
       </div>
       <div class="form-container" style="margin-top: 21vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
         <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
@@ -102,7 +102,8 @@ export default {
       genderIsValid: false,
       avatarIsValid: false,
       isSuccess: false,
-      email: ''
+      email: '',
+      tl: null
     }
   },
   watch: {
@@ -131,29 +132,27 @@ export default {
       let purpleContentBlock = document.querySelector('.purple-container__content')
       let purpleSvgsBlock = document.querySelector('.purple-container__svgs')
       let bottomBlock = document.querySelector('.bottom-block')
-      let tl = gsap.timeline()
+      let tl = gsap.timeline().pause()
 
       // slide left
       tl.to(greyContainer, { width: '88%', ease: 'power4.out', duration: 0.8 }, '<')
-      tl.to(purpleContainer, { width: '12%', ease: 'power4.out', duration: 0.8 }, '<')
-      tl.to(purpleContainer, { backgroundColor: '#d82558', duration: 0.8 }, '<')
-      tl.to(purpleContentBlock, { width: '0', duration: 0.8 }, '<')
-      tl.to(purpleSvgsBlock, { width: '100%', marginRight: '0px', duration: 0.8 }, '<')
-      tl.to(purpleContentBlock, { autoAlpha: '0', ease: 'power4.out', duration: 0.2 }, '<')
+        .to(purpleContainer, { width: '12%', ease: 'power4.out', duration: 0.8 }, '<')
+        .to(purpleContainer, { backgroundColor: '#d82558', duration: 0.8 }, '<')
+        .to(purpleSvgsBlock, { width: '100%', marginRight: '0px', duration: 0.8 }, '<')
+        .fromTo(purpleContentBlock, { width: '60%' }, { width: '0', ease: 'power4.out', duration: 0.8 }, '<')
+        .fromTo(purpleContentBlock, { autoAlpha: '1' }, { autoAlpha: '0', duration: 0.2 }, '<')
+        .to(bottomBlock, { y: '+=100%' }, '<')
 
-      // then hide bottom
-      tl.to(
-        bottomBlock,
-        {
-          y: '+=100%'
-        },
-        '2'
-      )
-
+      this.tl = tl
+      this.tl.play()
       this.activeTab = 'infos'
     },
     setNewInfoTab(val) {
       this.activeInfoTab = val
+    },
+    previousScreen() {
+      this.tl.reverse()
+      this.activeTab = 'signup'
     },
     handlePageClose() {
       if (this.fromRoute) this.$router.back()

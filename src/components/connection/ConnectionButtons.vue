@@ -122,8 +122,7 @@ export default {
       showWishlist: false,
       form: '',
       wishlists: null,
-      currUser: null,
-      left: false
+      currUser: null
     }
   },
   watch: {
