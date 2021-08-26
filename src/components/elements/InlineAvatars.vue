@@ -1,18 +1,17 @@
 <template>
-  <div class="d-flex align-items-center" :style="[pMarginBottomStyle, pMarginTopStyle]">
+  <div class="d-flex align-items-center" style="height: 42px" :style="[pMarginBottomStyle, pMarginTopStyle]">
     <div class="inline-avatar-container" v-for="(avatarId, index) in avatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
       <img class="inline-avatar-img rounded-circle" :class="{ 'inline-avatar-img--transparent': hoveredHeart }" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
     </div>
     <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="pSpacing">
-      <transition name="fade" mode="out-in">
-        <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
-        <div v-else style="position: relative" :style="[pHeartWidth, pHeartHeight]" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
-          <transition name="fade">
-            <InlineSvg v-if="hoveredHeart" :class="`heart-logo heart-logo-grey`" :src="require(`@/assets/svg/heart-logo-grey.svg`)" />
-            <InlineSvg v-else :style="pOutline" :class="`heart-logo heart-logo-white`" :src="require(`@/assets/svg/heart-logo-white.svg`)" />
-          </transition>
-        </div>
-      </transition>
+      <transition name="fade" mode="out-in"> </transition>
+      <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
+      <div v-else-if="wishlisted !== null" style="position: relative" :style="[pHeartWidth, pHeartHeight]" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
+        <transition name="fade">
+          <InlineSvg v-if="hoveredHeart" :class="`heart-logo heart-logo-grey`" :src="require(`@/assets/svg/heart-logo-grey.svg`)" />
+          <InlineSvg v-else :style="pOutline" :class="`heart-logo heart-logo-white`" :src="require(`@/assets/svg/heart-logo-white.svg`)" />
+        </transition>
+      </div>
     </div>
     <div class="avatar-count" v-if="count">+1.5k</div>
   </div>
@@ -43,7 +42,7 @@ export default {
   data() {
     return {
       hoveredHeart: false,
-      wishlisted: false,
+      wishlisted: null,
       userAvatarId: '',
       customColors: {
         'light-white': '#fcfcfc',
@@ -93,15 +92,15 @@ export default {
       else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.courseId } }).then(() => (this.wishlisted = false))
     }
   },
-  mounted() {
+  created() {
     this.userAvatarId = localStorage.getItem('user.avatarId')
-
     // check if course is already wishlisted
     this.$axios
       .get('/wishlists', { wishlist: { courseId: this.$props.courseId } })
       .then(() => (this.wishlisted = true))
       .catch(() => (this.wishlisted = false))
-
+  },
+  mounted() {
     let that = this
 
     document.querySelectorAll('.inline-avatar-container').forEach((img) => {

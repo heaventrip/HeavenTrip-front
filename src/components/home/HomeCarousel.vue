@@ -42,7 +42,7 @@
               <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Multi-activités</a>
+              <a class="nav-link multiactivity-item" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Multi-activités</a>
             </li>
           </ul>
         </div>
@@ -276,5 +276,12 @@ export default {
   color: #292f33;
   font-size: 1.5rem;
   vertical-align: sub;
+}
+.multiactivity-item {
+  transition: color 0.3s ease;
+  color: initial;
+}
+.multiactivity-item:hover {
+  color: #292f33;
 }
 </style>

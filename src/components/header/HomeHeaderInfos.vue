@@ -28,10 +28,15 @@
         </div>
         <div class="d-inline-flex d-lg-flex align-items-center justify-content-between pb-3 trippers-div">
           <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
+            <span>Je fais déjà partie</span>
+            <br />
+            des <span>{{ featuredCourse.wishlistUsers?.length }} intéressé{{ featuredCourse.wishlistUsers?.length > 1 ? 's' : '' }}</span>
+          </span>
+          <!-- <span class="bottom-left-text text-uppercase mb-0 d-none d-lg-inline-block">
             <span>Ca te titille? Rejoint</span>
             <br />
             les <span>{{ featuredCourse.wishlistUsers?.length }} intéressé{{ featuredCourse.wishlistUsers?.length > 1 ? 's' : '' }}</span>
-          </span>
+          </span> -->
           <InlineAvatars :course-id="featuredCourse?.id" :avatars="avatarKeys" outline-color="violetfullscreen" :heart="true" spacing="-10px" />
           <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
           <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
@@ -39,14 +44,14 @@
       </div>
       <div class="row no-gutters">
         <div class="col-4">
-          <Button @click="$router.push({ name: 'Product', params: { id: featuredCourse.id, showDateBtn: true } })" text="voir les <br /> dates" color="transparent" size=".8rem" />
+          <Button @click="$router.push({ name: 'Product', params: { id: featuredCourse.id, showDateBtn: true } })" text="voir les <br /> dates" color="transparent" size=".8rem" style="opacity: 0" />
           <!-- NOTE old version toggling session menu -->
           <!-- <Button @click="emitToggledSessions" text="voir les <br /> dates" color="transparent" size=".8rem" /> -->
         </div>
         <div class="col-8 bg block--white">
           <div class="block__content">
             <div class="px-0">
-              <span class="euro">{{ featuredCourse?.price }}&thinsp;&euro;</span>
+              <span class="euro">{{ featuredCourse?.price >= 1000 ? `${featuredCourse?.price.toString()[0]} ${featuredCourse?.price.toString().slice(-3)}` : featuredCourse?.price }}&hairsp;&euro;</span>
               <span class="euro-pers">/pers.</span>
               <br />
               <span class="text--smaller">Prix du stage hors options</span>
@@ -175,6 +180,7 @@ export default {
   color: #fff;
   cursor: pointer;
   height: 80px;
+  transition: background 0.3s ease;
 }
 .bttn__text {
   position: relative;
@@ -208,12 +214,6 @@ export default {
 .bttn--pink:active {
   background-color: #d82558;
   border-color: #d82558;
-}
-
-.euro {
-  font-size: 1.375rem;
-  font-weight: bold;
-  padding-right: 0.2rem;
 }
 .dates-link {
   background-color: transparent;

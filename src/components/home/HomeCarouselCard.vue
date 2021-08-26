@@ -3,6 +3,7 @@
     <div class="shadow-effect overflow-hidden position-relative">
       <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
       <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
+      <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="Multi-activités" />
       <div @click="addToWishlist" type="button" class="card-block__heart-icon" style="opacity: 0; position: absolute; top: 7%; right: 7%; z-index: 5">
         <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" />
         <InlineSvg v-else :src="require('@/assets/svg/heart-outline.svg')" height="20" />
@@ -19,19 +20,21 @@
             <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
             <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
-              <div class="card__footer__infos__heading d-flex align-items-center">
+              <div class="card__footer__infos__heading d-flex flex-column">
                 <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ course?.sports[0].name }}</span>
-                <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
-                <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ course.spot?.name }}</span>
+                <div>
+                  <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
+                  <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ course.spot?.name }}</span>
+                </div>
               </div>
-              <div class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
+              <div v-if="course.multisport" class="card__footer__infos__sub-heading mb-0 d-none d-md-inline-block">
                 <span>inclus :&nbsp;</span>
                 <span>yoga - rando - vtt neige</span>
               </div>
             </div>
           </div>
           <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
-            <div class="card__footer__price__info" style="font-weight: 300">par pers.</div>
+            <div class="card__footer__price__info" style="font-weight: 300">par pers. :</div>
             <div class="card__footer__price__euro">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</div>
           </div>
         </div>
@@ -39,19 +42,19 @@
           <div class="d-flex">
             <InlineProductInfos
               class="InlineProduct"
-              :infos="[course.spot?.country, course?.duration, 'Tout niveaux', course?.max]"
+              :infos="['Tout ', 'Tout ', 'Tout niveaux', course?.max]"
               pt="0.8rem"
               pb="0rem"
               pr="0.4rem"
               pl="0.4rem"
-              :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+              :icons="['globe', 'timer', 'intensity-2-dark', 'people']"
               color="#7c7c7c"
               width="100%"
               letter-spacing="0px"
               icon-margin="8px"
               justify-content=""
             />
-            <InlineAvatars class="pl-4" :avatars="avatarKeys" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
+            <InlineAvatars class="pl-4" :avatars="['p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd']" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
           </div>
         </div>
       </div>
@@ -88,10 +91,20 @@ export default {
     Tag
   },
   watch: {
-    course(val) {
-      if (!val.wishlistUsers) return
+    course: {
+      immediate: true,
+      handler(val) {
+        console.log('ccccccccccccccccccc', val)
+        if (!val.wishlistUsers) return
 
-      val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+        val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
+      }
+    },
+    avatarKeys: {
+      deep: true,
+      handler(val) {
+        document.querySelector('.card__footer__infos--border').style.width = `calc(100% - ${val.length * 40}px);`
+      }
     }
   },
   methods: {
@@ -124,16 +137,16 @@ export default {
       return this.$props.cardsArr.slice(cardPosition + 1)
     },
     biggerCard() {
+      this.hovered = true
       this.tl.play()
 
       this.cardBgImage.classList.add('card__bg-image--hover')
-      this.cardFooterPrice.classList.add('border-0')
     },
     smallerCard() {
+      this.hovered = false
       this.tl.reverse()
 
       this.cardBgImage.classList.remove('card__bg-image--hover')
-      this.cardFooterPrice.classList.remove('border-0')
     }
   },
   created() {
@@ -156,7 +169,7 @@ export default {
   transform: translateY(45px);
 }
 .hoverable-div {
-  transform: translateY(100px);
+  transform: translateY(120px);
 }
 .InlineProduct {
   margin-left: 0.6rem;
@@ -166,12 +179,14 @@ export default {
   position: relative;
   flex-grow: 1;
 }
+.card__footer__infos--border {
+  transition: background 0.3s ease;
+}
 .card__footer__infos--border::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -0.9rem;
-  width: 100%;
+  bottom: -1.2rem;
   height: 1px;
   background: rgba(41, 47, 51, 0.1);
 }
@@ -184,7 +199,7 @@ export default {
 }
 .card__footer__price__info {
   font-size: 0.8rem;
-  line-height: 1;
+  line-height: 1.4;
 }
 .card__footer__price__euro {
   font-size: 1.625rem;
@@ -207,7 +222,7 @@ export default {
 }
 .card__footer__infos__heading-arrow {
   margin-right: 0.7rem;
-  margin-left: 0.8rem;
+  /* margin-left: 0.8rem; */
 }
 .card__footer__infos__heading-sport {
   font-size: 1.6rem;

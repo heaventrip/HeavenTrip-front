@@ -100,7 +100,7 @@ ___________________________
 - Mot du cuisinier rajouter les mentions + enlever tabs pr le moment
 - Modal product zone blanche + large
 
-- Revoir le header recherche de façon générale avec mention dernière place
+> Revoir le header recherche de façon générale avec mention dernière place
 > Centrer la shadow sur le filtre pour renforcer le contour
 - Revoir si les cards sont corrects (devis/normal/dernière place)
 - Mettre les label
@@ -108,7 +108,11 @@ ___________________________
 > Hover du actualités : afficher les 3 articles dedans (avec fond blanc) et reprendre un bouton blanc/bg-dark en full largeur en dessous pour accéder au blog
 > Rajouter "+ 15€ de frais de gestions" après checkbox card dans checkout
 - scroll des filtres pareil que connection
-- autoriser les get de message
+- autoriser les GET de message
+- fixer fade du splash
+- dyanmiser icons niveaux dans mentions
+- fade sur les filtres search home + décalage hover/liseret
+- régler le firstname au dessus des cards
 
 IMPORTANT : bloquer les mobiles/tablettes
 IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail

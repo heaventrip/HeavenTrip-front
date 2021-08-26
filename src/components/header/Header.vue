@@ -103,6 +103,7 @@ import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
 import HomeHeaderInfos from './HomeHeaderInfos.vue'
 import ProductHeaderInfos from '@/components/header/ProductHeaderInfos.vue'
 import SearchHeaderInfos from '@/components/header/SearchHeaderInfos.vue'
+import { gsap } from 'gsap'
 
 export default {
   name: 'Header',
@@ -165,6 +166,8 @@ export default {
       if (window.scrollY > document.querySelector('.header').clientHeight) this.navSticky = true
       else this.navSticky = false
     })
+
+    gsap.fromTo('.header-bg-image', { scale: 1.4 }, { scale: 1, duration: 3, ease: 'power4.inOut' })
   }
 }
 </script>
@@ -192,6 +195,7 @@ export default {
   width: 100%;
   height: 94vh;
   z-index: -1;
+  /* transition: background 0.5s ease; */
 }
 .header-filter--light::after {
   content: '';
@@ -201,6 +205,7 @@ export default {
   width: 100%;
   height: 94vh;
   z-index: -1;
+  transition: background 0.5s ease;
 }
 /* SEARCH */
 .header--search {

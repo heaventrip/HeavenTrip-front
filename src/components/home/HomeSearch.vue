@@ -13,7 +13,7 @@
                 <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                 <span class="search-bar__filter__name">Activités</span>
               </div>
-              <Multiselect class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" @close="setBgWhite('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+              <Multiselect class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
                 <template v-slot:clear><div></div></template>
               </Multiselect>
             </div>
@@ -25,7 +25,7 @@
                 <span v-if="countrySelection.value" class="search-bar__filter__name">{{ countrySelection.value }}</span>
                 <span v-else class="search-bar__filter__name">Pays</span>
               </div>
-              <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" @close="setBgWhite('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
+              <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
                 <template v-slot:clear><div></div></template>
               </Multiselect>
             </div>
@@ -36,7 +36,7 @@
                 <InlineSvg class="search-bar__filter__svg pl-3" :src="require('@/assets/svg/date-search.svg')" height="22" />
                 <span class="search-bar__filter__name">Mois de départ</span>
               </div>
-              <Multiselect class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" @close="setBgWhite('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+              <Multiselect class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
                 <template v-slot:clear><div></div></template>
               </Multiselect>
             </div>
@@ -45,7 +45,7 @@
         <button class="btn btn-light bg-white text-uppercase search-btn filter-btn px-3 px-sm-4 rounded-right ml-auto border-left d-inline-block d-lg-none">
           <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
         </button>
-        <button @click.prevent="submitSearchForm" class="btn btn-dark text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
+        <button @click.prevent="submitSearchForm" class="bttn-search btn text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
           <div class="d-none d-lg-inline-block mb-1">rechercher</div>
           <!-- <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div> -->
         </button>
@@ -159,7 +159,7 @@ export default {
       //   .then((res) => console.log(res))
     },
     setMultiSelect(which) {
-      this.setBgGrey(which)
+      // this.setBgGrey(which)
       let filterDropdown = document.querySelector(`.${which}-multiselect .multiselect-options`)
       this.$nextTick(function () {
         filterDropdown.scrollTo({ top: filterDropdown.scrollHeight * -1 })
@@ -181,21 +181,21 @@ export default {
       element.style.backgroundColor = '#fff'
       element.style.color = '#292f33'
       element.querySelector('.search-bar__filter__svg').style.fill = '#fff'
-    },
-    turnBgGrey(el) {
-      if (!el.querySelector('.multiselect-options').style.display === 'none') return
-      el.style.backgroundColor = '#292f33'
-      el.style.borderColor = '#292f33'
-      el.style.color = '#fff'
-      el.querySelector('.search-bar__filter__svg').style.fill = '#fff'
-    },
-    turnBgWhite(el) {
-      if (!el.querySelector('.multiselect-options').style.display === 'none') return
-      el.style.backgroundColor = '#fff'
-      el.style.borderColor = '#fff'
-      el.style.color = '#292f33'
-      el.querySelector('.search-bar__filter__svg').style.fill = '#292f33'
     }
+    // turnBgGrey(el) {
+    //   if (!el.querySelector('.multiselect-options').style.display === 'none') return
+    //   el.style.backgroundColor = '#292f33'
+    //   el.style.borderColor = '#292f33'
+    //   el.style.color = '#fff'
+    //   el.querySelector('.search-bar__filter__svg').style.fill = '#fff'
+    // },
+    // turnBgWhite(el) {
+    //   if (!el.querySelector('.multiselect-options').style.display === 'none') return
+    //   el.style.backgroundColor = '#fff'
+    //   el.style.borderColor = '#fff'
+    //   el.style.color = '#292f33'
+    //   el.querySelector('.search-bar__filter__svg').style.fill = '#292f33'
+    // }
   },
   mounted() {
     this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
@@ -203,10 +203,10 @@ export default {
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').prepend(tagContainer)
     })
-    document.querySelectorAll('.multi-select-filter').forEach((el) => {
-      el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))
-      el.addEventListener('mouseleave', (e) => this.turnBgWhite(e.target))
-    })
+    // document.querySelectorAll('.multi-select-filter').forEach((el) => {
+    //   el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))
+    //   el.addEventListener('mouseleave', (e) => this.turnBgWhite(e.target))
+    // })
     this.$axios.get('/countries').then((res) => {
       res.data.countries.forEach((country) => {
         this.countrySelection.options.push({ value: country.id, label: country.name })
@@ -222,8 +222,27 @@ export default {
 </script>
 
 <style scoped>
+.bttn-search {
+  background: #292f33;
+  color: white;
+  transition: background 0.3s ease;
+}
+.bttn-search:hover {
+  background: #d82558;
+}
+.search-bar__filter__svg {
+  fill: #292f33;
+  transition: fill 0.3s ease;
+}
 .multi-select-filter {
   transition: all 0.3s ease;
+}
+.multi-select-filter:hover {
+  background: #292f33;
+  color: white;
+}
+.multi-select-filter:hover .search-bar__filter__svg {
+  fill: white;
 }
 .search-input::placeholder {
   color: #b4b4b4;
@@ -233,5 +252,9 @@ export default {
   margin-left: 1rem;
   vertical-align: middle;
   font-size: 0.875rem;
+}
+.centered-div {
+  box-shadow: none;
+  border-radius: 6px;
 }
 </style>

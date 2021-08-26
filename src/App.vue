@@ -5,7 +5,7 @@
     </transition>
   </router-view>
 
-  <transition>
+  <transition name="fade-splash">
     <vue-element-loading :active="initialLoading" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
   </transition>
 </template>
@@ -160,11 +160,19 @@ body.modal-open::after {
 /* FADE SLOW */
 .fade-slow-leave-active,
 .fade-slow-enter-active {
-  transition: opacity 0.5s ease-in-out;
   transition: opacity 0.2s ease-in-out;
 }
 .fade-slow-enter-from,
 .fade-slow-leave-to {
+  opacity: 0;
+}
+
+/* FADE splash */
+.fade-splash-enter-active,
+.fade-splash-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-splash-leave-to {
   opacity: 0;
 }
 
@@ -189,6 +197,16 @@ body.modal-open::after {
 .fade-leave-to {
   opacity: 0;
 }
+
+/* FADE DELAYED */
+.fade-delayed-enter-active,
+.fade-delayed-leave-active {
+  transition: opacity 0.3s ease 0.3s;
+}
+.fade-delayed-enter-from,
+.fade-delayed-leave-to {
+  opacity: 0;
+}
 #nav {
   padding: 30px;
 }
@@ -198,6 +216,11 @@ body.modal-open::after {
 }
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.euro {
+  font-size: 1.375rem;
+  font-weight: bold;
+  padding-right: 0.3rem;
 }
 .muli {
   font-family: Muli, sans-serif;

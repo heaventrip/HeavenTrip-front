@@ -78,7 +78,7 @@
             <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/people.svg`)" height="28" />
             <span class="block__text-content">
               <div class="block__text-content__title">Capacité</div>
-              <div>{{ course.max }}</div>
+              <div>{{ course.max }} max.</div>
             </span>
           </div>
         </div>
