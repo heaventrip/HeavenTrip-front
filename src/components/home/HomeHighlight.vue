@@ -1,6 +1,6 @@
 <template>
   <section class="middle-section">
-    <div class="messages-container">
+    <div v-if="messages.length > 0" class="messages-container">
       <h2>DERNIERS <strong>MESSAGES</strong></h2>
       <ul class="list-unstyled mb-0 discuss-list mt-3" v-if="messages">
         <li v-for="msg in messages" :key="msg">
@@ -95,7 +95,6 @@ export default {
       return isCurrentUser(user)
     },
     fetchMessages(courseId) {
-      console.log('sdfsdf', courseId)
       this.$axios.get('/messages', { message: { courseId: courseId } }).then((res) => {
         let messages = res.data.messages
         if (messages.length > 3) {
@@ -105,7 +104,6 @@ export default {
         } else {
           this.messages = messages
         }
-        console.log(this.messages)
       })
       //for (let i = messages.length - 1; i > messages.length - 4; i--) {}
     }

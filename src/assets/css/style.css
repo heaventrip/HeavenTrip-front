@@ -2930,8 +2930,8 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .reply-container {
-  background-color: #fcfcfc;
-  border-radius: 4px;
+  background-color: #ebebeb;
+  /*   border-radius: 4px; */
   padding: 20px;
   font-size: 0.625rem;
   font-weight: 700;

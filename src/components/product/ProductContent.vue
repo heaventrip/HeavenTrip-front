@@ -108,7 +108,7 @@
               </li>
             </ul>
           </div>
-          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #fcfcfc">
+          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #ebebeb">
             <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="2"> </textarea>
             <button class="ml-3 fg-1 text-center" type="submit">
               <InlineSvg :src="require('@/assets/svg/send.svg')" height="20" />
@@ -457,11 +457,11 @@ button {
   position: fixed;
   background-color: white;
   box-shadow: 0 0 3px #ebebeb;
-  height: calc(100vh - 71px - 100px - 40px); /* substract top nav and booking footer */
+  height: calc(100vh - 32px - 100px - 40px); /* substract top nav and booking footer */
 }
 @media only screen and (min-width: 1441px) {
   .aside-slider {
-    height: calc(100vh - 71px - 120px - 40px);
+    height: calc(100vh - 32px - 120px - 40px); /* height: calc(100vh - 71px - 120px - 40px);*/
   }
 }
 .aside-slider .swiper-slide__img {

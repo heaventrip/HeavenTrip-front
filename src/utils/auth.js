@@ -58,7 +58,7 @@ export function getUserInfo() {
 }
 
 export function isCurrentUser(user) {
-  if (!user) {
+  if (!user || !getUserInfo()) {
     return false
   }
   return getUserInfo().id === user.id
