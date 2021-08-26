@@ -65,13 +65,38 @@
           <div v-if="!isSuccess" @click="activeInfoTabByName('bio')" type="button" :style="{ color: avatarIsValid ? '#ffffff' : '' }" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }">Quelques mots</div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
         </div>
-        <div class="d-flex connection-nav-container" style="margin-bottom: 40px" v-else>
-          <div @click="activeTab = 'login'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'login' }">Connexion</div>
-          <div @click="activeTab = 'signup'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'signup' }">Inscription</div>
+        <div class="d-flex connection-nav-container" v-else>
+          <div
+            @click="
+              () => {
+                activeTab = 'login'
+                tlConnectionTab.reverse()
+              }
+            "
+            type="button"
+            class="connection-nav-button button-sign"
+            :class="{ 'connection-nav-button--active': activeTab === 'login' }"
+          >
+            Connexion
+          </div>
+          <div
+            @click="
+              () => {
+                activeTab = 'signup'
+                tlConnectionTab.play()
+              }
+            "
+            type="button"
+            class="connection-nav-button button-sign"
+            :class="{ 'connection-nav-button--active': activeTab === 'signup' }"
+          >
+            Inscription
+          </div>
           <!--<div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
         </div>
+        <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
         <transition name="fade-fast" mode="out-in">
-          <form :key="activeTab" :style="[activeTab === 'login' ? 'margin-top: 90px ' : '']">
+          <form :key="activeTab" :style="[activeTab === 'login' ? 'margin-top: 90px ' : activeTab === 'signup' ? 'margin-top: 50px ' : '']">
             <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
             <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @submitted-form="showInfoScreen" />
             <FormInfos v-else-if="activeTab === 'infos'" :email="email" @changed-tab="setNewInfoTab" @gender-is-valided="genderIsValid = true" @avatar-is-valided="avatarIsValid = true" @success="isSuccess = true" :active-info-tab="activeInfoTab" ref="formInfos" />
@@ -121,7 +146,8 @@ export default {
       avatarIsValid: false,
       isSuccess: false,
       email: '',
-      tl: null
+      tl: null,
+      tlConnectionTab: null
     }
   },
   watch: {
@@ -138,11 +164,22 @@ export default {
       }
     }
   },
+  mounted() {
+    this.createTsConnectionTab()
+  },
   methods: {
     activeInfoTabByName(tabName) {
       if (this.$refs.formInfos.stepper[tabName].authorize) {
         this.activeInfoTab = tabName
       }
+    },
+    createTsConnectionTab() {
+      let borderSelection = document.querySelector('.border-selection')
+      let tlConnectionTab = gsap.timeline().pause()
+
+      tlConnectionTab.to(borderSelection, { width: '94', x: '+=116', ease: 'power1.out', duration: 0.06 })
+
+      this.tlConnectionTab = tlConnectionTab
     },
     showInfoScreen() {
       let purpleContainer = document.querySelector('.purple-container')
@@ -232,13 +269,19 @@ export default {
 }
 .connection-nav-button--active {
   color: rgba(255, 255, 255);
-  border-bottom: 1px solid white;
+  border-bottom: 0px solid white;
 }
 .connection-nav-button--valid--active {
   border-bottom: 1px solid #d82558;
 }
 .button-sign:hover {
   color: white;
+}
+.border-selection {
+  background-color: white;
+  margin-top: 8px;
+  width: 84px;
+  height: 1px;
 }
 .center-btn,
 .center-btn:active {
