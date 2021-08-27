@@ -6,15 +6,16 @@
         <h6 class="profil-name">{{ user?.firstName }} {{ user?.lastName }}</h6>
         <span class="message-date">{{ new Date(createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
       </div>
-      <div class="message-content">{{ content }}</div>
-      <div></div>
+      <div :class="coloring">
+        <div class="message-content">{{ content }}</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['user', 'content', 'createdAt', 'position'],
+  props: ['user', 'content', 'createdAt', 'position', 'coloring'],
   data() {
     return {
       url: `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${this.$props.user?.avatarId}.jpg`
@@ -45,6 +46,9 @@ export default {
   background-color: #5a3a5f;
   color: white;
   float: right;
+}
+.right .over .message-content {
+  background-color: #292f33;
 }
 .right .message-container {
   margin-right: 15px;
@@ -86,8 +90,8 @@ export default {
   padding: 8px 17px;
   border-radius: 10px;
 }
-.message-right {
-  flex-direction: row-reverse;
+.over .message-content {
+  background-color: #ffffffa1;
 }
 @media (min-width: 2000px) {
   .message-content {

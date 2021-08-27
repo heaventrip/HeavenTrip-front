@@ -82,8 +82,8 @@
         </transition>
         <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
         <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
+          <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
           <div class="messages-container" @wheel.stop style="">
-            <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
             <!-- <Message
               :user="{
                 firstName: 'Geoff',
@@ -108,7 +108,7 @@
               </li>
             </ul>
           </div>
-          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #fcfcfc">
+          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #ebebeb">
             <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="2"> </textarea>
             <button class="ml-3 fg-1 text-center" type="submit">
               <InlineSvg :src="require('@/assets/svg/send.svg')" height="20" />
@@ -137,7 +137,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { getUserInfo } from '@/utils/auth'
+import { isCurrentUser } from '@/utils/auth'
 SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
 gsap.registerPlugin(ScrollTrigger)
 
@@ -208,10 +208,7 @@ export default {
   },
   methods: {
     isCurrentUser(user) {
-      if (!user) {
-        return false
-      }
-      return this.getUserInfo().id === user.id
+      return isCurrentUser(user)
     },
     fetchMessages() {
       this.$axios.get('/messages', { courseId: this.$props.course.id }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
@@ -320,9 +317,6 @@ export default {
     //     }
     //   })
     // },
-    getUserInfo() {
-      return getUserInfo()
-    },
     handleHide() {
       this.visible = false
     },
@@ -407,6 +401,8 @@ button {
   border: 5px solid #ebebeb;
 }
 .messages-container {
+  display: flex;
+  flex-direction: column-reverse;
   overflow-y: scroll;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -461,11 +457,11 @@ button {
   position: fixed;
   background-color: white;
   box-shadow: 0 0 3px #ebebeb;
-  height: calc(100vh - 71px - 100px - 40px); /* substract top nav and booking footer */
+  height: calc(100vh - 32px - 100px - 40px); /* substract top nav and booking footer */
 }
 @media only screen and (min-width: 1441px) {
   .aside-slider {
-    height: calc(100vh - 71px - 120px - 40px);
+    height: calc(100vh - 32px - 120px - 40px); /* height: calc(100vh - 71px - 120px - 40px);*/
   }
 }
 .aside-slider .swiper-slide__img {
