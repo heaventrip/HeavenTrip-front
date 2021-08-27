@@ -7,8 +7,10 @@
             <div class="participants-div align-items-center">
               <img class="img-fluid rounded-circle uploaded-img" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
               <h4 class="head font-weight-bold text-uppercase">
-                {{ booker.infos.firstName || 'Participant' }}
-                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"><i class="fas fa-edit mr-2"></i> Modifier</span>
+                {{ localBookerInfos.firstName || 'Participant' }}
+                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"
+                  ><i class="fas fa-edit mr-2"></i> Modifier</span
+                >
               </h4>
             </div>
           </div>
@@ -19,64 +21,76 @@
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>Nom*</label>
-                    <input type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.lastName" />
+                    <input type="text" name="" placeholder=" " class="form-control" v-model="localBookerInfos.lastName" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>Prénom*</label>
-                    <input type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.firstName" />
+                    <input type="text" name="" placeholder=" " class="form-control" v-model="localBookerInfos.firstName" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>DATE DE NAISSANCE*</label>
-                    <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="booker.infos.birthDate" />
+                    <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="localBookerInfos.birthDate" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label @click="booker.infos.gender = 'f'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.infos.gender === 'f' ? 'bg-grey text-white' : '']">Femme</label>
-                      <label @click="booker.infos.gender = 'm'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.infos.gender === 'm' ? 'bg-grey text-white' : '']">Homme</label>
+                      <label
+                        @click="localBookerInfos.gender = 'f'"
+                        class="btn gender-btn rounded-0 btn-lg px-4"
+                        style="border: 1px solid #292f33"
+                        :class="[localBookerInfos.gender === 'f' ? 'bg-grey text-white' : '']"
+                        >Femme</label
+                      >
+                      <label
+                        @click="localBookerInfos.gender = 'm'"
+                        class="btn gender-btn rounded-0 btn-lg px-4"
+                        style="border: 1px solid #292f33"
+                        :class="[localBookerInfos.gender === 'm' ? 'bg-grey text-white' : '']"
+                        >Homme</label
+                      >
                     </div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>Téléphone*</label>
-                    <input type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.phone" />
+                    <input type="text" name="" placeholder=" " class="form-control" v-model="localBookerInfos.phone" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>ADRESSE MAIL*</label>
-                    <input class="form-control" type="email" name="" v-model="booker.infos.email" />
+                    <input class="form-control" type="email" disabled name="" v-model="localBookerInfos.email" />
                     <i class="fa fa-check check-sym d-none"></i>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>Pays*</label>
-                    <input type="text" name="" class="form-control" v-model="booker.infos.country" />
+                    <input type="text" name="" class="form-control" v-model="localBookerInfos.country" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>Adresse*</label>
-                    <input type="text" name="" class="form-control" v-model="booker.infos.street" />
+                    <input type="text" name="" class="form-control" v-model="localBookerInfos.street" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
                     <label>VILLE*</label>
-                    <input type="text" name="" class="form-control" v-model="booker.infos.city" />
+                    <input type="text" name="" class="form-control" v-model="localBookerInfos.city" />
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <label>Code postal*</label>
-                    <input type="text" name="" class="form-control" v-model="booker.infos.postalCode" />
+                    <input type="text" name="" class="form-control" v-model="localBookerInfos.postalCode" />
                   </div>
                 </div>
                 <!-- <div class="col-12">
@@ -95,50 +109,68 @@
 </template>
 
 <script>
+import { required, helpers } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
 export default {
   name: 'CheckoutWizardBooker',
+  props: ['booker'],
+  setup() {
+    return { v$: useVuelidate() }
+  },
+  validationConfig: {
+    $autoDirty: true
+  },
   data() {
     return {
       allowForm: false,
-      booker: {
-        infos: {
-          firstName: 'a',
-          lastName: 'a',
-          birthDate: 'a',
-          phone: 'a',
-          email: 'a',
-          gender: 'a',
-          country: 'a',
-          city: 'a',
-          street: 'a',
-          postalCode: 'a'
+      localBookerInfos: this.$props.booker.infos
+    }
+  },
+  validations() {
+    return {
+      localBookerInfos: {
+        firstName: {
+          required: helpers.withMessage('Ce champ est requis', required)
         },
-        booking: {
-          room: [],
-          roomMate: 'a',
-          equipmentRental: null,
-          noExtraActivities: null,
-          extraActivities: [],
-          extraNotes: 'a',
-          insurance: 'a'
+        lastName: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        birthDate: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        phone: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        gender: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        country: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        city: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        street: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        postalCode: {
+          required: helpers.withMessage('Ce champ est requis', required)
         }
       }
     }
   },
-  computed: {
-    bookerInfosFilled() {
-      let obj = this.booker.infos
-      return !!obj.firstName && !!obj.lastName && !!obj.birthDate && !!obj.phone && !!obj.email && !!obj.gender && !!obj.country && !!obj.city && !!obj.street && !!obj.postalCode
-    }
-  },
   watch: {
-    booker: {
+    localBookerInfos: {
       deep: true,
       handler(val) {
-        this.$emit('updated-booker', val)
-
-        if (this.bookerInfosFilled) this.$emit('complete')
-        else this.$emit('incomplete')
+        this.v$.$touch()
+        this.$emit('updated-booker-infos', val)
+      }
+    },
+    'v$.$error': {
+      handler(error) {
+        if (!error) this.$emit('complete', true)
+        else this.$emit('complete', false)
       }
     }
   }

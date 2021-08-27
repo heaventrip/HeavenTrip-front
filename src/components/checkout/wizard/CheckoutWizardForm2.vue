@@ -4,7 +4,12 @@
     <div class="card-header rounded-0 border-0 p-0 d-flex">
       <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
         <div class="participant-img-container position-relative">
-          <img class="participant-img mr-3" fluid src="https://res.cloudinary.com/heaventrip/image/upload/v1624841583/yow5loelun43c3xbdbiw.jpg" style="height: 50px; border: 1px solid #292f33; box-shadow: none; outline: none" />
+          <img
+            class="participant-img mr-3"
+            fluid
+            src="https://res.cloudinary.com/heaventrip/image/upload/v1624841583/yow5loelun43c3xbdbiw.jpg"
+            style="height: 50px; border: 1px solid #292f33; box-shadow: none; outline: none"
+          />
           <span class="participant-check" style="border: 4px solid #ebebeb"></span>
         </div>
         <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
@@ -113,7 +118,10 @@
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
               </label>
             </div>
-            <p class="assurance-para font-weight-500">Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en cas d'urgence</p>
+            <p class="assurance-para font-weight-500">
+              Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en
+              cas d'urgence
+            </p>
           </div>
         </div>
       </div>
@@ -182,7 +190,10 @@
                 </span>
               </label>
             </div>
-            <p class="assurance-para font-weight-500">Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en cas d'urgence</p>
+            <p class="assurance-para font-weight-500">
+              Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en
+              cas d'urgence
+            </p>
           </div>
         </div>
       </div>

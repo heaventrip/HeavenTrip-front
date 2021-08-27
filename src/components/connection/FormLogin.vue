@@ -11,7 +11,7 @@
     <div type="button" @click="$emit('clicked-password-forgotten')" class="mt-2 text-right" style="font-family: Muli, sans-serif; font-size: 0.75rem">Mot de passe oublié</div>
   </div>
   <div>
-    <Button :class="{ 'bttn-disabled': v$.$invalid }" @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" />
+    <Button @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" />
   </div>
 </template>
 

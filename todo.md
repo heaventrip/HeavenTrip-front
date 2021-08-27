@@ -75,30 +75,30 @@ ___________________________
 
 - POSER QUESTION SUR LE FORUM GSAP
 - Border carré sur les avatars sur chrome
-- Rendre dynamique le message "je fais partie des 14 intéressés"
-- Régle général d'affichage du prix
-- Bug pictos barre de recherche
-- Croix des filtres à gauche + lien sur tout le bouton
+> Rendre dynamique le message "je fais partie des 14 intéressés
+> Régle général d'affichage du prix
+> Bug pictos barre de recherche
+> Croix des filtres à gauche + lien sur tout le bouton
 > Faire en sorte de monter la recherche avec filtres
 
 > Filtres carousel : Nos inspirations / Multiactivités
 > Mettre compteur carousel (+ si poss nprogress)
-- Anim survol boutons carousel
+> Anim survol boutons carousel
 - Icone dynamique sur la card + voir XD pour les changements card
 
 > Lien home dans la navbar
-- Version dark du dropdown connection
+> Version dark du dropdown connection
 - Tag nb de médias
 > Lightbox du product header => pouvoir voir tout l'album
-- Bug overscroll chat
-- Remplacer les boutons par le composant button donc ac fading etc ("détails et recherche")
+> Bug overscroll chat
+> Remplacer les boutons par le composant button donc ac fading etc ("détails et recherche")
 > Prendre comme référence de flexbox les mentions "les + du spot" à appliquer à "tu vas adorer"
 > Séparer les services en options des inclus/exclus
 - Voir new design activité principale sur XD
 - Dans activités incluses séparer le prix à droite (cf XD)
 - Compteur à mettre à gauche sur slider hébergement + autoplay
 - Mot du cuisinier rajouter les mentions + enlever tabs pr le moment
-- Modal product zone blanche + large
+> Modal product zone blanche + large
 
 > Revoir le header recherche de façon générale avec mention dernière place
 > Centrer la shadow sur le filtre pour renforcer le contour
@@ -115,8 +115,8 @@ ___________________________
 - régler le firstname au dessus des cards
 
 IMPORTANT : bloquer les mobiles/tablettes
-IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail
-IMPORTANT : revoir les navIsActive ActivitiesIsActive etc.
+> IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail
+> IMPORTANT : revoir les navIsActive ActivitiesIsActive etc.
 
 
 

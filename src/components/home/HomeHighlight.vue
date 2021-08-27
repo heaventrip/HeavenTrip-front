@@ -96,16 +96,8 @@ export default {
     },
     fetchMessages(courseId) {
       this.$axios.get('/messages', { params: { courseId: courseId } }).then((res) => {
-        let messages = res.data.messages
-        if (messages.length > 3) {
-          for (let i = messages.length - 1; i > messages.length - 4; i--) {
-            this.messages.unshift(messages[i])
-          }
-        } else {
-          this.messages = messages
-        }
+        this.messages = res.data.messages.slice(-3)
       })
-      //for (let i = messages.length - 1; i > messages.length - 4; i--) {}
     }
   },
   created() {

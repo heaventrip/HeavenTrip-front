@@ -23,7 +23,10 @@
               <InlineSvg :src="require('@/assets/svg/triangle-right.svg')" height="8" style="margin-left: 1rem; margin-right: 1rem" />
               <div class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName || 'Participant 2' }}</div>
               <div class="ml-auto">
-                <span type="button" @click.prevent="removeParticipant(index, $event)" class="d-block text-danger text-uppercase" style="font-size: 0.8rem; font-weight: 400"><i class="fa fa-times-circle ml-4 mr-2 h6 mb-0"></i> Retirer ce participant</span>
+                <span type="button" @click.prevent="removeParticipant(index)" class="d-block text-danger text-uppercase" style="font-size: 0.8rem; font-weight: 400">
+                  <i class="fa fa-times-circle ml-4 mr-2 h6 mb-0"></i>
+                  Retirer ce participant
+                </span>
               </div>
             </div>
           </div>
@@ -71,9 +74,10 @@ export default {
     }
   },
   computed: {
-    participantsFilled() {
-      return this.extraParticipants.every((part) => {
-        return part.infos.firstName && part.infos.birthDate && part.infos.email
+    fieldsValid() {
+      return this.extraParticipants.forEach((participant, index) => {
+        if (!participant.infos.firstName || !participant.infos.birthDay || !this.isEmailValid(participant.infos.email)) return false
+        else return true
       })
     }
   },
@@ -82,15 +86,16 @@ export default {
       deep: true,
       handler(val) {
         this.$emit('updated-participants', val)
-
-        if (this.participantsFilled) this.$emit('complete')
-        else this.$emit('incomplete')
       }
     }
   },
   methods: {
+    isEmailValid(email) {
+      const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      return email.match(validRegex) ? true : false
+    },
     addParticipant() {
-      this.extraParticipants.splice(this.extraParticipants.length, 0, {
+      this.extraParticipants.push({
         infos: {
           firstName: '',
           birthDate: '',
@@ -106,7 +111,6 @@ export default {
           insurance: ''
         }
       })
-      // TODO check parent scroll
     },
     test() {
       document.querySelector('.btn-add-participant').scrollIntoView({ behavior: 'smooth' })

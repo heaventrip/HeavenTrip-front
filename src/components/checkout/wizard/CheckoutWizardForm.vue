@@ -23,7 +23,12 @@
       </div>
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ booker.infos.firstName || 'Participant 1' }}</strong>
     </div>
-    <div class="participant-add position-relative d-flex align-items-center" :class="[extraParticipantForHeader === extraParticipant ? '' : 'participant-opacity']" v-for="(extraParticipantForHeader, index) in extraParticipants" :key="extraParticipantForHeader">
+    <div
+      class="participant-add position-relative d-flex align-items-center"
+      :class="[extraParticipantForHeader === extraParticipant ? '' : 'participant-opacity']"
+      v-for="(extraParticipantForHeader, index) in extraParticipants"
+      :key="extraParticipantForHeader"
+    >
       <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
       <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="50" fill="#292f33" />
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
@@ -118,7 +123,7 @@
       <div class="card-body border-top">
         <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
         <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-        <textarea v-model="localBooker.booking.extraNotes" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+        <textarea v-model="localBooker.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
       </div>
     </div>
     <div v-else>
@@ -186,7 +191,14 @@
             <div class="custom-radio-container inline-blocks py-3">
               <div class="custom-control custom-radio bg-light rounded border mb-3">
                 <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${mainLoopIndex}-activ0`">
-                  <input v-model="extraParticipant.booking.extraActivities" value="1" type="checkbox" :id="`extraPart${mainLoopIndex}-activ0`" class="" :disabled="extraParticipant.booking.noExtraActivities" />
+                  <input
+                    v-model="extraParticipant.booking.extraActivities"
+                    value="1"
+                    type="checkbox"
+                    :id="`extraPart${mainLoopIndex}-activ0`"
+                    class=""
+                    :disabled="extraParticipant.booking.noExtraActivities"
+                  />
                   <!-- TODO extracti -->
                   <span class="font-weight-bold text-uppercase">
                     <div style="margin-right: 2.25rem">sup-paddle</div>
@@ -212,12 +224,12 @@
         <div class="card-body border-top">
           <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
           <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-          <textarea v-model="extraParticipant.booking.extraNotes" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+          <textarea v-model="extraParticipant.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
         </div>
       </div>
     </div>
   </transition>
-  <div class="card p-0" style="position: relative" v-if="localExtraParticipants.length">
+  <div class="card p-0" style="position: relative" v-if="extraParticipants.length">
     <div @click="nextParticipant" class="btn-next-participant" type="button">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
@@ -286,8 +298,15 @@ export default {
 
       this.currFormStep = step
     },
+    nextParticipant() {
+      if (this.currForm === 'booker') {
+        this.currForm = 'extraParticipant'
+        this.currFormParticipant = 0 // which extra participant is current
+      }
+    }
+  },
+  computed: {
     filled() {
-      console.log(this.bookerBookingFilled, this.participantsBookingFilled)
       return this.bookerBookingFilled() && this.participantsBookingFilled()
     },
     bookerBookingFilled() {
@@ -298,32 +317,28 @@ export default {
       this.localExtraParticipants.forEach((part) => arr.concat(Object.values(part.booking)))
       return arr.every((el) => el && el.length !== 0)
     },
-    nextParticipant() {
-      if (this.currForm === 'booker') {
-        this.currForm = 'extraParticipant'
-        this.currFormParticipant = 0 // which extra participant is current
-      }
-    }
-  },
-  computed: {
     bookerRoomFilled() {
       return !!this.localBooker.booking.room.length && !!this.localBooker.booking.roomMate
     },
     bookerNoteFilled() {
-      return !!this.localBooker.booking.extraNotes
+      return !!this.localBooker.booking.comment
     },
     extraParticipantRoomFilled() {
+      if (!this.localExtraParticipants.length) return
       return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length
       // return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length && !!this.localExtraParticipants[this.currFormParticipant].booking.roomMate
     },
     extraParticipantEquipmentFilled() {
+      if (!this.localExtraParticipants.length) return
       return this.localExtraParticipants[this.currFormParticipant].booking.equipmentRental !== null
     },
     extraParticipantActivitiesFilled() {
+      if (!this.localExtraParticipants.length) return
       return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities || this.localExtraParticipants[this.currFormParticipant].booking.extraActivities.length
     },
     extraParticipantNoteFilled() {
-      return !!this.localExtraParticipants[this.currFormParticipant].booking.extraNotes
+      if (!this.localExtraParticipants.length) return
+      return !!this.localExtraParticipants[this.currFormParticipant].booking.comment
     }
   },
   watch: {
@@ -384,7 +399,6 @@ export default {
     localExtraParticipants: {
       deep: true,
       handler(val) {
-        // if (val[0].booking.room.length > 0) if (val[0].booking.equipmentRental !== null) console.log('RENTAL EXTRAAAAAAAAAAAAAAA')
         this.$emit('updated-participants', val)
       }
     }

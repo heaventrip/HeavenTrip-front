@@ -2,13 +2,19 @@
   <div class="checkout-header sticky-header">
     <div class="checkout-header-div m-flex bg-dark text-white d-flex align-items-center text-uppercase" v-if="activeStep !== 'validation'">
       <a href="#" class="back-to-home-link text-reset text-decoration-none font-weight-500 d-flex align-items-center align-self-stretch bg-danger px-3"><i class="fa fa-home h6 mb-0"></i></a>
-      <a href="#" class="descriptif-link text-reset text-decoration-none font-weight-bold d-flex align-items-center align-self-stretch px-4 ml-5" style="border-right: 1px solid white"><i class="fa fa-chevron-left mr-3 h6 mb-0"></i> descriptif</a>
+      <a href="#" class="descriptif-link text-reset text-decoration-none font-weight-bold d-flex align-items-center align-self-stretch px-4 ml-5" style="border-right: 1px solid white"
+        ><i class="fa fa-chevron-left mr-3 h6 mb-0"></i> descriptif</a
+      >
       <div class="mb-0 ml-4 pr-4 border-right font-weight-light">{{ course?.sports[0].sportCategories[0].name }}</div>
       <div class="mb-0 ml-3 font-weight-bold">{{ course?.sports[0].name }}</div>
       <p class="ml-auto mb-0 cap-letter font-weight-light mb-0 text-right">Besoin d'un conseil ou d'un renseignement ?</p>
       <div class="d-flex justify-content-around text-white text-uppercase font-weight-500 mail-box" style="margin-right: 4vw">
-        <a href="tel:0369316618" class="text-reset text-decoration-none border-right px-4"><img class="mr-3" fluid :src="require('@/assets/images/tel.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/tel_h.png')" />03 69 31 66 18</a>
-        <a href="#" class="text-reset text-decoration-none pl-4"><img class="mr-3" fluid :src="require('@/assets/images/chat.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/chat_h.png')" />écrivez-nous</a>
+        <a href="tel:0369316618" class="text-reset text-decoration-none border-right px-4"
+          ><img class="mr-3" fluid :src="require('@/assets/images/tel.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/tel_h.png')" />03 69 31 66 18</a
+        >
+        <a href="#" class="text-reset text-decoration-none pl-4"
+          ><img class="mr-3" fluid :src="require('@/assets/images/chat.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/chat_h.png')" />écrivez-nous</a
+        >
       </div>
     </div>
     <div class="checkout-header-block d-flex shadow-sm block-header position-relative">
@@ -33,22 +39,28 @@
           <a href="#" class="text-reset text-decoration-none">
             <InlineSvg :src="require('@/assets/svg/date-search.svg')" fill="white" height="20" class="mr-3 d-inline-block" />
             <span class="d-inline-block align-middle" style="font-weight: 100">départ :&nbsp;</span>
-            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
+            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session?.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
           <a href="#" class="text-reset text-decoration-none">
             <InlineSvg :src="require('@/assets/svg/date-search.svg')" fill="white" height="20" class="mr-3 d-inline-block" />
             <span class="d-inline-block align-middle" style="font-weight: 100">retour :&nbsp;</span>
-            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
+            <span class="d-inline-block align-middle">&nbsp;{{ new Date(session?.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
         </div>
         <div class="ml-auto" v-if="activeStep !== 'validation'">
-          <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span> </span>
+          <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block">
+            <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span>
+          </span>
           <div class="d-flex justify-content-between">
             <InlineAvatars :avatars="avatarKeys" :heart="false" outline-color="violet" outline-width="4px" height="40px" spacing="-8px" mt="0.5rem" mb="0rem" />
           </div>
         </div>
       </div>
-      <div class="ml-auto activity-total d-flex align-items-center total-amount-block" style="border-left: 1px solid rgba(255, 255, 255, 0.15); color: white" :style="{ backgroundColor: activeStep === 'validation' ? '#292f33' : 'rgb(90, 58, 95)' }">
+      <div
+        class="ml-auto activity-total d-flex align-items-center total-amount-block"
+        style="border-left: 1px solid rgba(255, 255, 255, 0.15); color: white"
+        :style="{ backgroundColor: activeStep === 'validation' ? '#292f33' : 'rgb(90, 58, 95)' }"
+      >
         <div class="total-amount text-uppercase mb-0" :style="{ padding: activeStep === 'validation' ? '0 2rem' : '' }">
           <span v-if="activeStep === 'validation'">Total de la<br />réservation :<br /></span>
           <span v-else>Prix total :<br /></span>

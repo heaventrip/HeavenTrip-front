@@ -98,8 +98,8 @@
         <transition name="fade-fast" mode="out-in">
           <form :key="activeTab" :style="[activeTab === 'login' ? 'margin-top: 90px ' : activeTab === 'signup' ? 'margin-top: 50px ' : '']">
             <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
-            <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @submitted-form="showInfoScreen" />
-            <FormInfos v-else-if="activeTab === 'infos'" :email="email" @changed-tab="setNewInfoTab" @gender-is-valided="genderIsValid = true" @avatar-is-valided="avatarIsValid = true" @success="isSuccess = true" :active-info-tab="activeInfoTab" ref="formInfos" />
+            <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @completed="bringInfoForm" />
+            <FormInfos v-else-if="activeTab === 'infos'" :user="user" @changed-tab="setNewInfoTab" @gender-is-valided="genderIsValid = true" @avatar-is-valided="avatarIsValid = true" @submitted-form="isSuccess = true" :active-info-tab="activeInfoTab" ref="formInfos" />
             <Password v-else-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
           </form>
         </transition>
@@ -147,7 +147,8 @@ export default {
       isSuccess: false,
       email: '',
       tl: null,
-      tlConnectionTab: null
+      tlConnectionTab: null,
+      user: null
     }
   },
   watch: {
@@ -168,6 +169,10 @@ export default {
     this.createTsConnectionTab()
   },
   methods: {
+    bringInfoForm(userObj) {
+      this.user = userObj
+      this.showInfoScreen()
+    },
     activeInfoTabByName(tabName) {
       if (this.$refs.formInfos.stepper[tabName].authorize) {
         this.activeInfoTab = tabName

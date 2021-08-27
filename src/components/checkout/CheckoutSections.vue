@@ -23,7 +23,11 @@
         <div
           class="checkout-progress-bar"
           style="position: sticky; top: 0; z-index: 15"
-          :class="[activeStep === 'booker' || activeStep === 'participants' || activeStep === 'insurance' || (activeStep === 'options' && $windowWidth <= 1366) ? 'checkout-progress-bar--bg-fade' : 'checkout-progress-bar--bg-white']"
+          :class="[
+            activeStep === 'booker' || activeStep === 'participants' || activeStep === 'insurance' || (activeStep === 'options' && $windowWidth <= 1366)
+              ? 'checkout-progress-bar--bg-fade'
+              : 'checkout-progress-bar--bg-white'
+          ]"
           v-if="activeStep !== 'validation' && activeStep !== 'success'"
         >
           <div class="d-flex w-100 py-5">
@@ -35,18 +39,49 @@
         </div>
         <transition name="fade" mode="out-in" @before-leave="beforeLeave">
           <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
-            <keep-alive>
-              <CheckoutWizardBooker @complete="bookerComplete = true" @incomplete="bookerComplete = false" @updated-booker="setBooker" v-if="activeStep === 'booker'" />
-              <CheckoutWizardParticipants @complete="participantsComplete = true" @incomplete="participantsComplete = false" @updated-participants="setParticipants" @clicked-my-infos="activeStep = 'booker'" v-else-if="activeStep === 'participants'" :booker="booker" />
-              <CheckoutWizardForm @complete="optionsComplete = true" @incomplete="optionsComplete = false" @updated-participants="setParticipants" @updated-booker="setBooker" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'options'" />
-              <CheckoutWizardForm2 @complete="insuranceComplete = true" @incomplete="insuranceComplete = false" @updated-participants="setParticipants" :booker="booker" :extra-participants="extraParticipants" :course="course" v-else-if="activeStep === 'insurance'" />
-            </keep-alive>
-            <CheckoutWizardValidation :course="course" :booker="booker" :extra-participants="extraParticipants" v-if="activeStep === 'validation'" />
+            <!-- eslint-disable-next-line prettier/prettier -->
+            <CheckoutWizardBooker
+              v-if="activeStep === 'booker'"
+              @complete="(status) => (bookerComplete = status)"
+              @updated-booker-infos="setBooker"
+              :booker="booker"
+            />
+            <CheckoutWizardParticipants
+              v-else-if="activeStep === 'participants'"
+              @complete="(status) => (participantsComplete = status)"
+              @updated-participants="setParticipants"
+              @clicked-my-infos="activeStep = 'booker'"
+              :booker="booker"
+            />
+            <CheckoutWizardForm
+              v-else-if="activeStep === 'options'"
+              @complete="(status) => (optionsComplete = status)"
+              @updated-participants="setParticipants"
+              @updated-booker="setBooker"
+              :booker="booker"
+              :extra-participants="extraParticipants"
+              :course="course"
+            />
+            <CheckoutWizardForm2
+              v-else-if="activeStep === 'insurance'"
+              @complete="(status) => (insuranceComplete = status)"
+              :booker="booker"
+              :extra-participants="extraParticipants"
+              :course="course"
+            />
+            <!-- eslint-disable-next-line prettier/prettier -->
+            <CheckoutWizardValidation
+              @complete="submitBookingForm"
+              :course="course" :booker="booker"
+              :extra-participants="extraParticipants"
+              v-if="activeStep === 'validation'"
+            />
             <CheckoutSuccess v-if="activeStep === 'success'" />
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
-              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">{{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}</button>
-              <!-- <button @click.prevent="nextStep" :class="{ disable: !stepIsComplete(activeStep) }" class="btn text-uppercase next-step-btn" style="border-radius: 0">étape suivante</button> -->
+              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
+                {{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}
+              </button>
             </div>
           </div>
         </transition>
@@ -56,7 +91,6 @@
 </template>
 
 <script>
-// import Step1 from './Step1.vue'
 import CheckoutWizardBooker from './wizard/CheckoutWizardBooker.vue'
 import CheckoutWizardParticipants from './wizard/CheckoutWizardParticipants.vue'
 import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
@@ -74,13 +108,13 @@ export default {
     CheckoutWizardValidation,
     CheckoutSuccess
   },
-  props: ['course', 'session', 'participantsNb'],
+  props: ['course', 'session'],
   data() {
     return {
       transitionEntered: false,
       steps: ['booker', 'participants', 'options', 'insurance', 'validation', 'success'],
       bookerComplete: false,
-      participantsComplete: false,
+      participantsComplete: true,
       optionsComplete: false,
       insuranceComplete: false,
       activeStep: '',
@@ -101,10 +135,10 @@ export default {
         booking: {
           room: [],
           roomMate: 'a',
-          equipmentRental: true,
-          noExtraActivities: true,
+          equipmentRental: null,
+          noExtraActivities: false,
           extraActivities: [],
-          extraNotes: 'a',
+          comment: 'a',
           insurance: 'a'
         }
       },
@@ -128,20 +162,19 @@ export default {
     }
   },
   computed: {
-    partipantsNb() {
-      return this.booker.length + this.extraParticipants.length
-    },
     showMenu() {
       return this.activeStep === 'options' && this.transitionEntered
     }
   },
   methods: {
+    isComplete(step) {
+      return this.$data[`${step}Complete`]
+    },
     beforeLeave() {
-      console.log('AAAAAAAAAAA')
       if (this.activeStep === 'options') this.transitionEntered = true
     },
     nextStep() {
-      // if (!this.stepIsComplete(this.activeStep)) return
+      if (!this.isComplete(this.activeStep)) return
 
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex + 1]
@@ -150,11 +183,8 @@ export default {
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex - 1]
     },
-    stepIsComplete(step) {
-      return this.$data[`${step}Complete`]
-    },
     setBooker(val) {
-      this.booker = val
+      this.booker.infos = val
 
       if (this.activeStep === 'booker') this.bookerInputsChanged = true
     },
@@ -163,7 +193,9 @@ export default {
     },
     submitBookingForm() {
       const AUTH_TOKEN_KEY = 'authToken'
-      let token = localStorage.getItem(AUTH_TOKEN_KEY)
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       this.$axios.post(
         '/reservations',
         {

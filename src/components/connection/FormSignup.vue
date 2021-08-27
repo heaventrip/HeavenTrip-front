@@ -3,57 +3,76 @@
   <div class="row">
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-firstName" v-model="firstName" class="form-control" :class="{ 'field-error': v$.firstName.$error }" type="text" name="" placeholder=" " />
+        <input id="signup-firstName" v-model="user.firstName" class="form-control" :class="{ 'field-error': v$.user.firstName.$error }" type="text" name="" placeholder=" " />
         <label for="signup-firstName">Prénom </label>
-        <div v-if="v$.firstName.$errors.length" class="field-error-message">{{ v$.firstName.$errors[0].$message }}</div>
+        <div v-if="v$.user.firstName.$errors.length" class="field-error-message">{{ v$.user.firstName.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-lastName" v-model="lastName" class="form-control" :class="{ 'field-error': v$.lastName.$error }" type="text" name="" placeholder=" " />
+        <input id="signup-lastName" v-model="user.lastName" class="form-control" :class="{ 'field-error': v$.user.lastName.$error }" type="text" name="" placeholder=" " />
         <label for="signup-lastName">Nom</label>
-        <div v-if="v$.lastName.$errors.length" class="field-error-message">{{ v$.lastName.$errors[0].$message }}</div>
+        <div v-if="v$.user.lastName.$errors.length" class="field-error-message">{{ v$.user.lastName.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-8">
       <div class="form-group has-float-label">
-        <input id="signup-email" v-model="email" class="form-control" :class="{ 'field-error': v$.email.$error }" type="text" name="" placeholder=" " />
+        <input id="signup-email" v-model="user.email" class="form-control" :class="{ 'field-error': v$.user.email.$error }" type="text" name="" placeholder=" " />
         <label for="signup-email">Adresse e-mail</label>
-        <div v-if="v$.email.$errors.length" class="field-error-message">{{ v$.email.$errors[0].$message }}</div>
+        <div v-if="v$.user.email.$errors.length" class="field-error-message">{{ v$.user.email.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-4">
       <div class="form-group has-float-label">
-        <input id="signup-birthDate" type="date" name="" class="form-control" :class="{ 'field-error': v$.birthDate.$error }" placeholder=" " datepicker :min="minBirthDate" required v-model="birthDate" />
+        <input
+          id="signup-birthDate"
+          v-model="user.birthDate"
+          type="date"
+          name=""
+          class="form-control"
+          :class="{ 'field-error': v$.user.birthDate.$error }"
+          placeholder=" "
+          datepicker
+          :min="minBirthDate"
+          required
+        />
         <label for="signup-birthDate">Date de naissance</label>
-        <div v-if="v$.birthDate.$errors.length" class="field-error-message">{{ v$.birthDate.$errors[0].$message }}</div>
+        <div v-if="v$.user.birthDate.$errors.length" class="field-error-message">{{ v$.user.birthDate.$errors[0].$message }}</div>
         <span class="validity"></span>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-password" v-model="password" class="form-control" :class="{ 'field-error': v$.password.$error }" type="password" name="" placeholder=" " />
+        <input id="signup-password" v-model="user.password" class="form-control" :class="{ 'field-error': v$.user.password.$error }" type="password" name="" placeholder=" " />
         <label for="signup-password">Mot de passe</label>
-        <div v-if="v$.password.$errors.length" class="field-error-message">{{ v$.password.$errors[0].$message }}</div>
+        <div v-if="v$.user.password.$errors.length" class="field-error-message">{{ v$.user.password.$errors[0].$message }}</div>
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
-        <input id="signup-passwordConfirmation" v-model="passwordConfirmation" class="form-control" :class="{ 'field-error': v$.passwordConfirmation.$error }" type="password" name="" placeholder=" " />
+        <input
+          id="signup-passwordConfirmation"
+          v-model="user.passwordConfirmation"
+          class="form-control"
+          :class="{ 'field-error': v$.user.passwordConfirmation.$error }"
+          type="password"
+          name=""
+          placeholder=" "
+        />
         <label for="signup-passwordConfirmation">Confirmer le mot de passe</label>
-        <div v-if="v$.passwordConfirmation.$errors.length" class="field-error-message">{{ v$.passwordConfirmation.$errors[0].$message }}</div>
+        <div v-if="v$.user.passwordConfirmation.$errors.length" class="field-error-message">{{ v$.user.passwordConfirmation.$errors[0].$message }}</div>
       </div>
     </div>
   </div>
   <div class="d-flex regist mb-1">
     <div>
-      <!--    <input id="signup-legal" type="checkbox" v-model="legal" /> -->
-      <label for="signup-legal" class="ml-2 password-link mr-auto"> En cliquant sur poursuivre l'inscription, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label>
+      <label for="signup-legal" class="password-link mr-auto">
+        En cliquant sur poursuivre l'inscription, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et
+        <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label
+      >
     </div>
   </div>
-  <Button @click="$emit('submitted-form')" text="Passer(dev)" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
-
-  <Button @click="submitRegisterForm" :class="{ 'bttn-disabled': v$.$invalid }" text="Poursuivre l'inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
+  <Button @click="validateForm" text="Poursuivre l'inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
 </template>
 
 <script>
@@ -73,37 +92,40 @@ export default {
   data() {
     return {
       errors: [],
-      firstName: '',
-      lastName: '',
-      birthDate: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-      legal: true
+      user: {
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+      }
     }
   },
   validations() {
     return {
-      firstName: {
-        required: helpers.withMessage('Ce champ est requis', required)
-      },
-      lastName: {
-        required: helpers.withMessage('Ce champ est requis', required)
-      },
-      birthDate: {
-        required: helpers.withMessage('Ce champ est requis', required)
-      },
-      email: {
-        required: helpers.withMessage('Ce champ est requis', required),
-        email: helpers.withMessage("L'email doit être au format xxx@xxx.xxx", email)
-      },
-      password: {
-        required: helpers.withMessage('Ce champ est requis', required),
-        minLength: helpers.withMessage('5 caractères minimum sont requis', minLength(5))
-      },
-      passwordConfirmation: {
-        required: helpers.withMessage('Ce champ est requis', required),
-        sameAs: helpers.withMessage("Le mot de passe n'est pas identique", sameAs(this.password))
+      user: {
+        firstName: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        lastName: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        birthDate: {
+          required: helpers.withMessage('Ce champ est requis', required)
+        },
+        email: {
+          required: helpers.withMessage('Ce champ est requis', required),
+          email: helpers.withMessage("L'email doit être au format xxx@xxx.xxx", email)
+        },
+        password: {
+          required: helpers.withMessage('Ce champ est requis', required),
+          minLength: helpers.withMessage('5 caractères minimum sont requis', minLength(5))
+        },
+        passwordConfirmation: {
+          required: helpers.withMessage('Ce champ est requis', required),
+          sameAs: helpers.withMessage("Le mot de passe n'est pas identique", sameAs(this.user.password))
+        }
       }
     }
   },
@@ -117,33 +139,11 @@ export default {
     }
   },
   methods: {
-    async submitRegisterForm() {
+    validateForm() {
       this.v$.$touch()
       if (this.v$.$error) return
 
-      this.$axios
-        .post('/registration', {
-          user: {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            birthDate: this.birthDate,
-            password: this.password,
-            passwordConfirmation: this.passwordConfirmation
-          }
-        })
-        .then((res) => {
-          this.firstName = ''
-          this.lastName = ''
-          this.birthDate = ''
-          this.email = ''
-          this.password = ''
-          this.passwordConfirmation = ''
-          this.$emit('submitted-form')
-          alert('Un mail de confirmation vient de vous être envoyé')
-        })
-        .catch((err) => (this.errResponse = err.message))
-      // this.$router.push('/');
+      this.$emit('completed', this.user)
     }
   }
 }
