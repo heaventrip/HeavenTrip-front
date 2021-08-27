@@ -50,10 +50,10 @@
       <div class="d-flex align-items-center mt-4">
         <div class="slider-buttons col-2 text-center">
           <div @click="slideLeft" type="button" style="transform: translateY(-220%); text-align: left; margin-left: 3vw">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 40 40" fill="#292f33">
+            <svg xmlns="http://www.w3.org/2000/svg" class="slider-buttons__left" width="50" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
-                  <path id="PICTO_ARROW_RIGHT_1" data-name="PICTO ARROW RIGHT 1" d="M23.56,14.74,17,21.27l6.6,6.53-2,2-8.64-8.53,8.64-8.54Z" />
+                  <path class="slider__arrow-left" data-name="PICTO ARROW RIGHT 1" d="M23.56,14.74,17,21.27l6.6,6.53-2,2-8.64-8.53,8.64-8.54Z" />
                   <path d="M5.52,9.38l.08-.09-.51-.52L5,8.87A18.48,18.48,0,0,0,31.13,35l.1-.08-.52-.52-.09.08A17.75,17.75,0,0,1,5.52,9.38Z" />
                   <path d="M24.27.53A20.22,20.22,0,0,0,8.93,3.08a20.77,20.77,0,0,0-3.44,2.7l-.36.35.35.35,2.41,2.4.34.34.34-.33A16.13,16.13,0,0,1,11.25,6.8,16,16,0,0,1,30.93,9a16.6,16.6,0,0,1,2.27,2.86,15.94,15.94,0,0,1-2.09,19.53l-.33.34.34.34,2.4,2.41.35.35.35-.36a20.32,20.32,0,0,0-9.95-34Z" />
                 </g>
@@ -61,10 +61,10 @@
             </svg>
           </div>
           <div @click="slideRight" type="button" style="transform: translateY(-170%); text-align: left; margin-left: 3vw">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 40 40" fill="#292f33">
+            <svg xmlns="http://www.w3.org/2000/svg" class="slider-buttons__right" width="50" viewBox="0 0 40 40" fill="#292f33">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
-                  <path id="PICTO_ARROW_RIGHT_1" data-name="PICTO ARROW RIGHT 1" d="M16.44,25.26,23,18.73l-6.6-6.53,2-2,8.64,8.53-8.64,8.54Z" />
+                  <path class="slider__arrow-right" data-name="PICTO ARROW RIGHT 1" d="M16.44,25.26,23,18.73l-6.6-6.53,2-2,8.64,8.53-8.64,8.54Z" />
                   <path d="M34.48,30.62l-.08.09.51.52.09-.1A18.48,18.48,0,0,0,8.87,5l-.1.08.52.52.09-.08a17.75,17.75,0,0,1,25.1,25.09Z" />
                   <path
                     d="M15.73,39.47a20.22,20.22,0,0,0,15.34-2.55,20.77,20.77,0,0,0,3.44-2.7l.36-.35-.35-.35-2.41-2.4-.34-.34-.34.33a16.13,16.13,0,0,1-2.68,2.09A16,16,0,0,1,9.07,31,16.6,16.6,0,0,1,6.8,28.11,15.94,15.94,0,0,1,8.89,8.58l.33-.34L8.88,7.9,6.48,5.49l-.35-.35-.35.36a20.32,20.32,0,0,0,10,34Z"
@@ -77,16 +77,9 @@
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="cards-slider d-flex overflow-hidden">
-              <HomeCarouselCard
-                v-for="(course, index) in courses"
-                @mouseenter="cardsRef[index].biggerCard()"
-                @mouseleave="cardsRef[index].smallerCard()"
-                :index="index"
-                :ref="(card) => cardsRef.push(card)"
-                :course="course"
-                :key="course.id"
-                :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
-              />
+              <div v-for="(course, index) in courses" :key="index" @mouseenter="cardsRef[index].biggerCard()" @mouseleave="cardsRef[index].smallerCard()" :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`">
+                <HomeCarouselCard :index="index" :course="course" :ref="(card) => cardsRef.push(card)" />
+              </div>
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">123456</div>
@@ -120,6 +113,7 @@ export default {
   },
   data() {
     return {
+      cards: [],
       cardsRef: [],
       counterSlideDir: 'vertical-slide-up',
       nbOfCards: 0,
@@ -131,7 +125,8 @@ export default {
       currentViewportWidth: '',
       firstCardIndex: 0,
       leftSlideTl: null,
-      rightSlideTl: null
+      rightSlideTl: null,
+      initiatedTl: false
     }
   },
   computed: {
@@ -144,9 +139,9 @@ export default {
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all left
-      this.cardsRef.forEach((card, index) => {
+      this.cards.forEach((card, index) => {
         tl.to(
-          card.$el,
+          card,
           {
             x: `-=${this.cardWidth + this.cardMargin}`,
             ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
@@ -160,27 +155,28 @@ export default {
       })
       // and fade first one and put it at the end
       tl.to(
-        this.cardsRef[0].$el,
+        this.cards[0],
         {
           opacity: 0,
           duration: 0.5,
           ease: 'power2.in',
           onComplete: () => {
             gsap.to(this.cardsRef[0].$el, { opacity: 1, duration: 0.5, ease: 'power4.out' })
-            this.cardsRef.push(this.cardsRef.shift())
+            this.cards.push(this.cards.shift())
           }
         },
         '0'
       )
+      console.log('init left')
       this.leftSlideTl = tl
     },
     initRightSlideTl() {
       let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
 
       // slide all right
-      this.cardsRef.forEach((card, index) => {
+      this.cards.forEach((card, index) => {
         tl.to(
-          card.$el,
+          card,
           {
             x: `+=${this.cardWidth + this.cardMargin}`,
             ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
@@ -195,42 +191,52 @@ export default {
 
       // and bring back last one
       tl.to(
-        this.cardsRef[this.cardsRef.length - 1].$el,
+        this.cards[this.cards.length - 1],
         {
           opacity: 1,
           duration: 0.5,
           ease: 'power2.out',
           onComplete: () => {
-            this.cardsRef.unshift(this.cardsRef.pop())
+            this.cards.unshift(this.cards.pop())
           }
         },
         '0'
       )
+      console.log('init right')
       this.rightSlideTl = tl
     },
     slideLeft() {
       this.counterSlideDir = 'vertical-slide-up'
-
+      console.log('slide left', this.leftSlideTl)
       if (this.animFinished) {
         this.leftSlideTl.play()
       }
     },
     slideRight() {
       this.counterSlideDir = 'vertical-slide-down'
-
+      console.log('slide right', this.rightSlideTl)
       if (this.animFinished) {
         this.rightSlideTl.play()
       }
     }
   },
   beforeUpdate() {
+    if (this.initiatedTl) return
+
     this.cardsRef = []
+    this.leftSlideTl = null
+    this.rightSlideTl = null
   },
   updated() {
     this.$nextTick(() => {
-      this.nbOfCards = this.cardsRef.length
+      if (!this.nbOfCards) this.nbOfCards = this.cardsRef.length
+      if (!this.cards.length) this.cards = this.cardsRef.map((ref) => ref.$el.parentElement)
+
+      if (this.initiatedTl) return
+
       this.initLeftSlideTl()
       this.initRightSlideTl()
+      this.initiatedTl = true
     })
   },
   mounted() {
@@ -255,14 +261,52 @@ export default {
   margin-bottom: 6rem;
   min-height: 420px;
 }
-/* .customers-testimonials .item-details .content.hover::after {
-  content: none !important;
+.slider-buttons__left:hover .slider__arrow-left {
+  animation: 0.3s ease-in 0s hideLeftArrow, 0.3s ease-out 0.3s showLeftArrow;
 }
-.customers-testimonials .new-link {
-  background-color: unset;
-  font-size: unset;
-  border-bottom-left-radius: unset;
-} */
+.slider-buttons__right:hover .slider__arrow-right {
+  animation: 0.3s ease-in 0s hideRightArrow, 0.3s ease-out 0.3s showRightArrow;
+}
+@keyframes hideLeftArrow {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
+@keyframes showLeftArrow {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@keyframes hideRightArrow {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+@keyframes showRightArrow {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
 .slider-counter__current {
   font-family: Oswald, sans-serif;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);

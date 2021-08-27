@@ -70,7 +70,7 @@ import gsap from 'gsap'
 
 export default {
   name: 'HomeCarouselCard',
-  props: ['course', 'index', 'cards-arr'],
+  props: ['course', 'index', 'cards-ref'],
   data() {
     return {
       animFinished: true,
