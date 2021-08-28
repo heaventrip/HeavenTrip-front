@@ -29,7 +29,9 @@
           </li>
         </ul>
       </div>
-      <a class="px-3 bg-dark d-flex d-lg-none align-items-center justify-content-around text-white menu-ref border-left" href="index.html"><img fluid :src="require('@/assets/images/mob-menu.png')" /></a>
+      <a class="px-3 bg-dark d-flex d-lg-none align-items-center justify-content-around text-white menu-ref border-left" href="index.html"
+        ><img fluid :src="require('@/assets/images/mob-menu.png')"
+      /></a>
       <div class="filter-div d-none d-md-flex">
         <!-- <Multiselect @open="changeBackground('grey')" @close="changeBackground('unset')" v-model="priceSelection.value" v-bind="priceSelection" style="width: 100%" /> -->
         <!-- <div class="btn bg-white text-dark rounded-0 text-uppercase"> <i class="fas fa-sort ml-4 symbol"></i></div>
@@ -37,17 +39,26 @@
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Durée<i class="fas fa-sort ml-4 symbol"></i></div> -->
         <div @click="sortByPrice" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <div><span class="align-middle">Prix</span><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" /></div>
+            <div>
+              <span class="align-middle">Prix</span
+              ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
+            </div>
           </div>
         </div>
         <div @click="sortByDate" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <div><span class="align-middle">Date de départ</span><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" /></div>
+            <div>
+              <span class="align-middle">Date de départ</span
+              ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
+            </div>
           </div>
         </div>
         <div @click="sortByDuration" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <div><span class="align-middle">Durée</span><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" /></div>
+            <div>
+              <span class="align-middle">Durée</span
+              ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
+            </div>
           </div>
         </div>
       </div>
@@ -63,11 +74,23 @@
             <div class="bg-white filter-body">
               <div class="filter-container theme-filter">
                 <div class="position-relative multi-select-filter" style="box-shadow: none; border-bottom: 1px solid rgba(41, 47, 51, 0.06); height: 4rem">
-                  <div class="d-flex align-items-center justify-content-around" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                  <div
+                    class="d-flex align-items-center justify-content-around"
+                    style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%"
+                  >
                     <span class="search-bar__filter__name">Thématique sportive</span>
                     <i class="fas fa-sort symbol"></i>
                   </div>
-                  <Multiselect @select="updateSearch" @deselect="updateSearch" class="theme-multiselect" ref="themeMultiselect" @open="setMultiSelect('theme')" v-model="themeSelection.value" v-bind="themeSelection" style="width: 100%">
+                  <Multiselect
+                    @select="updateSearch"
+                    @deselect="updateSearch"
+                    class="theme-multiselect"
+                    ref="themeMultiselect"
+                    @open="setMultiSelect('theme')"
+                    v-model="themeSelection.value"
+                    v-bind="themeSelection"
+                    style="width: 100%"
+                  >
                     <template v-slot:clear><div></div></template>
                   </Multiselect>
                 </div>
@@ -80,7 +103,16 @@
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
                       <span class="search-bar__filter__name">Activités<i class="fas fa-sort float-right symbol"></i></span>
                     </div>
-                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="activity-multiselect" ref="activityMultiselect" @open="setMultiSelect('activity')" v-model="activitySelection.value" v-bind="activitySelection" style="width: 100%">
+                    <Multiselect
+                      @select="updateSearch"
+                      @deselect="updateSearch"
+                      class="activity-multiselect"
+                      ref="activityMultiselect"
+                      @open="setMultiSelect('activity')"
+                      v-model="activitySelection.value"
+                      v-bind="activitySelection"
+                      style="width: 100%"
+                    >
                       <template v-slot:clear><div></div></template>
                     </Multiselect>
                   </div>
@@ -92,7 +124,16 @@
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/globe.svg')" height="22" />
                       <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
                     </div>
-                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
+                    <Multiselect
+                      @select="updateSearch"
+                      @deselect="updateSearch"
+                      class="country-multiselect"
+                      ref="countryMultiselect"
+                      @open="setMultiSelect('country')"
+                      v-model="countrySelection.value"
+                      v-bind="countrySelection"
+                      style="width: 100%"
+                    >
                       <template v-slot:clear><div></div></template>
                     </Multiselect>
                   </div>
@@ -104,7 +145,16 @@
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
                       <span class="search-bar__filter__name">Spot<i class="fas fa-sort float-right symbol"></i></span>
                     </div>
-                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="spot-multiselect" ref="spotMultiselect" @open="setMultiSelect('spot')" v-model="spotSelection.value" v-bind="spotSelection" style="width: 100%">
+                    <Multiselect
+                      @select="updateSearch"
+                      @deselect="updateSearch"
+                      class="spot-multiselect"
+                      ref="spotMultiselect"
+                      @open="setMultiSelect('spot')"
+                      v-model="spotSelection.value"
+                      v-bind="spotSelection"
+                      style="width: 100%"
+                    >
                       <template v-slot:clear><div></div></template>
                     </Multiselect>
                   </div>
@@ -116,7 +166,16 @@
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
                       <span class="search-bar__filter__name">Mois de départ<i class="fas fa-sort float-right symbol"></i></span>
                     </div>
-                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="month-multiselect" ref="monthMultiselect" @open="setMultiSelect('month')" v-model="monthSelection.value" v-bind="monthSelection" style="width: 100%">
+                    <Multiselect
+                      @select="updateSearch"
+                      @deselect="updateSearch"
+                      class="month-multiselect"
+                      ref="monthMultiselect"
+                      @open="setMultiSelect('month')"
+                      v-model="monthSelection.value"
+                      v-bind="monthSelection"
+                      style="width: 100%"
+                    >
                       <template v-slot:clear><div></div></template>
                     </Multiselect>
                   </div>
@@ -128,7 +187,16 @@
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/intensity-2-dark.svg')" height="22" />
                       <span class="search-bar__filter__name">Niveau<i class="fas fa-sort float-right symbol"></i></span>
                     </div>
-                    <Multiselect @select="updateSearch" @deselect="updateSearch" class="level-multiselect" ref="levelMultiselect" @open="setMultiSelect('level')" v-model="levelSelection.value" v-bind="levelSelection" style="width: 100%">
+                    <Multiselect
+                      @select="updateSearch"
+                      @deselect="updateSearch"
+                      class="level-multiselect"
+                      ref="levelMultiselect"
+                      @open="setMultiSelect('level')"
+                      v-model="levelSelection.value"
+                      v-bind="levelSelection"
+                      style="width: 100%"
+                    >
                       <template v-slot:clear><div></div></template>
                     </Multiselect>
                   </div>
@@ -155,7 +223,9 @@
             <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
               <div class="col-4 col-md-4 p-0">
                 <div class="position-relative w-100 h-100">
-                  <a href="/checkout"><img class="img-fluid img-fill" fluid :src="normalResult?.cover" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
+                  <a href="/checkout"
+                    ><img class="img-fluid img-fill" fluid :src="normalResult?.cover" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')"
+                  /></a>
                 </div>
               </div>
               <div class="d-flex fg-1">
@@ -223,9 +293,15 @@
             <div class="d-flex position-relative mb-5" v-for="lastSessionResult in lastSessionResults" :key="lastSessionResult">
               <div class="col-4 col-md-4 p-0" style="box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
                 <div class="position-relative w-100 h-100">
-                  <a href="/checkout"><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
+                  <a href="/checkout"
+                    ><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" />
+                    <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')"
+                  /></a>
                 </div>
-                <div class="d-flex justify-content-around align-items-center" style="position: absolute; bottom: 0; width: 100%; background-color: white; padding: 0.8rem 2rem; font-size: 0.75rem; text-transform: uppercase; height: 50px">
+                <div
+                  class="d-flex justify-content-around align-items-center"
+                  style="position: absolute; bottom: 0; width: 100%; background-color: white; padding: 0.8rem 2rem; font-size: 0.75rem; text-transform: uppercase; height: 50px"
+                >
                   <div><span style="font-weight: bold">1 place &nbsp;</span>restante</div>
                   <div class="divider"></div>
                   <div>Session du 24 décembre</div>
@@ -296,7 +372,10 @@
             <div class="d-flex position-relative mb-5" v-for="requestedTripResult in requestedTripResults" :key="requestedTripResult">
               <div class="col-4 col-md-4 p-0">
                 <div class="position-relative w-100 h-100">
-                  <a href="/checkout"><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" /> <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')" /></a>
+                  <a href="/checkout"
+                    ><img class="img-fluid img-fill" fluid :src="require('@/assets/images/asset-1.png')" />
+                    <img class="img-fluid position-pink d-none d-md-block" fluid :src="require('@/assets/images/pink.png')"
+                  /></a>
                 </div>
               </div>
               <div class="d-flex fg-1">
@@ -341,7 +420,18 @@
                         letter-spacing="0.07rem"
                       />
                     </div>
-                    <Button style="cursor: default" text-color="#292f33" text="Sur devis" background-color="#ebebeb" px="1.5rem" size=".8rem" width="max-content" weight="bold" height="inherit" icon="globe" />
+                    <Button
+                      style="cursor: default"
+                      text-color="#292f33"
+                      text="Sur devis"
+                      background-color="#ebebeb"
+                      px="1.5rem"
+                      size=".8rem"
+                      width="max-content"
+                      weight="bold"
+                      height="inherit"
+                      icon="globe"
+                    />
                   </div>
                 </div>
                 <!-- TODO changement de content au hover, et hover en gris -->

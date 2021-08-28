@@ -14,7 +14,8 @@
             </div>
             <p class="mb-0 d-none d-md-inline-block">
               <span class="font-weight-bold d-none d-lg-inline-block">{{ firstName }},</span>
-              sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y v! sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y voir les autres Trippers interesses ou inscrits et chater avec eux !
+              sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y v! sélectionné une vignette pour connaitre les dates de departs et les places
+              restantes. Tu pourras y voir les autres Trippers interesses ou inscrits et chater avec eux !
             </p>
           </div>
         </div>
@@ -24,7 +25,7 @@
       <div class="d-flex align-items-center justify-content-center w-100">
         <div class="ml-auto">
           <transition :name="counterSlideDir" mode="out-in">
-            <span class="slider-counter__current">{{ parseInt(cardsRef[0]?.index) + 1 }}</span>
+            <span class="slider-counter__current">{{ firstCardIndex + 1 }}</span>
           </transition>
           <span class="slider-counter__current mx-1">.</span>
           <sup
@@ -33,7 +34,9 @@
         </div>
         <div class="ml-5 w-50">
           <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
-            <span class="bg-white position-relative pl-4"><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')" /></span>
+            <span class="bg-white position-relative pl-4"
+              ><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')"
+            /></span>
           </div>
         </div>
         <div class="mx-auto">
@@ -55,7 +58,9 @@
                 <g id="Calque_1-2" data-name="Calque 1">
                   <path class="slider__arrow-left" data-name="PICTO ARROW RIGHT 1" d="M23.56,14.74,17,21.27l6.6,6.53-2,2-8.64-8.53,8.64-8.54Z" />
                   <path d="M5.52,9.38l.08-.09-.51-.52L5,8.87A18.48,18.48,0,0,0,31.13,35l.1-.08-.52-.52-.09.08A17.75,17.75,0,0,1,5.52,9.38Z" />
-                  <path d="M24.27.53A20.22,20.22,0,0,0,8.93,3.08a20.77,20.77,0,0,0-3.44,2.7l-.36.35.35.35,2.41,2.4.34.34.34-.33A16.13,16.13,0,0,1,11.25,6.8,16,16,0,0,1,30.93,9a16.6,16.6,0,0,1,2.27,2.86,15.94,15.94,0,0,1-2.09,19.53l-.33.34.34.34,2.4,2.41.35.35.35-.36a20.32,20.32,0,0,0-9.95-34Z" />
+                  <path
+                    d="M24.27.53A20.22,20.22,0,0,0,8.93,3.08a20.77,20.77,0,0,0-3.44,2.7l-.36.35.35.35,2.41,2.4.34.34.34-.33A16.13,16.13,0,0,1,11.25,6.8,16,16,0,0,1,30.93,9a16.6,16.6,0,0,1,2.27,2.86,15.94,15.94,0,0,1-2.09,19.53l-.33.34.34.34,2.4,2.41.35.35.35-.36a20.32,20.32,0,0,0-9.95-34Z"
+                  />
                 </g>
               </g>
             </svg>
@@ -77,8 +82,14 @@
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="cards-slider d-flex overflow-hidden">
-              <div v-for="(course, index) in courses" :key="index" @mouseenter="cardsRef[index].biggerCard()" @mouseleave="cardsRef[index].smallerCard()" :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`">
-                <HomeCarouselCard :index="index" :course="course" :ref="(card) => cardsRef.push(card)" />
+              <div
+                v-for="(course, index) in courses"
+                :key="course.id"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
+                @mouseenter="enterCard(index)"
+                @mouseleave="leaveCard(index)"
+              >
+                <HomeCarouselCard :index="index" :course="course" :ref="`card${index}`" />
               </div>
             </div>
           </div>
@@ -114,7 +125,6 @@ export default {
   data() {
     return {
       cards: [],
-      cardsRef: [],
       counterSlideDir: 'vertical-slide-up',
       nbOfCards: 0,
       cardMargin: 40,
@@ -123,20 +133,49 @@ export default {
       animFinished: true,
       courses: [],
       currentViewportWidth: '',
-      firstCardIndex: 0,
+      cardIndexCounter: 0,
       leftSlideTl: null,
       rightSlideTl: null,
-      initiatedTl: false
+      counter: 0
     }
   },
   computed: {
     windowWrap() {
-      return gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * this.nbOfCards)
+      return gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * (this.nbOfCards - 1))
+    },
+    firstCardIndex() {
+      return this.cardIndexCounter % 7
+    }
+  },
+  watch: {
+    cards(val) {
+      if (val.length === this.courses.length) {
+        this.nbOfCards = this.cards.length
+
+        this.initLeftSlideTl()
+        // this.initRightSlideTl()
+      }
     }
   },
   methods: {
+    enterCard(index) {
+      if (!this.$refs) return
+
+      this.$refs[`card${index}`].biggerCard()
+    },
+    leaveCard(index) {
+      if (!this.$refs) return
+
+      this.$refs[`card${index}`].smallerCard()
+    },
     initLeftSlideTl() {
-      let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+      let that = this
+      let tl = gsap
+        .timeline({
+          onComplete: () => that.cardIndexCounter++,
+          onReverseComplete: () => that.cardIndexCounter--
+        })
+        .pause()
 
       // slide all left
       this.cards.forEach((card, index) => {
@@ -147,31 +186,30 @@ export default {
             ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
             duration: 1,
             modifiers: {
-              x: (x) => this.windowWrap(parseFloat(x)) + 'px'
+              x: (x) => that.windowWrap(parseFloat(x)) + 'px'
             }
           },
-          index === 0 ? '' : '<0.08'
+          '<'
         )
       })
       // and fade first one and put it at the end
       tl.to(
-        this.cards[0],
+        that.cards[that.firstCardIndex],
         {
           opacity: 0,
           duration: 0.5,
-          ease: 'power2.in',
+          ease: 'power4.in',
           onComplete: () => {
-            gsap.to(this.cardsRef[0].$el, { opacity: 1, duration: 0.5, ease: 'power4.out' })
-            this.cards.push(this.cards.shift())
+            gsap.to(that.cards[that.firstCardIndex], { opacity: 1, duration: 0.5, ease: 'power4.out' })
           }
         },
         '0'
       )
-      console.log('init left')
       this.leftSlideTl = tl
     },
     initRightSlideTl() {
-      let tl = gsap.timeline({ onStart: () => (this.animFinished = false), onComplete: () => (this.animFinished = true) }).pause()
+      let that = this
+      let tl = gsap.timeline().pause()
 
       // slide all right
       this.cards.forEach((card, index) => {
@@ -195,49 +233,23 @@ export default {
         {
           opacity: 1,
           duration: 0.5,
-          ease: 'power2.out',
-          onComplete: () => {
-            this.cards.unshift(this.cards.pop())
-          }
+          ease: 'power2.out'
         },
         '0'
       )
-      console.log('init right')
       this.rightSlideTl = tl
     },
     slideLeft() {
       this.counterSlideDir = 'vertical-slide-up'
-      console.log('slide left', this.leftSlideTl)
-      if (this.animFinished) {
-        this.leftSlideTl.play()
-      }
+      this.leftSlideTl.invalidate().restart()
     },
     slideRight() {
       this.counterSlideDir = 'vertical-slide-down'
-      console.log('slide right', this.rightSlideTl)
-      if (this.animFinished) {
-        this.rightSlideTl.play()
-      }
+      this.leftSlideTl.invalidate().reverse()
     }
   },
-  beforeUpdate() {
-    if (this.initiatedTl) return
-
-    this.cardsRef = []
-    this.leftSlideTl = null
-    this.rightSlideTl = null
-  },
   updated() {
-    this.$nextTick(() => {
-      if (!this.nbOfCards) this.nbOfCards = this.cardsRef.length
-      if (!this.cards.length) this.cards = this.cardsRef.map((ref) => ref.$el.parentElement)
-
-      if (this.initiatedTl) return
-
-      this.initLeftSlideTl()
-      this.initRightSlideTl()
-      this.initiatedTl = true
-    })
+    if (!this.cards.length) this.cards = Object.values(this.$refs).map((ref) => ref.$el.parentElement)
   },
   mounted() {
     this.currentViewportWidth = window.innerWidth

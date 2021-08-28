@@ -22,21 +22,40 @@
               <span class="pad__content__title__sport">{{ highlightedCourse?.sports[0].name }}</span>
               <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mx-3"></i>{{ highlightedCourse?.spot.name }}</span>
             </div>
-            <div class="pad__content__sports d-flex align-items-center justify-content-center tooltip-div mt-4">
-              <InlineSvg v-for="includedCourse in highlightedCourse?.alternatives.filter((el) => el.isIncluded)" :key="includedCourse" class="mr-4" :src="require(`@/assets/svg/${includedCourse?.picto || 'surf'}.svg`)" height="28" />
-              <span class="ml-auto euro"
-                ><strong>{{ highlightedCourse?.price }}&euro;</strong>/pers.
-              </span>
+            <div class="pad__content__sports d-flex align-items-center justify-content-center tool-div mt-4">
+              <InlineSvg
+                v-for="includedCourse in highlightedCourse?.alternatives.filter((el) => el.isIncluded)"
+                :key="includedCourse"
+                class="mr-4"
+                :src="require(`@/assets/svg/${includedCourse?.picto || 'surf'}.svg`)"
+                height="28"
+              />
+              <span class="ml-auto euro" style="color: #292f33"
+                >{{ highlightedCourse?.price >= 1000 ? `${highlightedCourse?.price.toString()[0]} ${highlightedCourse?.price.toString().slice(-3)}` : highlightedCourse?.price }}&hairsp;&euro;</span
+              >/pers
             </div>
             <div class="d-flex align-items-center social-info">
-              <InlineProductInfos :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]" :icons="['globe', 'timer', 'intensity-2-white', 'people']" color="#292f33" />
+              <InlineProductInfos
+                :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]"
+                :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+                color="#292f33"
+              />
             </div>
           </div>
           <div class="d-flex pad__footer">
             <div class="pad__footer__review-counter shadow--top">
               <Button style="cursor: default" :text="`${reviewsNb} avis`" icon="star" color="white" weight="bold" size="0.8rem" height="60px" />
             </div>
-            <Button @click="$router.push({ path: `/product/${highlightedCourse.id}` })" class="w-100" text="Voir le détail du séjour" :arrow="true" color="pink" weight="bold" size="0.8rem" height="60px" />
+            <Button
+              @click="$router.push({ path: `/product/${highlightedCourse.id}` })"
+              class="w-100"
+              text="Voir le détail du séjour"
+              :arrow="true"
+              color="pink"
+              weight="bold"
+              size="0.8rem"
+              height="60px"
+            />
           </div>
         </div>
         <!-- TODO changement de content au hover, et hover en gris -->
@@ -182,7 +201,7 @@ export default {
   font-size: 0.75rem;
   font-weight: lighter;
 }
-.tooltip-div {
+.tool-div {
   border-top: 1px dashed #292f33;
   border-bottom: 1px dashed #292f33;
 }

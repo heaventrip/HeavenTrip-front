@@ -1,9 +1,9 @@
 <template>
   <div class="card-block" :style="{ width: cardWidth + 'px' }">
     <div class="shadow-effect overflow-hidden position-relative">
-      <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" text="2 départs" />
-      <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" />
-      <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="Multi-activités" />
+      <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
+      <!-- <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" /> -->
+      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="Multi-activités" />
       <div @click="addToWishlist" type="button" class="card-block__heart-icon" style="opacity: 0; position: absolute; top: 7%; right: 7%; z-index: 5">
         <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" />
         <InlineSvg v-else :src="require('@/assets/svg/heart-outline.svg')" height="20" />
@@ -16,9 +16,15 @@
       <div class="card__footer item-details" style="width: 100%">
         <div class="card__footer__static-infos content d-flex justify-content-between">
           <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
-            <img class="slider-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/pink.png')" />
-            <img class="slider-icon d-none d-md-inline-block d-lg-none" fluid :src="require('@/assets/images/pink2.png')" />
-            <img class="slider-icon d-inline-block d-md-none" fluid :src="require('@/assets/images/surf-1.png')" />
+            <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="100" viewBox="0 0 42.57972 37.89174">
+              <path
+                id="BACKGROUND_PICTO"
+                data-name="BACKGROUND PICTO"
+                d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
+              />
+              <InlineSvg v-if="course?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
+              <InlineSvg v-else-if="course?.sports[0]?.picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+            </svg>
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
               <div class="card__footer__infos__heading d-flex flex-column">
                 <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ course?.sports[0].name }}</span>
@@ -54,7 +60,17 @@
               icon-margin="8px"
               justify-content=""
             />
-            <InlineAvatars class="pl-4" :avatars="['p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd']" :heart="false" spacing="-10px" border-color="white" :outline="true" :count="true" mt="0rem" mb="0rem" />
+            <InlineAvatars
+              class="pl-4"
+              :avatars="['p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd', 'p4w0wymrut9wlukdhdpd']"
+              :heart="false"
+              spacing="-10px"
+              border-color="white"
+              :outline="true"
+              :count="true"
+              mt="0rem"
+              mb="0rem"
+            />
           </div>
         </div>
       </div>

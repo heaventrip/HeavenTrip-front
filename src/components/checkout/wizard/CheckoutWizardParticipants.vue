@@ -74,10 +74,11 @@ export default {
     }
   },
   computed: {
-    fieldsValid() {
-      return this.extraParticipants.forEach((participant, index) => {
-        if (!participant.infos.firstName || !participant.infos.birthDay || !this.isEmailValid(participant.infos.email)) return false
-        else return true
+    filled() {
+      let arr = new Array()
+      this.extraParticipants.forEach((part) => arr.push(part.infos.firstName, part.infos.birthDay))
+      return arr.every((el) => {
+        el && el.length
       })
     }
   },
@@ -107,7 +108,7 @@ export default {
           equipmentRental: null,
           noExtraActivities: false,
           extraActivities: [],
-          extraNotes: '',
+          comment: '',
           insurance: ''
         }
       })

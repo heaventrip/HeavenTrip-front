@@ -43,7 +43,7 @@
             <CheckoutWizardBooker
               v-if="activeStep === 'booker'"
               @complete="(status) => (bookerComplete = status)"
-              @updated-booker-infos="setBooker"
+              @updated-booker-infos="setBookerInfos"
               :booker="booker"
             />
             <CheckoutWizardParticipants
@@ -65,18 +65,21 @@
             <CheckoutWizardForm2
               v-else-if="activeStep === 'insurance'"
               @complete="(status) => (insuranceComplete = status)"
+              @updated-participants="setParticipants"
+              @updated-booker="setBooker"
               :booker="booker"
               :extra-participants="extraParticipants"
               :course="course"
             />
             <!-- eslint-disable-next-line prettier/prettier -->
             <CheckoutWizardValidation
+              v-else-if="activeStep === 'validation'"
               @complete="submitBookingForm"
-              :course="course" :booker="booker"
+              :course="course"
+              :booker="booker"
               :extra-participants="extraParticipants"
-              v-if="activeStep === 'validation'"
             />
-            <CheckoutSuccess v-if="activeStep === 'success'" />
+            <CheckoutSuccess v-else-if="activeStep === 'success'" />
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
               <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
@@ -183,8 +186,11 @@ export default {
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex - 1]
     },
-    setBooker(val) {
+    setBookerInfos(val) {
       this.booker.infos = val
+    },
+    setBooker(val) {
+      this.booker = val
 
       if (this.activeStep === 'booker') this.bookerInputsChanged = true
     },

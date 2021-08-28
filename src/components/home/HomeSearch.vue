@@ -1,6 +1,9 @@
 <template>
   <div class="search row">
-    <div class="search-bar col-12 col-sm-10 col-lg-9 mx-auto rounded p-0" style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px">
+    <div
+      class="search-bar col-12 col-sm-10 col-lg-9 mx-auto rounded p-0"
+      style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px"
+    >
       <div class="bg-white d-flex centered-div">
         <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 2rem 1.6rem 2rem">
           <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
@@ -22,7 +25,7 @@
             <div class="position-relative multi-select-filter">
               <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                 <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
-                <span v-if="countrySelection.value" class="search-bar__filter__name">{{ countrySelection.value }}</span>
+                <span v-if="countrySelection.value" class="search-bar__filter__name">{{ countrySelection.options.find((el) => el.value === countrySelection.value).label }}</span>
                 <span v-else class="search-bar__filter__name">Pays</span>
               </div>
               <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
@@ -45,13 +48,24 @@
         <button class="btn btn-light bg-white text-uppercase search-btn filter-btn px-3 px-sm-4 rounded-right ml-auto border-left d-inline-block d-lg-none">
           <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
         </button>
-        <button @click.prevent="submitSearchForm" class="bttn-search btn text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
-          <div class="d-none d-lg-inline-block mb-1">rechercher</div>
+        <button @click.prevent="goSearchPage" class="bttn-search btn text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
+          <div class="d-none d-lg-inline-block mb-1">
+            <span id="loading" v-show="fetching"></span>
+            rechercher
+          </div>
           <!-- <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div> -->
         </button>
       </div>
       <div class="tags-container d-flex justify-content-center">
-        <Button @click="clearFilters" text="<span style='text-transform: lowercase;'>supprimer tous les filtres</span>" background-color="#7c7c7c" text-color="#fff" style="transform: translateY(3px)" v-if="!!monthSelection.value.length || !!activitySelection.value.length" height="38px" />
+        <Button
+          @click="clearFilters"
+          text="<span style='text-transform: lowercase;'>supprimer tous les filtres</span>"
+          background-color="#7c7c7c"
+          text-color="#fff"
+          style="transform: translateY(3px)"
+          v-if="!!monthSelection.value.length || !!activitySelection.value.length"
+          height="38px"
+        />
       </div>
     </div>
   </div>
@@ -70,8 +84,14 @@ export default {
   },
   data() {
     return {
+      fetching: false,
       freeSearch: '',
       slideUpSearchBar: null,
+      filtered: {
+        countryArr: [],
+        activityArr: [],
+        monthArr: []
+      },
       monthSelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
@@ -108,7 +128,7 @@ export default {
       countrySelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
-        value: 0,
+        value: '',
         openDirection: 'top',
         caret: false,
         options: []
@@ -119,15 +139,23 @@ export default {
   computed: {
     totalSelectedNb() {
       return this.activitySelection.value.length + this.monthSelection.value.length
+    },
+    selectionIsActive() {
+      return this.totalSelectedNb || this.countrySelection.value
     }
   },
   watch: {
+    selectionIsActive(val) {
+      if (!val) this.resetFilters()
+    },
     firstName(newVal) {
       this.firstName = newVal
     },
     'activitySelection.value': {
       deep: true,
       handler(val) {
+        this.fetchData()
+
         if (window.scrollY > 25) return
 
         if (val.length) this.slideUpSearchBar.play()
@@ -145,21 +173,61 @@ export default {
     }
   },
   methods: {
-    submitSearchForm() {
+    resetFilters() {
+      this.activitySelection.options?.map((el) => (el.disabled = false))
+      this.countrySelection.options?.map((el) => (el.disabled = false))
+      this.monthSelection.options?.map((el) => (el.disabled = false))
+      this.fetching = false
+    },
+    goSearchPage() {
       this.$router.push({ name: 'Search', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
-      // this.$axios
-      //   .post('/courses/search', {
-      //     q: {
-      //       free_search: this.freeSearch,
-      //       spot_country_id_eq: this.countrySelection.value,
-      //       sports_id_in: this.activitySelection.value,
-      //       sessions_month_of_departure_eq: this.monthSelection.value
-      //     }
-      //   })
-      //   .then((res) => console.log(res))
+    },
+    fetchData() {
+      this.filtered.activityArr = []
+      this.filtered.countryArr = []
+      this.filtered.monthArr = []
+      this.resetFilters()
+
+      this.fetching = true
+
+      this.$axios
+        .post('/courses/search', {
+          q: {
+            free_search: this.freeSearch,
+            spot_country_id_eq: this.countrySelection.value,
+            sports_id_in: this.activitySelection.value,
+            sessions_month_of_departure_eq: this.monthSelection.value
+          }
+        })
+        .then((res) => {
+          console.log(res)
+          res.data.courses.forEach((course) => {
+            this.filtered.activityArr.push(course.sports.map((sport) => sport.id))
+            this.filtered.countryArr.push(course.country.id)
+            this.filtered.monthArr.push(course.sessions.map((session) => session.monthOfDeparture))
+          })
+
+          this.activitySelection.options.map((el) => Object.assign(el, { disabled: true }))
+          this.filtered.activityArr.flat().forEach((id) => {
+            this.activitySelection.options.find((option) => option.value === id).disabled = false
+          })
+
+          this.countrySelection.options.map((el) => Object.assign(el, { disabled: true }))
+          this.filtered.countryArr.flat().forEach((id) => {
+            this.countrySelection.options.find((option) => option.value === id).disabled = false
+          })
+
+          this.monthSelection.options.map((el) => Object.assign(el, { disabled: true }))
+          this.filtered.monthArr.flat().forEach((id) => {
+            this.monthSelection.options.find((option) => option.value === id).disabled = false
+          })
+          this.fetching = false
+        })
+        .catch((err) => {
+          this.fetching = false
+        })
     },
     setMultiSelect(which) {
-      // this.setBgGrey(which)
       let filterDropdown = document.querySelector(`.${which}-multiselect .multiselect-options`)
       this.$nextTick(function () {
         filterDropdown.scrollTo({ top: filterDropdown.scrollHeight * -1 })
@@ -169,33 +237,30 @@ export default {
       this.$refs.countryMultiselect.clear()
       this.$refs.monthMultiselect.clear()
       this.$refs.activityMultiselect.clear()
+      this.fetching = false
     },
-    setBgGrey(filterEl) {
-      let element = document.querySelector(`.${filterEl}-filter`)
-      element.style.backgroundColor = '#292f33'
-      element.style.color = '#fff'
-      element.querySelector('.search-bar__filter__svg').style.fill = '#fff'
+    fetchCountries() {
+      let arr = new Array()
+      return new Promise((resolve, _) => {
+        this.$axios.get('/countries').then((res) => {
+          res.data.countries.forEach((country) => {
+            arr.push({ value: country.id, label: country.name })
+          })
+          resolve(arr)
+        })
+      })
     },
-    setBgWhite(filterEl) {
-      let element = document.querySelector(`.${filterEl}-filter`)
-      element.style.backgroundColor = '#fff'
-      element.style.color = '#292f33'
-      element.querySelector('.search-bar__filter__svg').style.fill = '#fff'
+    fetchSports() {
+      let arr = new Array()
+      return new Promise((resolve, _) => {
+        this.$axios.get('/sports').then((res) => {
+          res.data.sports.forEach((sport) => {
+            arr.push({ value: sport.id, label: sport.name })
+          })
+          resolve(arr)
+        })
+      })
     }
-    // turnBgGrey(el) {
-    //   if (!el.querySelector('.multiselect-options').style.display === 'none') return
-    //   el.style.backgroundColor = '#292f33'
-    //   el.style.borderColor = '#292f33'
-    //   el.style.color = '#fff'
-    //   el.querySelector('.search-bar__filter__svg').style.fill = '#fff'
-    // },
-    // turnBgWhite(el) {
-    //   if (!el.querySelector('.multiselect-options').style.display === 'none') return
-    //   el.style.backgroundColor = '#fff'
-    //   el.style.borderColor = '#fff'
-    //   el.style.color = '#292f33'
-    //   el.querySelector('.search-bar__filter__svg').style.fill = '#292f33'
-    // }
   },
   mounted() {
     this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
@@ -203,10 +268,7 @@ export default {
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').prepend(tagContainer)
     })
-    // document.querySelectorAll('.multi-select-filter').forEach((el) => {
-    //   el.addEventListener('mouseenter', (e) => this.turnBgGrey(e.target))
-    //   el.addEventListener('mouseleave', (e) => this.turnBgWhite(e.target))
-    // })
+
     this.$axios.get('/countries').then((res) => {
       res.data.countries.forEach((country) => {
         this.countrySelection.options.push({ value: country.id, label: country.name })
@@ -256,5 +318,26 @@ export default {
 .centered-div {
   box-shadow: none;
   border-radius: 6px;
+}
+/* SPINNER */
+#loading {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

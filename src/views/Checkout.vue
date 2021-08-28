@@ -31,7 +31,10 @@ export default {
   },
   created() {
     this.$axios.get(`/courses/${this.$props.productId}`).then((res) => (this.course = res.data.course))
-    this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => (this.session = res.data.sessions[0]))
+    this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => {
+      this.session = res.data.sessions[0]
+      this.$root.initialLoading = false
+    })
     this.participantsNb = this.$route.params.participantsNb
     this.avatarKeys = this.$route.params.avatarKeys
   }

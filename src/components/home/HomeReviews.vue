@@ -9,20 +9,34 @@
       </div>
       <div class="d-flex align-items-center">
         <div v-for="(avatarId, index) in avatarKeys" :key="avatarId" :style="[index === 0 ? '' : 'margin-left: 25px']">
-          <img @mouseover="setReviewActive(avatarId)" class="sm-avatar rounded-circle" height="50" width="50" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" type="button" :class="[activeAvatar === avatarId ? 'avatar-opacity' : '']" />
+          <img
+            @mouseover="setReviewActive(avatarId)"
+            class="sm-avatar rounded-circle"
+            height="50"
+            width="50"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`"
+            type="button"
+            :class="[activeAvatar === avatarId ? 'avatar-opacity' : '']"
+          />
         </div>
       </div>
     </div>
     <transition name="fade-fast" mode="out-in">
       <div class="reviews__user d-flex flex-column ml-auto mr-4" :key="activeReview">
         <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
-        <img height="240" width="240" :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`" class="reviews__user-avatar rounded-circle" rel="preload" />
+        <img
+          height="240"
+          width="240"
+          :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`"
+          class="reviews__user-avatar rounded-circle"
+          rel="preload"
+        />
       </div>
     </transition>
     <transition name="fade-fast" mode="out-in">
       <div class="reviews__comment fs-1 pl-3 mr-5" :key="activeReview">
         <h6 class="text-uppercase mb-3">
-          <span class="d-inline-block" style="font-weight: 800">{{ activeReview?.session?.course.typeOfCourse }} {{ activeReview?.session.course.sports }}</span>
+          <span class="d-inline-block" style="font-weight: 800">{{ activeReview?.session?.course.typeOfCourse }} {{ activeReview?.session.course.name }}</span>
           <span class="review-comment__date d-inline-block text-nowrap" style="font-size: 0.8rem; vertical-align: baseline">
             <img class="align-baseline ml-3 mr-2" src="@/assets/svg/arrow-right.svg" style="max-height: 12px" />
             Session du {{ new Date(activeReview?.session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}

@@ -211,9 +211,9 @@ export default {
       localExtraParticipants: this.$props.extraParticipants
     }
   },
-  methods: {
+  computed: {
     filled() {
-      return this.bookerInsuranceFilled() && this.participantsInsuranceFilled()
+      return this.bookerInsuranceFilled && this.participantsInsuranceFilled
     },
     bookerInsuranceFilled() {
       return !!this.localBooker.booking.insurance
@@ -225,20 +225,18 @@ export default {
   },
   watch: {
     filled(val) {
-      if (val === true) this.$emit('complete')
-      else this.$emit('incomplete')
+      if (val) this.$emit('complete', true)
+      else this.$emit('complete', false)
     },
     localBooker: {
       deep: true,
       handler(val) {
-        console.log(val, this.bookerInsuranceFilled())
         this.$emit('updated-booker', val)
       }
     },
     localExtraParticipants: {
       deep: true,
       handler(val) {
-        console.log(val, this.participantsInsuranceFilled())
         this.$emit('updated-participants', val)
       }
     }
