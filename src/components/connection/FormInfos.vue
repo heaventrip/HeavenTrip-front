@@ -1,26 +1,34 @@
 <template>
   <div class="text-center mobile-vh">
     <div v-if="activeInfoTabs[activeStep] === 'gender'" class="centered-vh">
-      <div class="descr-text">Ton espace client te permet d’avoir une page spéciale Tripper "public". Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.</div>
+      <div class="descr-text">
+        Ton espace client te permet d’avoir une page spéciale Tripper "public". Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus
+        tard via ton espace client, aucun problème.
+      </div>
       <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
       <div class="div-group">
         <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'female'"> <input type="radio" name="gender" /> Femme </label>
-          <label :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'male'"> <input type="radio" name="gender" /> Homme </label>
+          <label :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'female'">
+            <input type="radio" name="gender" /> Femme
+          </label>
+          <label :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'male'">
+            <input type="radio" name="gender" /> Homme
+          </label>
         </div>
       </div>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'avatar'" class="centered-vh">
       <div class="descr-text">
-        Tu verras, sur le site tu pourras voir à plusieurs endroits les photos des intéressés et des participants aux stages et accéder a leur profils. Un bon moyen de connaitre les Trippers avec qui tu vas partir ! C’est cool de jouer le jeu et de faire vivre cette communauté :)
+        Tu verras, sur le site tu pourras voir à plusieurs endroits les photos des intéressés et des participants aux stages et accéder a leur profils. Un bon moyen de connaitre les Trippers avec qui
+        tu vas partir ! C’est cool de jouer le jeu et de faire vivre cette communauté :)
       </div>
       <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex flex-column justify-content-center text-right mr-1">
-          <p class="upload-text mb-2">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
+          <p class="upload-text mb-3" style="font-size: 0.8rem">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
-          <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
+          <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 4MB</p>
         </div>
         <div class="upload-container">
           <my-upload
@@ -68,15 +76,21 @@
       <label v-if="showAvatarValidationButton" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4"> Valider ma photo de profil </label>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
-      <div class="descr-text">Ultra rapide, une petite bio, tes passions, un proverbe préféré ? Ces informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton espace Trippers.</div>
+      <div class="descr-text">
+        Ultra rapide, une petite bio, tes passions, un proverbe préféré ? Ces informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton
+        espace Trippers.
+      </div>
       <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form>
-        <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="Tu peux taper ton texte ici..."></textarea>
+        <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="(Facultatif) Tu peux taper ton texte ici..."></textarea>
         <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="submitRegisterForm" />
       </form>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh success-block">
-      <div class="descr-text">Un e-mail de confirmation vous a été envoyé a l'adresse {{ user.email ? user.email : '' }}, merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur Heaven Trip. A tout de suite !</div>
+      <div class="descr-text">
+        Un e-mail de confirmation vous a été envoyé a l'adresse {{ user.email ? user.email : '' }}, merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur
+        Heaven Trip. A tout de suite !
+      </div>
       <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form>
         <Button text="RENVOYER LA CONFIRMATION DE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation" />

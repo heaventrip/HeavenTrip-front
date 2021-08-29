@@ -1,5 +1,5 @@
 <template>
-  <p class="text-left content-head mb-4">Merci de remplir tous les champs pour valider votre inscription :</p>
+  <p class="text-left content-head mb-5">Merci de remplir tous les champs pour valider votre inscription :</p>
   <div class="row">
     <div class="col-12 col-lg-6">
       <div class="form-group has-float-label">
@@ -150,6 +150,11 @@ export default {
 </script>
 
 <style scoped>
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
 .bttn--pink:hover {
   border: 1px solid white;
 }
