@@ -11,7 +11,15 @@
     <a href="#" class="text-white user-circle d-lg-none">
       <i class="fa fa-user-circle mx-auto"></i>
     </a>
-    <button class="navbar-toggler rounded-0 collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler rounded-0 collapsed"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <!-- <span class="navbar-toggler-icon"></span> -->
       <img class="menu-icon mx-auto" fluid :src="require('@/assets/images/menu.png')" />
       <i class="fa fa-times cross-sym mx-auto"></i>
@@ -56,24 +64,77 @@
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
       <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button> -->
-      <ul v-if="activeTab === 'activities' && sportCategories.length" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content">
+      <ul
+        v-if="activeTab === 'activities' && sportCategories.length"
+        class="nav navbar-nav border-0 mobile-navs"
+        id="activites_pills_tab"
+        style="position: relative; left: 3rem; z-index: 2; width: max-content"
+      >
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer">{{ sportCategories[0]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name"
+            class="nav-link active text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-vent-mer-tab"
+            data-toggle="pill"
+            href="#v-pills-vent-mer"
+            >{{ sportCategories[0]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[1]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne">{{ sportCategories[1]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[1]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-montagne-tab"
+            data-toggle="pill"
+            href="#v-pills-montagne"
+            >{{ sportCategories[1]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[2]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied">{{ sportCategories[2]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[2]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-pied-tab"
+            data-toggle="pill"
+            href="#v-pills-pied"
+            >{{ sportCategories[2]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[3]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti">{{ sportCategories[3]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[3]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-multi-acti-tab"
+            data-toggle="pill"
+            href="#v-pills-multi-acti"
+            >{{ sportCategories[3]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[4]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien">{{ sportCategories[4]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[4]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-bien-tab"
+            data-toggle="pill"
+            href="#v-pills-bien"
+            >{{ sportCategories[4]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[5]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige">{{ sportCategories[5]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[5]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-neige-tab"
+            data-toggle="pill"
+            href="#v-pills-neige"
+            >{{ sportCategories[5]?.name }}</a
+          >
         </li>
       </ul>
       <div class="d-lg-none nav-btm-div d-none align-items-center">
@@ -243,7 +304,10 @@ export default {
 .navbar-collapse {
   padding: 0px;
 }
-@media only screen and (min-height: 1000px) {
+.navbar-collapse ul {
+  margin-top: 2em;
+}
+@media only screen and (max-height: 900px) {
   .navbar-collapse ul {
     margin-top: 1em;
   }
