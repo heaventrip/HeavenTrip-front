@@ -1,7 +1,7 @@
 <template>
   <nav
     class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center pr-0 pl-5"
-    :class="[['activities', 'destinations'].includes(activeTab) ? 'navbar-filter--grey' : '', activeTab === 'agency' ? 'navbar-filter--white' : '']"
+    :class="[['activities', 'destinations'].includes(activeTab) ? 'navbar-filter--grey' : '', activeTab === 'agency' || activeTab === 'news' ? 'navbar-filter--white' : '']"
   >
     <div @click="onClickNavLogo" class="navbar-logo" style="margin-right: 5rem">
       <InlineSvg v-if="['agency', 'news'].includes(activeTab)" :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="#292f33" />
@@ -28,7 +28,7 @@
       <i class="fa fa-times cross-sym mx-auto"></i>
     </button>
 
-    <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" :style="[activeTab === 'agency' || activeTab === 'news' ? 'color: #292f33' : 'color: #fff']">
       <div class="logged_in-div d-none align-items-center bg-white d-lg-none">
         <!-- d-flex -->
         <a href="#"><img class="menu-icon mr-4" fluid :src="require('@/assets/images/svg/PICTO_LOG_USER_PROFIL_SUB_MENU_2.svg')" /></a>
@@ -222,7 +222,7 @@ export default {
       this.$emit('changed-tab', newVal)
 
       if (newVal === 'agency') {
-        document.body.style.position = 'fixed'
+        //document.body.style.position = 'fixed'
       }
       if (oldVal === 'agency') {
         document.body.style.position = 'static'
@@ -341,13 +341,16 @@ export default {
   top: 0;
   left: 0;
 }
+.navbar-filter--white {
+  background-color: white;
+}
 .navbar-filter--white::after {
   content: '';
   position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: #fff;
-  opacity: 0.8;
+  opacity: 1;
   z-index: -1;
   top: 0;
   left: 0;
