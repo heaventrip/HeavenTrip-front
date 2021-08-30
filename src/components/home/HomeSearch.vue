@@ -165,6 +165,8 @@ export default {
     'monthSelection.value': {
       deep: true,
       handler(val) {
+        this.fetchData()
+
         if (window.scrollY > 25) return
 
         if (val.length) this.slideUpSearchBar.play()

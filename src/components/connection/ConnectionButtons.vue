@@ -17,7 +17,12 @@
             <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.last_name }}</div>
             <div v-else style="font-weight: 700">.{{ currUser?.last_name?.[0] }}</div>
           </div>
-          <InlineSvg class="connection-icon ml-auto" :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown && !isLightTheme ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
+          <InlineSvg
+            class="connection-icon ml-auto"
+            :src="require('@/assets/svg/connection-dropdown.svg')"
+            :fill="toggleDropdown && !isLightTheme ? '#292f33' : 'white'"
+            :transform="toggleDropdown ? 'rotate(-90)' : ''"
+          />
         </div>
         <transition @before-enter="showcontent = true" :name="toggleDropdown ? 'connection-slide-down' : 'connection-slide-up'">
           <div
@@ -25,7 +30,10 @@
             :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown, 'bg-dark': isLightTheme }"
             class="flex-column"
             style="position: absolute; z-index: 2; padding-top: 60px; width: 250px; top: 0px; padding-bottom: 3px"
-            :style="[toggleDropdown ? 'color: #292f33' : '', isLightTheme ? 'color: white; border-left: 3px solid #292f33; border-right: 5px solid #292f33;' : 'border-left: 3px solid white; border-right: 5px solid white;']"
+            :style="[
+              toggleDropdown ? 'color: #292f33' : '',
+              isLightTheme ? 'color: white; border-left: 3px solid #292f33; border-right: 5px solid #292f33;' : 'border-left: 3px solid white; border-right: 5px solid white;'
+            ]"
           >
             <div @click="$router.push({ name: 'Profile' })" :class="[isLightTheme ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <transition name="fade-delayed">
@@ -39,7 +47,11 @@
               </transition>
             </div>
             <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
-            <div @click="logOut" :class="[isLightTheme ? 'menu-item-light menu-item-disconnect-light' : 'menu-item menu-item-disconnect']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+            <div
+              @click="logOut"
+              :class="[isLightTheme ? 'menu-item-light menu-item-disconnect-light' : 'menu-item menu-item-disconnect']"
+              style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem"
+            >
               <transition name="fade-delayed">
                 <div v-show="showcontent">
                   <InlineSvg class="disconnect-icon" :src="require('@/assets/svg/disconnect.svg')" height="20" :fill="isLightTheme ? 'white' : '#292f33'" />
@@ -51,10 +63,14 @@
         </transition>
       </li>
       <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="$router.push('/login')" class="px-4 py-4 d-inline-block" :style="$parent.activeTab === 'agency' || $parent.activeTab === 'news' ? 'color: #292f33' : 'color: white'">se connecter</a>
+        <a @click.prevent="$router.push('/login')" class="px-4 py-4 d-inline-block" :style="$parent.activeTab === 'agency' || $parent.activeTab === 'news' ? 'color: #292f33' : 'color: white'"
+          >se connecter</a
+        >
       </li>
       <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="$router.push('/login')" class="px-4 py-4 profile-link font-weight-bold d-inline-block" :style="isLightTheme ? 'color: #fff; background-color: #292f33' : ''">creér son profil</a>
+        <a @click.prevent="$router.push('/login')" class="px-4 py-4 profile-link font-weight-bold d-inline-block" :style="isLightTheme ? 'color: #fff; background-color: #292f33' : ''"
+          >creér son profil</a
+        >
       </li>
     </ul>
     <teleport to="#modal">
