@@ -466,6 +466,7 @@ import Button from '@/components/elements/Button.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import InlineProductInfos from '@/components/elements/InlineProductInfos.vue'
 import Multiselect from '@vueform/multiselect'
+import { gsap } from 'gsap'
 
 export default {
   name: 'SearchResultSection',
@@ -560,7 +561,15 @@ export default {
         caret: false,
         options: [],
         createTag: true
-      }
+      },
+      filtered: {
+        countryArr: [],
+        activityArr: [],
+        levelArr: [],
+        spotArr: [],
+        themeArr: []
+      },
+      slideUpSearchBar: null
     }
   },
   computed: {
@@ -570,8 +579,7 @@ export default {
   },
   watch: {
     selectionIsEmpty(val) {
-      console.log(val)
-      if (val === true) this.resetFilters()
+      if (val) this.resetFilters()
     },
     $route() {
       if (this.$route.query) {
@@ -579,7 +587,7 @@ export default {
       }
     },
     normalResults(val) {
-      if (val !== []) {
+      if (val.length) {
         let arr = []
         val.forEach((result) => {
           if (!result.sessions) return
@@ -594,11 +602,16 @@ export default {
           })
         })
       }
-      console.log('COURSES:', val)
     },
     'countrySelection.value': {
-      handler() {
-        console.log(this.countrySelection.value)
+      deep: true,
+      handler(val) {
+        this.submitSearchForm()
+
+        if (window.scrollY > 25) return
+
+        if (val.length) this.slideUpSearchBar.play()
+        else if (!this.countrySelection.value.length) this.slideUpSearchBar.reverse()
       }
     }
   },
@@ -608,6 +621,7 @@ export default {
       this.countrySelection.options.map((el) => (el.disabled = false))
       this.spotSelection.options.map((el) => (el.disabled = false))
       this.levelSelection.options.map((el) => (el.disabled = false))
+      this.fetching = false
     },
     sortByPrice() {
       if (this.sortedBy === 'descPrice') {
@@ -640,7 +654,15 @@ export default {
       this.submitSearchForm()
     },
     submitSearchForm() {
+      this.filtered.themesArr = []
+      this.filtered.activityArr = []
+      this.filtered.levelArr = []
+      this.filtered.countryArr = []
+      this.filtered.spotArr = []
+      this.resetFilters()
+
       this.loading = true
+
       this.$axios
         .post('/courses/search', {
           free_search: this.freeSearch,
@@ -655,35 +677,38 @@ export default {
           sessions_full_eq: this.dateConfirmed
         })
         .then((res) => {
-          let themesArr = new Array()
-          let activityArr = new Array()
-          let levelArr = new Array()
-          let countryArr = new Array()
-          let spotArr = new Array()
-          this.resetFilters()
-
           // console.log(res.data.courses[0].sports.map((el) => console.log(el)))
           res.data.courses.forEach((course) => {
-            activityArr.push(course.sports.map((sport) => sport.id))
-            countryArr.push(course.country.id)
-            spotArr.push(course.spot.id)
-            levelArr.push(course.level.id)
+            this.filtered.activityArr.push(course.sports.map((sport) => sport.id))
+            this.filtered.countryArr.push(course.country.id)
+            this.filtered.spotArr.push(course.spot.id)
+            this.filtered.levelArr.push(course.level.id)
           })
-          activityArr.flat().forEach((id) => {
-            this.activitySelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+
+          this.activitySelection.options.map((el) => Object.assign(el, { disabled: true }))
+          this.filtered.activityArr.flat().forEach((id) => {
+            this.activitySelection.options.find((option) => option.value === id).disabled = false
           })
-          countryArr.flat().forEach((id) => {
-            this.countrySelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+
+          this.countrySelection.options.map((el) => Object.assign(el, { disabled: true }))
+          this.filtered.countryArr.flat().forEach((id) => {
+            this.countrySelection.options.find((option) => option.value === id).disabled = false
           })
-          spotArr.flat().forEach((id) => {
-            this.spotSelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+
+          this.spotSelection.options.map((el) => Object.assign(el, { disabled: true }))
+          this.filtered.spotArr.flat().forEach((id) => {
+            this.spotSelection.options.find((option) => option.value === id).disabled = false
           })
-          levelArr.flat().forEach((id) => {
-            this.levelSelection.options.filter((option) => option.value !== id).map((el) => (el.disabled = true))
+
+          this.levelSelection.options.map((el) => Object.assign(el, { disabled: true }))
+          this.filtered.levelArr.flat().forEach((id) => {
+            this.levelSelection.options.find((option) => option.value === id).disabled = false
           })
+
           this.normalResults = res.data.courses
           this.loading = false
         })
+        .catch((err) => (this.loading = false))
     },
     setMultiSelect(which) {
       let filterDropdown = document.querySelector(`.${which}-multiselect .multiselect-options`)
@@ -749,6 +774,7 @@ export default {
     if (queryParams) this.submitSearchForm()
   },
   mounted() {
+    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       tagContainer.closest('.filter-container').querySelector('.tags-container')?.append(tagContainer)
     })
