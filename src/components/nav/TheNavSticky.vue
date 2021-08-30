@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center pr-0 pl-5" :class="[['activities', 'destinations'].includes(activeTab) ? 'navbar-filter--grey' : '', activeTab === 'agency' ? 'navbar-filter--white' : '']">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark border-lg-0 main-navbar align-items-center pr-0 pl-5"
+    :class="[['activities', 'destinations'].includes(activeTab) ? 'navbar-filter--grey' : '', activeTab === 'agency' || activeTab === 'news' ? 'navbar-filter--white' : '']"
+  >
     <div @click="onClickNavLogo" class="navbar-logo" style="margin-right: 5rem">
       <InlineSvg v-if="['agency', 'news'].includes(activeTab)" :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="#292f33" />
       <InlineSvg v-else :src="require('@/assets/svg/logo-small-no-circle.svg')" width="70" style="position: relative; bottom: 0.2rem" fill="white" />
@@ -11,13 +14,21 @@
     <a href="#" class="text-white user-circle d-lg-none">
       <i class="fa fa-user-circle mx-auto"></i>
     </a>
-    <button class="navbar-toggler rounded-0 collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler rounded-0 collapsed"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <!-- <span class="navbar-toggler-icon"></span> -->
       <img class="menu-icon mx-auto" fluid :src="require('@/assets/images/menu.png')" />
       <i class="fa fa-times cross-sym mx-auto"></i>
     </button>
 
-    <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" :style="[activeTab === 'agency' || activeTab === 'news' ? 'color: #292f33' : 'color: #fff']">
       <div class="logged_in-div d-none align-items-center bg-white d-lg-none">
         <!-- d-flex -->
         <a href="#"><img class="menu-icon mr-4" fluid :src="require('@/assets/images/svg/PICTO_LOG_USER_PROFIL_SUB_MENU_2.svg')" /></a>
@@ -28,40 +39,101 @@
           <div class="notify-number">1</div>
         </div>
       </div>
-      <ul id="header_nav" class="sticky-nav navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
+      <ul id="header_nav" class="sticky-nav navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs" :style="[activeTab === 'activities' ? 'margin-top: 4px' : '']">
         <li class="nav-item">
-          <a @click="onClicked('activities')" class="nav-link border-0 nav__item" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('activities')" class="nav-link border-0 nav__item" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"
+            ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a @click="onClicked('destinations')" class="nav-link border-0 nav__item" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('destinations')" class="nav-link border-0 nav__item" id="pills-destinations-tab" data-toggle="pill" href="#pills-destinations"
+            ><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a @click="onClicked('agency')" class="nav-link border-0 nav__item" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('agency')" class="nav-link border-0 nav__item" id="pills-agency-tab" data-toggle="pill" href="#pills-agency"
+            ><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a @click="onClicked('news')" class="nav-link border-0 nav__item" id="pills-news-tab" data-toggle="pill" href="#pills-news"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a @click="onClicked('news')" class="nav-link border-0 nav__item" id="pills-news-tab" data-toggle="pill" href="#pills-news"
+            ><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
       </ul>
       <!-- <button v-if="agencyIsActive" class="btn nav-btn btn-lg text-uppercase d-none d-lg-inline-block" style="border: 1px solid #292f33">creer ton séjour</button>
         <button v-else class="btn nav-btn btn-lg btn-outline-light text-uppercase d-none d-lg-inline-block">creer ton séjour</button> -->
-      <ul v-if="activeTab === 'activities' && sportCategories.length" class="nav navbar-nav border-0 mobile-navs" id="activites_pills_tab" style="position: relative; left: 3rem; z-index: 2; width: max-content; border-bottom: none !important">
+      <ul
+        v-if="activeTab === 'activities' && sportCategories.length"
+        class="nav navbar-nav border-0 mobile-navs"
+        id="activites_pills_tab"
+        style="position: relative; left: 3rem; z-index: 2; width: max-content; border-bottom: none !important"
+      >
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name" class="nav-link active text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer border-0">{{ sportCategories[0]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[0]?.name"
+            class="nav-link active text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-vent-mer-tab"
+            data-toggle="pill"
+            href="#v-pills-vent-mer border-0"
+            >{{ sportCategories[0]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[1]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne">{{ sportCategories[1]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[1]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-montagne-tab"
+            data-toggle="pill"
+            href="#v-pills-montagne"
+            >{{ sportCategories[1]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[2]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied">{{ sportCategories[2]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[2]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-pied-tab"
+            data-toggle="pill"
+            href="#v-pills-pied"
+            >{{ sportCategories[2]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[3]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti">{{ sportCategories[3]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[3]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-multi-acti-tab"
+            data-toggle="pill"
+            href="#v-pills-multi-acti"
+            >{{ sportCategories[3]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[4]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien">{{ sportCategories[4]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[4]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-bien-tab"
+            data-toggle="pill"
+            href="#v-pills-bien"
+            >{{ sportCategories[4]?.name }}</a
+          >
         </li>
         <li class="nav-item" role="presentation">
-          <a @click="$refs.activitiesTab.activeCategory = sportCategories[5]?.name" class="nav-link text-uppercase subactivity-nav__item" style="border-bottom: none !important" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige">{{ sportCategories[5]?.name }}</a>
+          <a
+            @click="$refs.activitiesTab.activeCategory = sportCategories[5]?.name"
+            class="nav-link text-uppercase subactivity-nav__item"
+            style="border-bottom: none !important"
+            id="v-pills-neige-tab"
+            data-toggle="pill"
+            href="#v-pills-neige"
+            >{{ sportCategories[5]?.name }}</a
+          >
         </li>
       </ul>
       <div class="d-lg-none nav-btm-div d-none align-items-center">
@@ -150,7 +222,7 @@ export default {
       this.$emit('changed-tab', newVal)
 
       if (newVal === 'agency') {
-        document.body.style.position = 'fixed'
+        //document.body.style.position = 'fixed'
       }
       if (oldVal === 'agency') {
         document.body.style.position = 'static'
@@ -224,6 +296,7 @@ export default {
 #navbarSupportedContent {
   flex-direction: column;
   align-items: flex-start;
+  margin: auto;
 }
 .nav__item {
   font-weight: 300 !important;
@@ -262,10 +335,14 @@ export default {
   width: 100vw;
   height: 100vh;
   background-color: #292f33;
-  opacity: 0.9;
+  /* opacity: 0.9; */
+  opacity: 0.99;
   z-index: -1;
   top: 0;
   left: 0;
+}
+.navbar-filter--white {
+  background-color: white;
 }
 .navbar-filter--white::after {
   content: '';
@@ -273,7 +350,7 @@ export default {
   width: 100vw;
   height: 100vh;
   background-color: #fff;
-  opacity: 0.8;
+  opacity: 1;
   z-index: -1;
   top: 0;
   left: 0;
