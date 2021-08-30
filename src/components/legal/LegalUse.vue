@@ -4,7 +4,10 @@
 
     <h4>Données personnelles</h4>
 
-    <p>La Société collecte et traite les données à caractère personnel, en qualité de responsable du traitement, dans le respect de la réglementation applicable en matière de protection des données à caractère personnel.</p>
+    <p>
+      La Société collecte et traite les données à caractère personnel, en qualité de responsable du traitement, dans le respect de la réglementation applicable en matière de protection des données à
+      caractère personnel.
+    </p>
 
     <p>Les catégories de données à caractère personnel collectées par la Société sont les suivantes :</p>
     <ul>
@@ -34,16 +37,20 @@
 
     <p>Les données collectées par la Société sont communiquées aux prestataires et partenaires de la Société dans les conditions suivantes :</p>
     <ul>
-      <li>les données collectées dans le cadre du traitement des commandes et de l’exécution des prestations réservées sont transmises aux partenaires de la Société auprès desquels les réservations sont réalisées</li>
       <li>
-        des sociétés auxquelles la Société a confié des prestations de services liées aux services proposés par la Société tels que le traitement des cartes bancaires, étant entendu que ces sociétés sont contractuellement tenues de protéger toutes les données à caractère personnel qui leur sont dans
-        ce cadre transmises.
+        les données collectées dans le cadre du traitement des commandes et de l’exécution des prestations réservées sont transmises aux partenaires de la Société auprès desquels les réservations sont
+        réalisées
+      </li>
+      <li>
+        des sociétés auxquelles la Société a confié des prestations de services liées aux services proposés par la Société tels que le traitement des cartes bancaires, étant entendu que ces sociétés
+        sont contractuellement tenues de protéger toutes les données à caractère personnel qui leur sont dans ce cadre transmises.
       </li>
     </ul>
 
     <p>
-      Dans le cadre de la gestion des réservations faites par les Clients, la Société pourra être amenée à transmettre des données personnelles aux partenaires auprès desquels les réservations ont été faites qui seraient situés en dehors de l’Union européenne. Seules les données dont la transmission
-      est nécessaire pour assurer la prise en compte et bonne gestion desdites réservations seront transmises dans ce cadre.
+      Dans le cadre de la gestion des réservations faites par les Clients, la Société pourra être amenée à transmettre des données personnelles aux partenaires auprès desquels les réservations ont été
+      faites qui seraient situés en dehors de l’Union européenne. Seules les données dont la transmission est nécessaire pour assurer la prise en compte et bonne gestion desdites réservations seront
+      transmises dans ce cadre.
     </p>
 
     <p>Les données dont la collecte est nécessaire pour pouvoir utiliser le service proposé par la Société sont marquées d’un astérisque.</p>
@@ -55,7 +62,10 @@
       <li>intérêts légitimes de la Société concernant l’utilisation des données dans le cadre des activités liées au fonctionnement des services tels que décrits ci-dessus.</li>
     </ul>
 
-    <p>Conformément à la réglementation applicable, le client, ainsi que les autres participants, peuvent exercer les droits suivants sur les données à caractère personnel le concernant, dans les conditions et limites prévues par le règlement :</p>
+    <p>
+      Conformément à la réglementation applicable, le client, ainsi que les autres participants, peuvent exercer les droits suivants sur les données à caractère personnel le concernant, dans les
+      conditions et limites prévues par le règlement :
+    </p>
     <ul>
       <li>droit d’accès, de rectification, d’opposition et d’effacement ;</li>
       <li>droit de limitation du traitement ;</li>
@@ -69,8 +79,14 @@
 
     <p>Enfin le client est informé qu’il peut introduire une réclamation auprès de l’autorité de contrôle compétente (la Commission Nationale de l’Informatique et des Libertés (CNIL) en France).</p>
 
-    <p>Les données d’identification du client sont conservées pendant la durée de la relation contractuelle. Les données de contact (comme l’adresse électronique) du client sont conservées pendant une durée de trois ans à compter de la fin de la relation commerciale.</p>
-    <p>Les données nécessaires au respect d’une obligation légale sont conservées conformément aux dispositions en vigueur (notamment celles prévues par le Code de commerce, le Code civil et le Code de la consommation).</p>
+    <p>
+      Les données d’identification du client sont conservées pendant la durée de la relation contractuelle. Les données de contact (comme l’adresse électronique) du client sont conservées pendant une
+      durée de trois ans à compter de la fin de la relation commerciale.
+    </p>
+    <p>
+      Les données nécessaires au respect d’une obligation légale sont conservées conformément aux dispositions en vigueur (notamment celles prévues par le Code de commerce, le Code civil et le Code de
+      la consommation).
+    </p>
   </div>
 </template>
 

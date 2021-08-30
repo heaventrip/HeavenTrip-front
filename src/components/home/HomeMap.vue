@@ -15,7 +15,8 @@
                 <h6 class="text-uppercase country-head d-flex mb-0">
                   pays :
                   <div class="btn-group select-dropdown px-3 align-items-center">
-                    <a class="select-toggle tous text-white text-decoration-none" data-toggle="dropdown" href="#" aria-expanded="false">tous <i class="fa fa-chevron-down ml-2 chevron"></i></a><i role="button" class="fa fa-times text-warning ml-2 cancel"></i>
+                    <a class="select-toggle tous text-white text-decoration-none" data-toggle="dropdown" href="#" aria-expanded="false">tous <i class="fa fa-chevron-down ml-2 chevron"></i></a
+                    ><i role="button" class="fa fa-times text-warning ml-2 cancel"></i>
                     <ul class="dropdown-menu menu-items">
                       <li>
                         <a class="text-capitalize text-reset dropdown-item" href="javascript:void(0);"><i class="fa fa-chevron-right small ml-2"></i> France</a>
@@ -44,7 +45,8 @@
                 <h6 class="text-uppercase city-head d-flex mb-0 zero-opacity">
                   ville :
                   <div class="btn-group select-dropdown px-3 align-items-center">
-                    <a href="javaScript:void(0);" id="dropdownMenuLink" class="select-toggle toutes text-white text-decoration-none" data-toggle="dropdown" aria-expanded="false">toutes <i class="fa fa-chevron-down ml-2 chevron"></i></a
+                    <a href="javaScript:void(0);" id="dropdownMenuLink" class="select-toggle toutes text-white text-decoration-none" data-toggle="dropdown" aria-expanded="false"
+                      >toutes <i class="fa fa-chevron-down ml-2 chevron"></i></a
                     ><i role="button" class="fa fa-times text-warning ml-2 cancel"></i>
                     <ul class="dropdown-menu menu-items" aria-labelledby="dropdownMenuLink">
                       <li>
@@ -197,7 +199,11 @@
             <g id="Calque_2" data-name="Calque 2">
               <g id="Calque_1-2" data-name="Calque 1">
                 <path fill="white" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
-                <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
+                <path
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="white"
+                  d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z"
+                />
               </g>
             </g>
             <svg viewBox="-13 -22 30 30" fill="white">

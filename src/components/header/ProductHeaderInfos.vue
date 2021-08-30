@@ -96,7 +96,15 @@
           fill-rule="evenodd"
         />
         <path id="Tracé_2499" data-name="Tracé 2499" d="M49,35.442V37.21a.442.442,0,0,0,.884,0V35.442a.442.442,0,1,0-.884,0Z" transform="translate(-44.137 -32.347)" fill="#fff" fill-rule="evenodd" />
-        <path class="scrolldown-icon__arrow" id="Tracé_2500" data-name="Tracé 2500" d="M45.953,78.735,48.384,76.3a.442.442,0,1,1,.625.625l-2.744,2.744a.442.442,0,0,1-.625,0l-2.765-2.765a.442.442,0,1,1,.625-.625Z" transform="translate(-40.648 -55.307)" fill="#fff" fill-rule="evenodd" />
+        <path
+          class="scrolldown-icon__arrow"
+          id="Tracé_2500"
+          data-name="Tracé 2500"
+          d="M45.953,78.735,48.384,76.3a.442.442,0,1,1,.625.625l-2.744,2.744a.442.442,0,0,1-.625,0l-2.765-2.765a.442.442,0,1,1,.625-.625Z"
+          transform="translate(-40.648 -55.307)"
+          fill="#fff"
+          fill-rule="evenodd"
+        />
       </svg>
       <span>Détails & booking</span>
     </div>
@@ -106,7 +114,9 @@
       <a @click.prevent="$emit('clicked-tab', 'activities')" class="nav-link p-0" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
     </li>
     <li class="nav-item" type="button" role="presentation">
-      <a @click.prevent="$emit('clicked-tab', 'activities')" class="nav-link p-0" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">02. Activités & spot</a>
+      <a @click.prevent="$emit('clicked-tab', 'activities')" class="nav-link p-0" id="pills-activityspot-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true"
+        >02. Activités & spot</a
+      >
     </li>
     <li class="nav-item" type="button" role="presentation">
       <a @click.prevent="$emit('clicked-tab', 'living')" class="nav-link p-0" id="pills-place-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">03. Vie sur place</a>

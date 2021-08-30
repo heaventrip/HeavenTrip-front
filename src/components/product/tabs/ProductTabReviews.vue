@@ -44,7 +44,9 @@
                 </span>
                 <span class="d-inline-block align-middle">{{ review.user.city }}</span>
               </div>
-              <div class="review__block__stars mr-4"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i></div>
+              <div class="review__block__stars mr-4">
+                <i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i>
+              </div>
               <!-- <div class="review__block__user-profile-link"><span>Voir profil</span></div> -->
             </div>
             <div class="review__block-right__text-content">{{ review.comment }}</div>

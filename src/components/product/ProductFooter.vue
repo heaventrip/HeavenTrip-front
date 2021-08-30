@@ -50,7 +50,18 @@
     </ul> -->
       <ul class="nav nav-pills text-uppercase list-unstyled mb-0 booking-session-list border-left border-white" role="tablist">
         <li v-for="(month, index) in months" :key="month" class="nav-item" role="presentation">
-          <a class="nav-link" :class="[filterSessions(index + 1).length === 0 ? 'empty-sessions' : '']" :id="`${month}-tab`" data-toggle="pill" :href="`#${month}`" role="tab" :aria-controls="month" aria-selected="true"> {{ namedMonths[index] }} </a>
+          <a
+            class="nav-link"
+            :class="[filterSessions(index + 1).length === 0 ? 'empty-sessions' : '']"
+            :id="`${month}-tab`"
+            data-toggle="pill"
+            :href="`#${month}`"
+            role="tab"
+            :aria-controls="month"
+            aria-selected="true"
+          >
+            {{ namedMonths[index] }}
+          </a>
         </li>
       </ul>
     </div>
@@ -88,7 +99,9 @@
                     </div>
                   </div>
                   <div class="registrants fg-1" style="width: 20%">
-                    <h6 v-if="session.nbOfParticipants === 0" class="premier-text mb-0 font-weight-bold text-uppercase"><img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !</h6>
+                    <h6 v-if="session.nbOfParticipants === 0" class="premier-text mb-0 font-weight-bold text-uppercase">
+                      <img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !
+                    </h6>
                     <InlineAvatars v-else :avatars="getParticipantsAvatarKeys(session)" :heart="false" outline-color="white" outline-width="3px" height="40px" spacing="-8px" mt="0rem" mb="0rem" />
                   </div>
                   <div class="d-flex align-items-center ml-auto justify-content-between fg-1">
@@ -112,7 +125,11 @@
     </transition>
     <div class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff; position: relative; z-index: 10">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
-      <div class="d-flex justify-content-between flex-1 mx-0 text-center" style="transition: all 0.2s ease" :style="[showSessions ? 'color: #fff; background-color: #292f33' : 'color: unset; background-color: unset']">
+      <div
+        class="d-flex justify-content-between flex-1 mx-0 text-center"
+        style="transition: all 0.2s ease"
+        :style="[showSessions ? 'color: #fff; background-color: #292f33' : 'color: unset; background-color: unset']"
+      >
         <div v-if="choseBtn" class="left-avatar-block center-col" :class="{ inactive: showSessions }" :style="[showSessions ? '' : 'background-color: #fafafa']">
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-5 mb-0">
@@ -149,7 +166,8 @@
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-5 mb-0">
               <span style="font-family: Oswald, sans-serif; font-size: 0.75rem">
-                <span color="#292f33">Ca te titille?</span> <span style="font-weight: bold">Rejoint les {{ course.wishlistUsers?.length }} intéressé{{ course.wishlistUsers?.length > 1 ? 's' : '' }} :</span><br />
+                <span color="#292f33">Ca te titille?</span>
+                <span style="font-weight: bold">Rejoint les {{ course.wishlistUsers?.length }} intéressé{{ course.wishlistUsers?.length > 1 ? 's' : '' }} :</span><br />
                 <InlineAvatars
                   :course-id="course?.id"
                   :avatars="avatarKeys"
@@ -176,7 +194,10 @@
                 <div class="pb-0">
                   <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />
                   <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400">Session :&nbsp;&nbsp;</span>
-                  <span class="d-inline-block align-middle">{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }} au {{ new Date(choice.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}</span>
+                  <span class="d-inline-block align-middle"
+                    >{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }} au
+                    {{ new Date(choice.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}</span
+                  >
                 </div>
                 <div class="text-uppercase pt-2" style="font-weight: 400; letter-spacing: 0px">
                   <span class="text--pink" style="font-weight: bold">{{ choice.max - choice.nbOfParticipants }} place{{ choice.max - choice.nbOfParticipants > 1 ? 's' : '' }}</span
@@ -191,7 +212,14 @@
                 </div>
               </div>
             </div>
-            <InlineSvg class="up-down-arrow-svg ml-4" v-show="availSessions.length && !choseBtn" :src="require('@/assets/svg/arrow-right.svg')" :transform="[showSessions ? 'rotate(90)' : 'rotate(270)']" height="24" :fill="showSessions ? '#fff' : '#292f33'" />
+            <InlineSvg
+              class="up-down-arrow-svg ml-4"
+              v-show="availSessions.length && !choseBtn"
+              :src="require('@/assets/svg/arrow-right.svg')"
+              :transform="[showSessions ? 'rotate(90)' : 'rotate(270)']"
+              height="24"
+              :fill="showSessions ? '#fff' : '#292f33'"
+            />
           </div>
           <div class="d-none">
             <div class="d-none text-right">
@@ -202,13 +230,19 @@
               <h5 class="premier-text d-block font-weight-normal mb-0"><strong class="text-warning">Dernière place</strong> restante</h5>
             </div>
             <div class="d-inline-block text-right">
-              <h5 class="premier-text font-weight-bold mb-2 pb-2 letter-space-1 btm-border d-flex align-items-end"><img class="mr-2 img-16" fluid :src="require('@/assets/images/cal_light.png')" /><span class="d-inline-block align-top ml-1 text-right">Sélectionne une session</span></h5>
+              <h5 class="premier-text font-weight-bold mb-2 pb-2 letter-space-1 btm-border d-flex align-items-end">
+                <img class="mr-2 img-16" fluid :src="require('@/assets/images/cal_light.png')" /><span class="d-inline-block align-top ml-1 text-right">Sélectionne une session</span>
+              </h5>
               <h5 class="premier-text d-block font-weight-normal mb-0"><strong class="text-warning">4 sessions </strong> disponibles</h5>
             </div>
             <i class="fa fa-chevron-down ml-5"></i>
           </div>
         </div>
-        <div class="h-50 center-col flex-column px-5 m-auto" :class="{ inactive: !choseBtn }" :style="[{ borderLeft: showSessions ? '1px dashed white' : '1px dashed black' }, { borderRight: showSessions ? '1px dashed white' : '1px dashed black' }]">
+        <div
+          class="h-50 center-col flex-column px-5 m-auto"
+          :class="{ inactive: !choseBtn }"
+          :style="[{ borderLeft: showSessions ? '1px dashed white' : '1px dashed black' }, { borderRight: showSessions ? '1px dashed white' : '1px dashed black' }]"
+        >
           <div class="d-flex align-items-center text-center w-100" style="position: relative">
             <h5 class="premier-text mb-0 letter-space-1">
               <!-- <img class="mr-2 icons" fluid :src="require('@/assets/images/places.png')" /> -->
@@ -223,7 +257,10 @@
                 <div
                   class="value-button increase"
                   style="user-select: none; padding-bottom: 2px; padding-left: 1px; transition: all 0.5s ease"
-                  :style="[choseBtn ? '' : 'pointer-events: none', participantsNb === 4 ? 'transform: rotate(45deg); color: #d82558; border: 1px solid #d82558; background-color: white !important' : '']"
+                  :style="[
+                    choseBtn ? '' : 'pointer-events: none',
+                    participantsNb === 4 ? 'transform: rotate(45deg); color: #d82558; border: 1px solid #d82558; background-color: white !important' : ''
+                  ]"
                   @click="incrementCounter"
                 >
                   +

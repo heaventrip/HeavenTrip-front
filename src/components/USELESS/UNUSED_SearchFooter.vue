@@ -9,9 +9,14 @@
               <span class="font-weight-bold">8h30 à 20h00</span>
             </p>
             <div class="border rounded p-2 d-flex justify-content-around text-white text-uppercase font-weight-bold mail-box">
-              <a href="tel:0369316618" class="text-reset py-2"><img class="mr-3 align-baseline" fluid :src="require('@/assets/images/tel.png')" /><img class="mr-3 align-baseline hover-img" fluid :src="require('@/assets/images/tel_h.png')" />03 69 31 66 18</a>
+              <a href="tel:0369316618" class="text-reset py-2"
+                ><img class="mr-3 align-baseline" fluid :src="require('@/assets/images/tel.png')" /><img class="mr-3 align-baseline hover-img" fluid :src="require('@/assets/images/tel_h.png')" />03 69
+                31 66 18</a
+              >
               <div class="divider"></div>
-              <a href="#" class="text-reset py-2"><img class="mr-3" fluid :src="require('@/assets/images/chat.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/chat_h.png')" />écrivez-nous</a>
+              <a href="#" class="text-reset py-2"
+                ><img class="mr-3" fluid :src="require('@/assets/images/chat.png')" /><img class="mr-3 hover-img" fluid :src="require('@/assets/images/chat_h.png')" />écrivez-nous</a
+              >
             </div>
           </div>
         </div>
@@ -34,9 +39,15 @@
               <img class="mr-2 ml-auto" fluid :src="require('@/assets/images/share.png')" />
             </h3>
             <div class="d-flex align-items-center social-icons">
-              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"><img class="mr-2" fluid :src="require('@/assets/images/insta.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/insta_h.png')" /></a>
-              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"><img class="mr-2" fluid :src="require('@/assets/images/fb.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/fb_h.png')" /></a>
-              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"><img class="mr-2" fluid :src="require('@/assets/images/youtube.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/youtube_h.png')" /></a>
+              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"
+                ><img class="mr-2" fluid :src="require('@/assets/images/insta.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/insta_h.png')"
+              /></a>
+              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"
+                ><img class="mr-2" fluid :src="require('@/assets/images/fb.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/fb_h.png')"
+              /></a>
+              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"
+                ><img class="mr-2" fluid :src="require('@/assets/images/youtube.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/youtube_h.png')"
+              /></a>
               <span class="ml-auto">#yourheaventrip</span>
             </div>
           </div>
@@ -164,7 +175,9 @@
             <hr class="d-none d-sm-block d-lg-none my-3" />
             <p class="mb-0 text-left text-sm-center d-lg-none copy-right">&copy; Tous droits reserves - Heaven Trip 2019 - 2020</p>
             <div class="btn-group dropright float-right mt-n4 d-sm-inline-flex d-none">
-              <button type="button" class="btn dropdown-toggle text-uppercase py-0 border-0 font-weight-bold drpbtn-right text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">fr</button>
+              <button type="button" class="btn dropdown-toggle text-uppercase py-0 border-0 font-weight-bold drpbtn-right text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                fr
+              </button>
               <div class="dropdown-menu text-uppercase">
                 <a class="dropdown-item" href="#">fr</a>
                 <a class="dropdown-item" href="#">en</a>

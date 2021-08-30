@@ -47,7 +47,9 @@
             </li>
           </ul>
           <span class="divider d-none d-md-inline-block mx-2"></span>
-          <a class="galary-link text-uppercase text-white font-weight-bold d-none d-md-inline-block pl-3" href="#"><img class="img-fluid mr-3" fluid :src="require('@/assets/images/svg/noun_Image.svg')" />GALERIE PHOTOS </a>
+          <a class="galary-link text-uppercase text-white font-weight-bold d-none d-md-inline-block pl-3" href="#"
+            ><img class="img-fluid mr-3" fluid :src="require('@/assets/images/svg/noun_Image.svg')" />GALERIE PHOTOS
+          </a>
         </div>
       </div>
     </div>

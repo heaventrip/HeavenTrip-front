@@ -67,10 +67,18 @@
               <div class="row level-modal" style="width: 50vw">
                 <div class="col-5 bg-dark">
                   <div class="nav flex-column nav-pills kitesurf-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-level1-tab" data-toggle="pill" href="#v-pills-level1" role="tab" aria-controls="v-pills-level1" aria-selected="true">NIVEAU 1 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                    <a class="nav-link" id="v-pills-level2-tab" data-toggle="pill" href="#v-pills-level2" role="tab" aria-controls="v-pills-level2" aria-selected="false">NIVEAU 2 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                    <a class="nav-link" id="v-pills-level3-tab" data-toggle="pill" href="#v-pills-level3" role="tab" aria-controls="v-pills-level3" aria-selected="false">NIVEAU 3 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                    <a class="nav-link" id="v-pills-level4-tab" data-toggle="pill" href="#v-pills-level4" role="tab" aria-controls="v-pills-level4" aria-selected="false">NIVEAU 4 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                    <a class="nav-link active" id="v-pills-level1-tab" data-toggle="pill" href="#v-pills-level1" role="tab" aria-controls="v-pills-level1" aria-selected="true"
+                      >NIVEAU 1 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                    ></a>
+                    <a class="nav-link" id="v-pills-level2-tab" data-toggle="pill" href="#v-pills-level2" role="tab" aria-controls="v-pills-level2" aria-selected="false"
+                      >NIVEAU 2 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                    ></a>
+                    <a class="nav-link" id="v-pills-level3-tab" data-toggle="pill" href="#v-pills-level3" role="tab" aria-controls="v-pills-level3" aria-selected="false"
+                      >NIVEAU 3 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                    ></a>
+                    <a class="nav-link" id="v-pills-level4-tab" data-toggle="pill" href="#v-pills-level4" role="tab" aria-controls="v-pills-level4" aria-selected="false"
+                      >NIVEAU 4 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                    ></a>
                   </div>
                 </div>
                 <div class="col-7 bg-white" style="position: relative">
@@ -101,7 +109,13 @@
           <div class="d-flex align-items-center justify-content-start">
             <div style="position: relative">
               <InlineSvg v-if="course?.level?.step" :src="require(`@/assets/svg/intensity-${course?.level?.step}.svg`)" height="150px" />
-              <InlineSvg v-if="course?.sports && course.sports[0].picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="35%" fill="#d82558" style="left: 34%; top: 34%; position: absolute" />
+              <InlineSvg
+                v-if="course?.sports && course.sports[0].picto"
+                :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)"
+                height="35%"
+                fill="#d82558"
+                style="left: 34%; top: 34%; position: absolute"
+              />
             </div>
             <span class="ml-4">
               <h6 class="level-text">

@@ -1,6 +1,11 @@
 <template>
   <div class="block d-flex align-items-center text-uppercase" :class="[justifyContent || 'justify-content-between', extraClass]" :style="[borderTopStyle, borderBottomStyle, widthStyle]">
-    <div class="block__item" v-for="(info, index) in filteredInfos" :key="info" :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === filteredInfos.length - 1 ? '' : paddingRightStyle]">
+    <div
+      class="block__item"
+      v-for="(info, index) in filteredInfos"
+      :key="info"
+      :style="[index === 0 ? '' : dividerStyle, index === 0 ? '' : paddingLeftStyle, index === filteredInfos.length - 1 ? '' : paddingRightStyle]"
+    >
       <InlineSvg v-if="icons" :src="require(`@/assets/svg/${icons[index]}.svg`)" :fill="color" />
       <span class="block__text-content" :style="[iconMarginStyle, letterSpacingStyle, fontWeightStyle, { color: color }]">{{ info }}</span>
     </div>

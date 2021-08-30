@@ -36,9 +36,15 @@
               <img class="mr-2 ml-auto" fluid :src="require('@/assets/images/share.png')" />
             </h3>
             <div class="d-flex align-items-center social-icons">
-              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"><img class="mr-2" fluid :src="require('@/assets/images/insta.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/insta_h.png')" /></a>
-              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"><img class="mr-2" fluid :src="require('@/assets/images/fb.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/fb_h.png')" /></a>
-              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"><img class="mr-2" fluid :src="require('@/assets/images/youtube.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/youtube_h.png')" /></a>
+              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"
+                ><img class="mr-2" fluid :src="require('@/assets/images/insta.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/insta_h.png')"
+              /></a>
+              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"
+                ><img class="mr-2" fluid :src="require('@/assets/images/fb.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/fb_h.png')"
+              /></a>
+              <a href="#" class="rounded-circle d-inline-block mr-2 text-dark"
+                ><img class="mr-2" fluid :src="require('@/assets/images/youtube.png')" /><img class="mr-2 hover-img" fluid :src="require('@/assets/images/youtube_h.png')"
+              /></a>
               <span class="ml-auto">#yourheaventrip</span>
             </div>
           </div>
@@ -79,10 +85,31 @@
             </h3>
             <p class="para mb-3">Ne manque surtout pas toute l'actualite sur nos offres !</p>
             <form class="d-flex">
-              <input v-model="newsletterEmail" class="form-control mail_input" type="text" name="" placeholder="Mon adresse email..." style="border-top-left-radius: 2px; border-bottom-left-radius: 2px" />
+              <input
+                v-model="newsletterEmail"
+                class="form-control mail_input"
+                type="text"
+                name=""
+                placeholder="Mon adresse email..."
+                style="border-top-left-radius: 2px; border-bottom-left-radius: 2px"
+              />
               <transition name="fade" mode="out-in">
-                <button v-if="newsletterSubscribed" @click.prevent class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4 text-nowrap" style="border-top-right-radius: 2px; border-bottom-right-radius: 2px">tu es abonné !</button>
-                <button v-else @click.prevent="submitNewsletterForm" class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4" style="border-top-right-radius: 2px; border-bottom-right-radius: 2px">s'abonner</button>
+                <button
+                  v-if="newsletterSubscribed"
+                  @click.prevent
+                  class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4 text-nowrap"
+                  style="border-top-right-radius: 2px; border-bottom-right-radius: 2px"
+                >
+                  tu es abonné !
+                </button>
+                <button
+                  v-else
+                  @click.prevent="submitNewsletterForm"
+                  class="btn bg-pink font-weight-bold text-white text-uppercase mail_btn px-4"
+                  style="border-top-right-radius: 2px; border-bottom-right-radius: 2px"
+                >
+                  s'abonner
+                </button>
               </transition>
             </form>
           </div>

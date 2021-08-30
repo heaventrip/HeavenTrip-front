@@ -66,7 +66,9 @@
                       <img class="img-fluid" fluid :src="require('@/assets/images/fprint_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">Une agence en ligne oui, mais bien humaine je te rassure. Nous avons à cœur d'accompagner et conseiller nos Trippers. Fun, rencontres et convivialité assurés !</p>
+                      <p class="mb-0 registor-points">
+                        Une agence en ligne oui, mais bien humaine je te rassure. Nous avons à cœur d'accompagner et conseiller nos Trippers. Fun, rencontres et convivialité assurés !
+                      </p>
                     </div>
                   </li>
                   <li class="row">
@@ -74,7 +76,9 @@
                       <img class="img-fluid" fluid :src="require('@/assets/images/lab_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">Nous accordons beaucoup de temps et d'énergie dans la création de nos séjours qui se veulent authentiques et personnalisables. Gagnez en liberté !</p>
+                      <p class="mb-0 registor-points">
+                        Nous accordons beaucoup de temps et d'énergie dans la création de nos séjours qui se veulent authentiques et personnalisables. Gagnez en liberté !
+                      </p>
                     </div>
                   </li>
                   <li class="row">

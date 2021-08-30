@@ -28,12 +28,18 @@
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
               <div class="guide-word__subtitle">Atmosphère culinaire</div>
-              <p class="content pt-3 text-white" style="line-height: 24px">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+              <p class="content pt-3 text-white" style="line-height: 24px">
+                Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear
+                eruditi ncillae, fabulas.
+              </p>
               <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
-              <p class="content pt-3 text-white" style="line-height: 24px">testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste testeste testeste testeste testeste testeste</p>
+              <p class="content pt-3 text-white" style="line-height: 24px">
+                testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste
+                testeste testeste testeste testeste testeste
+              </p>
               <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
           </transition>
@@ -59,13 +65,22 @@
       </div>
       <div class="card-body">
         <div v-if="course.multisport" class="w-100 pb-3">
-          <div v-for="sport in course.sports" :key="sport" class="head text-uppercase py-2 d-inline-block mr-5" style="font-weight: 500; cursor: pointer" :class="{ 'sport-tab--active': activeSportTab === sport }" @mouseover="activeSportTab = sport">
+          <div
+            v-for="sport in course.sports"
+            :key="sport"
+            class="head text-uppercase py-2 d-inline-block mr-5"
+            style="font-weight: 500; cursor: pointer"
+            :class="{ 'sport-tab--active': activeSportTab === sport }"
+            @mouseover="activeSportTab = sport"
+          >
             {{ sport.name }}
           </div>
         </div>
         <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
         <transition name="fade">
-          <p :key="activeSportTab" class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">{{ activeSportTab?.description || course.sports[0].description }}</p>
+          <p :key="activeSportTab" class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">
+            {{ activeSportTab?.description || course.sports[0].description }}
+          </p>
         </transition>
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
@@ -177,7 +192,9 @@
         <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
       </div>
       <div class="card-body">
-        <p class="content">En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.</p>
+        <p class="content">
+          En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.
+        </p>
         <ul class="activity-list list-unstyled mb-0">
           <li v-for="(alternative, index) in altCourses" :key="alternative" :class="[index === altCourses.length - 1 ? 'pb-0' : '']">
             <h5 class="activity-list-head mb-0">

@@ -66,7 +66,9 @@
           <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
         </ul>
       </div>
-      <button @click="countryModal = true" class="btn btn-danger btn-block rounded-0 border-0 pay-btn py-3 text-uppercase mb-5"><img class="d-inline-block mr-3" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />VOIR LES INFOs SANITAIRE</button>
+      <button @click="countryModal = true" class="btn btn-danger btn-block rounded-0 border-0 pay-btn py-3 text-uppercase mb-5">
+        <img class="d-inline-block mr-3" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />VOIR LES INFOs SANITAIRE
+      </button>
       <teleport to="#modal">
         <transition name="fade">
           <div v-if="countryModal" class="modal__backdrop">
@@ -80,9 +82,15 @@
                       SANITAIRE</span
                     >
                   </h6>
-                  <a class="nav-link active" id="v-pills-health1-tab" data-toggle="pill" href="#v-pills-health1" role="tab" aria-controls="v-pills-health1" aria-selected="true">VACCIN <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                  <a class="nav-link" id="v-pills-health2-tab" data-toggle="pill" href="#v-pills-health2" role="tab" aria-controls="v-pills-health2" aria-selected="false">REGLES A SAVOIR <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                  <a class="nav-link" id="v-pills-health3-tab" data-toggle="pill" href="#v-pills-health3" role="tab" aria-controls="v-pills-health3" aria-selected="false">INFOS COVID <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                  <a class="nav-link active" id="v-pills-health1-tab" data-toggle="pill" href="#v-pills-health1" role="tab" aria-controls="v-pills-health1" aria-selected="true"
+                    >VACCIN <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
+                  <a class="nav-link" id="v-pills-health2-tab" data-toggle="pill" href="#v-pills-health2" role="tab" aria-controls="v-pills-health2" aria-selected="false"
+                    >REGLES A SAVOIR <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
+                  <a class="nav-link" id="v-pills-health3-tab" data-toggle="pill" href="#v-pills-health3" role="tab" aria-controls="v-pills-health3" aria-selected="false"
+                    >INFOS COVID <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
                 </div>
               </div>
               <div class="col-7 bg-white" style="position: relative">
@@ -93,7 +101,8 @@
                     <ul class="list-unstyled mb-0 surflist health">
                       <li>
                         Aucun vaccins obligatoires.<br />
-                        Il n’est pas exigé de vaccination sauf contre la fièvre jaune pour les voyageurs en provenance de pays où elle sévit. Dans ce cas, elle doit être faite au moins 10 jours avant le départ.
+                        Il n’est pas exigé de vaccination sauf contre la fièvre jaune pour les voyageurs en provenance de pays où elle sévit. Dans ce cas, elle doit être faite au moins 10 jours avant
+                        le départ.
                       </li>
                       <li>Hépatite A : fortement recommandée par l’OMS</li>
                       <li>En cas de long séjour, d’expatriation ou de séjour en milieu rural, les vaccins contre la rage et la typhoïde sont recommandés.</li>
