@@ -113,6 +113,15 @@ ___________________________
 - dyanmiser icons niveaux dans mentions
 - fade sur les filtres search home + décalage hover/liseret
 - régler le firstname au dessus des cards
+- fading sur les modals de connexion
+- virer calendy
+
+- desactiver la sticky sur search / update l'url
+- hover sur les 3 filtres recherche
+- autoplay sur les photos
+- rajouter des marges sur le footer quand grand ecran
+- quand 0 sessions ne pas rendre les sessions cliquables
+- créer modal de contact accessible via créer une session/je privatise/bouton sur le mois
 
 IMPORTANT : bloquer les mobiles/tablettes
 > IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail

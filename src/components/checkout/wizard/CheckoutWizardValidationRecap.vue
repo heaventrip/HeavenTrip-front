@@ -3,8 +3,18 @@
     <img class="course-image" :src="require('@/assets/images/beach.jpg')" />
     <div class="accordion" id="tripperaccordion">
       <div class="card accordion-card border-0">
-        <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" id="tripBooker" type="button" data-toggle="collapse" data-target="#tripperBooker" aria-expanded="false" aria-controls="tripperBooker">
-          <div class="participant-img-container position-relative"><img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span></div>
+        <div
+          class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed"
+          id="tripBooker"
+          type="button"
+          data-toggle="collapse"
+          data-target="#tripperBooker"
+          aria-expanded="false"
+          aria-controls="tripperBooker"
+        >
+          <div class="participant-img-container position-relative">
+            <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span>
+          </div>
           <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
@@ -57,7 +67,15 @@
         </div>
       </div>
       <div class="card accordion-card border-0" v-for="(extraParticipant, index) in extraParticipants" :key="extraParticipant">
-        <div class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed" :id="`trip${index}`" type="button" data-toggle="collapse" :data-target="`#tripper${index}`" aria-expanded="false" aria-controls="tripperTwo">
+        <div
+          class="card-header border-0 mb-0 text-uppercase font-weight-bold d-flex align-items-center collapsed"
+          :id="`trip${index}`"
+          type="button"
+          data-toggle="collapse"
+          :data-target="`#tripper${index}`"
+          aria-expanded="false"
+          aria-controls="tripperTwo"
+        >
           <div class="participant-img-container position-relative">
             <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
           </div>

@@ -6,14 +6,29 @@
       <ProductHeaderInfos ref="productHeaderInfos" :course="course" @clicked-tab="emitClickedTab" />
     </div>
     <div class="header-product__pics" style="box-shadow: -1px 0px 12px rgba(41, 47, 51, 0.8); width: 40%">
-      <div style="height: 34%"><img src="https://images.ctfassets.net/8dtxc3nuj0tn/4RJSKIk5v7saV1cji10crg/214b7be246e8c63cba0355ebaac5e989/kitesurf-elgouna-spot.jpg" @click="showImg(0)" style="border-bottom: 2px solid #292f33" /></div>
+      <div style="height: 34%">
+        <img
+          src="https://images.ctfassets.net/8dtxc3nuj0tn/4RJSKIk5v7saV1cji10crg/214b7be246e8c63cba0355ebaac5e989/kitesurf-elgouna-spot.jpg"
+          @click="showImg(0)"
+          style="border-bottom: 2px solid #292f33"
+        />
+      </div>
       <div class="d-flex" style="height: 66%">
         <div class="d-flex flex-column" style="width: 55%">
-          <img class="header-product__pic" src="https://images.ctfassets.net/8dtxc3nuj0tn/4SuuqMdgxsyjQQpdjEmun7/4db974d816a5a6df577f74f63e29b7b5/kitesurf-elgouna-lecon2.jpg" @click="showImg(1)" style="border-bottom: 2px solid #292f33" />
+          <img
+            class="header-product__pic"
+            src="https://images.ctfassets.net/8dtxc3nuj0tn/4SuuqMdgxsyjQQpdjEmun7/4db974d816a5a6df577f74f63e29b7b5/kitesurf-elgouna-lecon2.jpg"
+            @click="showImg(1)"
+            style="border-bottom: 2px solid #292f33"
+          />
           <img src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" @click="showImg(2)" />
         </div>
         <div style="width: 45%">
-          <img src="https://images.ctfassets.net/8dtxc3nuj0tn/1S1Nt2KpYQGGvBiS3864QR/6d8a53010fc7459aaf35c68d4510b1d6/kitesurf-elgouna-cook.jpg" @click="showImg(3)" style="border-left: 2px solid #292f33" />
+          <img
+            src="https://images.ctfassets.net/8dtxc3nuj0tn/1S1Nt2KpYQGGvBiS3864QR/6d8a53010fc7459aaf35c68d4510b1d6/kitesurf-elgouna-cook.jpg"
+            @click="showImg(3)"
+            style="border-left: 2px solid #292f33"
+          />
         </div>
       </div>
       <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="handleHide"></vue-easy-lightbox>

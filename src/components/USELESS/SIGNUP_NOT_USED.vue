@@ -182,7 +182,9 @@
       </div>
     </div>
     <div class="nav nav-tabs login-tabs border-0" data-toggle="buttons" role="tablist">
-      <button class="btn nav-link border-0 rounded-0" id="checkoutaccount-tab" data-toggle="tab" href="#checkoutaccount" role="tab" aria-controls="checkoutaccount" aria-selected="false">créer mon compte</button>
+      <button class="btn nav-link border-0 rounded-0" id="checkoutaccount-tab" data-toggle="tab" href="#checkoutaccount" role="tab" aria-controls="checkoutaccount" aria-selected="false">
+        créer mon compte
+      </button>
       <button class="btn nav-link border-0 rounded-0" id="checkoutlogin-tab" data-toggle="tab" href="#checkoutlogin" role="tab" aria-controls="checkoutlogin" aria-selected="false">CONNEXION</button>
     </div>
     <div class="validate-btn-info">

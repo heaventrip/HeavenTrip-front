@@ -21,11 +21,11 @@
           </li>
           <li class="mr-4">
             <InlineSvg class="mr-2" :src="require('@/assets/svg/globe.svg')" height="22" />
-            FRANCE
+            {{ countrySelection.value.join(' + ') }}
           </li>
           <li class="mr-4">
             <InlineSvg class="mr-2" :src="require('@/assets/svg/date-search.svg')" height="22" />
-            Décembre
+            monthSelection()
           </li>
         </ul>
       </div>
@@ -215,7 +215,7 @@
               </div>
             </div>
             <!-- <button class="btn btn-block clear-btn border-0 rounded-0">Effacer les 4 critères de sélection</button> -->
-            <button @click="submitSearchForm" class="btn btn-block clear-btn border-0 rounded-0">Rechercher</button>
+            <button @click="clearFilters" class="btn btn-block clear-btn border-0 rounded-0">Supprimer tous les filtres</button>
           </div>
           <div class="d-flex flex-column col-12 col-lg-8 mx-auto">
             <vue-element-loading :active="loading" spinner="spinner" color="#d82558" background-color="transparent" />
@@ -251,8 +251,12 @@
                       <div class="d-flex justify-content-between">
                         <InlineAvatars :avatars="avatarKeys" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         <div class="pad__content__price text-right">
-                          <div class="pad__content__price__info" style="font-weight: 300">par pers.</div>
-                          <div class="pad__content__price__euro">{{ normalResult.price }}&euro;</div>
+                          <div class="pad__content__price__info" style="font-weight: 300">par pers. :</div>
+                          <div class="pad__content__price__euro">
+                            <span class="euro"
+                              >{{ normalResult?.price >= 1000 ? `${normalResult?.price.toString()[0]} ${normalResult?.price.toString().slice(-3)}` : normalResult?.price }}&hairsp;&euro;</span
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -261,7 +265,7 @@
                     <div class="inline-product-infos-container">
                       <InlineProductInfos
                         :infos="[normalResult.country.name, `${normalResult.duration} jours`, normalResult.level.name, `${normalResult.max} places`]"
-                        :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+                        :icons="['globe', 'timer', 'intensity-2-dark', 'people']"
                         color="#292f33"
                         pb="0.8rem"
                         pt="0.8rem"
@@ -494,7 +498,7 @@ export default {
         noOptionsText: 'La liste est vide',
         mode: 'tags',
         value: [],
-        openDirection: 'top',
+        openDirection: 'down',
         caret: false,
         options: [],
         createTag: true
@@ -606,7 +610,7 @@ export default {
     'countrySelection.value': {
       deep: true,
       handler(val) {
-        this.submitSearchForm()
+        if (val.length) this.submitSearchForm()
 
         if (window.scrollY > 25) return
 
@@ -621,6 +625,14 @@ export default {
       this.countrySelection.options.map((el) => (el.disabled = false))
       this.spotSelection.options.map((el) => (el.disabled = false))
       this.levelSelection.options.map((el) => (el.disabled = false))
+      this.fetching = false
+    },
+    clearFilters() {
+      this.$refs.countryMultiselect.clear()
+      this.$refs.spotMultiselect.clear()
+      this.$refs.levelMultiselect.clear()
+      this.$refs.activityMultiselect.clear()
+      this.resetFilters()
       this.fetching = false
     },
     sortByPrice() {

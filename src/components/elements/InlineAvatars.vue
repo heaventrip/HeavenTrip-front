@@ -1,7 +1,12 @@
 <template>
   <div class="d-flex align-items-center" style="height: 42px" :style="[pMarginBottomStyle, pMarginTopStyle]">
     <div class="inline-avatar-container" v-for="(avatarId, index) in avatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
-      <img class="inline-avatar-img rounded-circle" :class="{ 'inline-avatar-img--transparent': hoveredHeart }" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`" />
+      <img
+        class="inline-avatar-img rounded-circle"
+        :class="{ 'inline-avatar-img--transparent': hoveredHeart }"
+        :style="[pHeight, pOutline]"
+        :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`"
+      />
     </div>
     <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="pSpacing">
       <transition name="fade" mode="out-in"> </transition>
@@ -23,22 +28,7 @@ import gsap from 'gsap'
 export default {
   name: 'InlineAvatars',
   // eslint-disable-next-line prettier/prettier
-  props: [
-    'course-id',
-    'height',
-    'heart',
-    'spacing',
-    'avatars',
-    'outline-color',
-    'outline-width',
-    'border-width',
-    'mt',
-    'mb',
-    'heart-color',
-    'heart-width',
-    'heart-height',
-    'count'
-  ],
+  props: ['course-id', 'height', 'heart', 'spacing', 'avatars', 'outline-color', 'outline-width', 'border-width', 'mt', 'mb', 'heart-color', 'heart-width', 'heart-height', 'count'],
   data() {
     return {
       hoveredHeart: false,
@@ -84,6 +74,10 @@ export default {
       }
     },
     addToWishlist() {
+      const AUTH_TOKEN_KEY = 'authToken'
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       if (!this.wishlisted)
         this.$axios
           .post('/wishlists', { wishlist: { courseId: this.$props.courseId } })

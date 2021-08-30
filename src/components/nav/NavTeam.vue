@@ -8,8 +8,9 @@
         </div>
         <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
           <div class="team-card__person-infos__descr">
-            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
-            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête
+            dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans
+            les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
           </div>
           <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
         </div>
@@ -23,8 +24,9 @@
         </div>
         <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
           <div class="team-card__person-infos__descr">
-            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
-            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête
+            dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans
+            les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
           </div>
           <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
         </div>
@@ -38,8 +40,9 @@
         </div>
         <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
           <div class="team-card__person-infos__descr">
-            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
-            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête
+            dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans
+            les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
           </div>
           <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
         </div>
@@ -53,8 +56,9 @@
         </div>
         <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
           <div class="team-card__person-infos__descr">
-            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
-            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête
+            dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans
+            les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
           </div>
           <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
         </div>
@@ -68,8 +72,9 @@
         </div>
         <div class="team-card__person-infos d-flex flex-column justify-content-center ml-5">
           <div class="team-card__person-infos__descr">
-            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les
-            nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
+            Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête
+            dans les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là… celui-là… Toujours la tête dans
+            les nuages celui-là, Toujours la tête dans les nuages celui-là… Toujours la …
           </div>
           <div class="">Toujours la tête dans les nuages celui-là, Toujours la tête dans les nuages celui-là…</div>
         </div>

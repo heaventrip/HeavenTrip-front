@@ -8,7 +8,10 @@
   <div class="text-center mobile-vh">
     <div v-if="step === 1" class="centered-vh">
       <div class="profile-head" style="font-size: 0.875rem">
-        <span class="" style="font-weight: 500">Ton espace client te permet d’avoir une page spéciale Tripper "public".Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus tard via ton espace client, aucun problème.</span>
+        <span class="" style="font-weight: 500"
+          >Ton espace client te permet d’avoir une page spéciale Tripper "public".Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire
+          plus tard via ton espace client, aucun problème.</span
+        >
       </div>
       <div class="mt-4" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <div class="div-group">
@@ -27,7 +30,19 @@
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 1MB</p>
         </div>
-        <my-upload :no-square="true" langType="en" field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess" @crop-upload-fail="cropUploadFail" url="https://heaventrip-dev.herokuapp.com/api/v1/upload" v-model="show" :width="300" :height="300" img-format="jpg"></my-upload>
+        <my-upload
+          :no-square="true"
+          langType="en"
+          field="img"
+          @crop-success="cropSuccess"
+          @crop-upload-success="cropUploadSuccess"
+          @crop-upload-fail="cropUploadFail"
+          url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+          v-model="show"
+          :width="300"
+          :height="300"
+          img-format="jpg"
+        ></my-upload>
         <!-- <div class="ml-2" style="margin-right: auto">
                     <a class="btn" @click="toggleShow">
                       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 104.501 103.177">

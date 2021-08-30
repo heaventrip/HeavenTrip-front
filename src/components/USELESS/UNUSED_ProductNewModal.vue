@@ -15,10 +15,18 @@
             <div class="row">
               <div class="col-5 bg-dark">
                 <div class="nav flex-column nav-pills kitesurf-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link active" id="v-pills-level1-tab" data-toggle="pill" href="#v-pills-level1" role="tab" aria-controls="v-pills-level1" aria-selected="true">NIVEAU 1 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                  <a class="nav-link" id="v-pills-level2-tab" data-toggle="pill" href="#v-pills-level2" role="tab" aria-controls="v-pills-level2" aria-selected="false">NIVEAU 2 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                  <a class="nav-link" id="v-pills-level3-tab" data-toggle="pill" href="#v-pills-level3" role="tab" aria-controls="v-pills-level3" aria-selected="false">NIVEAU 3 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
-                  <a class="nav-link" id="v-pills-level4-tab" data-toggle="pill" href="#v-pills-level4" role="tab" aria-controls="v-pills-level4" aria-selected="false">NIVEAU 4 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                  <a class="nav-link active" id="v-pills-level1-tab" data-toggle="pill" href="#v-pills-level1" role="tab" aria-controls="v-pills-level1" aria-selected="true"
+                    >NIVEAU 1 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
+                  <a class="nav-link" id="v-pills-level2-tab" data-toggle="pill" href="#v-pills-level2" role="tab" aria-controls="v-pills-level2" aria-selected="false"
+                    >NIVEAU 2 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
+                  <a class="nav-link" id="v-pills-level3-tab" data-toggle="pill" href="#v-pills-level3" role="tab" aria-controls="v-pills-level3" aria-selected="false"
+                    >NIVEAU 3 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
+                  <a class="nav-link" id="v-pills-level4-tab" data-toggle="pill" href="#v-pills-level4" role="tab" aria-controls="v-pills-level4" aria-selected="false"
+                    >NIVEAU 4 <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
                 </div>
               </div>
               <div class="col-7">
@@ -65,7 +73,9 @@
                     >
                   </h6>
 
-                  <a class="nav-link" id="v-pills-health3-tab" data-toggle="pill" href="#v-pills-health3" role="tab" aria-controls="v-pills-health3" aria-selected="false">INFOS COVID <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i></a>
+                  <a class="nav-link" id="v-pills-health3-tab" data-toggle="pill" href="#v-pills-health3" role="tab" aria-controls="v-pills-health3" aria-selected="false"
+                    >INFOS COVID <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                  ></a>
                 </div>
               </div>
               <div class="col-7">
@@ -75,7 +85,8 @@
                     <ul class="list-unstyled mb-0 surflist health">
                       <li>
                         Aucun vaccins obligatoires.<br />
-                        Il n’est pas exigé de vaccination sauf contre la fièvre jaune pour les voyageurs en provenance de pays où elle sévit. Dans ce cas, elle doit être faite au moins 10 jours avant le départ.
+                        Il n’est pas exigé de vaccination sauf contre la fièvre jaune pour les voyageurs en provenance de pays où elle sévit. Dans ce cas, elle doit être faite au moins 10 jours avant
+                        le départ.
                       </li>
                       <li>Hépatite A : fortement recommandée par l’OMS</li>
                       <li>En cas de long séjour, d’expatriation ou de séjour en milieu rural, les vaccins contre la rage et la typhoïde sont recommandés.</li>

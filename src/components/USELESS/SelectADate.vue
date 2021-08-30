@@ -94,8 +94,12 @@
                         <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" /></a>
                       </li>
                       <li>
-                        <a class="d-none" href="#" data-toggle="tooltip" data-placement="right" title="Ajoute cette date dans tes envies et discute avec les autres"><i class="fa fa-heart like-icon text-white h4 mb-0"></i></a>
-                        <a class="" href="#" data-toggle="tooltip" data-placement="right" title="Tu peux me retirer de ta liste des envies :("><i class="fa fa-times like-icon text-white h4 mb-0"></i></a>
+                        <a class="d-none" href="#" data-toggle="tooltip" data-placement="right" title="Ajoute cette date dans tes envies et discute avec les autres"
+                          ><i class="fa fa-heart like-icon text-white h4 mb-0"></i
+                        ></a>
+                        <a class="" href="#" data-toggle="tooltip" data-placement="right" title="Tu peux me retirer de ta liste des envies :("
+                          ><i class="fa fa-times like-icon text-white h4 mb-0"></i
+                        ></a>
                       </li>
                     </ul>
                   </div>
@@ -132,8 +136,12 @@
                         <a href="#"><img class="img-fill" fluid :src="require('@/assets/images/ui_faces/4.jpg')" /></a>
                       </li>
                       <li>
-                        <a class="" href="#" data-toggle="tooltip" data-placement="right" title="Ajoute cette date dans tes envies et discute avec les autres"><i class="fa fa-heart like-icon text-white h4 mb-0"></i></a>
-                        <a class="d-none" href="#" data-toggle="tooltip" data-placement="right" title="Tu peux me retirer de ta liste des envies :("><i class="fa fa-times like-icon text-white h4 mb-0"></i></a>
+                        <a class="" href="#" data-toggle="tooltip" data-placement="right" title="Ajoute cette date dans tes envies et discute avec les autres"
+                          ><i class="fa fa-heart like-icon text-white h4 mb-0"></i
+                        ></a>
+                        <a class="d-none" href="#" data-toggle="tooltip" data-placement="right" title="Tu peux me retirer de ta liste des envies :("
+                          ><i class="fa fa-times like-icon text-white h4 mb-0"></i
+                        ></a>
                       </li>
                     </ul>
                   </div>

@@ -36,7 +36,7 @@
         </div>
         <div class="my-auto text-center mt-5">
           <div style="color: white; font-weight: 400">De l’évasion sportive pour tous !</div>
-          <InlineAvatars :avatars="[]" />
+          <InlineAvatars :avatars="[avatarKeys]" />
         </div>
       </div>
       <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2 px-xl-5">
@@ -133,18 +133,21 @@
         <transition name="fade-fast" mode="out-in">
           <form :key="activeTab" :style="[activeTab === 'login' ? 'margin-top: 90px ' : activeTab === 'signup' ? 'margin-top: 50px ' : '']">
             <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
-            <FormSignup v-else-if="activeTab === 'signup'" @clicked-existing-account="activeTab = 'login'" @completed="bringInfoForm" />
-            <FormInfos
-              v-else-if="activeTab === 'infos'"
-              :user="user"
-              @changed-tab="setNewInfoTab"
-              @gender-is-valided="genderIsValid = true"
-              @avatar-is-valided="avatarIsValid = true"
-              @submitted-form="isSuccess = true"
-              :active-info-tab="activeInfoTab"
-              ref="formInfos"
-            />
-            <Password v-else-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
+            <keep-alive>
+              <component
+                :ref="activeTab === 'infos' ? 'formInfos' : ''"
+                :user="user"
+                :active-info-tab="activeInfoTab"
+                @submitted-form="isSuccess = true"
+                @avatar-is-valided="avatarIsValid = true"
+                @changed-tab="setNewInfoTab"
+                @gender-is-valided="genderIsValid = true"
+                @clicked-existing-account="activeTab = 'login'"
+                @completed="bringInfoForm"
+                :is="activeTab === 'infos' ? 'FormInfos' : 'FormSignup'"
+              ></component>
+            </keep-alive>
+            <Password v-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
           </form>
         </transition>
       </div>
@@ -409,7 +412,7 @@ export default {
   left: 0;
   position: fixed;
   z-index: 100;
-  overflow: auto;
+  /* overflow: auto; */
 }
 .big-image {
   object-fit: cover;

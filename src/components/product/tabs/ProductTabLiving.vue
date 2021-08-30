@@ -26,12 +26,19 @@
         </div>
       </div>
       <div class="card-body">
-        <div v-for="room in course.rooms" :key="room" class="head text-uppercase py-2 d-inline-block mr-5" style="font-weight: 500; cursor: pointer" :class="{ 'room-tab--active': activeRoomTab === room }" @mouseover="activeRoomTab = room">
+        <div
+          v-for="room in course.rooms"
+          :key="room"
+          class="head text-uppercase py-2 d-inline-block mr-5"
+          style="font-weight: 500; cursor: pointer"
+          :class="{ 'room-tab--active': activeRoomTab === room }"
+          @mouseover="activeRoomTab = room"
+        >
           {{ room?.title }}
         </div>
         <transition name="fade-fast" mode="out-in">
           <div :key="activeRoomTab">
-            <p class="content">{{ activeRoomTab?.title }}</p>
+            <p class="content mt-3">{{ activeRoomTab?.title }}</p>
             <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
@@ -58,7 +65,17 @@
           <!-- <h5 class="head text-uppercase mb-0 font-weight-bold text-danger mb-0"><img class="d-inline-block" fluid :src="require('@/assets/images/svg/PICTO_HEBERGEMENT.svg')" /><i class="fas fa-caret-right mr-2 ml-3 pr-1 h4 mb-0"></i><strong class="d-lg-none">Hébergement</strong></h5> -->
           <ul class="nav nav-pills mb-0 text-uppercase font-weight-bold d-none d-lg-flex accommodation-nav ml-0" id="pills-tab" role="tablist">
             <li v-for="(room, index) in course.rooms" :key="room" class="nav-item" role="presentation">
-              <a class="nav-link m-0" :class="[index === 0 ? 'active' : '']" id="pills-solo-tab" data-toggle="pill" :href="`#pills-room-${index}`" role="tab" aria-controls="pills-solo" aria-selected="true">{{ room.title }}</a>
+              <a
+                class="nav-link m-0"
+                :class="[index === 0 ? 'active' : '']"
+                id="pills-solo-tab"
+                data-toggle="pill"
+                :href="`#pills-room-${index}`"
+                role="tab"
+                aria-controls="pills-solo"
+                aria-selected="true"
+                >{{ room.title }}</a
+              >
             </li>
           </ul>
         </div>
@@ -108,10 +125,18 @@
     </div>
   </div>
   <swiper :slidesPerView="3" :spaceBetween="1" :loop="true" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }">
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg" @click="showImg(0)" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" @click="showImg(1)" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7KLjC3NaiA4RjXxEoifCQZ/2de2549c4677ac776dfd21d9a8a0d49f/kitesurf-elgouna-cook2.jpg" @click="showImg(2)" /></swiper-slide>
-    <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7jcPbN1eXNsFxWfEkwKlUP/5f6367376f5b06a26473e5822ea4ba87/kitesurf-elgouna-groupe2.jpg" @click="showImg(3)" /></swiper-slide>
+    <swiper-slide
+      ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg" @click="showImg(0)"
+    /></swiper-slide>
+    <swiper-slide
+      ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" @click="showImg(1)"
+    /></swiper-slide>
+    <swiper-slide
+      ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7KLjC3NaiA4RjXxEoifCQZ/2de2549c4677ac776dfd21d9a8a0d49f/kitesurf-elgouna-cook2.jpg" @click="showImg(2)"
+    /></swiper-slide>
+    <swiper-slide
+      ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7jcPbN1eXNsFxWfEkwKlUP/5f6367376f5b06a26473e5822ea4ba87/kitesurf-elgouna-groupe2.jpg" @click="showImg(3)"
+    /></swiper-slide>
   </swiper>
   <vue-easy-lightbox style="z-index: 2" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
   <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
@@ -128,7 +153,7 @@
   </div>
   <div class="d-flex" style="margin-top: 0.5rem; margin-bottom: 6rem">
     <div class="linear-block p-0 m-0 w-100">
-      <div class="card-body d-flex" style="box-shadow: 0 0 2px #ebebeb; height: 340px">
+      <div class="card-body d-flex" style="box-shadow: 0 0 2px #ebebeb; height: 370px">
         <div class="guide-word__image">
           <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
         </div>
@@ -138,12 +163,18 @@
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
               <div class="guide-word__subtitle">Atmosphère culinaire</div>
-              <p class="content pt-3 text-white" style="line-height: 24px">Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear eruditi ncillae, fabulas.</p>
+              <p class="content pt-3 text-white" style="line-height: 24px">
+                Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear
+                eruditi ncillae, fabulas.
+              </p>
               <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
-              <p class="content pt-3 text-white" style="line-height: 24px">testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste testeste testeste testeste testeste testeste</p>
+              <p class="content pt-3 text-white" style="line-height: 24px">
+                testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste
+                testeste testeste testeste testeste testeste
+              </p>
               <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
           </transition>
@@ -171,8 +202,8 @@
       </div>
       <div class="card-body">
         <p class="content">
-          Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises conditions météorologiques ou autres. En cas de mauvaises conditions météorologiques ou autres. En cas de
-          mauvaises conditions météorologiques.
+          Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises conditions
+          météorologiques ou autres. En cas de mauvaises conditions météorologiques ou autres. En cas de mauvaises conditions météorologiques.
         </p>
       </div>
     </div>

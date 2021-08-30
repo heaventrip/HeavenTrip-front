@@ -53,7 +53,7 @@
             <span id="loading" v-show="fetching"></span>
             rechercher
           </div>
-          <!-- <div style="font-size: 0.8rem; font-weight: 300; text-transform: none">12 résultats</div> -->
+          <div v-show="resultsNb" style="font-size: 0.8rem; font-weight: 300; text-transform: none">{{ resultsNb }} résultats</div>
         </button>
       </div>
       <div class="tags-container d-flex justify-content-center">
@@ -132,7 +132,8 @@ export default {
         openDirection: 'top',
         caret: false,
         options: []
-      }
+      },
+      resultsNb: 0
     }
   },
   props: [],
@@ -154,7 +155,7 @@ export default {
     'activitySelection.value': {
       deep: true,
       handler(val) {
-        this.fetchData()
+        if (val.length) this.fetchData()
 
         if (window.scrollY > 25) return
 
@@ -165,6 +166,8 @@ export default {
     'monthSelection.value': {
       deep: true,
       handler(val) {
+        if (val.length) this.fetchData()
+
         if (window.scrollY > 25) return
 
         if (val.length) this.slideUpSearchBar.play()
@@ -177,6 +180,7 @@ export default {
       this.activitySelection.options?.map((el) => (el.disabled = false))
       this.countrySelection.options?.map((el) => (el.disabled = false))
       this.monthSelection.options?.map((el) => (el.disabled = false))
+      this.resultsNb = 0
       this.fetching = false
     },
     goSearchPage() {
@@ -200,7 +204,8 @@ export default {
           }
         })
         .then((res) => {
-          console.log(res)
+          this.resultsNb = res.data.courses.length
+
           res.data.courses.forEach((course) => {
             this.filtered.activityArr.push(course.sports.map((sport) => sport.id))
             this.filtered.countryArr.push(course.country.id)
@@ -237,6 +242,7 @@ export default {
       this.$refs.countryMultiselect.clear()
       this.$refs.monthMultiselect.clear()
       this.$refs.activityMultiselect.clear()
+      this.resetFilters()
       this.fetching = false
     },
     fetchCountries() {

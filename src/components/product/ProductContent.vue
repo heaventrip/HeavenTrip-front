@@ -17,12 +17,19 @@
     <div class="tab-content main-tab d-flex flex-column justify-content-around" id="pills-tabContent" style="">
       <div class="product-nav-tabs">
         <ProductNav :course="course" />
-        <ul style="height: 100px; background-color: white; font-weight: 400; padding: 0 2.3vw" class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
+        <ul
+          style="height: 100px; background-color: white; font-weight: 400; padding: 0 2.3vw"
+          class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center"
+          id="pills-tab"
+          role="tablist"
+        >
           <li class="nav-item" role="presentation" type="button">
             <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
           </li>
           <li class="nav-item" role="presentation" type="button">
-            <a @click.prevent="scrollToSection('product-tab-activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true">Activités & spot</a>
+            <a @click.prevent="scrollToSection('product-tab-activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true"
+              >Activités & spot</a
+            >
           </li>
           <li class="nav-item" role="presentation" type="button">
             <a @click.prevent="scrollToSection('product-tab-living')" class="nav-link" id="pills-living-tab" data-toggle="pill" aria-controls="pills-place" aria-selected="false">Vie sur place</a>
@@ -72,12 +79,31 @@
     <div class="gallery-comment-block">
       <div class="aside-slider">
         <transition name="fade" @after-leave="afterLeave">
-          <swiper v-if="asideSlider" @after-init="setCustomButtons" :spaceBetween="10" :autoplay="{ delay: 5000 }" :loop="true" :effect="'fade'" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }" :navigation="true">
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" @click="showImg(0)" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" @click="showImg(1)" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" @click="showImg(2)" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin" @click="showImg(3)" /></swiper-slide>
-            <swiper-slide><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2" @click="showImg(4)" /></swiper-slide>
+          <swiper
+            v-if="asideSlider"
+            @after-init="setCustomButtons"
+            :spaceBetween="10"
+            :autoplay="{ delay: 5000 }"
+            :loop="true"
+            :effect="'fade'"
+            :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }"
+            :navigation="true"
+          >
+            <swiper-slide
+              ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" @click="showImg(0)"
+            /></swiper-slide>
+            <swiper-slide
+              ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" @click="showImg(1)"
+            /></swiper-slide>
+            <swiper-slide
+              ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" @click="showImg(2)"
+            /></swiper-slide>
+            <swiper-slide
+              ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7hs9rPXy3OcgCjnKOUuEaP/461f8a21de4a0bb481bc9407e0d0f647/kitesurf-elgouna-dauphin" @click="showImg(3)"
+            /></swiper-slide>
+            <swiper-slide
+              ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/xq9P8R3xr0freagUL2M1B/95126b093d7e4c3c2342f6e508584136/kitesurf-elgouna-cover2" @click="showImg(4)"
+            /></swiper-slide>
           </swiper>
         </transition>
         <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>

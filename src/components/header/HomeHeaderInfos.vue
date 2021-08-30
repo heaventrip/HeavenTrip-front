@@ -8,10 +8,20 @@
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
                   <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
-                  <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
+                  <path
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="white"
+                    d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z"
+                  />
                 </g>
               </g>
-              <InlineSvg v-if="featuredCourse.sports && featuredCourse.sports[0].picto !== null" :src="require(`@/assets/svg/${featuredCourse.sports[0].picto}.svg`)" height="80" viewBox="-12 -20 50 50" fill="white" />
+              <InlineSvg
+                v-if="featuredCourse.sports && featuredCourse.sports[0].picto !== null"
+                :src="require(`@/assets/svg/${featuredCourse.sports[0].picto}.svg`)"
+                height="80"
+                viewBox="-12 -20 50 50"
+                fill="white"
+              />
             </svg>
             <!-- <InlineSvg :src="require('@/assets/svg/circle-ski-light.svg')" class="top-block__svg d-inline-block" style="max-width: 9rem" /> -->
             <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
@@ -23,7 +33,15 @@
           </div>
           <div class="d-flex">
             <Tag text="4 départs" color="white" class="product-infos__tag" height="30px" />
-            <InlineProductInfos :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]" :icons="['globe', 'timer', 'intensity-2-white', 'people']" pr="0rem" :border-top="false" color="white" icon="globe" pt="0rem" />
+            <InlineProductInfos
+              :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]"
+              :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+              pr="0rem"
+              :border-top="false"
+              color="white"
+              icon="globe"
+              pt="0rem"
+            />
           </div>
         </div>
         <div class="d-inline-flex d-lg-flex align-items-center justify-content-between pb-3 trippers-div">
@@ -39,7 +57,9 @@
           </span> -->
           <InlineAvatars :course-id="featuredCourse?.id" :avatars="avatarKeys" outline-color="violetfullscreen" :heart="true" spacing="-10px" />
           <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
-          <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#">Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')" /></a>
+          <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#"
+            >Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')"
+          /></a>
         </div>
       </div>
       <div class="row no-gutters">
@@ -51,7 +71,9 @@
         <div class="col-8 bg block--white">
           <div class="block__content">
             <div class="px-0">
-              <span class="euro">{{ featuredCourse?.price >= 1000 ? `${featuredCourse?.price.toString()[0]} ${featuredCourse?.price.toString().slice(-3)}` : featuredCourse?.price }}&hairsp;&euro;</span>
+              <span class="euro"
+                >{{ featuredCourse?.price >= 1000 ? `${featuredCourse?.price.toString()[0]} ${featuredCourse?.price.toString().slice(-3)}` : featuredCourse?.price }}&hairsp;&euro;</span
+              >
               <span class="euro-pers">/pers.</span>
               <br />
               <span class="text--smaller">Prix du stage hors options</span>

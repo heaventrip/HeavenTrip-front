@@ -7,7 +7,15 @@
     <a href="#" class="text-white user-circle">
       <i class="fa fa-user-circle mx-auto"></i>
     </a>
-    <button class="navbar-toggler rounded-0 collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler rounded-0 collapsed"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <!-- <span class="navbar-toggler-icon"></span> -->
       <img class="menu-icon mx-auto" fluid :src="require('@/assets/images/menu.png')" />
       <i class="fa fa-times cross-sym mx-auto"></i>
@@ -26,16 +34,24 @@
       </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
         <li class="nav-item">
-          <a class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link" id="pills-activites-tab" data-toggle="pill" href="#pills-activites" role="tab" aria-controls="pills-activites" aria-selected="false"
+            ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link" id="pills-destination-tab" data-toggle="pill" href="#pills-destination" role="tab" aria-controls="pills-destination" aria-selected="false"
+            ><span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link" id="pills-agence-tab" data-toggle="pill" href="#pills-agence" role="tab" aria-controls="pills-agence" aria-selected="false"
+            ><span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i></a>
+          <a class="nav-link active" id="pills-activity-tab" data-toggle="pill" href="#pills-activity" role="tab" aria-controls="pills-activity" aria-selected="true"
+            ><span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
+          ></a>
         </li>
       </ul>
 
@@ -60,22 +76,34 @@
                 </h4>
                 <ul class="nav navbar-nav inner-nav-list flex-column nav-pills wrapper-pills border-0 mobile-navs" id="activites_pills_tab" role="tablist" aria-orientation="vertical">
                   <li class="nav-item activity-item" role="presentation">
-                    <a class="nav-link" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false">VENT & MER <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+                    <a class="nav-link" id="v-pills-vent-mer-tab" data-toggle="pill" href="#v-pills-vent-mer" role="tab" aria-controls="v-pills-vent-mer" aria-selected="false"
+                      >VENT & MER <i class="fa fa-chevron-right chevron-left float-right"></i
+                    ></a>
                   </li>
                   <li class="nav-item activity-item" role="presentation">
-                    <a class="nav-link" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne" role="tab" aria-controls="v-pills-montagne" aria-selected="false">MONTAGNE <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+                    <a class="nav-link" id="v-pills-montagne-tab" data-toggle="pill" href="#v-pills-montagne" role="tab" aria-controls="v-pills-montagne" aria-selected="false"
+                      >MONTAGNE <i class="fa fa-chevron-right chevron-left float-right"></i
+                    ></a>
                   </li>
                   <li class="nav-item activity-item" role="presentation">
-                    <a class="nav-link" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false">A PIED <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+                    <a class="nav-link" id="v-pills-pied-tab" data-toggle="pill" href="#v-pills-pied" role="tab" aria-controls="v-pills-pied" aria-selected="false"
+                      >A PIED <i class="fa fa-chevron-right chevron-left float-right"></i
+                    ></a>
                   </li>
                   <li class="nav-item activity-item" role="presentation">
-                    <a class="nav-link" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false">MULTI - ACTIVITES <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+                    <a class="nav-link" id="v-pills-multi-acti-tab" data-toggle="pill" href="#v-pills-multi-acti" role="tab" aria-controls="v-pills-multi-acti" aria-selected="false"
+                      >MULTI - ACTIVITES <i class="fa fa-chevron-right chevron-left float-right"></i
+                    ></a>
                   </li>
                   <li class="nav-item activity-item" role="presentation">
-                    <a class="nav-link" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false">BIEN-ÊTRE <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+                    <a class="nav-link" id="v-pills-bien-tab" data-toggle="pill" href="#v-pills-bien" role="tab" aria-controls="v-pills-bien" aria-selected="false"
+                      >BIEN-ÊTRE <i class="fa fa-chevron-right chevron-left float-right"></i
+                    ></a>
                   </li>
                   <li class="nav-item activity-item" role="presentation">
-                    <a class="nav-link" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false">NEIGE <i class="fa fa-chevron-right chevron-left float-right"></i></a>
+                    <a class="nav-link" id="v-pills-neige-tab" data-toggle="pill" href="#v-pills-neige" role="tab" aria-controls="v-pills-neige" aria-selected="false"
+                      >NEIGE <i class="fa fa-chevron-right chevron-left float-right"></i
+                    ></a>
                   </li>
                 </ul>
               </div>
@@ -339,7 +367,8 @@
                             et
                             <span class="font-weight-bold">authentique</span>
                             loin du tourisme de masse. Un concept d’<span class="font-weight-bold">évasion mêlant sport, culture et bien-être</span>
-                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression assurées !
+                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression
+                            assurées !
                           </p>
                         </div>
                         <div class="tab-pane fade" id="pills-turnkey" role="tabpanel" aria-labelledby="pills-turnkey-tab">
@@ -349,7 +378,8 @@
                             et
                             <span class="font-weight-bold">authentique</span>
                             loin du tourisme de masse. Un concept d’<span class="font-weight-bold">évasion mêlant sport, culture et bien-être</span>
-                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression assurées !
+                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression
+                            assurées !
                           </p>
                         </div>
                         <div class="tab-pane fade" id="pills-made" role="tabpanel" aria-labelledby="pills-made-tab">
@@ -359,7 +389,8 @@
                             et
                             <span class="font-weight-bold">authentique</span>
                             loin du tourisme de masse. Un concept d’<span class="font-weight-bold">évasion mêlant sport, culture et bien-être</span>
-                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression assurées !
+                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression
+                            assurées !
                           </p>
                         </div>
                         <div class="tab-pane fade" id="pills-share" role="tabpanel" aria-labelledby="pills-share-tab">
@@ -369,7 +400,8 @@
                             et
                             <span class="font-weight-bold">authentique</span>
                             loin du tourisme de masse. Un concept d’<span class="font-weight-bold">évasion mêlant sport, culture et bien-être</span>
-                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression assurées !
+                            pensé par des amoureux pour des passionnés tels que vous. Parce que votre emprunte est unique, nos séjours sportifs aussi ! Cohésion, fun, rencontres et progression
+                            assurées !
                           </p>
                         </div>
                       </div>

@@ -1,68 +1,67 @@
-        <div class="d-none dropdown login-dropdown" :class="{ 'bg-white': toggleDropdown }">
-          <button class="btn btn-block rounded-0 border-0" @click.prevent="toggleDropdown = !toggleDropdown">
-            <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-            <span :class="{ 'text-dark': toggleDropdown }"
-              >{{ currUser?.first_name }}
-              <span class="l-name" style="margin-right: 40px"> .{{ currUser?.last_name?.[0] }} </span>
-            </span>
-            <InlineSvg :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
-          </button>
-          <transition name="fade-fast">
-            <div v-if="toggleDropdown" class="dropdown-menu text-uppercase p-0" :class="{ 'd-block': toggleDropdown }">
-              <div class="account-dropdown-item p-0">
-                <router-link :to="{ name: 'Profile' }" class="dropdown-item p-3">Mes infos</router-link>
-              </div>
-              <div class="account-dropdown-item p-0">
-                <button @click.stop="showWishlist = !showWishlist" class="dropdown-item p-3" type="button">
-                  Mes envies
-                  <span class="font-weight-bold text-danger ml-1">(2)</span>
-                </button>
-              </div>
-              <transition name="fade-fast">
-                <div class="wishlists" v-show="showWishlist" :key="showWishlist">
-                  <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
-                    <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
-                    {{ wishlist.name }}
-                  </div>
-                </div>
-              </transition>
-              <div class="account-dropdown-item p-0">
-                <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link p-3">Mon compte</router-link>
-                <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
-                <!-- <Profile v-if="showProfileModal" /> -->
-              </div>
-              <div class="account-dropdown-item p-0">
-                <InlineSvg :src="require('@/assets/svg/disconnect.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" />
-                <button @click="logOut" class="dropdown-item logout-page-link p-3" type="button">se déconnecter</button>
-              </div>
-            </div>
-          </transition>
+<div class="d-none dropdown login-dropdown" :class="{ 'bg-white': toggleDropdown }">
+  <button class="btn btn-block rounded-0 border-0" @click.prevent="toggleDropdown = !toggleDropdown">
+    <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+    <span :class="{ 'text-dark': toggleDropdown }"
+      >{{ currUser?.first_name }}
+      <span class="l-name" style="margin-right: 40px"> .{{ currUser?.last_name?.[0] }} </span>
+    </span>
+    <InlineSvg :src="require('@/assets/svg/connection-dropdown.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
+  </button>
+  <transition name="fade-fast">
+    <div v-if="toggleDropdown" class="dropdown-menu text-uppercase p-0" :class="{ 'd-block': toggleDropdown }">
+      <div class="account-dropdown-item p-0">
+        <router-link :to="{ name: 'Profile' }" class="dropdown-item p-3">Mes infos</router-link>
+      </div>
+      <div class="account-dropdown-item p-0">
+        <button @click.stop="showWishlist = !showWishlist" class="dropdown-item p-3" type="button">
+          Mes envies
+          <span class="font-weight-bold text-danger ml-1">(2)</span>
+        </button>
+      </div>
+      <transition name="fade-fast">
+        <div class="wishlists" v-show="showWishlist" :key="showWishlist">
+          <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
+            <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
+            {{ wishlist.name }}
+          </div>
         </div>
+      </transition>
+      <div class="account-dropdown-item p-0">
+        <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link p-3">Mon compte</router-link>
+        <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
+        <!-- <Profile v-if="showProfileModal" /> -->
+      </div>
+      <div class="account-dropdown-item p-0">
+        <InlineSvg :src="require('@/assets/svg/disconnect.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" />
+        <button @click="logOut" class="dropdown-item logout-page-link p-3" type="button">se déconnecter</button>
+      </div>
+    </div>
+  </transition>
+</div>
 
-
-                      <div class="account-dropdown-item p-0">
-                <router-link :to="{ name: 'Profile' }" class="dropdown-item p-3">Mes infos</router-link>
-              </div>
-              <div class="account-dropdown-item p-0">
-                <button @click.stop="showWishlist = !showWishlist" class="dropdown-item p-3" type="button">
-                  Mes envies
-                  <span class="font-weight-bold text-danger ml-1">(2)</span>
-                </button>
-              </div>
-              <transition name="fade-fast">
-                <div class="wishlists" v-show="showWishlist" :key="showWishlist">
-                  <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
-                    <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
-                    {{ wishlist.name }}
-                  </div>
-                </div>
-              </transition>
-              <div class="account-dropdown-item p-0">
-                <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link p-3">Mon compte</router-link>
-                <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
-                <!-- <Profile v-if="showProfileModal" /> -->
-              </div>
-              <div class="account-dropdown-item p-0">
-                <InlineSvg :src="require('@/assets/svg/disconnect.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" />
-                <button @click="logOut" class="dropdown-item logout-page-link p-3" type="button">se déconnecter</button>
-              </div>
+<div class="account-dropdown-item p-0">
+  <router-link :to="{ name: 'Profile' }" class="dropdown-item p-3">Mes infos</router-link>
+</div>
+<div class="account-dropdown-item p-0">
+  <button @click.stop="showWishlist = !showWishlist" class="dropdown-item p-3" type="button">
+    Mes envies
+    <span class="font-weight-bold text-danger ml-1">(2)</span>
+  </button>
+</div>
+<transition name="fade-fast">
+  <div class="wishlists" v-show="showWishlist" :key="showWishlist">
+    <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
+      <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
+      {{ wishlist.name }}
+    </div>
+  </div>
+</transition>
+<div class="account-dropdown-item p-0">
+  <router-link :to="{ name: 'Account' }" class="dropdown-item account-page-link p-3">Mon compte</router-link>
+  <!-- <button @click="setActiveTab('infos')" class="dropdown-item account-page-link" type="button">Mon compte</button> -->
+  <!-- <Profile v-if="showProfileModal" /> -->
+</div>
+<div class="account-dropdown-item p-0">
+  <InlineSvg :src="require('@/assets/svg/disconnect.svg')" :fill="toggleDropdown ? '#292f33' : 'white'" />
+  <button @click="logOut" class="dropdown-item logout-page-link p-3" type="button">se déconnecter</button>
+</div>

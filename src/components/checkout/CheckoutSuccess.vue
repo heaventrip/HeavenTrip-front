@@ -10,7 +10,11 @@
             <g id="Calque_2" data-name="Calque 2">
               <g id="Calque_1-2" data-name="Calque 1">
                 <path fill="#d82558" d="M48.37,0A52.19,52.19,0,0,0,15.62,10.85l7.63,7.61A41.66,41.66,0,0,1,77.14,22.9a41.48,41.48,0,0,1,4.34,53.68l7.61,7.6A52.26,52.26,0,0,0,48.37,0Z" />
-                <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z" />
+                <path
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="white"
+                  d="M76.11,88.8a46.3,46.3,0,0,1-61.37-3.52,46,46,0,0,1-3.49-61.22l-.87-.88a47.22,47.22,0,0,0,3.49,63A47.52,47.52,0,0,0,77,89.67Z"
+                />
               </g>
             </g>
             <InlineSvg :src="require(`@/assets/svg/check.svg`)" viewBox="-12 -18 50 50" fill="white" />
@@ -21,7 +25,10 @@
           <div style="font-weight: 400; letter-spacing: 0.04rem">Votre paiement de 1000 € a été validé</div>
         </div>
       </div>
-      <div class="d-flex justify-content-center" style="position: relative; width: 100%; height: 80px; border-top: 1px dashed rgba(255, 255, 255, 0.15); border-bottom: 1px dashed rgba(255, 255, 255, 0.15)">
+      <div
+        class="d-flex justify-content-center"
+        style="position: relative; width: 100%; height: 80px; border-top: 1px dashed rgba(255, 255, 255, 0.15); border-bottom: 1px dashed rgba(255, 255, 255, 0.15)"
+      >
         <div class="keywords-container" style="position: absolute; left: 0; transform: translateX(-100%)">
           <div class="d-flex">
             <span class="keyword keyword--first-line">Résilience</span>
@@ -48,7 +55,8 @@
       </div>
       <div class="d-flex align-items-center justify-content-center" style="margin-bottom: 5rem; margin-top: 4rem; font-family: Muli, sans-serif; font-size: 0.8rem">
         <div class="text-right" style="margin-right: 4rem; letter-spacing: 0.04rem; line-height: 1.8; font-size: 0.8rem; width: 45%">
-          Un email de confirmation a été envoyé sur ta boite mail. Tu peux retrouver l'état de ta réservation sur ton espace client. Profites-en pour discuter avec les autres participants via le chat en ligne. Merci pour ta confiance !
+          Un email de confirmation a été envoyé sur ta boite mail. Tu peux retrouver l'état de ta réservation sur ton espace client. Profites-en pour discuter avec les autres participants via le chat
+          en ligne. Merci pour ta confiance !
         </div>
         <InlineSvg :src="require('@/assets/svg/instagram-light.svg')" height="60" />
         <div class="ml-4">

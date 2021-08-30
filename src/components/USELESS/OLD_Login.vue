@@ -57,15 +57,41 @@
                 <div class="login-form">
                   <div class="row">
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0 text-left pl-4"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook</button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0 text-left pl-4">
+                        <i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>Connexion avec Facebook
+                      </button>
                     </div>
                     <div class="col-12 col-lg-6">
                       <button class="btn btn-block rounded-0 social-btn text-left pl-4">
                         <svg class="mr-3 h5 mb-0 align-text-bottom" id="Groupe_90" data-name="Groupe 90" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
-                          <path id="Tracé_2140" data-name="Tracé 2140" d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z" transform="translate(0 -132.327)" fill="#fbbb00" />
-                          <path id="Tracé_2141" data-name="Tracé 2141" d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z" transform="translate(-250.386 -199.231)" fill="#518ef8" />
-                          <path id="Tracé_2142" data-name="Tracé 2142" d="M47.084,315.692h0a11,11,0,0,1-16.575-3.365l3.565-2.918a6.542,6.542,0,0,0,9.427,3.35Z" transform="translate(-29.198 -296.114)" fill="#28b446" />
-                          <path id="Tracé_2143" data-name="Tracé 2143" d="M45.415,2.532,41.852,5.45a6.541,6.541,0,0,0-9.644,3.425L28.625,5.941h0A11,11,0,0,1,45.415,2.532Z" transform="translate(-27.394)" fill="#f14336" />
+                          <path
+                            id="Tracé_2140"
+                            data-name="Tracé 2140"
+                            d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z"
+                            transform="translate(0 -132.327)"
+                            fill="#fbbb00"
+                          />
+                          <path
+                            id="Tracé_2141"
+                            data-name="Tracé 2141"
+                            d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z"
+                            transform="translate(-250.386 -199.231)"
+                            fill="#518ef8"
+                          />
+                          <path
+                            id="Tracé_2142"
+                            data-name="Tracé 2142"
+                            d="M47.084,315.692h0a11,11,0,0,1-16.575-3.365l3.565-2.918a6.542,6.542,0,0,0,9.427,3.35Z"
+                            transform="translate(-29.198 -296.114)"
+                            fill="#28b446"
+                          />
+                          <path
+                            id="Tracé_2143"
+                            data-name="Tracé 2143"
+                            d="M45.415,2.532,41.852,5.45a6.541,6.541,0,0,0-9.644,3.425L28.625,5.941h0A11,11,0,0,1,45.415,2.532Z"
+                            transform="translate(-27.394)"
+                            fill="#f14336"
+                          />
                         </svg>
                         Connexion avec Google
                       </button>
@@ -86,7 +112,14 @@
                         <div class="row">
                           <div class="col-12">
                             <div class="form-group">
-                              <input v-model="loginEmail" class="form-control modal-input" type="mail" name="email" placeholder="Adresse mail" :style="[errors.includes('loginEmail') && !loginEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
+                              <input
+                                v-model="loginEmail"
+                                class="form-control modal-input"
+                                type="mail"
+                                name="email"
+                                placeholder="Adresse mail"
+                                :style="[errors.includes('loginEmail') && !loginEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+                              />
                             </div>
                           </div>
                           <div class="col-12">
@@ -127,18 +160,39 @@
                     <div class="row">
                       <div class="col-12 col-lg-6">
                         <div class="form-group position-relative">
-                          <input v-model="firstName" class="form-control modal-input" type="text" name="" placeholder="Prénom" :style="[registerErrors.includes('firstName') && !firstName ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
+                          <input
+                            v-model="firstName"
+                            class="form-control modal-input"
+                            type="text"
+                            name=""
+                            placeholder="Prénom"
+                            :style="[registerErrors.includes('firstName') && !firstName ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+                          />
                           <i class="fa fa-check check-sym"></i>
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <div class="form-group">
-                          <input v-model="lastName" class="form-control modal-input" type="text" name="" placeholder="Nom" :style="[registerErrors.includes('lastName') && !lastName ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
+                          <input
+                            v-model="lastName"
+                            class="form-control modal-input"
+                            type="text"
+                            name=""
+                            placeholder="Nom"
+                            :style="[registerErrors.includes('lastName') && !lastName ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+                          />
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="form-group">
-                          <input v-model="registerEmail" class="form-control modal-input" type="mail" name="register_email" placeholder="Adresse mail" :style="[registerErrors.includes('registerEmail') && !registerEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']" />
+                          <input
+                            v-model="registerEmail"
+                            class="form-control modal-input"
+                            type="mail"
+                            name="register_email"
+                            placeholder="Adresse mail"
+                            :style="[registerErrors.includes('registerEmail') && !registerEmail ? 'background-color: #fff8f8; border-left: 4px solid red' : '']"
+                          />
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
@@ -178,15 +232,41 @@
                   </h6>
                   <div class="form-row">
                     <div class="col-12 col-lg-6">
-                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0 text-left pl-4"><i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>S'inscrire avec Facebook</button>
+                      <button class="btn btn-block rounded-0 social-btn fb-btn mb-3 mb-lg-0 text-left pl-4">
+                        <i class="fab fa-facebook-f mr-3 h5 mb-0 align-text-bottom"></i>S'inscrire avec Facebook
+                      </button>
                     </div>
                     <div class="col-12 col-lg-6">
                       <button class="btn btn-block rounded-0 social-btn text-left pl-4">
                         <svg class="mr-3 h5 mb-0 align-text-bottom" id="Groupe_90" data-name="Groupe 90" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
-                          <path id="Tracé_2140" data-name="Tracé 2140" d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z" transform="translate(0 -132.327)" fill="#fbbb00" />
-                          <path id="Tracé_2141" data-name="Tracé 2141" d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z" transform="translate(-250.386 -199.231)" fill="#518ef8" />
-                          <path id="Tracé_2142" data-name="Tracé 2142" d="M47.084,315.692h0a11,11,0,0,1-16.575-3.365l3.565-2.918a6.542,6.542,0,0,0,9.427,3.35Z" transform="translate(-29.198 -296.114)" fill="#28b446" />
-                          <path id="Tracé_2143" data-name="Tracé 2143" d="M45.415,2.532,41.852,5.45a6.541,6.541,0,0,0-9.644,3.425L28.625,5.941h0A11,11,0,0,1,45.415,2.532Z" transform="translate(-27.394)" fill="#f14336" />
+                          <path
+                            id="Tracé_2140"
+                            data-name="Tracé 2140"
+                            d="M4.876,145.622,4.11,148.48l-2.8.059a11.019,11.019,0,0,1-.081-10.272h0l2.492.457L4.814,141.2a6.565,6.565,0,0,0,.062,4.42Z"
+                            transform="translate(0 -132.327)"
+                            fill="#fbbb00"
+                          />
+                          <path
+                            id="Tracé_2141"
+                            data-name="Tracé 2141"
+                            d="M272.194,208.176a11,11,0,0,1-3.921,10.633h0l-3.139-.16-.444-2.773a6.556,6.556,0,0,0,2.821-3.348h-5.882v-4.352h10.566Z"
+                            transform="translate(-250.386 -199.231)"
+                            fill="#518ef8"
+                          />
+                          <path
+                            id="Tracé_2142"
+                            data-name="Tracé 2142"
+                            d="M47.084,315.692h0a11,11,0,0,1-16.575-3.365l3.565-2.918a6.542,6.542,0,0,0,9.427,3.35Z"
+                            transform="translate(-29.198 -296.114)"
+                            fill="#28b446"
+                          />
+                          <path
+                            id="Tracé_2143"
+                            data-name="Tracé 2143"
+                            d="M45.415,2.532,41.852,5.45a6.541,6.541,0,0,0-9.644,3.425L28.625,5.941h0A11,11,0,0,1,45.415,2.532Z"
+                            transform="translate(-27.394)"
+                            fill="#f14336"
+                          />
                         </svg>
                         S'inscrire avec Google
                       </button>
@@ -211,7 +291,9 @@
                       <img class="img-fluid" fluid :src="require('@/assets/images/fprint_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">Une agence en ligne oui, mais bien humaine je te rassure. Nous avons à cœur d'accompagner et conseiller nos Trippers. Fun, rencontres et convivialité assurés !</p>
+                      <p class="mb-0 registor-points">
+                        Une agence en ligne oui, mais bien humaine je te rassure. Nous avons à cœur d'accompagner et conseiller nos Trippers. Fun, rencontres et convivialité assurés !
+                      </p>
                     </div>
                   </li>
                   <li class="row">
@@ -219,7 +301,9 @@
                       <img class="img-fluid" fluid :src="require('@/assets/images/lab_white.png')" />
                     </div>
                     <div class="col-10">
-                      <p class="mb-0 registor-points">Nous accordons beaucoup de temps et d'énergie dans la création de nos séjours qui se veulent authentiques et personnalisables. Gagnez en liberté !</p>
+                      <p class="mb-0 registor-points">
+                        Nous accordons beaucoup de temps et d'énergie dans la création de nos séjours qui se veulent authentiques et personnalisables. Gagnez en liberté !
+                      </p>
                     </div>
                   </li>
                   <li class="row">

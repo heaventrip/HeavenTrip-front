@@ -26,12 +26,12 @@
         <div class="row" style="margin-bottom: 2rem; padding-bottom: 3rem; border-bottom: 1px dashed #292f33">
           <span class="mb-2"
             >C’est très simple, on te prend toi ! Lui, elle, elle, lui et encore d’ autres et vous partez ici ou là tous dans une villa, un chalet ou petite résidence ou
-            <span class="text--bold">vous partagerez tous ensemble le logement, de bons repas, les activités sportives, parfois culturelles et bien- être</span>. Tu feras parti (on l’espère !) d’un de ces groupes composé de 4 personnes minimum jusqu’à 10 max ! Un “Nous” en petit collectif et
-            authentique, histoire de.</span
+            <span class="text--bold">vous partagerez tous ensemble le logement, de bons repas, les activités sportives, parfois culturelles et bien- être</span>. Tu feras parti (on l’espère !) d’un de
+            ces groupes composé de 4 personnes minimum jusqu’à 10 max ! Un “Nous” en petit collectif et authentique, histoire de.</span
           >
           <span
-            >Nos séjours sportifs sont des <span class="text--bold">créations By Heaven Trip</span>, nous sélectionnons nos partenaires par domaine de compétences, réduisons les intermédiaires et favorisons l’emploi local. Cela nous permet de concevoir des expériences différentes et de permettre sur
-            les pratiques sportives une réelle pédagogie avec des
+            >Nos séjours sportifs sont des <span class="text--bold">créations By Heaven Trip</span>, nous sélectionnons nos partenaires par domaine de compétences, réduisons les intermédiaires et
+            favorisons l’emploi local. Cela nous permet de concevoir des expériences différentes et de permettre sur les pratiques sportives une réelle pédagogie avec des
           </span>
         </div>
         <div class="inline-infos d-flex align-items-center">
@@ -73,7 +73,9 @@
               <g id="Calque_1-2" data-name="Calque 1">
                 <path id="PICTO_ARROW_RIGHT_1" data-name="PICTO ARROW RIGHT 1" d="M23.56,14.74,17,21.27l6.6,6.53-2,2-8.64-8.53,8.64-8.54Z" />
                 <path d="M5.52,9.38l.08-.09-.51-.52L5,8.87A18.48,18.48,0,0,0,31.13,35l.1-.08-.52-.52-.09.08A17.75,17.75,0,0,1,5.52,9.38Z" />
-                <path d="M24.27.53A20.22,20.22,0,0,0,8.93,3.08a20.77,20.77,0,0,0-3.44,2.7l-.36.35.35.35,2.41,2.4.34.34.34-.33A16.13,16.13,0,0,1,11.25,6.8,16,16,0,0,1,30.93,9a16.6,16.6,0,0,1,2.27,2.86,15.94,15.94,0,0,1-2.09,19.53l-.33.34.34.34,2.4,2.41.35.35.35-.36a20.32,20.32,0,0,0-9.95-34Z" />
+                <path
+                  d="M24.27.53A20.22,20.22,0,0,0,8.93,3.08a20.77,20.77,0,0,0-3.44,2.7l-.36.35.35.35,2.41,2.4.34.34.34-.33A16.13,16.13,0,0,1,11.25,6.8,16,16,0,0,1,30.93,9a16.6,16.6,0,0,1,2.27,2.86,15.94,15.94,0,0,1-2.09,19.53l-.33.34.34.34,2.4,2.41.35.35.35-.36a20.32,20.32,0,0,0-9.95-34Z"
+                />
               </g>
             </g>
           </svg>

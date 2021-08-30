@@ -16,7 +16,7 @@
       <div class="card__footer item-details" style="width: 100%">
         <div class="card__footer__static-infos content d-flex justify-content-between">
           <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
-            <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="100" viewBox="0 0 42.57972 37.89174">
+            <svg class="mr-3" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="80" viewBox="0 0 42.57972 37.89174">
               <path
                 id="BACKGROUND_PICTO"
                 data-name="BACKGROUND PICTO"
@@ -140,6 +140,10 @@ export default {
       this.tl = tl
     },
     addToWishlist() {
+      const AUTH_TOKEN_KEY = 'authToken'
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       if (!this.wishlisted)
         this.$axios
           .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })

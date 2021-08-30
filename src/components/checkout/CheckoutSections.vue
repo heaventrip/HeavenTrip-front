@@ -40,12 +40,7 @@
         <transition name="fade" mode="out-in" @before-leave="beforeLeave">
           <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
             <!-- eslint-disable-next-line prettier/prettier -->
-            <CheckoutWizardBooker
-              v-if="activeStep === 'booker'"
-              @complete="(status) => (bookerComplete = status)"
-              @updated-booker-infos="setBookerInfos"
-              :booker="booker"
-            />
+            <CheckoutWizardBooker v-if="activeStep === 'booker'" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBookerInfos" :booker="booker" />
             <CheckoutWizardParticipants
               v-else-if="activeStep === 'participants'"
               @complete="(status) => (participantsComplete = status)"
@@ -72,13 +67,7 @@
               :course="course"
             />
             <!-- eslint-disable-next-line prettier/prettier -->
-            <CheckoutWizardValidation
-              v-else-if="activeStep === 'validation'"
-              @complete="submitBookingForm"
-              :course="course"
-              :booker="booker"
-              :extra-participants="extraParticipants"
-            />
+            <CheckoutWizardValidation v-else-if="activeStep === 'validation'" @complete="submitBookingForm" :course="course" :booker="booker" :extra-participants="extraParticipants" />
             <CheckoutSuccess v-else-if="activeStep === 'success'" />
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>

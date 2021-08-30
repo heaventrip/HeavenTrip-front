@@ -152,32 +152,16 @@
           <InlineSvg v-else :src="require('@/assets/svg/cross.svg')" fill="white" height="25" />
         </div> -->
         <transition name="nav-fade">
-          <div v-show="activeTab === 'activities'" id="pills-activities" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <keep-alive>
-              <component :is="'ActivitiesTab'" ref="activitiesTab" @fetched-categ="setCateg"></component>
-            </keep-alive>
-          </div>
-        </transition>
-        <transition name="nav-fade">
-          <div v-show="activeTab === 'agency'" id="pills-agency" class="wrapper h-100 p-0 tab-pane home-wrapper show active">
-            <keep-alive>
-              <component :is="'AgencyTab'" ref="agencyTab"></component>
-            </keep-alive>
-          </div>
-        </transition>
-        <transition name="nav-fade">
-          <div v-show="activeTab === 'destinations'" id="pills-destinations" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <keep-alive>
-              <component :is="'DestinationsTab'"></component>
-            </keep-alive>
-          </div>
-        </transition>
-        <transition name="nav-fade">
-          <div v-show="activeTab === 'news'" id="pills-news" class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active">
-            <keep-alive>
-              <component :is="'HomeArticles'" :in-nav="true"></component>
-            </keep-alive>
-          </div>
+          <keep-alive>
+            <component
+              :id="`pills-${activeTab}`"
+              :is="contentComponents[activeTab]"
+              :ref="`${activeTab}Tab`"
+              class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active"
+              @fetched-categ="setCateg"
+              :in-nav="true"
+            ></component>
+          </keep-alive>
         </transition>
       </div>
     </div>
@@ -202,7 +186,13 @@ export default {
   },
   data() {
     return {
-      sportCategories: []
+      sportCategories: [],
+      contentComponents: {
+        activities: 'ActivitiesTab',
+        destinations: 'DestinationsTab',
+        agency: 'AgencyTab',
+        news: 'HomeArticles'
+      }
     }
   },
   computed: {
@@ -217,7 +207,7 @@ export default {
       }
       if (oldVal === 'agency') {
         document.body.style.position = 'static'
-        this.$refs.agencyTab.resetTabs()
+        this.$refs.agencyTab?.resetTabs()
       }
 
       if (!newVal) {
@@ -256,7 +246,7 @@ export default {
       // if already active do nothing except for agency
       if (this.$props.activeTab === tab && tab !== 'agency') return
 
-      if (tab === 'agency') this.$refs.agencyTab.resetTabs()
+      if (tab === 'agency') this.$refs.agencyTab?.resetTabs()
 
       this.$emit('changed-tab', tab)
     },

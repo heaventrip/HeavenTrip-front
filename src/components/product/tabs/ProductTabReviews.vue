@@ -40,11 +40,13 @@
               <div class="review__block-right__user-name mr-4">{{ review.user.firstName }} {{ review.user.lastName }}</div>
               <div class="review__block-right__user-infos mr-4">
                 <span class="mr-2">
-                  <InlineSvg :src="require('@/assets/svg/country-search.svg')" height="20" fill="#292f33" class="d-inline-block reviews__user-infos__spot-svg" />
+                  <InlineSvg :src="require('@/assets/svg/map-pin-filled.svg')" height="20" fill="#292f33" class="d-inline-block reviews__user-infos__spot-svg" />
                 </span>
                 <span class="d-inline-block align-middle">{{ review.user.city }}</span>
               </div>
-              <div class="review__block__stars mr-4"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i></div>
+              <div class="review__block__stars mr-4">
+                <i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i>
+              </div>
               <!-- <div class="review__block__user-profile-link"><span>Voir profil</span></div> -->
             </div>
             <div class="review__block-right__text-content">{{ review.comment }}</div>

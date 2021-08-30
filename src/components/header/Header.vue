@@ -25,7 +25,11 @@
         'header-bg-container--product': currentRoute('Product')
       }"
     >
-      <img src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
+      <img
+        src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg"
+        class="header-bg-image"
+        :style="[navIsActive ? 'filter: blur(4px)' : '']"
+      />
     </div>
     <ConnectionButtons :nav-sticky="navSticky" @mouseover="leftAllTabs" />
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" />
@@ -215,7 +219,7 @@ export default {
 .header-filter--search::after {
   content: '';
   position: absolute;
-  background-color: #5a3a5fb3;
+  background-color: #5a3a5ff2;
   /* opacity: 0.6; */
   width: 100%;
   height: 100vh;

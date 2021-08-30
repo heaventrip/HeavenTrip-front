@@ -20,7 +20,15 @@
             <a href="#" class="text-white ml-auto d-inline-block d-lg-none mail-btn">
               <img class="mail-icon" fluid :src="require('@/assets/images/svg/PICTO_CONTACT_MOBILE.svg')" data-toggle="modal" data-target="#login" />
             </a>
-            <button class="navbar-toggler rounded-0 collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button
+              class="navbar-toggler rounded-0 collapsed"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
               <!-- <span class="navbar-toggler-icon"></span> -->
               <img class="menu-icon mx-auto" fluid :src="require('@/assets/images/menu.png')" />
               <i class="fa fa-times cross-sym mx-auto"></i>

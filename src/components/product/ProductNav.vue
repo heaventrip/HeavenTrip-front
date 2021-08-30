@@ -1,7 +1,11 @@
 <template>
   <nav v-if="loaded" class="narrow-header-div bg-dark text-white d-flex align-items-center text-uppercase">
-    <router-link :to="{ name: 'Home' }" class="text-reset text-decoration-none font-weight-500 d-flex align-items-center align-self-stretch px-3"> <i class="fa fa-home h6 mb-0 d-none d-lg-inline-block"></i><i class="fas fa-chevron-left mx-4 h5 mb-0 d-inline-block d-lg-none"></i> </router-link>
-    <a href="#" class="text-reset text-decoration-none font-weight-500 d-none d-lg-flex align-items-center align-self-stretch px-3 bg-danger descriptif-link border-right border-white"><i class="fa fa-chevron-left mr-3 h6 mb-0"></i> Activités</a>
+    <router-link :to="{ name: 'Home' }" class="text-reset text-decoration-none font-weight-500 d-flex align-items-center align-self-stretch px-3">
+      <i class="fa fa-home h6 mb-0 d-none d-lg-inline-block"></i><i class="fas fa-chevron-left mx-4 h5 mb-0 d-inline-block d-lg-none"></i>
+    </router-link>
+    <a href="#" class="text-reset text-decoration-none font-weight-500 d-none d-lg-flex align-items-center align-self-stretch px-3 bg-danger descriptif-link border-right border-white"
+      ><i class="fa fa-chevron-left mr-3 h6 mb-0"></i> Activités</a
+    >
     <div>
       <h5 class="nav_heading text-uppercase mb-0 ml-4">
         <strong>{{ course?.sports?.[0].name }}</strong>
