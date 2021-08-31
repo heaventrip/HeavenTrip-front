@@ -1,78 +1,80 @@
 <template>
-  <p class="text-left content-head mb-5">Merci de remplir tous les champs pour valider votre inscription :</p>
-  <div class="row">
-    <div class="col-12 col-lg-6">
-      <div class="form-group has-float-label">
-        <input id="signup-firstName" v-model="user.firstName" class="form-control" :class="{ 'field-error': v$.user.firstName.$error }" type="text" name="" placeholder=" " />
-        <label for="signup-firstName">Prénom </label>
-        <div v-if="v$.user.firstName.$errors.length" class="field-error-message">{{ v$.user.firstName.$errors[0].$message }}</div>
+  <div>
+    <p class="text-left content-head mb-5">Merci de remplir tous les champs pour valider votre inscription :</p>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <div class="form-group has-float-label">
+          <input id="signup-firstName" v-model="user.firstName" class="form-control" :class="{ 'field-error': v$.user.firstName.$error }" type="text" name="" placeholder=" " />
+          <label for="signup-firstName">Prénom </label>
+          <div v-if="v$.user.firstName.$errors.length" class="field-error-message">{{ v$.user.firstName.$errors[0].$message }}</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group has-float-label">
+          <input id="signup-lastName" v-model="user.lastName" class="form-control" :class="{ 'field-error': v$.user.lastName.$error }" type="text" name="" placeholder=" " />
+          <label for="signup-lastName">Nom</label>
+          <div v-if="v$.user.lastName.$errors.length" class="field-error-message">{{ v$.user.lastName.$errors[0].$message }}</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-8">
+        <div class="form-group has-float-label">
+          <input id="signup-email" v-model="user.email" class="form-control" :class="{ 'field-error': v$.user.email.$error }" type="text" name="" placeholder=" " />
+          <label for="signup-email">Adresse e-mail</label>
+          <div v-if="v$.user.email.$errors.length" class="field-error-message">{{ v$.user.email.$errors[0].$message }}</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="form-group has-float-label">
+          <input
+            id="signup-birthDate"
+            v-model="user.birthDate"
+            type="date"
+            name=""
+            class="form-control"
+            :class="{ 'field-error': v$.user.birthDate.$error }"
+            placeholder=" "
+            datepicker
+            :min="minBirthDate"
+            required
+          />
+          <label for="signup-birthDate">Date de naissance</label>
+          <div v-if="v$.user.birthDate.$errors.length" class="field-error-message">{{ v$.user.birthDate.$errors[0].$message }}</div>
+          <span class="validity"></span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group has-float-label">
+          <input id="signup-password" v-model="user.password" class="form-control" :class="{ 'field-error': v$.user.password.$error }" type="password" name="" placeholder=" " />
+          <label for="signup-password">Mot de passe</label>
+          <div v-if="v$.user.password.$errors.length" class="field-error-message">{{ v$.user.password.$errors[0].$message }}</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group has-float-label">
+          <input
+            id="signup-passwordConfirmation"
+            v-model="user.passwordConfirmation"
+            class="form-control"
+            :class="{ 'field-error': v$.user.passwordConfirmation.$error }"
+            type="password"
+            name=""
+            placeholder=" "
+          />
+          <label for="signup-passwordConfirmation">Confirmer le mot de passe</label>
+          <div v-if="v$.user.passwordConfirmation.$errors.length" class="field-error-message">{{ v$.user.passwordConfirmation.$errors[0].$message }}</div>
+        </div>
       </div>
     </div>
-    <div class="col-12 col-lg-6">
-      <div class="form-group has-float-label">
-        <input id="signup-lastName" v-model="user.lastName" class="form-control" :class="{ 'field-error': v$.user.lastName.$error }" type="text" name="" placeholder=" " />
-        <label for="signup-lastName">Nom</label>
-        <div v-if="v$.user.lastName.$errors.length" class="field-error-message">{{ v$.user.lastName.$errors[0].$message }}</div>
+    <div class="d-flex regist mb-1">
+      <div>
+        <label for="signup-legal" class="password-link mr-auto">
+          En cliquant sur poursuivre l'inscription, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et
+          <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label
+        >
       </div>
     </div>
-    <div class="col-12 col-lg-8">
-      <div class="form-group has-float-label">
-        <input id="signup-email" v-model="user.email" class="form-control" :class="{ 'field-error': v$.user.email.$error }" type="text" name="" placeholder=" " />
-        <label for="signup-email">Adresse e-mail</label>
-        <div v-if="v$.user.email.$errors.length" class="field-error-message">{{ v$.user.email.$errors[0].$message }}</div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-4">
-      <div class="form-group has-float-label">
-        <input
-          id="signup-birthDate"
-          v-model="user.birthDate"
-          type="date"
-          name=""
-          class="form-control"
-          :class="{ 'field-error': v$.user.birthDate.$error }"
-          placeholder=" "
-          datepicker
-          :min="minBirthDate"
-          required
-        />
-        <label for="signup-birthDate">Date de naissance</label>
-        <div v-if="v$.user.birthDate.$errors.length" class="field-error-message">{{ v$.user.birthDate.$errors[0].$message }}</div>
-        <span class="validity"></span>
-      </div>
-    </div>
-    <div class="col-12 col-lg-6">
-      <div class="form-group has-float-label">
-        <input id="signup-password" v-model="user.password" class="form-control" :class="{ 'field-error': v$.user.password.$error }" type="password" name="" placeholder=" " />
-        <label for="signup-password">Mot de passe</label>
-        <div v-if="v$.user.password.$errors.length" class="field-error-message">{{ v$.user.password.$errors[0].$message }}</div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-6">
-      <div class="form-group has-float-label">
-        <input
-          id="signup-passwordConfirmation"
-          v-model="user.passwordConfirmation"
-          class="form-control"
-          :class="{ 'field-error': v$.user.passwordConfirmation.$error }"
-          type="password"
-          name=""
-          placeholder=" "
-        />
-        <label for="signup-passwordConfirmation">Confirmer le mot de passe</label>
-        <div v-if="v$.user.passwordConfirmation.$errors.length" class="field-error-message">{{ v$.user.passwordConfirmation.$errors[0].$message }}</div>
-      </div>
-    </div>
+    <Button @click="validateForm" text="Poursuivre l'inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
   </div>
-  <div class="d-flex regist mb-1">
-    <div>
-      <label for="signup-legal" class="password-link mr-auto">
-        En cliquant sur poursuivre l'inscription, tu acceptes nos <router-link target="_blank" to="/legal" class="text-danger">CGV</router-link> et
-        <router-link target="_blank" to="/legal" class="text-danger">CGU</router-link></label
-      >
-    </div>
-  </div>
-  <Button @click="validateForm" text="Poursuivre l'inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" text-color="#fff" color="pink" />
 </template>
 
 <script>

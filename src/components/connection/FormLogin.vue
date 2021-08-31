@@ -1,17 +1,19 @@
 <template>
-  <div class="form-group has-float-label">
-    <input id="login-email" v-model="email" class="form-control" :class="{ 'field-error': v$.email.$error }" type="email" name="" placeholder=" " />
-    <label for="login-email">Adresse e-mail</label>
-    <div v-if="v$.email.$errors.length" class="field-error-message">{{ v$.email.$errors[0].$message }}</div>
-  </div>
-  <div class="form-group has-float-label">
-    <input id="login-password" v-model="password" class="form-control" :class="{ 'field-error': v$.password.$error }" type="password" name="" placeholder=" " />
-    <label for="login-password">Mot de passe</label>
-    <div v-if="v$.password.$errors.length" class="field-error-message">{{ v$.password.$errors[0].$message }}</div>
-    <div type="button" @click="$emit('clicked-password-forgotten')" class="mt-2 text-right" style="font-family: Muli, sans-serif; font-size: 0.75rem">Mot de passe oublié</div>
-  </div>
   <div>
-    <Button @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" />
+    <div class="form-group has-float-label">
+      <input id="login-email" v-model="email" class="form-control" :class="{ 'field-error': v$.email.$error }" type="email" name="" placeholder=" " />
+      <label for="login-email">Adresse e-mail</label>
+      <div v-if="v$.email.$errors.length" class="field-error-message">{{ v$.email.$errors[0].$message }}</div>
+    </div>
+    <div class="form-group has-float-label">
+      <input id="login-password" v-model="password" class="form-control" :class="{ 'field-error': v$.password.$error }" type="password" name="" placeholder=" " />
+      <label for="login-password">Mot de passe</label>
+      <div v-if="v$.password.$errors.length" class="field-error-message">{{ v$.password.$errors[0].$message }}</div>
+      <div type="button" @click="$emit('clicked-password-forgotten')" class="mt-2 text-right" style="font-family: Muli, sans-serif; font-size: 0.75rem">Mot de passe oublié</div>
+    </div>
+    <div>
+      <Button @click="submitLoginForm" text="Se connecter" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" />
+    </div>
   </div>
 </template>
 

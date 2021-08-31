@@ -130,26 +130,34 @@
           <!--<div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
         </div>
         <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
-        <transition name="fade-fast" mode="out-in">
-          <form :key="activeTab" :style="[activeTab === 'login' ? 'margin-top: 90px ' : activeTab === 'signup' ? 'margin-top: 50px ' : '']">
-            <FormLogin v-if="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" />
+        <form style="margin-top: 50px">
+          <transition name="fade-fast" mode="out-in">
+            <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" /> -->
+            <!-- <FormSignup v-if="activeTab === 'signup'" @completed="bringInfoForm" @clicked-existing-account="activeTab = 'login'"/> -->
             <keep-alive>
               <component
-                :ref="activeTab === 'infos' ? 'formInfos' : ''"
-                :user="user"
-                :active-info-tab="activeInfoTab"
-                @submitted-form="isSuccess = true"
-                @avatar-is-valided="avatarIsValid = true"
-                @changed-tab="setNewInfoTab"
-                @gender-is-valided="genderIsValid = true"
-                @clicked-existing-account="activeTab = 'login'"
+                :is="formComponents[activeTab]"
+                :ref="formComponents[activeTab]"
+                @login-success="$emit('login-success')"
+                @clicked-signup="activeTab = 'signup'"
+                @clicked-password-forgotten="activeTab = 'password'"
                 @completed="bringInfoForm"
-                :is="activeTab === 'infos' ? 'FormInfos' : 'FormSignup'"
+                @clicked-existing-account="activeTab = 'login'"
               ></component>
             </keep-alive>
-            <Password v-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
-          </form>
-        </transition>
+          </transition>
+          <FormInfos
+            v-if="activeTab === 'infos'"
+            ref="FormInfos"
+            @submitted-form="isSuccess = true"
+            @avatar-is-valided="avatarIsValid = true"
+            @gender-is-valided="genderIsValid = true"
+            @changed-tab="setNewInfoTab"
+            :active-info-tab="activeInfoTab"
+            :user="user"
+          />
+          <Password v-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
+        </form>
       </div>
       <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
         <div class="mb-4" style="color: #fff; font-weight: 400">C'est la première fois ?</div>
@@ -217,6 +225,10 @@ export default {
     return {
       activeTab: '',
       activeInfoTab: 'gender',
+      formComponents: {
+        login: 'FormLogin',
+        signup: 'FormSignup'
+      },
       fromRoute: '',
       genderIsValid: false,
       avatarIsValid: false,

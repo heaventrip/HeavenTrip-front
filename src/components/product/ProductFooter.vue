@@ -192,7 +192,7 @@
           class="session-select-btn fg-1 center-col datepicker-col"
           id="depart_datepick"
           style="padding: 0 3rem; border-left: 1px solid rgba(255, 255, 255, 0.1)"
-          type="button"
+          :type="{ button: showSessions }"
         >
           <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
             <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
@@ -337,6 +337,8 @@ export default {
       }
     },
     showSessions(val) {
+      if (!this.availSessions.length) return
+
       if (val === true) {
         this.$emit('show-sessions')
         document.querySelector('.product-content').addEventListener('click', this.clickToClose)
