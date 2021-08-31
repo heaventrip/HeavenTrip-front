@@ -14,10 +14,11 @@
 <script>
 export default {
   name: 'Button',
-  props: ['text', 'color', 'weight', 'height', 'icon', 'px', 'py', 'arrow', 'size', 'width', 'radius', 'text-color', 'background-color', 'icon-height'],
+  props: ['margin', 'text', 'color', 'weight', 'height', 'icon', 'px', 'py', 'arrow', 'size', 'width', 'radius', 'text-color', 'background-color', 'icon-height'],
   computed: {
     style() {
       return `
+        margin: ${this.margin};
         padding: ${this.py || '0'} ${this.px || '1rem'};
         font-size: ${this.size || '0.8rem'};
         height: ${this.height || '80px'};

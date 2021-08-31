@@ -1,7 +1,7 @@
 <template>
   <div style="text-transform: uppercase; font-weight: bold; font-size: 1.3rem; margin-bottom: 3rem">Demande personnalisée</div>
   <div class="d-flex justify-content-between">
-    <div class="d-flex flex-column justify-content-between" style="width: 40%">
+    <div class="d-flex flex-column justify-content-between" style="width: 35%">
       <div class="mb-4">
         <h3 class="contacter-head mb-1">Demander l'ouverture d'une date</h3>
         <p class="contacter-para mb-4 mb-lg-0">Tu peux nous appeler directement pour demander l'ouverture d'une date ou faire la demande par le formulaire de droite.</p>
@@ -11,7 +11,7 @@
         <p class="contacter-para mb-0">Lundi - samedi : 8h30 à 19h00</p>
       </div>
     </div>
-    <div class="d-flex flex-column justify-content-between" style="padding-left: 4rem; border-left: 1px dashed #b4b4b4">
+    <div class="d-flex flex-column justify-content-between" style="width: 55%; padding-left: 4rem; border-left: 1px dashed #b4b4b4">
       <form class="contact-form">
         <div class="row no-gutters">
           <div class="col-12 col-lg-5 mb-4">
@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        <div class="row no-gutters">
+        <div class="row no-gutters mb-4">
           <div class="col-12 col-lg-5">
             <div class="form-group has-float-label">
               <input id="contact-phone" class="form-control" type="text" name="" placeholder=" " />
@@ -42,8 +42,23 @@
           </div>
         </div>
         <div class="row no-gutters">
-          <div class="col-12">
-            <button class="btn btn-dark font-weight-bold border-0 rounded-0 w-100">ENVOYER MON MESSAGE</button>
+          <div class="col-6">
+            <select required class="text-uppercase px-2" style="border: 1px solid #292f33; background: white; font-size: 0.875rem; font-weight: 500; font-family: Oswald, sans-serif; height: 100%">
+              <option value="">Nombre de participants</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div class="ml-auto col-6">
+            <button class="btn btn-dark font-weight-bold border-0 rounded-0 w-100 text-uppercase">Envoyer ma demande</button>
           </div>
         </div>
       </form>
@@ -53,11 +68,24 @@
 
 <script>
 export default {
-  name: 'ProdutFooterForm'
+  name: 'ProdutFooterForm',
+  data() {
+    return {
+      participantsNb: {
+        value: 0,
+        placeholder: 'Nombre de participants',
+        options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
+.multiselect-placeholder,
+.multiselect-single-label {
+  display: flex !important;
+}
 .container {
   height: auto;
 }
@@ -92,7 +120,7 @@ export default {
   left: 0;
 }
 .form-group {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .form-control {
   padding-left: 0;
