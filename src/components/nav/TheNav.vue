@@ -264,7 +264,7 @@ export default {
 <style scoped>
 .nav-fade-enter-active,
 .nav-fade-leave-active {
-  transition: opacity 1s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: opacity 0.3s cubic-bezier(0.86, 0, 0.07, 1);
 }
 .nav-fade-enter-from,
 .nav-fade-leave-to {

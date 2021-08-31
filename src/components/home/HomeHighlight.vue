@@ -38,6 +38,7 @@
               <InlineProductInfos
                 :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]"
                 :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+                mb="1.5rem"
                 color="#292f33"
               />
             </div>

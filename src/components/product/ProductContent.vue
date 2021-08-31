@@ -184,8 +184,7 @@ export default {
     SwiperSlide
   },
   props: ['course', 'showed-sessions', 'selected-session'],
-  // props: ['nav-is-active', 'course'],
-  // emits: ['slide-is-up', 'slide-is-down'],
+  emits: ['active-lightbox'],
   data() {
     return {
       messages: [],

@@ -19,13 +19,23 @@
             <InlineSvg class="mr-4" :src="require('@/assets/svg/date-search.svg')" height="22" />
             SURF
           </li>
-          <li class="mr-4">
+          <li class="mr-4" v-show="countrySelection.value.length">
             <InlineSvg class="mr-2" :src="require('@/assets/svg/globe.svg')" height="22" />
-            {{ countrySelection.value.join(' + ') }}
+            {{
+              countrySelection.options
+                .filter((el) => countrySelection.value.includes(el.value))
+                .map((el) => el.label)
+                .join(' + ')
+            }}
           </li>
-          <li class="mr-4">
+          <li class="mr-4" v-show="monthSelection.value.length">
             <InlineSvg class="mr-2" :src="require('@/assets/svg/date-search.svg')" height="22" />
-            monthSelection()
+            {{
+              monthSelection.options
+                .filter((el) => monthSelection.value.includes(el.value))
+                .map((el) => el.label)
+                .join(' + ')
+            }}
           </li>
         </ul>
       </div>
@@ -38,27 +48,21 @@
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Date de depart<i class="fas fa-sort ml-4 symbol"></i></div>
         <div class="btn bg-white text-dark rounded-0 text-uppercase">Durée<i class="fas fa-sort ml-4 symbol"></i></div> -->
         <div @click="sortByPrice" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
-          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <div>
-              <span class="align-middle">Prix</span
-              ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
-            </div>
+          <div class="d-flex align-items-center">
+            <span class="align-middle">Prix</span
+            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
           </div>
         </div>
         <div @click="sortByDate" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
-          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <div>
-              <span class="align-middle">Date de départ</span
-              ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
-            </div>
+          <div class="d-flex align-items-center">
+            <span class="align-middle">Date de départ</span
+            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
           </div>
         </div>
         <div @click="sortByDuration" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
-          <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
-            <div>
-              <span class="align-middle">Durée</span
-              ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
-            </div>
+          <div class="">
+            <span class="align-middle">Durée</span
+            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
           </div>
         </div>
       </div>
@@ -99,9 +103,10 @@
                 <div class="text-uppercase mb-4 mt-3 letter" style="font-weight: 500">Je filtre si je veux :</div>
                 <div class="filter-container activity-filter">
                   <div class="position-relative multi-select-filter">
-                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <div class="d-flex align-items-center" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/activity-search.svg')" height="22" />
-                      <span class="search-bar__filter__name">Activités<i class="fas fa-sort float-right symbol"></i></span>
+                      <span class="search-bar__filter__name">Activités</span>
+                      <i class="fas fa-sort ml-auto symbol"></i>
                     </div>
                     <Multiselect
                       @select="updateSearch"
@@ -120,9 +125,10 @@
                 </div>
                 <div class="filter-container country-filter">
                   <div class="position-relative multi-select-filter">
-                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <div class="d-flex align-items-center" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/globe.svg')" height="22" />
-                      <span class="search-bar__filter__name">Pays<i class="fas fa-sort float-right symbol"></i></span>
+                      <span class="search-bar__filter__name">Pays</span>
+                      <i class="ml-auto fas fa-sort symbol"></i>
                     </div>
                     <Multiselect
                       @select="updateSearch"
@@ -141,9 +147,10 @@
                 </div>
                 <div v-if="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="filter-container spot-filter">
                   <div class="position-relative multi-select-filter">
-                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <div class="d-flex align-items-center" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
-                      <span class="search-bar__filter__name">Spot<i class="fas fa-sort float-right symbol"></i></span>
+                      <span class="search-bar__filter__name">Spot</span>
+                      <i class="fas fa-sort ml-auto symbol"></i>
                     </div>
                     <Multiselect
                       @select="updateSearch"
@@ -162,9 +169,10 @@
                 </div>
                 <div class="filter-container month-filter">
                   <div class="position-relative multi-select-filter">
-                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <div class="d-flex align-items-center" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/date-search.svg')" height="22" />
-                      <span class="search-bar__filter__name">Mois de départ<i class="fas fa-sort float-right symbol"></i></span>
+                      <span class="search-bar__filter__name">Mois de départ</span>
+                      <i class="fas fa-sort ml-auto symbol"></i>
                     </div>
                     <Multiselect
                       @select="updateSearch"
@@ -183,9 +191,10 @@
                 </div>
                 <div class="filter-container level-filter">
                   <div class="position-relative multi-select-filter">
-                    <div style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
+                    <div class="d-flex align-items-center" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/intensity-2-dark.svg')" height="22" />
-                      <span class="search-bar__filter__name">Niveau<i class="fas fa-sort float-right symbol"></i></span>
+                      <span class="search-bar__filter__name">Niveau</span>
+                      <i class="fas fa-sort ml-auto symbol"></i>
                     </div>
                     <Multiselect
                       @select="updateSearch"
@@ -217,7 +226,7 @@
             <!-- <button class="btn btn-block clear-btn border-0 rounded-0">Effacer les 4 critères de sélection</button> -->
             <button @click="clearFilters" class="btn btn-block clear-btn border-0 rounded-0">Supprimer tous les filtres</button>
           </div>
-          <div class="d-flex flex-column col-12 col-lg-8 mx-auto">
+          <div class="d-flex flex-column col-12 col-lg-8 ml-auto">
             <vue-element-loading :active="loading" spinner="spinner" color="#d82558" background-color="transparent" />
             <!-- NOTE NORMAL -->
             <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
@@ -801,10 +810,17 @@ export default {
   margin-left: auto;
 }
 .sort-by-button {
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-left: 2px solid #f1f1f1;
 }
 .sort-by-button:last-of-type {
   border-right: 2px solid #f1f1f1;
+}
+.sort-by-button:hover {
+  background-color: #ebebeb;
 }
 .search-filter-div {
   display: flex;
@@ -826,6 +842,9 @@ export default {
 
 .tags-container {
   height: 2.5rem;
+}
+.tags-container .multiselect-tags .multiselect-tag {
+  transform: none;
 }
 .multi-select-filter {
   box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.08);

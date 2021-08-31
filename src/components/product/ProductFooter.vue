@@ -1,7 +1,7 @@
 <template>
   <div class="pre-booking-footer d-flex sticky-bottom flex-column" style="position: sticky; bottom: 0; width: 100%">
     <div class="booking-session align-items-center" :class="[showSessions ? 'd-flex' : 'd-none']">
-      <h2 @click="createRequest" class="session-head border-right text-uppercase border-white px-4">Je privatise</h2>
+      <h2 @click="contactModal = true" class="session-head border-right text-uppercase border-white px-4">Je privatise</h2>
       <div class="text-uppercase d-flex h-100">
         <div @click="activeYear = 2020" class="date-btn px-3 h-100" :class="{ 'date-btn--active': activeYear === 2020 }">2020</div>
         <div @click="activeYear = 2021" class="date-btn px-3 h-100" :class="{ 'date-btn--active': activeYear === 2021 }">2021</div>
@@ -69,7 +69,7 @@
       <div v-show="showSessions" class="tab-content">
         <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
           <div class="container" style="padding: 0 3rem">
-            <ul class="list-unstyled order-tab-list mb-0 pb-4">
+            <ul v-if="filterSessions(index + 1).length" class="list-unstyled order-tab-list mb-0 pb-4">
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
                   <div class="info-div-left d-flex align-items-center justify-content-between">
@@ -93,9 +93,10 @@
                       </h6>
                       <h6 class="text-uppercase text-danger mb-0 tripper-count">
                         <span style="font-weight: 700"> {{ session.min - session.nbOfParticipants }} tripper{{ session.min - session.nbOfParticipants > 1 ? 's' : '' }} </span>
-                        <span> pour confirmer le départ </span>
+                        <span> pour confirmer </span>
                       </h6>
-                      <span class="cancel-info-text">il te reste {{ session.latestBooking }} jours pour réserver</span>
+                      <span v-if="daysLeft" class="cancel-info-text">il te reste {{ daysLeft }} jours pour réserver</span>
+                      <span v-else class="cancel-info-text">les réserverations sont désormais fermées</span>
                     </div>
                   </div>
                   <div class="registrants fg-1" style="width: 20%">
@@ -119,6 +120,7 @@
                 </div>
               </li>
             </ul>
+            <div v-else class="margin-auto py-4"><Button text="Créer une session" color="white" width="30%" height="4rem" /></div>
           </div>
         </div>
       </div>
@@ -188,11 +190,12 @@
           <h6 class="premier-text mb-0 font-weight-bold d-none"><img class="mic_icon" fluid :src="require('@/assets/images/mic-w.png')" />Sois le premier !</h6>
         </div>
         <div
-          @click="showSessions = !showSessions"
+          @click="availSessions.length ? (showSessions = !showSessions) : ''"
           class="session-select-btn fg-1 center-col datepicker-col"
+          :class="{ active: showSessions }"
           id="depart_datepick"
           style="padding: 0 3rem; border-left: 1px solid rgba(255, 255, 255, 0.1)"
-          :type="{ button: showSessions }"
+          :type="availSessions.length ? 'button' : ''"
         >
           <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
             <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
@@ -284,7 +287,7 @@
         </div>
       </div>
       <button
-        @click="$router.push({ name: 'Checkout', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } })"
+        @click="availSessions.length ? $router.push({ name: 'Checkout', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } }) : (contactModal = true)"
         class="btn border-0 rounded-0 reserve-btn"
         :style="{ fontSize: availSessions.length ? '1.4rem' : '1rem' }"
         :class="[{ disable: !choseBtn && availSessions.length }, { 'px-5': !availSessions.length }]"
@@ -293,18 +296,33 @@
       </button>
     </div>
   </div>
+  <teleport to="#modal">
+    <transition name="fade">
+      <div v-if="contactModal" class="modal__backdrop">
+        <div class="contact-modal bg-white" style="padding: 3rem 4rem; width: 60vw">
+          <ProductFooterForm />
+        </div>
+      </div>
+    </transition>
+  </teleport>
 </template>
 <script>
+import ProductFooterForm from '@/components/product/ProductFooterForm.vue'
 import InlineAvatars from '@/components/elements/InlineAvatars.vue'
+import Button from '@/components/elements/Button.vue'
 
 export default {
   name: 'ProductFooter',
   props: ['course'],
+  emits: ['selected-session', 'show-sessions', 'hide-sessions'],
   components: {
-    InlineAvatars
+    ProductFooterForm,
+    InlineAvatars,
+    Button
   },
   data() {
     return {
+      contactModal: false,
       counterSlideDir: '',
       initialActiveMonth: false,
       activeYear: 2021,
@@ -323,13 +341,25 @@ export default {
     // either session is selected or sessions are open
     bookingIsActive() {
       return this.choice !== null || this.showSessions
+    },
+    daysLeft() {
+      return new Date(this.session?.latestBooking).getDay() - new Date().getDay()
     }
   },
   watch: {
-    // bookingIsActive(val) {
-    //   if (val) document.body.style.overflow = 'hidden'
-    //   else document.body.style.overflow = ''
-    // },
+    contactModal(newVal) {
+      if (newVal === true) {
+        // document.body.style.overflow = 'hidden'
+        document.querySelector('#app').style.filter = 'blur(5px)'
+        setTimeout(() => {
+          this.handleModalClose()
+        }, 100)
+      }
+      if (newVal === false) {
+        document.body.style.overflow = ''
+        document.querySelector('#app').style.filter = ''
+      }
+    },
     choice(val) {
       if (val !== null) {
         this.$emit('selected-session')
@@ -337,8 +367,6 @@ export default {
       }
     },
     showSessions(val) {
-      if (!this.availSessions.length) return
-
       if (val === true) {
         this.$emit('show-sessions')
         document.querySelector('.product-content').addEventListener('click', this.clickToClose)
@@ -369,6 +397,17 @@ export default {
     }
   },
   methods: {
+    handleModalClose() {
+      const that = this
+      if (document.querySelector('.contact-modal')) {
+        document.addEventListener('click', function handleClick(e) {
+          if (!e.target.closest('.contact-modal')) {
+            that.contactModal = false
+            document.removeEventListener('click', handleClick)
+          }
+        })
+      }
+    },
     getParticipantsAvatarKeys(session) {
       let avatars = new Array()
       return session.participants?.forEach((user) => avatars.push(user.avatarKey))
@@ -376,7 +415,7 @@ export default {
     clickToClose() {
       this.showSessions = false
     },
-    createRequest() {
+    submitRequestForm() {
       this.$axios.post('/requests', { courseId: this.$props.course.id })
     },
     clickedChoseBtn(session) {
@@ -439,7 +478,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$props.course)
     $('#datepicker-range-start').Zebra_DatePicker({
       onChange: function () {
         // var dval = $(this).val();
@@ -526,7 +564,7 @@ export default {
   padding-left: 0;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #b4b4b4;
+  border-bottom: 1px solid #7c7c7c;
   background-color: transparent;
   padding-bottom: 0.1rem;
   color: #292f33;
@@ -608,7 +646,7 @@ export default {
 .session-select-btn {
   transition: background 0.3s ease;
 }
-.session-select-btn:hover {
+.session-select-btn:not(.active):hover {
   background-color: #ebebeb;
 }
 .nav {
