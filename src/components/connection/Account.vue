@@ -100,6 +100,9 @@
           </div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
         </div>
+        <div v-else-if="isNewPassword">
+          <div id="title-password" class="connection-nav-button">Nouveau mot de passe</div>
+        </div>
         <div v-else-if="activeTab === 'password'">
           <div id="title-password" class="connection-nav-button">Mot de passe oublié</div>
         </div>
@@ -167,14 +170,17 @@
               () => {
                 activeTab = 'login'
                 tlConnectionTab.reverse()
+                isNewPassword = false
               }
             "
             @clicked-password-retrieved="
               () => {
                 activeTab = 'login'
                 tlConnectionTab.reverse()
+                isNewPassword = false
               }
             "
+            @change-news-password="isNewPassword = true"
           />
         </form>
       </div>
@@ -248,6 +254,7 @@ export default {
         login: 'FormLogin',
         signup: 'FormSignup'
       },
+      isNewPassword: false,
       fromRoute: '',
       genderIsValid: false,
       avatarIsValid: false,
