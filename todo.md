@@ -122,6 +122,13 @@ ___________________________
 > rajouter des marges sur le footer quand grand ecran
 > quand 0 sessions ne pas rendre les sessions cliquables
 > créer modal de contact accessible via créer une session/je privatise/bouton sur le mois
+- bouton réserver + grand
+- bouton créer session en dark/pink, pareil pour privatise
+- voir version pad sur le scroll
+- boolean cours actif / pas actif
+- "veuillez consulter sur portable ou ordi :)"
+- friendly Id
+
 
 IMPORTANT : bloquer les mobiles/tablettes
 > IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail

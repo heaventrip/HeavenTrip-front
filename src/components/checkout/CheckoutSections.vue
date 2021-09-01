@@ -192,10 +192,39 @@ export default {
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
       this.$axios.post(
-        '/reservations',
+        'http://localhost:3000/api/v1/reservations',
         {
-          booker: this.booker,
-          extraParticipants: this.extraParticipants
+          reservation: {
+            roomId: 1,
+            sessionId: 1,
+            alternativeIds: [1, 2],
+            extraParticipantsReservationsAttributes: [
+              {
+                equipmentRental: 'a',
+                comment: 'a',
+                insurance: 'a',
+                roomId: 1,
+                alternativeIds: [1],
+                extraParticipantAttributes: {
+                  firstName: 'a',
+                  birthDate: 'a',
+                  email: 'a'
+                }
+              },
+              {
+                equipmentRental: 'b',
+                comment: 'b',
+                insurance: 'b',
+                roomId: 2,
+                alternativeIds: [1, 2, 3, 4],
+                extraParticipantAttributes: {
+                  firstName: 'b',
+                  birthDate: 'b',
+                  email: 'b'
+                }
+              }
+            ]
+          }
         },
         {
           headers: {
@@ -206,6 +235,7 @@ export default {
     }
   },
   mounted() {
+    this.submitBookingForm()
     // $(function () {
     //   $('[data-toggle="tooltip"]').tooltip();
     //   $(
