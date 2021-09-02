@@ -1,32 +1,33 @@
 <template>
   <p class="content-head">Merci de saisir ton nouveau mot de passe :</p>
   <form>
-    <div class="form-group has-float-label">
+    <div class="form-group has-float-label mb-5 mt-5">
       <input
         v-model="firstPassword"
         id="login-password"
-        class="form-control mb-5 mt-5"
+        class="form-control"
         type="password"
         name=""
         autocomplete="off"
         placeholder=" "
-        :style="[errors.includes('first') ? 'border-bottom: 1px solid red' : '']"
+        :style="[errors.find((elem) => elem.title === 'first') ? 'border-bottom: 1px solid tomato' : '']"
       />
       <label for="login-password">Nouveau mot de passe</label>
+      <div v-if="errors.find((elem) => elem.title === 'first')" class="field-error-message">{{ errors.find((elem) => elem.title === 'first').message }}</div>
     </div>
-    <div class="form-group has-float-label">
+    <div class="form-group has-float-label mb-5">
       <input
         v-model="secondPassword"
         id="login-second-password"
-        class="form-control mb-5"
+        class="form-control"
         type="password"
         name=""
         autocomplete="off"
         placeholder=" "
-        :style="[errors.includes('second') ? 'border-bottom: 1px solid red' : '']"
+        :style="[errors.find((elem) => elem.title === 'second') ? 'border-bottom: 1px solid tomato' : '']"
       />
       <label for="login-second-password">Confirmation de ton mot de passe</label>
-      <div class="field-error-message">{{ v$.password.$errors[0].$message }}</div>
+      <div v-if="errors.find((elem) => elem.title === 'second')" class="field-error-message">{{ errors.find((elem) => elem.title === 'second').message }}</div>
     </div>
     <!--    <input class="form-control modal-input" type="password" autocomplete="off" name="" value="" placeholder="Nouveau mot de passe" />
     <input class="form-control modal-input" type="password" autocomplete="off" name="" placeholder="Confirmation de ton mot de passe" /> -->
@@ -109,6 +110,15 @@ export default {
 .has-float-label label {
   letter-spacing: 0.03rem;
   left: 0;
+}
+.field-error {
+  border-bottom: 1px solid tomato !important;
+}
+.field-error-message {
+  position: absolute;
+  font-family: Muli, sans-serif;
+  color: tomato;
+  font-size: 0.6rem;
 }
 .form-control {
   padding-left: 0;
