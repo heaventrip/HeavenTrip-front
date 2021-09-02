@@ -26,6 +26,7 @@
         :style="[errors.includes('second') ? 'border-bottom: 1px solid red' : '']"
       />
       <label for="login-second-password">Confirmation de ton mot de passe</label>
+      <div class="field-error-message">{{ v$.password.$errors[0].$message }}</div>
     </div>
     <!--    <input class="form-control modal-input" type="password" autocomplete="off" name="" value="" placeholder="Nouveau mot de passe" />
     <input class="form-control modal-input" type="password" autocomplete="off" name="" placeholder="Confirmation de ton mot de passe" /> -->
@@ -78,10 +79,10 @@ export default {
     validPassword: function (type) {
       if (this.firstPassword != this.secondPassword && this.secondPassword) {
         if (type === 'first') {
-          this.errors = [...this.errors, 'first']
+          this.errors = [...this.errors, { title: 'first', message: 'Les mots de passe ne correspondent pas' }]
         }
         if (type === 'second') {
-          this.errors = [...this.errors, 'second']
+          this.errors = [...this.errors, { title: 'second', message: 'Les mots de passe ne correspondent pas' }]
         }
       }
       if (this.firstPassword === this.secondPassword) {

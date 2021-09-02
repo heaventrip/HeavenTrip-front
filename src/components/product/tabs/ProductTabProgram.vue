@@ -26,7 +26,16 @@
     hiddenContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
   Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
   />
-  <div v-for="(dayProgram, index) in course.programs" :key="dayProgram" class="linear-block py-0 mb-0">
+  <div v-for="(dayProgram, index) in course.programs" :key="dayProgram">
+    <DailyProgramCard
+      title="Jour 1"
+      :transports="transports"
+      principalTitle="Matin :"
+      :principalContent="dayProgram.description"
+      hiddenTitle="Aprés-midi :"
+      hiddenContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
+  Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
+    />
     <h5 class="tour-head text-uppercase d-flex flex-column flex-lg-row align-items-start align-items-lg-center border-0">
       <span class="font-weight-bold text-danger">Jour {{ index + 1 }}</span>
       <ul class="list-unstyled tour-list text-uppercase ml-auto d-flex flex-column flex-lg-row mb-0">

@@ -32,6 +32,13 @@ export default {
     return {
       step: 1
     }
+  },
+  watch: {
+    step() {
+      if (this.step >= 3) {
+        this.$emit('change-news-password')
+      }
+    }
   }
 }
 </script>
