@@ -73,7 +73,8 @@
           <p class="upload-text">Cadrage conseillé</p>
         </div>
       </div>
-      <label v-if="showAvatarValidationButton" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4"> Valider ma photo de profil </label>
+      <label v-if="showAvatarValidationButton && !error" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4"> Valider ma photo de profil </label>
+      <label v-else-if="!showAvatarValidationButton && error" class="rounded-0 px-4" style="position: absolute; margin-top: 78px; color: tomato">{{ error }}</label>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
       <div class="descr-text">
@@ -156,8 +157,10 @@ export default {
       gender: '',
       description: '',
       show: true,
+      error: '',
       showAvatarValidationButton: false,
       imgDataUrl: '',
+      currentErreur: '',
       activeInfoTabs: ['gender', 'avatar', 'bio', 'success'],
       activeStep: 0
     }
@@ -259,6 +262,7 @@ export default {
       console.log('-------- upload fail --------')
       console.log(status)
       console.log('field: ' + field)
+      this.error = "Une erreur s'est produite, ton image n'a pas été validée"
     },
     updateProfile() {
       this.$axios

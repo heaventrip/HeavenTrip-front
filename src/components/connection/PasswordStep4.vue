@@ -22,7 +22,7 @@
       </g>
     </svg>
   </div>
-  <h6 class="info-text text-uppercase mb-5 mt-5">
+  <h6 class="info-text text-uppercase mb-5 mt-3">
     <strong class="text-danger d-block mb-3">Ton nouveau mot de passe a été enregistré.</strong>
     Tu peux maintenant te reconnecter.
   </h6>
