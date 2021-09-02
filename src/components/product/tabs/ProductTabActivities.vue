@@ -31,7 +31,10 @@
               <p class="content pt-3 text-white" style="line-height: 24px">
                 {{ course?.staffs.find((el) => el.role === 'Guide').description }}
               </p>
-              <h6 class="author text-white mt-4 mb-0">{{ course?.staffs.find((el) => el.role === 'Guide').firstName }} - {{ course?.staffs.find((el) => el.role === 'Guide').title }}</h6>
+              <h6 class="author text-white mt-4 mb-0">
+                {{ course?.staffs.find((el) => el.role === 'Guide').firstName }} {{ course?.staffs.find((el) => el.role === 'Guide')?.lastName }} -
+                {{ course?.staffs.find((el) => el.role === 'Guide').title }}
+              </h6>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>

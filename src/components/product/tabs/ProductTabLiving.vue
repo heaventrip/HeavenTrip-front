@@ -166,7 +166,10 @@
               <p class="content pt-3 text-white" style="line-height: 24px">
                 {{ course?.staffs.find((el) => el.role === 'Cook')?.description }}
               </p>
-              <h6 class="author text-white mt-4 mb-0">{{ course?.staffs.find((el) => el.role === 'Cook')?.firstName }} - {{ course?.staffs.find((el) => el.role === 'Cook')?.title }}</h6>
+              <h6 class="author text-white mt-4 mb-0">
+                {{ course?.staffs.find((el) => el.role === 'Cook')?.firstName }} {{ course?.staffs.find((el) => el.role === 'Cook')?.lastName }} -
+                {{ course?.staffs.find((el) => el.role === 'Cook')?.title }}
+              </h6>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
