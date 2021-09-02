@@ -8,6 +8,7 @@
   <transition name="fade-splash">
     <vue-element-loading :active="initialLoading" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
   </transition>
+  <notifications position="top center" width="50%" max="3" />
 </template>
 
 <script>
@@ -18,7 +19,8 @@ export default {
   data() {
     return {
       initialLoading: false,
-      backgroundView: null
+      backgroundView: null,
+      currUser: null
     }
   },
   computed: {

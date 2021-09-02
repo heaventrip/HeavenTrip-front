@@ -95,13 +95,13 @@
         <h6 class="font-weight-bold">Activites en +</h6>
         <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
         <div class="hidable">
-          <div class="custom-radio-container inline-blocks py-3">
-            <div class="custom-control custom-radio bg-light rounded border mb-3">
+          <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+            <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
               <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
-                <input v-model="localBooker.booking.extraActivities[0]" value="1" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
+                <input v-model="localBooker.booking.extraActivities" :value="extraActivity.id" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
                 <span class="font-weight-bold text-uppercase">
-                  <div style="margin-right: 2.25rem">sup-paddle</div>
-                  <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
+                  <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
+                  <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
                 </span>
               </label>
             </div>
@@ -137,7 +137,7 @@
               <label class="">
                 <input
                   v-model="localExtraParticipants[currFormParticipant].booking.room"
-                  :value="index"
+                  :value="room.id"
                   type="radio"
                   :id="`extraPart${currFormParticipant}-${index}`"
                   :name="`extraPartRoom${currFormParticipant}-${index}`"
@@ -209,12 +209,12 @@
           <h6 class="font-weight-bold">Activites en +</h6>
           <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
           <div class="hidable">
-            <div class="custom-radio-container inline-blocks py-3">
-              <div class="custom-control custom-radio bg-light rounded border mb-3">
+            <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+              <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
                 <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
                   <input
                     v-model="localExtraParticipants[currFormParticipant].booking.extraActivities"
-                    value="1"
+                    :value="extraActivity.id"
                     type="checkbox"
                     :id="`extraPart${currFormParticipant}-activ0`"
                     class=""
@@ -222,8 +222,8 @@
                   />
                   <!-- TODO extracti -->
                   <span class="font-weight-bold text-uppercase">
-                    <div style="margin-right: 2.25rem">sup-paddle</div>
-                    <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
+                    <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
+                    <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
                   </span>
                 </label>
               </div>
@@ -250,7 +250,7 @@
       </div>
     </div>
   </transition>
-  <div class="card p-0" style="position: relative" v-if="extraParticipants.length && currFormParticipant < extraParticipants.length">
+  <div class="card p-0" style="position: relative" v-if="extraParticipants.length && !(currForm === 'extraParticipant' && currFormParticipant === extraParticipants.length - 1)">
     <div @click="nextParticipant" class="btn-next-participant" type="button">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
@@ -337,7 +337,7 @@ export default {
       return this.extraParticipantRoomFilled && this.extraParticipantEquipmentFilled && this.extraParticipantActivitiesFilled && this.extraParticipantNoteFilled
     },
     bookerRoomFilled() {
-      return !!this.localBooker.booking.room.length && !!this.localBooker.booking.roomMate
+      return !!this.localBooker.booking.room
     },
     bookerEquipmentFilled() {
       return this.localBooker.booking.equipmentRental !== null
@@ -350,7 +350,7 @@ export default {
     },
     extraParticipantRoomFilled() {
       if (!this.localExtraParticipants.length) return
-      return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length
+      return !!this.localExtraParticipants[this.currFormParticipant].booking.room
       // return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length && !!this.localExtraParticipants[this.currFormParticipant].booking.roomMate
     },
     extraParticipantEquipmentFilled() {
@@ -383,6 +383,7 @@ export default {
       }
     },
     extraParticipantRoomFilled(val) {
+      alert('room ok')
       if (val) this.nextFormStep(1)
     },
     extraParticipantEquipmentFilled(val) {

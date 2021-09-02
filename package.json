@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@dafcoe/vue-collapsible-panel": "^0.2.0",
+    "@kyvg/vue3-notification": "^2.3.3",
     "@stripe/stripe-js": "^1.14.0",
     "@vueform/multiselect": "^1.5.0",
     "@vuelidate/core": "^2.0.0-alpha.21",

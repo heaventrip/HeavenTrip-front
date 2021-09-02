@@ -5,17 +5,17 @@
         <div @click.prevent="test" style="position: relative; z-index: 3; cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
           <img
             class="avatar-block"
-            v-show="currUser?.avatar_key"
+            v-show="currUser?.avatarKey"
             height="40"
             style="border-radius: 50%"
             :style="(toggleDropdown ? 'border: 1px solid #292f33' : 'border: 1px solid white', isLightTheme ? 'border: 1px solid white' : 'border: 1px solid #292f33')"
             fluid
-            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`"
           />
           <div class="name-block d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="toggleDropdown && !isLightTheme ? 'color: #292f33' : 'color: white'">
-            <div>{{ currUser?.first_name }}</div>
-            <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.last_name }}</div>
-            <div v-else style="font-weight: 700">.{{ currUser?.last_name?.[0] }}</div>
+            <div>{{ currUser?.firstName }}</div>
+            <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.lastName }}</div>
+            <div v-else style="font-weight: 700">.{{ currUser?.lastName?.[0] }}</div>
           </div>
           <InlineSvg
             class="connection-icon ml-auto"
@@ -117,11 +117,13 @@ export default {
       agencyIsActive: false,
       showWishlist: false,
       form: '',
-      wishlists: null,
-      currUser: null
+      wishlists: null
     }
   },
   computed: {
+    currUser() {
+      return this.$root.currUser
+    },
     isLightTheme() {
       return this.$parent.$parent.navSticky || this.$parent.activeTab === 'agency' || this.$parent.activeTab === 'news'
     }
@@ -192,11 +194,8 @@ export default {
       this.showAccountPage = true
     },
     unwishlistCourse(courseId) {
-      console.log(courseId)
       this.$axios.delete('/wishlists', { courseId: courseId }).then(() => {
         document.querySelector(`[data-course='${courseId}']`).remove()
-        alert('deleted')
-        // this.fetchWishlists()
       })
     },
     logOut() {
@@ -204,7 +203,7 @@ export default {
       this.$forceUpdate()
     },
     async loginSuccess() {
-      this.currUser = await this.getUserInfo()
+      this.$notify({ type: 'success', text: 'Connexion réussie !' })
       this.showAccountPage = false
       this.$router.push(this.$route.query.redirect || '/')
     },
@@ -232,11 +231,6 @@ export default {
     //     })
     //   }
     // },
-    getLocalInfos() {
-      this.firstName = localStorage.getItem('user.firstName') || ''
-      this.lastName = localStorage.getItem('user.lastName') || ''
-      this.avatarId = localStorage.getItem('user.avatarId')
-    },
     fetchWishlists() {
       this.$axios.get('/users/1/wishlist-courses').then((res) => {
         this.wishlists = res.data.courses
@@ -244,11 +238,10 @@ export default {
     }
   },
   created() {
-    this.currUser = this.getUserInfo()
     this.fetchWishlists()
   },
   updated() {
-    this.getUserInfo()
+    // this.getUserInfo()
   }
 }
 </script>

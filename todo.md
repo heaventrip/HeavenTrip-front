@@ -128,6 +128,12 @@ ___________________________
 - boolean cours actif / pas actif
 - "veuillez consulter sur portable ou ordi :)"
 - friendly Id
+- ordre des items
+- liens des cards vers /checkout sur page request
+- picto dynamique sur le search
+- fading sur card dans recherche
+- virer city et region
+- rajouter titre sur programme "jour 1" "jour 2" etc
 
 
 IMPORTANT : bloquer les mobiles/tablettes

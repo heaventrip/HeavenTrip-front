@@ -145,6 +145,7 @@ export default {
       immediate: true,
       handler(val) {
         this.activeStep = 'booker'
+        console.log(val)
       }
     },
     activeStep: {
@@ -157,6 +158,66 @@ export default {
   computed: {
     showMenu() {
       return this.activeStep === 'options' && this.transitionEntered
+    },
+    custParams() {
+      let params = {
+        reservation: {
+          equipmentRental: true,
+          comment: 'a',
+          insurance: 'a',
+          roomId: 1,
+          sessionId: 1,
+          alternativeIds: [1],
+          extraParticipantsReservationsAttributes: [
+            {
+              equipmentRental: false,
+              comment: 'b',
+              insurance: 'b',
+              roomId: 1,
+              alternativeIds: [1, 2, 3, 4],
+              extraParticipantAttributes: {
+                firstName: 'updatepart',
+                birthDate: 'updatepart',
+                email: 'part1'
+              }
+            }
+          ]
+        }
+      }
+      return params
+    },
+    params() {
+      let params = {
+        reservation: {
+          equipmentRental: this.booker.booking.equipmentRental,
+          comment: this.booker.booking.comment,
+          insurance: this.booker.booking.insurance,
+          roomId: this.booker.booking.room,
+          sessionId: this.$props.session.id,
+          alternativeIds: this.booker.booking.extraActivities
+        }
+      }
+
+      if (this.extraParticipants.length) {
+        params.reservation.extraParticipantsReservationsAttributes = new Array()
+
+        this.extraParticipants.forEach((part) => {
+          params.reservation.extraParticipantsReservationsAttributes.push({
+            equipmentRental: part.booking.equipmentRental,
+            comment: part.booking.comment,
+            insurance: part.booking.insurance,
+            roomId: part.booking.room,
+            alternativeIds: part.booking.extraActivities,
+            extraParticipantAttributes: {
+              firstName: part.infos.firstName,
+              birthDate: part.infos.birthDate,
+              email: part.infos.email
+            }
+          })
+        })
+      }
+
+      return params
     }
   },
   methods: {
@@ -193,39 +254,13 @@ export default {
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
       this.$axios
-        .post(
-          '/reservations',
-          {
-            reservation: {
-              equipmentRental: this.booker.booking.equipmentRental,
-              comment: this.booker.booking.comment,
-              insurance: this.booker.booking.insurance,
-              roomId: this.booker.booking.room,
-              sessionId: this.$props.session.id,
-              alternativeIds: this.booker.booking.extraActivities,
-              extraParticipantsReservationsAttributes: [
-                {
-                  equipmentRental: this.extraParticipants[0].booking.equipmentRental,
-                  comment: this.extraParticipants[0].booking.comment,
-                  insurance: this.extraParticipants[0].booking.insurance,
-                  roomId: this.extraParticipants[0].booking.room,
-                  alternativeIds: this.extraParticipants[0].booking.extraActivities,
-                  extraParticipantAttributes: {
-                    firstName: this.extraParticipants[0].infos.firstName,
-                    birthDate: this.extraParticipants[0].infos.birthDate,
-                    email: this.extraParticipants[0].infos.email
-                  }
-                }
-              ]
-            }
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        .post('/reservations', this.params, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        )
-        .then((res) => alert(res.message))
+        })
+        .then((res) => this.$notify({ type: 'success', text: 'Réservation créée avec succès' }))
+        .catch((err) => alert(err.message))
     }
   },
   mounted() {

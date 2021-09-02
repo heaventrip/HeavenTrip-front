@@ -139,21 +139,23 @@
           <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
         </div>
         <form style="margin-top: 50px">
-          <transition name="fade-fast" mode="out-in">
-            <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" /> -->
-            <!-- <FormSignup v-if="activeTab === 'signup'" @completed="bringInfoForm" @clicked-existing-account="activeTab = 'login'"/> -->
-            <keep-alive>
-              <component
-                :is="formComponents[activeTab]"
-                :ref="formComponents[activeTab]"
-                @login-success="$emit('login-success')"
-                @clicked-signup="activeTab = 'signup'"
-                @clicked-password-forgotten="activeTab = 'password'"
-                @completed="bringInfoForm"
-                @clicked-existing-account="activeTab = 'login'"
-              ></component>
-            </keep-alive>
-          </transition>
+          <router-view>
+            <transition name="fade-fast" mode="out-in">
+              <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" /> -->
+              <!-- <FormSignup v-if="activeTab === 'signup'" @completed="bringInfoForm" @clicked-existing-account="activeTab = 'login'"/> -->
+              <keep-alive>
+                <component
+                  :is="formComponents[activeTab]"
+                  :ref="formComponents[activeTab]"
+                  @login-success="$emit('login-success')"
+                  @clicked-signup="activeTab = 'signup'"
+                  @clicked-password-forgotten="activeTab = 'password'"
+                  @completed="bringInfoForm"
+                  @clicked-existing-account="activeTab = 'login'"
+                ></component>
+              </keep-alive>
+            </transition>
+          </router-view>
           <FormInfos
             v-if="activeTab === 'infos'"
             ref="FormInfos"
@@ -269,6 +271,12 @@ export default {
     // activeTab(val) {
     //   if (val === 'login' || val === 'signup') this.createTsConnectionTab()
     // },
+    '$route.params.activeTab': {
+      immediate: true,
+      handler(val) {
+        this.activeTab = val
+      }
+    },
     newActiveTab: {
       immediate: true,
       handler(val) {
