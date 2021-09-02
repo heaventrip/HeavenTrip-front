@@ -156,7 +156,7 @@
           </transition>
           <FormInfos
             v-if="activeTab === 'infos'"
-            ref="FormInfos"
+            ref="formInfos"
             @submitted-form="isSuccess = true"
             @avatar-is-valided="avatarIsValid = true"
             @gender-is-valided="genderIsValid = true"
