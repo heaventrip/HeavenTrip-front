@@ -53,26 +53,26 @@ const routes = [
     }
   },
   {
-    path: '/login/:activeTab',
+    path: '/login',
     name: 'Account',
     component: Account,
     meta: {
       allowAnonymous: true
-    },
-    children: [
-      {
-        path: 'login'
-      },
-      {
-        path: 'signup'
-      },
-      {
-        path: 'infos'
-      },
-      {
-        path: 'password'
-      }
-    ]
+    }
+    // children: [
+    //   {
+    //     path: 'login'
+    //   },
+    //   {
+    //     path: 'signup'
+    //   },
+    //   {
+    //     path: 'infos'
+    //   },
+    //   {
+    //     path: 'password'
+    //   }
+    // ]
   },
   {
     path: '/legal',

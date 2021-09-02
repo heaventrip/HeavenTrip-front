@@ -61,7 +61,7 @@ export default {
           this.$emit('login-success')
         })
         .catch((err) => {
-          this.$notify({ type: 'error', text: err.response.data.message })
+          this.$notify({ type: 'error', text: err.message })
         })
     }
   }
