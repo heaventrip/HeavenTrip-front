@@ -142,6 +142,12 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 1441px) {
+  .no-gutters {
+    width: 250px;
+    font-size: 0.8rem;
+  }
+}
 .title-activities {
   width: 90%;
   margin-left: 2.5rem;
