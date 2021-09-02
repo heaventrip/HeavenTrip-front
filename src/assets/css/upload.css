@@ -705,7 +705,7 @@
 }
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-error, .upload-container .vue-image-crop-upload .vicp-wrap .vicp-success {
-  display: block;
+  display: none;
   font-size: 14px;
   line-height: 24px;
   height: 24px;
