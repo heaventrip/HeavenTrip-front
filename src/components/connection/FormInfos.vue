@@ -73,8 +73,11 @@
           <p class="upload-text">Cadrage conseillé</p>
         </div>
       </div>
-      <label v-if="showAvatarValidationButton && !error" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4"> Valider ma photo de profil </label>
-      <label v-else-if="!showAvatarValidationButton && error" class="rounded-0 px-4" style="position: absolute; margin-top: 78px; color: tomato">{{ error }}</label>
+      <div v-if="!showAvatarValidationButton && !error && showLoaderUploadImg" class="lds-dual-ring"></div>
+      <label v-else-if="showAvatarValidationButton && !error && !showLoaderUploadImg" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4">
+        Valider ma photo de profil
+      </label>
+      <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="rounded-0 px-4" style="position: absolute; margin-top: 78px; color: tomato">{{ error }}</label>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
       <div class="descr-text">
@@ -159,6 +162,7 @@ export default {
       show: true,
       error: '',
       showAvatarValidationButton: false,
+      showLoaderUploadImg: false,
       imgDataUrl: '',
       currentErreur: '',
       activeInfoTabs: ['gender', 'avatar', 'bio', 'success'],
@@ -238,6 +242,8 @@ export default {
     cropSuccess(imgDataUrl, field) {
       console.log('-------- crop success --------')
       this.showAvatarValidationButton = false
+      this.showLoaderUploadImg = true
+      this.error = ''
       /**
        * upload success
        *
@@ -248,6 +254,7 @@ export default {
     cropUploadSuccess(jsonData, field) {
       console.log('-------- upload success --------')
       this.showAvatarValidationButton = true
+      this.showLoaderUploadImg = false
       localStorage.setItem('user.avatarId', jsonData.upload.public_id)
       this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${localStorage['user.avatarId']}.jpg`
       this.$parent.$forceUpdate()
@@ -262,6 +269,9 @@ export default {
       console.log('-------- upload fail --------')
       console.log(status)
       console.log('field: ' + field)
+
+      this.showAvatarValidationButton = false
+      this.showLoaderUploadImg = false
       this.error = "Une erreur s'est produite, ton image n'a pas été validée"
     },
     updateProfile() {
@@ -392,5 +402,33 @@ export default {
 }
 .bttn--pink:hover {
   border: 1px solid white;
+}
+/*Loader image*/
+.lds-dual-ring {
+  position: absolute;
+  margin-left: 30px;
+  margin-top: 58px;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: ' ';
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

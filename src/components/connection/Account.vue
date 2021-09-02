@@ -158,7 +158,7 @@
           </router-view>
           <FormInfos
             v-if="activeTab === 'infos'"
-            ref="FormInfos"
+            ref="formInfos"
             @submitted-form="isSuccess = true"
             @avatar-is-valided="avatarIsValid = true"
             @gender-is-valided="genderIsValid = true"
@@ -358,6 +358,11 @@ export default {
 .purple-container__content {
   width: 50%;
 }
+@media only screen and (max-width: 1460px) {
+  .form-container {
+    width: 57% !important;
+  }
+}
 @media only screen and (max-width: 1200px) {
   .purple-container__content {
     width: 60%;
@@ -471,6 +476,11 @@ export default {
   /* object-position: 10px 10px; */
   height: 100%;
   width: 100%;
+}
+@media only screen and (max-width: 1300px) {
+  .grey-container {
+    width: 60% !important;
+  }
 }
 .purple-container {
   display: flex;
