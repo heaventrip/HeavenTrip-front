@@ -9,7 +9,7 @@
     <PasswordStep3 @filled="step = 4" />
   </div>
   <div v-else class="text-center">
-    <PasswordStep4 @complete="$emit('passwordUpdated')" />
+    <PasswordStep4 @complete="$emit('password-updated')" />
   </div>
 </template>
 

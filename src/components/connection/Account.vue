@@ -100,36 +100,41 @@
           </div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
         </div>
-        <div class="d-flex connection-nav-container" v-else>
-          <div
-            @click="
-              () => {
-                activeTab = 'login'
-                tlConnectionTab.reverse()
-              }
-            "
-            type="button"
-            class="connection-nav-button button-sign"
-            :class="{ 'connection-nav-button--active': activeTab === 'login' }"
-          >
-            Connexion
-          </div>
-          <div
-            @click="
-              () => {
-                activeTab = 'signup'
-                tlConnectionTab.play()
-              }
-            "
-            type="button"
-            class="connection-nav-button button-sign"
-            :class="{ 'connection-nav-button--active': activeTab === 'signup' }"
-          >
-            Inscription
-          </div>
-          <!--<div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
+        <div v-else-if="activeTab === 'password'">
+          <div id="title-password" class="connection-nav-button">Mot de passe oublié</div>
         </div>
-        <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
+        <div v-else>
+          <div class="d-flex connection-nav-container">
+            <div
+              @click="
+                () => {
+                  activeTab = 'login'
+                  tlConnectionTab.restart()
+                }
+              "
+              type="button"
+              class="connection-nav-button button-sign"
+              :class="{ 'connection-nav-button--active': activeTab === 'login' }"
+            >
+              Connexion
+            </div>
+            <div
+              @click="
+                () => {
+                  activeTab = 'signup'
+                  tlConnectionTab.reverse()
+                }
+              "
+              type="button"
+              class="connection-nav-button button-sign"
+              :class="{ 'connection-nav-button--active': activeTab === 'signup' }"
+            >
+              Inscription
+            </div>
+            <!--<div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
+          </div>
+          <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
+        </div>
         <form style="margin-top: 50px">
           <transition name="fade-fast" mode="out-in">
             <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" /> -->
@@ -156,7 +161,21 @@
             :active-info-tab="activeInfoTab"
             :user="user"
           />
-          <Password v-if="activeTab === 'password'" @password-updated="activeTab = 'login'" @clicked-password-retrieved="activeTab = 'login'" />
+          <Password
+            v-if="activeTab === 'password'"
+            @password-updated="
+              () => {
+                activeTab = 'login'
+                createTsConnectionTab()
+              }
+            "
+            @clicked-password-retrieved="
+              () => {
+                activeTab = 'login'
+                createTsConnectionTab()
+              }
+            "
+          />
         </form>
       </div>
       <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
@@ -172,7 +191,7 @@
           @click="
             () => {
               activeTab = 'signup'
-              tlConnectionTab.play()
+              createTsConnectionTab()
             }
           "
         />
@@ -191,7 +210,7 @@
           @click="
             () => {
               activeTab = 'login'
-              tlConnectionTab.reverse()
+              createTsConnectionTab()
             }
           "
         />
@@ -240,6 +259,9 @@ export default {
     }
   },
   watch: {
+    // activeTab(val) {
+    //   if (val === 'login' || val === 'signup') this.createTsConnectionTab()
+    // },
     newActiveTab: {
       immediate: true,
       handler(val) {
@@ -315,6 +337,9 @@ export default {
 </script>
 
 <style scoped>
+#title-password {
+  color: white;
+}
 .purple-container__content {
   width: 50%;
 }

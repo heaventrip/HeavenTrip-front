@@ -1,6 +1,6 @@
 <template>
   <div class="checkout-main-container" :style="[activeStep === 'validation' ? 'height: calc(100vh - 170px)' : '']">
-    <div class="top-infos-container">
+    <div v-if="false" class="top-infos-container">
       <div class="top-info" type="button" @click="nextStep">Retour</div>
       <div class="top-info">aaaaaaaa</div>
       <div class="top-info">aaaaaaaa</div>
@@ -31,10 +31,11 @@
           v-if="activeStep !== 'validation' && activeStep !== 'success'"
         >
           <div class="d-flex w-100 py-5">
-            <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
-            <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
-            <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
-            <div class="text-uppercase pl-4" style="color: #b4b4b487; font-weight: 600">Paiement</div>
+            <div class="checkout-step text-uppercase mr-auto" style="font-weight: 700" :style="activeStep === 'booker' ? '' : 'color: #b4b4b487;'">Mes infos</div>
+            <div class="checkout-step text-uppercase px-4" :style="activeStep === 'participants' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Participants</div>
+            <div class="checkout-step text-uppercase px-4" :style="activeStep === 'options' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Options</div>
+            <div class="checkout-step text-uppercase px-4" :style="activeStep === 'insurance' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Assurance</div>
+            <div class="checkout-step text-uppercase pl-4" :style="activeStep === 'validation' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Paiement</div>
           </div>
         </div>
         <transition name="fade" mode="out-in" @before-leave="beforeLeave">
@@ -125,7 +126,7 @@ export default {
           postalCode: 'a'
         },
         booking: {
-          room: [],
+          room: 0,
           roomMate: 'a',
           equipmentRental: null,
           noExtraActivities: false,
@@ -191,51 +192,44 @@ export default {
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-      this.$axios.post(
-        'http://localhost:3000/api/v1/reservations',
-        {
-          reservation: {
-            roomId: 1,
-            sessionId: 1,
-            alternativeIds: [1, 2],
-            extraParticipantsReservationsAttributes: [
-              {
-                equipmentRental: 'a',
-                comment: 'a',
-                insurance: 'a',
-                roomId: 1,
-                alternativeIds: [1],
-                extraParticipantAttributes: {
-                  firstName: 'a',
-                  birthDate: 'a',
-                  email: 'a'
+      this.$axios
+        .post(
+          '/reservations',
+          {
+            reservation: {
+              equipmentRental: this.booker.booking.equipmentRental,
+              comment: this.booker.booking.comment,
+              insurance: this.booker.booking.insurance,
+              roomId: this.booker.booking.room,
+              sessionId: this.$props.session.id,
+              alternativeIds: this.booker.booking.extraActivities,
+              extraParticipantsReservationsAttributes: [
+                {
+                  equipmentRental: this.extraParticipants[0].booking.equipmentRental,
+                  comment: this.extraParticipants[0].booking.comment,
+                  insurance: this.extraParticipants[0].booking.insurance,
+                  roomId: this.extraParticipants[0].booking.room,
+                  alternativeIds: this.extraParticipants[0].booking.extraActivities,
+                  extraParticipantAttributes: {
+                    firstName: this.extraParticipants[0].infos.firstName,
+                    birthDate: this.extraParticipants[0].infos.birthDate,
+                    email: this.extraParticipants[0].infos.email
+                  }
                 }
-              },
-              {
-                equipmentRental: 'b',
-                comment: 'b',
-                insurance: 'b',
-                roomId: 2,
-                alternativeIds: [1, 2, 3, 4],
-                extraParticipantAttributes: {
-                  firstName: 'b',
-                  birthDate: 'b',
-                  email: 'b'
-                }
-              }
-            ]
+              ]
+            }
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
           }
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
+        )
+        .then((res) => alert(res.message))
     }
   },
   mounted() {
-    this.submitBookingForm()
+    // this.submitBookingForm()
     // $(function () {
     //   $('[data-toggle="tooltip"]').tooltip();
     //   $(
@@ -273,6 +267,9 @@ export default {
 </script>
 
 <style scoped>
+.checkout-step:not(:last-of-type) {
+  border-right: 1px dashed #b4b4b487;
+}
 .tab-content,
 .checkout-progress-bar {
   margin-left: auto;

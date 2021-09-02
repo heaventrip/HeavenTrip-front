@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div class="card completed rounded-0 mb-0 p-0" v-for="extraParticipant in localExtraParticipants" :key="extraParticipant">
+  <div class="card completed rounded-0 mb-0 p-0" v-for="(extraParticipant, index) in localExtraParticipants" :key="extraParticipant">
     <div class="card-header rounded-0 border-0 p-0 d-flex">
       <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
         <div class="participant-img-container position-relative">
@@ -63,7 +63,7 @@
       </h6>
       <div class="d-flex flex-column">
         <button class="btn text-uppercase personalize-btn rounded-0 border-0 px-4 flex-1">MODIFIER</button>
-        <button class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="margin-top: 1px">RETIRER</button>
+        <button @click.prevent="localExtraParticipants.splice(index, 1)" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="margin-top: 1px">RETIRER</button>
       </div>
     </div>
   </div>
@@ -82,7 +82,7 @@
           <div class="col-12 col-lg-6">
             <div class="custom-control p-0 pb-3 mt-2">
               <label class="" for="booker-ins1">
-                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins1" name="insurance_plan_booker" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" value="ins1" type="radio" id="booker-ins1" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
               </label>
             </div>
@@ -98,7 +98,7 @@
           <div class="col-12 col-lg-6">
             <div class="custom-control p-0 pb-3 mt-2">
               <label class="" for="booker-ins2">
-                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins2" name="insurance_plan_booker" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" value="ins2" type="radio" id="booker-ins2" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
               </label>
             </div>
@@ -114,7 +114,7 @@
           <div class="col-12">
             <div class="custom-control p-0 pb-2 mt-4">
               <label class="" for="booker-ins3">
-                <input v-model="localBooker.booking.insurance" type="radio" id="booker-ins3" name="insurance_plan_booker" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" value="ins2" type="radio" id="booker-ins3" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
               </label>
             </div>
@@ -205,6 +205,7 @@
 export default {
   name: 'CheckoutWizardForm2',
   props: ['booker', 'extra-participants', 'course'],
+  emits: ['complete', 'updated-booker', 'updated-participants'],
   data() {
     return {
       localBooker: this.$props.booker,
@@ -213,10 +214,11 @@ export default {
   },
   computed: {
     filled() {
-      return this.bookerInsuranceFilled && this.participantsInsuranceFilled
+      if (this.localExtraParticipants.length) return this.bookerInsuranceFilled && this.participantsInsuranceFilled
+      else return this.bookerInsuranceFilled
     },
     bookerInsuranceFilled() {
-      return !!this.localBooker.booking.insurance
+      return ['ins1', 'ins2', 'ins3'].includes(this.localBooker.booking.insurance)
     },
     participantsInsuranceFilled() {
       let insurancesArr = this.localExtraParticipants.map((part) => part.booking.insurance)

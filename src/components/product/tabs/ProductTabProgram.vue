@@ -44,9 +44,7 @@
             <img class="img-fluid rounded-day-img" fluid :src="require('@/assets/images/beach.jpg')" />
           </div>
           <div class="col-12 col-lg-8">
-            <p class="content">
-              {{ dayProgram.description }}
-            </p>
+            <p class="content" v-html="dayProgram.description"></p>
           </div>
         </div>
       </div>

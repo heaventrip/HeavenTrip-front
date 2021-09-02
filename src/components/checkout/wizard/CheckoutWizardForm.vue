@@ -43,7 +43,7 @@
         <div class="hidable custom-radio-container">
           <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
             <label class="">
-              <input v-model="localBooker.booking.room[0]" :value="index" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
+              <input v-model="localBooker.booking.room" :value="room.id" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
               <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
                 <div>
                   <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
@@ -63,7 +63,7 @@
       </div>
       <div class="card-body border-top">
         <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
-        <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
+        <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a ton activité principale</p>
         <div class="hidable custom-radio-container">
           <div class="custom-control">
             <label class="" for="materielBooker-with">
@@ -98,7 +98,7 @@
           <div class="custom-radio-container inline-blocks py-3">
             <div class="custom-control custom-radio bg-light rounded border mb-3">
               <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
-                <input v-model="localBooker.booking.extraActivities" value="1" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
+                <input v-model="localBooker.booking.extraActivities[0]" value="1" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
                 <span class="font-weight-bold text-uppercase">
                   <div style="margin-right: 2.25rem">sup-paddle</div>
                   <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
@@ -136,7 +136,7 @@
             <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
               <label class="">
                 <input
-                  v-model="localExtraParticipants[currFormParticipant].booking.room[0]"
+                  v-model="localExtraParticipants[currFormParticipant].booking.room"
                   :value="index"
                   type="radio"
                   :id="`extraPart${currFormParticipant}-${index}`"
@@ -250,7 +250,7 @@
       </div>
     </div>
   </transition>
-  <div class="card p-0" style="position: relative" v-if="extraParticipants.length">
+  <div class="card p-0" style="position: relative" v-if="extraParticipants.length && currFormParticipant < extraParticipants.length">
     <div @click="nextParticipant" class="btn-next-participant" type="button">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
@@ -267,6 +267,7 @@
 export default {
   name: 'CheckoutWizardForm',
   props: ['booker', 'extra-participants', 'course'],
+  emits: ['complete', 'updated-participants', 'updated-booker'],
   data() {
     return {
       currFormParticipant: 0,
@@ -326,7 +327,8 @@ export default {
   },
   computed: {
     filled() {
-      return this.bookerBookingFilled && this.participantsBookingFilled
+      if (this.localExtraParticipants.length) return this.bookerBookingFilled && this.participantsBookingFilled
+      else return this.bookerBookingFilled
     },
     bookerBookingFilled() {
       return this.bookerRoomFilled && this.bookerEquipmentFilled && this.bookerActivitiesFilled && this.bookerNoteFilled
@@ -365,17 +367,19 @@ export default {
     }
   },
   watch: {
-    bookerRoomFilled(val) {
-      if (val) this.nextFormStep(1)
+    bookerRoomFilled: {
+      handler(val) {
+        if (val) this.nextFormStep(1)
+      }
     },
     'localBooker.booking.equipmentRental': {
       handler(val) {
-        this.nextFormStep(2)
+        if (val) this.nextFormStep(2)
       }
     },
     'localBooker.booking.noExtraActivities': {
       handler(val) {
-        this.nextFormStep(3)
+        if (val) this.nextFormStep(3)
       }
     },
     extraParticipantRoomFilled(val) {
