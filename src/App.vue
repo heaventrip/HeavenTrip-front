@@ -8,7 +8,7 @@
   <transition name="fade-splash">
     <vue-element-loading :active="initialLoading" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
   </transition>
-  <notifications position="top center" width="50%" max="3" />
+  <notifications class="custom-notifications" group="app" position="top center" width="35%" max="3" />
 </template>
 
 <script>
@@ -71,6 +71,12 @@ body.modal-open::after {
 }
 #app {
   color: #2c3e50;
+}
+.custom-notifications {
+  transform: translateY(1rem);
+}
+.custom-notifications .vue-notification {
+  font-size: 0.875rem;
 }
 .modal__backdrop {
   position: fixed;

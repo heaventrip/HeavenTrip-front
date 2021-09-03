@@ -227,6 +227,7 @@
       <InlineSvg v-if="activeTab === 'success'" style="position: absolute; bottom: 2rem; right: 2rem" fill="white" height="60" :src="require('@/assets/svg/logo-small-no-circle.svg')" />
     </div>
   </div>
+  <notifications class="custom-notifications" group="modal" position="top center" width="35%" max="3" />
 </template>
 
 <script>

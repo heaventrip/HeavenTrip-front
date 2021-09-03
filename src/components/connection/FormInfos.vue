@@ -39,7 +39,7 @@
             @crop-success="cropSuccess"
             @crop-upload-success="cropUploadSuccess"
             @crop-upload-fail="cropUploadFail"
-            :url="`https://heaventrip-dev.herokuapp.com/api/v1/upload?avatar_token=${avatarToken}`"
+            url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
             v-model="show"
             :width="300"
             :height="300"
@@ -167,11 +167,8 @@ export default {
       currentErreur: '',
       activeInfoTabs: ['gender', 'avatar', 'bio', 'success'],
       activeStep: 0,
-      avatarToken: ''
+      avatarKey: ''
     }
-  },
-  mounted() {
-    this.generateRandomKey()
   },
   watch: {
     activeInfoTab(val) {
@@ -199,13 +196,11 @@ export default {
   computed: {
     finalUser() {
       let user = this.$props.user
-      return Object.assign(user, { gender: this.gender, description: this.description })
+      console.log(this.avatarKey)
+      return Object.assign(user, { gender: this.gender, description: this.description, avatarKey: this.avatarKey })
     }
   },
   methods: {
-    generateRandomKey() {
-      this.avatarToken = Math.random().toString(36).substr(2, 5)
-    },
     toggleShow() {
       this.show = !this.show
     },
@@ -221,7 +216,7 @@ export default {
           user: this.finalUser
         })
         .then((res) => {
-          alert('Un mail de confirmation vient de vous être envoyé')
+          this.$notify({ type: 'info', text: 'Un mail de confirmation vient de vous être envoyé' })
           this.$emit('submitted-form')
           this.stepper.bio.valid = true
           this.stepper.success.authorize = true
@@ -262,6 +257,7 @@ export default {
       console.log('-------- upload success --------')
       this.showAvatarValidationButton = true
       this.showLoaderUploadImg = false
+      this.avatarKey = jsonData.upload.public_id
       localStorage.setItem('user.avatarId', jsonData.upload.public_id)
       this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${localStorage['user.avatarId']}.jpg`
       this.$parent.$forceUpdate()

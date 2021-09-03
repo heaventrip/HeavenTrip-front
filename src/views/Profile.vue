@@ -209,6 +209,7 @@
 import Button from '@/components/elements/Button.vue'
 import { logoutUser } from '@/utils/auth'
 import { getUserInfo } from '@/utils/auth'
+import { isLoggedIn } from '@/utils/auth'
 
 export default {
   name: 'Profile',
@@ -319,12 +320,17 @@ export default {
     getUserInfo() {
       return getUserInfo()
     },
+    isLoggedIn() {
+      return isLoggedIn()
+    },
     handlePageClose() {
       if (this.fromRoute) this.$router.back()
       else this.$router.push({ name: 'Home' })
     }
   },
   created() {
+    if (!isLoggedIn()) return
+
     const AUTH_TOKEN_KEY = 'authToken'
     const token = localStorage.getItem(AUTH_TOKEN_KEY)
     this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
