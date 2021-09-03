@@ -7,7 +7,14 @@
         <!-- <ProductNav /> -->
         <!-- <ProductContent :course="course" ref="productContent" @slide-is-up="$refs.productFooter.slideIsUp = true" @slide-is-down="$refs.productFooter.slideIsUp = false" /> -->
         <ProductContent :showed-sessions="showSessions" :selected-session="selectedSession" :course="course" @active-lightbox="setLightboxStatus" ref="productContent" />
-        <ProductFooter v-if="!activeLightbox" :course="course" @selected-session="selectedSession = true" @show-sessions="showSessions = true" @hide-sessions="showSessions = false" ref="productFooter" />
+        <ProductFooter
+          v-if="!activeLightbox"
+          :course="course"
+          @selected-session="selectedSession = true"
+          @show-sessions="showSessions = true"
+          @hide-sessions="showSessions = false"
+          ref="productFooter"
+        />
       </div>
     </transition>
   </div>
@@ -160,6 +167,7 @@ export default {
   },
   created() {
     this.$axios.get(`/courses/${this.id}`).then((res) => {
+      console.log('fff', res.data.course)
       this.course = res.data.course
       this.$root.initialLoading = false
     })
