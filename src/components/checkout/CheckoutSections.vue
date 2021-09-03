@@ -31,7 +31,7 @@
           v-if="activeStep !== 'validation' && activeStep !== 'success'"
         >
           <div class="d-flex w-100 py-5">
-            <div class="checkout-step text-uppercase mr-auto" style="font-weight: 700" :style="activeStep === 'booker' ? '' : 'color: #b4b4b487;'">Mes infos</div>
+            <div class="checkout-step text-uppercase pr-4" style="font-weight: 700" :style="activeStep === 'booker' ? '' : 'color: #b4b4b487;'">Mes infos</div>
             <div class="checkout-step text-uppercase px-4" :style="activeStep === 'participants' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Participants</div>
             <div class="checkout-step text-uppercase px-4" :style="activeStep === 'options' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Options</div>
             <div class="checkout-step text-uppercase px-4" :style="activeStep === 'insurance' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Assurance</div>
@@ -41,7 +41,7 @@
         <transition name="fade" mode="out-in" @before-leave="beforeLeave">
           <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
             <!-- eslint-disable-next-line prettier/prettier -->
-            <CheckoutWizardBooker v-if="activeStep === 'booker'" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBookerInfos" :booker="booker" />
+            <CheckoutWizardBooker v-if="activeStep === 'booker'" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBooker" :booker="booker" />
             <CheckoutWizardParticipants
               v-else-if="activeStep === 'participants'"
               @complete="(status) => (participantsComplete = status)"
@@ -90,6 +90,7 @@ import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
 import CheckoutSuccess from './CheckoutSuccess.vue'
+import { getUserInfo } from '@/utils/auth'
 
 export default {
   name: 'CheckoutSections',
@@ -145,7 +146,6 @@ export default {
       immediate: true,
       handler(val) {
         this.activeStep = 'booker'
-        console.log(val)
       }
     },
     activeStep: {
@@ -156,6 +156,9 @@ export default {
     }
   },
   computed: {
+    userAvatarKey() {
+      return this.getUserInfo().avatarKey
+    },
     showMenu() {
       return this.activeStep === 'options' && this.transitionEntered
     },
@@ -221,6 +224,9 @@ export default {
     }
   },
   methods: {
+    getUserInfo() {
+      return getUserInfo()
+    },
     isComplete(step) {
       return this.$data[`${step}Complete`]
     },
@@ -236,9 +242,6 @@ export default {
     prevStep() {
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex - 1]
-    },
-    setBookerInfos(val) {
-      this.booker.infos = val
     },
     setBooker(val) {
       this.booker = val

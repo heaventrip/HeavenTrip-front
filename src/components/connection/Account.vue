@@ -35,6 +35,7 @@
           </div>
         </div>
         <div class="my-auto text-center mt-5">
+          {{ $route.params.activeTab }}
           <div style="color: white; font-weight: 400">De l’évasion sportive pour tous !</div>
           <InlineAvatars :avatars="[avatarKeys]" />
         </div>

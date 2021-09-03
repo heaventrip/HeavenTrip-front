@@ -13,21 +13,21 @@
   <!-- TODO séparer les participants -->
   <div class="card card-header border-0 p-0 flex-row align-items-center pb-3" style="display: flex; flex-wrap: wrap; outline: 5px solid white" :style="{ zIndex: $windowWidth <= 1366 ? '' : '15' }">
     <div class="position-relative">
-      <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase">Complète la réservation de :</h6>
+      <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase pr-4">Complète la réservation de :</h6>
     </div>
-    <div class="d-inline-block mr-auto" style="flex-grow: 0.9; height: 1px; background-color: #ebebeb"></div>
-    <div class="participant-img-container participant-opacity position-relative">
+    <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #ebebeb"></div>
+    <div class="participant-img-container position-relative" :class="{ 'participant-opacity': currForm !== 'booker' }">
       <div class="d-inline-block" style="position: relative; margin-left: 3rem">
-        <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" style="height: 50px" />
+        <InlineSvg :src="require(`@/assets/svg/${$parent.userAvatarKey}}.svg`)" class="participant-img mr-3" height="50" fill="#292f33" />
         <span class="participant-check"></span>
       </div>
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ booker.infos.firstName || 'Participant 1' }}</strong>
     </div>
     <div
       class="participant-add position-relative d-flex align-items-center"
-      :class="[extraParticipantForHeader === extraParticipant ? '' : 'participant-opacity']"
       v-for="(extraParticipantForHeader, index) in extraParticipants"
       :key="extraParticipantForHeader"
+      :class="{ 'participant-opacity': extraParticipantForHeader !== localExtraParticipants[currFormParticipant] }"
     >
       <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
       <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="50" fill="#292f33" />

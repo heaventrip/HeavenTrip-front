@@ -53,8 +53,9 @@
             <span class="d-inline-block align-middle">&nbsp;{{ new Date(session?.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
         </div>
-        <div class="ml-auto" v-if="activeStep !== 'validation'">
+        <div class="ml-auto" v-if="activeStep !== 'validation' && session?.participants.length">
           <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block">
+            <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span>
             <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span>
           </span>
           <div class="d-flex justify-content-between">

@@ -269,6 +269,7 @@ export default {
   border-bottom: 1px solid rgba(250, 250, 250, 0.35);
 }
 .trippers-div {
+  margin-top: 0.4rem;
   border-top: 1px solid rgba(250, 250, 250, 0.35);
   padding-top: 1.6rem;
   width: max-content;

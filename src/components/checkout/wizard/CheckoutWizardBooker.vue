@@ -114,6 +114,7 @@ import { useVuelidate } from '@vuelidate/core'
 export default {
   name: 'CheckoutWizardBooker',
   props: ['booker'],
+  emits: ['updated-booker-infos', 'complete'],
   setup() {
     return { v$: useVuelidate() }
   },

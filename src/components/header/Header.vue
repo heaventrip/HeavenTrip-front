@@ -136,7 +136,6 @@ export default {
   watch: {
     // store background view when modal opens
     $route: {
-      immediate: true,
       handler(to, from) {
         if (to.name === 'Account') this.modalBackgroundView = from.name
       }

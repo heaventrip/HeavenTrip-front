@@ -39,7 +39,7 @@
             @crop-success="cropSuccess"
             @crop-upload-success="cropUploadSuccess"
             @crop-upload-fail="cropUploadFail"
-            url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+            :url="`https://heaventrip-dev.herokuapp.com/api/v1/upload?avatar_token=${avatarToken}`"
             v-model="show"
             :width="300"
             :height="300"
@@ -166,8 +166,12 @@ export default {
       imgDataUrl: '',
       currentErreur: '',
       activeInfoTabs: ['gender', 'avatar', 'bio', 'success'],
-      activeStep: 0
+      activeStep: 0,
+      avatarToken: ''
     }
+  },
+  mounted() {
+    this.generateRandomKey()
   },
   watch: {
     activeInfoTab(val) {
@@ -199,6 +203,9 @@ export default {
     }
   },
   methods: {
+    generateRandomKey() {
+      this.avatarToken = Math.random().toString(36).substr(2, 5)
+    },
     toggleShow() {
       this.show = !this.show
     },
