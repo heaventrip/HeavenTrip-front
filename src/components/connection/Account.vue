@@ -48,7 +48,11 @@
         <InlineSvg :src="require('@/assets/svg/freeride.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
       </div>
     </div>
-    <div class="grey-container d-flex flex-column align-items-center text-white" style="background-color: #292f33">
+    <div
+      class="grey-container d-flex flex-column align-items-center text-white"
+      style="background-color: #292f33"
+      :class="[activeTab === 'login' || activeTab === 'signup' ? 'grey-container-width' : '']"
+    >
       <InlineSvg
         style="position: absolute; top: 2rem; left: 2rem"
         v-if="activeTab === 'infos'"
@@ -66,7 +70,7 @@
         <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
         <InlineSvg class="title-connection" :src="require('@/assets/svg/logo-small.svg')" height="60" />
       </div>
-      <div class="form-container" style="margin-top: 21vh" :style="[activeTab === 'infos' ? 'width: 600px ' : 'width: 50%']">
+      <div class="form-container" :style="[activeTab === 'infos' ? 'width: 600px' : 'width: 50%']">
         <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
           <div
             v-if="!isSuccess"
@@ -347,16 +351,6 @@ export default {
 .purple-container__content {
   width: 50%;
 }
-@media only screen and (max-width: 1460px) {
-  .form-container {
-    width: 57% !important;
-  }
-}
-@media only screen and (max-width: 1200px) {
-  .purple-container__content {
-    width: 60%;
-  }
-}
 .purple-container__svgs {
   margin-right: 30px;
 }
@@ -466,11 +460,6 @@ export default {
   height: 100%;
   width: 100%;
 }
-@media only screen and (max-width: 1300px) {
-  .grey-container {
-    width: 60% !important;
-  }
-}
 .purple-container {
   display: flex;
   width: 52%;
@@ -492,4 +481,28 @@ export default {
   height: 100vh; /* corresponds height of image */
   z-index: -1;
 }
+.form-container {
+  margin-top: 21vh;
+}
+@media only screen and (max-width: 1460px) {
+  .grey-container-width {
+    width: 64% !important;
+  }
+}
+@media only screen and (max-height: 950px) {
+  .form-container {
+    margin-top: 15vh;
+  }
+}
+@media only screen and (max-height: 790px) {
+  .form-container {
+    margin-top: 12vh;
+  }
+}
+/*
+@media only screen and (max-width: 1200px) {
+  .purple-container__content {
+    width: 60%;
+  }
+} */
 </style>
