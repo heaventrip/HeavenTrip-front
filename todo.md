@@ -134,6 +134,7 @@ ___________________________
 - fading sur card dans recherche
 - virer city et region
 - rajouter titre sur programme "jour 1" "jour 2" etc
+- récup tous les avatars en bas a gauche du violet
 
 
 IMPORTANT : bloquer les mobiles/tablettes

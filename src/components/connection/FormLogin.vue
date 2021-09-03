@@ -56,8 +56,8 @@ export default {
       if (this.v$.$error) return
 
       loginUser(this.email, this.password)
-        .then((res) => {
-          this.$root.currUser = res.data.user
+        .then((user) => {
+          this.$root.currUser = user
           this.$emit('login-success')
         })
         .catch((err) => {

@@ -5,17 +5,17 @@
         <div @click.prevent="test" style="position: relative; z-index: 3; cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
           <img
             class="avatar-block"
-            v-show="currUser?.avatarKey"
+            v-show="currUser?.avatar_key"
             height="40"
             style="border-radius: 50%"
             :style="(toggleDropdown ? 'border: 1px solid #292f33' : 'border: 1px solid white', isLightTheme ? 'border: 1px solid white' : 'border: 1px solid #292f33')"
             fluid
-            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`"
           />
           <div class="name-block d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="toggleDropdown && !isLightTheme ? 'color: #292f33' : 'color: white'">
-            <div>{{ currUser?.firstName }}</div>
-            <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.lastName }}</div>
-            <div v-else style="font-weight: 700">.{{ currUser?.lastName?.[0] }}</div>
+            <div>{{ currUser?.first_name }}</div>
+            <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.last_name }}</div>
+            <div v-else style="font-weight: 700">.{{ currUser?.last_name?.[0] }}</div>
           </div>
           <InlineSvg
             class="connection-icon ml-auto"
@@ -117,13 +117,11 @@ export default {
       agencyIsActive: false,
       showWishlist: false,
       form: '',
-      wishlists: null
+      wishlists: null,
+      currUser: null
     }
   },
   computed: {
-    currUser() {
-      return this.$root.currUser
-    },
     isLightTheme() {
       return this.$parent.$parent.navSticky || this.$parent.activeTab === 'agency' || this.$parent.activeTab === 'news'
     }
@@ -184,6 +182,9 @@ export default {
       this.avatarId = newVal
     }
   },
+  updated() {
+    this.currUser = this.$root.currUser
+  },
   methods: {
     test() {
       this.toggleDropdown = !this.toggleDropdown
@@ -202,10 +203,10 @@ export default {
       this.logoutUser()
       this.$forceUpdate()
     },
-    async loginSuccess() {
-      this.$notify({ type: 'success', text: 'Connexion réussie !' })
+    loginSuccess() {
       this.showAccountPage = false
       this.$router.push(this.$route.query.redirect || '/')
+      this.$notify({ type: 'success', text: 'Connexion réussie !' })
     },
     isLoggedIn() {
       return isLoggedIn()
@@ -239,9 +240,6 @@ export default {
   },
   created() {
     this.fetchWishlists()
-  },
-  updated() {
-    // this.getUserInfo()
   }
 }
 </script>
