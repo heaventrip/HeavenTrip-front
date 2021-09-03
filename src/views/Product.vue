@@ -167,6 +167,7 @@ export default {
   },
   created() {
     this.$axios.get(`/courses/${this.id}`).then((res) => {
+      console.log('fff', res.data.course)
       this.course = res.data.course
       this.$root.initialLoading = false
     })

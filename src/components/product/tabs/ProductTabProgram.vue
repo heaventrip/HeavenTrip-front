@@ -16,7 +16,7 @@
       <h4 class="heading mb-0">Programme</h4>
     </div>
   </div>
-  <DailyProgramCard
+  <!--   <DailyProgramCard
     title="Jour 1"
     :transports="transports"
     principalTitle="Matin :"
@@ -25,8 +25,21 @@
     hiddenTitle="Aprés-midi :"
     hiddenContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
   Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
-  />
-  <div v-for="(dayProgram, index) in course.programs" :key="dayProgram">
+  /> -->
+  <div v-for="dayProgram in course.programs" :key="dayProgram">
+    <div class="mb-4">
+      <DailyProgramCard
+        title="Jour 1"
+        :transports="transports"
+        principalTitle="Matin :"
+        :principalContent="dayProgram.description"
+        hiddenTitle="Aprés-midi :"
+        hiddenContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
+  Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
+      />
+    </div>
+  </div>
+  <!--   <div v-for="(dayProgram, index) in course.programs" :key="dayProgram">
     <DailyProgramCard
       title="Jour 1"
       :transports="transports"
@@ -58,7 +71,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 <script>
 import DailyProgramCard from '@/components/product/tabs/DailyProgramCard.vue'

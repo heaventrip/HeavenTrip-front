@@ -137,7 +137,7 @@
           <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #ebebeb">
             <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="2"> </textarea>
             <button class="ml-3 fg-1 text-center" type="submit">
-              <InlineSvg :src="require('@/assets/svg/send.svg')" height="20" />
+              <InlineSvg class="svg-btn-send" :src="require('@/assets/svg/send.svg')" height="20" />
             </button>
             <!-- <label class="message-input-label">
             </label> -->
@@ -403,6 +403,12 @@ export default {
 </script>
 
 <style scoped>
+.svg-btn-send:hover {
+  fill: #a2a2a2;
+}
+.svg-btn-send:active {
+  fill: #d3d3d3;
+}
 .customized-prev {
   display: none !important;
 }

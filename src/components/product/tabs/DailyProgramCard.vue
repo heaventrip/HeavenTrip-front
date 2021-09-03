@@ -23,7 +23,7 @@
     <div class="content shadow-style">
       <div class="principal-content">
         <h6>{{ principalTitle }}</h6>
-        <p>{{ principalContent }}</p>
+        <p><span v-html="principalContent"></span></p>
       </div>
       <div v-if="activeHiddenContent" class="hidden-content">
         <h6>{{ hiddenTitle }}</h6>

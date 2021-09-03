@@ -410,7 +410,7 @@ export default {
 .lds-dual-ring {
   position: absolute;
   margin-left: 30px;
-  margin-top: 58px;
+  margin-top: 49px;
   display: inline-block;
   width: 80px;
   height: 80px;
