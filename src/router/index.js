@@ -5,6 +5,7 @@ import Profile from '@/views/Profile.vue'
 import Product from '@/views/Product.vue'
 import Search from '@/views/Search.vue'
 import Checkout from '@/views/Checkout.vue'
+import NotFound from '@/views/NotFound.vue'
 import Legal from '@/views/Legal.vue'
 import Account from '@/components/connection/Account.vue'
 import { isLoggedIn } from '@/utils/auth'
@@ -64,6 +65,14 @@ const routes = [
     path: '/legal',
     name: 'Legal',
     component: Legal,
+    meta: {
+      allowAnonymous: true
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
     meta: {
       allowAnonymous: true
     }

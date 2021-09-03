@@ -71,12 +71,18 @@
         </transition>
       </li>
       <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="$router.push('/login')" class="px-4 py-4 d-inline-block" :style="$parent.activeTab === 'agency' || $parent.activeTab === 'news' ? 'color: #292f33' : 'color: white'"
+        <a
+          @click.prevent="$router.push({ name: 'Account', params: { activeTab: 'login' } })"
+          class="px-4 py-4 d-inline-block"
+          :style="$parent.activeTab === 'agency' || $parent.activeTab === 'news' ? 'color: #292f33' : 'color: white'"
           >se connecter</a
         >
       </li>
       <li v-if="!isLoggedIn()" type="button">
-        <a @click.prevent="$router.push('/login')" class="px-4 py-4 profile-link font-weight-bold d-inline-block" :style="isLightTheme ? 'color: #fff; background-color: #292f33' : ''"
+        <a
+          @click.prevent="$router.push({ name: 'Account', params: { activeTab: 'signup' } })"
+          class="px-4 py-4 profile-link font-weight-bold d-inline-block"
+          :style="isLightTheme ? 'color: #fff; background-color: #292f33' : ''"
           >creér son profil</a
         >
       </li>

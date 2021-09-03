@@ -140,7 +140,7 @@ ___________________________
 IMPORTANT : bloquer les mobiles/tablettes
 > IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail
 > IMPORTANT : revoir les navIsActive ActivitiesIsActive etc.
-- routes login/signup/password/infos
+> routes login/signup/password/infos
 - back sur paiement
 - revoir le système de backing (perte de données)
 - prix dynamique du checkout

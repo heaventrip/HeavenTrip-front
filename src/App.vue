@@ -36,7 +36,9 @@ export default {
     $route: {
       immediate: true,
       handler(to, from) {
-        if (from === START_LOCATION) this.initialLoading = true
+        if (from === START_LOCATION && to.name !== 'NotFound') {
+          this.initialLoading = true
+        }
 
         if (to.name === 'Account') {
           this.backgroundView = from
