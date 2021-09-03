@@ -3,6 +3,8 @@ node_modules
 /dist
 ./todo.md
 ./TODO.md
+todo.md
+TODO.md
 
 
 # local env files

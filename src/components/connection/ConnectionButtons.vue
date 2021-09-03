@@ -117,18 +117,19 @@ export default {
       agencyIsActive: false,
       showWishlist: false,
       form: '',
-      wishlists: null
+      wishlists: null,
+      currUser: null
     }
   },
   computed: {
-    currUser() {
-      return this.$root.currUser
-    },
     isLightTheme() {
       return this.$parent.$parent.navSticky || this.$parent.activeTab === 'agency' || this.$parent.activeTab === 'news'
     }
   },
   watch: {
+    currUser(val) {
+      this.$root.currUser = val
+    },
     // showWishlist(val) {
     //   if (val) {
     //     if (document.querySelector('.wishlists')) {
@@ -184,6 +185,9 @@ export default {
       this.avatarId = newVal
     }
   },
+  // updated() {
+  //   this.currUser = this.$root.currUser
+  // },
   methods: {
     test() {
       this.toggleDropdown = !this.toggleDropdown
@@ -202,10 +206,10 @@ export default {
       this.logoutUser()
       this.$forceUpdate()
     },
-    async loginSuccess() {
-      this.$notify({ type: 'success', text: 'Connexion réussie !' })
+    loginSuccess() {
       this.showAccountPage = false
       this.$router.push(this.$route.query.redirect || '/')
+      this.$notify({ type: 'success', text: 'Connexion réussie !' })
     },
     isLoggedIn() {
       return isLoggedIn()
@@ -238,10 +242,24 @@ export default {
     }
   },
   created() {
-    this.fetchWishlists()
-  },
-  updated() {
-    // this.getUserInfo()
+    // this.fetchWishlists()
+    console.log('buttons created')
+
+    const AUTH_TOKEN_KEY = 'authToken'
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+    // this.currUser = await this.getUserInfo()
+    this.$axios
+      .get('/users/current')
+      .then((res) => {
+        this.currUser = res.data.user
+        this.$root.initialLoading = false
+      })
+      .catch((err) => {
+        this.$notify({ type: 'error', text: err.message })
+        this.$root.initialLoading = false
+      })
   }
 }
 </script>

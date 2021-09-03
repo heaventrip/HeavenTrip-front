@@ -112,7 +112,7 @@
               @click="
                 () => {
                   activeTab = 'login'
-                  tlConnectionTab.restart()
+                  tlConnectionTab.reverse()
                 }
               "
               type="button"
@@ -125,7 +125,7 @@
               @click="
                 () => {
                   activeTab = 'signup'
-                  tlConnectionTab.reverse()
+                  tlConnectionTab.restart()
                 }
               "
               type="button"

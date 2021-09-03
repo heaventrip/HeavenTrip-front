@@ -17,7 +17,7 @@ export async function loginUser(email, password) {
       })
       .then((res) => {
         setAuthToken(res.data.auth_token)
-        resolve()
+        resolve(res.data.user)
       })
       .catch((err) => reject(err))
   })
