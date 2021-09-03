@@ -494,7 +494,7 @@ export default {
     margin-top: 15vh;
   }
 }
-@media only screen and (max-height: 790px) {
+@media only screen and (max-height: 600px) {
   .form-container {
     margin-top: 12vh;
   }
