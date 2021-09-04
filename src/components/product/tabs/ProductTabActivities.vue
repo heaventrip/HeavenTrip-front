@@ -29,10 +29,12 @@
             <div v-if="tab === 1">
               <div class="guide-word__subtitle">Atmosphère culinaire</div>
               <p class="content pt-3 text-white" style="line-height: 24px">
-                Lorem ipsum dolor sit amet, solum dictas vim cu, ne his hendrerit deterruisset, id sed doctus fuisset intellegam. Per case melius assentior ea. Et scaevola insolens eum. Ad vix verear
-                eruditi ncillae, fabulas.
+                {{ course?.staffs.find((el) => el.role === 'Guide').description }}
               </p>
-              <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+              <h6 class="author text-white mt-4 mb-0">
+                {{ course?.staffs.find((el) => el.role === 'Guide').firstName }} {{ course?.staffs.find((el) => el.role === 'Guide')?.lastName }} -
+                {{ course?.staffs.find((el) => el.role === 'Guide').title }}
+              </h6>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>

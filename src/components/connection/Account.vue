@@ -280,7 +280,7 @@ export default {
     // activeTab(val) {
     //   if (val === 'login' || val === 'signup') this.createTsConnectionTab()
     // },
-    // 'activeTab': {
+    // '$route.params.activeTab': {
     //   immediate: true,
     //   handler(val) {
     //     this.activeTab = val
