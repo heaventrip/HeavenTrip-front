@@ -127,7 +127,7 @@
                     <h5 class="surfcontent-head mb-1">Vaccin</h5>
                     <ul class="list-unstyled mb-0 surflist health">
                       <li>
-                        Aucun vaccins obligatoires.<br />
+                        Aucun vaccins obligatoires. <br />
                         Il n’est pas exigé de vaccination sauf contre la fièvre jaune pour les voyageurs en provenance de pays où elle sévit. Dans ce cas, elle doit être faite au moins 10 jours avant
                         le départ.
                       </li>
