@@ -1,13 +1,13 @@
 <template>
   <div class="daily-program-card">
     <div class="header">
-      <h5 class="title shadow-style" :class="[!(transports && transports.length > 0) ? 'without-transports' : '']">{{ title }}</h5>
-      <div v-if="transports && transports.length > 0" class="transports shadow-style">
+      <h5 class="title shadow-style" :class="[!(informations && informations.length > 0) ? 'without-informations' : '']">{{ title }}</h5>
+      <div v-if="informations && informations.length > 0" class="informations shadow-style">
         <ul>
-          <li v-for="transport in transports" :key="transport">
-            <img fluid :src="require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg')" />
-            {{ transport.text }} <strong>{{ transport.strongText }}</strong>
-
+          <li v-for="information in informations" :key="information">
+            <!-- <img fluid :src="require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg')" /> -->
+            <!-- <InlineSvg :src="require(information.pictoUrl)" /> -->
+            <p><span v-html="information.text"></span></p>
             <!--<li>
             <img fluid :src="require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg')" />
             VOL pour <strong>HURGHADA</strong>
@@ -22,14 +22,12 @@
     </div>
     <div class="content shadow-style">
       <div class="principal-content">
-        <h6>{{ principalTitle }}</h6>
         <p><span v-html="principalContent"></span></p>
       </div>
       <div v-if="activeHiddenContent" class="hidden-content">
-        <h6>{{ hiddenTitle }}</h6>
-        <p>{{ hiddenContent }}</p>
+        <p><span v-html="hiddenContent"></span></p>
       </div>
-      <a v-if="hiddenContent && hiddenTitle" @click="toggleHiddenContent()">{{ !activeHiddenContent ? 'Afficher le reste de la journée…' : 'Réduire' }}</a>
+      <a v-if="hiddenContent" @click="toggleHiddenContent()">{{ !activeHiddenContent ? 'Afficher le reste de la journée…' : 'Réduire' }}</a>
     </div>
   </div>
 </template>
@@ -37,7 +35,7 @@
 <script>
 export default {
   name: 'DailyProgramCard',
-  props: ['title', 'transports', 'principalContent', 'hiddenContent', 'principalTitle', 'hiddenTitle'],
+  props: ['title', 'informations', 'principalContent', 'hiddenContent'],
   data() {
     return {
       activeHiddenContent: false
@@ -69,27 +67,30 @@ export default {
   padding: 20px;
   background-color: rgb(255, 255, 255);
 }
-.daily-program-card .header .transports {
+.daily-program-card .header .informations {
   margin-left: 7px;
   display: flex;
   flex-grow: 1;
   background-color: rgb(255, 255, 255);
 }
-.daily-program-card .header .transports ul {
+.daily-program-card .header .informations ul {
   margin: auto;
   margin-right: 40px;
   align-self: center;
   padding: initial;
   display: flex;
 }
-.daily-program-card .header .transports li {
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 0.844rem;
+.daily-program-card .header .informations li {
   list-style: none;
   margin-left: 60px;
 }
-.daily-program-card .header .transports li img {
+.daily-program-card .header .informations li p {
+  text-transform: uppercase;
+  font-weight: 400;
+  display: initial;
+  font-size: 0.844rem;
+}
+.daily-program-card .header .informations li img {
   margin-right: 10px;
   margin-bottom: 4px;
 }
@@ -116,7 +117,7 @@ export default {
   color: #d9345a;
 }
 
-.without-transports {
+.without-informations {
   width: 100%;
   text-align: center;
 }

@@ -77,7 +77,7 @@
       <label v-else-if="showAvatarValidationButton && !error && !showLoaderUploadImg" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4">
         Valider ma photo de profil
       </label>
-      <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="rounded-0 px-4" style="position: absolute; margin-top: 78px; color: tomato">{{ error }}</label>
+      <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="rounded-0 px-4" style="position: absolute; margin-top: 70px; color: tomato">{{ error }}</label>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
       <div class="descr-text">
@@ -96,8 +96,23 @@
         Heaven Trip. A tout de suite !
       </div>
       <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
-      <form>
-        <Button text="RENVOYER LA CONFIRMATION DE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation" />
+      <form class="group-btn">
+        <Button class="btn-resend-email" text="RENVOYER LE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation" />
+        <Button
+          class="btn-login"
+          text="SE CONNECTER"
+          px="1.5rem"
+          size=".8rem"
+          height="50px"
+          width="100%"
+          weight="bold"
+          color="white"
+          @click="
+            () => {
+              $router.push({ name: 'Account', params: { activeTab: 'login' } })
+            }
+          "
+        />
       </form>
     </div>
   </div>
@@ -183,6 +198,9 @@ export default {
     },
     activeStep(val) {
       this.$emit('changed-tab', this.activeInfoTabs[this.activeStep])
+      if (this.activeStep === 3) {
+        this.$emit('last-step')
+      }
     },
     gender(val) {
       if (!val) return
@@ -298,6 +316,31 @@ export default {
 </script>
 
 <style scoped>
+.group-btn {
+  display: flex;
+  justify-content: center;
+  margin: 0px 10% 0px 10%;
+}
+.group-btn .btn-resend-email {
+  width: inherit !important;
+  background-color: #ffffff00;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+.group-btn .btn-resend-email:hover {
+  background-color: #ffffff;
+  color: #292f33;
+}
+.group-btn .btn-login {
+  width: inherit !important;
+  margin-left: 3%;
+  border: 1px solid #ffffff00;
+}
+.group-btn .btn-login:hover {
+  background-color: #ffffff00;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
 .bttn--white:hover {
   background-color: #d82558;
 }

@@ -12,7 +12,7 @@
     <div class="purple-container align-items-center" style="position: relative">
       <div class="purple-container__content mx-auto d-flex flex-column h-100">
         <InlineSvg :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
-        <div class="mt-auto d-flex flex-column" style="padding-bottom: 8vh; border-bottom: 1px dashed rgba(250, 250, 250, 0.2)">
+        <div class="mt-auto d-flex flex-column" style="padding-bottom: 8vh; max-width: 27rem; margin: auto; border-bottom: 1px dashed rgba(250, 250, 250, 0.2); line-height: 1.4rem">
           <div class="d-flex align-items-center mb-3 mb-xl-5" style="color: white">
             <div class="purple-container__paragraph-nb mr-4">01</div>
             <div class="purple-container__paragraph">
@@ -55,7 +55,7 @@
     >
       <InlineSvg
         style="position: absolute; top: 2rem; left: 2rem"
-        v-if="activeTab === 'infos'"
+        v-if="activeTab === 'infos' && !hiddenArrow"
         @click="previousScreen"
         type="button"
         :src="require('@/assets/svg/arrow-right.svg')"
@@ -167,6 +167,7 @@
             @avatar-is-valided="avatarIsValid = true"
             @gender-is-valided="genderIsValid = true"
             @changed-tab="setNewInfoTab"
+            @last-step="hiddenArrow = true"
             :active-info-tab="activeInfoTab"
             :user="user"
           />
@@ -273,7 +274,8 @@ export default {
       tl: null,
       tlConnectionTab: null,
       user: null,
-      avatarKeys: []
+      avatarKeys: [],
+      hiddenArrow: false
     }
   },
   watch: {
@@ -512,6 +514,16 @@ export default {
 @media only screen and (max-width: 1460px) {
   .grey-container-width {
     width: 64% !important;
+  }
+  .purple-container__svgs {
+    width: 144px;
+    margin-right: 0px;
+  }
+  .purple-container__content {
+    width: 50%;
+  }
+  .purple-container__paragraph-nb {
+    display: none;
   }
 }
 @media only screen and (max-height: 950px) {
