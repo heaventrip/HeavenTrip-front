@@ -27,15 +27,15 @@
   Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
   /> -->
   <div v-for="dayProgram in course.programs" :key="dayProgram">
-    <div class="mb-4">
+    <div class="mb-5">
       <DailyProgramCard
-        title="Jour 1"
-        :transports="transports"
-        principalTitle="Matin :"
+        :title="dayProgram.dayTitle"
+        :informations="[
+          { pictoUrl: dayProgram.info1Picto, text: dayProgram.info1Description },
+          { pictoUrl: dayProgram.info2Picto, text: dayProgram.info2Description }
+        ]"
         :principalContent="dayProgram.description"
-        hiddenTitle="Aprés-midi :"
-        hiddenContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
-  Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
+        :hiddenContent="dayProgram.longDescription"
       />
     </div>
   </div>

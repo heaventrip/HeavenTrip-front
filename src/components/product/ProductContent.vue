@@ -236,7 +236,7 @@ export default {
       return isCurrentUser(user)
     },
     fetchMessages() {
-      this.$axios.get('/messages', { params: { courseId: this.$props.course.id } }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
+      this.$axios.get('/messages', { params: { courseId: this.$props.course?.id } }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
       /* this.messages = [
         {
           user: {
