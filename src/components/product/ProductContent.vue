@@ -55,7 +55,7 @@
         <ProductTabLiving :course="course" />
       </div>
       <div id="product-tab-program" class="product-section">
-        <ProductTabProgram :course="course" />
+        <ProductTabProgram :course="course" :programs="sortPrograms(course.programs)" />
       </div>
       <div id="product-tab-tips" class="product-section">
         <ProductTabTips :course="course" />
@@ -271,6 +271,12 @@ export default {
           createdAt: '2021-08-05T11:13:32.612Z'
         }
       ] */
+    },
+    sortPrograms(programs) {
+      programs.sort((a, b) => {
+        return a.dayId - b.dayId
+      })
+      return programs
     },
     afterLeave() {
       window.scrollTo({ top: 0, behavior: 'smooth' })

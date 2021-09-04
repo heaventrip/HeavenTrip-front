@@ -3,6 +3,9 @@
     <div class="header">
       <h5 class="title shadow-style" :class="[!(informations && informations.length > 0) ? 'without-informations' : '']">{{ title }}</h5>
       <div v-if="informations && informations.length > 0" class="informations shadow-style">
+        <!-- {{ require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg') }}
+        <img fluid :src="require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg')" />
+        <img fluid src="/img/PICTO_PLANE_ARRIVAL.73619552.svg" /> -->
         <ul>
           <li v-for="information in informations" :key="information">
             <!-- <img fluid :src="require('@/assets/images/svg/PICTO_PLANE_ARRIVAL.svg')" /> -->
