@@ -36,7 +36,7 @@
         </div>
         <div class="my-auto text-center mt-5">
           <div style="color: white; font-weight: 400">De l’évasion sportive pour tous !</div>
-          <InlineAvatars :avatars="[avatarKeys]" />
+          <InlineAvatars :avatars="avatarKeys" />
         </div>
       </div>
       <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2 px-xl-5">
@@ -269,7 +269,8 @@ export default {
       email: '',
       tl: null,
       tlConnectionTab: null,
-      user: null
+      user: null,
+      avatarKeys: []
     }
   },
   watch: {
@@ -298,9 +299,6 @@ export default {
         this.activeTab = this.$route.params.activeTab
       }
     }
-  },
-  mounted() {
-    this.createTsConnectionTab()
   },
   methods: {
     bringInfoForm(userObj) {
@@ -356,6 +354,14 @@ export default {
   created() {
     // TODO in back endpoint for all wishlist users
     // this.$axios.get('/wishlists')
+  },
+  mounted() {
+    this.$axios
+      .get(`https://${process.env.VUE_APP_CLOUDINARY_KEY}:${process.env.VUE_APP_CLOUDINARY_SECRET}@api.cloudinary.com/v1_1/heaventrip/resources/search?max_results=10&expression=resource_type:image`)
+      .then((res) => {
+        this.avatarKeys = res.resources.map((resource) => resource.public_id)
+      })
+    this.createTsConnectionTab()
   }
 }
 </script>
