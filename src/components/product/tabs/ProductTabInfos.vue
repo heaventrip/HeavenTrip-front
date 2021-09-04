@@ -185,8 +185,8 @@
       <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
     </div>
     <ul class="list-unstyled content-list equip mb-0">
-      <li v-for="extraService in course.extraServices" :key="extraService">
-        <a class="text-reset" href="#">{{ extraService.title }}</a>
+      <li class="d-inline" style="padding: 0 1rem; border-right: 1px dashed #ebebeb" v-for="extraService in course.extraServices" :key="extraService">
+        <a @click.prevent style="cursor: default; border-bottom: none" class="text-reset" href="#">{{ extraService.title }}</a>
       </li>
     </ul>
   </div>

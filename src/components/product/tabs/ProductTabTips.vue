@@ -69,7 +69,7 @@
           <div class="col-9 col-lg-12 mx-auto">
             <div class="like-div white">
               <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
-                <li class="fg-1" v-for="countryInfo in course.countryInfos" :key="countryInfo">
+                <li class="fg-1" v-for="countryInfo in course.courseInfos.filter((el) => el.type === 'CountryInfo')" :key="countryInfo">
                   <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
                     <strong class="text-dark ml-2">{{ countryInfo.title }} :</strong>
                     {{ countryInfo.description }}
@@ -88,8 +88,8 @@
           Quelques indicateurs
         </h6>
         <ul class="list-unstyled pays-list mb-0">
-          <li v-for="courseInfo in course.courseInfos" :key="courseInfo">
-            <strong class="letter-space">{{ courseInfo.title }} :</strong> {{ courseInfo.description }}
+          <li v-for="expenseInfo in course.courseInfos.filter((el) => el.type === 'ExpenseInfo')" :key="expenseInfo">
+            <strong class="letter-space">{{ expenseInfo.title }} :</strong> {{ expenseInfo.description }}
           </li>
         </ul>
       </div>
@@ -163,9 +163,9 @@
           <div class="col-9 col-lg-12 mx-auto">
             <div class="like-div white">
               <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
-                <li class="fg-1" v-for="itineraryInfo in course.itineraryInfos" :key="itineraryInfo">
+                <li class="fg-1" v-for="itineraryInfo in course.courseInfos.filter((el) => el.type === 'ItineraryInfo')" :key="itineraryInfo">
                   <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
-                    <strong class="text-dark ml-2">{{ itineraryInfo.title }} :</strong>
+                    <strong class="text-dark ml-2">{{ itineraryInfo.title }}</strong>
                     {{ itineraryInfo.description }} :
                   </a>
                 </li>
