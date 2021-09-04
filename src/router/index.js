@@ -59,7 +59,8 @@ const routes = [
     component: Account,
     meta: {
       allowAnonymous: true
-    }
+    },
+    props: (route) => ({ token: route.query.recover_password_token })
   },
   {
     path: '/legal',

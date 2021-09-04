@@ -171,7 +171,7 @@
             :user="user"
           />
           <Password
-            v-if="activeTab === 'password'"
+            v-if="activeTab === 'password' && !$route.query.recover_password_token"
             @password-updated="
               () => {
                 activeTab = 'login'
@@ -188,6 +188,7 @@
             "
             @change-news-password="isNewPassword = true"
           />
+          <PasswordStep3 v-if="$route.query.recover_password_token" />
         </form>
       </div>
       <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
@@ -240,6 +241,7 @@ import FormLogin from './FormLogin.vue'
 import FormSignup from './FormSignup.vue'
 import FormInfos from './FormInfos.vue'
 import Password from './Password.vue'
+import PasswordStep3 from './PasswordStep3.vue'
 import gsap from 'gsap'
 
 export default {
@@ -250,6 +252,7 @@ export default {
     FormSignup,
     FormInfos,
     Password,
+    PasswordStep3,
     InlineAvatars
   },
   props: ['new-active-tab'],

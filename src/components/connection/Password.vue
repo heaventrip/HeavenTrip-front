@@ -3,9 +3,9 @@
     <PasswordStep1 @clicked-password-retrieved="$emit('clicked-password-retrieved')" @filled="step = 2" />
   </div>
   <div v-else-if="step == 2" class="text-center">
-    <PasswordStep2 @filled="step = 3" />
+    <PasswordStep2 />
   </div>
-  <div v-else-if="step == 3">
+  <div v-else-if="$route.query.recoverPasswordToken">
     <PasswordStep3 @filled="step = 4" />
   </div>
   <div v-else class="text-center">
