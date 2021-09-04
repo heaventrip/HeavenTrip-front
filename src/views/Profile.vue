@@ -11,37 +11,43 @@
         <div class="left-panel__content p-4">
           <div class="d-flex justify-content-center align-items-center my-auto">
             <div style="position: relative; width: 40%" class="mr-3">
-              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
-              <div style="position: absolute; display: flex; border-radius: 50%; box-shadow: rgb(235, 235, 235) 0px 0px 6px; background-color: white; bottom: 0; right: 0; width: 3rem; height: 3rem">
+              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`" />
+              <!-- TODO install component to update avatar -->
+              <div
+                v-if="false"
+                style="position: absolute; display: flex; border-radius: 50%; box-shadow: rgb(235, 235, 235) 0px 0px 6px; background-color: white; bottom: 0; right: 0; width: 3rem; height: 3rem"
+              >
                 <InlineSvg class="m-auto" :src="require('@/assets/svg/camera.svg')" height="30" />
               </div>
             </div>
             <div class="text-left">
-              <div style="font-size: 1.2rem; font-weight: 200; text-transform: uppercase">{{ currUser?.first_name }}</div>
-              <div style="font-size: 1.2rem; font-weight: 500; text-transform: uppercase">{{ currUser?.last_name }}</div>
+              <div style="font-size: 1.2rem; font-weight: 200; text-transform: uppercase">{{ currUser?.firstName }}</div>
+              <div style="font-size: 1.2rem; font-weight: 500; text-transform: uppercase">{{ currUser?.lastName }}</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="cards-container">
+      <div v-if="currUser" class="cards-container">
         <div class="cards-container__first-row">
           <div class="card border-0">
             <div class="card-body">
               <div class="card__title align-items-center justify-content-between mb-5">
                 <div>Qui suis-je ?</div>
-                <div type="button" @click="allowForm = !allowForm" style="font-weight: 400; font-size: 0.8rem" class="d-block text-danger text-uppercase"><i class="fas fa-edit"></i> {{ allowForm ? 'Valider' : 'Modifier' }}</div>
+                <div type="button" @click="allowForm1 = !allowForm1" style="font-weight: 400; font-size: 0.8rem" class="d-block text-danger text-uppercase">
+                  <i class="fas fa-edit"></i> {{ allowForm1 ? 'Valider' : 'Modifier' }}
+                </div>
               </div>
-              <form :class="{ 'form--disallowed': !allowForm }">
+              <form :class="{ 'form--disallowed': !allowForm1 }">
                 <div class="row mb-3">
                   <div class="col-12 col-lg-6">
                     <div class="form-group has-float-label">
-                      <input id="infos-firstName" type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.firstName" />
+                      <input id="infos-firstName" type="text" name="" placeholder=" " class="form-control" v-model="currUser.firstName" />
                       <label for="infos-firstName">Prénom</label>
                     </div>
                   </div>
                   <div class="col-12 col-lg-6">
                     <div class="form-group has-float-label">
-                      <input id="infos-lastName" type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.lastName" />
+                      <input id="infos-lastName" type="text" name="" placeholder=" " class="form-control" v-model="currUser.lastName" />
                       <label for="infos-lastName">Nom</label>
                     </div>
                   </div>
@@ -49,15 +55,27 @@
                 <div class="row">
                   <div class="col-12 col-lg-6">
                     <div class="form-group has-float-label">
-                      <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="booker.infos.birthDate" />
+                      <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="currUser.birthDate" />
                       <label for="date">DATE DE NAISSANCE</label>
                     </div>
                   </div>
                   <div class="col-12 col-lg-6">
                     <div class="form-group">
                       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label @click="booker.infos.gender = 'f'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.infos.gender === 'f' ? 'bg-grey text-white' : '']">Femme</label>
-                        <label @click="booker.infos.gender = 'm'" class="btn gender-btn rounded-0 btn-lg px-4" style="border: 1px solid #292f33" :class="[booker.infos.gender === 'm' ? 'bg-grey text-white' : '']">Homme</label>
+                        <label
+                          @click="currUser.gender = 'f'"
+                          class="btn gender-btn rounded-0 btn-lg px-4"
+                          style="border: 1px solid #292f33"
+                          :class="[currUser.gender === 'f' ? 'bg-grey text-white' : '']"
+                          >Femme</label
+                        >
+                        <label
+                          @click="currUser.gender = 'm'"
+                          class="btn gender-btn rounded-0 btn-lg px-4"
+                          style="border: 1px solid #292f33"
+                          :class="[currUser.gender === 'm' ? 'bg-grey text-white' : '']"
+                          >Homme</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -69,12 +87,14 @@
             <div class="card-body">
               <div class="card__title align-items-center justify-content-between" style="margin-bottom: 2rem">
                 <div>Ma bio</div>
-                <div type="button" @click="allowForm2 = !allowForm2" style="font-weight: 400; font-size: 0.8rem" class="d-block text-danger text-uppercase"><i class="fas fa-edit"></i> {{ allowForm2 ? 'Valider' : 'Modifier' }}</div>
+                <div type="button" @click="allowForm2 = !allowForm2" style="font-weight: 400; font-size: 0.8rem" class="d-block text-danger text-uppercase">
+                  <i class="fas fa-edit"></i> {{ allowForm2 ? 'Valider' : 'Modifier' }}
+                </div>
               </div>
               <form :class="{ 'form--disallowed': !allowForm2 }">
                 <label>Infos à partager</label>
                 <div style="font-family: Muli, sans-serif; font-size: 0.8rem">Présentation légère qui apparaitra bientôt sur ta page publique.</div>
-                <textarea name="" placeholder="Décris-toi en quelques lignes !" class="form-control" rows="2" v-model="booker.infos.bio"></textarea>
+                <textarea name="" placeholder="Décris-toi en quelques lignes !" class="form-control" rows="2" v-model="currUser.bio"></textarea>
               </form>
             </div>
           </div>
@@ -84,19 +104,21 @@
             <div class="card-body">
               <div class="card__title align-items-center justify-content-between mb-5">
                 <div>Comment te joindre ?</div>
-                <div type="button" @click="allowForm3 = !allowForm3" style="font-weight: 400; font-size: 0.8rem" class="d-block text-danger text-uppercase"><i class="fas fa-edit"></i> {{ allowForm3 ? 'Valider' : 'Modifier' }}</div>
+                <div type="button" @click="allowForm3 = !allowForm3" style="font-weight: 400; font-size: 0.8rem" class="d-block text-danger text-uppercase">
+                  <i class="fas fa-edit"></i> {{ allowForm3 ? 'Valider' : 'Modifier' }}
+                </div>
               </div>
               <form :class="{ 'form--disallowed': !allowForm3 }">
                 <div class="row mb-3">
                   <div class="col-12 col-lg-4">
                     <div class="form-group has-float-label">
-                      <input id="infos-phone" type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.phone" />
+                      <input id="infos-phone" type="text" name="" placeholder=" " class="form-control" v-model="currUser.phone" />
                       <label for="infos-phone">Téléphone</label>
                     </div>
                   </div>
                   <div class="col-12 col-lg-8">
                     <div class="form-group has-float-label">
-                      <input id="infos-street" type="text" name="" placeholder=" " class="form-control" v-model="booker.infos.street" />
+                      <input id="infos-street" type="text" name="" placeholder=" " class="form-control" v-model="currUser.street" />
                       <label for="infos-street">Adresse</label>
                     </div>
                   </div>
@@ -104,19 +126,27 @@
                 <div class="row">
                   <div class="col-12 col-lg-3">
                     <div class="form-group has-float-label">
-                      <input id="infos-postalCode" type="text" name="" class="form-control" placeholder=" " v-model="booker.infos.postalCode" />
+                      <input id="infos-postalCode" type="text" name="" class="form-control" placeholder=" " v-model="currUser.postalCode" />
                       <label for="infos-postalCode">Code postal</label>
                     </div>
                   </div>
                   <div class="col-12 col-lg-5">
                     <div class="form-group has-float-label">
-                      <input id="infos-city" type="text" name="" class="form-control" placeholder=" " v-model="booker.infos.city" />
+                      <input id="infos-city" type="text" name="" class="form-control" placeholder=" " v-model="currUser.city" />
                       <label for="infos-city">Ville</label>
                     </div>
                   </div>
                   <div class="col-12 col-lg-4">
                     <div class="form-group has-float-label">
-                      <CountrySelect id="infos-country" style="position: relative; right: 3px" v-model="booker.infos.country" :country="booker.infos.country" :countryName="true" topCountry="France" className="form-control" />
+                      <CountrySelect
+                        id="infos-country"
+                        style="position: relative; right: 3px"
+                        v-model="currUser.country"
+                        :country="currUser.country"
+                        :countryName="true"
+                        topCountry="France"
+                        className="form-control"
+                      />
                       <label for="infos-country">Pays</label>
                     </div>
                   </div>
@@ -133,13 +163,15 @@
                 <div class="row">
                   <div class="col-12 col-lg-12">
                     <div class="form-group has-float-label">
-                      <input id="infos-email" type="email" disabled name="" placeholder=" " class="form-control" v-model="booker.infos.email" />
+                      <input id="infos-email" type="email" disabled name="" placeholder=" " class="form-control" v-model="currUser.email" />
                       <label for="infos-email">Email</label>
                     </div>
                   </div>
                   <div class="col-12 col-lg-12">
                     <label>Réinitialiser le mot de passe</label>
-                    <div class="mb-3" style="font-family: Muli, sans-serif; font-size: 0.8rem">Clique sur ce lien pour recevoir un email contenant les informations nécessaires pour pouvoir modifier ton mot de passe.</div>
+                    <div class="mb-3" style="font-family: Muli, sans-serif; font-size: 0.8rem">
+                      Clique sur ce lien pour recevoir un email contenant les informations nécessaires pour pouvoir modifier ton mot de passe.
+                    </div>
                     <Button text="M'envoyer un email" color="grey" height="2rem" width="100%" weight="bold" />
                   </div>
                 </div>
@@ -156,7 +188,9 @@
               <form>
                 <div class="row">
                   <div class="col-12 col-lg-7">
-                    <div style="font-family: Muli, sans-serif; font-size: 0.8rem">Attention, cette action est irréversible ! Si tu décides de supprimer ton compte tu perdras toutes tes données et tes bonus.</div>
+                    <div style="font-family: Muli, sans-serif; font-size: 0.8rem">
+                      Attention, cette action est irréversible ! Si tu décides de supprimer ton compte tu perdras toutes tes données et tes bonus.
+                    </div>
                   </div>
                   <div class="col-12 col-lg-2 offset-3">
                     <Button style="transform: translateY(-50%)" text="Supprimer" px="1rem" color="grey" height="3rem" weight="bold" />
@@ -175,6 +209,7 @@
 import Button from '@/components/elements/Button.vue'
 import { logoutUser } from '@/utils/auth'
 import { getUserInfo } from '@/utils/auth'
+import { isLoggedIn } from '@/utils/auth'
 
 export default {
   name: 'Profile',
@@ -185,36 +220,12 @@ export default {
     return {
       fromRoute: '',
       currUser: null,
-      allowForm: false,
+      allowForm1: false,
       allowForm2: false,
       allowForm3: false,
-      booker: {
-        infos: {
-          firstName: 'a',
-          lastName: 'a',
-          birthDate: 'a',
-          phone: 'a',
-          email: 'a',
-          gender: 'a',
-          country: 'a',
-          city: 'a',
-          street: 'a',
-          postalCode: 'a',
-          password: 'a',
-          passwordConfirmation: 'a',
-          bio: '',
-          avatarId: ''
-        },
-        booking: {
-          room: [],
-          roomMate: 'a',
-          equipmentRental: null,
-          noExtraActivities: null,
-          extraActivities: [],
-          extraNotes: 'a',
-          insurance: 'a'
-        }
-      }
+      form1Modified: false,
+      form2Modified: false,
+      form3Modified: false
     }
   },
   watch: {
@@ -223,19 +234,118 @@ export default {
       handler(to, from) {
         this.fromRoute = from
       }
+    },
+    allowForm1(val) {
+      // clicked "valider"
+      if (val === false && this.form1Modified) {
+        this.updateUser()
+      }
+    },
+    allowForm2(val) {
+      // clicked "valider"
+      if (val === false && this.form2Modified) {
+        this.updateUser()
+      }
+    },
+    allowForm3(val) {
+      // clicked "valider"
+      if (val === false && this.form3Modified) {
+        this.updateUser()
+      }
+    },
+    'currUser.firstName': {
+      handler() {
+        this.form1Modified = true
+      }
+    },
+    'currUser.lastName': {
+      handler() {
+        this.form1Modified = true
+      }
+    },
+    'currUser.birthDate': {
+      handler() {
+        this.form1Modified = true
+      }
+    },
+    'currUser.gender': {
+      handler() {
+        this.form1Modified = true
+      }
+    },
+    'currUser.bio': {
+      handler() {
+        this.form2Modified = true
+      }
+    },
+    'currUser.phone': {
+      handler() {
+        this.form3Modified = true
+      }
+    },
+    'currUser.street': {
+      handler() {
+        this.form3Modified = true
+      }
+    },
+    'currUser.postalCode': {
+      handler() {
+        this.form3Modified = true
+      }
+    },
+    'currUser.city': {
+      handler() {
+        this.form3Modified = true
+      }
+    },
+    'currUser.country': {
+      handler() {
+        this.form3Modified = true
+      }
     }
   },
   methods: {
+    updateUser() {
+      this.$axios
+        .put('/users/current', { user: this.currUser })
+        .then((res) => {
+          this.$notify({ type: 'success', text: 'Mis à jour avec succès' })
+          this.currUser = res.data.user
+          this.form1Modified = false
+          this.form2Modified = false
+          this.form3Modified = false
+        })
+        .catch((err) => this.$notify({ type: 'error', text: err.response.data.message }))
+    },
     getUserInfo() {
       return getUserInfo()
+    },
+    isLoggedIn() {
+      return isLoggedIn()
     },
     handlePageClose() {
       if (this.fromRoute) this.$router.back()
       else this.$router.push({ name: 'Home' })
     }
   },
-  async created() {
-    this.currUser = await this.getUserInfo()
+  created() {
+    if (!isLoggedIn()) return
+
+    const AUTH_TOKEN_KEY = 'authToken'
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+    // this.currUser = await this.getUserInfo()
+    this.$axios
+      .get('/users/current')
+      .then((res) => {
+        this.currUser = res.data.user
+        this.$root.initialLoading = false
+      })
+      .catch((err) => {
+        this.$notify({ type: 'error', text: err.message })
+        this.$root.initialLoading = false
+      })
   }
 }
 </script>

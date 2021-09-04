@@ -1,8 +1,14 @@
 <template>
   <div class="checkout-header sticky-header">
     <div class="checkout-header-div m-flex bg-dark text-white d-flex align-items-center text-uppercase" v-if="activeStep !== 'validation'">
-      <a href="#" class="back-to-home-link text-reset text-decoration-none font-weight-500 d-flex align-items-center align-self-stretch bg-danger px-3"><i class="fa fa-home h6 mb-0"></i></a>
-      <a href="#" class="descriptif-link text-reset text-decoration-none font-weight-bold d-flex align-items-center align-self-stretch px-4 ml-5" style="border-right: 1px solid white"
+      <a href="#" @click.prevent="$router.push({ name: 'Home' })" class="back-to-home-link text-reset text-decoration-none font-weight-500 d-flex align-items-center align-self-stretch bg-danger px-3"
+        ><i class="fa fa-home h6 mb-0"></i
+      ></a>
+      <a
+        href="#"
+        @click.prevent="$router.push({ name: 'Product', params: { id: course?.id } })"
+        class="descriptif-link text-reset text-decoration-none font-weight-bold d-flex align-items-center align-self-stretch px-4 ml-5"
+        style="border-right: 1px solid white"
         ><i class="fa fa-chevron-left mr-3 h6 mb-0"></i> descriptif</a
       >
       <div class="mb-0 ml-4 pr-4 border-right font-weight-light">{{ course?.sports[0].sportCategories[0].name }}</div>
@@ -47,8 +53,9 @@
             <span class="d-inline-block align-middle">&nbsp;{{ new Date(session?.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
           </a>
         </div>
-        <div class="ml-auto" v-if="activeStep !== 'validation'">
+        <div class="ml-auto" v-if="activeStep !== 'validation' && session?.participants.length">
           <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block">
+            <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span>
             <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span>
           </span>
           <div class="d-flex justify-content-between">
@@ -64,7 +71,9 @@
         <div class="total-amount text-uppercase mb-0" :style="{ padding: activeStep === 'validation' ? '0 2rem' : '' }">
           <span v-if="activeStep === 'validation'">Total de la<br />réservation :<br /></span>
           <span v-else>Prix total :<br /></span>
-          <span class="font-weight-bold" style="font-size: 1.875rem">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</span>
+          <span class="font-weight-bold" style="font-size: 1.875rem"
+            >{{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro;</span
+          >
         </div>
       </div>
     </div>

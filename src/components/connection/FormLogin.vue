@@ -56,8 +56,13 @@ export default {
       if (this.v$.$error) return
 
       loginUser(this.email, this.password)
-        .then(() => this.$emit('login-success'))
-        .catch((err) => (this.errResponse = err.message))
+        .then((user) => {
+          this.$root.currUser = user
+          this.$emit('login-success')
+        })
+        .catch((err) => {
+          this.$notify({ group: 'modal', type: 'error', text: err.message })
+        })
     }
   }
 }

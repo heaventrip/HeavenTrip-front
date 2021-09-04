@@ -32,8 +32,6 @@ export default {
   },
   props: ['in-nav'],
   created() {
-    console.log('OKKKKKKKKKKKKKKKKKKKKKKKK')
-    // fetch last 3
     this.$axios.get('https://blog.yourheaventrip.com/wp-json/wp/v2/posts?_embed&filter[orderby]=date&order=desc').then((res) => (this.articles = res.data.slice(-3)))
   },
   activated() {

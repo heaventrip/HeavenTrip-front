@@ -13,21 +13,21 @@
   <!-- TODO séparer les participants -->
   <div class="card card-header border-0 p-0 flex-row align-items-center pb-3" style="display: flex; flex-wrap: wrap; outline: 5px solid white" :style="{ zIndex: $windowWidth <= 1366 ? '' : '15' }">
     <div class="position-relative">
-      <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase">Complète la réservation de :</h6>
+      <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase pr-4">Complète la réservation de :</h6>
     </div>
-    <div class="d-inline-block mr-auto" style="flex-grow: 0.9; height: 1px; background-color: #ebebeb"></div>
-    <div class="participant-img-container participant-opacity position-relative">
+    <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #ebebeb"></div>
+    <div class="participant-img-container position-relative" :class="{ 'participant-opacity': currForm !== 'booker' }">
       <div class="d-inline-block" style="position: relative; margin-left: 3rem">
-        <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" style="height: 50px" />
+        <InlineSvg :src="require(`@/assets/svg/${$parent.userAvatarKey}}.svg`)" class="participant-img mr-3" height="50" fill="#292f33" />
         <span class="participant-check"></span>
       </div>
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ booker.infos.firstName || 'Participant 1' }}</strong>
     </div>
     <div
       class="participant-add position-relative d-flex align-items-center"
-      :class="[extraParticipantForHeader === extraParticipant ? '' : 'participant-opacity']"
       v-for="(extraParticipantForHeader, index) in extraParticipants"
       :key="extraParticipantForHeader"
+      :class="{ 'participant-opacity': extraParticipantForHeader !== localExtraParticipants[currFormParticipant] }"
     >
       <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
       <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="50" fill="#292f33" />
@@ -43,7 +43,7 @@
         <div class="hidable custom-radio-container">
           <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
             <label class="">
-              <input v-model="localBooker.booking.room[0]" :value="index" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
+              <input v-model="localBooker.booking.room" :value="room.id" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
               <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
                 <div>
                   <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
@@ -63,7 +63,7 @@
       </div>
       <div class="card-body border-top">
         <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
-        <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
+        <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a ton activité principale</p>
         <div class="hidable custom-radio-container">
           <div class="custom-control">
             <label class="" for="materielBooker-with">
@@ -95,13 +95,13 @@
         <h6 class="font-weight-bold">Activites en +</h6>
         <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
         <div class="hidable">
-          <div class="custom-radio-container inline-blocks py-3">
-            <div class="custom-control custom-radio bg-light rounded border mb-3">
+          <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+            <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
               <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
-                <input v-model="localBooker.booking.extraActivities" value="1" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
+                <input v-model="localBooker.booking.extraActivities" :value="extraActivity.id" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
                 <span class="font-weight-bold text-uppercase">
-                  <div style="margin-right: 2.25rem">sup-paddle</div>
-                  <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
+                  <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
+                  <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
                 </span>
               </label>
             </div>
@@ -136,8 +136,8 @@
             <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
               <label class="">
                 <input
-                  v-model="localExtraParticipants[currFormParticipant].booking.room[0]"
-                  :value="index"
+                  v-model="localExtraParticipants[currFormParticipant].booking.room"
+                  :value="room.id"
                   type="radio"
                   :id="`extraPart${currFormParticipant}-${index}`"
                   :name="`extraPartRoom${currFormParticipant}-${index}`"
@@ -209,12 +209,12 @@
           <h6 class="font-weight-bold">Activites en +</h6>
           <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
           <div class="hidable">
-            <div class="custom-radio-container inline-blocks py-3">
-              <div class="custom-control custom-radio bg-light rounded border mb-3">
+            <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+              <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
                 <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
                   <input
                     v-model="localExtraParticipants[currFormParticipant].booking.extraActivities"
-                    value="1"
+                    :value="extraActivity.id"
                     type="checkbox"
                     :id="`extraPart${currFormParticipant}-activ0`"
                     class=""
@@ -222,8 +222,8 @@
                   />
                   <!-- TODO extracti -->
                   <span class="font-weight-bold text-uppercase">
-                    <div style="margin-right: 2.25rem">sup-paddle</div>
-                    <div class="border-left pl-4">+ 60&euro;<small class="text-lowercase">/pers.</small></div>
+                    <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
+                    <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
                   </span>
                 </label>
               </div>
@@ -250,7 +250,7 @@
       </div>
     </div>
   </transition>
-  <div class="card p-0" style="position: relative" v-if="extraParticipants.length">
+  <div class="card p-0" style="position: relative" v-if="extraParticipants.length && !(currForm === 'extraParticipant' && currFormParticipant === extraParticipants.length - 1)">
     <div @click="nextParticipant" class="btn-next-participant" type="button">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
@@ -267,6 +267,7 @@
 export default {
   name: 'CheckoutWizardForm',
   props: ['booker', 'extra-participants', 'course'],
+  emits: ['complete', 'updated-participants', 'updated-booker'],
   data() {
     return {
       currFormParticipant: 0,
@@ -326,7 +327,8 @@ export default {
   },
   computed: {
     filled() {
-      return this.bookerBookingFilled && this.participantsBookingFilled
+      if (this.localExtraParticipants.length) return this.bookerBookingFilled && this.participantsBookingFilled
+      else return this.bookerBookingFilled
     },
     bookerBookingFilled() {
       return this.bookerRoomFilled && this.bookerEquipmentFilled && this.bookerActivitiesFilled && this.bookerNoteFilled
@@ -335,7 +337,7 @@ export default {
       return this.extraParticipantRoomFilled && this.extraParticipantEquipmentFilled && this.extraParticipantActivitiesFilled && this.extraParticipantNoteFilled
     },
     bookerRoomFilled() {
-      return !!this.localBooker.booking.room.length && !!this.localBooker.booking.roomMate
+      return !!this.localBooker.booking.room
     },
     bookerEquipmentFilled() {
       return this.localBooker.booking.equipmentRental !== null
@@ -348,7 +350,7 @@ export default {
     },
     extraParticipantRoomFilled() {
       if (!this.localExtraParticipants.length) return
-      return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length
+      return !!this.localExtraParticipants[this.currFormParticipant].booking.room
       // return !!this.localExtraParticipants[this.currFormParticipant].booking.room.length && !!this.localExtraParticipants[this.currFormParticipant].booking.roomMate
     },
     extraParticipantEquipmentFilled() {
@@ -365,20 +367,23 @@ export default {
     }
   },
   watch: {
-    bookerRoomFilled(val) {
-      if (val) this.nextFormStep(1)
+    bookerRoomFilled: {
+      handler(val) {
+        if (val) this.nextFormStep(1)
+      }
     },
     'localBooker.booking.equipmentRental': {
       handler(val) {
-        this.nextFormStep(2)
+        if (val) this.nextFormStep(2)
       }
     },
     'localBooker.booking.noExtraActivities': {
       handler(val) {
-        this.nextFormStep(3)
+        if (val) this.nextFormStep(3)
       }
     },
     extraParticipantRoomFilled(val) {
+      alert('room ok')
       if (val) this.nextFormStep(1)
     },
     extraParticipantEquipmentFilled(val) {

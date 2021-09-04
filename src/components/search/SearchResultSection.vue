@@ -695,7 +695,8 @@ export default {
             spot_id_in: this.spotSelection.value,
             sessions_month_of_departure_in: this.monthSelection.value
           },
-          sessions_full_eq: this.dateConfirmed
+          sessions_last_places_eq: this.lastPlaces,
+          sessions_confirmed_eq: this.dateConfirmed
         })
         .then((res) => {
           // console.log(res.data.courses[0].sports.map((el) => console.log(el)))

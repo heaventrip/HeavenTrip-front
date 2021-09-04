@@ -166,7 +166,8 @@ export default {
       imgDataUrl: '',
       currentErreur: '',
       activeInfoTabs: ['gender', 'avatar', 'bio', 'success'],
-      activeStep: 0
+      activeStep: 0,
+      avatarKey: ''
     }
   },
   watch: {
@@ -195,7 +196,8 @@ export default {
   computed: {
     finalUser() {
       let user = this.$props.user
-      return Object.assign(user, { gender: this.gender, description: this.description })
+      console.log(this.avatarKey)
+      return Object.assign(user, { gender: this.gender, description: this.description, avatarKey: this.avatarKey })
     }
   },
   methods: {
@@ -214,7 +216,7 @@ export default {
           user: this.finalUser
         })
         .then((res) => {
-          alert('Un mail de confirmation vient de vous être envoyé')
+          this.$notify({ type: 'info', text: 'Un mail de confirmation vient de vous être envoyé' })
           this.$emit('submitted-form')
           this.stepper.bio.valid = true
           this.stepper.success.authorize = true
@@ -255,6 +257,7 @@ export default {
       console.log('-------- upload success --------')
       this.showAvatarValidationButton = true
       this.showLoaderUploadImg = false
+      this.avatarKey = jsonData.upload.public_id
       localStorage.setItem('user.avatarId', jsonData.upload.public_id)
       this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${localStorage['user.avatarId']}.jpg`
       this.$parent.$forceUpdate()

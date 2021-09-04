@@ -24,9 +24,9 @@
   </div>
   <h6 class="info-text text-uppercase mt-3 mb-5">
     <strong class="text-danger d-block mb-3">Un email a été envoyé.</strong>
-    Il Contient le lien Pour réinitialiser ton mot de passe
+    Il contient le lien pour réinitialiser ton mot de passe
   </h6>
-  <Button id="btn-validate" @click="$emit('filled')" text="Renvoyer l'email" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" :disabled="!formIsFilled" />
+  <Button id="btn-validate" @click="resendEmail" text="Renvoyer l'email" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" :disabled="!formIsFilled" />
 </template>
 
 <script>
@@ -34,9 +34,13 @@ import Button from '@/components/elements/Button.vue'
 
 export default {
   name: 'PasswordStep2',
-  emits: ['filled'],
   components: {
     Button
+  },
+  methods: {
+    resendEmail() {
+      // TODO
+    }
   }
 }
 </script>

@@ -41,7 +41,7 @@
           </div>
           <div class="card__footer__price text-right d-none d-lg-inline-block align-self-center">
             <div class="card__footer__price__info" style="font-weight: 300">par pers. :</div>
-            <div class="card__footer__price__euro">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</div>
+            <div class="card__footer__price__euro">{{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro;</div>
           </div>
         </div>
         <div class="hoverable-div">

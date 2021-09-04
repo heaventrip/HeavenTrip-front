@@ -3,8 +3,24 @@
     <TheNavSticky />
   </div>
   <div class="legal__tabs-container">
-    <div class="legal__tab-button" :class="{ 'legal__tab-button--active': hoveredTab === 'sales' || activeTab === 'sales' }" @mouseleave="hoveredTab = ''" @mouseenter="hoveredTab = 'sales'" @click="activeTab = 'sales'">Conditions générales de vente</div>
-    <div class="legal__tab-button" :class="{ 'legal__tab-button--active': hoveredTab === 'use' || activeTab === 'use' }" @mouseleave="hoveredTab = ''" @mouseenter="hoveredTab = 'use'" @click="activeTab = 'use'">Conditions générales d'utilisation</div>
+    <div
+      class="legal__tab-button"
+      :class="{ 'legal__tab-button--active': hoveredTab === 'sales' || activeTab === 'sales' }"
+      @mouseleave="hoveredTab = ''"
+      @mouseenter="hoveredTab = 'sales'"
+      @click="activeTab = 'sales'"
+    >
+      Conditions générales de vente
+    </div>
+    <div
+      class="legal__tab-button"
+      :class="{ 'legal__tab-button--active': hoveredTab === 'use' || activeTab === 'use' }"
+      @mouseleave="hoveredTab = ''"
+      @mouseenter="hoveredTab = 'use'"
+      @click="activeTab = 'use'"
+    >
+      Conditions générales d'utilisation
+    </div>
     <div class="legal__tab-button">Infos Covid-19</div>
     <div class="legal__tab-button">Faq</div>
   </div>

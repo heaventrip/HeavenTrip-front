@@ -36,7 +36,7 @@
         </div>
         <div class="my-auto text-center mt-5">
           <div style="color: white; font-weight: 400">De l’évasion sportive pour tous !</div>
-          <InlineAvatars :avatars="[avatarKeys]" />
+          <InlineAvatars :avatars="avatarKeys" />
         </div>
       </div>
       <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2 px-xl-5">
@@ -129,7 +129,7 @@
               @click="
                 () => {
                   activeTab = 'signup'
-                  tlConnectionTab.play()
+                  tlConnectionTab.restart()
                 }
               "
               type="button"
@@ -138,14 +138,14 @@
             >
               Inscription
             </div>
-            <!--<div @click="activeTab = 'infos'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
+            <!--<div @click="activeTab = 'login'" type="button" class="connection-nav-button button-sign" :class="{ 'connection-nav-button--active': activeTab === 'infos' }">Infos</div>-->
           </div>
           <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
         </div>
         <form style="margin-top: 50px">
           <transition name="fade-fast" mode="out-in">
-            <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="activeTab = 'signup'" @clicked-password-forgotten="activeTab = 'password'" /> -->
-            <!-- <FormSignup v-if="activeTab === 'signup'" @completed="bringInfoForm" @clicked-existing-account="activeTab = 'login'"/> -->
+            <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="$router.push({name: 'Account', params: {activeTab: 'signup'}})" @clicked-password-forgotten="activeTab = 'password'" /> -->
+            <!-- <FormSignup v-if="activeTab === 'signup'" @completed="bringInfoForm" @clicked-existing-account="$router.push({name: 'Account', params: {activeTab: 'login'}})"/> -->
             <keep-alive>
               <component
                 :is="formComponents[activeTab]"
@@ -158,6 +158,8 @@
               ></component>
             </keep-alive>
           </transition>
+          <!-- <router-view v-if="$route.name === 'FormLogin' || $route.name === 'FormSignup'" v-slot="{ Component }">
+          </router-view> -->
           <FormInfos
             v-if="activeTab === 'infos'"
             ref="formInfos"
@@ -169,7 +171,7 @@
             :user="user"
           />
           <Password
-            v-if="activeTab === 'password'"
+            v-if="activeTab === 'password' && !$route.query.recover_password_token"
             @password-updated="
               () => {
                 activeTab = 'login'
@@ -186,6 +188,7 @@
             "
             @change-news-password="isNewPassword = true"
           />
+          <PasswordStep3 v-if="$route.query.recover_password_token" />
         </form>
       </div>
       <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
@@ -201,7 +204,7 @@
           @click="
             () => {
               activeTab = 'signup'
-              tlConnectionTab.play()
+              createTsConnectionTab()
             }
           "
         />
@@ -220,7 +223,7 @@
           @click="
             () => {
               activeTab = 'login'
-              tlConnectionTab.reverse()
+              createTsConnectionTab()
             }
           "
         />
@@ -228,6 +231,7 @@
       <InlineSvg v-if="activeTab === 'success'" style="position: absolute; bottom: 2rem; right: 2rem" fill="white" height="60" :src="require('@/assets/svg/logo-small-no-circle.svg')" />
     </div>
   </div>
+  <notifications class="custom-notifications" group="modal" position="top center" width="35%" max="3" />
 </template>
 
 <script>
@@ -237,6 +241,7 @@ import FormLogin from './FormLogin.vue'
 import FormSignup from './FormSignup.vue'
 import FormInfos from './FormInfos.vue'
 import Password from './Password.vue'
+import PasswordStep3 from './PasswordStep3.vue'
 import gsap from 'gsap'
 
 export default {
@@ -247,6 +252,7 @@ export default {
     FormSignup,
     FormInfos,
     Password,
+    PasswordStep3,
     InlineAvatars
   },
   props: ['new-active-tab'],
@@ -266,25 +272,36 @@ export default {
       email: '',
       tl: null,
       tlConnectionTab: null,
-      user: null
+      user: null,
+      avatarKeys: []
     }
   },
   watch: {
+    // activeTab(val) {
+    //   if (val === 'login' || val === 'signup') this.createTsConnectionTab()
+    // },
+    // '$route.params.activeTab': {
+    //   immediate: true,
+    //   handler(val) {
+    //     this.activeTab = val
+    //   }
+    // },
     newActiveTab: {
       immediate: true,
       handler(val) {
         this.activeTab = val
       }
     },
+    activeTab(val) {
+      history.pushState(null, null, val)
+    },
     $route: {
       immediate: true,
       handler(to, from) {
         this.fromRoute = from
+        this.activeTab = this.$route.params.activeTab
       }
     }
-  },
-  mounted() {
-    this.createTsConnectionTab()
   },
   methods: {
     bringInfoForm(userObj) {
@@ -340,6 +357,14 @@ export default {
   created() {
     // TODO in back endpoint for all wishlist users
     // this.$axios.get('/wishlists')
+  },
+  mounted() {
+    this.$axios
+      .get(`https://${process.env.VUE_APP_CLOUDINARY_KEY}:${process.env.VUE_APP_CLOUDINARY_SECRET}@api.cloudinary.com/v1_1/heaventrip/resources/search?max_results=10&expression=resource_type:image`)
+      .then((res) => {
+        this.avatarKeys = res.resources.map((resource) => resource.public_id)
+      })
+    this.createTsConnectionTab()
   }
 }
 </script>

@@ -15,7 +15,7 @@
       <label for="login-email">Adresse e-mail</label>
     </div>
 
-    <a @click.stop="$emit('clicked-password-retrieved')" class="password-link d-block text-right mb-5" href="#">J’ai retrouvé mon mot de passe</a>
+    <a @click.prevent="$emit('clicked-password-retrieved')" class="password-link d-block text-right mb-5" href="#">J’ai retrouvé mon mot de passe</a>
     <!--  <button @click.stop="submitForm" class="btn btn-dark btn-block text-uppercase border-0 rounded-0 modal-btn" :disabled="!formIsFilled">Valider</button> -->
     <Button id="btn-validate" @click="submitForm" text="Valider" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" :disabled="!formIsFilled" />
   </form>

@@ -1,6 +1,6 @@
 <template>
   <div class="checkout-main-container" :style="[activeStep === 'validation' ? 'height: calc(100vh - 170px)' : '']">
-    <div class="top-infos-container">
+    <div v-if="false" class="top-infos-container">
       <div class="top-info" type="button" @click="nextStep">Retour</div>
       <div class="top-info">aaaaaaaa</div>
       <div class="top-info">aaaaaaaa</div>
@@ -31,16 +31,17 @@
           v-if="activeStep !== 'validation' && activeStep !== 'success'"
         >
           <div class="d-flex w-100 py-5">
-            <div class="text-uppercase" style="font-weight: 700">Mes infos</div>
-            <div class="text-uppercase pr-4 ml-auto" style="color: #b4b4b487; font-weight: 600">Options</div>
-            <div class="text-uppercase px-4" style="color: #b4b4b487; border-left: 1px dashed #b4b4b487; border-right: 1px dashed #b4b4b487; font-weight: 600">Assurance</div>
-            <div class="text-uppercase pl-4" style="color: #b4b4b487; font-weight: 600">Paiement</div>
+            <div class="checkout-step text-uppercase pr-4" style="font-weight: 700" :style="activeStep === 'booker' ? '' : 'color: #b4b4b487;'">Mes infos</div>
+            <div class="checkout-step text-uppercase px-4" :style="activeStep === 'participants' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Participants</div>
+            <div class="checkout-step text-uppercase px-4" :style="activeStep === 'options' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Options</div>
+            <div class="checkout-step text-uppercase px-4" :style="activeStep === 'insurance' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Assurance</div>
+            <div class="checkout-step text-uppercase pl-4" :style="activeStep === 'validation' ? '' : 'color: #b4b4b487;'" style="font-weight: 600">Paiement</div>
           </div>
         </div>
         <transition name="fade" mode="out-in" @before-leave="beforeLeave">
           <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
             <!-- eslint-disable-next-line prettier/prettier -->
-            <CheckoutWizardBooker v-if="activeStep === 'booker'" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBookerInfos" :booker="booker" />
+            <CheckoutWizardBooker v-if="activeStep === 'booker'" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBooker" :booker="booker" />
             <CheckoutWizardParticipants
               v-else-if="activeStep === 'participants'"
               @complete="(status) => (participantsComplete = status)"
@@ -89,6 +90,7 @@ import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
 import CheckoutSuccess from './CheckoutSuccess.vue'
+import { getUserInfo } from '@/utils/auth'
 
 export default {
   name: 'CheckoutSections',
@@ -125,7 +127,7 @@ export default {
           postalCode: 'a'
         },
         booking: {
-          room: [],
+          room: 0,
           roomMate: 'a',
           equipmentRental: null,
           noExtraActivities: false,
@@ -154,11 +156,77 @@ export default {
     }
   },
   computed: {
+    userAvatarKey() {
+      return this.getUserInfo().avatarKey
+    },
     showMenu() {
       return this.activeStep === 'options' && this.transitionEntered
+    },
+    custParams() {
+      let params = {
+        reservation: {
+          equipmentRental: true,
+          comment: 'a',
+          insurance: 'a',
+          roomId: 1,
+          sessionId: 1,
+          alternativeIds: [1],
+          extraParticipantsReservationsAttributes: [
+            {
+              equipmentRental: false,
+              comment: 'b',
+              insurance: 'b',
+              roomId: 1,
+              alternativeIds: [1, 2, 3, 4],
+              extraParticipantAttributes: {
+                firstName: 'updatepart',
+                birthDate: 'updatepart',
+                email: 'part1'
+              }
+            }
+          ]
+        }
+      }
+      return params
+    },
+    params() {
+      let params = {
+        reservation: {
+          equipmentRental: this.booker.booking.equipmentRental,
+          comment: this.booker.booking.comment,
+          insurance: this.booker.booking.insurance,
+          roomId: this.booker.booking.room,
+          sessionId: this.$props.session.id,
+          alternativeIds: this.booker.booking.extraActivities
+        }
+      }
+
+      if (this.extraParticipants.length) {
+        params.reservation.extraParticipantsReservationsAttributes = new Array()
+
+        this.extraParticipants.forEach((part) => {
+          params.reservation.extraParticipantsReservationsAttributes.push({
+            equipmentRental: part.booking.equipmentRental,
+            comment: part.booking.comment,
+            insurance: part.booking.insurance,
+            roomId: part.booking.room,
+            alternativeIds: part.booking.extraActivities,
+            extraParticipantAttributes: {
+              firstName: part.infos.firstName,
+              birthDate: part.infos.birthDate,
+              email: part.infos.email
+            }
+          })
+        })
+      }
+
+      return params
     }
   },
   methods: {
+    getUserInfo() {
+      return getUserInfo()
+    },
     isComplete(step) {
       return this.$data[`${step}Complete`]
     },
@@ -175,9 +243,6 @@ export default {
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex - 1]
     },
-    setBookerInfos(val) {
-      this.booker.infos = val
-    },
     setBooker(val) {
       this.booker = val
 
@@ -191,21 +256,18 @@ export default {
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-      this.$axios.post(
-        '/reservations',
-        {
-          booker: this.booker,
-          extraParticipants: this.extraParticipants
-        },
-        {
+      this.$axios
+        .post('/reservations', this.params, {
           headers: {
             Authorization: `Bearer ${token}`
           }
-        }
-      )
+        })
+        .then((res) => this.$notify({ type: 'success', text: 'Réservation créée avec succès' }))
+        .catch((err) => alert(err.message))
     }
   },
   mounted() {
+    // this.submitBookingForm()
     // $(function () {
     //   $('[data-toggle="tooltip"]').tooltip();
     //   $(
@@ -243,6 +305,9 @@ export default {
 </script>
 
 <style scoped>
+.checkout-step:not(:last-of-type) {
+  border-right: 1px dashed #b4b4b487;
+}
 .tab-content,
 .checkout-progress-bar {
   margin-left: auto;

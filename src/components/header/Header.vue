@@ -31,7 +31,9 @@
         :style="[navIsActive ? 'filter: blur(4px)' : '']"
       />
     </div>
-    <ConnectionButtons :nav-sticky="navSticky" @mouseover="leftAllTabs" />
+    <keep-alive>
+      <component :is="'ConnectionButtons'" :nav-sticky="navSticky" @mouseover="leftAllTabs"></component>
+    </keep-alive>
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" />
     <TheNav v-else :activeTab="activeTab" @left-all-tabs="leftAllTabs" @changed-tab="setActiveTab" />
     <keep-alive>
@@ -101,6 +103,7 @@
 </template>
 
 <script>
+import { START_LOCATION } from 'vue-router'
 import TheNav from '@/components/nav/TheNav.vue'
 import TheNavSticky from '@/components/nav/TheNavSticky.vue'
 import ConnectionButtons from '@/components/connection/ConnectionButtons.vue'
@@ -126,13 +129,16 @@ export default {
       token: true,
       toggleSessions: false,
       activeTab: '',
-      modalBackgroundView: ''
+      modalBackgroundView: '',
+      headerAnimComplete: false
     }
   },
   watch: {
     // store background view when modal opens
-    $route(to, from) {
-      if (to.name === 'Account') this.modalBackgroundView = from.name
+    $route: {
+      handler(to, from) {
+        if (to.name === 'Account') this.modalBackgroundView = from.name
+      }
     },
     navIsActive(newVal) {
       if (newVal === true) this.$emit('nav-is-active')

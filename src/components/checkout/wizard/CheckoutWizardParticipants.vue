@@ -103,7 +103,7 @@ export default {
           email: ''
         },
         booking: {
-          room: [],
+          room: 0,
           roomMate: '',
           equipmentRental: null,
           noExtraActivities: false,

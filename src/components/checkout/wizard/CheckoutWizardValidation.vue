@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex w-100">
-    <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem padding-bottom: 4rem; top: 15vh">
+    <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem padding-bottom: 4rem; top: 10vh">
       <button @click.prevent="$emit('complete')">VALIDER LA RESERVATION</button>
       <CheckoutWizardValidationPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>

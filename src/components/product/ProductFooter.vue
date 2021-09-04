@@ -66,9 +66,9 @@
       </ul>
     </div>
     <transition name="fade-slow">
-      <div v-show="showSessions" class="tab-content">
+      <div class="tab-content">
         <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
-          <div class="container" style="padding: 0 3rem">
+          <div v-if="showSessions" class="container" style="padding: 0 3rem">
             <ul v-if="filterSessions(index + 1).length" class="list-unstyled order-tab-list mb-0 pb-4">
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
@@ -120,7 +120,7 @@
                 </div>
               </li>
             </ul>
-            <div v-else class="margin-auto py-4"><Button text="Créer une session" color="white" width="30%" height="4rem" /></div>
+            <div v-else class="py-4"><Button @click="contactModal = true" text="Créer une session" color="white" width="30%" height="4rem" margin="auto" /></div>
           </div>
         </div>
       </div>
@@ -299,7 +299,7 @@
   <teleport to="#modal">
     <transition name="fade">
       <div v-if="contactModal" class="modal__backdrop">
-        <div class="contact-modal bg-white" style="padding: 3rem 4rem; width: 60vw">
+        <div class="contact-modal bg-white" style="padding: 3rem 4rem; width: 70vw">
           <ProductFooterForm />
         </div>
       </div>

@@ -27,7 +27,7 @@
               <label class="custom-control-label" for="Radio14">
                 <div class="d-flex align-items-center" style="font-size: 0.8rem">
                   Verser un acompte de 30% :
-                  <strong class="h6 mb-0 ml-3 font-weight-bold">{{ parseInt(course?.price * 0.3) }} &euro;</strong>
+                  <strong class="h6 mb-0 ml-3 font-weight-bold">{{ parseInt(course?.price * 0.3) >= 1000 ? `${parseInt(course?.price * 0.3).toString()[0]} ${parseInt(course?.price * 0.3).toString().slice(-3)}` : parseInt(course?.price * 0.3) }}&hairsp;&euro;</strong>
                 </div>
               </label>
             </div>
@@ -48,8 +48,8 @@
   <div class="card pay-card rounded-0 mb-0 p-0">
     <button class="stripe-redirect-button" type="button" @click="processPayment" id="checkout-button">
       <transition name="fade-fast" mode="out-in">
-        <span v-if="deposit === 'deposit'"> Je veux procéder au paiement de {{ parseInt(course?.price * 0.3) }}&thinsp;&euro; </span>
-        <span v-else> Je veux procéder au paiement de {{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro; </span>
+        <span v-if="deposit === 'deposit'"> Je veux procéder au paiement de {{ parseInt(course?.price * 0.3) >= 1000 ? `${parseInt(course?.price * 0.3).toString()[0]} ${parseInt(course?.price * 0.3).toString().slice(-3)}` : parseInt(course?.price * 0.3) }}&hairsp;&euro; </span>
+        <span v-else> Je veux procéder au paiement de {{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro; </span>
       </transition>
     </button>
     <!-- <div class="card-body">
