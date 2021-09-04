@@ -27,7 +27,7 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-lg-5">
+          <div class="col-12 col-lg-5 mr-5">
             <div class="shadow-box">
               <h6 class="head">Indispensable :</h6>
               <ul class="points list-unstyled mb-0">

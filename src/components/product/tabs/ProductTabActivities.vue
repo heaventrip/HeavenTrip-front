@@ -27,7 +27,6 @@
           <div class="mb-4" style="height: 1px; width: 40%; border-top: 1px dashed #ffffff66"></div>
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
-              <div class="guide-word__subtitle">Atmosphère culinaire</div>
               <p class="content pt-3 text-white" style="line-height: 24px">
                 {{ course?.staffs.find((el) => el.role === 'Guide').description }}
               </p>

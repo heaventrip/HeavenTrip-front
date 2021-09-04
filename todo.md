@@ -127,12 +127,12 @@ ___________________________
 - boolean cours actif / pas actif
 - "veuillez consulter sur portable ou ordi :)"
 - friendly Id
-- ordre des items
+- ordre des items dans le dashboard
 - liens des cards vers /checkout sur page request
 - picto dynamique sur le search
 - fading sur card dans recherche
 - virer city et region
-- rajouter titre sur programme "jour 1" "jour 2" etc
+> rajouter titre sur programme "jour 1" "jour 2" etc
 - récup tous les avatars en bas a gauche du violet
 - pas de scale sur le header en venant d'une modale
 
@@ -141,17 +141,57 @@ IMPORTANT : bloquer les mobiles/tablettes
 > IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail
 > IMPORTANT : revoir les navIsActive ActivitiesIsActive etc.
 > routes login/signup/password/infos
+
 - back sur paiement
 - revoir le système de backing (perte de données)
+> dropdown
 - prix dynamique du checkout
 - programme descriptif produit
-- desactiver la sticky sur search / update l'url
-- elargir contenaire des filtres et opacité sur 1 (pas de diffusion mais liseret)
+> desactiver la sticky sur search / update l'url
+> elargir contenaire des filtres et opacité sur 1 (pas de diffusion mais liseret)
 - voir sms filtre dark
 - filtres dernières places/confirmés
+- mentions inverser le gras
+- pas la version grise
+
+- style du bouton dans la modal
+- copier les bons styles d'input dans modal contact
+
+GLOBAL
+- input largeur max
 - liens
-
-
+- pluriels
+ 
+.has-float-label .form-control:placeholder-shown:not(:focus) + label {
+  top: 0.15em;
+  font-size: 100%;
+  color: #fff;
+  opacity: 1;
+}
+.has-float-label label::after {
+  display: none;
+}
+.has-float-label label {
+  left: 0;
+}
+.form-group {
+  margin-bottom: 2rem;
+}
+.form-control {
+  padding-left: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ffffff33;
+  background-color: transparent;
+  padding-bottom: 0.1rem;
+  color: #fff;
+}
+.form-control:focus {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid white;
+}
 
 
 

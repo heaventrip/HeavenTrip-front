@@ -68,6 +68,14 @@ export default {
 .block__item:not(:last-of-type) {
   padding-right: 1rem;
 }
+@media only screen and (max-width: 1600px) {
+  .block__item:not(:first-of-type) {
+    padding-left: 0.3rem;
+  }
+  .block__item:not(:last-of-type) {
+    padding-right: 0.2rem;
+  }
+}
 .half-border {
   width: 50%;
   height: 1px;

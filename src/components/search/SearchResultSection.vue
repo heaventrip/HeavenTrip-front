@@ -70,7 +70,7 @@
     <div class="result-block">
       <div class="container p-0">
         <div class="row">
-          <div class="col-12 col-lg-3 pr-lg-0 d-none d-lg-block">
+          <div class="pr-lg-0 d-none d-lg-block" style="flex-grow: 0.6">
             <div class="search-container d-flex align-items-center" style="background-color: #fff">
               <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
               <input v-model="freeSearch" id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
@@ -828,7 +828,7 @@ export default {
   padding-right: calc((100vw - 1444px) / 2);
 }
 .search-container {
-  border: 8px solid rgba(247, 247, 247, 0.58);
+  outline: 8px solid rgba(247, 247, 247, 0.58);
   background-color: #fff;
   margin-bottom: 1rem;
 }
