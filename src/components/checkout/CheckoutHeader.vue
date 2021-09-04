@@ -71,9 +71,7 @@
         <div class="total-amount text-uppercase mb-0" :style="{ padding: activeStep === 'validation' ? '0 2rem' : '' }">
           <span v-if="activeStep === 'validation'">Total de la<br />réservation :<br /></span>
           <span v-else>Prix total :<br /></span>
-          <span class="font-weight-bold" style="font-size: 1.875rem"
-            >{{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro;</span
-          >
+          <span class="font-weight-bold" style="font-size: 1.875rem">{{ totalPrice >= 1000 ? `${totalPrice.toString()[0]} ${totalPrice.toString().slice(-3)}` : totalPrice }}&hairsp;&euro;</span>
         </div>
       </div>
     </div>
@@ -89,7 +87,7 @@ export default {
   components: {
     InlineAvatars
   },
-  props: ['course', 'session', 'active-step'],
+  props: ['course', 'session', 'active-step', 'total-price'],
   data() {
     return {
       avatarKeys: []

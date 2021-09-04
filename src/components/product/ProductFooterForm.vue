@@ -36,14 +36,19 @@
           </div>
           <div class="col-12 col-lg-6 ml-auto">
             <div class="form-group has-float-label">
-              <input id="contact-date" class="form-control" type="date" datepicker required name="" placeholder=" " />
+              <input v-model="date" id="contact-date" class="form-control" type="date" datepicker required name="" placeholder=" " />
               <label for="contact-date">Dates souhaitées</label>
             </div>
           </div>
         </div>
         <div class="row no-gutters">
           <div class="col-6">
-            <select required class="text-uppercase px-2" style="border: 1px solid #292f33; background: white; font-size: 0.875rem; font-weight: 500; font-family: Oswald, sans-serif; height: 100%">
+            <select
+              v-model="participants"
+              required
+              class="text-uppercase px-2"
+              style="border: 1px solid #292f33; background: white; font-size: 0.875rem; font-weight: 500; font-family: Oswald, sans-serif; height: 100%"
+            >
               <option value="">Nombre de participants</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -58,7 +63,7 @@
             </select>
           </div>
           <div class="ml-auto col-6">
-            <button class="btn btn-dark font-weight-bold border-0 rounded-0 w-100 text-uppercase">Envoyer ma demande</button>
+            <button @click.prevent="submitRequestForm" class="btn btn-dark font-weight-bold border-0 rounded-0 w-100 text-uppercase">Envoyer ma demande</button>
           </div>
         </div>
       </form>
@@ -69,13 +74,33 @@
 <script>
 export default {
   name: 'ProdutFooterForm',
+  props: ['course'],
+  emits: ['submitted-form'],
   data() {
     return {
+      date: '',
+      participants: 0,
       participantsNb: {
         value: 0,
         placeholder: 'Nombre de participants',
         options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
       }
+    }
+  },
+  methods: {
+    submitRequestForm() {
+      const AUTH_TOKEN_KEY = 'authToken'
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+      this.$axios
+        .post('/requests', { request: { courseId: this.$props.course.id, date: this.date, participantsNb: this.participants } })
+        .then(() => {
+          this.$emit('submitted-form')
+          // TODO can't see the notif, maybe zindex?
+          this.$notify({ group: 'app', type: 'success', text: 'Votre demande a bien été envoyée !' })
+        })
+        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response.data.message || err.message }))
     }
   }
 }

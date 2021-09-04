@@ -102,6 +102,7 @@ export default {
     CheckoutWizardValidation,
     CheckoutSuccess
   },
+  emits: ['booker-expense'],
   props: ['course', 'session'],
   data() {
     return {
@@ -142,6 +143,12 @@ export default {
     }
   },
   watch: {
+    bookerExpense(val) {
+      this.$emit('booker-expense', val)
+    },
+    extraParticipantsExpenses(val) {
+      this.$emit('extra-participants-expenses', val)
+    },
     course: {
       immediate: true,
       handler(val) {
@@ -156,38 +163,27 @@ export default {
     }
   },
   computed: {
+    bookerExpense() {
+      if (!this.booker?.booking?.extraActivities?.length) return
+
+      let pricesArr = this.booker.booking.extraActivities.map((id) => this.$props.course.alternatives.find((el) => el.id === id).price)
+      let expense = pricesArr.reduce((s, el) => s + el)
+      return expense
+    },
+    extraParticipantsExpenses() {
+      if (!this.extraParticipants.length) return
+
+      let pricesArr = this.extraParticipants.map((participant) => {
+        participant.booking.extraActivities.map((id) => this.$props.course.alternatives.find((el) => el.id === id).price)
+      })
+      let expenses = pricesArr.flat().reduce((s, el) => s + el)
+      return expenses
+    },
     userAvatarKey() {
       return this.getUserInfo().avatarKey
     },
     showMenu() {
       return this.activeStep === 'options' && this.transitionEntered
-    },
-    custParams() {
-      let params = {
-        reservation: {
-          equipmentRental: true,
-          comment: 'a',
-          insurance: 'a',
-          roomId: 1,
-          sessionId: 1,
-          alternativeIds: [1],
-          extraParticipantsReservationsAttributes: [
-            {
-              equipmentRental: false,
-              comment: 'b',
-              insurance: 'b',
-              roomId: 1,
-              alternativeIds: [1, 2, 3, 4],
-              extraParticipantAttributes: {
-                firstName: 'updatepart',
-                birthDate: 'updatepart',
-                email: 'part1'
-              }
-            }
-          ]
-        }
-      }
-      return params
     },
     params() {
       let params = {

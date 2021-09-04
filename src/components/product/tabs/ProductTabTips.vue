@@ -65,36 +65,32 @@
             </p>
           </div>
         </div>
-        <ul class="list-unstyled place-list f-13 text-uppercase mb-0 d-flex flex-wrap flex-column flex-lg-row" style="border-bottom: 1px dashed #ebebeb">
-          <li>
-            <a href="#" class="text-decoration-none">Aéroport : <strong class="text-dark"> Hurghada</strong></a>
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none"><strong class="text-dark"> Temps moyen de vol : </strong>3H50 </a>
-          </li>
-        </ul>
+        <div class="row">
+          <div class="col-9 col-lg-12 mx-auto">
+            <div class="like-div white">
+              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
+                <li class="fg-1" v-for="countryInfo in course.countryInfos" :key="countryInfo">
+                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
+                    <strong class="text-dark ml-2">{{ countryInfo.title }} :</strong>
+                    {{ countryInfo.description }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="top-positioned-div">
-      <div class="bg-dark pays-block rounded-top text-uppercase">
+      <div class="bg-dark pays-block text-uppercase">
         <h6 class="head text-white font-weight-bold letter-space">
           <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />
           Quelques indicateurs
         </h6>
         <ul class="list-unstyled pays-list mb-0">
-          <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
-          <li>
-            <strong class="letter-space">Restaurants :</strong>
-            Prix moyen
-            <span class="text-warning ml-1"> 60 EGP</span>
+          <li v-for="courseInfo in course.courseInfos" :key="courseInfo">
+            <strong class="letter-space">{{ courseInfo.title }} :</strong> {{ courseInfo.description }}
           </li>
-          <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
         </ul>
       </div>
       <button @click="countryModal = true" class="btn btn-danger btn-block rounded-0 border-0 pay-btn py-3 text-uppercase mb-5">
@@ -163,26 +159,20 @@
         <p class="content">
           {{ course.itinerary }}
         </p>
-        <ul class="list-unstyled place-list f-13 text-uppercase my-3 mb-0 d-flex flex-wrap" style="border-bottom: 1px dashed #ebebeb">
-          <li>
-            <a href="#" class="text-decoration-none">
-              AÉROPORTS :
-              <strong class="text-dark ml-2"> LYON - GRENOBLE</strong></a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none">
-              GARE :
-              <strong class="text-dark ml-2"> proximité du spot</strong></a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none">
-              LIAISONS AUTOCAR :
-              <strong class="text-dark ml-2"> Www.autocars-resalp.com</strong></a
-            >
-          </li>
-        </ul>
+        <div class="row">
+          <div class="col-9 col-lg-12 mx-auto">
+            <div class="like-div white">
+              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
+                <li class="fg-1" v-for="itineraryInfo in course.itineraryInfos" :key="itineraryInfo">
+                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
+                    <strong class="text-dark ml-2">{{ itineraryInfo.title }} :</strong>
+                    {{ itineraryInfo.description }} :
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

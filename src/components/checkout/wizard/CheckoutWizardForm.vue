@@ -18,7 +18,7 @@
     <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #ebebeb"></div>
     <div class="participant-img-container position-relative" :class="{ 'participant-opacity': currForm !== 'booker' }">
       <div class="d-inline-block" style="position: relative; margin-left: 3rem">
-        <InlineSvg :src="require(`@/assets/svg/${$parent.userAvatarKey}}.svg`)" class="participant-img mr-3" height="50" fill="#292f33" />
+        <InlineSvg :src="require(`@/assets/svg/${$parent.userAvatarKey || 'avatar-empty'}.svg`)" class="participant-img mr-3" height="50" fill="#292f33" />
         <span class="participant-check"></span>
       </div>
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ booker.infos.firstName || 'Participant 1' }}</strong>

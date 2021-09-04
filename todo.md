@@ -146,14 +146,15 @@ IMPORTANT : bloquer les mobiles/tablettes
 - revoir le système de backing (perte de données)
 > dropdown
 - prix dynamique du checkout
-- programme descriptif produit
+> programme descriptif produit
 > desactiver la sticky sur search / update l'url
 > elargir contenaire des filtres et opacité sur 1 (pas de diffusion mais liseret)
 - voir sms filtre dark
 - filtres dernières places/confirmés
+
+AJD
 - mentions inverser le gras
 - pas la version grise
-
 - style du bouton dans la modal
 - copier les bons styles d'input dans modal contact
 
@@ -161,38 +162,6 @@ GLOBAL
 - input largeur max
 - liens
 - pluriels
- 
-.has-float-label .form-control:placeholder-shown:not(:focus) + label {
-  top: 0.15em;
-  font-size: 100%;
-  color: #fff;
-  opacity: 1;
-}
-.has-float-label label::after {
-  display: none;
-}
-.has-float-label label {
-  left: 0;
-}
-.form-group {
-  margin-bottom: 2rem;
-}
-.form-control {
-  padding-left: 0;
-  border-radius: 0;
-  border: none;
-  border-bottom: 1px solid #ffffff33;
-  background-color: transparent;
-  padding-bottom: 0.1rem;
-  color: #fff;
-}
-.form-control:focus {
-  background-color: transparent;
-  border-radius: 0;
-  border: none;
-  border-bottom: 1px solid white;
-}
-
 
 
 
