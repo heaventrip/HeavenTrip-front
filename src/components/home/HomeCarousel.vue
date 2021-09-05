@@ -93,7 +93,19 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">123456</div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="cards-slider d-flex overflow-hidden">
+              <div
+                v-for="(course, index) in courses.filter((el) => el.multisport)"
+                :key="course.id"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
+                @mouseenter="enterCard(index)"
+                @mouseleave="leaveCard(index)"
+              >
+                <HomeCarouselCard :index="index" :course="course" :ref="`card${index}`" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

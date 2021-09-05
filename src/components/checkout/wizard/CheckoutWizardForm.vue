@@ -316,6 +316,12 @@ export default {
       this.initFormDisplay('extra-participant')
       document.querySelector('.card-header').scrollIntoView(false) // scroll top of div
     },
+    resetDisplay() {
+      document.querySelectorAll('.card-body').forEach((card) => {
+        card.removeAttribute('style')
+        card.querySelector('.hidable').style.display = ''
+      })
+    },
     nextFormStep(step) {
       let nextCard = document.querySelectorAll('.card-body')[step]
       nextCard.querySelector('.hidable').style.display = ''

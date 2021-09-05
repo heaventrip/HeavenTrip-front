@@ -4671,7 +4671,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .footer a:hover, .mail-box a:hover {
-  color: #d82558 !important;
+  color: #7c7c7c !important;
 }
 
 .footer .divider {

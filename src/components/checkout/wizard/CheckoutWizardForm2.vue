@@ -44,7 +44,7 @@
     <div class="card-header rounded-0 border-0 p-0 d-flex">
       <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
         <div class="participant-img-container position-relative">
-          <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="50" style="margin-right: 1rem" fill="#292f33" />
+          <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
         </div>
         <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName }}</strong>
         <div class="completion-details">

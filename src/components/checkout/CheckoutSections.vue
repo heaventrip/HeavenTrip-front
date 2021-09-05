@@ -74,7 +74,8 @@
             />
             <!-- eslint-disable-next-line prettier/prettier -->
             <CheckoutWizardValidation :avatar-key="avatarKey" :total-price="totalPrice" v-else-if="activeStep === 'validation'" @complete="submitBookingForm" :course="course" :booker="booker" :extra-participants="extraParticipants" />
-            <CheckoutSuccess v-else-if="activeStep === 'success'" />
+            <router-view></router-view>
+            <!-- <CheckoutSuccess v-else-if="activeStep === 'success'" /> -->
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
               <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
@@ -94,9 +95,9 @@ import CheckoutWizardParticipants from './wizard/CheckoutWizardParticipants.vue'
 import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
-import CheckoutSuccess from './CheckoutSuccess.vue'
+// import CheckoutSuccess from './CheckoutSuccess.vue'
 import { getUserInfo } from '@/utils/auth'
-import { loadStripe } from '@stripe/stripe-js'
+// import { loadStripe } from '@stripe/stripe-js'
 
 export default {
   name: 'CheckoutSections',
@@ -105,8 +106,8 @@ export default {
     CheckoutWizardParticipants,
     CheckoutWizardForm,
     CheckoutWizardForm2,
-    CheckoutWizardValidation,
-    CheckoutSuccess
+    CheckoutWizardValidation
+    // CheckoutSuccess
   },
   emits: ['booker-expense', 'extra-participants-expense', 'extra-participants-nb', 'changed-step'],
   props: ['course', 'session', 'total-price'],
@@ -171,8 +172,10 @@ export default {
     },
     activeStep: {
       immediate: true,
-      handler(val) {
-        this.$emit('changed-step', val)
+      handler(newVal, oldVal) {
+        this.$emit('changed-step', newVal)
+
+        if (oldVal === 'insurance' && newVal === 'options') this.resetDisplay()
       }
     }
   },

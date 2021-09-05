@@ -27,7 +27,7 @@
             </svg>
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
               <div class="card__footer__infos__heading d-flex flex-column">
-                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ course?.sports[0].name }}</span>
+                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ course?.sports[0]?.name }}</span>
                 <div>
                   <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
                   <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ course.spot?.name }}</span>
@@ -149,7 +149,7 @@ export default {
           .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
           .then(() => (this.wishlisted = true))
           .catch((err) => console.log(err))
-      else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
+      else this.$axios.delete('/wishlists', { params: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
     },
     getCardsToSlide(card) {
       const cardPosition = this.$props.cardsArr.indexOf(card)
@@ -172,7 +172,7 @@ export default {
   created() {
     // check if course is already wishlisted
     this.$axios
-      .get('/wishlists', { wishlist: { courseId: this.$props.course.id } })
+      .get('/wishlists', { params: { courseId: this.$props.course.id } })
       .then(() => (this.wishlisted = true))
       .catch(() => (this.wishlisted = false))
   },

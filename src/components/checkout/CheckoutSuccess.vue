@@ -22,7 +22,7 @@
         </div>
         <div style="margin-left: 2rem">
           <div style="font-weight: 800; font-size: 2.2rem; margin-bottom: 0.5rem">GOOD TRIP !</div>
-          <div style="font-weight: 400; letter-spacing: 0.04rem">Votre paiement de 1000 € a été validé</div>
+          <div style="font-weight: 400; letter-spacing: 0.04rem">Votre paiement de {{ $route.query.amount }}€ a été validé</div>
         </div>
       </div>
       <div
@@ -50,7 +50,7 @@
           <div class="center-btn-text">Consulter ma réservation</div>
         </div>
         <div type="button" class="center-btn px-4 mr-1">
-          <div class="center-btn-text">Discuter avec les participants</div>
+          <div @click="$router.push({ name: 'Product', params: { id: $route.query.course_id } })" class="center-btn-text">Discuter avec les participants</div>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-center" style="margin-bottom: 5rem; margin-top: 4rem; font-family: Muli, sans-serif; font-size: 0.8rem">

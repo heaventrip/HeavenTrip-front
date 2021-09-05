@@ -87,9 +87,7 @@
                       <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
                       <h5 class="surfcontent-head mb-4">TOUS NIVEAUX</h5>
                       <ul class="mb-0 surflist">
-                        <li>Marche de 4 à 5 heures par jour sur chemin, piste, sentier ou parcours vallonné. Dénivelé maximum de 500 m par jour.</li>
-                        <li>Je marche régulièrement sans trop de dénivelé</li>
-                        <li>Je pratique une activité sportive de temps en temps</li>
+                        <!-- {{course.levelInfos.}} -->
                       </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-level2" role="tabpanel" aria-labelledby="v-pills-level2-tab">qwertyu</div>
@@ -203,6 +201,9 @@ export default {
     }
   },
   watch: {
+    course(val) {
+      console.log(val)
+    },
     levelsModal(newVal) {
       if (newVal === true) {
         // document.body.style.overflow = 'hidden'

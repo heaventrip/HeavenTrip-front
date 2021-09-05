@@ -45,7 +45,7 @@
               </transition>
             </div>
             <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
-            <div :class="[isLightTheme === true ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+            <div @click="showWishlist != showWishlist" :class="[isLightTheme === true ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <transition name="fade-delayed">
                 <div v-show="showcontent">Mes envies</div>
               </transition>
@@ -217,7 +217,7 @@ export default {
       this.showAccountPage = true
     },
     unwishlistCourse(courseId) {
-      this.$axios.delete('/wishlists', { courseId: courseId }).then(() => {
+      this.$axios.delete('/wishlists', { params: { courseId: courseId } }).then(() => {
         document.querySelector(`[data-course='${courseId}']`).remove()
       })
     },
@@ -261,8 +261,7 @@ export default {
     }
   },
   created() {
-    // this.fetchWishlists()
-    console.log('buttons created')
+    this.fetchWishlists()
 
     if (!isLoggedIn()) return
 
