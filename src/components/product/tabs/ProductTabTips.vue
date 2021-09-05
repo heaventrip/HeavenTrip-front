@@ -123,10 +123,10 @@
               <div class="col-7 bg-white" style="position: relative">
                 <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
                   <div class="tab-pane fade show active" id="v-pills-health1" role="tabpanel" aria-labelledby="v-pills-health1-tab">
-                    {{ course.vaccineInfos }}
+                    {{ course?.country?.vaccineInfos }}
                   </div>
-                  <div class="tab-pane fade" id="v-pills-health2" role="tabpanel" aria-labelledby="v-pills-health2-tab">{{ course.generalInfos }}</div>
-                  <div class="tab-pane fade" id="v-pills-health3" role="tabpanel" aria-labelledby="v-pills-health3-tab">{{ course.covidInfos }}</div>
+                  <div class="tab-pane fade" id="v-pills-health2" role="tabpanel" aria-labelledby="v-pills-health2-tab">{{ course?.country?.generalInfos }}</div>
+                  <div class="tab-pane fade" id="v-pills-health3" role="tabpanel" aria-labelledby="v-pills-health3-tab">{{ course?.country?.covidInfos }}</div>
                 </div>
               </div>
             </div>

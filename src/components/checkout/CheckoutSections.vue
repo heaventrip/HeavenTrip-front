@@ -96,6 +96,7 @@ import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
 import CheckoutSuccess from './CheckoutSuccess.vue'
 import { getUserInfo } from '@/utils/auth'
+import { loadStripe } from '@stripe/stripe-js'
 
 export default {
   name: 'CheckoutSections',
@@ -324,8 +325,10 @@ export default {
             Authorization: `Bearer ${token}`
           }
         })
-        .then((res) => this.$notify({ group: 'app', type: 'success', text: 'Réservation créée avec succès' }))
-        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.reponse.data?.message || err.message }))
+        .then((res) => {
+          this.$notify({ group: 'app', type: 'success', text: 'Réservation créée avec succès' })
+        })
+        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response?.data?.message || err.message }))
     }
   },
   created() {
