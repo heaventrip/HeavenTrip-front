@@ -26,14 +26,18 @@
     hiddenContent="A votre sortie de l’aéroport de Hurghada vous serez directement pris en charge par une navette pour le transfert à votre
   Hébergement. Une réunion d’information est prévue le dimanche matin (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche. (cet horaire peut évoluer suivant l’arrivée du vol Heaven Trip). Une réunion d’information est prévue le dimanche."
   /> -->
-  <div v-for="dayProgram in course.programs" :key="dayProgram">
+  <div v-for="dayProgram in programs" :key="dayProgram">
     <div class="mb-5">
       <DailyProgramCard
         :title="dayProgram.dayTitle"
-        :informations="[
-          { pictoUrl: dayProgram.info1Picto, text: dayProgram.info1Description },
-          { pictoUrl: dayProgram.info2Picto, text: dayProgram.info2Description }
-        ]"
+        :informations="
+          dayProgram.info1Description || dayProgram.info2Description
+            ? [
+                { pictoUrl: dayProgram.info1Picto, text: dayProgram.info1Description },
+                { pictoUrl: dayProgram.info2Picto, text: dayProgram.info2Description }
+              ]
+            : []
+        "
         :principalContent="dayProgram.description"
         :hiddenContent="dayProgram.longDescription"
       />
@@ -81,7 +85,7 @@ export default {
   components: {
     DailyProgramCard
   },
-  props: ['course'],
+  props: ['course', 'programs'],
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',

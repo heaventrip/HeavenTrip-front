@@ -11,15 +11,15 @@
     />
     <div class="purple-container align-items-center" style="position: relative">
       <div class="purple-container__content mx-auto d-flex flex-column h-100">
-        <InlineSvg :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
-        <div class="mt-auto d-flex flex-column" style="padding-bottom: 8vh; max-width: 27rem; margin: auto; border-bottom: 1px dashed rgba(250, 250, 250, 0.2); line-height: 1.4rem">
-          <div class="d-flex align-items-center mb-3 mb-xl-5" style="color: white">
+        <InlineSvg id="svg-logo-white" :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
+        <div class="purple-container__block mt-auto d-flex flex-column">
+          <div class="purple-container__groupe d-flex align-items-center mb-3 mb-xl-5" style="color: white">
             <div class="purple-container__paragraph-nb mr-4">01</div>
             <div class="purple-container__paragraph">
               La team d’Heaven Trip conçois de toute pièce les stages sportifs ce qui nous permet de te proposer des expériences hors normes a travers des programmes soutenus et personnalisables.
             </div>
           </div>
-          <div class="d-flex mb-3 mb-xl-5" style="color: white">
+          <div class="purple-container__groupe d-flex mb-3 mb-xl-5" style="color: white">
             <div class="purple-container__paragraph-nb mr-4">02</div>
             <div class="purple-container__paragraph">
               En solo, en couple, entre potes ? Ici tu intègres un petit groupe avec lequel tu vas partager la totalité de ton stage sportif. Pas d’hôtel ni de buffet à volonté, panique pas ! On te
@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-        <div class="my-auto text-center mt-5">
+        <div class="purple-container__footer my-auto text-center mt-5">
           <div style="color: white; font-weight: 400">De l’évasion sportive pour tous !</div>
           <InlineAvatars :avatars="avatarKeys" />
         </div>
@@ -103,6 +103,8 @@
             Quelques mots
           </div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
+
+          <div id="btn-skip-step" @click="skipStep()"><p>Je décide de le faire plus tard</p></div>
         </div>
         <div v-else-if="isNewPassword">
           <div id="title-password" class="connection-nav-button">Nouveau mot de passe</div>
@@ -192,6 +194,7 @@
           <PasswordStep3 v-if="$route.query.recover_password_token" />
         </form>
       </div>
+
       <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
         <div class="mb-4" style="color: #fff; font-weight: 400">C'est la première fois ?</div>
         <Button
@@ -310,6 +313,10 @@ export default {
       this.user = userObj
       this.showInfoScreen()
     },
+    skipStep() {
+      console.log('tdff')
+      this.$refs.formInfos.activeStep++
+    },
     activeInfoTabByName(tabName) {
       if (this.$refs.formInfos.stepper[tabName].authorize) {
         this.activeInfoTab = tabName
@@ -374,6 +381,12 @@ export default {
 <style scoped>
 #title-password {
   color: white;
+}
+#btn-skip-step {
+  position: absolute;
+  bottom: 1rem;
+  right: 3rem;
+  cursor: pointer;
 }
 .purple-container__content {
   width: 50%;
@@ -491,6 +504,13 @@ export default {
   display: flex;
   width: 52%;
 }
+.purple-container__block {
+  padding-bottom: 8vh;
+  max-width: 27rem;
+  margin: auto;
+  border-bottom: 1px dashed rgba(250, 250, 250, 0.2);
+  line-height: 1.4rem;
+}
 .grey-container {
   box-shadow: -10px -2px 32px -14px rgb(41 47 51);
   position: relative;
@@ -511,6 +531,9 @@ export default {
 .form-container {
   margin-top: 21vh;
 }
+.purple-container_groupe {
+  margin-bottom: 1rem;
+}
 @media only screen and (max-width: 1460px) {
   .grey-container-width {
     width: 64% !important;
@@ -524,6 +547,20 @@ export default {
   }
   .purple-container__paragraph-nb {
     display: none;
+  }
+  .purple-container__groupe {
+    margin-bottom: 2rem !important;
+  }
+  .purple-container__block {
+    margin: initial;
+    margin-top: 4rem !important;
+  }
+  .purple-container__footer {
+    margin-top: 2rem !important;
+  }
+  #svg-logo-white {
+    margin-top: 13rem !important;
+    height: 32px;
   }
 }
 @media only screen and (max-height: 950px) {

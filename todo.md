@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # front
 - rgpd => vue cookies
 - nullify unselected sess
@@ -167,6 +168,9 @@ GLOBAL
 
 
 
+=======
+HOME
+>>>>>>> geoff-dev
 
 - inverser le picto et le nom en haut a droite
 - mettre les prix tous pareils avec des espaces corrects
