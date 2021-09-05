@@ -87,7 +87,7 @@
                       <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
                       <h5 class="surfcontent-head mb-4">TOUS NIVEAUX</h5>
                       <ul class="mb-0 surflist">
-                        <!-- {{course.levelInfos.}} -->
+                        aaaaa
                       </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-level2" role="tabpanel" aria-labelledby="v-pills-level2-tab">qwertyu</div>
