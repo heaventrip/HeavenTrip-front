@@ -1,7 +1,14 @@
 <template>
   <!-- <div style="position: fixed; width: 100vw"> -->
-  <CheckoutHeader :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
-  <CheckoutSections :course="course" :session="session" :participantsNb="participantsNb" @changed-step="setActiveStep" />
+  <CheckoutHeader :total-price="totalPrice" :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
+  <CheckoutSections
+    @extra-participants-expenses="(val) => (extraParticipantsExpenses = val)"
+    @booker-expense="(val) => (bookerExpense = val)"
+    :course="course"
+    :session="session"
+    :participantsNb="participantsNb"
+    @changed-step="setActiveStep"
+  />
   <!-- </div> -->
 </template>
 <script>
@@ -21,7 +28,15 @@ export default {
       session: null,
       participantsNb: 0,
       activeStep: '',
-      avatarKeys: []
+      avatarKeys: [],
+      bookerExpense: 0,
+      extraParticipantsExpenses: 0
+    }
+  },
+  computed: {
+    totalPrice() {
+      if (!this.course) return
+      return this.course.price + this.bookerExpense + this.extraParticipantsExpenses
     }
   },
   methods: {
@@ -30,7 +45,10 @@ export default {
     }
   },
   created() {
-    this.$axios.get(`/courses/${this.$props.productId}`).then((res) => (this.course = res.data.course))
+    this.$axios.get(`/courses/${this.$props.productId}`).then((res) => {
+      this.course = res.data.course
+      this.totalPrice = res.data.price
+    })
     this.$axios.get(`/sessions?courseId=${this.$props.productId}`).then((res) => {
       this.session = res.data.sessions[0]
       this.$root.initialLoading = false

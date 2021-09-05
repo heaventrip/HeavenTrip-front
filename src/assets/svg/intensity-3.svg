@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 146.0288 146.189">
   <defs>
     <style>
-      .cls-1,
+      .cls-1023928678,
       .cls-2,
       .cls-3,
       .cls-4 {
         fill: none;
       }
 
-      .cls-1 {
+      .cls-1023928678 {
         stroke: #ebebeb;
         stroke-width: 5px;
       }
 
-      .cls-1,
+      .cls-1023928678,
       .cls-2 {
         stroke-miterlimit: 10;
       }
@@ -33,7 +33,7 @@
   </defs>
   <g id="Calque_2" data-name="Calque 2">
     <g id="Calque_1-2" data-name="Calque 1">
-      <path id="Tracé_5223-2" data-name="Tracé 5223-2" class="cls-1"
+      <path id="Tracé_5223-2" data-name="Tracé 5223-2" class="cls-1023928678"
         d="M67.855,7a60.8445,60.8445,0,0,1,0,121.689h-.0105A60.8445,60.8445,0,0,1,67.8445,7Z" />
       <path id="Tracé_5223-2-2" data-name="Tracé 5223-2" class="cls-2"
         d="M67.8445,7h.0105a60.8445,60.8445,0,0,1,0,121.689h-.0105A60.8445,60.8445,0,0,1,7,67.8445" />

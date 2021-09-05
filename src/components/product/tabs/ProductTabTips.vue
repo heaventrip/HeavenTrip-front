@@ -27,7 +27,7 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-lg-5">
+          <div class="col-12 col-lg-5 mr-5">
             <div class="shadow-box">
               <h6 class="head">Indispensable :</h6>
               <ul class="points list-unstyled mb-0">
@@ -58,43 +58,39 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-lg-7">
+          <div class="col-12 col-lg-8">
             <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">L’EGYPTE</h5>
             <p class="content">
               {{ course.country.description }}
             </p>
           </div>
         </div>
-        <ul class="list-unstyled place-list f-13 text-uppercase mb-0 d-flex flex-wrap flex-column flex-lg-row" style="border-bottom: 1px dashed #ebebeb">
-          <li>
-            <a href="#" class="text-decoration-none">Aéroport : <strong class="text-dark"> Hurghada</strong></a>
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none"><strong class="text-dark"> Décalage horaires : </strong>+ 0 <i class="fas fa-info-circle text-dark h6 mb-0"></i></a>
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none"><strong class="text-dark"> Temps moyen de vol : </strong>3H50 </a>
-          </li>
-        </ul>
+        <div class="row">
+          <div class="col-9 col-lg-12 mx-auto">
+            <div class="like-div white">
+              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
+                <li class="fg-1" v-for="countryInfo in course.courseInfos.filter((el) => el.type === 'CountryInfo')" :key="countryInfo">
+                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
+                    <strong class="text-dark ml-2">{{ countryInfo.title }} :</strong>
+                    {{ countryInfo.description }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="top-positioned-div">
-      <div class="bg-dark pays-block rounded-top text-uppercase">
+      <div class="bg-dark pays-block text-uppercase">
         <h6 class="head text-white font-weight-bold letter-space">
           <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />
           Quelques indicateurs
         </h6>
         <ul class="list-unstyled pays-list mb-0">
-          <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
-          <li>
-            <strong class="letter-space">Restaurants :</strong>
-            Prix moyen
-            <span class="text-warning ml-1"> 60 EGP</span>
+          <li v-for="expenseInfo in course.courseInfos.filter((el) => el.type === 'ExpenseInfo')" :key="expenseInfo">
+            <strong class="letter-space">{{ expenseInfo.title }} :</strong> {{ expenseInfo.description }}
           </li>
-          <li><strong class="letter-space">Taxi :</strong> Prix moyen <span class="text-warning ml-1"> 60 EGP</span></li>
         </ul>
       </div>
       <button @click="countryModal = true" class="btn btn-danger btn-block rounded-0 border-0 pay-btn py-3 text-uppercase mb-5">
@@ -127,20 +123,10 @@
               <div class="col-7 bg-white" style="position: relative">
                 <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
                   <div class="tab-pane fade show active" id="v-pills-health1" role="tabpanel" aria-labelledby="v-pills-health1-tab">
-                    <h4 class="surfhead text-center"><img class="align-text-bottom mr-3 globe_dark" fluid :src="require('@/assets/images/globe_dark.png')" /> EGYPTE</h4>
-                    <h5 class="surfcontent-head mb-1">Vaccin</h5>
-                    <ul class="list-unstyled mb-0 surflist health">
-                      <li>
-                        Aucun vaccins obligatoires.<br />
-                        Il n’est pas exigé de vaccination sauf contre la fièvre jaune pour les voyageurs en provenance de pays où elle sévit. Dans ce cas, elle doit être faite au moins 10 jours avant
-                        le départ.
-                      </li>
-                      <li>Hépatite A : fortement recommandée par l’OMS</li>
-                      <li>En cas de long séjour, d’expatriation ou de séjour en milieu rural, les vaccins contre la rage et la typhoïde sont recommandés.</li>
-                    </ul>
+                    {{ course.vaccineInfos }}
                   </div>
-                  <div class="tab-pane fade" id="v-pills-health2" role="tabpanel" aria-labelledby="v-pills-health2-tab">qwertyu</div>
-                  <div class="tab-pane fade" id="v-pills-health3" role="tabpanel" aria-labelledby="v-pills-health3-tab">asdfgh</div>
+                  <div class="tab-pane fade" id="v-pills-health2" role="tabpanel" aria-labelledby="v-pills-health2-tab">{{ course.generalInfos }}</div>
+                  <div class="tab-pane fade" id="v-pills-health3" role="tabpanel" aria-labelledby="v-pills-health3-tab">{{ course.covidInfos }}</div>
                 </div>
               </div>
             </div>
@@ -163,26 +149,20 @@
         <p class="content">
           {{ course.itinerary }}
         </p>
-        <ul class="list-unstyled place-list f-13 text-uppercase my-3 mb-0 d-flex flex-wrap" style="border-bottom: 1px dashed #ebebeb">
-          <li>
-            <a href="#" class="text-decoration-none">
-              AÉROPORTS :
-              <strong class="text-dark ml-2"> LYON - GRENOBLE</strong></a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none">
-              GARE :
-              <strong class="text-dark ml-2"> proximité du spot</strong></a
-            >
-          </li>
-          <li>
-            <a href="#" class="text-decoration-none">
-              LIAISONS AUTOCAR :
-              <strong class="text-dark ml-2"> Www.autocars-resalp.com</strong></a
-            >
-          </li>
-        </ul>
+        <div class="row">
+          <div class="col-9 col-lg-12 mx-auto">
+            <div class="like-div white">
+              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
+                <li class="fg-1" v-for="itineraryInfo in course.courseInfos.filter((el) => el.type === 'ItineraryInfo')" :key="itineraryInfo">
+                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
+                    <strong class="text-dark ml-2">{{ itineraryInfo.title }} :</strong>
+                    {{ itineraryInfo.description }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

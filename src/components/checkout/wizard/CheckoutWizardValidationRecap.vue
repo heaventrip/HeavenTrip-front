@@ -19,7 +19,7 @@
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
             <span class="view-detail">Voir Détails<i class="fas fa-chevron-down ml-2"></i></span>
-            <strong class="check-amount text-dark d-block">{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>
+            <strong class="check-amount text-dark d-block">{{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro;</strong>
           </div>
         </div>
         <div id="tripperBooker" class="collapse" aria-labelledby="tripBooker" data-parent="#tripperaccordion">

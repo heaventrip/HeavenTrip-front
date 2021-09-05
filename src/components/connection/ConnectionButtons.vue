@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right mr-3">
+    <ul class="bttn-block list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right mr-3">
       <li v-if="isLoggedIn()">
         <div @click.prevent="test" style="position: relative; z-index: 3; cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
           <img
@@ -8,11 +8,15 @@
             v-show="currUser?.avatarKey"
             height="40"
             style="border-radius: 50%"
-            :style="(toggleDropdown ? 'border: 1px solid #292f33' : 'border: 1px solid white', isLightTheme ? 'border: 1px solid white' : 'border: 1px solid #292f33')"
+            :style="`border: 1px solid ${toggleDropdown ? (isLightTheme ? 'white' : '#292f33') : isLightTheme ? '#292f33' : 'white'}`"
             fluid
             :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`"
           />
-          <div class="name-block d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="toggleDropdown && !isLightTheme ? 'color: #292f33' : 'color: white'">
+          <div
+            class="name-block d-flex ml-3"
+            :class="toggleDropdown ? 'flex-column' : 'flex-row'"
+            :style="toggleDropdown ? (isLightTheme ? 'color: white' : 'color: #292f33') : isLightTheme ? 'color: #292f33' : 'color: white'"
+          >
             <div>{{ currUser?.firstName }}</div>
             <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.lastName }}</div>
             <div v-else style="font-weight: 700">.{{ currUser?.lastName?.[0] }}</div>
@@ -20,7 +24,7 @@
           <InlineSvg
             class="connection-icon ml-auto"
             :src="require('@/assets/svg/connection-dropdown.svg')"
-            :fill="toggleDropdown && !isLightTheme ? '#292f33' : 'white'"
+            :fill="toggleDropdown ? (isLightTheme ? 'white' : '#292f33') : isLightTheme ? '#292f33' : 'white'"
             :transform="toggleDropdown ? 'rotate(-90)' : ''"
           />
         </div>
@@ -111,6 +115,7 @@ export default {
   components: {
     Account
   },
+  props: ['nav-sticky', 'active-tab'],
   data() {
     return {
       showcontent: false,
@@ -129,12 +134,16 @@ export default {
   },
   computed: {
     isLightTheme() {
-      return this.$parent.$parent.navSticky || this.$parent.activeTab === 'agency' || this.$parent.activeTab === 'news'
+      return this.$props.navSticky || this.$props.activeTab === 'agency' || this.$props.activeTab === 'news'
     }
   },
   watch: {
     currUser(val) {
       this.$root.currUser = val
+    },
+    toggleDropdown(val) {
+      if (val) document.addEventListener('click', this.handleClickToClose)
+      else document.removeEventListener('click', this.handleClickToClose)
     },
     // showWishlist(val) {
     //   if (val) {
@@ -195,6 +204,10 @@ export default {
   //   this.currUser = this.$root.currUser
   // },
   methods: {
+    handleClickToClose(e) {
+      if (e.target.closest('.bttn-block')) return
+      this.toggleDropdown = false
+    },
     test() {
       this.toggleDropdown = !this.toggleDropdown
       this.showcontent = false

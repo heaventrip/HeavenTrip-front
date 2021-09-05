@@ -37,7 +37,7 @@
             <div class="d-flex align-items-center social-info">
               <InlineProductInfos
                 :infos="[highlightedCourse?.country.name, `${highlightedCourse?.duration} jours`, highlightedCourse?.level.name, `${highlightedCourse?.max} places`]"
-                :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+                :icons="['globe', 'timer', 'intensity-2-dark', 'people']"
                 mb="1.5rem"
                 color="#292f33"
               />

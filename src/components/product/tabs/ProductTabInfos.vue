@@ -155,7 +155,7 @@
     <div class="card-body py-0 p-lg-0">
       <div class="row">
         <div class="col-12 col-lg-6">
-          <div class="content-head equip mb-2">
+          <div class="content-head equip mb-3">
             <i class="far fa-check-circle mr-2 h5 align-text-top mb-0"></i>
             <span class="d-inline-block" style="vertical-align: baseline">Est inclus :</span>
           </div>
@@ -166,7 +166,7 @@
           </ul>
         </div>
         <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 6rem">
-          <div class="content-head equip mb-2">
+          <div class="content-head equip mb-3">
             <i class="far fa-times-circle mr-2 h5 align-text-top mb-0"></i>
             <span class="d-inline-block" style="vertical-align: baseline">Non inclus :</span>
           </div>
@@ -180,13 +180,13 @@
     </div>
   </div>
   <div class="linear-block mt-2">
-    <div class="content-head equip mb-2">
+    <div class="content-head equip mb-3">
       <i class="far fa-dot-circle mr-2 mr-2 h5 align-text-top mb-0"></i>
       <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
     </div>
     <ul class="list-unstyled content-list equip mb-0">
-      <li v-for="extraService in course.extraServices" :key="extraService">
-        <a class="text-reset" href="#">{{ extraService.title }}</a>
+      <li class="options-item d-inline" v-for="extraService in course.extraServices" :key="extraService">
+        <a @click.prevent style="cursor: default; border-bottom: none" class="text-reset" href="#">{{ extraService.title }}</a>
       </li>
     </ul>
   </div>
@@ -238,6 +238,13 @@ export default {
 </script>
 
 <style scoped>
+.options-item:not(:first-of-type) {
+  padding-left: 1rem;
+}
+.options-item:not(:last-of-type) {
+  padding-right: 1rem;
+  border-right: 1px dashed #ebebeb;
+}
 .chapter-block {
   margin-bottom: 8rem;
   margin-top: 13rem;

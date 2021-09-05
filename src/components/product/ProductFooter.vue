@@ -112,7 +112,7 @@
                       <div v-else class="d-inline-block align-middle">{{ session.duration }} jours - {{ session.duration - 1 }} nuits</div>
                     </h6>
                     <h6 class="amount-per mb-0 fg-3">
-                      <strong>{{ course?.price.toString()[0] }}&thinsp;{{ course?.price.toString().slice(1) }}&thinsp;&euro;</strong>/pers.
+                      <strong>{{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro;</strong>/pers.
                     </h6>
                     <button @click="clickedChoseBtn(session)" class="btn choose-btn ml-3">CHOISIR</button>
                     <!-- <button @click="clickedChoseBtn(session)" class="btn choose-btn disable ml-3">OUPS !</button> -->
@@ -282,7 +282,11 @@
         <div class="center-col px-5" style="min-width: 190px" :class="{ inactive: !choseBtn }">
           <span class="tot-amount text-left">
             PRIX total :
-            <strong class="d-block"> {{ (course.price * participantsNb).toString()[0] }}&thinsp;{{ (course.price * participantsNb).toString().slice(1) }}&thinsp;&euro; </strong>
+            <strong class="d-block"
+              >{{
+                course?.price * participantsNb >= 1000 ? `${(course?.price * participantsNb).toString()[0]} ${(course?.price * participantsNb).toString().slice(-3)}` : course?.price * participantsNb
+              }}&hairsp;&euro;</strong
+            >
           </span>
         </div>
       </div>
@@ -299,8 +303,8 @@
   <teleport to="#modal">
     <transition name="fade">
       <div v-if="contactModal" class="modal__backdrop">
-        <div class="contact-modal bg-white" style="padding: 3rem 4rem; width: 70vw">
-          <ProductFooterForm />
+        <div class="contact-modal bg-white" style="padding: 3rem 4rem; width: max-content">
+          <ProductFooterForm :course="course" @submitted-form="contactModal = false" />
         </div>
       </div>
     </transition>

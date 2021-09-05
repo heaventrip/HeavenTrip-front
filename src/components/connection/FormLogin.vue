@@ -61,7 +61,7 @@ export default {
           this.$emit('login-success')
         })
         .catch((err) => {
-          this.$notify({ group: 'modal', type: 'error', text: err.message })
+          this.$notify({ group: 'modal', type: 'error', text: 'Identifiants invalides' })
         })
     }
   }

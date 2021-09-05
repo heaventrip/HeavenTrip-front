@@ -32,7 +32,7 @@
       />
     </div>
     <keep-alive>
-      <component :is="'ConnectionButtons'" :nav-sticky="navSticky" @mouseover="leftAllTabs"></component>
+      <component :is="'ConnectionButtons'" :nav-sticky="navSticky" :active-tab="activeTab" @mouseover="leftAllTabs"></component>
     </keep-alive>
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" />
     <TheNav v-else :activeTab="activeTab" @left-all-tabs="leftAllTabs" @changed-tab="setActiveTab" />
@@ -171,13 +171,13 @@ export default {
     if (!token_val) {
       this.token = false
     }
+    gsap.fromTo('.header-bg-image', { scale: 1.4 }, { scale: 1, duration: 3, ease: 'power4.inOut' })
 
+    if (this.$route.name === 'Search') return
     document.addEventListener('scroll', () => {
       if (window.scrollY > document.querySelector('.header').clientHeight) this.navSticky = true
       else this.navSticky = false
     })
-
-    gsap.fromTo('.header-bg-image', { scale: 1.4 }, { scale: 1, duration: 3, ease: 'power4.inOut' })
   }
 }
 </script>
