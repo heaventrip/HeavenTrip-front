@@ -192,4 +192,34 @@ export default {
   opacity: 0.3;
   pointer-events: none;
 }
+.has-float-label .form-control:placeholder-shown:not(:focus) + label {
+  top: 0.15em;
+  font-size: 100%;
+  color: #fff;
+  opacity: 1;
+}
+.has-float-label label::after {
+  display: none;
+}
+.has-float-label label {
+  left: 0;
+}
+.form-group {
+  margin-bottom: 2rem;
+}
+.form-control {
+  padding-left: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ffffff33;
+  background-color: transparent;
+  padding-bottom: 0.1rem;
+  color: #fff;
+}
+.form-control:focus {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid white;
+}
 </style>

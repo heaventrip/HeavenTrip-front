@@ -144,19 +144,19 @@ IMPORTANT : bloquer les mobiles/tablettes
 
 - back sur paiement
 - revoir le système de backing (perte de données)
-> dropdown
 - prix dynamique du checkout
+> dropdown
 > programme descriptif produit
 > desactiver la sticky sur search / update l'url
 > elargir contenaire des filtres et opacité sur 1 (pas de diffusion mais liseret)
-- voir sms filtre dark
-- filtres dernières places/confirmés
+> voir sms filtre dark
+> filtres dernières places/confirmés
 
 AJD
-- mentions inverser le gras
-- pas la version grise
+> mentions inverser le gras
+> pas la version grise
 - style du bouton dans la modal
-- copier les bons styles d'input dans modal contact
+> copier les bons styles d'input dans modal contact
 
 GLOBAL
 - input largeur max

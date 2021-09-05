@@ -46,8 +46,8 @@ export default {
   letter-spacing: 1.5px;
 }
 .bttn__text--bold {
-  font-weight: bold;
   font-size: 0.8rem;
+  font-weight: bold;
 }
 .bttn--transparent {
   background-color: transparent;

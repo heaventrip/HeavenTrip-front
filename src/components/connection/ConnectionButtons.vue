@@ -24,7 +24,7 @@
           <InlineSvg
             class="connection-icon ml-auto"
             :src="require('@/assets/svg/connection-dropdown.svg')"
-            :fill="toggleDropdown && !isLightTheme ? '#292f33' : 'white'"
+            :fill="toggleDropdown ? (isLightTheme ? 'white' : '#292f33') : isLightTheme ? '#292f33' : 'white'"
             :transform="toggleDropdown ? 'rotate(-90)' : ''"
           />
         </div>

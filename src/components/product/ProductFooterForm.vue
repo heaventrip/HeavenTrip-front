@@ -1,7 +1,7 @@
 <template>
   <div style="text-transform: uppercase; font-weight: bold; font-size: 1.3rem; margin-bottom: 3rem">Demande personnalisée</div>
   <div class="d-flex justify-content-between">
-    <div class="d-flex flex-column justify-content-between" style="width: 35%">
+    <div class="d-flex flex-column justify-content-between" style="width: 300px">
       <div class="mb-4">
         <h3 class="contacter-head mb-1">Demander l'ouverture d'une date</h3>
         <p class="contacter-para mb-4 mb-lg-0">Tu peux nous appeler directement pour demander l'ouverture d'une date ou faire la demande par le formulaire de droite.</p>
@@ -143,6 +143,8 @@ export default {
 }
 .has-float-label label {
   left: 0;
+  font-size: 75%;
+  top: -10px;
 }
 .form-group {
   margin-bottom: 1rem;

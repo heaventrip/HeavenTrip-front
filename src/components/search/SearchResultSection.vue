@@ -50,19 +50,19 @@
         <div @click="sortByPrice" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div class="d-flex align-items-center">
             <span class="align-middle">Prix</span
-            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
+            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascPrice' ? 'rotate(0)' : 'rotate(180)']" height="1rem" class="ml-3" />
           </div>
         </div>
         <div @click="sortByDate" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div class="d-flex align-items-center">
             <span class="align-middle">Date de départ</span
-            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
+            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDate' ? 'rotate(0)' : 'rotate(180)']" height="1rem" class="ml-3" />
           </div>
         </div>
         <div @click="sortByDuration" type="button" class="sort-by-button" style="position: relative; flex-grow: 1">
           <div class="">
             <span class="align-middle">Durée</span
-            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(180)' : 'rotate(0)']" height="1rem" class="ml-3" />
+            ><InlineSvg :src="require('@/assets/svg/arrow-up.svg')" :transform="[sortedBy === 'ascDuration' ? 'rotate(0)' : 'rotate(180)']" height="1rem" class="ml-3" />
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
     <div class="result-block">
       <div class="container p-0">
         <div class="row">
-          <div class="pr-lg-0 d-none d-lg-block" style="flex-grow: 0.6">
+          <div class="pr-lg-0 d-none d-lg-block mx-auto" style="flex-grow: 0.4">
             <div class="search-container d-flex align-items-center" style="background-color: #fff">
               <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
               <input v-model="freeSearch" id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
@@ -82,7 +82,7 @@
                     class="d-flex align-items-center justify-content-around"
                     style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%"
                   >
-                    <span class="search-bar__filter__name">Thématique sportive</span>
+                    <span class="search-bar__filter__name">{{ themeSelection.options.find((el) => el.value === themeSelection.value)?.label || 'Thématique sportive' }}</span>
                     <i class="fas fa-sort symbol"></i>
                   </div>
                   <Multiselect
@@ -496,7 +496,7 @@ export default {
       queryParams: '',
       dateConfirmed: '',
       lastPlaces: '',
-      sortedBy: 'descPrice',
+      sortedBy: '',
       sessionsArr: [],
       normalResults: [],
       lastSessionResults: [],
@@ -505,12 +505,11 @@ export default {
       themeSelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
-        mode: 'tags',
-        value: [],
+        value: '',
         openDirection: 'down',
         caret: false,
         options: [],
-        createTag: true
+        createTag: false
       },
       activitySelection: {
         hideSelected: false,
@@ -848,7 +847,7 @@ export default {
   transform: none;
 }
 .multi-select-filter {
-  box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.08);
+  box-shadow: 0px 0px 1px rgba(41, 47, 51, 0.2);
   transition: all 0.3s ease !important;
 }
 .divider {

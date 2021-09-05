@@ -64,7 +64,6 @@
           text-color="#fff"
           style="transform: translateY(3px)"
           v-if="!!monthSelection.value.length || !!activitySelection.value.length"
-          height="38px"
         />
       </div>
     </div>
@@ -184,7 +183,7 @@ export default {
       this.fetching = false
     },
     goSearchPage() {
-      this.$router.push({ name: 'Search', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
+      this.$router.push({ name: 'Search', query: { month: this.monthSelection.value, activity: this.activitySelection.value } })
     },
     fetchData() {
       this.filtered.activityArr = []

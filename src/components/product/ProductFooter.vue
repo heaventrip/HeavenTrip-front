@@ -303,7 +303,7 @@
   <teleport to="#modal">
     <transition name="fade">
       <div v-if="contactModal" class="modal__backdrop">
-        <div class="contact-modal bg-white" style="padding: 3rem 4rem; width: 70vw">
+        <div class="contact-modal bg-white" style="padding: 3rem 4rem; width: max-content">
           <ProductFooterForm :course="course" @submitted-form="contactModal = false" />
         </div>
       </div>
