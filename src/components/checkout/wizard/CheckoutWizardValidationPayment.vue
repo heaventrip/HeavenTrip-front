@@ -27,7 +27,7 @@
               <label class="custom-control-label" for="Radio14">
                 <div class="d-flex align-items-center" style="font-size: 0.8rem">
                   Verser un acompte de 30% :
-                  <strong class="h6 mb-0 ml-3 font-weight-bold">{{ parseInt(course?.price * 0.3) >= 1000 ? `${parseInt(course?.price * 0.3).toString()[0]} ${parseInt(course?.price * 0.3).toString().slice(-3)}` : parseInt(course?.price * 0.3) }}&hairsp;&euro;</strong>
+                  <strong class="h6 mb-0 ml-3 font-weight-bold">{{ parseInt(totalPrice * 0.3) >= 1000 ? `${parseInt(totalPrice * 0.3).toString()[0]} ${parseInt(totalPrice * 0.3).toString().slice(-3)}` : parseInt(totalPrice * 0.3) }}&hairsp;&euro;</strong>
                 </div>
               </label>
             </div>
@@ -46,10 +46,10 @@
     </div>
   </div>
   <div class="card pay-card rounded-0 mb-0 p-0">
-    <button class="stripe-redirect-button" type="button" @click="processPayment" id="checkout-button">
+    <button class="stripe-redirect-button" type="button" @click="$emit('complete')" id="checkout-button">
       <transition name="fade-fast" mode="out-in">
-        <span v-if="deposit === 'deposit'"> Je veux procéder au paiement de {{ parseInt(course?.price * 0.3) >= 1000 ? `${parseInt(course?.price * 0.3).toString()[0]} ${parseInt(course?.price * 0.3).toString().slice(-3)}` : parseInt(course?.price * 0.3) }}&hairsp;&euro; </span>
-        <span v-else> Je veux procéder au paiement de {{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro; </span>
+        <span v-if="deposit === 'deposit'"> Je veux procéder au paiement de {{ parseInt(totalPrice * 0.3) >= 1000 ? `${parseInt(totalPrice * 0.3).toString()[0]} ${parseInt(totalPrice * 0.3).toString().slice(-3)}` : parseInt(totalPrice * 0.3) }}&hairsp;&euro; </span>
+        <span v-else> Je veux procéder au paiement de {{ totalPrice >= 1000 ? `${totalPrice.toString()[0]} ${totalPrice.toString().slice(-3)}` : totalPrice }}&hairsp;&euro; </span>
       </transition>
     </button>
     <!-- <div class="card-body">
@@ -89,43 +89,45 @@ import { loadStripe } from '@stripe/stripe-js'
 
 export default {
   name: 'CheckoutWizardValidationPayment',
-  props: ['course'],
+  props: ['course', 'total-price'],
+  emits: ['complete'],
   data() {
     return {
       deposit: ''
     }
-  },
-  methods: {
-    async processPayment() {
-      const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
-      fetch('https://heaventrip-dev.herokuapp.com/api/v1/stripe-session', {
-        method: 'POST'
-      })
-        .then(function (response) {
-          return response.json()
-        })
-
-        .then(function (session) {
-          return stripe.redirectToCheckout({ sessionId: session.session.id })
-        })
-
-        .then(function (result) {
-          // If redirectToCheckout fails due to a browser or network
-
-          // error, you should display the localized error message to your
-
-          // customer using error.message.
-
-          if (result.error) {
-            alert(result.error.message)
-          }
-        })
-
-        .catch(function (error) {
-          console.error('Error:', error)
-        })
-    }
   }
+  // methods: {
+  //   async processPayment() {
+  //     this.$emit('complete')
+  //     const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
+  //     fetch('https://heaventrip-dev.herokuapp.com/api/v1/stripe-session', {
+  //       method: 'POST'
+  //     })
+  //       .then(function (response) {
+  //         return response.json()
+  //       })
+
+  //       .then(function (session) {
+  //         return stripe.redirectToCheckout({ sessionId: session.session.id })
+  //       })
+
+  //       .then(function (result) {
+  //         // If redirectToCheckout fails due to a browser or network
+
+  //         // error, you should display the localized error message to your
+
+  //         // customer using error.message.
+
+  //         if (result.error) {
+  //           alert(result.error.message)
+  //         }
+  //       })
+
+  //       .catch(function (error) {
+  //         console.error('Error:', error)
+  //       })
+  //   }
+  // }
 }
 </script>
 

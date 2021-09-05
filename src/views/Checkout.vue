@@ -2,12 +2,14 @@
   <!-- <div style="position: fixed; width: 100vw"> -->
   <CheckoutHeader :total-price="totalPrice" :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
   <CheckoutSections
-    @extra-participants-expenses="(val) => (extraParticipantsExpenses = val)"
+    @extra-participants-expense="(val) => (extraParticipantsExpense = val)"
+    @extra-participants-nb="(val) => (extraParticipantsNb = val)"
     @booker-expense="(val) => (bookerExpense = val)"
+    @changed-step="setActiveStep"
     :course="course"
     :session="session"
     :participantsNb="participantsNb"
-    @changed-step="setActiveStep"
+    :total-price="totalPrice"
   />
   <!-- </div> -->
 </template>
@@ -30,13 +32,14 @@ export default {
       activeStep: '',
       avatarKeys: [],
       bookerExpense: 0,
-      extraParticipantsExpenses: 0
+      extraParticipantsNb: 0,
+      extraParticipantsExpense: 0
     }
   },
   computed: {
     totalPrice() {
       if (!this.course) return
-      return this.course.price + this.bookerExpense + this.extraParticipantsExpenses
+      return this.course.price * (this.extraParticipantsNb + 1) + this.bookerExpense + this.extraParticipantsExpense
     }
   },
   methods: {

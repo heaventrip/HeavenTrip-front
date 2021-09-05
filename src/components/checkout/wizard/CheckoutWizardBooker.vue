@@ -5,7 +5,14 @@
         <div class="row">
           <div class="col-12 col-lg-4">
             <div class="participants-div align-items-center">
-              <img class="img-fluid rounded-circle uploaded-img" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+              <img
+                v-if="avatarKey"
+                class="participant-img mr-3"
+                fluid
+                :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
+                style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
+              />
+              <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
               <h4 class="head font-weight-bold text-uppercase">
                 {{ localBookerInfos.firstName || 'Participant' }}
                 <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"
@@ -113,7 +120,7 @@ import { required, helpers } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 export default {
   name: 'CheckoutWizardBooker',
-  props: ['booker'],
+  props: ['booker', 'avatar-key'],
   emits: ['updated-booker-infos', 'complete'],
   setup() {
     return { v$: useVuelidate() }
@@ -192,7 +199,7 @@ export default {
   opacity: 0.3;
   pointer-events: none;
 }
-.has-float-label .form-control:placeholder-shown:not(:focus) + label {
+/* .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.15em;
   font-size: 100%;
   color: #fff;
@@ -221,5 +228,5 @@ export default {
   border-radius: 0;
   border: none;
   border-bottom: 1px solid white;
-}
+} */
 </style>

@@ -144,13 +144,14 @@ IMPORTANT : bloquer les mobiles/tablettes
 
 - back sur paiement
 - revoir le système de backing (perte de données)
-- prix dynamique du checkout
+> prix dynamique du checkout
 > dropdown
 > programme descriptif produit
 > desactiver la sticky sur search / update l'url
 > elargir contenaire des filtres et opacité sur 1 (pas de diffusion mais liseret)
 > voir sms filtre dark
 > filtres dernières places/confirmés
+- ajouter equipment rental price
 
 AJD
 > mentions inverser le gras

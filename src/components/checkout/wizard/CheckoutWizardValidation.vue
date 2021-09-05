@@ -1,11 +1,10 @@
 <template>
   <div class="d-flex w-100">
     <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem padding-bottom: 4rem; top: 10vh">
-      <button @click.prevent="$emit('complete')">VALIDER LA RESERVATION</button>
-      <CheckoutWizardValidationPayment :course="course" :booker="booker" :extra-participants="extraParticipants" />
+      <CheckoutWizardValidationPayment @complete="$emit('complete')" :total-price="totalPrice" :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
     <div class="col-12 col-lg-4 ml-auto p-0" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px">
-      <CheckoutWizardValidationRecap :course="course" :booker="booker" :extra-participants="extraParticipants" />
+      <CheckoutWizardValidationRecap :avatar-key="avatarKey" :total-price="totalPrice" :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
   </div>
 </template>
@@ -20,7 +19,8 @@ export default {
     CheckoutWizardValidationPayment,
     CheckoutWizardValidationRecap
   },
-  props: ['course', 'booker', 'extra-participants'],
+  emits: ['complete'],
+  props: ['course', 'booker', 'extra-participants', 'total-price', 'avatar-key'],
   methods: {
     // async processPayment() {
     //   const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
