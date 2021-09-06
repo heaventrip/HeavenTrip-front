@@ -271,7 +271,7 @@
         <div class="d-inline-block" style="position: relative" data-v-9215de46="">
           <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="50" style="margin-left: 1rem; margin-right: 1rem" fill="white" />
         </div>
-        <div class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</div>
+        <div class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ localExtraParticipants[currFormParticipant + 1]?.infos.firstName }}</div>
       </div>
     </div>
   </div>

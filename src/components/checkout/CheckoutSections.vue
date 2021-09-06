@@ -77,7 +77,7 @@
             <router-view></router-view>
             <!-- <CheckoutSuccess v-else-if="activeStep === 'success'" /> -->
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
-              <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
+              <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn prev-btn mr-3" style="border-radius: 0">Précédent</button>
               <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
                 {{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}
               </button>
@@ -175,7 +175,7 @@ export default {
       handler(newVal, oldVal) {
         this.$emit('changed-step', newVal)
 
-        if (oldVal === 'insurance' && newVal === 'options') this.resetDisplay()
+        // if (oldVal === 'insurance' && newVal === 'options') this.$children.checkoutWizardForm.resetDisplay()
       }
     }
   },
@@ -329,7 +329,7 @@ export default {
           }
         })
         .then((res) => {
-          this.$notify({ group: 'app', type: 'success', text: 'Réservation créée avec succès' })
+          window.location.href = res.data.url
         })
         .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response?.data?.message || err.message }))
     }
@@ -396,6 +396,23 @@ export default {
 .checkout-progress-bar--bg-white {
   background-color: white;
   outline: 5px solid white;
+}
+.next-btn {
+  background-color: white;
+  color: #292f33;
+  border: 1px solid #292f33;
+}
+.next-btn:hover {
+  background-color: #292f33;
+  color: white;
+}
+.next-btn.disable {
+  color: #ebebeb;
+  border: 1px solid #b4b4b4;
+}
+.next-btn.disable:hover {
+  background-color: white;
+  color: #ebebeb;
 }
 .next-btn {
   background-color: white;

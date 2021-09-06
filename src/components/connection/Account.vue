@@ -235,7 +235,7 @@
       <InlineSvg v-if="activeTab === 'success'" style="position: absolute; bottom: 2rem; right: 2rem" fill="white" height="60" :src="require('@/assets/svg/logo-small-no-circle.svg')" />
     </div>
   </div>
-  <notifications class="custom-notifications" group="modal" position="top center" width="35%" max="3" />
+  <notifications class="custom-notifications" group="modal" position="top center" width="35%" :max="3" />
 </template>
 
 <script>
@@ -259,7 +259,7 @@ export default {
     PasswordStep3,
     InlineAvatars
   },
-  props: ['new-active-tab'],
+  props: ['active-tab'],
   data() {
     return {
       activeTab: '',
@@ -291,12 +291,12 @@ export default {
     //     this.activeTab = val
     //   }
     // },
-    newActiveTab: {
-      immediate: true,
-      handler(val) {
-        this.activeTab = val
-      }
-    },
+    // newActiveTab: {
+    //   immediate: true,
+    //   handler(val) {
+    //     this.activeTab = val
+    //   }
+    // },
     activeTab(val) {
       history.pushState(null, null, val)
     },

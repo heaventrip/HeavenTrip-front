@@ -8,7 +8,7 @@
   <transition name="fade-splash">
     <vue-element-loading :active="initialLoading" is-full-screen spinner="spinner" color="#fff" background-color="#d82558" />
   </transition>
-  <notifications class="custom-notifications" group="app" position="top center" width="35%" max="3" />
+  <notifications class="custom-notifications" group="app" position="top center" width="35%" :max="3" />
 </template>
 
 <script>

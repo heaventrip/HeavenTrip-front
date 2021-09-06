@@ -1,26 +1,25 @@
-<<<<<<< HEAD
 # front
 - rgpd => vue cookies
-- nullify unselected sess
+> nullify unselected sess
 > add trippers inscrits session
 > espace profil
-- dynamisme des cards
+> dynamisme des cards
 
 # back
-(- join table course_id | sport_id | | level_id | description1:text |  description2:text |  description3:text)
+> (- join table course_id | sport_id | | level_id | description1:text |  description2:text |  description3:text)
 
 __________
 
-- entre clique sur agence et clique bouton recherche (photo agrandie et module disparait)
+> entre clique sur agence et clique bouton recherche (photo agrandie et module disparait)
 > checkout booker prochain encart déjà sélectionné?
 > changements d'URLs avec suivant/précédent => voir router history pb? (par ex précédent à partir du checkout ramène sur product)
 
 # general
-- erreurs
+> erreurs
 - tooltips
 
 # home
-- ouvrir connexion menu au hover + rotate icon
+> ouvrir connexion menu au hover + rotate icon
 - animatique externe des cards @mousevents
 >>> animatique des reviews
 > animatique interne des cards
@@ -31,18 +30,17 @@ __________
 
 # product
 > GEOFF textarea qui sort du cadre sur petit écran
-- remplacer les curseurs swiper par les notres
 
 > textarea ajouter bouton envoyer
 > lightbox
-(- formulaire créer session module booking (sur mois sans session ou ac sessions complètes))
+> (- formulaire créer session module booking (sur mois sans session ou ac sessions complètes))
 
 ### IMPERATIF V1 ###
  gérer les transitions et chargements de pages/composants etc.
 > mécanique intégration des photos selon tags
 > résolution des URLs
-- gestion des origines pour mailerlite (newsletter, signup, wishlist, etc)
-- spinner sur recherche et autres endroits le nécessitant
+ gestion des origines pour mailerlite (newsletter, signup, wishlist, etc)
+> spinner sur recherche et autres endroits le nécessitant
 
 ____________________________________________
 
@@ -65,7 +63,7 @@ SAMEDI
 > finalisation du front /search
 + links (ceux qui manquent)
 + curseurs swiper à customiser (pas réussi l'autre fois)
-+ revoir l'ajout à la wishlist
+> revoir l'ajout à la wishlist
 
 DIMANCHE
 
@@ -98,7 +96,7 @@ ___________________________
 > Voir new design activité principale sur XD
 - Dans activités incluses séparer le prix à droite (cf XD)
 - Compteur à mettre à gauche sur slider hébergement + autoplay
-- Mot du cuisinier rajouter les mentions + enlever tabs pr le moment
+> Mot du cuisinier rajouter les mentions + enlever tabs pr le moment
 > Modal product zone blanche + large
 
 > Revoir le header recherche de façon générale avec mention dernière place
@@ -109,11 +107,11 @@ ___________________________
 > Hover du actualités : afficher les 3 articles dedans (avec fond blanc) et reprendre un bouton blanc/bg-dark en full largeur en dessous pour accéder au blog
 > Rajouter "+ 15€ de frais de gestions" après checkbox card dans checkout
 - scroll des filtres pareil que connection
-- autoriser les GET de message
+> autoriser les GET de message
 - fixer fade du splash
 - dyanmiser icons niveaux dans mentions
 - fade sur les filtres search home + décalage hover/liseret
-- régler le firstname au dessus des cards
+> régler le firstname au dessus des cards
 
 - fading sur les modals de connexion
 - virer calendy
@@ -134,7 +132,7 @@ ___________________________
 - fading sur card dans recherche
 - virer city et region
 > rajouter titre sur programme "jour 1" "jour 2" etc
-- récup tous les avatars en bas a gauche du violet
+> récup tous les avatars en bas a gauche du violet
 - pas de scale sur le header en venant d'une modale
 
 
@@ -152,13 +150,20 @@ IMPORTANT : bloquer les mobiles/tablettes
 > elargir contenaire des filtres et opacité sur 1 (pas de diffusion mais liseret)
 > voir sms filtre dark
 > filtres dernières places/confirmés
-- ajouter equipment rental price
+> ajouter equipment rental price
 
 AJD
 > mentions inverser le gras
 > pas la version grise
 - style du bouton dans la modal
 > copier les bons styles d'input dans modal contact
+- rajouter bouton toutes les thématiques dans la recherche
+
+AJD
+- scroll top sur insurance
+- continuer avec la résa de "X" bug
+- opacité avatar
+- taille des avatars
 
 GLOBAL
 - input largeur max
@@ -168,9 +173,6 @@ GLOBAL
 
 
 
-=======
-HOME
->>>>>>> geoff-dev
 
 - inverser le picto et le nom en haut a droite
 - mettre les prix tous pareils avec des espaces corrects

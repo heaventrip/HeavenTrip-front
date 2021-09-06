@@ -6,6 +6,7 @@
       <ProductHeaderInfos ref="productHeaderInfos" :course="course" @clicked-tab="emitClickedTab" />
     </div>
     <div class="header-product__pics" style="box-shadow: -1px 0px 12px rgba(41, 47, 51, 0.8); width: 40%">
+      <Tag color="white" :text="`${photos.length} photos`" style="position: absolute; margin-top: 1.5rem; right: 2rem" />
       <div style="height: 34%">
         <img
           src="https://images.ctfassets.net/8dtxc3nuj0tn/4RJSKIk5v7saV1cji10crg/214b7be246e8c63cba0355ebaac5e989/kitesurf-elgouna-spot.jpg"
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+import Tag from '@/components/elements/Tag.vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import ProductHeaderInfos from '@/components/header/ProductHeaderInfos.vue'
 
@@ -44,7 +46,8 @@ export default {
   name: 'Header',
   components: {
     VueEasyLightbox,
-    ProductHeaderInfos
+    ProductHeaderInfos,
+    Tag
   },
   props: ['course'],
   data() {
@@ -56,10 +59,23 @@ export default {
         'https://images.ctfassets.net/8dtxc3nuj0tn/1S1Nt2KpYQGGvBiS3864QR/6d8a53010fc7459aaf35c68d4510b1d6/kitesurf-elgouna-cook.jpg'
       ],
       visible: false,
+      photos: [],
       index: 0 // default: 0
     }
   },
   methods: {
+    fetchPhotos(tags = 'essaouira') {
+      const client = this.$contentful.createClient({
+        space: '85gxc8iirgln',
+        environment: 'master',
+        accessToken: 'oe1JxjiWZcL4PduKm-E6a1R36IZfM6uiHBrjwODo6IU'
+      })
+
+      client
+        .getAssets({ 'metadata.tags.sys.id[all]': tags })
+        .then((entries) => (this.photos = entries.items))
+        .catch((err) => alert(err))
+    },
     emitClickedTab(tab) {
       this.$emit('clicked-tab', tab)
     },
@@ -70,6 +86,9 @@ export default {
     handleHide() {
       this.visible = false
     }
+  },
+  created() {
+    this.fetchPhotos()
   }
 }
 </script>

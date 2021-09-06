@@ -2,7 +2,7 @@
   <div>
     <ul class="bttn-block list-unstyled mb-0 ml-auto d-none d-lg-flex text-uppercase profile-menu float-right mr-3">
       <li v-if="isLoggedIn()">
-        <div @click.prevent="test" style="position: relative; z-index: 3; cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
+        <div @click.prevent="toggleDropdownMenu" style="position: relative; z-index: 3; cursor: pointer; width: 230px; height: 60px; padding: 0 1.8rem" class="btttn d-flex align-items-center">
           <img
             class="avatar-block"
             v-show="currUser?.avatarKey"
@@ -78,7 +78,7 @@
         <a
           @click.prevent="$router.push({ name: 'Account', params: { activeTab: 'login' } })"
           class="px-4 py-4 d-inline-block"
-          :style="$parent.activeTab === 'agency' || $parent.activeTab === 'news' ? 'color: #292f33' : 'color: white'"
+          :style="activeTab === 'agency' || activeTab === 'news' ? 'color: #292f33' : 'color: white'"
           >se connecter</a
         >
       </li>
@@ -94,7 +94,7 @@
     <teleport to="#modal">
       <transition name="fade">
         <div v-if="$route.name === 'Account'">
-          <Account @closed-page="showAccountPage = false" @login-success="loginSuccess" :new-active-tab="activeTab" />
+          <Account @closed-page="showAccountPage = false" @login-success="loginSuccess" :active-tab="activeTab" />
         </div>
       </transition>
     </teleport>
@@ -208,13 +208,9 @@ export default {
       if (e.target.closest('.bttn-block')) return
       this.toggleDropdown = false
     },
-    test() {
+    toggleDropdownMenu() {
       this.toggleDropdown = !this.toggleDropdown
       this.showcontent = false
-    },
-    setActiveTab(tab) {
-      this.activeTab = tab
-      this.showAccountPage = true
     },
     unwishlistCourse(courseId) {
       this.$axios.delete('/wishlists', { params: { courseId: courseId } }).then(() => {

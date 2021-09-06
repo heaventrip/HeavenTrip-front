@@ -157,7 +157,7 @@
               :id="`pills-${activeTab}`"
               :is="contentComponents[activeTab]"
               :ref="`${activeTab}Tab`"
-              class="wrapper h-100 p-0 tab-pane black pt-lg-5 home-wrapper show active"
+              class="wrapper h-100 p-0 tab-pane black home-wrapper show active"
               @fetched-categ="setCateg"
               :in-nav="true"
             ></component>
