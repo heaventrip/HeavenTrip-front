@@ -120,7 +120,7 @@
                 </div>
               </li>
             </ul>
-            <div v-else class="py-4"><Button @click="contactModal = true" text="Créer une session" color="white" width="30%" height="4rem" margin="auto" /></div>
+            <div v-else style="padding: 4rem 0"><Button @click="contactModal = true" text="Créer une session" color="grey" px="3rem" width="max-content" height="4rem" margin="auto" /></div>
           </div>
         </div>
       </div>
@@ -639,13 +639,13 @@ export default {
   z-index: 5;
 }
 .booking-session .session-head {
-  background-color: #5a3a5f;
+  background-color: #292f33;
   letter-spacing: 0.03rem;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 .booking-session .session-head:hover {
-  background-color: #292f33;
+  background-color: #d82558;
   color: white;
 }
 .session-select-btn {

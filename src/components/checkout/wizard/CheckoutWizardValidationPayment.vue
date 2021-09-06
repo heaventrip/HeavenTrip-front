@@ -52,7 +52,7 @@
         <span v-else> Je veux procéder au paiement de {{ totalPrice >= 1000 ? `${totalPrice.toString()[0]} ${totalPrice.toString().slice(-3)}` : totalPrice }}&hairsp;&euro; </span>
       </transition>
     </button>
-    <!-- <div class="card-body">
+    <div class="card-body">
       <h6 class="font-weight-bold text-uppercase pay-head">
         Choisissez votre moyen de paiement :
       </h6>
@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 

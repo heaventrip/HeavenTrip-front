@@ -25,11 +25,7 @@
         'header-bg-container--product': currentRoute('Product')
       }"
     >
-      <img
-        src="https://images.ctfassets.net/8dtxc3nuj0tn/3iZvdSGqmL7fF13yAi9yrY/f3495b196a70cb25001f6fbf2c1c729a/kitesurf_elgouna_cover4.jpg"
-        class="header-bg-image"
-        :style="[navIsActive ? 'filter: blur(4px)' : '']"
-      />
+      <img :src="course?.cover" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <keep-alive>
       <component :is="'ConnectionButtons'" :nav-sticky="navSticky" :active-tab="activeTab" @mouseover="leftAllTabs"></component>

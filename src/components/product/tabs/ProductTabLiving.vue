@@ -229,6 +229,7 @@ export default {
   data() {
     return {
       index: 0,
+      photos: [],
       visible: false,
       imgs: [
         'https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg',
@@ -259,6 +260,18 @@ export default {
     }
   },
   methods: {
+    fetchPhotos(tags = 'essaouira') {
+      const client = this.$contentful.createClient({
+        space: '85gxc8iirgln',
+        environment: 'master',
+        accessToken: 'oe1JxjiWZcL4PduKm-E6a1R36IZfM6uiHBrjwODo6IU'
+      })
+
+      client
+        .getAssets({ 'metadata.tags.sys.id[all]': tags })
+        .then((entries) => (this.photos = entries.items))
+        .catch((err) => alert(err))
+    },
     renderSwiperFraction(currentClass, totalClass) {
       return `<span style="${this.currentPaginationStyle}" class="${currentClass}"></span>
       <span style="${this.currentPaginationStyle}">.</span>
@@ -268,6 +281,9 @@ export default {
       this.index = index
       this.visible = true
     }
+  },
+  created() {
+    this.fetchPhotos()
   }
 }
 </script>
