@@ -63,6 +63,7 @@
           background-color="#7c7c7c"
           text-color="#fff"
           style="transform: translateY(3px)"
+          height="auto"
           v-if="!!monthSelection.value.length || !!activitySelection.value.length"
         />
       </div>

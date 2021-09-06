@@ -56,7 +56,6 @@
         <div class="ml-auto" v-if="activeStep !== 'validation' && session?.participants.length">
           <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block">
             <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span>
-            <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05rem">Trippers inscrits&nbsp;</span><span style="font-size: 0.8rem; letter-spacing: 0.05rem">à cette session</span>
           </span>
           <div class="d-flex justify-content-between">
             <InlineAvatars :avatars="avatarKeys" :heart="false" outline-color="violet" outline-width="4px" height="40px" spacing="-8px" mt="0.5rem" mb="0rem" />

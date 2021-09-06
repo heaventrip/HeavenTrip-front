@@ -168,8 +168,9 @@
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-5 mb-0">
               <span style="font-family: Oswald, sans-serif; font-size: 0.75rem">
-                <span color="#292f33">Ca te titille?</span>
-                <span style="font-weight: bold">Rejoint les {{ course.wishlistUsers?.length }} intéressé{{ course.wishlistUsers?.length > 1 ? 's' : '' }} :</span><br />
+                <span color="#292f33">Ca te titille?&nbsp;</span>
+                <span v-if="course.wishlistUsers?.length === 1" style="font-weight: bold">Rejoins l'intéressé(e) :</span>
+                <span v-else style="font-weight: bold">Rejoins les {{ course.wishlistUsers?.length }} intéressé{{ course.wishlistUsers?.length > 1 ? 's' : '' }} :</span><br />
                 <InlineAvatars
                   :course-id="course?.id"
                   :avatars="avatarKeys"

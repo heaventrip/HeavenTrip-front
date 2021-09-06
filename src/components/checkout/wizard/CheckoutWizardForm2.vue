@@ -5,11 +5,13 @@
       <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
         <div class="participant-img-container position-relative">
           <img
+            v-if="avatarKey"
             class="participant-img mr-3"
             fluid
-            src="https://res.cloudinary.com/heaventrip/image/upload/v1624841583/yow5loelun43c3xbdbiw.jpg"
-            style="height: 50px; border: 1px solid #292f33; box-shadow: none; outline: none"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
+            style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
           />
+          <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
           <span class="participant-check" style="border: 4px solid #ebebeb"></span>
         </div>
         <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
@@ -21,15 +23,17 @@
             </li>
             <li>
               <h6 class="detail-head mb-0">Matériel</h6>
-              <p class="detail-desc mb-0">Avec location</p>
+              <p class="detail-desc mb-0">{{ booker.booking.equipmentRental ? 'Avec' : 'Sans' }} location</p>
             </li>
             <li data-toggle="tooltip" data-placement="top" title="SUP-PADDLE - PLONGéE SOUS MARINE">
-              <h6 class="detail-head mb-0">2 activités en +</h6>
-              <p class="detail-desc mb-0">sélectionnées</p>
+              <h6 class="detail-head mb-0">{{ booker.booking.extraActivities.length }} activité{{ booker.booking.extraActivities.length > 1 ? 's' : '' }} en +</h6>
+              <p class="detail-desc mb-0">sélectionnée{{ booker.booking.extraActivities.length > 1 ? 's' : '' }}</p>
             </li>
           </ul>
         </div>
-        <div class="ml-auto text-right check-amount-head">Mon séjour<br /><strong class="check-amount d-block mt-1">2 220 &euro;</strong></div>
+        <div class="ml-auto text-right check-amount-head">
+          Mon séjour<br /><strong class="check-amount d-block mt-1">{{ course?.price + calcExpense(booker) }} &euro;</strong>
+        </div>
       </h6>
       <div class="d-flex flex-column">
         <button class="btn text-uppercase personalize-btn rounded-0 border-0 px-4 flex-1">MODIFIER</button>
@@ -40,7 +44,7 @@
     <div class="card-header rounded-0 border-0 p-0 d-flex">
       <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
         <div class="participant-img-container position-relative">
-          <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="50" style="margin-right: 1rem" fill="#292f33" />
+          <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
         </div>
         <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName }}</strong>
         <div class="completion-details">
@@ -51,15 +55,17 @@
             </li>
             <li>
               <h6 class="detail-head mb-0">Matériel</h6>
-              <p class="detail-desc mb-0">Avec location</p>
+              <p class="detail-desc mb-0">{{ extraParticipant.booking.equipmentRental ? 'Avec' : 'Sans' }} location</p>
             </li>
             <li data-toggle="tooltip" data-placement="top" title="SUP-PADDLE - PLONGéE SOUS MARINE">
-              <h6 class="detail-head mb-0">2 activités en +</h6>
-              <p class="detail-desc mb-0">sélectionnées</p>
+              <h6 class="detail-head mb-0">{{ extraParticipant.booking.extraActivities.length }} activité{{ extraParticipant.booking.extraActivities.length > 1 ? 's' : '' }} en +</h6>
+              <p class="detail-desc mb-0">sélectionnée{{ extraParticipant.booking.extraActivities.length > 1 ? 's' : '' }}</p>
             </li>
           </ul>
         </div>
-        <div class="ml-auto text-right check-amount-head">Mon séjour<br /><strong class="check-amount d-block mt-1">2 220 &euro;</strong></div>
+        <div class="ml-auto text-right check-amount-head">
+          Mon séjour<br /><strong class="check-amount d-block mt-1">{{ course?.price + calcExpense(extraParticipant) }} &euro;</strong>
+        </div>
       </h6>
       <div class="d-flex flex-column">
         <button class="btn text-uppercase personalize-btn rounded-0 border-0 px-4 flex-1">MODIFIER</button>
@@ -82,7 +88,7 @@
           <div class="col-12 col-lg-6">
             <div class="custom-control p-0 pb-3 mt-2">
               <label class="" for="booker-ins1">
-                <input v-model="localBooker.booking.insurance" value="ins1" type="radio" id="booker-ins1" name="insurance_plan_booker" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" :value="{ ins1: 60 }" type="radio" id="booker-ins1" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
               </label>
             </div>
@@ -98,7 +104,7 @@
           <div class="col-12 col-lg-6">
             <div class="custom-control p-0 pb-3 mt-2">
               <label class="" for="booker-ins2">
-                <input v-model="localBooker.booking.insurance" value="ins2" type="radio" id="booker-ins2" name="insurance_plan_booker" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" :value="{ ins2: 60 }" type="radio" id="booker-ins2" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
               </label>
             </div>
@@ -114,7 +120,7 @@
           <div class="col-12">
             <div class="custom-control p-0 pb-2 mt-4">
               <label class="" for="booker-ins3">
-                <input v-model="localBooker.booking.insurance" value="ins2" type="radio" id="booker-ins3" name="insurance_plan_booker" class="custom-control p-0-input" />
+                <input v-model="localBooker.booking.insurance" :value="{ ins3: 0 }" type="radio" id="booker-ins3" name="insurance_plan_booker" class="custom-control p-0-input" />
                 <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
               </label>
             </div>
@@ -141,7 +147,14 @@
           <div class="col-12 col-lg-5">
             <div class="custom-control p-0 pb-2 mt-4">
               <label class="" :for="`extraPart${index}-ins1`">
-                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins1`" :name="`insurance_plan_extraPart${index}`" class="custom-control p-0-input" />
+                <input
+                  v-model="extraParticipant.booking.insurance"
+                  :value="{ ins1: 60 }"
+                  type="radio"
+                  :id="`extraPart${index}-ins1`"
+                  :name="`insurance_plan_extraPart${index}`"
+                  class="custom-control p-0-input"
+                />
                 <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
                   Rapatriment 60&euro;/pers.
                   <div class="ml-auto">
@@ -161,7 +174,14 @@
           <div class="col-12 col-lg-6 offset-lg-1">
             <div class="custom-control p-0 pb-3 mt-2 mb-4">
               <label class="" :for="`extraPart${index}-ins2`">
-                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins2`" :name="`insurance_plan_extraPart${index}`" class="custom-control p-0-input" />
+                <input
+                  v-model="extraParticipant.booking.insurance"
+                  :value="{ ins2: 60 }"
+                  type="radio"
+                  :id="`extraPart${index}-ins2`"
+                  :name="`insurance_plan_extraPart${index}`"
+                  class="custom-control p-0-input"
+                />
                 <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
                   Rapatriment 60&euro;/pers.
                   <div class="ml-auto">
@@ -181,13 +201,15 @@
           <div class="col-12">
             <div class="custom-control p-0 pb-3 mt-2 mb-4">
               <label class="" :for="`extraPart${index}-ins3`">
-                <input v-model="extraParticipant.booking.insurance" type="radio" :id="`extraPart${index}-ins3`" :name="`insurance_plan_extraPart${index}`" class="custom-control p-0-input" />
-                <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
-                  Rapatriment 60&euro;/pers.
-                  <div class="ml-auto">
-                    <img class="" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" />
-                  </div>
-                </span>
+                <input
+                  v-model="extraParticipant.booking.insurance"
+                  :value="{ ins3: 0 }"
+                  type="radio"
+                  :id="`extraPart${index}-ins3`"
+                  :name="`insurance_plan_extraPart${index}`"
+                  class="custom-control p-0-input"
+                />
+                <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
               </label>
             </div>
             <p class="assurance-para font-weight-500">
@@ -204,7 +226,7 @@
 <script>
 export default {
   name: 'CheckoutWizardForm2',
-  props: ['booker', 'extra-participants', 'course'],
+  props: ['booker', 'extra-participants', 'course', 'booker-expense', 'avatar-key'],
   emits: ['complete', 'updated-booker', 'updated-participants'],
   data() {
     return {
@@ -218,7 +240,7 @@ export default {
       else return this.bookerInsuranceFilled
     },
     bookerInsuranceFilled() {
-      return ['ins1', 'ins2', 'ins3'].includes(this.localBooker.booking.insurance)
+      return !!this.localBooker.booking.insurance
     },
     participantsInsuranceFilled() {
       let insurancesArr = this.localExtraParticipants.map((part) => part.booking.insurance)
@@ -241,6 +263,16 @@ export default {
       handler(val) {
         this.$emit('updated-participants', val)
       }
+    }
+  },
+  methods: {
+    calcExpense(participant) {
+      let roomExp = Object.values(participant.booking.room)[0] || 0
+      let insuranceExp = Object.values(participant.booking.insurance)[0] || 0
+      let equipmentExp = participant.booking.equipmentRental ? 50 : 0
+      let activitiesExpArr = participant.booking.extraActivities.map((el) => Object.values(el)[0])
+      let activitiesExp = activitiesExpArr.length ? activitiesExpArr.reduce((s, el) => s + el) : 0
+      return roomExp + insuranceExp + equipmentExp + activitiesExp
     }
   }
 }

@@ -13,13 +13,15 @@
           aria-controls="tripperBooker"
         >
           <div class="participant-img-container position-relative">
-            <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" /><span class="participant-check"></span>
+            <img v-if="avatarKey" class="participant-img mr-3" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${avatarKey}.jpg`" />
+            <InlineSvg v-else class="mr-3" :src="require('@/assets/svg/avatar-empty.svg')" height="70" fill="#292f33" />
+            <span class="participant-check"></span>
           </div>
           <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
             <span class="view-detail">Voir Détails<i class="fas fa-chevron-down ml-2"></i></span>
-            <strong class="check-amount text-dark d-block">{{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro;</strong>
+            <strong class="check-amount text-dark d-block">{{ course?.price + calcExpense(booker) }} &hairsp;&euro;</strong>
           </div>
         </div>
         <div id="tripperBooker" class="collapse" aria-labelledby="tripBooker" data-parent="#tripperaccordion">
@@ -31,7 +33,9 @@
                     <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Chambre Privée</h6>
                     <p class="tripper-list-para mb-0">à partager avec {{ booker.booking.roomMate }}</p>
                   </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
+                  <h6 class="tripper-amount ml-auto mb-0">
+                    <strong>+ {{ booker.booking.room.price || 0 }}€</strong>/pers.
+                  </h6>
                 </div>
               </li>
               <li>
@@ -42,24 +46,28 @@
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0">
                     <!-- TODO dynamic price -->
-                    <strong>{{ booker.booking.equipmentRental ? '+10€' : 'Gratuit' }}</strong>
+                    <strong>{{ booker.booking.equipmentRental ? '+50€' : 'Gratuit' }}</strong>
                   </h6>
                 </div>
               </li>
-              <li>
+              <li v-if="booker.booking.extraActivities.length">
                 <div v-for="extraActivity in booker.booking.extraActivities" :key="extraActivity" class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">{{ extraActivity?.name }}</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">{{ course?.alternatives.find((el) => el.id == Object.keys(extraActivity)[0])?.title }}</h6>
                   </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
+                  <h6 class="tripper-amount ml-auto mb-0">
+                    <strong>+ {{ Object.values(extraActivity)[0] }}€</strong>/pers.
+                  </h6>
                 </div>
               </li>
               <li>
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance {{ booker.booking.insurance }}</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance {{ Object.keys(booker.booking.insurance)[0] }}</h6>
                   </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
+                  <h6 class="tripper-amount ml-auto mb-0">
+                    <strong>+ {{ Object.values(booker.booking.insurance)[0] }}€</strong>/pers.
+                  </h6>
                 </div>
               </li>
             </ul>
@@ -77,13 +85,13 @@
           aria-controls="tripperTwo"
         >
           <div class="participant-img-container position-relative">
-            <img class="participant-img mr-3" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+            <InlineSvg class="mr-3" :src="require('@/assets/svg/avatar-empty.svg')" height="70" fill="#292f33" />
           </div>
           <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName }}</strong>
           <div class="ml-auto text-right check-amount-head">
             <span class="close-detail">Fermer Détails<i class="fas fa-chevron-up ml-2"></i></span>
             <span class="view-detail">Voir Détails<i class="fas fa-chevron-down ml-2"></i></span>
-            <strong class="check-amount text-dark d-block">2 220 &euro;</strong>
+            <strong class="check-amount text-dark d-block">{{ course?.price + calcExpense(extraParticipant) }} &hairsp;&euro;</strong>
           </div>
         </div>
         <div :id="`tripper${index}`" class="collapse" :aria-labelledby="`trip${index}`" data-parent="#tripperaccordion">
@@ -95,7 +103,9 @@
                     <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Chambre PRIvé</h6>
                     <p class="tripper-list-para mb-0">à partager avec {{ extraParticipant.booking.roomMate }}</p>
                   </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
+                  <h6 class="tripper-amount ml-auto mb-0">
+                    <strong>+ {{ extraParticipant.booking.room.price || 0 }}€</strong>/pers.
+                  </h6>
                 </div>
               </li>
               <li>
@@ -105,24 +115,28 @@
                     <p class="tripper-list-para mb-0">{{ extraParticipant.booking.equipmentRental ? 'Avec' : 'Sans' }} location</p>
                   </span>
                   <h6 class="tripper-amount ml-auto mb-0">
-                    <strong>{{ extraParticipant.booking.equipmentRental ? '+10€' : 'Gratuit' }}</strong>
+                    <strong>{{ extraParticipant.booking.equipmentRental ? '+50€' : 'Gratuit' }}</strong>
                   </h6>
                 </div>
               </li>
-              <li>
+              <li v-if="extraParticipant.booking.extraActivities.length">
                 <div v-for="extraActivity in extraParticipant.booking.extraActivities" :key="extraActivity" class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">{{ extraActivity?.name }}</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">{{ course?.alternatives.find((el) => el.id == Object.keys(extraActivity)[0])?.title }}</h6>
                   </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
+                  <h6 class="tripper-amount ml-auto mb-0">
+                    <strong>+ {{ Object.values(extraActivity)[0] }}€</strong>/pers.
+                  </h6>
                 </div>
               </li>
               <li>
                 <div class="trippers-list-div d-flex align-items-center">
                   <span>
-                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance {{ extraParticipant.booking.insurance }}</h6>
+                    <h6 class="text-uppercase mb-0 tripper-list-head font-weight-bold">Assurance {{ Object.keys(extraParticipant.booking.insurance)[0] }}</h6>
                   </span>
-                  <h6 class="tripper-amount ml-auto mb-0"><strong>+ 60€</strong>/pers.</h6>
+                  <h6 class="tripper-amount ml-auto mb-0">
+                    <strong>+ {{ Object.values(extraParticipant.booking.insurance)[0] }}€</strong>/pers.
+                  </h6>
                 </div>
               </li>
             </ul>
@@ -136,7 +150,17 @@
 <script>
 export default {
   name: 'CheckoutWizardValidationRecap',
-  props: ['course', 'booker', 'extra-participants']
+  props: ['course', 'booker', 'extra-participants', 'total-price', 'avatar-key'],
+  methods: {
+    calcExpense(participant) {
+      let roomExp = Object.values(participant.booking.room)[0] || 0
+      let insuranceExp = Object.values(participant.booking.insurance)[0] || 0
+      let equipmentExp = participant.booking.equipmentRental ? 50 : 0
+      let activitiesExpArr = participant.booking.extraActivities.map((el) => Object.values(el)[0])
+      let activitiesExp = activitiesExpArr.length ? activitiesExpArr.reduce((s, el) => s + el) : 0
+      return roomExp + insuranceExp + equipmentExp + activitiesExp
+    }
+  }
 }
 </script>
 

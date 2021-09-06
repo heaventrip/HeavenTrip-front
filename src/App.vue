@@ -20,7 +20,8 @@ export default {
     return {
       initialLoading: false,
       backgroundView: null,
-      currUser: null
+      currUser: null,
+      noSplash: ['NotFound', 'CheckoutSuccess']
     }
   },
   computed: {
@@ -36,7 +37,7 @@ export default {
     $route: {
       immediate: true,
       handler(to, from) {
-        if (from === START_LOCATION && to.name !== 'NotFound') {
+        if (from === START_LOCATION && !this.noSplash.includes(to.name)) {
           this.initialLoading = true
         }
 

@@ -5,6 +5,7 @@ import Profile from '@/views/Profile.vue'
 import Product from '@/views/Product.vue'
 import Search from '@/views/Search.vue'
 import Checkout from '@/views/Checkout.vue'
+import CheckoutSuccess from '@/components/checkout/CheckoutSuccess.vue'
 import NotFound from '@/views/NotFound.vue'
 import Legal from '@/views/Legal.vue'
 import Account from '@/components/connection/Account.vue'
@@ -32,6 +33,14 @@ const routes = [
     name: 'Product',
     component: Product,
     props: true,
+    meta: {
+      allowAnonymous: false
+    }
+  },
+  {
+    path: '/checkout/success',
+    name: 'CheckoutSuccess',
+    component: CheckoutSuccess,
     meta: {
       allowAnonymous: false
     }

@@ -8,8 +8,8 @@
         :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`"
       />
     </div>
-    <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="pSpacing">
-      <transition name="fade" mode="out-in"> </transition>
+    <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[pSpacing, wishlistLoading ? 'cursor: default' : '']">
+      <span id="loading" v-show="wishlistLoading"></span>
       <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
       <div v-else-if="wishlisted !== null" style="position: relative" :style="[pHeartWidth, pHeartHeight]" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
         <transition name="fade">
@@ -39,7 +39,8 @@ export default {
         violetfullscreen: '#65446d',
         grey: '#292f33',
         violet: '#5a3a5f'
-      }
+      },
+      wishlistLoading: false
     }
   },
   computed: {
@@ -74,23 +75,42 @@ export default {
       }
     },
     addToWishlist() {
+      if (this.wishlistLoading) return
+
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
+      this.wishlistLoading = true
+
       if (!this.wishlisted)
         this.$axios
           .post('/wishlists', { wishlist: { courseId: this.$props.courseId } })
-          .then(() => (this.wishlisted = true))
-          .catch((err) => console.log(err))
-      else this.$axios.delete('/wishlists', { wishlist: { courseId: this.$props.courseId } }).then(() => (this.wishlisted = false))
+          .then(() => {
+            this.wishlisted = true
+            this.wishlistLoading = false
+          })
+          .catch((err) => {
+            console.log(err)
+            this.wishlistLoading = false
+          })
+      else
+        this.$axios
+          .delete('/wishlists', { params: { courseId: this.$props.courseId } })
+          .then(() => {
+            this.wishlisted = false
+            this.wishlistLoading = false
+          })
+          .catch(() => {
+            this.wishlistLoading = false
+          })
     }
   },
   created() {
     this.userAvatarId = localStorage.getItem('user.avatarId')
     // check if course is already wishlisted
     this.$axios
-      .get('/wishlists', { wishlist: { courseId: this.$props.courseId } })
+      .get('/wishlists', { params: { courseId: this.$props.courseId } })
       .then(() => (this.wishlisted = true))
       .catch(() => (this.wishlisted = false))
   },
@@ -132,5 +152,27 @@ export default {
 }
 .inline-avatar-img--transparent {
   opacity: 0.5;
+}
+/* SPINNER */
+#loading {
+  display: inline-block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

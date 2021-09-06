@@ -2,7 +2,14 @@
   <div class="login-signup-tab">
     <div class="card card-booker d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
       <div class="d-inline-block" style="position: relative" data-v-9215de46="">
-        <img class="participant-img mr-3" fluid="" src="/img/1.4d5bbf3e.jpg" data-v-9215de46="" />
+        <img
+          v-if="avatarKey"
+          class="participant-img mr-3"
+          fluid
+          :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
+          style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
+        />
+        <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
         <span class="participant-check" data-v-9215de46=""></span>
       </div>
       <InlineSvg :src="require('@/assets/svg/triangle-right.svg')" height="8" style="margin-left: 1rem; margin-right: 1rem" />
@@ -66,7 +73,7 @@
 <script>
 export default {
   name: 'CheckoutWizardParticipants',
-  props: ['booker'],
+  props: ['booker', 'avatar-key'],
   data() {
     return {
       allowForm: false,

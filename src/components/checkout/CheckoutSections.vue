@@ -1,7 +1,7 @@
 <template>
   <div class="checkout-main-container" :style="[activeStep === 'validation' ? 'height: calc(100vh - 170px)' : '']">
-    <div v-if="false" class="top-infos-container">
-      <div class="top-info" type="button" @click="nextStep">Retour</div>
+    <div class="top-infos-container" v-if="activeStep === 'validation'">
+      <div class="top-info" type="button" @click="activeStep = 'insurance'">Retour</div>
       <div class="top-info">aaaaaaaa</div>
       <div class="top-info">aaaaaaaa</div>
       <div class="top-info">aaaaaaaa</div>
@@ -41,12 +41,13 @@
         <transition name="fade" mode="out-in" @before-leave="beforeLeave">
           <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
             <!-- eslint-disable-next-line prettier/prettier -->
-            <CheckoutWizardBooker v-if="activeStep === 'booker'" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBooker" :booker="booker" />
+            <CheckoutWizardBooker v-if="activeStep === 'booker'" :avatar-key="avatarKey" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBooker" :booker="booker" />
             <CheckoutWizardParticipants
               v-else-if="activeStep === 'participants'"
               @complete="(status) => (participantsComplete = status)"
               @updated-participants="setParticipants"
               @clicked-my-infos="activeStep = 'booker'"
+              :avatar-key="avatarKey"
               :booker="booker"
             />
             <CheckoutWizardForm
@@ -54,6 +55,7 @@
               @complete="(status) => (optionsComplete = status)"
               @updated-participants="setParticipants"
               @updated-booker="setBooker"
+              :avatar-key="avatarKey"
               :booker="booker"
               :extra-participants="extraParticipants"
               :course="course"
@@ -63,13 +65,17 @@
               @complete="(status) => (insuranceComplete = status)"
               @updated-participants="setParticipants"
               @updated-booker="setBooker"
+              :avatar-key="avatarKey"
               :booker="booker"
               :extra-participants="extraParticipants"
               :course="course"
+              :booker-expense="bookerExpense"
+              :extra-participants-expense="extraParticipantsExpense"
             />
             <!-- eslint-disable-next-line prettier/prettier -->
-            <CheckoutWizardValidation v-else-if="activeStep === 'validation'" @complete="submitBookingForm" :course="course" :booker="booker" :extra-participants="extraParticipants" />
-            <CheckoutSuccess v-else-if="activeStep === 'success'" />
+            <CheckoutWizardValidation :avatar-key="avatarKey" :total-price="totalPrice" v-else-if="activeStep === 'validation'" @complete="submitBookingForm" :course="course" :booker="booker" :extra-participants="extraParticipants" />
+            <router-view></router-view>
+            <!-- <CheckoutSuccess v-else-if="activeStep === 'success'" /> -->
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
               <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn mr-3" style="border-radius: 0">Précédent</button>
               <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
@@ -89,8 +95,9 @@ import CheckoutWizardParticipants from './wizard/CheckoutWizardParticipants.vue'
 import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
-import CheckoutSuccess from './CheckoutSuccess.vue'
+// import CheckoutSuccess from './CheckoutSuccess.vue'
 import { getUserInfo } from '@/utils/auth'
+// import { loadStripe } from '@stripe/stripe-js'
 
 export default {
   name: 'CheckoutSections',
@@ -99,11 +106,11 @@ export default {
     CheckoutWizardParticipants,
     CheckoutWizardForm,
     CheckoutWizardForm2,
-    CheckoutWizardValidation,
-    CheckoutSuccess
+    CheckoutWizardValidation
+    // CheckoutSuccess
   },
-  emits: ['booker-expense'],
-  props: ['course', 'session'],
+  emits: ['booker-expense', 'extra-participants-expense', 'extra-participants-nb', 'changed-step'],
+  props: ['course', 'session', 'total-price'],
   data() {
     return {
       transitionEntered: false,
@@ -129,58 +136,121 @@ export default {
         },
         booking: {
           room: 0,
-          roomMate: 'a',
+          roomMate: '',
           equipmentRental: null,
           noExtraActivities: false,
           extraActivities: [],
-          comment: 'a',
-          insurance: 'a'
+          comment: '',
+          insurance: ''
         }
       },
       bookerInputsChanged: false,
       updatedBooker: null,
-      updatedExtraParticipants: null
+      updatedExtraParticipants: null,
+      avatarKey: ''
     }
   },
   watch: {
+    extraParticipants: {
+      deep: true,
+      handler(val) {
+        this.$emit('extra-participants-nb', val.length)
+      }
+    },
     bookerExpense(val) {
       this.$emit('booker-expense', val)
     },
-    extraParticipantsExpenses(val) {
-      this.$emit('extra-participants-expenses', val)
+    extraParticipantsExpense(val) {
+      this.$emit('extra-participants-expense', val)
     },
     course: {
       immediate: true,
       handler(val) {
         this.activeStep = 'booker'
+        console.log(val)
       }
     },
     activeStep: {
       immediate: true,
-      handler(val) {
-        this.$emit('changed-step', val)
+      handler(newVal, oldVal) {
+        this.$emit('changed-step', newVal)
+
+        if (oldVal === 'insurance' && newVal === 'options') this.resetDisplay()
       }
     }
   },
   computed: {
     bookerExpense() {
-      if (!this.booker?.booking?.extraActivities?.length) return
-
-      let pricesArr = this.booker.booking.extraActivities.map((id) => this.$props.course.alternatives.find((el) => el.id === id).price)
-      let expense = pricesArr.reduce((s, el) => s + el)
-      return expense
+      return this.bookerEquipmentExpense + this.bookerInsuranceExpense + this.bookerRoomExpense + this.bookerActivitiesExpense
     },
-    extraParticipantsExpenses() {
-      if (!this.extraParticipants.length) return
+    extraParticipantsExpense() {
+      return this.extraParticipantsEquipmentExpense + this.extraParticipantsInsuranceExpense + this.extraParticipantsRoomExpense + this.extraParticipantsActivitiesExpense
+    },
+    bookerEquipmentExpense() {
+      if (!this.booker.booking) return 0
 
-      let pricesArr = this.extraParticipants.map((participant) => {
-        participant.booking.extraActivities.map((id) => this.$props.course.alternatives.find((el) => el.id === id).price)
+      if (this.booker.booking.equipmentRental) return 50
+      else return 0
+    },
+    bookerInsuranceExpense() {
+      if (!this.booker.booking) return 0
+
+      return Object.values(this.booker.booking.insurance)[0] || 0
+    },
+    bookerRoomExpense() {
+      if (!this.booker.booking) return 0
+
+      return Object.values(this.booker.booking.room)[0] || 0
+    },
+    bookerActivitiesExpense() {
+      if (!this.booker.booking) return 0
+
+      let activitiesPrices = this.booker.booking.extraActivities.map((el) => Object.values(el)[0])
+
+      if (!activitiesPrices.length) return 0
+
+      return activitiesPrices.reduce((s, el) => s + el)
+    },
+    extraParticipantsEquipmentExpense() {
+      if (!this.extraParticipants.length) return 0
+
+      let total = 0
+
+      this.extraParticipants.forEach((partic) => {
+        if (partic.booking.equipmentRental) total += 50
       })
-      let expenses = pricesArr.flat().reduce((s, el) => s + el)
-      return expenses
+      return total
     },
-    userAvatarKey() {
-      return this.getUserInfo().avatarKey
+    extraParticipantsInsuranceExpense() {
+      if (!this.extraParticipants.length) return 0
+
+      let total = 0
+
+      this.extraParticipants.forEach((partic) => {
+        total += Object.values(partic.booking.insurance)[0] || 0
+      })
+      return total
+    },
+    extraParticipantsRoomExpense() {
+      if (!this.extraParticipants.length) return 0
+
+      let total = 0
+
+      this.extraParticipants.forEach((partic) => {
+        total += Object.values(partic.booking.room)[0] || 0
+      })
+      return total
+    },
+    extraParticipantsActivitiesExpense() {
+      if (!this.extraParticipants.length) return 0
+
+      let total = 0
+
+      this.extraParticipants.forEach((partic) => {
+        partic.booking.extraActivities.forEach((el) => (total += Object.values(el)[0]))
+      })
+
+      return total
     },
     showMenu() {
       return this.activeStep === 'options' && this.transitionEntered
@@ -190,10 +260,10 @@ export default {
         reservation: {
           equipmentRental: this.booker.booking.equipmentRental,
           comment: this.booker.booking.comment,
-          insurance: this.booker.booking.insurance,
-          roomId: this.booker.booking.room,
+          insurance: Object.keys(this.booker.booking.insurance)[0],
+          roomId: Object.keys(this.booker.booking.room)[0],
           sessionId: this.$props.session.id,
-          alternativeIds: this.booker.booking.extraActivities
+          alternativeIds: this.booker.booking.extraActivities.map((el) => Object.keys(el)[0])
         }
       }
 
@@ -204,9 +274,9 @@ export default {
           params.reservation.extraParticipantsReservationsAttributes.push({
             equipmentRental: part.booking.equipmentRental,
             comment: part.booking.comment,
-            insurance: part.booking.insurance,
-            roomId: part.booking.room,
-            alternativeIds: part.booking.extraActivities,
+            insurance: Object.keys(part.booking.insurance)[0],
+            roomId: Object.keys(part.booking.room)[0],
+            alternativeIds: part.booking.extraActivities.map((el) => Object.keys(el)[0]),
             extraParticipantAttributes: {
               firstName: part.infos.firstName,
               birthDate: part.infos.birthDate,
@@ -258,9 +328,14 @@ export default {
             Authorization: `Bearer ${token}`
           }
         })
-        .then((res) => this.$notify({ type: 'success', text: 'Réservation créée avec succès' }))
-        .catch((err) => alert(err.message))
+        .then((res) => {
+          this.$notify({ group: 'app', type: 'success', text: 'Réservation créée avec succès' })
+        })
+        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response?.data?.message || err.message }))
     }
+  },
+  created() {
+    this.avatarKey = this.getUserInfo().avatar_key
   },
   mounted() {
     // this.submitBookingForm()
@@ -343,6 +418,7 @@ export default {
   display: flex;
   width: max-content;
   position: absolute;
+  z-index: 100;
 }
 .top-info {
   font-weight: 500;

@@ -18,7 +18,14 @@
     <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #ebebeb"></div>
     <div class="participant-img-container position-relative" :class="{ 'participant-opacity': currForm !== 'booker' }">
       <div class="d-inline-block" style="position: relative; margin-left: 3rem">
-        <InlineSvg :src="require(`@/assets/svg/${$parent.userAvatarKey || 'avatar-empty'}.svg`)" class="participant-img mr-3" height="50" fill="#292f33" />
+        <img
+          v-if="avatarKey"
+          class="participant-img mr-3"
+          fluid
+          :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
+          style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
+        />
+        <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
         <span class="participant-check"></span>
       </div>
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ booker.infos.firstName || 'Participant 1' }}</strong>
@@ -43,7 +50,7 @@
         <div class="hidable custom-radio-container">
           <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
             <label class="">
-              <input v-model="localBooker.booking.room" :value="room.id" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
+              <input v-model="localBooker.booking.room" :value="{ [room.id]: room.price }" type="radio" :id="`bookerRoom${index}`" :name="`bookerRoom${index}`" class="" />
               <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
                 <div>
                   <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
@@ -98,7 +105,14 @@
           <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
             <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
               <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
-                <input v-model="localBooker.booking.extraActivities" :value="extraActivity.id" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
+                <input
+                  v-model="localBooker.booking.extraActivities"
+                  :value="{ [extraActivity.id]: extraActivity.price }"
+                  type="checkbox"
+                  id="customRadio7"
+                  class=""
+                  :disabled="localBooker.booking.noExtraActivities"
+                />
                 <span class="font-weight-bold text-uppercase">
                   <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
                   <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
@@ -137,7 +151,7 @@
               <label class="">
                 <input
                   v-model="localExtraParticipants[currFormParticipant].booking.room"
-                  :value="room.id"
+                  :value="{ [room.id]: room.price }"
                   type="radio"
                   :id="`extraPart${currFormParticipant}-${index}`"
                   :name="`extraPartRoom${currFormParticipant}-${index}`"
@@ -214,7 +228,7 @@
                 <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
                   <input
                     v-model="localExtraParticipants[currFormParticipant].booking.extraActivities"
-                    :value="extraActivity.id"
+                    :value="{ [extraActivity.id]: extraActivity.price }"
                     type="checkbox"
                     :id="`extraPart${currFormParticipant}-activ0`"
                     class=""
@@ -266,7 +280,7 @@
 <script>
 export default {
   name: 'CheckoutWizardForm',
-  props: ['booker', 'extra-participants', 'course'],
+  props: ['booker', 'extra-participants', 'course', 'avatar-key'],
   emits: ['complete', 'updated-participants', 'updated-booker'],
   data() {
     return {
@@ -302,6 +316,12 @@ export default {
       this.initFormDisplay('extra-participant')
       document.querySelector('.card-header').scrollIntoView(false) // scroll top of div
     },
+    resetDisplay() {
+      document.querySelectorAll('.card-body').forEach((card) => {
+        card.removeAttribute('style')
+        card.querySelector('.hidable').style.display = ''
+      })
+    },
     nextFormStep(step) {
       let nextCard = document.querySelectorAll('.card-body')[step]
       nextCard.querySelector('.hidable').style.display = ''
@@ -331,10 +351,10 @@ export default {
       else return this.bookerBookingFilled
     },
     bookerBookingFilled() {
-      return this.bookerRoomFilled && this.bookerEquipmentFilled && this.bookerActivitiesFilled && this.bookerNoteFilled
+      return this.bookerRoomFilled && this.bookerEquipmentFilled && this.bookerActivitiesFilled
     },
     participantsBookingFilled() {
-      return this.extraParticipantRoomFilled && this.extraParticipantEquipmentFilled && this.extraParticipantActivitiesFilled && this.extraParticipantNoteFilled
+      return this.extraParticipantRoomFilled && this.extraParticipantEquipmentFilled && this.extraParticipantActivitiesFilled
     },
     bookerRoomFilled() {
       return !!this.localBooker.booking.room
@@ -344,9 +364,6 @@ export default {
     },
     bookerActivitiesFilled() {
       return this.localBooker.booking.noExtraActivities || this.localBooker.booking.extraActivities.length
-    },
-    bookerNoteFilled() {
-      return !!this.localBooker.booking.comment
     },
     extraParticipantRoomFilled() {
       if (!this.localExtraParticipants.length) return
@@ -360,10 +377,6 @@ export default {
     extraParticipantActivitiesFilled() {
       if (!this.localExtraParticipants.length) return
       return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities || this.localExtraParticipants[this.currFormParticipant].booking.extraActivities.length
-    },
-    extraParticipantNoteFilled() {
-      if (!this.localExtraParticipants.length) return
-      return !!this.localExtraParticipants[this.currFormParticipant].booking.comment
     }
   },
   watch: {
@@ -383,7 +396,6 @@ export default {
       }
     },
     extraParticipantRoomFilled(val) {
-      alert('room ok')
       if (val) this.nextFormStep(1)
     },
     extraParticipantEquipmentFilled(val) {
@@ -391,10 +403,6 @@ export default {
     },
     extraParticipantActivitiesFilled(val) {
       if (val) this.nextFormStep(3)
-    },
-    extraParticipantNoteFilled(val) {
-      // TODO add btns then show recap
-      // if (val) this.nextFormStep(4)
     },
     filled(val) {
       if (val) this.$emit('complete', true)
