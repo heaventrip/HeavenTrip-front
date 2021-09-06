@@ -85,7 +85,7 @@ export default {
   font-size: 0.75rem;
   font-weight: 400;
   font-family: 'Muli', sans-serif;
-  background-color: #f1f1f1;
+  background-color: #f5f5f5;
   letter-spacing: 0.3px;
   padding: 8px 17px;
   border-radius: 10px;

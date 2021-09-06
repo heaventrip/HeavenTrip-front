@@ -107,8 +107,14 @@
           </swiper>
         </transition>
         <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
-        <div class="d-flex flex-column" style="padding: 1rem; padding-left: 1rem; padding-top: 2rem; height: calc(100% - 25vh)">
-          <div class="font-weight-bold mb-5">DISCUSSIONS ENTRE TRIPPERS :</div>
+        <div class="messaging d-flex flex-column">
+          <div class="messaging-header">
+            <div class="font-weight-bold" style="color: #292f33">JE PAPOTE AVEC :</div>
+            <div class="messaging-tabs">
+              <div class="tab-btn-participant"># LES PARTICIPANTS</div>
+              <div class="tab-btn-interested"># TOUT LES INTERESSES</div>
+            </div>
+          </div>
           <div class="messages-container" @wheel.stop style="">
             <!-- <Message
               :user="{
@@ -128,14 +134,14 @@
               createdAt="2021-08-05T11:13:32.612Z"
               position="left"
             /> -->
-            <ul class="list-unstyled mb-0 discuss-list mt-3" v-if="messages">
+            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
           </div>
-          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #ebebeb">
-            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 2rem" rows="2"> </textarea>
+          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
+            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 3rem" rows="2"> </textarea>
             <button class="ml-3 fg-1 text-center" type="submit">
               <InlineSvg class="svg-btn-send" :src="require('@/assets/svg/send.svg')" height="20" />
             </button>
@@ -412,11 +418,17 @@ export default {
 </script>
 
 <style scoped>
+.svg-btn-send {
+  fill: #ffffff;
+  height: 17px;
+  margin-bottom: 3px;
+  transition: all 0.3s ease;
+}
 .svg-btn-send:hover {
-  fill: #a2a2a2;
+  fill: #d82558;
 }
 .svg-btn-send:active {
-  fill: #d3d3d3;
+  fill: #a51e44;
 }
 .customized-prev {
   display: none !important;
@@ -427,21 +439,46 @@ export default {
 button {
   all: unset;
 }
+.messaging {
+  background-color: #fcfcfc;
+  padding: 0.4rem 1rem 0rem 0rem;
+  height: calc(100% - 25vh);
+}
+.messaging-header {
+  display: flex;
+  height: 90px;
+  max-height: 90px;
+  min-height: 90px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+.messaging-tabs {
+  display: flex;
+  font-size: 0.76rem;
+}
+.messages-container-ul {
+  padding: 0px 8px 0px 8px;
+}
 .messages-container::-webkit-scrollbar {
   width: 12px;
 }
 
 .messages-container::-webkit-scrollbar-track {
-  background: #ebebeb;
+  background: #f5f5f5;
 }
 
 .messages-container::-webkit-scrollbar-thumb {
   background-color: #292f33;
   border-radius: 10px;
-  border: 5px solid #ebebeb;
+  border: 5px solid #f5f5f5;
 }
 .messages-container {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   display: flex;
+  background-color: #fcfcfc;
   flex-direction: column-reverse;
   overflow-y: scroll;
   padding-left: 2.5rem;
@@ -468,11 +505,15 @@ button {
   background: url('../../assets/svg/send.svg') center / contain no-repeat;
 }
 .reply-container {
+  background-color: #5a3a5f;
+  color: white !important;
   width: 85%;
   overflow: visible !important;
+  padding: 15px;
+  height: 50px;
 }
 .reply-container::placeholder {
-  color: #292f33;
+  color: #ffffff;
   font-weight: 500;
 }
 .reply-container:focus {
@@ -497,7 +538,7 @@ button {
   position: fixed;
   background-color: white;
   box-shadow: 0 0 3px #ebebeb;
-  height: calc(100vh - 32px - 100px - 40px); /* substract top nav and booking footer */
+  height: calc(100vh - 71px - 100px - 40px); /* substract top nav and booking footer */
 }
 @media only screen and (min-width: 1441px) {
   .aside-slider {
