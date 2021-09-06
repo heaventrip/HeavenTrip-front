@@ -5,7 +5,7 @@
         Ton espace client te permet d’avoir une page spéciale Tripper "public". Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus
         tard via ton espace client, aucun problème.
       </div>
-      <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
+      <div class="sperator-genre mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
       <div class="div-group">
         <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -23,10 +23,10 @@
         Tu verras, sur le site tu pourras voir à plusieurs endroits les photos des intéressés et des participants aux stages et accéder a leur profils. Un bon moyen de connaitre les Trippers avec qui
         tu vas partir ! C’est cool de jouer le jeu et de faire vivre cette communauté :)
       </div>
-      <div class="mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
+      <div class="sperator-avatar mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex flex-column justify-content-center text-right mr-1">
-          <p class="upload-text mb-3" style="font-size: 0.8rem">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
+          <p class="upload-text-left upload-text mb-3" style="font-size: 0.8rem">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
           <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
           <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 4MB</p>
         </div>
@@ -77,7 +77,7 @@
       <label v-else-if="showAvatarValidationButton && !error && !showLoaderUploadImg" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4">
         Valider ma photo de profil
       </label>
-      <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="rounded-0 px-4" style="position: absolute; margin-top: 70px; color: tomato">{{ error }}</label>
+      <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="label-error rounded-0 px-4" style="position: absolute; margin-top: 70px; color: tomato">{{ error }}</label>
     </div>
     <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
       <div class="descr-text">
@@ -95,7 +95,7 @@
         Un e-mail de confirmation vous a été envoyé a l'adresse {{ user.email ? user.email : '' }}, merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur
         Heaven Trip. A tout de suite !
       </div>
-      <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
+      <div class="separator-success mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
       <form class="group-btn">
         <Button class="btn-resend-email" text="RENVOYER LE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation" />
         <Button
@@ -397,6 +397,9 @@ export default {
 .separator {
   margin-bottom: 90px;
 }
+.separator-success {
+  margin-bottom: 90px;
+}
 .info-textarea {
   height: 130px;
   padding-left: 25px;
@@ -483,6 +486,53 @@ export default {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-height: 950px) {
+  .descr-text {
+    font-size: 0.75rem;
+    line-height: 1.7;
+  }
+  .form-label {
+    font-size: 0.9rem;
+  }
+  .profile-gender-btn {
+    font-size: 1rem;
+  }
+  .upload-text-left {
+    font-size: 0.75rem !important;
+  }
+  .avatar-validation-btn {
+    padding-top: 14px;
+    font-size: 0.75rem;
+    width: 200px;
+    margin-top: 51px;
+    margin-left: 230px;
+  }
+  .separator {
+    margin-bottom: 5vh;
+  }
+  .sperator-genre {
+    margin-bottom: 9vh !important;
+  }
+  .sperator-avatar {
+    margin-bottom: 5vh !important;
+  }
+  .separator-success {
+    margin-top: 9vh !important;
+    margin-bottom: 9vh !important;
+  }
+  .lds-dual-ring {
+    margin-top: 43px;
+  }
+  .label-error {
+    margin-top: 64px !important;
+    font-size: 0.9rem !important;
+  }
+  .info-textarea {
+    height: 120px;
+    margin-bottom: 52px;
   }
 }
 </style>

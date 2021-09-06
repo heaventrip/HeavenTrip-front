@@ -223,4 +223,10 @@ label > .text-danger {
 .password-link {
   font-size: 0.7rem;
 }
+@media only screen and (max-height: 950px) {
+  .form-control,
+  .form-group {
+    font-size: 0.8rem;
+  }
+}
 </style>

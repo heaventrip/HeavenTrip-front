@@ -12,7 +12,7 @@
       </svg>
     </svg>
     <div class="head-block ml-4">
-      <p class="sub-heading mb-2">{{ course.sports ? course.sports[0].name : 'Sport' }}</p>
+      <p class="sub-heading mb-2">{{ course?.sports ? course.sports[0].name : 'Sport' }}</p>
       <h4 class="heading mb-0">RECAP DU STAGE</h4>
     </div>
   </div>
@@ -25,14 +25,14 @@
       </div>
       <span class="activity-head img-block d-none d-lg-flex align-items-center ml-auto">
         <div style="width: 1px; height: 1.5rem; border-left: 1px dashed #292f33"></div>
-        <InlineSvg v-if="course.sports && course.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="60" />
+        <InlineSvg v-if="course?.sports && course?.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course?.sports[0].picto}.svg`)" height="60" />
       </span>
     </div>
     <div class="card-body">
       <h6 class="activity-head d-flex d-lg-none align-items-center mb-3">
         Les activités inclues :
         <span class="img-block d-flex ml-auto">
-          <InlineSvg v-if="course.sports && course.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" height="30" />
+          <InlineSvg v-if="course?.sports && course?.sports[0].picto !== null" class="img_icon" :src="require(`@/assets/svg/${course?.sports[0].picto}.svg`)" height="30" />
         </span>
       </h6>
       <p class="content mt-3" style="margin-bottom: 2.5rem">
@@ -108,8 +108,8 @@
             <div style="position: relative">
               <InlineSvg v-if="course?.level?.step" :src="require(`@/assets/svg/intensity-${course?.level?.step}.svg`)" height="150px" />
               <InlineSvg
-                v-if="course?.sports && course.sports[0].picto"
-                :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)"
+                v-if="course?.sports && course?.sports[0].picto"
+                :src="require(`@/assets/svg/${course?.sports[0].picto}.svg`)"
                 height="35%"
                 fill="#d82558"
                 style="left: 34%; top: 34%; position: absolute"
@@ -120,7 +120,7 @@
                 Niveau : <strong class="ml-2">{{ course?.level?.step }}</strong
                 >&nbsp;/4
               </h6>
-              <h6 class="status-text mb-0">{{ course?.level.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
+              <h6 class="status-text mb-0">{{ course?.level?.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
             </span>
           </div>
         </div>
@@ -133,7 +133,7 @@
             <span class="ml-4">
               <h6 class="level-text">
                 Intensité physique :
-                <strong class="ml-2">{{ course?.intensity.step }}</strong
+                <strong class="ml-2">{{ course?.intensity?.step }}</strong
                 >&nbsp;/4
               </h6>
               <h6 class="status-text mb-0">{{ course?.intensity?.name }} <i class="fas fa-info-circle text-pink ml-2" style="font-size: 1.2rem"></i></h6>
@@ -158,7 +158,7 @@
             <span class="d-inline-block" style="vertical-align: baseline">Est inclus :</span>
           </div>
           <ul class="list-unstyled content-list equip mb-4">
-            <li v-for="includedService in course.includedServices" :key="includedService">
+            <li v-for="includedService in course?.includedServices" :key="includedService">
               <a class="text-reset" href="#">{{ includedService.title }}</a>
             </li>
           </ul>
@@ -169,8 +169,8 @@
             <span class="d-inline-block" style="vertical-align: baseline">Non inclus :</span>
           </div>
           <ul class="list-unstyled content-list equip mb-0">
-            <li v-for="(excludedService, index) in course.excludedServices" :key="excludedService">
-              <a class="text-reset" :class="[index === course.excludedServices.length - 1 ? 'pb-0' : '']" href="#">{{ excludedService.title }}</a>
+            <li v-for="(excludedService, index) in course?.excludedServices" :key="excludedService">
+              <a class="text-reset" :class="[index === course?.excludedServices.length - 1 ? 'pb-0' : '']" href="#">{{ excludedService.title }}</a>
             </li>
           </ul>
         </div>
@@ -183,7 +183,7 @@
       <span class="d-inline-block" style="vertical-align: baseline">En options :</span>
     </div>
     <ul class="list-unstyled content-list equip mb-0">
-      <li class="options-item d-inline" v-for="extraService in course.extraServices" :key="extraService">
+      <li class="options-item d-inline" v-for="extraService in course?.extraServices" :key="extraService">
         <a @click.prevent style="cursor: default; border-bottom: none" class="text-reset" href="#">{{ extraService.title }}</a>
       </li>
     </ul>

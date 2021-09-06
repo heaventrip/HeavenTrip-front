@@ -71,7 +71,12 @@
         <InlineSvg class="title-connection" :src="require('@/assets/svg/logo-small.svg')" height="60" />
       </div>
       <div class="form-container" :class="[{ 'form-container-login': activeTab === 'login' }, { 'form-container-signup': activeTab === 'signup' }, { 'form-container-infos': activeTab === 'infos' }]">
-        <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
+        <div
+          class="d-flex connection-nav-container connection-nav-container-info"
+          :class="[{ 'form-container-infos-avatar': activeInfoTab === 'avatar' }]"
+          style="margin-bottom: 110px"
+          v-if="activeTab === 'infos'"
+        >
           <div
             v-if="!isSuccess"
             @click="activeInfoTabByName('gender')"
@@ -198,6 +203,7 @@
       <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
         <div class="mb-4" style="color: #fff; font-weight: 400">C'est la première fois ?</div>
         <Button
+          class="btn-change-connection"
           text="Je n'ai pas encore de compte"
           px="1.5rem"
           size=".8rem"
@@ -216,10 +222,10 @@
       <div v-else-if="activeTab === 'signup'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: white">
         <div class="mb-4" style="color: #292f33">Tripper, je suis déjà !</div>
         <Button
+          class="btn-change-connection"
           id="bttn-have-account"
           text="J'ai déjà un compte"
           px="1.5rem"
-          size=".8rem"
           height="50px"
           width="60%"
           weight="bold"
@@ -324,7 +330,7 @@ export default {
     createTsConnectionTab() {
       let borderSelection = document.querySelector('.border-selection')
       let tlConnectionTab = gsap.timeline().pause()
-
+      console.log(window.innerWidth)
       tlConnectionTab.to(borderSelection, { width: '94', x: '+=116', ease: 'power1.out', duration: 0.06 })
 
       this.tlConnectionTab = tlConnectionTab
@@ -382,6 +388,7 @@ export default {
   color: white;
 }
 #btn-skip-step {
+  z-index: 10;
   position: absolute;
   bottom: 1rem;
   right: 3rem;
@@ -393,7 +400,7 @@ export default {
   font-weight: 400;
 }
 .purple-container__content {
-  width: 50%;
+  width: 52%;
 }
 .purple-container__svgs {
   margin-right: 30px;
@@ -545,6 +552,11 @@ export default {
 .purple-container_groupe {
   margin-bottom: 1rem;
 }
+@media only screen and (min-width: 1460px) and (max-height: 950px) {
+  .purple-container__svgs {
+    margin-right: 0px;
+  }
+}
 @media only screen and (max-width: 1460px) {
   .grey-container-width {
     width: 64% !important;
@@ -554,7 +566,7 @@ export default {
     margin-right: 0px;
   }
   .purple-container__content {
-    width: 59%;
+    width: 62%;
   }
   .purple-container__paragraph-nb {
     display: none;
@@ -575,7 +587,6 @@ export default {
     min-height: 32px;
   }
 }
-
 @media only screen and (max-width: 1250px) {
   .form-container-login,
   .form-container-signup {
@@ -585,16 +596,26 @@ export default {
 @media only screen and (max-width: 1150px) {
   .form-container-login,
   .form-container-signup {
-    width: 35vw;
+    width: 343px;
   }
 }
 @media only screen and (max-height: 950px) {
+  .connection-nav-container-info {
+    margin-bottom: 6vh !important;
+  }
+  .purple-container__paragraph-nb {
+    display: none;
+  }
   .form-container-form {
-    margin-top: 45px;
+    margin-top: 35px;
+  }
+  .connection-nav-button {
+    font-size: 0.8rem;
   }
   .purple-container__block {
-    margin-top: 3rem !important;
-    padding-bottom: 7vh;
+    margin-top: 3.5rem !important;
+    margin-bottom: 3rem;
+    padding-bottom: 11vh;
     line-height: 1.2rem;
   }
   .purple-container__groupe {
@@ -609,7 +630,7 @@ export default {
   }
   .purple-container__footer {
     font-size: 0.85rem;
-    margin-top: 3rem !important;
+    margin-top: 0rem !important;
   }
   #svg-logo-white {
     height: 29px;
@@ -619,16 +640,16 @@ export default {
 }
 @media only screen and (max-height: 800px) {
   .form-container {
-    margin-top: 15vh;
+    margin-top: 21vh;
   }
   .form-container-login,
   .form-container-signup {
     margin-top: 13vh;
   }
   .purple-container__block {
-    margin-top: 2rem !important;
-    padding-bottom: 5vh;
-    line-height: 1.1rem;
+    margin-top: 3rem !important;
+    padding-bottom: 10vh;
+    line-height: 1.3rem;
   }
   .purple-container__groupe {
     margin-bottom: 2vh !important;
@@ -639,9 +660,12 @@ export default {
   .purple-container__svgs {
     width: 92px !important;
   }
+  .purple-container__svgs svg {
+    height: 35px !important;
+  }
   .purple-container__footer {
     font-size: 0.85rem;
-    margin-top: 3rem !important;
+    margin-top: 0rem !important;
   }
   #svg-logo-white {
     height: 29px;
