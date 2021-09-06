@@ -70,7 +70,7 @@
         <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
         <InlineSvg class="title-connection" :src="require('@/assets/svg/logo-small.svg')" height="60" />
       </div>
-      <div class="form-container" :style="[activeTab === 'infos' ? 'width: 600px' : 'width: 50%']">
+      <div class="form-container" :class="[{ 'form-container-login': activeTab === 'login' }, { 'form-container-signup': activeTab === 'signup' }, { 'form-container-infos': activeTab === 'infos' }]">
         <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
           <div
             v-if="!isSuccess"
@@ -144,7 +144,7 @@
           </div>
           <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
         </div>
-        <form style="margin-top: 50px">
+        <form class="form-container-form">
           <transition name="fade-fast" mode="out-in">
             <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="$router.push({name: 'Account', params: {activeTab: 'signup'}})" @clicked-password-forgotten="activeTab = 'password'" /> -->
             <!-- <FormSignup v-if="activeTab === 'signup'" @completed="bringInfoForm" @clicked-existing-account="$router.push({name: 'Account', params: {activeTab: 'login'}})"/> -->
@@ -314,8 +314,7 @@ export default {
       this.showInfoScreen()
     },
     skipStep() {
-      console.log('tdff')
-      this.$refs.formInfos.activeStep++
+      this.$refs.formInfos.skipStep(this.activeInfoTab)
     },
     activeInfoTabByName(tabName) {
       if (this.$refs.formInfos.stepper[tabName].authorize) {
@@ -387,6 +386,11 @@ export default {
   bottom: 1rem;
   right: 3rem;
   cursor: pointer;
+}
+#btn-skip-step p {
+  letter-spacing: 0.03rem;
+  font-family: inherit;
+  font-weight: 400;
 }
 .purple-container__content {
   width: 50%;
@@ -530,6 +534,13 @@ export default {
 }
 .form-container {
   margin-top: 21vh;
+  width: 50%;
+}
+.form-container-infos {
+  width: 600px;
+}
+.form-container-form {
+  margin-top: 50px;
 }
 .purple-container_groupe {
   margin-bottom: 1rem;
@@ -543,7 +554,7 @@ export default {
     margin-right: 0px;
   }
   .purple-container__content {
-    width: 50%;
+    width: 59%;
   }
   .purple-container__paragraph-nb {
     display: none;
@@ -559,24 +570,83 @@ export default {
     margin-top: 2rem !important;
   }
   #svg-logo-white {
-    margin-top: 13rem !important;
+    margin-top: 11rem !important;
     height: 32px;
+    min-height: 32px;
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .form-container-login,
+  .form-container-signup {
+    width: 30vw;
+  }
+}
+@media only screen and (max-width: 1150px) {
+  .form-container-login,
+  .form-container-signup {
+    width: 35vw;
   }
 }
 @media only screen and (max-height: 950px) {
+  .form-container-form {
+    margin-top: 45px;
+  }
+  .purple-container__block {
+    margin-top: 3rem !important;
+    padding-bottom: 7vh;
+    line-height: 1.2rem;
+  }
+  .purple-container__groupe {
+    margin-bottom: 3vh !important;
+  }
+  .purple-container__paragraph {
+    font-size: 0.78rem;
+  }
+  .purple-container__svgs {
+    width: 92px !important;
+    padding-left: 0rem !important;
+  }
+  .purple-container__footer {
+    font-size: 0.85rem;
+    margin-top: 3rem !important;
+  }
+  #svg-logo-white {
+    height: 29px;
+    min-height: 29px;
+    margin-top: 18vh !important;
+  }
+}
+@media only screen and (max-height: 800px) {
   .form-container {
     margin-top: 15vh;
   }
-}
-@media only screen and (max-height: 600px) {
-  .form-container {
-    margin-top: 12vh;
+  .form-container-login,
+  .form-container-signup {
+    margin-top: 13vh;
+  }
+  .purple-container__block {
+    margin-top: 2rem !important;
+    padding-bottom: 5vh;
+    line-height: 1.1rem;
+  }
+  .purple-container__groupe {
+    margin-bottom: 2vh !important;
+  }
+  .purple-container__paragraph {
+    font-size: 0.75rem;
+  }
+  .purple-container__svgs {
+    width: 92px !important;
+  }
+  .purple-container__footer {
+    font-size: 0.85rem;
+    margin-top: 3rem !important;
+  }
+  #svg-logo-white {
+    height: 29px;
+    min-height: 29px;
+    margin-top: 18vh !important;
   }
 }
-/*
-@media only screen and (max-width: 1200px) {
-  .purple-container__content {
-    width: 60%;
-  }
-} */
 </style>

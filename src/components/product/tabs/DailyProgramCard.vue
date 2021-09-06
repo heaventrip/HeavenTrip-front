@@ -92,6 +92,7 @@ export default {
   font-weight: 400;
   display: initial;
   font-size: 0.844rem;
+  font-family: inherit;
 }
 .daily-program-card .header .informations li img {
   margin-right: 10px;

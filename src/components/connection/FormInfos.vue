@@ -219,6 +219,14 @@ export default {
     }
   },
   methods: {
+    skipStep(nameStep) {
+      this.stepper[nameStep].valid = true
+      let index = this.activeInfoTabs.findIndex((elem) => elem === nameStep) + 1
+      if (index != 0) {
+        this.stepper[this.activeInfoTabs[index]].authorize = true
+        this.activeStep++
+      }
+    },
     toggleShow() {
       this.show = !this.show
     },
