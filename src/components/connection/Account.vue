@@ -388,7 +388,8 @@ export default {
   color: white;
 }
 #svg-logo-white {
-  margin-top: 21vh !important;
+  /* margin-top: 21vh !important; */
+  margin-top: calc(23vh - 40px) !important;
   max-height: 40px;
   min-height: 35px;
   height: 3vw;
@@ -406,7 +407,7 @@ export default {
   font-weight: 400;
 }
 .purple-container__content {
-  width: 52%;
+  width: 55%;
 }
 .purple-container__svgs {
   margin-right: 30px;
@@ -586,7 +587,7 @@ export default {
     display: none;
   } */
   .purple-container__svgs {
-    margin-right: 0px;
+    margin-right: -7px;
   }
   .purple-container__block {
     margin-top: 4rem !important;
