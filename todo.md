@@ -62,7 +62,7 @@ VENDREDI
 SAMEDI
 > finalisation du front /search
 + links (ceux qui manquent)
-+ curseurs swiper à customiser (pas réussi l'autre fois)
+> curseurs swiper à customiser (pas réussi l'autre fois)
 > revoir l'ajout à la wishlist
 
 DIMANCHE
@@ -87,7 +87,7 @@ ___________________________
 
 > Lien home dans la navbar
 > Version dark du dropdown connection
-- Tag nb de médias
+> Tag nb de médias
 > Lightbox du product header => pouvoir voir tout l'album
 > Bug overscroll chat
 > Remplacer les boutons par le composant button donc ac fading etc ("détails et recherche")
@@ -172,11 +172,6 @@ GLOBAL
 
 
 
-
-
-- inverser le picto et le nom en haut a droite
-- mettre les prix tous pareils avec des espaces corrects
-- rajouter les nb de resultats sur la recherche
 - hover sur les avis + micro animations (scale ou border sur l'actif et opacity sur les autres)
 - enlever le picto map sur les avis et mettre petit sépa entre les deux
 - sur la nav garder juste la croix + réduire les icones legerement

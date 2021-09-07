@@ -34,10 +34,10 @@
       class="participant-add position-relative d-flex align-items-center"
       v-for="(extraParticipantForHeader, index) in extraParticipants"
       :key="extraParticipantForHeader"
-      :class="{ 'participant-opacity': extraParticipantForHeader !== localExtraParticipants[currFormParticipant] }"
+      :class="{ 'participant-opacity': extraParticipantForHeader !== localExtraParticipants[currFormParticipant] || currForm !== 'extraParticipant' }"
     >
       <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
-      <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="50" fill="#292f33" />
+      <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="70" fill="#292f33" />
       <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
     </div>
   </div>
@@ -264,14 +264,16 @@
       </div>
     </div>
   </transition>
-  <div class="card p-0" style="position: relative" v-if="extraParticipants.length && !(currForm === 'extraParticipant' && currFormParticipant === extraParticipants.length - 1)">
+  <div class="card p-0" style="position: relative" v-if="notYetLastParticipant">
     <div @click="nextParticipant" class="btn-next-participant" type="button">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
         <div class="d-inline-block" style="position: relative" data-v-9215de46="">
           <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="50" style="margin-left: 1rem; margin-right: 1rem" fill="white" />
         </div>
-        <div class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ localExtraParticipants[currFormParticipant + 1]?.infos.firstName }}</div>
+        <div class="text-uppercase participant-name h6 mb-0 font-weight-bold">
+          {{ currForm === 'booker' ? localExtraParticipants[currFormParticipant].infos.firstName : localExtraParticipants[currFormParticipant + 1].infos.firstName }}
+        </div>
       </div>
     </div>
   </div>
@@ -281,7 +283,7 @@
 export default {
   name: 'CheckoutWizardForm',
   props: ['booker', 'extra-participants', 'course', 'avatar-key'],
-  emits: ['complete', 'updated-participants', 'updated-booker'],
+  emits: ['complete', 'updated-participants', 'updated-booker', 'updated-notYetLastParticipant'],
   data() {
     return {
       currFormParticipant: 0,
@@ -342,7 +344,7 @@ export default {
     },
     nextParticipant() {
       if (this.currForm === 'booker') this.currForm = 'extraParticipant'
-      if (this.currForm === 'extraParticipant' && this.participantsBookingFilled) this.currFormParticipant++
+      else if (this.currForm === 'extraParticipant' && this.participantsBookingFilled) this.currFormParticipant++
     }
   },
   computed: {
@@ -377,6 +379,9 @@ export default {
     extraParticipantActivitiesFilled() {
       if (!this.localExtraParticipants.length) return
       return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities || this.localExtraParticipants[this.currFormParticipant].booking.extraActivities.length
+    },
+    notYetLastParticipant() {
+      return this.extraParticipants.length && !(this.currForm === 'extraParticipant' && this.currFormParticipant === this.extraParticipants.length - 1)
     }
   },
   watch: {
@@ -418,6 +423,12 @@ export default {
       deep: true,
       handler(val) {
         this.$emit('updated-participants', val)
+      }
+    },
+    notYetLastParticipant: {
+      immediate: true,
+      handler(val) {
+        this.$emit('updated-notYetLastParticipant', val)
       }
     }
   },

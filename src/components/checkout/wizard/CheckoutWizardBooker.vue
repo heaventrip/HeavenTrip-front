@@ -14,7 +14,7 @@
               />
               <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
               <h4 class="head font-weight-bold text-uppercase">
-                {{ localBookerInfos.firstName || 'Participant' }}
+                {{ localBooker.infos.firstName || 'Participant' }}
                 <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"
                   ><i class="fas fa-edit mr-2"></i> Modifier</span
                 >
@@ -22,82 +22,141 @@
             </div>
           </div>
           <div class="col-12 col-lg-8">
-            <!-- TODO float labels -->
-            <form class="participants-form contact-form pt-5" :class="{ 'form--disallowed': !allowForm }">
+            <form class="pt-5" :class="{ 'form--disallowed': !allowForm }">
               <div class="row">
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <label>Nom*</label>
-                    <input type="text" name="" placeholder=" " class="form-control" v-model="localBookerInfos.lastName" />
+                    <input
+                      id="booker-lastname"
+                      type="text"
+                      name=""
+                      placeholder=" "
+                      class="form-control"
+                      :class="{ 'field-error': v$.localBooker.infos.lastName.$error }"
+                      v-model="localBooker.infos.lastName"
+                    />
+                    <label for="booker-lastname">Nom*</label>
+                    <div v-if="v$.localBooker.infos.lastName.$errors.length" class="field-error-message">{{ v$.localBooker.infos.lastName.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
-                    <label>Prénom*</label>
-                    <input type="text" name="" placeholder=" " class="form-control" v-model="localBookerInfos.firstName" />
+                    <input
+                      id="booker-firstname"
+                      type="text"
+                      name=""
+                      placeholder=" "
+                      class="form-control"
+                      :class="{ 'field-error': v$.localBooker.infos.firstName.$error }"
+                      v-model="localBooker.infos.firstName"
+                    />
+                    <label for="booker-firstname">Prénom*</label>
+                    <div v-if="v$.localBooker.infos.firstName.$errors.length" class="field-error-message">{{ v$.localBooker.infos.firstName.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <label>DATE DE NAISSANCE*</label>
-                    <input type="date" name="" class="form-control" placeholder=" " required datepicker id="date" v-model="localBookerInfos.birthDate" />
+                    <input
+                      id="booker-birthdate"
+                      type="date"
+                      name=""
+                      class="form-control"
+                      :class="{ 'field-error': v$.localBooker.infos.birthDate.$error }"
+                      placeholder=" "
+                      required
+                      datepicker
+                      v-model="localBooker.infos.birthDate"
+                    />
+                    <label for="booker-birthdate">DATE DE NAISSANCE*</label>
+                    <div v-if="v$.localBooker.infos.birthDate.$errors.length" class="field-error-message">{{ v$.localBooker.infos.birthDate.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
-                  <div class="form-group">
+                  <div class="form-group has-float-label">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label
-                        @click="localBookerInfos.gender = 'f'"
-                        class="btn gender-btn rounded-0 btn-lg px-4"
+                      <div
+                        @click="localBooker.infos.gender = 'f'"
+                        class="btn gender-btn rounded-0 px-4"
                         style="border: 1px solid #292f33"
-                        :class="[localBookerInfos.gender === 'f' ? 'bg-grey text-white' : '']"
-                        >Femme</label
+                        :class="[localBooker.infos.gender === 'f' ? 'bg-grey text-white' : '']"
                       >
-                      <label
-                        @click="localBookerInfos.gender = 'm'"
-                        class="btn gender-btn rounded-0 btn-lg px-4"
+                        Femme
+                      </div>
+                      <div
+                        @click="localBooker.infos.gender = 'm'"
+                        class="btn gender-btn rounded-0 px-4"
                         style="border: 1px solid #292f33"
-                        :class="[localBookerInfos.gender === 'm' ? 'bg-grey text-white' : '']"
-                        >Homme</label
+                        :class="[localBooker.infos.gender === 'm' ? 'bg-grey text-white' : '']"
                       >
+                        Homme
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <label>Téléphone*</label>
-                    <input type="text" name="" placeholder=" " class="form-control" v-model="localBookerInfos.phone" />
+                    <input id="booker-phone" type="text" name="" placeholder=" " class="form-control" :class="{ 'field-error': v$.localBooker.infos.phone.$error }" v-model="localBooker.infos.phone" />
+                    <label for="booker-phone">Téléphone*</label>
+                    <div v-if="v$.localBooker.infos.phone.$errors.length" class="field-error-message">{{ v$.localBooker.infos.phone.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
-                    <label>ADRESSE MAIL*</label>
-                    <input class="form-control" type="email" disabled name="" v-model="localBookerInfos.email" />
+                    <input class="form-control" type="email" disabled name="" v-model="localBooker.infos.email" />
+                    <label for="">ADRESSE MAIL*</label>
                     <i class="fa fa-check check-sym d-none"></i>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <label>Pays*</label>
-                    <input type="text" name="" class="form-control" v-model="localBookerInfos.country" />
+                    <input
+                      id="booker-country"
+                      type="text"
+                      name=""
+                      placeholder=" "
+                      class="form-control"
+                      :class="{ 'field-error': v$.localBooker.infos.country.$error }"
+                      v-model="localBooker.infos.country"
+                    />
+                    <label for="booker-country">Pays*</label>
+                    <div v-if="v$.localBooker.infos.country.$errors.length" class="field-error-message">{{ v$.localBooker.infos.country.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
-                    <label>Adresse*</label>
-                    <input type="text" name="" class="form-control" v-model="localBookerInfos.street" />
+                    <input
+                      id="booker-street"
+                      type="text"
+                      name=""
+                      placeholder=" "
+                      class="form-control"
+                      :class="{ 'field-error': v$.localBooker.infos.street.$error }"
+                      v-model="localBooker.infos.street"
+                    />
+                    <label for="booker-street">Adresse*</label>
+                    <div v-if="v$.localBooker.infos.street.$errors.length" class="field-error-message">{{ v$.localBooker.infos.street.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <label>VILLE*</label>
-                    <input type="text" name="" class="form-control" v-model="localBookerInfos.city" />
+                    <input id="booker-city" type="text" name="" placeholder=" " class="form-control" :class="{ 'field-error': v$.localBooker.infos.city.$error }" v-model="localBooker.infos.city" />
+                    <label for="booker-city">VILLE*</label>
+                    <div v-if="v$.localBooker.infos.city.$errors.length" class="field-error-message">{{ v$.localBooker.infos.city.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
-                    <label>Code postal*</label>
-                    <input type="text" name="" class="form-control" v-model="localBookerInfos.postalCode" />
+                    <input
+                      id="booker-postalcode"
+                      type="text"
+                      name=""
+                      placeholder=" "
+                      class="form-control"
+                      :class="{ 'field-error': v$.localBooker.infos.postalCode.$error }"
+                      v-model="localBooker.infos.postalCode"
+                    />
+                    <label for="booker-postalcode">Code postal*</label>
+                    <div v-if="v$.localBooker.infos.postalCode.$errors.length" class="field-error-message">{{ v$.localBooker.infos.postalCode.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <!-- <div class="col-12">
@@ -127,57 +186,56 @@ export default {
   setup() {
     return { v$: useVuelidate() }
   },
-  validationConfig: {
-    $autoDirty: true
-  },
   data() {
     return {
       allowForm: false,
-      localBookerInfos: this.$props.booker.infos
+      localBooker: this.$props.booker
     }
   },
   validations() {
     return {
-      localBookerInfos: {
-        firstName: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        lastName: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        birthDate: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        phone: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        gender: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        country: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        city: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        street: {
-          required: helpers.withMessage('Ce champ est requis', required)
-        },
-        postalCode: {
-          required: helpers.withMessage('Ce champ est requis', required)
+      localBooker: {
+        infos: {
+          firstName: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          lastName: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          birthDate: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          phone: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          gender: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          country: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          city: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          street: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          },
+          postalCode: {
+            required: helpers.withMessage('Ce champ est requis', required)
+          }
         }
       }
     }
   },
   watch: {
-    localBookerInfos: {
+    localBooker: {
       deep: true,
       handler(val) {
-        this.v$.$touch()
+        this.v$.localBooker.infos.$touch()
         this.$emit('updated-booker-infos', val)
       }
     },
-    'v$.$error': {
+    'v$.localBooker.infos.$error': {
       handler(error) {
         if (!error) this.$emit('complete', true)
         else this.$emit('complete', false)
@@ -230,14 +288,20 @@ export default {
   box-shadow: rgb(240, 240, 240) 0px 0px 6px;
   border-radius: 0 !important;
 }
+.form-group > label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #292f33;
+}
 .form--disallowed {
   opacity: 0.3;
   pointer-events: none;
 }
-/* .has-float-label .form-control:placeholder-shown:not(:focus) + label {
-  top: 0.15em;
+.has-float-label .form-control:placeholder-shown:not(:focus) + label {
+  top: 0.8em;
   font-size: 100%;
-  color: #fff;
+  color: #292f33;
   opacity: 1;
 }
 .has-float-label label::after {
@@ -247,21 +311,31 @@ export default {
   left: 0;
 }
 .form-group {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 .form-control {
   padding-left: 0;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #ffffff33;
+  border-bottom: 1px solid #292f3357;
   background-color: transparent;
   padding-bottom: 0.1rem;
-  color: #fff;
+  color: #292f33;
+  font-weight: 200;
 }
 .form-control:focus {
   background-color: transparent;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid white;
-} */
+  border-bottom: 1px solid #292f33;
+}
+.field-error {
+  border-bottom: 1px solid tomato !important;
+}
+.field-error-message {
+  position: absolute;
+  font-family: Muli, sans-serif;
+  color: tomato;
+  font-size: 0.6rem;
+}
 </style>
