@@ -176,12 +176,12 @@ input[type='date']::-webkit-calendar-picker-indicator {
   margin-bottom: 2rem;
 }
 .form-control {
-  padding-left: 0;
+  padding: 0;
   border-radius: 0;
   border: none;
+  font-size: 0.9rem !important;
   border-bottom: 1px solid #b4b4b4;
   background-color: transparent;
-  padding-bottom: 0.1rem;
   color: #fff;
 }
 label > .text-danger {
