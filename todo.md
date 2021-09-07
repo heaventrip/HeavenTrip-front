@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # front
 - rgpd => vue cookies
 > nullify unselected sess
@@ -172,6 +173,13 @@ GLOBAL
 
 
 
+=======
+HOME
+
+- inverser le picto et le nom en haut a droite
+- mettre les prix tous pareils avec des espaces corrects
+- rajouter les nb de resultats sur la recherche
+>>>>>>> geoff-dev
 - hover sur les avis + micro animations (scale ou border sur l'actif et opacity sur les autres)
 - enlever le picto map sur les avis et mettre petit sépa entre les deux
 - sur la nav garder juste la croix + réduire les icones legerement

@@ -14,32 +14,32 @@
         <InlineSvg id="svg-logo-white" :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
         <div class="purple-container__block mt-auto d-flex flex-column">
           <div class="purple-container__groupe d-flex align-items-center mb-3 mb-xl-5" style="color: white">
-            <div class="purple-container__paragraph-nb mr-4">01</div>
+            <!-- <div class="purple-container__paragraph-nb mr-4">01</div> -->
             <div class="purple-container__paragraph">
               La team d’Heaven Trip conçois de toute pièce les stages sportifs ce qui nous permet de te proposer des expériences hors normes a travers des programmes soutenus et personnalisables.
             </div>
           </div>
           <div class="purple-container__groupe d-flex mb-3 mb-xl-5" style="color: white">
-            <div class="purple-container__paragraph-nb mr-4">02</div>
+            <!-- <div class="purple-container__paragraph-nb mr-4">02</div> -->
             <div class="purple-container__paragraph">
               En solo, en couple, entre potes ? Ici tu intègres un petit groupe avec lequel tu vas partager la totalité de ton stage sportif. Pas d’hôtel ni de buffet à volonté, panique pas ! On te
               laisse découvrir les coulisses…
             </div>
           </div>
           <div class="d-flex" style="color: white">
-            <div class="purple-container__paragraph-nb mr-4">03</div>
+            <!-- <div class="purple-container__paragraph-nb mr-4">03</div> -->
             <div class="purple-container__paragraph">
               Vous ! Les Trippers, êtes au centre du concept, c’est pourquoi on vous donne les pleins pouvoirs sur ce site. Profil public, messagerie instantanée… Devenez la communauté N°1 de
               l’évasion sportive !
             </div>
           </div>
         </div>
-        <div class="purple-container__footer my-auto text-center mt-5">
+        <div class="purple-container__footer text-center">
           <div style="color: white; font-weight: 400">De l’évasion sportive pour tous !</div>
           <InlineAvatars :avatars="avatarKeys" />
         </div>
       </div>
-      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2 px-xl-5">
+      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2">
         <InlineSvg :src="require('@/assets/svg/surf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/kitesurf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/paddle.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
@@ -70,8 +70,13 @@
         <div class="title-connection" v-else style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">Se connecter</div>
         <InlineSvg class="title-connection" :src="require('@/assets/svg/logo-small.svg')" height="60" />
       </div>
-      <div class="form-container" :style="[activeTab === 'infos' ? 'width: 600px' : 'width: 50%']">
-        <div class="d-flex connection-nav-container" style="margin-bottom: 110px" v-if="activeTab === 'infos'">
+      <div class="form-container" :class="[{ 'form-container-login': activeTab === 'login' }, { 'form-container-signup': activeTab === 'signup' }, { 'form-container-infos': activeTab === 'infos' }]">
+        <div
+          class="d-flex connection-nav-container connection-nav-container-info"
+          :class="[{ 'form-container-infos-avatar': activeInfoTab === 'avatar' }]"
+          style="margin-bottom: 110px"
+          v-if="activeTab === 'infos'"
+        >
           <div
             v-if="!isSuccess"
             @click="activeInfoTabByName('gender')"
@@ -144,7 +149,7 @@
           </div>
           <div class="border-selection" :style="{ display: activeTab != 'login' && activeTab != 'signup' ? 'none' : '' }"></div>
         </div>
-        <form style="margin-top: 50px">
+        <form class="form-container-form">
           <transition name="fade-fast" mode="out-in">
             <!-- <FormLogin v-show="activeTab === 'login'" @login-success="$emit('login-success')" @clicked-signup="$router.push({name: 'Account', params: {activeTab: 'signup'}})" @clicked-password-forgotten="activeTab = 'password'" /> -->
             <!-- <FormSignup v-if="activeTab === 'signup'" @completed="bringInfoForm" @clicked-existing-account="$router.push({name: 'Account', params: {activeTab: 'login'}})"/> -->
@@ -195,9 +200,10 @@
         </form>
       </div>
 
-      <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
-        <div class="mb-4" style="color: #fff; font-weight: 400">C'est la première fois ?</div>
+      <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="width: 100%; background-color: #d82558">
+        <div class="bottom-block-text" style="color: #fff; font-weight: 400">C'est la première fois ?</div>
         <Button
+          class="btn-change-connection"
           text="Je n'ai pas encore de compte"
           px="1.5rem"
           size=".8rem"
@@ -213,13 +219,13 @@
           "
         />
       </div>
-      <div v-else-if="activeTab === 'signup'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: white">
-        <div class="mb-4" style="color: #292f33">Tripper, je suis déjà !</div>
+      <div v-else-if="activeTab === 'signup'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="width: 100%; background-color: white">
+        <div class="bottom-block-text" style="color: #292f33">Tripper, je suis déjà !</div>
         <Button
+          class="btn-change-connection"
           id="bttn-have-account"
           text="J'ai déjà un compte"
           px="1.5rem"
-          size=".8rem"
           height="50px"
           width="60%"
           weight="bold"
@@ -314,8 +320,7 @@ export default {
       this.showInfoScreen()
     },
     skipStep() {
-      console.log('tdff')
-      this.$refs.formInfos.activeStep++
+      this.$refs.formInfos.skipStep(this.activeInfoTab)
     },
     activeInfoTabByName(tabName) {
       if (this.$refs.formInfos.stepper[tabName].authorize) {
@@ -325,7 +330,7 @@ export default {
     createTsConnectionTab() {
       let borderSelection = document.querySelector('.border-selection')
       let tlConnectionTab = gsap.timeline().pause()
-
+      console.log(window.innerWidth)
       tlConnectionTab.to(borderSelection, { width: '94', x: '+=116', ease: 'power1.out', duration: 0.06 })
 
       this.tlConnectionTab = tlConnectionTab
@@ -382,33 +387,61 @@ export default {
 #title-password {
   color: white;
 }
+#svg-logo-white {
+  /* margin-top: 21vh !important; */
+  margin-top: calc(23vh - 40px) !important;
+  max-height: 40px;
+  min-height: 35px;
+  height: 3vw;
+}
 #btn-skip-step {
+  z-index: 10;
   position: absolute;
   bottom: 1rem;
   right: 3rem;
   cursor: pointer;
 }
+#btn-skip-step p {
+  letter-spacing: 0.03rem;
+  font-family: inherit;
+  font-weight: 400;
+}
+.bottom-block {
+  height: 15vh;
+}
+.bottom-block-text {
+  margin-bottom: 1.5rem;
+}
 .purple-container__content {
-  width: 50%;
+  width: 55%;
 }
 .purple-container__svgs {
   margin-right: 30px;
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+}
+.purple-container__svgs svg {
+  height: 4vw;
+  max-height: 52px;
 }
 .bttn--grey:hover {
   color: #292f33;
   background-color: white;
 }
-.purple-container__paragraph-nb {
+/* .purple-container__paragraph-nb {
   font-size: 3rem;
   font-family: Oswald, sans-serif;
   font-weight: bold;
   color: rgba(250, 250, 250, 0.1);
-}
+} */
 .purple-container__paragraph {
   font-family: Muli, sans-serif;
   font-weight: light;
   color: #ffffff8f;
   font-size: 0.85rem;
+}
+.purple-container__groupe {
+  margin-bottom: 2rem !important;
 }
 .title-connection {
   color: white;
@@ -506,8 +539,10 @@ export default {
 }
 .purple-container__block {
   padding-bottom: 8vh;
-  max-width: 27rem;
+  max-width: 32rem;
   margin: auto;
+  margin-top: 5rem !important;
+  margin-bottom: 43px;
   border-bottom: 1px dashed rgba(250, 250, 250, 0.2);
   line-height: 1.4rem;
 }
@@ -530,53 +565,118 @@ export default {
 }
 .form-container {
   margin-top: 21vh;
+  width: 50%;
+}
+.form-container-login,
+.form-container-signup {
+  max-width: 40rem;
+  min-width: 22rem;
+}
+.form-container-infos {
+  width: 600px;
+}
+.form-container-form {
+  margin-top: 50px;
 }
 .purple-container_groupe {
   margin-bottom: 1rem;
 }
 @media only screen and (max-width: 1460px) {
   .grey-container-width {
-    width: 64% !important;
-  }
-  .purple-container__svgs {
-    width: 144px;
-    margin-right: 0px;
+    /* width: 64% !important; */
+    min-width: 34rem;
   }
   .purple-container__content {
-    width: 50%;
+    margin-left: auto !important;
   }
-  .purple-container__paragraph-nb {
+  /*   .purple-container__paragraph-nb {
     display: none;
-  }
-  .purple-container__groupe {
-    margin-bottom: 2rem !important;
+  } */
+  .purple-container__svgs {
+    margin-right: -7px;
   }
   .purple-container__block {
-    margin: initial;
     margin-top: 4rem !important;
   }
   .purple-container__footer {
-    margin-top: 2rem !important;
+    margin-top: 0rem !important;
   }
-  #svg-logo-white {
-    margin-top: 13rem !important;
-    height: 32px;
+}
+@media only screen and (max-width: 1250px) {
+  .form-container-login,
+  .form-container-signup {
+    width: 30vw;
+  }
+}
+@media only screen and (max-width: 1150px) {
+  .form-container-login,
+  .form-container-signup {
+    width: 343px;
   }
 }
 @media only screen and (max-height: 950px) {
-  .form-container {
-    margin-top: 15vh;
+  .connection-nav-container-info {
+    margin-bottom: 6vh !important;
+  }
+  .form-container-form {
+    margin-top: 35px;
+  }
+  .connection-nav-button {
+    font-size: 0.8rem;
+  }
+  .purple-container__block {
+    margin-bottom: 3rem;
+    padding-bottom: 10vh;
+  }
+  .purple-container__groupe {
+    margin-bottom: 3vh !important;
+  }
+  .purple-container__footer {
+    font-size: 0.85rem;
+    margin-top: 0rem !important;
   }
 }
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 800px) {
   .form-container {
-    margin-top: 12vh;
+    margin-top: 21vh;
+  }
+  .form-container-login,
+  .form-container-signup {
+    margin-top: 17vh;
+  }
+  .bottom-block-text {
+    margin-bottom: 0.9rem;
+  }
+  .purple-container__block {
+    margin-top: 4rem !important;
+    padding-bottom: 10vh;
+  }
+  .purple-container__groupe {
+    margin-bottom: 2vh !important;
+  }
+  .purple-container__footer {
+    font-size: 0.85rem;
+    margin-top: 0rem !important;
   }
 }
-/*
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1120px) and (max-height: 800px) {
+  .purple-container__block {
+    margin-top: 2.4rem !important;
+    margin-bottom: 2.2rem !important;
+    padding-bottom: 7vh !important;
+  }
   .purple-container__content {
     width: 60%;
+    margin-right: 2rem !important;
   }
-} */
+  .purple-container__svgs {
+    margin-right: -24px;
+  }
+  .purple-container__svgs svg {
+    height: 3.6vw !important;
+  }
+  .purple-container__paragraph {
+    font-size: 0.8rem;
+  }
+}
 </style>
