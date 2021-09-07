@@ -39,7 +39,7 @@
           <InlineAvatars :avatars="avatarKeys" />
         </div>
       </div>
-      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2 px-xl-5">
+      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2">
         <InlineSvg :src="require('@/assets/svg/surf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/kitesurf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/paddle.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
@@ -410,10 +410,12 @@ export default {
 }
 .purple-container__svgs {
   margin-right: 30px;
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
 }
 .purple-container__svgs svg {
   height: 4vw;
-  max-height: 73px;
+  max-height: 60px;
 }
 .bttn--grey:hover {
   color: #292f33;
@@ -580,6 +582,9 @@ export default {
   /*   .purple-container__paragraph-nb {
     display: none;
   } */
+  .purple-container__svgs {
+    margin-right: 0px;
+  }
   .purple-container__groupe {
     margin-bottom: 2rem !important;
   }
@@ -589,10 +594,6 @@ export default {
   .purple-container__footer {
     margin-top: 0rem !important;
   }
-  /*   #svg-logo-white {
-    height: 32px;
-    min-height: 32px;
-  } */
 }
 @media only screen and (max-width: 1250px) {
   .form-container-login,
@@ -610,9 +611,6 @@ export default {
   .connection-nav-container-info {
     margin-bottom: 6vh !important;
   }
-  /*   .purple-container__paragraph-nb {
-    display: none;
-  } */
   .form-container-form {
     margin-top: 35px;
   }
@@ -631,19 +629,10 @@ export default {
   .purple-container__paragraph {
     font-size: 0.78rem;
   }
-  /*   .purple-container__svgs {
-    width: 92px !important;
-    padding-left: 0rem !important;
-  } */
   .purple-container__footer {
     font-size: 0.85rem;
     margin-top: 0rem !important;
   }
-  /*   #svg-logo-white {
-    height: 29px;
-    min-height: 29px;
-    margin-top: 18vh !important;
-  } */
 }
 @media only screen and (max-height: 800px) {
   .form-container {
@@ -664,20 +653,9 @@ export default {
   .purple-container__paragraph {
     font-size: 0.75rem;
   }
-  /*   .purple-container__svgs {
-    width: 92px !important;
-  }
-  .purple-container__svgs svg {
-    height: 35px !important;
-  } */
   .purple-container__footer {
     font-size: 0.85rem;
     margin-top: 0rem !important;
   }
-  /*   #svg-logo-white {
-    height: 29px;
-    min-height: 29px;
-    margin-top: 18vh !important;
-  } */
 }
 </style>
