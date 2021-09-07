@@ -431,7 +431,7 @@ export default {
   transition: all 0.3s ease;
   color: #292f33;
   margin: initial;
-  margin-left: 314px;
+  margin-left: 196px;
   margin-top: 58px;
   width: 285px;
   background-color: white;
@@ -507,7 +507,7 @@ export default {
     font-size: 0.75rem;
     width: 200px;
     margin-top: 51px;
-    margin-left: 230px;
+    margin-left: 98px;
   }
   .separator {
     margin-bottom: 5vh;
