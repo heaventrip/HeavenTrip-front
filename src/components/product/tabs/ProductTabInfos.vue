@@ -36,7 +36,7 @@
         </span>
       </h6>
       <p class="content mt-3" style="margin-bottom: 2.5rem">
-        {{ course.description }}
+        {{ course?.description }}
       </p>
       <div class="row" style="margin-left: -3rem; margin-right: -3rem">
         <div class="col-9 col-lg-12 p-0">

@@ -552,7 +552,7 @@ button {
   display: flex;
   background-color: #fcfcfc;
   flex-direction: column-reverse;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
   padding-top: 1rem;

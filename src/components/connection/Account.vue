@@ -14,27 +14,27 @@
         <InlineSvg id="svg-logo-white" :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
         <div class="purple-container__block mt-auto d-flex flex-column">
           <div class="purple-container__groupe d-flex align-items-center mb-3 mb-xl-5" style="color: white">
-            <div class="purple-container__paragraph-nb mr-4">01</div>
+            <!-- <div class="purple-container__paragraph-nb mr-4">01</div> -->
             <div class="purple-container__paragraph">
               La team d’Heaven Trip conçois de toute pièce les stages sportifs ce qui nous permet de te proposer des expériences hors normes a travers des programmes soutenus et personnalisables.
             </div>
           </div>
           <div class="purple-container__groupe d-flex mb-3 mb-xl-5" style="color: white">
-            <div class="purple-container__paragraph-nb mr-4">02</div>
+            <!-- <div class="purple-container__paragraph-nb mr-4">02</div> -->
             <div class="purple-container__paragraph">
               En solo, en couple, entre potes ? Ici tu intègres un petit groupe avec lequel tu vas partager la totalité de ton stage sportif. Pas d’hôtel ni de buffet à volonté, panique pas ! On te
               laisse découvrir les coulisses…
             </div>
           </div>
           <div class="d-flex" style="color: white">
-            <div class="purple-container__paragraph-nb mr-4">03</div>
+            <!-- <div class="purple-container__paragraph-nb mr-4">03</div> -->
             <div class="purple-container__paragraph">
               Vous ! Les Trippers, êtes au centre du concept, c’est pourquoi on vous donne les pleins pouvoirs sur ce site. Profil public, messagerie instantanée… Devenez la communauté N°1 de
               l’évasion sportive !
             </div>
           </div>
         </div>
-        <div class="purple-container__footer my-auto text-center mt-5">
+        <div class="purple-container__footer text-center">
           <div style="color: white; font-weight: 400">De l’évasion sportive pour tous !</div>
           <InlineAvatars :avatars="avatarKeys" />
         </div>
@@ -387,6 +387,9 @@ export default {
 #title-password {
   color: white;
 }
+#svg-logo-white {
+  margin-top: 16vh !important;
+}
 #btn-skip-step {
   z-index: 10;
   position: absolute;
@@ -409,12 +412,12 @@ export default {
   color: #292f33;
   background-color: white;
 }
-.purple-container__paragraph-nb {
+/* .purple-container__paragraph-nb {
   font-size: 3rem;
   font-family: Oswald, sans-serif;
   font-weight: bold;
   color: rgba(250, 250, 250, 0.1);
-}
+} */
 .purple-container__paragraph {
   font-family: Muli, sans-serif;
   font-weight: light;
@@ -517,8 +520,10 @@ export default {
 }
 .purple-container__block {
   padding-bottom: 8vh;
-  max-width: 27rem;
+  max-width: 32rem;
   margin: auto;
+  margin-top: 5rem !important;
+  margin-bottom: 43px;
   border-bottom: 1px dashed rgba(250, 250, 250, 0.2);
   line-height: 1.4rem;
 }
@@ -543,6 +548,11 @@ export default {
   margin-top: 21vh;
   width: 50%;
 }
+.form-container-login,
+.form-container-signup {
+  max-width: 40rem;
+  min-width: 22rem;
+}
 .form-container-infos {
   width: 600px;
 }
@@ -559,18 +569,19 @@ export default {
 }
 @media only screen and (max-width: 1460px) {
   .grey-container-width {
-    width: 64% !important;
+    /* width: 64% !important; */
+    min-width: 34rem;
   }
   .purple-container__svgs {
     width: 144px;
     margin-right: 0px;
   }
   .purple-container__content {
-    width: 62%;
+    margin-left: auto !important;
   }
-  .purple-container__paragraph-nb {
+  /*   .purple-container__paragraph-nb {
     display: none;
-  }
+  } */
   .purple-container__groupe {
     margin-bottom: 2rem !important;
   }
@@ -579,7 +590,7 @@ export default {
     margin-top: 4rem !important;
   }
   .purple-container__footer {
-    margin-top: 2rem !important;
+    margin-top: 0rem !important;
   }
   #svg-logo-white {
     margin-top: 11rem !important;
@@ -603,9 +614,9 @@ export default {
   .connection-nav-container-info {
     margin-bottom: 6vh !important;
   }
-  .purple-container__paragraph-nb {
+  /*   .purple-container__paragraph-nb {
     display: none;
-  }
+  } */
   .form-container-form {
     margin-top: 35px;
   }
