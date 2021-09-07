@@ -238,4 +238,9 @@ label > .text-danger {
     font-size: 0.8rem;
   }
 }
+@media only screen and (max-height: 800px) {
+  .text-mention {
+    margin-bottom: 2rem !important;
+  }
+}
 </style>

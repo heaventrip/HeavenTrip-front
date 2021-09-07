@@ -200,8 +200,8 @@
         </form>
       </div>
 
-      <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: #d82558">
-        <div class="mb-4" style="color: #fff; font-weight: 400">C'est la première fois ?</div>
+      <div v-if="activeTab === 'login'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="width: 100%; background-color: #d82558">
+        <div class="bottom-block-text" style="color: #fff; font-weight: 400">C'est la première fois ?</div>
         <Button
           class="btn-change-connection"
           text="Je n'ai pas encore de compte"
@@ -219,8 +219,8 @@
           "
         />
       </div>
-      <div v-else-if="activeTab === 'signup'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="height: 18vh; width: 100%; background-color: white">
-        <div class="mb-4" style="color: #292f33">Tripper, je suis déjà !</div>
+      <div v-else-if="activeTab === 'signup'" class="bottom-block d-flex flex-column justify-content-center align-items-center mt-auto" style="width: 100%; background-color: white">
+        <div class="bottom-block-text" style="color: #292f33">Tripper, je suis déjà !</div>
         <Button
           class="btn-change-connection"
           id="bttn-have-account"
@@ -405,6 +405,12 @@ export default {
   letter-spacing: 0.03rem;
   font-family: inherit;
   font-weight: 400;
+}
+.bottom-block {
+  height: 15vh;
+}
+.bottom-block-text {
+  margin-bottom: 1.5rem;
 }
 .purple-container__content {
   width: 55%;
@@ -638,6 +644,9 @@ export default {
   .form-container-signup {
     margin-top: 17vh;
   }
+  .bottom-block-text {
+    margin-bottom: 0.9rem;
+  }
   .purple-container__block {
     margin-top: 4rem !important;
     padding-bottom: 10vh;
@@ -648,6 +657,26 @@ export default {
   .purple-container__footer {
     font-size: 0.85rem;
     margin-top: 0rem !important;
+  }
+}
+@media only screen and (max-width: 1120px) and (max-height: 800px) {
+  .purple-container__block {
+    margin-top: 2.4rem !important;
+    margin-bottom: 2.2rem !important;
+    padding-bottom: 7vh !important;
+  }
+  .purple-container__content {
+    width: 60%;
+    margin-right: 2rem !important;
+  }
+  .purple-container__svgs {
+    margin-right: -24px;
+  }
+  .purple-container__svgs svg {
+    height: 3.6vw !important;
+  }
+  .purple-container__paragraph {
+    font-size: 0.8rem;
   }
 }
 </style>
