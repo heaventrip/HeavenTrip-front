@@ -177,7 +177,24 @@
             </ul>
           </div>
           <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
-            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 3rem" rows="2"> </textarea>
+            <textarea
+              @keypress="
+                (e) => {
+                  if (e.keyCode === 13) {
+                    if (e.preventDefault) e.preventDefault()
+                    submitMessageForm()
+                    return false
+                  }
+                }
+              "
+              placeholder="Tape ici ton message..."
+              v-model="inputMessage"
+              class="reply-container form-control;"
+              type="submit"
+              style="padding-left: 3rem"
+              rows="2"
+            >
+            </textarea>
             <button class="ml-3 fg-1 text-center" type="submit">
               <InlineSvg class="svg-btn-send" :src="require('@/assets/svg/send.svg')" height="20" />
             </button>

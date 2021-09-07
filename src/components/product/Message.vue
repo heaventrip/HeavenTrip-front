@@ -3,8 +3,9 @@
     <img class="profil-img" src="@/assets/images/ui_faces/4.jpg" />
     <div class="message-container">
       <div class="message-header">
-        <h6 class="profil-name">{{ user?.firstName }} {{ user?.lastName }}</h6>
-        <span class="message-date">{{ new Date(createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
+        <div class="profil-name">{{ user?.firstName }} {{ user?.lastName }}</div>
+        <!-- <span class="message-date">{{ new Date(createdAt).toLocaleString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span> -->
+        <span class="message-date">{{ formatDateToStringDayHourMinute(new Date(createdAt)) }}</span>
       </div>
       <div :class="coloring">
         <div class="message-content">{{ content }}</div>
@@ -20,6 +21,12 @@ export default {
     return {
       url: `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${this.$props.user?.avatarId}.jpg`
     }
+  },
+  methods: {
+    formatDateToStringDayHourMinute(date) {
+      let dateString = date.toLocaleString()
+      return dateString
+    }
   }
 }
 </script>
@@ -33,6 +40,7 @@ export default {
 .profil-name {
   color: #292f33;
   font-size: 0.8rem;
+  font-weight: 500;
 }
 .message {
   display: flex;
@@ -71,6 +79,8 @@ export default {
   margin-left: 10px;
   font-size: 0.75rem;
   color: #b4b4b4;
+  display: flex;
+  align-items: center;
 }
 .message-header {
   color: #292f33;

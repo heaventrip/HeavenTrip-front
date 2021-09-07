@@ -438,8 +438,8 @@ export default {
 }
 .avatar-validation-btn:hover,
 .avatar-validation-btn.active {
-  border: 1px solid white;
-  background-color: #292f33;
+  border: 1px solid #d82558;
+  background-color: #d82558;
   color: white;
 }
 .profile-gender-btn {
