@@ -388,9 +388,9 @@ export default {
   color: white;
 }
 #svg-logo-white {
-  margin-top: 16vh !important;
+  margin-top: 21vh !important;
   max-height: 40px;
-  min-height: 29px;
+  min-height: 35px;
   height: 3vw;
 }
 #btn-skip-step {
@@ -431,7 +431,10 @@ export default {
   font-family: Muli, sans-serif;
   font-weight: light;
   color: #ffffff8f;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
+}
+.purple-container__groupe {
+  margin-bottom: 2rem !important;
 }
 .title-connection {
   color: white;
@@ -585,9 +588,6 @@ export default {
   .purple-container__svgs {
     margin-right: 0px;
   }
-  .purple-container__groupe {
-    margin-bottom: 2rem !important;
-  }
   .purple-container__block {
     margin-top: 4rem !important;
   }
@@ -638,7 +638,7 @@ export default {
     margin-top: 17vh;
   }
   .purple-container__block {
-    margin-top: 3rem !important;
+    margin-top: 4rem !important;
     padding-bottom: 10vh;
   }
   .purple-container__groupe {
