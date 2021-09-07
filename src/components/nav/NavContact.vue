@@ -35,7 +35,7 @@
           </div>
           <div class="col-12 col-lg-6 ml-auto">
             <div class="form-group valid">
-              <label for="input-email">Adresse Email</label>
+              <label for="input-email">E-mail</label>
               <input id="input-email" class="form-control" type="email" name="" value="hello@yourheaventrip.com" />
               <!-- <i class="fa fa-check check-sym"></i> -->
             </div>

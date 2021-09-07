@@ -108,11 +108,11 @@
                   <div class="d-flex align-items-center ml-auto justify-content-between fg-1">
                     <h6 class="hours-count mb-0 fg-1 ml-5">
                       <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/timer.svg')" height="20" />
-                      <div v-if="$windowWidth <= 1440" class="d-inline-block align-middle">{{ session.duration }} jour{{ session.duration > 1 ? 's' : '' }}</div>
-                      <div v-else class="d-inline-block align-middle">{{ session.duration }} jours - {{ session.duration - 1 }} nuits</div>
+                      <div v-if="$windowWidth <= 1440" class="d-inline-block align-middle">{{ course.duration }} jour{{ course?.duration > 1 ? 's' : '' }}</div>
+                      <div v-else class="d-inline-block align-middle">{{ course.duration }} jours - {{ course?.duration - 1 }} nuits</div>
                     </h6>
                     <h6 class="amount-per mb-0 fg-3">
-                      <strong>{{ course?.price >= 1000 ? `${course?.price.toString()[0]} ${course?.price.toString().slice(-3)}` : course?.price }}&hairsp;&euro;</strong>/pers.
+                      <strong>{{ session?.price >= 1000 ? `${session?.price?.toString()[0]} ${session?.price?.toString().slice(-3)}` : session?.price }}&hairsp;&euro;</strong>/pers.
                     </h6>
                     <button @click="clickedChoseBtn(session)" class="btn choose-btn ml-3">CHOISIR</button>
                     <!-- <button @click="clickedChoseBtn(session)" class="btn choose-btn disable ml-3">OUPS !</button> -->
@@ -280,25 +280,25 @@
             <div v-show="participantsNb === 4" class="max-participants-msg">4 trippers max. par réservation</div>
           </div>
         </div>
-        <div class="center-col px-5" style="min-width: 190px" :class="{ inactive: !choseBtn }">
+        <div v-if="choseBtn" class="center-col px-5" style="min-width: 190px">
           <span class="tot-amount text-left">
-            PRIX total :
+            Prix total
             <strong class="d-block"
               >{{
-                course?.price * participantsNb >= 1000 ? `${(course?.price * participantsNb).toString()[0]} ${(course?.price * participantsNb).toString().slice(-3)}` : course?.price * participantsNb
+                choice?.price * participantsNb >= 1000 ? `${(choice?.price * participantsNb).toString()[0]} ${(choice?.price * participantsNb).toString().slice(-3)}` : choice?.price * participantsNb
               }}&hairsp;&euro;</strong
             >
           </span>
         </div>
+        <button
+          @click="availSessions.length ? $router.push({ name: 'Checkout', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } }) : (contactModal = true)"
+          class="btn border-0 rounded-0 reserve-btn"
+          :style="{ fontSize: availSessions.length ? '1.4rem' : '1rem' }"
+          :class="[{ disable: !choseBtn && availSessions.length }, { 'px-5': !availSessions.length }]"
+        >
+          {{ availSessions.length ? 'Réserver' : 'Créer une session' }}
+        </button>
       </div>
-      <button
-        @click="availSessions.length ? $router.push({ name: 'Checkout', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } }) : (contactModal = true)"
-        class="btn border-0 rounded-0 reserve-btn"
-        :style="{ fontSize: availSessions.length ? '1.4rem' : '1rem' }"
-        :class="[{ disable: !choseBtn && availSessions.length }, { 'px-5': !availSessions.length }]"
-      >
-        {{ availSessions.length ? 'Réserver' : 'Créer une session' }}
-      </button>
     </div>
   </div>
   <teleport to="#modal">
@@ -630,7 +630,7 @@ export default {
   /* box-shadow: 0px 0px 5px rgba(41, 47, 51, 0.8); */
 }
 .reserve-btn {
-  min-width: 200px !important;
+  min-width: 250px !important;
   height: 100px !important;
 }
 .booking-session {

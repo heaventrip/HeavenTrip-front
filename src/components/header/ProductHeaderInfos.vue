@@ -60,7 +60,7 @@
             <InlineSvg class="block__item__svg" :src="require(`@/assets/svg/timer.svg`)" height="28" />
             <span class="block__text-content">
               <div class="block__text-content__title">Durée</div>
-              <div>{{ course.duration?.name }}</div>
+              <div>{{ course?.duration }} jours</div>
             </span>
           </div>
         </div>

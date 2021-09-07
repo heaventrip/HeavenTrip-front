@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # front
 - rgpd => vue cookies
 > nullify unselected sess
@@ -73,8 +72,8 @@ ___________________________
 
 # Réglages de front
 
-- POSER QUESTION SUR LE FORUM GSAP
-- Border carré sur les avatars sur chrome
+> POSER QUESTION SUR LE FORUM GSAP
+> Border carré sur les avatars sur chrome
 > Rendre dynamique le message "je fais partie des 14 intéressés
 > Régle général d'affichage du prix
 > Bug pictos barre de recherche
@@ -84,7 +83,7 @@ ___________________________
 > Filtres carousel : Nos inspirations / Multiactivités
 > Mettre compteur carousel (+ si poss nprogress)
 > Anim survol boutons carousel
-- Icone dynamique sur la card + voir XD pour les changements card
+> Icone dynamique sur la card + voir XD pour les changements card
 
 > Lien home dans la navbar
 > Version dark du dropdown connection
@@ -95,35 +94,24 @@ ___________________________
 > Prendre comme référence de flexbox les mentions "les + du spot" à appliquer à "tu vas adorer"
 > Séparer les services en options des inclus/exclus
 > Voir new design activité principale sur XD
-- Dans activités incluses séparer le prix à droite (cf XD)
-- Compteur à mettre à gauche sur slider hébergement + autoplay
 > Mot du cuisinier rajouter les mentions + enlever tabs pr le moment
 > Modal product zone blanche + large
 
 > Revoir le header recherche de façon générale avec mention dernière place
 > Centrer la shadow sur le filtre pour renforcer le contour
-- Revoir si les cards sont corrects (devis/normal/dernière place)
-- Mettre les label
-- Liserets plus léger et revoir les typo du prix + ponctuations
-> Hover du actualités : afficher les 3 articles dedans (avec fond blanc) et reprendre un bouton blanc/bg-dark en full largeur en dessous pour accéder au blog
+> Hover du actualités : afficher les 3 articles dedans (avec fond blanc)
 > Rajouter "+ 15€ de frais de gestions" après checkbox card dans checkout
-- scroll des filtres pareil que connection
 > autoriser les GET de message
-- fixer fade du splash
-- dyanmiser icons niveaux dans mentions
-- fade sur les filtres search home + décalage hover/liseret
 > régler le firstname au dessus des cards
 
-- fading sur les modals de connexion
-- virer calendy
 > hover sur les 3 filtres recherche
-- autoplay sur les photos
 > rajouter des marges sur le footer quand grand ecran
 > quand 0 sessions ne pas rendre les sessions cliquables
 > créer modal de contact accessible via créer une session/je privatise/bouton sur le mois
-- bouton réserver + grand
-- bouton créer session en dark/pink, pareil pour privatise
-- voir version pad sur le scroll
+> rajouter titre sur programme "jour 1" "jour 2" etc
+
+
+- voir version pad sur le- bouton créer session en dark/pink, pareil pour privatise scroll
 - boolean cours actif / pas actif
 - "veuillez consulter sur portable ou ordi :)"
 - friendly Id
@@ -132,18 +120,28 @@ ___________________________
 - picto dynamique sur le search
 - fading sur card dans recherche
 - virer city et region
-> rajouter titre sur programme "jour 1" "jour 2" etc
-> récup tous les avatars en bas a gauche du violet
+- Dans activités incluses séparer le prix à droite (cf XD)
+- Compteur à mettre à gauche sur slider hébergement + autoplay
+- Revoir si les cards sont corrects (devis/normal/dernière place)
+- Mettre les label
+- Liserets plus léger et revoir les typo du prix + ponctuations
+- et reprendre un bouton blanc/bg-dark en full largeur en dessous pour accéder au blog
+- scroll des filtres pareil que connection
+- fixer fade du splash
+- dyanmiser icons niveaux dans mentions
+- fade sur les filtres search home + décalage hover/liseret
+- fading sur les modals de connexion
+- virer calendy
+- autoplay sur les photos
+- bouton réserver + grand
 - pas de scale sur le header en venant d'une modale
 
-
-IMPORTANT : bloquer les mobiles/tablettes
 > IMPORTANT : valider le signup à la fin de tout le formulaire pour qu'il n'y ait pas d'update tant que l'user n'est pas validé par mail
 > IMPORTANT : revoir les navIsActive ActivitiesIsActive etc.
 > routes login/signup/password/infos
 
-- back sur paiement
-- revoir le système de backing (perte de données)
+> back sur paiement
+> revoir le système de backing (perte de données)
 > prix dynamique du checkout
 > dropdown
 > programme descriptif produit
@@ -153,46 +151,41 @@ IMPORTANT : bloquer les mobiles/tablettes
 > filtres dernières places/confirmés
 > ajouter equipment rental price
 
-AJD
+7/09
+> "e-mail" sans "adresse"
+> course.duration => session.duration
+> total de la réservation: breaker après "de"
+> largeur min du prix total pr pas qu'il bouge
+> rajouter flèche sur "retour" checkout
+> hauteur du bouton retirer
+> bouton réserver max-width: 280
+> mettre prix sur la session et l'enlever de course
+> conditionner || avatar-empty
+- dropdown up rajouter fading
+- text dynamique sélectionne une vignette quand pas logué
+- cards (voir sms)
+- version grise du dropdown sur produit
+
+- lancer l'anim fullscreen en cas de rechargement des infos
+- voir les valeurs de sorties de l'anim car bug en resize
+
+- WISHLIST!!!
+- FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
+
+6/09
 > mentions inverser le gras
 > pas la version grise
 - style du bouton dans la modal
 > copier les bons styles d'input dans modal contact
 - rajouter bouton toutes les thématiques dans la recherche
 
-AJD
-- scroll top sur insurance
-- continuer avec la résa de "X" bug
-- opacité avatar
-- taille des avatars
+5/09
+> scroll top sur insurance
+> continuer avec la résa de "X" bug
+> opacité avatar
+> taille des avatars
 
 GLOBAL
 - input largeur max
 - liens
 - pluriels
-
-
-
-=======
-HOME
-
-- inverser le picto et le nom en haut a droite
-- mettre les prix tous pareils avec des espaces corrects
-- rajouter les nb de resultats sur la recherche
->>>>>>> geoff-dev
-- hover sur les avis + micro animations (scale ou border sur l'actif et opacity sur les autres)
-- enlever le picto map sur les avis et mettre petit sépa entre les deux
-- sur la nav garder juste la croix + réduire les icones legerement
-
-PRODUIT
-
-- mettre à jour la navbar du haut du produit (cf xd)
-- picto intensité + boutons modals à mettre comme sur le xd
-- tooltip
-- module booking, mettre plus de blanc/blur comme sur la nav
-
-SEARCH
-
-- card dernière place bandeau à passer en noir
-- pictos des filtres
-- passer le filtre thématique en haut

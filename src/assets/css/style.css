@@ -285,7 +285,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .header .wrapper .wrapper-innerlist a:hover {
-  color: #fec201;
+  color: #7c7c7c;
 }
 
 .header .wrapper .wrapper-innerlist a .arrow-left {
@@ -3538,8 +3538,6 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
   text-align: center;
   background-color: #fff;
   align-self: stretch;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .booking-session .booking-session-list li {
@@ -4917,13 +4915,15 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .total-amount-block {
-  padding: 0 4vw;
+  padding: 0 3vw;
 }
 
 .total-amount-block .total-amount {
   font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 1.2px;
+  min-width: 150px;
+  text-align: center;
 }
 
 .total-amount-block .total-amount .amount {

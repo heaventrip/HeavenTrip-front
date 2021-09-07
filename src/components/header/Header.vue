@@ -28,7 +28,7 @@
       <img :src="course?.cover" class="header-bg-image" :style="[navIsActive ? 'filter: blur(4px)' : '']" />
     </div>
     <keep-alive>
-      <component :is="'ConnectionButtons'" :nav-sticky="navSticky" :active-tab="activeTab" @mouseover="leftAllTabs"></component>
+      <component :is="'ConnectionButtons'" :active-tab="activeTab" @mouseover="leftAllTabs"></component>
     </keep-alive>
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" />
     <TheNav v-else :activeTab="activeTab" @left-all-tabs="leftAllTabs" @changed-tab="setActiveTab" />

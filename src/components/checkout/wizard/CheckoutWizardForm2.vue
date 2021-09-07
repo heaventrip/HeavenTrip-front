@@ -68,8 +68,8 @@
         </div>
       </h6>
       <div class="d-flex flex-column">
-        <button class="btn text-uppercase personalize-btn rounded-0 border-0 px-4 flex-1">MODIFIER</button>
-        <button @click.prevent="localExtraParticipants.splice(index, 1)" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="margin-top: 1px">RETIRER</button>
+        <button @click.prevent="" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="flex-grow: 3">MODIFIER</button>
+        <button @click.prevent="localExtraParticipants.splice(index, 1)" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="margin-top: 1px; flex-grow: 1">RETIRER</button>
       </div>
     </div>
   </div>

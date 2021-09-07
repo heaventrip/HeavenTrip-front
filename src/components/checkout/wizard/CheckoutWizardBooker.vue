@@ -103,7 +103,7 @@
                 <div class="col-12 col-lg-5 offset-1">
                   <div class="form-group has-float-label">
                     <input class="form-control" type="email" disabled name="" v-model="localBooker.infos.email" />
-                    <label for="">ADRESSE MAIL*</label>
+                    <label for="">E-mail*</label>
                     <i class="fa fa-check check-sym d-none"></i>
                   </div>
                 </div>
