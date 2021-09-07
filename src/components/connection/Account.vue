@@ -9,7 +9,7 @@
       height="60"
       style="position: absolute; top: 30px; left: 30px; z-index: 100"
     />
-    <div class="purple-container align-items-center" style="position: relative">
+    <div class="purple-container align-items-center" :class="{ 'purple-container-infos': activeTab === 'infos' }" style="position: relative">
       <div class="purple-container__content mx-auto d-flex flex-column h-100" :class="{ 'purple-container__content-tab-info-active': activeTab === 'infos' }">
         <InlineSvg id="svg-logo-white" :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
         <div class="purple-container__block mt-auto d-flex flex-column">
@@ -39,7 +39,7 @@
           <InlineAvatars :avatars="avatarKeys" />
         </div>
       </div>
-      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2" :class="{ 'purple-container__svgs-infos': activeTab === 'infos' }">
+      <div class="purple-container__svgs d-flex flex-column justify-content-around px-2" :class="{ 'purple-container__svgs-infos': activeTab === 'infos' }">
         <InlineSvg :src="require('@/assets/svg/surf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/kitesurf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/paddle.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
@@ -51,7 +51,7 @@
     <div
       class="grey-container d-flex flex-column align-items-center text-white"
       style="background-color: #292f33"
-      :class="[activeTab === 'login' || activeTab === 'signup' ? 'grey-container-width' : '']"
+      :class="[{ 'grey-container-infos': activeTab === 'infos' }, { 'grey-container-width': activeTab === 'login' || activeTab === 'signup' }]"
     >
       <InlineSvg
         style="position: absolute; top: 2rem; left: 2rem"
@@ -421,6 +421,7 @@ export default {
 }
 .purple-container__svgs {
   margin-right: 30px;
+  height: 100%;
   padding-left: 3rem !important;
   padding-right: 3rem !important;
 }
@@ -429,11 +430,18 @@ export default {
   max-height: 52px;
 }
 .purple-container__svgs-infos {
-  min-width: 18.5vh;
+  /* min-width: 12.2vw;
+  padding-top: 0.6rem;
+  padding-bottom: 0.2rem;
+  padding-left: 3.4rem !important;
+  padding-right: 2.2rem !important; */
   padding-left: 3.4rem !important;
   padding-right: 2.2rem !important;
+  padding-bottom: 1.2rem;
+  padding-top: 1.6rem;
 }
 .purple-container__svgs-infos svg {
+  height: 3.4vw !important;
 }
 .bttn--grey:hover {
   color: #292f33;
@@ -548,6 +556,9 @@ export default {
   display: flex;
   width: 52%;
 }
+.purple-container-infos {
+  max-width: 24rem;
+}
 .purple-container__block {
   padding-bottom: 8vh;
   max-width: 32rem;
@@ -573,6 +584,9 @@ export default {
   width: 100%;
   height: 100vh; /* corresponds height of image */
   z-index: -1;
+}
+.grey-container-infos {
+  width: 100% !important;
 }
 .form-container {
   margin-top: 21vh;
