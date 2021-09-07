@@ -415,7 +415,7 @@ export default {
 }
 .purple-container__svgs svg {
   height: 4vw;
-  max-height: 60px;
+  max-height: 52px;
 }
 .bttn--grey:hover {
   color: #292f33;
@@ -431,7 +431,7 @@ export default {
   font-family: Muli, sans-serif;
   font-weight: light;
   color: #ffffff8f;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
 }
 .title-connection {
   color: white;
@@ -618,16 +618,11 @@ export default {
     font-size: 0.8rem;
   }
   .purple-container__block {
-    margin-top: 3.5rem !important;
     margin-bottom: 3rem;
     padding-bottom: 10vh;
-    line-height: 1.2rem;
   }
   .purple-container__groupe {
     margin-bottom: 3vh !important;
-  }
-  .purple-container__paragraph {
-    font-size: 0.78rem;
   }
   .purple-container__footer {
     font-size: 0.85rem;
@@ -640,18 +635,14 @@ export default {
   }
   .form-container-login,
   .form-container-signup {
-    margin-top: 13vh;
+    margin-top: 17vh;
   }
   .purple-container__block {
     margin-top: 3rem !important;
     padding-bottom: 10vh;
-    line-height: 1.3rem;
   }
   .purple-container__groupe {
     margin-bottom: 2vh !important;
-  }
-  .purple-container__paragraph {
-    font-size: 0.75rem;
   }
   .purple-container__footer {
     font-size: 0.85rem;
