@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-left content-head mb-5">Merci de remplir tous les champs pour valider votre inscription :</p>
+    <p class="text-mention text-left content-head mb-5">Merci de remplir tous les champs pour valider votre inscription :</p>
     <div class="row">
       <div class="col-12 col-lg-6">
         <div class="form-group has-float-label">
@@ -172,6 +172,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .has-float-label label {
   left: 0;
 }
+.text-mention {
+  font-size: 0.825rem;
+}
 .form-group {
   margin-bottom: 2rem;
 }
@@ -223,6 +226,12 @@ label > .text-danger {
 .password-link {
   font-size: 0.7rem;
 }
+@media only screen and (max-width: 1564px) {
+  .text-mention {
+    font-size: 0.75rem;
+  }
+}
+
 @media only screen and (max-height: 950px) {
   .form-control,
   .form-group {
