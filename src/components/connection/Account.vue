@@ -7,7 +7,7 @@
       type="button"
       :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')"
       height="60"
-      style="position: absolute; top: 30px; left: 30px; z-index: 100"
+      style="position: absolute; top: 30px; left: 48px; z-index: 100"
     />
     <div class="purple-container align-items-center" :class="{ 'purple-container-infos': activeTab === 'infos' }" style="position: relative">
       <div class="purple-container__content mx-auto d-flex flex-column h-100" :class="{ 'purple-container__content-tab-info-active': activeTab === 'infos' }">
@@ -54,7 +54,7 @@
       :class="[{ 'grey-container-infos': activeTab === 'infos' }, { 'grey-container-width': activeTab === 'login' || activeTab === 'signup' }]"
     >
       <InlineSvg
-        style="position: absolute; top: 2rem; left: 2rem"
+        style="position: absolute; top: 3.8rem; left: 3.2rem"
         v-if="activeTab === 'infos' && !hiddenArrow"
         @click="previousScreen"
         type="button"
@@ -63,7 +63,7 @@
         fill="white"
         transform="rotate(180)"
       />
-      <div class="d-flex align-items-center" style="position: absolute; top: 2rem; right: 2rem">
+      <div class="d-flex align-items-center" style="position: absolute; top: 1.6rem; right: 2.4rem">
         <div class="title-connection" v-if="activeTab === 'infos'" style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">
           Complète ton <br />profil
         </div>
@@ -109,7 +109,11 @@
           </div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
 
-          <div v-if="activeInfoTab != 'success' && activeInfoTab != 'bio'" id="btn-skip-step" @click="skipStep()"><p>Je décide de le faire plus tard</p></div>
+          <div v-if="activeInfoTab != 'success' && activeInfoTab != 'bio'" id="btn-skip-step" @click="skipStep()">
+            <p>
+              Je décide de le faire plus tard <InlineSvg :src="require('@/assets/svg/arrow-next-right.svg')" width="17px" height="17px" fill="#292f33" style="margin-left: 5px; padding-bottom: 2px" />
+            </p>
+          </div>
         </div>
         <div v-else-if="isNewPassword">
           <div id="title-password" class="connection-nav-button">Nouveau mot de passe</div>
@@ -420,7 +424,6 @@ export default {
   width: 55%;
 }
 .purple-container__svgs {
-  margin-right: 30px;
   height: 100%;
   padding-left: 3rem !important;
   padding-right: 3rem !important;
