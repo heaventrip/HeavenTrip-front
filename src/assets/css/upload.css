@@ -79,8 +79,8 @@
   left: 0;
   right: 0;
   margin: auto;
-  /* width: 600px; */
-  /* height: 330px; */
+  width: 600px;
+  height: 330px;
   padding: 0px;
   /* background-color: #fff; */
   /* border-radius: 2px; */
@@ -671,9 +671,11 @@
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-operate a:first-child {
   margin-left: 200px;
 }
+
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-operate a {
   display: none;
 }
+
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-operate a {
   border: 1px solid white;
   transition: all 0.3s ease;
