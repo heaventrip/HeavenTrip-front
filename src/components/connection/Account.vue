@@ -360,8 +360,12 @@ export default {
       this.activeInfoTab = val
     },
     previousScreen() {
-      this.tl.reverse()
-      this.activeTab = 'signup'
+      if (this.activeInfoTab === 'gender') {
+        this.tl.reverse()
+        this.activeTab = 'signup'
+      } else {
+        this.$refs.formInfos.activeStep--
+      }
     },
     handlePageClose() {
       if (this.fromRoute) this.$router.back()
@@ -418,14 +422,18 @@ export default {
 .purple-container__svgs {
   margin-right: 30px;
   padding-left: 3rem !important;
-  padding-right: 2rem !important;
+  padding-right: 3rem !important;
 }
 .purple-container__svgs svg {
   height: 4vw;
   max-height: 52px;
 }
+.purple-container__svgs-infos {
+  min-width: 18.5vh;
+  padding-left: 3.4rem !important;
+  padding-right: 2.2rem !important;
+}
 .purple-container__svgs-infos svg {
-  min-height: 52px;
 }
 .bttn--grey:hover {
   color: #292f33;
