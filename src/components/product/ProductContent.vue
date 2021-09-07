@@ -541,7 +541,7 @@ button {
 }
 .messaging {
   background-color: #fcfcfc;
-  padding: 0.4rem 1rem 0rem 0rem;
+  padding: 0.4rem 1.4rem 0rem 0rem;
   height: calc(100% - 25vh);
 }
 .messaging-header {
@@ -603,16 +603,17 @@ button {
   background-color: #fcfcfc;
   flex-direction: column-reverse;
   overflow-y: auto;
-  padding-left: 2.5rem;
+  /*   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  padding-top: 1rem;
+  padding-top: 1rem; */
+  padding: 0 1rem;
   overscroll-behavior: none;
 }
-@media only screen and (max-width: 1440px) {
+/* @media only screen and (max-width: 1440px) {
   .messages-container {
     padding: 0 1rem;
   }
-}
+} */
 .message-input-label {
   position: relative;
   width: 100%;
@@ -631,8 +632,8 @@ button {
   color: white !important;
   width: 85%;
   overflow: visible !important;
-  padding: 20px;
-  height: 59px;
+  padding: 25px;
+  height: 71px;
   font-size: 0.8rem;
   letter-spacing: 0.03rem;
   font-weight: 400;

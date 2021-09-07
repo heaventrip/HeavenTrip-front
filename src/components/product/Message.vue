@@ -64,7 +64,7 @@ export default {
 }
 .right .message-header {
   flex-flow: row-reverse;
-  margin-right: 17px;
+  margin-right: 16px;
   margin-left: 0px;
 }
 .right .message-date {
@@ -85,7 +85,8 @@ export default {
 .message-header {
   color: #292f33;
   font-size: 0.8rem;
-  margin-left: 17px;
+  margin-left: 16px;
+  margin-bottom: 4px;
   height: 20px;
   display: flex;
 }
