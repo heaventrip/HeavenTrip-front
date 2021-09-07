@@ -141,127 +141,129 @@
       </div>
     </div>
     <div v-else>
-      <!-- NOTE extras -->
-      <div class="card card-participant card-extra-participant d-block px-5 mb-5">
-        <div class="card-body">
-          <h6 class="font-weight-bold">Quel type de chambre :</h6>
-          <p class="font-weight-500" style="font-family: 0.875rem">Dans la limite des stocks disponibles !</p>
-          <div class="hidable custom-radio-container">
-            <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
-              <label class="">
-                <input
-                  v-model="localExtraParticipants[currFormParticipant].booking.room"
-                  :value="{ [room.id]: room.price }"
-                  type="radio"
-                  :id="`extraPart${currFormParticipant}-${index}`"
-                  :name="`extraPartRoom${currFormParticipant}-${index}`"
-                  class=""
-                />
-                <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
-                  <div>
-                    <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
-                    <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
-                  </div>
-                  <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable && extraParticipants.length > 0">
-                    <p class="font-weight-500 mb-0">A partager avec :</p>
-                    <select v-model="localExtraParticipants[currFormParticipant].booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
-                      <option>{{ booker.infos.firstName }}</option>
-                      <option v-for="extraParticipant in localExtraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
-                    </select>
-                  </div>
-                  <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="card-body border-top">
-          <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
-          <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
-          <div class="hidable custom-radio-container">
-            <div class="custom-control">
-              <label class="" :for="`extraPart${currFormParticipant}-with`">
-                <input
-                  v-model="localExtraParticipants[currFormParticipant].booking.equipmentRental"
-                  :value="true"
-                  type="radio"
-                  :id="`extraPart${currFormParticipant}-with`"
-                  :name="`material-extraPart${currFormParticipant}`"
-                  class=""
-                />
-                <span class="d-flex align-items-center w-100 dotted-border">
-                  <div>
-                    <div class="font-weight-bold text-uppercase">avec matériel</div>
-                    <p class="font-weight-500 mb-0">Je voyage léger</p>
-                  </div>
-                  <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
-                </span>
-              </label>
-            </div>
-            <div class="custom-control">
-              <label class="" :for="`extraPart${currFormParticipant}-without`">
-                <input
-                  v-model="localExtraParticipants[currFormParticipant].booking.equipmentRental"
-                  :value="false"
-                  type="radio"
-                  :id="`extraPart${currFormParticipant}-without`"
-                  :name="`material-extraPart${currFormParticipant}`"
-                  class=""
-                />
-                <span class="d-flex align-items-center w-100">
-                  <div>
-                    <div class="font-weight-bold text-uppercase">sans materiel</div>
-                    <p class="font-weight-500 mb-0" style="font-family: 0.875rem">Je préfére venir avec mon matos !</p>
-                  </div>
-                  <div class="ml-auto font-weight-bold text-uppercase">reduction de 380 &euro;</div>
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="card-body border-top">
-          <h6 class="font-weight-bold">Activites en +</h6>
-          <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
-          <div class="hidable">
-            <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
-              <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
-                <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
+      <transition name="fade" mode="out-in" @enter="scroll">
+        <!-- NOTE extras -->
+        <div :key="currFormParticipant" class="card card-participant card-extra-participant d-block px-5 mb-5">
+          <div class="card-body">
+            <h6 class="font-weight-bold">Quel type de chambre :</h6>
+            <p class="font-weight-500" style="font-family: 0.875rem">Dans la limite des stocks disponibles !</p>
+            <div class="hidable custom-radio-container">
+              <div class="custom-control" v-for="(room, index) in course.rooms" :key="room">
+                <label class="">
                   <input
-                    v-model="localExtraParticipants[currFormParticipant].booking.extraActivities"
-                    :value="{ [extraActivity.id]: extraActivity.price }"
-                    type="checkbox"
-                    :id="`extraPart${currFormParticipant}-activ0`"
+                    v-model="localExtraParticipants[currFormParticipant].booking.room"
+                    :value="{ [room.id]: room.price }"
+                    type="radio"
+                    :id="`extraPart${currFormParticipant}-${index}`"
+                    :name="`extraPartRoom${currFormParticipant}-${index}`"
                     class=""
-                    :disabled="localExtraParticipants[currFormParticipant].booking.noExtraActivities"
                   />
-                  <!-- TODO extracti -->
-                  <span class="font-weight-bold text-uppercase">
-                    <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
-                    <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
+                  <span class="d-flex align-items-center w-100" :class="[index !== course.rooms.length - 1 ? 'dotted-border' : '']">
+                    <div>
+                      <div class="font-weight-bold text-uppercase">{{ room.title }}</div>
+                      <p class="font-weight-500 mb-0">{{ room.subtitle }}</p>
+                    </div>
+                    <div class="avalaible-mem col-6 justify-content-center align-items-center" v-if="room.is_sharable && extraParticipants.length > 0">
+                      <p class="font-weight-500 mb-0">A partager avec :</p>
+                      <select v-model="localExtraParticipants[currFormParticipant].booking.roomMate" class="form-control col-5 ml-3 text-capitalize custom-select">
+                        <option>{{ booker.infos.firstName }}</option>
+                        <option v-for="extraParticipant in localExtraParticipants" :key="extraParticipant">{{ extraParticipant.infos.firstName }}</option>
+                      </select>
+                    </div>
+                    <div class="ml-auto font-weight-bold text-uppercase">+ {{ room.price }} &euro;</div>
                   </span>
                 </label>
               </div>
             </div>
-            <div class="custom-control custom-checkbox other-activity-check">
-              <label class="mb-0" :for="`extraPart${currFormParticipant}-noextra`" style="font-weight: 400">
-                <input v-model="localExtraParticipants[currFormParticipant].booking.noExtraActivities" type="checkbox" class="" :id="`extraPart${currFormParticipant}-noextra`" />
-                <span>Je ne souhaite pas d'autres activites</span>
-              </label>
+          </div>
+          <div class="card-body border-top">
+            <h6 class="font-weight-bold">Avec ou sans location matériel :</h6>
+            <p class="font-weight-500" style="font-family: 0.875rem">Matériel correspondant uniquement a tan activité principale</p>
+            <div class="hidable custom-radio-container">
+              <div class="custom-control">
+                <label class="" :for="`extraPart${currFormParticipant}-with`">
+                  <input
+                    v-model="localExtraParticipants[currFormParticipant].booking.equipmentRental"
+                    :value="true"
+                    type="radio"
+                    :id="`extraPart${currFormParticipant}-with`"
+                    :name="`material-extraPart${currFormParticipant}`"
+                    class=""
+                  />
+                  <span class="d-flex align-items-center w-100 dotted-border">
+                    <div>
+                      <div class="font-weight-bold text-uppercase">avec matériel</div>
+                      <p class="font-weight-500 mb-0">Je voyage léger</p>
+                    </div>
+                    <div class="ml-auto font-weight-bold text-uppercase">inclus</div>
+                  </span>
+                </label>
+              </div>
+              <div class="custom-control">
+                <label class="" :for="`extraPart${currFormParticipant}-without`">
+                  <input
+                    v-model="localExtraParticipants[currFormParticipant].booking.equipmentRental"
+                    :value="false"
+                    type="radio"
+                    :id="`extraPart${currFormParticipant}-without`"
+                    :name="`material-extraPart${currFormParticipant}`"
+                    class=""
+                  />
+                  <span class="d-flex align-items-center w-100">
+                    <div>
+                      <div class="font-weight-bold text-uppercase">sans materiel</div>
+                      <p class="font-weight-500 mb-0" style="font-family: 0.875rem">Je préfére venir avec mon matos !</p>
+                    </div>
+                    <div class="ml-auto font-weight-bold text-uppercase">reduction de 380 &euro;</div>
+                  </span>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- <div class="card-body border-top d-none">
+          <div class="card-body border-top">
+            <h6 class="font-weight-bold">Activites en +</h6>
+            <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
+            <div class="hidable">
+              <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+                <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
+                  <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
+                    <input
+                      v-model="localExtraParticipants[currFormParticipant].booking.extraActivities"
+                      :value="{ [extraActivity.id]: extraActivity.price }"
+                      type="checkbox"
+                      :id="`extraPart${currFormParticipant}-activ0`"
+                      class=""
+                      :disabled="localExtraParticipants[currFormParticipant].booking.noExtraActivities"
+                    />
+                    <!-- TODO extracti -->
+                    <span class="font-weight-bold text-uppercase">
+                      <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
+                      <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="custom-control custom-checkbox other-activity-check">
+                <label class="mb-0" :for="`extraPart${currFormParticipant}-noextra`" style="font-weight: 400">
+                  <input v-model="localExtraParticipants[currFormParticipant].booking.noExtraActivities" type="checkbox" class="" :id="`extraPart${currFormParticipant}-noextra`" />
+                  <span>Je ne souhaite pas d'autres activites</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card-body border-top d-none">
       <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
       <p class="font-weight-500">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
       <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
       <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
       </div> -->
-        <div class="card-body border-top">
-          <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
-          <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-          <textarea v-model="localExtraParticipants[currFormParticipant].booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+          <div class="card-body border-top">
+            <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
+            <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
+            <textarea v-model="localExtraParticipants[currFormParticipant].booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </transition>
   <div class="card p-0" style="position: relative" v-if="notYetLastParticipant">
@@ -282,7 +284,7 @@
 <script>
 export default {
   name: 'CheckoutWizardForm',
-  props: ['booker', 'extra-participants', 'course', 'avatar-key'],
+  props: ['booker', 'extra-participants', 'course', 'avatar-key', 'needs-reset'],
   emits: ['complete', 'updated-participants', 'updated-booker', 'updated-notYetLastParticipant'],
   data() {
     return {
@@ -295,12 +297,8 @@ export default {
   },
   methods: {
     initFormDisplay(type) {
-      let mainCard
-      if (type === 'extraParticipant') {
-        mainCard = document.querySelectorAll(`.card-${type}`)[this.currFormParticipant]
-      } else {
-        mainCard = document.querySelector(`.card-${type}`)
-      }
+      let mainCard = document.querySelector(`.card-${type}`)
+
       let cards = Array.from(mainCard.querySelectorAll('.card-body'))
       let hiddenCards = cards.splice(1)
       let buttons = document.querySelector('.nav-buttons-container')
@@ -383,6 +381,9 @@ export default {
     notYetLastParticipant() {
       return this.extraParticipants.length && !(this.currForm === 'extraParticipant' && this.currFormParticipant === this.extraParticipants.length - 1)
     }
+  },
+  activated() {
+    if (this.$props.needsReset) this.$nextTick(() => this.resetDisplay())
   },
   watch: {
     bookerRoomFilled: {

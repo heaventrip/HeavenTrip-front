@@ -66,6 +66,7 @@
                 :booker="booker"
                 :extra-participants="extraParticipants"
                 :course="course"
+                :needs-reset="needsReset"
               >
               </component>
             </keep-alive>
@@ -168,7 +169,8 @@ export default {
       updatedBooker: null,
       updatedExtraParticipants: null,
       avatarKey: '',
-      notYetLastParticipant: false
+      notYetLastParticipant: false,
+      needsReset: false
     }
   },
   watch: {
@@ -196,7 +198,10 @@ export default {
       handler(newVal, oldVal) {
         this.$emit('changed-step', newVal)
 
-        // if (oldVal === 'insurance' && newVal === 'options') this.$children.checkoutWizardForm.resetDisplay()
+        if (oldVal === 'insurance' && newVal === 'options') this.needsReset = true
+        else this.needsReset = false
+
+        if (newVal === 'insurance') document.querySelector('.checkout-body-content').scrollTo({ top: 0, behavior: 'smooth' })
       }
     }
   },
