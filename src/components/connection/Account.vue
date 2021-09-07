@@ -10,7 +10,7 @@
       style="position: absolute; top: 30px; left: 30px; z-index: 100"
     />
     <div class="purple-container align-items-center" style="position: relative">
-      <div class="purple-container__content mx-auto d-flex flex-column h-100">
+      <div class="purple-container__content mx-auto d-flex flex-column h-100" :class="{ 'purple-container__content-tab-info-active': activeTab === 'infos' }">
         <InlineSvg id="svg-logo-white" :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
         <div class="purple-container__block mt-auto d-flex flex-column">
           <div class="purple-container__groupe d-flex align-items-center mb-3 mb-xl-5" style="color: white">
@@ -109,7 +109,7 @@
           </div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
 
-          <div id="btn-skip-step" @click="skipStep()"><p>Je décide de le faire plus tard</p></div>
+          <div v-if="activeInfoTab != 'success' && activeInfoTab != 'bio'" id="btn-skip-step" @click="skipStep()"><p>Je décide de le faire plus tard</p></div>
         </div>
         <div v-else-if="isNewPassword">
           <div id="title-password" class="connection-nav-button">Nouveau mot de passe</div>
@@ -668,6 +668,9 @@ export default {
   .purple-container__content {
     width: 60%;
     margin-right: 2rem !important;
+  }
+  .purple-container__content-tab-info-active {
+    margin-right: 0rem !important;
   }
   .purple-container__svgs {
     margin-right: -24px;

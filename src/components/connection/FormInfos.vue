@@ -107,11 +107,7 @@
           width="100%"
           weight="bold"
           color="white"
-          @click="
-            () => {
-              $router.push({ name: 'Account', params: { activeTab: 'login' } })
-            }
-          "
+          @click="$router.push({ name: 'Account', params: { activeTab: 'login' } })"
         />
       </form>
     </div>
@@ -248,7 +244,10 @@ export default {
           this.stepper.success.authorize = true
           this.activeStep++
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log('err', err)
+          this.$notify({ group: 'modal', type: 'error', text: "L'email est déjà pris" })
+        })
     },
     resendEmailConfirmation() {
       //todo: resend email confirmation
