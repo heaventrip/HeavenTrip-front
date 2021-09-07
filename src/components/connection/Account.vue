@@ -586,14 +586,12 @@ export default {
     margin-bottom: 2rem !important;
   }
   .purple-container__block {
-    margin: initial;
     margin-top: 4rem !important;
   }
   .purple-container__footer {
     margin-top: 0rem !important;
   }
   #svg-logo-white {
-    margin-top: 11rem !important;
     height: 32px;
     min-height: 32px;
   }
@@ -626,7 +624,7 @@ export default {
   .purple-container__block {
     margin-top: 3.5rem !important;
     margin-bottom: 3rem;
-    padding-bottom: 11vh;
+    padding-bottom: 10vh;
     line-height: 1.2rem;
   }
   .purple-container__groupe {
