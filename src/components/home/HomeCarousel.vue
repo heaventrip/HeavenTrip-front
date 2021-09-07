@@ -85,7 +85,7 @@
               <div
                 v-for="(course, index) in courses"
                 :key="course.id"
-                :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin)}px)`"
                 @mouseenter="enterCard(index)"
                 @mouseleave="leaveCard(index)"
               >
@@ -98,11 +98,11 @@
               <div
                 v-for="(course, index) in courses.filter((el) => el.multisport)"
                 :key="course.id"
-                :style="`transform: translateX(${index * (cardWidth + cardMargin) + currentViewportWidth * 0.1}px)`"
-                @mouseenter="enterCard(index)"
-                @mouseleave="leaveCard(index)"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin)}px)`"
+                @mouseenter="enterCard(index * 10)"
+                @mouseleave="leaveCard(index * 10)"
               >
-                <HomeCarouselCard :index="index" :course="course" :ref="`card${index}`" />
+                <HomeCarouselCard :index="index * 10" :course="course" :ref="`card${index * 10}`" />
               </div>
             </div>
           </div>
@@ -153,10 +153,10 @@ export default {
   },
   computed: {
     windowWrap() {
-      return gsap.utils.wrap(0, (this.cardWidth + this.cardMargin) * (this.nbOfCards - 1))
+      return gsap.utils.wrap(this.cardWidth * -1, (this.cardWidth + this.cardMargin) * (this.nbOfCards - 1) - this.cardWidth)
     },
     firstCardIndex() {
-      return this.cardIndexCounter % 7
+      return this.cardIndexCounter % this.nbOfCards
     }
   },
   watch: {
@@ -201,22 +201,22 @@ export default {
               x: (x) => that.windowWrap(parseFloat(x)) + 'px'
             }
           },
-          '<'
+          index === 0 ? '' : '<0.08'
         )
       })
       // and fade first one and put it at the end
-      tl.to(
-        that.cards[that.firstCardIndex],
-        {
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power4.in',
-          onComplete: () => {
-            gsap.to(that.cards[that.firstCardIndex], { opacity: 1, duration: 0.5, ease: 'power4.out' })
-          }
-        },
-        '0'
-      )
+      // tl.to(
+      //   that.cards[that.firstCardIndex],
+      //   {
+      //     opacity: 0,
+      //     duration: 0.5,
+      //     ease: 'power4.in',
+      //     onComplete: () => {
+      //       gsap.to(that.cards[that.firstCardIndex], { opacity: 1, duration: 0.5, ease: 'power4.out' })
+      //     }
+      //   },
+      //   '0'
+      // )
       this.leftSlideTl = tl
     },
     initRightSlideTl() {
@@ -240,15 +240,15 @@ export default {
       })
 
       // and bring back last one
-      tl.to(
-        this.cards[this.cards.length - 1],
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out'
-        },
-        '0'
-      )
+      // tl.to(
+      //   this.cards[this.cards.length - 1],
+      //   {
+      //     opacity: 1,
+      //     duration: 0.5,
+      //     ease: 'power2.out'
+      //   },
+      //   '0'
+      // )
       this.rightSlideTl = tl
     },
     slideLeft() {
@@ -257,7 +257,7 @@ export default {
     },
     slideRight() {
       this.counterSlideDir = 'vertical-slide-down'
-      this.leftSlideTl.invalidate().reverse()
+      this.leftSlideTl.reverse()
     }
   },
   updated() {
