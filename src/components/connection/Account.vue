@@ -411,6 +411,10 @@ export default {
 .purple-container__svgs {
   margin-right: 30px;
 }
+.purple-container__svgs svg {
+  height: 4vw;
+  max-height: 73px;
+}
 .bttn--grey:hover {
   color: #292f33;
   background-color: white;
@@ -565,19 +569,10 @@ export default {
 .purple-container_groupe {
   margin-bottom: 1rem;
 }
-@media only screen and (min-width: 1460px) and (max-height: 950px) {
-  .purple-container__svgs {
-    margin-right: 0px;
-  }
-}
 @media only screen and (max-width: 1460px) {
   .grey-container-width {
     /* width: 64% !important; */
     min-width: 34rem;
-  }
-  .purple-container__svgs {
-    width: 144px;
-    margin-right: 0px;
   }
   .purple-container__content {
     margin-left: auto !important;
@@ -636,10 +631,10 @@ export default {
   .purple-container__paragraph {
     font-size: 0.78rem;
   }
-  .purple-container__svgs {
+  /*   .purple-container__svgs {
     width: 92px !important;
     padding-left: 0rem !important;
-  }
+  } */
   .purple-container__footer {
     font-size: 0.85rem;
     margin-top: 0rem !important;
@@ -669,12 +664,12 @@ export default {
   .purple-container__paragraph {
     font-size: 0.75rem;
   }
-  .purple-container__svgs {
+  /*   .purple-container__svgs {
     width: 92px !important;
   }
   .purple-container__svgs svg {
     height: 35px !important;
-  }
+  } */
   .purple-container__footer {
     font-size: 0.85rem;
     margin-top: 0rem !important;
