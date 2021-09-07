@@ -39,7 +39,7 @@
           <InlineAvatars :avatars="avatarKeys" />
         </div>
       </div>
-      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2">
+      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2" :class="{ 'purple-container__svgs-infos': activeTab === 'infos' }">
         <InlineSvg :src="require('@/assets/svg/surf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/kitesurf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/paddle.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
@@ -418,11 +418,14 @@ export default {
 .purple-container__svgs {
   margin-right: 30px;
   padding-left: 3rem !important;
-  padding-right: 3rem !important;
+  padding-right: 2rem !important;
 }
 .purple-container__svgs svg {
   height: 4vw;
   max-height: 52px;
+}
+.purple-container__svgs-infos svg {
+  min-height: 52px;
 }
 .bttn--grey:hover {
   color: #292f33;
