@@ -19,7 +19,7 @@
       </div>
     </div>
     <transition-group name="participant-fade" @enter="test">
-      <div v-for="(extraParticipant, index) in extraParticipants" :key="extraParticipant">
+      <div v-for="(extraParticipant, index) in localExtraParticipants" :key="extraParticipant">
         <div class="card border-0 px-3 pt-3">
           <div class="card-header border-0">
             <div class="d-flex flex-row align-items-center">
@@ -73,24 +73,24 @@
 <script>
 export default {
   name: 'CheckoutWizardParticipants',
-  props: ['booker', 'avatar-key'],
+  props: ['booker', 'avatar-key', 'extra-participants'],
   data() {
     return {
       allowForm: false,
-      extraParticipants: []
+      localExtraParticipants: this.$props.extraParticipants
     }
   },
   computed: {
     filled() {
       let arr = new Array()
-      this.extraParticipants.forEach((part) => arr.push(part.infos.firstName, part.infos.birthDay))
+      this.localExtraParticipants.forEach((part) => arr.push(part.infos.firstName, part.infos.birthDay))
       return arr.every((el) => {
         el && el.length
       })
     }
   },
   watch: {
-    extraParticipants: {
+    localExtraParticipants: {
       deep: true,
       handler(val) {
         this.$emit('updated-participants', val)
@@ -103,7 +103,7 @@ export default {
       return email.match(validRegex) ? true : false
     },
     addParticipant() {
-      this.extraParticipants.push({
+      this.localExtraParticipants.push({
         infos: {
           firstName: '',
           birthDate: '',
@@ -124,7 +124,7 @@ export default {
       document.querySelector('.btn-add-participant').scrollIntoView({ behavior: 'smooth' })
     },
     removeParticipant(index) {
-      this.extraParticipants.splice(index, 1)
+      this.localExtraParticipants.splice(index, 1)
     }
   }
 }

@@ -1,17 +1,17 @@
 <template>
-  <!-- <div style="position: fixed; width: 100vw"> -->
-  <CheckoutHeader :total-price="totalPrice" :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
-  <CheckoutSections
-    @extra-participants-expense="(val) => (extraParticipantsExpense = val)"
-    @extra-participants-nb="(val) => (extraParticipantsNb = val)"
-    @booker-expense="(val) => (bookerExpense = val)"
-    @changed-step="setActiveStep"
-    :course="course"
-    :session="session"
-    :participantsNb="participantsNb"
-    :total-price="totalPrice"
-  />
-  <!-- </div> -->
+  <div>
+    <CheckoutHeader :total-price="totalPrice" :course="course" :session="session" :active-step="activeStep" v-if="activeStep !== 'success'" />
+    <CheckoutSections
+      @extra-participants-expense="(val) => (extraParticipantsExpense = val)"
+      @extra-participants-nb="(val) => (extraParticipantsNb = val)"
+      @booker-expense="(val) => (bookerExpense = val)"
+      @changed-step="setActiveStep"
+      :course="course"
+      :session="session"
+      :participantsNb="participantsNb"
+      :total-price="totalPrice"
+    />
+  </div>
 </template>
 <script>
 import CheckoutHeader from '@/components/checkout/CheckoutHeader'

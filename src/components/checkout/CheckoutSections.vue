@@ -42,43 +42,64 @@
           <div class="tab-content" :key="activeStep" style="margin-top: 0.1rem" :style="[activeStep === 'validation' ? 'max-width: unset' : '']">
             <!-- eslint-disable-next-line prettier/prettier -->
             <CheckoutWizardBooker v-if="activeStep === 'booker'" :avatar-key="avatarKey" @complete="(status) => (bookerComplete = status)" @updated-booker-infos="setBooker" :booker="booker" />
-            <CheckoutWizardParticipants
-              v-else-if="activeStep === 'participants'"
-              @complete="(status) => (participantsComplete = status)"
-              @updated-participants="setParticipants"
-              @clicked-my-infos="activeStep = 'booker'"
-              :avatar-key="avatarKey"
-              :booker="booker"
-            />
-            <CheckoutWizardForm
-              v-else-if="activeStep === 'options'"
-              @complete="(status) => (optionsComplete = status)"
-              @updated-participants="setParticipants"
-              @updated-booker="setBooker"
-              :avatar-key="avatarKey"
-              :booker="booker"
-              :extra-participants="extraParticipants"
-              :course="course"
-            />
-            <CheckoutWizardForm2
-              v-else-if="activeStep === 'insurance'"
-              @complete="(status) => (insuranceComplete = status)"
-              @updated-participants="setParticipants"
-              @updated-booker="setBooker"
-              :avatar-key="avatarKey"
-              :booker="booker"
-              :extra-participants="extraParticipants"
-              :course="course"
-              :booker-expense="bookerExpense"
-              :extra-participants-expense="extraParticipantsExpense"
-            />
+            <keep-alive>
+              <component
+                :is="'CheckoutWizardParticipants'"
+                v-if="activeStep === 'participants'"
+                @complete="(status) => (participantsComplete = status)"
+                @updated-participants="setParticipants"
+                @clicked-my-infos="activeStep = 'booker'"
+                :avatar-key="avatarKey"
+                :extra-participants="extraParticipants"
+                :booker="booker"
+              ></component>
+            </keep-alive>
+            <keep-alive>
+              <component
+                :is="'CheckoutWizardForm'"
+                v-if="activeStep === 'options'"
+                @complete="(status) => (optionsComplete = status)"
+                @updated-participants="setParticipants"
+                @updated-booker="setBooker"
+                @updated-notYetLastParticipant="(val) => (notYetLastParticipant = val)"
+                :avatar-key="avatarKey"
+                :booker="booker"
+                :extra-participants="extraParticipants"
+                :course="course"
+                :needs-reset="needsReset"
+              >
+              </component>
+            </keep-alive>
+            <keep-alive>
+              <component
+                :is="'CheckoutWizardForm2'"
+                v-if="activeStep === 'insurance'"
+                @complete="(status) => (insuranceComplete = status)"
+                @updated-participants="setParticipants"
+                @updated-booker="setBooker"
+                :avatar-key="avatarKey"
+                :booker="booker"
+                :extra-participants="extraParticipants"
+                :course="course"
+                :booker-expense="bookerExpense"
+                :extra-participants-expense="extraParticipantsExpense"
+              ></component>
+            </keep-alive>
             <!-- eslint-disable-next-line prettier/prettier -->
-            <CheckoutWizardValidation :avatar-key="avatarKey" :total-price="totalPrice" v-else-if="activeStep === 'validation'" @complete="submitBookingForm" :course="course" :booker="booker" :extra-participants="extraParticipants" />
+            <CheckoutWizardValidation :avatar-key="avatarKey" :total-price="totalPrice" v-if="activeStep === 'validation'" @complete="submitBookingForm" :course="course" :booker="booker" :extra-participants="extraParticipants" />
             <router-view></router-view>
             <!-- <CheckoutSuccess v-else-if="activeStep === 'success'" /> -->
             <div class="nav-buttons-container d-flex justify-content-end mt-4" v-if="activeStep !== 'validation' && activeStep !== 'success'">
-              <button @click.prevent="prevStep" v-show="steps.indexOf(activeStep) !== 0" class="btn text-uppercase prev-step-btn prev-btn mr-3" style="border-radius: 0">Précédent</button>
-              <button @click.prevent="nextStep" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
+              <button
+                @click.prevent="prevStep"
+                v-show="steps.indexOf(activeStep) !== 0"
+                class="btn text-uppercase prev-step-btn prev-btn mr-3"
+                :class="{ 'mr-auto': notYetLastParticipant && activeStep === 'options' }"
+                style="border-radius: 0"
+              >
+                Précédent
+              </button>
+              <button @click.prevent="nextStep" v-show="!(notYetLastParticipant && activeStep === 'options')" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
                 {{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}
               </button>
             </div>
@@ -147,7 +168,9 @@ export default {
       bookerInputsChanged: false,
       updatedBooker: null,
       updatedExtraParticipants: null,
-      avatarKey: ''
+      avatarKey: '',
+      notYetLastParticipant: false,
+      needsReset: false
     }
   },
   watch: {
@@ -175,7 +198,10 @@ export default {
       handler(newVal, oldVal) {
         this.$emit('changed-step', newVal)
 
-        // if (oldVal === 'insurance' && newVal === 'options') this.$children.checkoutWizardForm.resetDisplay()
+        if (oldVal === 'insurance' && newVal === 'options') this.needsReset = true
+        else this.needsReset = false
+
+        if (newVal === 'insurance') document.querySelector('.checkout-body-content').scrollTo({ top: 0, behavior: 'smooth' })
       }
     }
   },
@@ -397,40 +423,28 @@ export default {
   background-color: white;
   outline: 5px solid white;
 }
-.next-btn {
+.next-btn,
+.prev-btn {
   background-color: white;
   color: #292f33;
   border: 1px solid #292f33;
 }
-.next-btn:hover {
+.next-btn:hover,
+.prev-btn:hover {
   background-color: #292f33;
   color: white;
 }
-.next-btn.disable {
+.next-btn.disable,
+.prev-btn.disable {
   color: #ebebeb;
   border: 1px solid #b4b4b4;
 }
-.next-btn.disable:hover {
+.next-btn.disable:hover,
+.prev-btn.disable:hover {
   background-color: white;
   color: #ebebeb;
 }
-.next-btn {
-  background-color: white;
-  color: #292f33;
-  border: 1px solid #292f33;
-}
-.next-btn:hover {
-  background-color: #292f33;
-  color: white;
-}
-.next-btn.disable {
-  color: #ebebeb;
-  border: 1px solid #b4b4b4;
-}
-.next-btn.disable:hover {
-  background-color: white;
-  color: #ebebeb;
-}
+
 .top-infos-container {
   display: flex;
   width: max-content;
