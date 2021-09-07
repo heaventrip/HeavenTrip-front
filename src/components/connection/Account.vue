@@ -389,6 +389,9 @@ export default {
 }
 #svg-logo-white {
   margin-top: 16vh !important;
+  max-height: 40px;
+  min-height: 29px;
+  height: 3vw;
 }
 #btn-skip-step {
   z-index: 10;
@@ -591,10 +594,10 @@ export default {
   .purple-container__footer {
     margin-top: 0rem !important;
   }
-  #svg-logo-white {
+  /*   #svg-logo-white {
     height: 32px;
     min-height: 32px;
-  }
+  } */
 }
 @media only screen and (max-width: 1250px) {
   .form-container-login,
@@ -641,11 +644,11 @@ export default {
     font-size: 0.85rem;
     margin-top: 0rem !important;
   }
-  #svg-logo-white {
+  /*   #svg-logo-white {
     height: 29px;
     min-height: 29px;
     margin-top: 18vh !important;
-  }
+  } */
 }
 @media only screen and (max-height: 800px) {
   .form-container {
@@ -676,10 +679,10 @@ export default {
     font-size: 0.85rem;
     margin-top: 0rem !important;
   }
-  #svg-logo-white {
+  /*   #svg-logo-white {
     height: 29px;
     min-height: 29px;
     margin-top: 18vh !important;
-  }
+  } */
 }
 </style>
