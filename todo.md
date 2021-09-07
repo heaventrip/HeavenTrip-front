@@ -161,16 +161,21 @@ ___________________________
 > bouton réserver max-width: 280
 > mettre prix sur la session et l'enlever de course
 > conditionner || avatar-empty
-- dropdown up rajouter fading
-- text dynamique sélectionne une vignette quand pas logué
-- cards (voir sms)
-- version grise du dropdown sur produit
 
+BUG
+- version grise du dropdown sur produit
 - lancer l'anim fullscreen en cas de rechargement des infos
 - voir les valeurs de sorties de l'anim car bug en resize
 
+TODO
+- cards (voir sms)
 - WISHLIST!!!
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
+
+NOTE
+- dropdown up rajouter fading
+- text dynamique sélectionne une vignette quand pas logué
+
 
 6/09
 > mentions inverser le gras

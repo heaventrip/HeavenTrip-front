@@ -5,9 +5,9 @@
         <InlineSvg :src="require('@/assets/svg/arrow-right.svg')" transform="rotate(180)" class="mr-3" height="12" fill="white" />
         <span class="d-inline-block align-middle">Retour</span>
       </div>
-      <div class="top-info">Besoin de renseignements</div>
-      <div class="top-info">aaaaaaaa</div>
-      <div class="top-info">aaaaaaaa</div>
+      <div class="top-info">Besoin d'informations?</div>
+      <div class="top-info">Remboursement intégral en cas de non-départ confirmé</div>
+      <div class="top-info">Annulation sans frais jusqu'au {{ new Date(session.cancelDate).toLocaleString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) }}</div>
     </div>
     <div class="d-flex h-100 w-100">
       <div class="col-xl-4 p-0 bg-image h-100 position-relative" v-if="activeStep !== 'validation'">
