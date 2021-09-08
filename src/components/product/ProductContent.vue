@@ -176,7 +176,7 @@
               </li>
             </ul>
           </div>
-          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
+          <form @submit.prevent="submitMessageForm" class="message-send-form mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
             <textarea
               @keypress="
                 (e) => {
@@ -571,6 +571,8 @@ button {
   padding: 0px 2vw 0px 2vw;
   cursor: pointer;
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 .messaging-tab-btn:hover {
   background-color: #f5f5f5;
@@ -627,6 +629,11 @@ button {
   width: 20px;
   background: url('../../assets/svg/send.svg') center / contain no-repeat;
 }
+.message-send-form {
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
 .reply-container {
   background-color: #5a3a5f;
   color: white !important;
@@ -637,6 +644,9 @@ button {
   font-size: 0.8rem;
   letter-spacing: 0.03rem;
   font-weight: 400;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
 }
 
 .reply-container::placeholder {
