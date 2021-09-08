@@ -1,116 +1,120 @@
 <template>
   <div class="text-center mobile-vh">
-    <div v-if="activeInfoTabs[activeStep] === 'gender'" class="centered-vh">
-      <div class="descr-text">
-        Ton espace client te permet d’avoir une page spéciale Tripper "public". Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire plus
-        tard via ton espace client, aucun problème.
-      </div>
-      <div class="sperator-genre mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
-      <div class="div-group">
-        <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'female'">
-            <input type="radio" name="gender" /> Femme
-          </label>
-          <label :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'male'">
-            <input type="radio" name="gender" /> Homme
-          </label>
+    <transition name="fade-fast" mode="out-in">
+      <div v-if="activeInfoTabs[activeStep] === 'gender'" class="centered-vh">
+        <div class="descr-text">
+          Ton espace client te permet d’avoir une page spéciale Tripper "public". Tous les autres membres pourront la consulter. Joue le jeu et donne quelques infos sur toi ! Tu peux aussi le faire
+          plus tard via ton espace client, aucun problème.
+        </div>
+        <div class="sperator-genre mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
+        <div class="div-group">
+          <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'female'">
+              <input type="radio" name="gender" /> Femme
+            </label>
+            <label :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'male'">
+              <input type="radio" name="gender" /> Homme
+            </label>
+          </div>
         </div>
       </div>
-    </div>
-    <div v-else-if="activeInfoTabs[activeStep] === 'avatar'" class="centered-vh">
-      <div class="descr-text">
-        Tu verras, sur le site tu pourras voir à plusieurs endroits les photos des intéressés et des participants aux stages et accéder a leur profils. Un bon moyen de connaitre les Trippers avec qui
-        tu vas partir ! C’est cool de jouer le jeu et de faire vivre cette communauté :)
-      </div>
-      <div class="sperator-avatar mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="d-flex flex-column justify-content-center text-right mr-1">
-          <p class="upload-text-left upload-text mb-3" style="font-size: 0.8rem">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
-          <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
-          <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 4MB</p>
+      <div v-else-if="activeInfoTabs[activeStep] === 'avatar'" class="centered-vh">
+        <div class="descr-text">
+          Tu verras, sur le site tu pourras voir à plusieurs endroits les photos des intéressés et des participants aux stages et accéder a leur profils. Un bon moyen de connaitre les Trippers avec
+          qui tu vas partir ! C’est cool de jouer le jeu et de faire vivre cette communauté :)
         </div>
-        <div class="upload-container">
-          <my-upload
-            :no-square="true"
-            :langExt="uploadLang"
-            field="img"
-            @src-file-Set="fileSet"
-            @crop-success="cropSuccess"
-            @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadFail"
-            url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
-            v-model="show"
-            :width="300"
-            :height="300"
-            img-format="jpg"
-          ></my-upload>
+        <div class="sperator-avatar mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4; margin-bottom: 10vh"></div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="d-flex flex-column justify-content-center text-right mr-1">
+            <p class="upload-text-left upload-text mb-3" style="font-size: 0.8rem">Clique sur l’icône<br />pour télécharger ta<br />photo de profil</p>
+            <div style="transform: translateX(100%); width: 50%; border-bottom: 1px dashed #b4b4b4"></div>
+            <p class="info-text-small mb-0 mt-1 pb-0">Taille maximum 4MB</p>
+          </div>
+          <div class="upload-container">
+            <my-upload
+              :no-square="true"
+              :langExt="uploadLang"
+              field="img"
+              @src-file-Set="fileSet"
+              @crop-success="cropSuccess"
+              @crop-upload-success="cropUploadSuccess"
+              @crop-upload-fail="cropUploadFail"
+              url="https://heaventrip-dev.herokuapp.com/api/v1/upload"
+              v-model="show"
+              :width="300"
+              :height="300"
+              img-format="jpg"
+            ></my-upload>
+          </div>
+          <div class="principal-img">
+            <img v-if="imgDataUrl" :src="imgDataUrl" />
+            <svg class="svg-avatar" v-if="!imgDataUrl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.333 152.34">
+              <path
+                id="Tracé_5342"
+                data-name="Tracé 5342"
+                d="M76.167,152.34a76.162,76.162,0,0,0,12.855-1.166,43.914,43.914,0,0,1,16.311-72.408,30.593,30.593,0,0,0,1.529-4.658c1.57-6.357,1.154-11.941-.943-12.463a1.317,1.317,0,0,0-.621.029c.475-5.139.328-10-1.131-12.111-4.547-6.5-4.933-12.24-11.823-14.718-6.873-2.484,1.4-11.408,1.4-11.408s-29.435.826-35.71,11.4c-3.685,6.181-5.466,8.22-10.007,14.724-1.465,2.115-1.506,6.99-.879,12.123a1.473,1.473,0,0,0-.762-.035c-2.1.521-2.525,6.105-.955,12.463,1.488,5.994,4.2,10.47,6.246,10.523,1.266,7.06,3.34,13.576,6.9,17.173,8.788,8.894-8.788,17.789-8.788,17.789s-5.49,2.314-6.105,2.566c-3.867,1.67-9.093,4-14.155,6.474A70.264,70.264,0,1,1,146.474,76.17a69.1,69.1,0,0,1-.545,8.437,44.928,44.928,0,0,1,5.238,4.418,76.127,76.127,0,1,0-75,63.315Z"
+                fill="#fff"
+              />
+            </svg>
+            <svg class="svg-plus" v-if="!imgDataUrl" xmlns="http://www.w3.org/2000/svg" width="33.773" height="33.773" viewBox="0 0 33.773 33.773">
+              <path
+                id="Tracé_5887"
+                data-name="Tracé 5887"
+                d="M66.681,50.294h-14.2v-14.2a1.092,1.092,0,0,0-2.185,0v14.2h-14.2a1.092,1.092,0,0,0,0,2.185h14.2v14.2a1.092,1.092,0,1,0,2.185,0v-14.2h14.2a1.092,1.092,0,1,0,0-2.185Z"
+                transform="translate(-34.5 -34.5)"
+                fill="#fff"
+                stroke="#fff"
+                stroke-width="1"
+              />
+            </svg>
+          </div>
+          <div class="advises-avatar">
+            <img src="@/assets/images/ui_faces/4.jpg" />
+            <p class="upload-text">Cadrage conseillé</p>
+          </div>
         </div>
-        <div class="principal-img">
-          <img v-if="imgDataUrl" :src="imgDataUrl" />
-          <svg class="svg-avatar" v-if="!imgDataUrl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.333 152.34">
-            <path
-              id="Tracé_5342"
-              data-name="Tracé 5342"
-              d="M76.167,152.34a76.162,76.162,0,0,0,12.855-1.166,43.914,43.914,0,0,1,16.311-72.408,30.593,30.593,0,0,0,1.529-4.658c1.57-6.357,1.154-11.941-.943-12.463a1.317,1.317,0,0,0-.621.029c.475-5.139.328-10-1.131-12.111-4.547-6.5-4.933-12.24-11.823-14.718-6.873-2.484,1.4-11.408,1.4-11.408s-29.435.826-35.71,11.4c-3.685,6.181-5.466,8.22-10.007,14.724-1.465,2.115-1.506,6.99-.879,12.123a1.473,1.473,0,0,0-.762-.035c-2.1.521-2.525,6.105-.955,12.463,1.488,5.994,4.2,10.47,6.246,10.523,1.266,7.06,3.34,13.576,6.9,17.173,8.788,8.894-8.788,17.789-8.788,17.789s-5.49,2.314-6.105,2.566c-3.867,1.67-9.093,4-14.155,6.474A70.264,70.264,0,1,1,146.474,76.17a69.1,69.1,0,0,1-.545,8.437,44.928,44.928,0,0,1,5.238,4.418,76.127,76.127,0,1,0-75,63.315Z"
-              fill="#fff"
-            />
-          </svg>
-          <svg class="svg-plus" v-if="!imgDataUrl" xmlns="http://www.w3.org/2000/svg" width="33.773" height="33.773" viewBox="0 0 33.773 33.773">
-            <path
-              id="Tracé_5887"
-              data-name="Tracé 5887"
-              d="M66.681,50.294h-14.2v-14.2a1.092,1.092,0,0,0-2.185,0v14.2h-14.2a1.092,1.092,0,0,0,0,2.185h14.2v14.2a1.092,1.092,0,1,0,2.185,0v-14.2h14.2a1.092,1.092,0,1,0,0-2.185Z"
-              transform="translate(-34.5 -34.5)"
-              fill="#fff"
-              stroke="#fff"
-              stroke-width="1"
-            />
-          </svg>
+        <div v-if="!showAvatarValidationButton && !error && showLoaderUploadImg" class="lds-dual-ring"></div>
+        <label v-else-if="showAvatarValidationButton && !error && !showLoaderUploadImg" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4">
+          Valider ma photo de profil
+        </label>
+        <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="label-error rounded-0 px-4" style="position: absolute; margin-top: 70px; color: tomato">{{
+          error
+        }}</label>
+      </div>
+      <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
+        <div class="descr-text">
+          Ultra rapide, une petite bio, tes passions, un proverbe préféré ? Ces informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton
+          espace Trippers.
         </div>
-        <div class="advises-avatar">
-          <img src="@/assets/images/ui_faces/4.jpg" />
-          <p class="upload-text">Cadrage conseillé</p>
+        <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
+        <form>
+          <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="(Facultatif) Tu peux taper ton texte ici..."></textarea>
+          <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="submitRegisterForm" />
+        </form>
+      </div>
+      <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh success-block">
+        <div class="descr-text">
+          Un e-mail de confirmation vous a été envoyé a l'adresse {{ user.email ? user.email : '' }}, merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur
+          Heaven Trip. A tout de suite !
         </div>
+        <div class="separator-success mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
+        <form class="group-btn">
+          <Button class="btn-resend-email" text="RENVOYER LE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation" />
+          <Button
+            class="btn-login"
+            text="SE CONNECTER"
+            px="1.5rem"
+            size=".8rem"
+            height="50px"
+            width="100%"
+            weight="bold"
+            color="white"
+            @click="$router.push({ name: 'Account', params: { activeTab: 'login' } })"
+          />
+        </form>
       </div>
-      <div v-if="!showAvatarValidationButton && !error && showLoaderUploadImg" class="lds-dual-ring"></div>
-      <label v-else-if="showAvatarValidationButton && !error && !showLoaderUploadImg" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4">
-        Valider ma photo de profil
-      </label>
-      <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="label-error rounded-0 px-4" style="position: absolute; margin-top: 70px; color: tomato">{{ error }}</label>
-    </div>
-    <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
-      <div class="descr-text">
-        Ultra rapide, une petite bio, tes passions, un proverbe préféré ? Ces informations seront visibles sur ta page public par tous les autres membres. Tu peux a tout moment les compléter via ton
-        espace Trippers.
-      </div>
-      <div class="separator mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
-      <form>
-        <textarea v-model="description" class="form-control info-textarea" style="border-radius: 0" rows="4" placeholder="(Facultatif) Tu peux taper ton texte ici..."></textarea>
-        <Button text="Valider mon inscription" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="submitRegisterForm" />
-      </form>
-    </div>
-    <div v-else-if="activeInfoTabs[activeStep] === 'success'" class="centered-vh success-block">
-      <div class="descr-text">
-        Un e-mail de confirmation vous a été envoyé a l'adresse {{ user.email ? user.email : '' }}, merci de <strong> cliquer sur le lien de validation </strong> pour finaliser votre inscription sur
-        Heaven Trip. A tout de suite !
-      </div>
-      <div class="separator-success mt-5" style="width: 100%; height: 1px; border-top: 1px dashed #b4b4b4"></div>
-      <form class="group-btn">
-        <Button class="btn-resend-email" text="RENVOYER LE MAIL" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" @click="resendEmailConfirmation" />
-        <Button
-          class="btn-login"
-          text="SE CONNECTER"
-          px="1.5rem"
-          size=".8rem"
-          height="50px"
-          width="100%"
-          weight="bold"
-          color="white"
-          @click="$router.push({ name: 'Account', params: { activeTab: 'login' } })"
-        />
-      </form>
-    </div>
+    </transition>
   </div>
 </template>
 
