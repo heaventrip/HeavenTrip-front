@@ -68,7 +68,7 @@
         :style="{ backgroundColor: activeStep === 'validation' ? '#292f33' : 'rgb(90, 58, 95)' }"
       >
         <div class="total-amount text-uppercase mb-0" :style="{ padding: activeStep === 'validation' ? '0 2rem' : '' }">
-          <span v-if="activeStep === 'validation'">Total de la<br />réservation :<br /></span>
+          <span v-if="activeStep === 'validation'">Total de<br />la réservation :<br /></span>
           <span v-else>Prix total :<br /></span>
           <span class="font-weight-bold" style="font-size: 1.875rem">{{ totalPrice >= 1000 ? `${totalPrice.toString()[0]} ${totalPrice.toString().slice(-3)}` : totalPrice }}&hairsp;&euro;</span>
         </div>

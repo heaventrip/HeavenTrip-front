@@ -2,7 +2,7 @@
   <div>
     <div class="form-group has-float-label">
       <input id="login-email" v-model="email" class="form-control" :class="{ 'field-error': v$.email.$error }" type="email" name="" placeholder=" " />
-      <label for="login-email">Adresse e-mail</label>
+      <label for="login-email">E-mail</label>
       <div v-if="v$.email.$errors.length" class="field-error-message">{{ v$.email.$errors[0].$message }}</div>
     </div>
     <div class="form-group has-float-label">

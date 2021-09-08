@@ -1,10 +1,13 @@
 <template>
   <div class="checkout-main-container" :style="[activeStep === 'validation' ? 'height: calc(100vh - 170px)' : '']">
     <div class="top-infos-container" v-if="activeStep === 'validation'">
-      <div class="top-info" type="button" @click="activeStep = 'insurance'">Retour</div>
-      <div class="top-info">aaaaaaaa</div>
-      <div class="top-info">aaaaaaaa</div>
-      <div class="top-info">aaaaaaaa</div>
+      <div class="top-info top-info-back" type="button" @click="activeStep = 'insurance'">
+        <InlineSvg :src="require('@/assets/svg/arrow-right.svg')" transform="rotate(180)" class="mr-3" height="12" fill="white" />
+        <span class="d-inline-block align-middle">Retour</span>
+      </div>
+      <div class="top-info">Besoin d'informations?</div>
+      <div class="top-info">Remboursement intégral en cas de non-départ confirmé</div>
+      <div class="top-info">Annulation sans frais jusqu'au {{ new Date(session.cancelDate).toLocaleString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) }}</div>
     </div>
     <div class="d-flex h-100 w-100">
       <div class="col-xl-4 p-0 bg-image h-100 position-relative" v-if="activeStep !== 'validation'">
@@ -456,12 +459,18 @@ export default {
   font-family: Oswald, sans-serif;
   padding: 1rem 2rem;
 }
-.top-info:first-of-type {
-  background-color: #292f33;
-  color: white;
-}
 .top-info {
   background-color: white;
   color: #292f33;
+  margin: 0 1px;
+  box-shadow: rgb(240, 240, 240) 0px 1px 3px;
+}
+.top-info-back {
+  background-color: #292f33;
+  color: white;
+  transition: all 0.3s ease;
+}
+.top-info-back:hover {
+  background-color: #d82558;
 }
 </style>

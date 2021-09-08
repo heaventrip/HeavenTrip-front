@@ -118,18 +118,9 @@ export default {
     addSportPicto(svg) {},
     animateSvg(type, index) {
       let svgCircle = document.querySelector(`.svg-circle-sports[data-index='${index}']`)
-      let svgActivity = document.querySelector(`.svg-activity[data-index='${index}']`)
 
-      if (type === 'enter')
-        gsap
-          .timeline({ defaults: { duration: 0.3 } })
-          .to(svgActivity, { scale: '1.2', transformOrigin: '50px 50px' })
-          .to(svgCircle, { autoAlpha: 0.3 }, '<')
-      if (type === 'leave')
-        gsap
-          .timeline({ defaults: { duration: 0.3 } })
-          .to(svgActivity, { scale: '1', transformOrigin: '50px 50px' })
-          .to(svgCircle, { autoAlpha: 1 }, '<')
+      if (type === 'enter') gsap.to(svgCircle, { autoAlpha: 0.3, duration: 0.3 })
+      if (type === 'leave') gsap.to(svgCircle, { autoAlpha: 1, duration: 0.3 })
     }
   },
   created() {

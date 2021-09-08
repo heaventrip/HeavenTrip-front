@@ -175,7 +175,7 @@
       </div>
     </div>
     <div class="">
-      <ConnectionButtons />
+      <ConnectionButtons :nav-sticky="true" />
     </div>
   </nav>
 </template>

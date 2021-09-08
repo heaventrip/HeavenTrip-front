@@ -55,7 +55,7 @@
                 <div class="col-12 col-lg-4">
                   <div class="form-group has-float-label">
                     <input v-model="extraParticipant.infos.email" id="emailAddr" class="form-control" type="email" name="" placeholder=" " />
-                    <label for="emailAddr">Email*</label>
+                    <label for="emailAddr">E-mail*</label>
                   </div>
                 </div>
               </div>

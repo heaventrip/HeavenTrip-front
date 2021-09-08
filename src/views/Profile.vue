@@ -164,7 +164,7 @@
                   <div class="col-12 col-lg-12">
                     <div class="form-group has-float-label">
                       <input id="infos-email" type="email" disabled name="" placeholder=" " class="form-control" v-model="currUser.email" />
-                      <label for="infos-email">Email</label>
+                      <label for="infos-email">E-mail</label>
                     </div>
                   </div>
                   <div class="col-12 col-lg-12">
