@@ -7,10 +7,10 @@
       type="button"
       :src="require('@/assets/images/svg/PICTO_CLOSE_PLEIN.svg')"
       height="60"
-      style="position: absolute; top: 30px; left: 30px; z-index: 100"
+      style="position: absolute; top: 30px; left: 48px; z-index: 100"
     />
-    <div class="purple-container align-items-center" style="position: relative">
-      <div class="purple-container__content mx-auto d-flex flex-column h-100">
+    <div class="purple-container align-items-center" :class="{ 'purple-container-infos': activeTab === 'infos' }" style="position: relative">
+      <div class="purple-container__content mx-auto d-flex flex-column h-100" :class="{ 'purple-container__content-tab-info-active': activeTab === 'infos' }">
         <InlineSvg id="svg-logo-white" :src="require('@/assets/svg/logo-white.svg')" class="mt-auto" height="40" :class="{ 'd-none': $windowHeight < 600 }" />
         <div class="purple-container__block mt-auto d-flex flex-column">
           <div class="purple-container__groupe d-flex align-items-center mb-3 mb-xl-5" style="color: white">
@@ -39,7 +39,7 @@
           <InlineAvatars :avatars="avatarKeys" />
         </div>
       </div>
-      <div class="purple-container__svgs d-flex flex-column h-100 justify-content-around px-2">
+      <div class="purple-container__svgs d-flex flex-column justify-content-around px-2" :class="{ 'purple-container__svgs-infos': activeTab === 'infos' }">
         <InlineSvg :src="require('@/assets/svg/surf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/kitesurf.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
         <InlineSvg :src="require('@/assets/svg/paddle.svg')" :height="$windowWidth < 1200 ? 40 : 60" fill="#292f33" />
@@ -51,10 +51,10 @@
     <div
       class="grey-container d-flex flex-column align-items-center text-white"
       style="background-color: #292f33"
-      :class="[activeTab === 'login' || activeTab === 'signup' ? 'grey-container-width' : '']"
+      :class="[{ 'grey-container-infos': activeTab === 'infos' }, { 'grey-container-width': activeTab === 'login' || activeTab === 'signup' }]"
     >
       <InlineSvg
-        style="position: absolute; top: 2rem; left: 2rem"
+        style="position: absolute; top: 3.8rem; left: 3.2rem"
         v-if="activeTab === 'infos' && !hiddenArrow"
         @click="previousScreen"
         type="button"
@@ -63,7 +63,7 @@
         fill="white"
         transform="rotate(180)"
       />
-      <div class="d-flex align-items-center" style="position: absolute; top: 2rem; right: 2rem">
+      <div class="d-flex align-items-center" style="position: absolute; top: 1.6rem; right: 2.4rem">
         <div class="title-connection" v-if="activeTab === 'infos'" style="text-transform: uppercase; text-align: right; margin-right: 1rem; font-weight: 500; font-size: 0.8rem">
           Complète ton <br />profil
         </div>
@@ -109,7 +109,11 @@
           </div>
           <!--<div @click="activeInfoTabByName('success')" type="button" class="connection-nav-button" :class="{ 'connection-nav-button--active': activeInfoTab === 'success' }">success</div>-->
 
-          <div id="btn-skip-step" @click="skipStep()"><p>Je décide de le faire plus tard</p></div>
+          <div v-if="activeInfoTab != 'success' && activeInfoTab != 'bio'" id="btn-skip-step" @click="skipStep()">
+            <p>
+              Je décide de le faire plus tard <InlineSvg :src="require('@/assets/svg/arrow-next-right.svg')" width="17px" height="17px" fill="#292f33" style="margin-left: 5px; padding-bottom: 2px" />
+            </p>
+          </div>
         </div>
         <div v-else-if="isNewPassword">
           <div id="title-password" class="connection-nav-button">Nouveau mot de passe</div>
@@ -360,8 +364,12 @@ export default {
       this.activeInfoTab = val
     },
     previousScreen() {
-      this.tl.reverse()
-      this.activeTab = 'signup'
+      if (this.activeInfoTab === 'gender') {
+        this.tl.reverse()
+        this.activeTab = 'signup'
+      } else {
+        this.$refs.formInfos.activeStep--
+      }
     },
     handlePageClose() {
       if (this.fromRoute) this.$router.back()
@@ -416,13 +424,27 @@ export default {
   width: 55%;
 }
 .purple-container__svgs {
-  margin-right: 30px;
+  height: 100%;
   padding-left: 3rem !important;
   padding-right: 3rem !important;
 }
 .purple-container__svgs svg {
   height: 4vw;
   max-height: 52px;
+}
+.purple-container__svgs-infos {
+  /* min-width: 12.2vw;
+  padding-top: 0.6rem;
+  padding-bottom: 0.2rem;
+  padding-left: 3.4rem !important;
+  padding-right: 2.2rem !important; */
+  padding-left: 3.4rem !important;
+  padding-right: 2.2rem !important;
+  padding-bottom: 1.2rem;
+  padding-top: 1.6rem;
+}
+.purple-container__svgs-infos svg {
+  height: 3.4vw !important;
 }
 .bttn--grey:hover {
   color: #292f33;
@@ -537,6 +559,9 @@ export default {
   display: flex;
   width: 52%;
 }
+.purple-container-infos {
+  max-width: 24rem;
+}
 .purple-container__block {
   padding-bottom: 8vh;
   max-width: 32rem;
@@ -562,6 +587,9 @@ export default {
   width: 100%;
   height: 100vh; /* corresponds height of image */
   z-index: -1;
+}
+.grey-container-infos {
+  width: 100% !important;
 }
 .form-container {
   margin-top: 21vh;
@@ -668,6 +696,9 @@ export default {
   .purple-container__content {
     width: 60%;
     margin-right: 2rem !important;
+  }
+  .purple-container__content-tab-info-active {
+    margin-right: 0rem !important;
   }
   .purple-container__svgs {
     margin-right: -24px;

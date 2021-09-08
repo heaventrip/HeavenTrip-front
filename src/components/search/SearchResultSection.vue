@@ -237,7 +237,7 @@
             <!-- NOTE NORMAL -->
             <transition-group>
               <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
-                <div class="col-4 col-md-4 p-0">
+                <div class="p-0" style="flex: 0 0 36%">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="normalResult?.cover" />
                     <svg
@@ -253,15 +253,15 @@
                         data-name="BACKGROUND PICTO"
                         d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
                       />
-                      <InlineSvg v-if="normalResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-                      <InlineSvg v-else-if="normalResult?.sports[0]?.picto" :src="require(`@/assets/svg/${normalResult.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+                      <InlineSvg v-if="normalResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+                      <InlineSvg v-else-if="normalResult?.sports[0]?.picto" :src="require(`@/assets/svg/${normalResult.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
                     </svg>
                   </div>
                 </div>
                 <div class="d-flex fg-1">
                   <div class="d-flex flex-column justify-content-between shadow--right" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
                     <div class="pad__content">
-                      <div class="d-flex justify-content-between align-items-center pb-3 mb-3" style="border-bottom: 1px dashed #ebebeb">
+                      <div class="d-flex justify-content-between align-items-center" style="border-bottom: 1px dashed #b4b4b4; padding-bottom: 1.2rem; margin-bottom: 0.5">
                         <div class="text-uppercase pad__content__title font-weight-bold d-flex flex-column justify-content-start">
                           <span class="pad__content__title__sport">{{ normalResult?.sports[0]?.name }}</span>
                           <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mr-3"></i>{{ normalResult?.spot.name }}</span>
@@ -269,15 +269,13 @@
                         <div class="pad__content__price">
                           <div class="pad__content__price__info" style="font-weight: 300">par pers. :</div>
                           <div class="pad__content__price__euro">
-                            <span class="euro"
+                            <span class=""
                               >{{ normalResult?.price >= 1000 ? `${normalResult?.price.toString()[0]} ${normalResult?.price.toString().slice(-3)}` : normalResult?.price }}&hairsp;&euro;</span
                             >
                           </div>
                         </div>
                       </div>
-                      <div class="pad__content__description">
-                        {{ normalResult?.description.substr(0, 200) }}
-                      </div>
+                      <div class="pad__content__description">{{ normalResult?.description.substr(0, 140) }}...</div>
                       <!-- NOTE display for multisport -->
                       <!-- <div class="pad__content__sports d-flex align-items-center tooltip-div">
                         <span class="pad__content__activities__title">Activités :</span>
@@ -290,7 +288,7 @@
                       </div> -->
                       <div class="">
                         <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers inscrits&nbsp;</span><span>aux sessions :</span> </span>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between" style="margin-top: 0.3rem">
                           <InlineAvatars :avatars="avatarKeys" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         </div>
                       </div>
@@ -311,7 +309,7 @@
                     </div>
                   </div>
                   <!-- TODO changement de content au hover, et hover en gris -->
-                  <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
+                  <div class="d-inline-block pad__content p-0" style="width: 92px; height: min-content">
                     <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('01') }"><span>Janv.</span></div>
                     <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('02') }"><span>Fév.</span></div>
                     <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('03') }"><span>Mars</span></div>
@@ -331,7 +329,7 @@
             <!-- NOTE LAST SESSION -->
             <transition-group>
               <div class="d-flex position-relative mb-5" v-for="lastSessionResult in lastSessionResults" :key="lastSessionResult">
-                <div class="col-4 col-md-4 p-0" style="box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
+                <div class="p-0" style="flex: 0 0 36%; box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="lastSessionResult?.cover" />
                     <svg
@@ -339,7 +337,7 @@
                       class="mr-3"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#d82558"
-                      height="80"
+                      height="75"
                       viewBox="0 0 42.57972 37.89174"
                     >
                       <path
@@ -347,8 +345,8 @@
                         data-name="BACKGROUND PICTO"
                         d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
                       />
-                      <InlineSvg v-if="lastSessionResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-                      <InlineSvg v-else-if="lastSessionResult?.sports[0]?.picto" :src="require(`@/assets/svg/${lastSessionResult.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+                      <InlineSvg v-if="lastSessionResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+                      <InlineSvg v-else-if="lastSessionResult?.sports[0]?.picto" :src="require(`@/assets/svg/${lastSessionResult.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
                     </svg>
                   </div>
                   <div
@@ -406,7 +404,7 @@
                     </div>
                   </div>
                   <!-- TODO changement de content au hover, et hover en gris -->
-                  <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
+                  <div class="d-inline-block pad__content p-0" style="width: 92px; height: min-content">
                     <div class="pad__content__month-block shadow"><span>Janv.</span></div>
                     <div class="pad__content__month-block shadow"><span>Fév.</span></div>
                     <div class="pad__content__month-block shadow"><span>Mars</span></div>
@@ -426,7 +424,7 @@
             <!-- NOTE TRIP REQUEST -->
             <transition-group>
               <div class="d-flex position-relative mb-5" v-for="requestedTripResult in requestedTripResults" :key="requestedTripResult">
-                <div class="col-4 col-md-4 p-0">
+                <div class="p-0" style="flex: 0 0 36%">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="requestedTripResult?.cover" />
                     <svg
@@ -442,8 +440,8 @@
                         data-name="BACKGROUND PICTO"
                         d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
                       />
-                      <InlineSvg v-if="requestedTripResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-                      <InlineSvg v-else-if="requestedTripResult?.sports[0]?.picto" :src="require(`@/assets/svg/${requestedTripResult.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+                      <InlineSvg v-if="requestedTripResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+                      <InlineSvg v-else-if="requestedTripResult?.sports[0]?.picto" :src="require(`@/assets/svg/${requestedTripResult.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
                     </svg>
                   </div>
                 </div>
@@ -505,7 +503,7 @@
                     </div>
                   </div>
                   <!-- TODO changement de content au hover, et hover en gris -->
-                  <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content; visibility: hidden">
+                  <div class="d-inline-block pad__content p-0" style="width: 92px; height: min-content; visibility: hidden">
                     <div class="pad__content__month-block shadow"><span>Janv.</span></div>
                     <div class="pad__content__month-block shadow"><span>Fév.</span></div>
                     <div class="pad__content__month-block shadow"><span>Mars</span></div>
@@ -660,6 +658,9 @@ export default {
       if (val.length) {
         let arr = []
         val.forEach((result) => {
+          // retrieve participants
+          result.wishlistUsers?.forEach((user) => this.avatarKeys.push(user.avatarKey))
+
           if (!result.sessions) return
 
           result.sessions.forEach((session) => {
@@ -667,9 +668,6 @@ export default {
             arr.push(session.dateStart.split('-')[1])
             this.sessionsArr = [...new Set(arr)]
           })
-
-          // retrieve participants
-          val.wishlistUsers?.forEach((user) => this.avatarKeys.push(user.avatarKey))
         })
       }
     },
@@ -868,8 +866,10 @@ export default {
 
 <style scoped>
 .pad__content__description {
-  font-size: 1rem;
+  font-size: 0.85rem;
   margin-bottom: 1rem;
+  font-family: Muli, sans-serif;
+  line-height: 1.7;
 }
 .filter-div {
   width: 40%;
@@ -945,7 +945,7 @@ export default {
   font-weight: bold;
 }
 .inline-product-infos-container {
-  margin: 0 2rem;
+  margin: 0 2.4rem;
   flex-grow: 1;
 }
 .pad__footer {
@@ -991,6 +991,7 @@ export default {
   left: 0;
 }
 .pad__content__title__sport {
+  margin-bottom: 0.2rem;
   font-size: 1.75rem;
 }
 .pad__content__title__spot {
@@ -1018,7 +1019,7 @@ export default {
   height: 100%;
   justify-content: space-between;
   color: #292f33;
-  padding: 1.5rem 2rem 0rem 2rem;
+  padding: 1.5rem 2rem 1.4rem 2.4rem;
 }
 .pad__content__month-block span {
   display: inline;
@@ -1026,7 +1027,7 @@ export default {
 }
 .pad__content__month-block {
   text-align: center;
-  padding: 0.2rem 0;
+  padding: 0.25rem 0;
   margin-bottom: 1px;
   margin-left: 1px;
   background-color: #fff;

@@ -22,8 +22,8 @@
                 data-name="BACKGROUND PICTO"
                 d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
               />
-              <InlineSvg v-if="course?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-              <InlineSvg v-else-if="course?.sports[0]?.picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+              <InlineSvg v-if="course?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+              <InlineSvg v-else-if="course?.sports[0]?.picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
             </svg>
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
               <div class="card__footer__infos__heading d-flex flex-column">

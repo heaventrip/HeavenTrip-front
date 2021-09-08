@@ -135,10 +135,20 @@
         <vue-easy-lightbox loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
         <div class="messaging d-flex flex-column">
           <div class="messaging-header">
-            <div class="font-weight-bold" style="color: #292f33">JE PAPOTE AVEC :</div>
+            <div class="messaging-header-title" style="color: #292f33">
+              <svg id="PICTO_CHAT" xmlns="http://www.w3.org/2000/svg" width="18.285" height="14.298" viewBox="0 0 18.285 14.298">
+                <path
+                  id="PICTO_CHAT-2"
+                  data-name="PICTO_CHAT"
+                  d="M2.361,14.289a.093.093,0,0,1-.053-.085V11.228A3.8,3.8,0,0,1,0,7.719v-.08a3.8,3.8,0,0,1,2.881-3.7c0,.045,0,.092,0,.137v.086a5.085,5.085,0,0,0,5.055,5.1h3.935l.823.714a3.748,3.748,0,0,1-3.031,1.545H5.638l-3.178,2.75a.091.091,0,0,1-.1.013Zm13.287-3.1-3.4-2.947H7.933a4.059,4.059,0,0,1-4.04-4.078V4.078A4.059,4.059,0,0,1,7.933,0h6.313a4.059,4.059,0,0,1,4.04,4.078v.085a4.081,4.081,0,0,1-2.473,3.76v3.189a.1.1,0,0,1-.058.091.1.1,0,0,1-.042.009A.1.1,0,0,1,15.648,11.189ZM13.733,4.121a.939.939,0,1,0,.94-.948h0A.944.944,0,0,0,13.733,4.121Zm-3.583,0a.94.94,0,1,0,.94-.948A.944.944,0,0,0,10.149,4.121Zm-3.583,0a.94.94,0,1,0,.939-.948A.944.944,0,0,0,6.566,4.121Z"
+                  fill="#292f33"
+                />
+              </svg>
+              JE PAPOTE AVEC :
+            </div>
             <div class="messaging-tabs">
-              <div class="tab-btn-participant"># LES PARTICIPANTS</div>
-              <div class="tab-btn-interested"># TOUT LES INTERESSES</div>
+              <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'participants'" :class="[{ active: activeTabMassaging === 'participants' }]"># LES PARTICIPANTS</div>
+              <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'interested'" :class="[{ active: activeTabMassaging === 'interested' }]"># TOUT LES INTERESSES</div>
             </div>
           </div>
           <div class="messages-container" @wheel.stop style="">
@@ -166,8 +176,25 @@
               </li>
             </ul>
           </div>
-          <form @submit.prevent="submitMessageForm" class="mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
-            <textarea placeholder="Tape ici ton message..." v-model="inputMessage" class="reply-container form-control;" style="padding-left: 3rem" rows="2"> </textarea>
+          <form @submit.prevent="submitMessageForm" class="message-send-form mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
+            <textarea
+              @keypress="
+                (e) => {
+                  if (e.keyCode === 13) {
+                    if (e.preventDefault) e.preventDefault()
+                    submitMessageForm()
+                    return false
+                  }
+                }
+              "
+              placeholder="Tape ici ton message..."
+              v-model="inputMessage"
+              class="reply-container form-control;"
+              type="submit"
+              style="padding-left: 3rem"
+              rows="2"
+            >
+            </textarea>
             <button class="ml-3 fg-1 text-center" type="submit">
               <InlineSvg class="svg-btn-send" :src="require('@/assets/svg/send.svg')" height="20" />
             </button>
@@ -219,6 +246,7 @@ export default {
   emits: ['active-lightbox'],
   data() {
     return {
+      activeTabMassaging: 'interested',
       messages: [],
       messageSentSuccess: true,
       inputMessage: '',
@@ -277,30 +305,6 @@ export default {
           },
           content: 'cc cest le Jo',
           createdAt: '2021-08-05T11:13:32.612Z'
-        },
-        {
-          user: {
-            firstName: 'Marie',
-            lastName: 'Dag'
-          },
-          content: 'zefazef rvzefz zefzefzef',
-          createdAt: '2021-08-05T11:13:32.612Z'
-        },
-        {
-          user: {
-            firstName: 'Bonie',
-            lastName: 'M'
-          },
-          content: 'zefazef rvzefz zefzefzezev fjghjyhjlhk dfsgdsfgdf',
-          createdAt: '2021-08-05T11:13:32.612Z'
-        },
-        {
-          user: {
-            firstName: 'Marie',
-            lastName: 'Dag'
-          },
-          content: 'zefazef rvzefz zefzefzef zefazef rvzefz zefzefzef zefazef rvzefz zefzefzefzefazef rvzefz zefzefzef',
-          createdAt: '2021-08-05T11:13:32.612Z'
         }
       ] */
     },
@@ -332,6 +336,7 @@ export default {
         .then((res) => {
           console.log(res)
           this.fetchMessages()
+          this.inputMessage = ''
         })
         .catch((err) => console.log(err))
     },
@@ -513,21 +518,45 @@ button {
 }
 .messaging {
   background-color: #fcfcfc;
-  padding: 0.4rem 1rem 0rem 0rem;
+  padding: 0.4rem 1.4rem 0rem 0rem;
   height: calc(100% - 25vh);
 }
 .messaging-header {
   display: flex;
-  height: 90px;
-  max-height: 90px;
-  min-height: 90px;
+  height: 65px;
+  max-height: 65px;
+  min-height: 65px;
   align-items: center;
   justify-content: space-between;
   background-color: white;
 }
+.messaging-header-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-left: calc(2vw - 8px);
+}
+.messaging-header-title svg {
+  margin-right: 0.4vw;
+}
 .messaging-tabs {
   display: flex;
   font-size: 0.76rem;
+  align-items: center;
+  height: 100%;
+}
+.messaging-tab-btn {
+  padding: 0px 2vw 0px 2vw;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.messaging-tab-btn:hover {
+  background-color: #f5f5f5;
+}
+.active.messaging-tab-btn {
+  background-color: #292f33;
+  color: white;
 }
 .messages-container-ul {
   padding: 0px 8px 0px 8px;
@@ -553,16 +582,17 @@ button {
   background-color: #fcfcfc;
   flex-direction: column-reverse;
   overflow-y: auto;
-  padding-left: 2.5rem;
+  /*   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  padding-top: 1rem;
+  padding-top: 1rem; */
+  padding: 0 1rem;
   overscroll-behavior: none;
 }
-@media only screen and (max-width: 1440px) {
+/* @media only screen and (max-width: 1440px) {
   .messages-container {
     padding: 0 1rem;
   }
-}
+} */
 .message-input-label {
   position: relative;
   width: 100%;
@@ -576,17 +606,28 @@ button {
   width: 20px;
   background: url('../../assets/svg/send.svg') center / contain no-repeat;
 }
+.message-send-form {
+  border: solid 8px #00000021;
+}
 .reply-container {
   background-color: #5a3a5f;
   color: white !important;
   width: 85%;
   overflow: visible !important;
-  padding: 15px;
-  height: 50px;
+  padding: 22px;
+  /* height: 71px; */
+  height: calc(71px - 8px); /* -8px is border from message-send-form */
+  font-size: 0.8rem;
+  letter-spacing: 0.03rem;
+  font-weight: 400;
 }
+
 .reply-container::placeholder {
   color: #ffffff;
   font-weight: 500;
+}
+.reply-container:focus::placeholder {
+  color: #ffffffc0;
 }
 .reply-container:focus {
   outline: none;
@@ -610,7 +651,7 @@ button {
   position: fixed;
   background-color: white;
   box-shadow: 0 0 3px #ebebeb;
-  height: calc(100vh - 71px - 100px - 40px); /* substract top nav and booking footer */
+  height: calc(100vh - 32px - 100px - 40px); /* substract top nav and booking footer */
 }
 @media only screen and (min-width: 1441px) {
   .aside-slider {
@@ -622,11 +663,6 @@ button {
   display: block;
   width: 100%;
   object-fit: cover;
-}
-.reply-container {
-  font-size: 0.8rem;
-  color: #292f33;
-  font-weight: 400;
 }
 .profile-container {
   margin: auto;

@@ -79,8 +79,8 @@
   left: 0;
   right: 0;
   margin: auto;
-  /* width: 600px; */
-  /* height: 330px; */
+  width: 600px;
+  height: 330px;
   padding: 0px;
   /* background-color: #fff; */
   /* border-radius: 2px; */
@@ -658,6 +658,7 @@
   width: 106%;
   bottom: -50px;
   background-color: #292f33;
+  margin-left: -40px;
 }
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-operate {
@@ -669,11 +670,13 @@
 }
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step3 .vicp-operate a:first-child {
-  margin-left: 200px;
+  margin-left: 180px;
 }
+
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-step1 .vicp-operate a {
   display: none;
 }
+
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-operate a {
   border: 1px solid white;
   transition: all 0.3s ease;
@@ -681,7 +684,7 @@
   float: left;
   display: block;
   padding: 5px;
-  margin-left: 20px;
+  margin-left: 15px;
   width: 100px;
   height: 48px;
   /* height: 36px; */

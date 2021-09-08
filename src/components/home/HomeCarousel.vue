@@ -146,7 +146,6 @@ export default {
       courses: [],
       currentViewportWidth: '',
       cardIndexCounter: 0,
-      leftSlideTl: null,
       rightSlideTl: null,
       counter: 0
     }
@@ -183,32 +182,31 @@ export default {
       this.$refs[`card${index}`].smallerCard()
     },
     initLeftSlideTl() {
-      let shallowCards = this.cards
-      let that = this
       let tl = gsap
         .timeline({
           onComplete: () => {
-            that.cardIndexCounter++
-            shallowCards.push(shallowCards.shift())
+            this.cardIndexCounter++
+            this.cards.push(this.cards.shift())
           },
           onReverseComplete: () => {
-            that.cardIndexCounter--
-            shallowCards.unshift(shallowCards.pop())
+            this.cardIndexCounter--
+            this.cards.unshift(this.cards.pop())
           }
         })
         .pause()
 
       // slide all left
-      tl.to(shallowCards, {
+      tl.to(this.cards, {
         x: `-=${this.cardWidth + this.cardMargin}`,
         duration: 1,
         ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
         modifiers: {
-          x: (x) => that.windowWrap(parseFloat(x)) + 'px'
+          x: (x) => this.windowWrap(parseFloat(x)) + 'px'
         },
         stagger: {
+          axis: 'x',
           each: 0.08,
-          from: 'start'
+          from: this.$data.firstCardIndex
         }
       })
       // and fade first one and put it at the end
@@ -287,6 +285,7 @@ export default {
   padding-top: 2rem;
   position: relative;
   margin-bottom: 3rem;
+  margin-left: 3vw;
   min-height: 420px;
 }
 .slider-buttons {
