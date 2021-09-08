@@ -237,7 +237,7 @@
             <!-- NOTE NORMAL -->
             <transition-group>
               <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
-                <div class="p-0" style="flex: 0 0 38%">
+                <div class="p-0" style="flex: 0 0 36%">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="normalResult?.cover" />
                     <svg
@@ -329,7 +329,7 @@
             <!-- NOTE LAST SESSION -->
             <transition-group>
               <div class="d-flex position-relative mb-5" v-for="lastSessionResult in lastSessionResults" :key="lastSessionResult">
-                <div class="p-0" style="flex: 0 0 38%; box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
+                <div class="p-0" style="flex: 0 0 36%; box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="lastSessionResult?.cover" />
                     <svg
@@ -424,7 +424,7 @@
             <!-- NOTE TRIP REQUEST -->
             <transition-group>
               <div class="d-flex position-relative mb-5" v-for="requestedTripResult in requestedTripResults" :key="requestedTripResult">
-                <div class="p-0" style="flex: 0 0 38%">
+                <div class="p-0" style="flex: 0 0 36%">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="requestedTripResult?.cover" />
                     <svg
@@ -866,9 +866,10 @@ export default {
 
 <style scoped>
 .pad__content__description {
-  font-size: 1rem;
+  font-size: 0.85rem;
   margin-bottom: 1rem;
   font-family: Muli, sans-serif;
+  line-height: 1.7;
 }
 .filter-div {
   width: 40%;
@@ -944,7 +945,7 @@ export default {
   font-weight: bold;
 }
 .inline-product-infos-container {
-  margin: 0 2rem;
+  margin: 0 2.4rem;
   flex-grow: 1;
 }
 .pad__footer {
@@ -1017,7 +1018,7 @@ export default {
   height: 100%;
   justify-content: space-between;
   color: #292f33;
-  padding: 1.5rem 2rem 0rem 2rem;
+  padding: 1.5rem 2rem 1.4rem 2.4rem;
 }
 .pad__content__month-block span {
   display: inline;
