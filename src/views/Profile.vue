@@ -339,6 +339,7 @@ export default {
     this.$axios
       .get('/users/current')
       .then((res) => {
+        console.log(res.data.user)
         this.currUser = res.data.user
         this.$root.initialLoading = false
       })
