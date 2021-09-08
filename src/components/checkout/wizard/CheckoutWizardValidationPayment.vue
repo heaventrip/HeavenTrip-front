@@ -17,13 +17,41 @@
             <button @click.prevent class="btn coupon-btn contact-form-btn border-0 disable" style="border-radius: 0">APPLIQUER</button>
           </div>
         </div>
-      </form>
+      </form> 
+    </div>
+  </div>
+
+  <div class="card pay-card">
+    <div class="card-body">
+      <h6 class="font-weight-bold text-uppercase pay-head pb-1">Choisissez votre moyen de paiement : </h6>
+      <div class="custom-radio-container assurance-radio-container text-uppercase">
+        <div class="row">
+          <div class="col-12 col-lg-4 pr-0">
+            <div class="custom-control custom-radio pt-3">
+              <input type="radio" id="Radio16" value="card" name="payment-type" class="custom-control-input" v-model="paymentType" />
+              <label class="custom-control-label" for="Radio16">
+                <div class="d-flex align-items-center" style="font-size: 0.8rem">Carte bancaire</div>
+              </label>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="custom-control custom-radio pt-3">
+              <input type="radio" id="Radio17" value="transfer" name="payment-type" class="custom-control-input" v-model="paymentType" />
+              <label class="custom-control-label" for="Radio17">
+                <div class="d-flex align-items-center" style="font-size: 0.8rem">Virement bancaire</div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" :style="paymentType ? '' : 'pointer-events: none; filter: opacity(0.2)'">
       <h6 class="font-weight-bold text-uppercase pay-head mt-5 pb-1">Quel montant souhaitez vous payer :</h6>
       <div class="custom-radio-container assurance-radio-container text-uppercase">
         <div class="row">
-          <div class="col-12 col-lg-7 pr-0">
+          <div class="col-12 col-lg-4 pr-0">
             <div class="custom-control custom-radio pt-3 pb-1">
-              <input type="radio" id="Radio14" value="deposit" name="pay" class="custom-control-input" v-model="deposit" />
+              <input type="radio" id="Radio14" value="deposit" name="payment-amount" :disabled="paymentType === 'transfer'" class="custom-control-input" v-model="deposit" />
               <label class="custom-control-label" for="Radio14">
                 <div class="d-flex align-items-center" style="font-size: 0.8rem">
                   Verser un acompte de 30% :
@@ -33,9 +61,9 @@
             </div>
             <p class="left-pad-pars text-transform-none" style="font-size: 0.7rem; color: #7c7c7c">Solde à payer avant le 28/09/2020</p>
           </div>
-          <div class="col-12 col-lg-5">
+          <div class="col-12 col-lg-4">
             <div class="custom-control custom-radio pt-3">
-              <input type="radio" id="Radio15" value="full" name="pay" class="custom-control-input" v-model="deposit" />
+              <input type="radio" id="Radio15" value="full" name="payment-amount" :checked="paymentType === 'transfer'" class="custom-control-input" v-model="deposit" />
               <label class="custom-control-label" for="Radio15">
                 <div class="d-flex align-items-center" style="font-size: 0.8rem">Payer la totalité</div>
               </label>
@@ -45,89 +73,51 @@
       </div>
     </div>
   </div>
-  <div class="card pay-card rounded-0 mb-0 p-0">
+
+<transition name="fade" mode="out-in">
+
+
+
+  <div v-if="paymentType === 'card' && deposit" class="card pay-card rounded-0 mb-0 p-0" >
     <button class="stripe-redirect-button" type="button" @click="$emit('complete')" id="checkout-button">
       <transition name="fade-fast" mode="out-in">
-        <span v-if="deposit === 'deposit'"> Je veux procéder au paiement de {{ parseInt(totalPrice * 0.3) >= 1000 ? `${parseInt(totalPrice * 0.3).toString()[0]} ${parseInt(totalPrice * 0.3).toString().slice(-3)}` : parseInt(totalPrice * 0.3) }}&hairsp;&euro; </span>
-        <span v-else> Je veux procéder au paiement de {{ totalPrice >= 1000 ? `${totalPrice.toString()[0]} ${totalPrice.toString().slice(-3)}` : totalPrice }}&hairsp;&euro; </span>
+        <span v-if="paymentType === 'transfer'">Je veux procéder au paiement</span>
+        <span v-else-if="deposit === 'deposit'">Je veux procéder au paiement de {{ parseInt(totalPrice * 0.3) >= 1000 ? `${parseInt(totalPrice * 0.3).toString()[0]} ${parseInt(totalPrice * 0.3).toString().slice(-3)}` : parseInt(totalPrice * 0.3) }}&hairsp;&euro; </span>
+        <span v-else>Je veux procéder au paiement de {{ totalPrice >= 1000 ? `${totalPrice.toString()[0]} ${totalPrice.toString().slice(-3)}` : totalPrice }}&hairsp;&euro; </span>
       </transition>
     </button>
-    <div class="card-body">
-      <h6 class="font-weight-bold text-uppercase pay-head">
-        Choisissez votre moyen de paiement :
-      </h6>
-      <div class="custom-radio-container assurance-radio-container text-uppercase my-4 py-3">
+  </div>
+  <div v-else-if="paymentType === 'transfer'" class="card pay-card">
+    <div class="card-body" >
+      <h6 class="font-weight-bold text-uppercase pay-head pb-1">Coordonnées bancaires de Heaven Trip :</h6>
+      <div class="custom-radio-container assurance-radio-container text-uppercase">
         <div class="row">
-          <div class="col-12 col-lg-7">
-            <div class="custom-control custom-radio">
-              <input type="radio" id="card_transfer" name="choicePay" class="custom-control-input" />
-              <label class="custom-control-label" for="card_transfer">
-                <div class="d-flex align-items-center font-weight-normal">
-                  Carte bancaire
-                </div>
-              </label>
-            </div>
+          <div class="col-12 col-lg-4 pr-0">
+            <div>IBAN</div>
+            <div>111111111111111</div>
           </div>
-          <div class="col-12 col-lg-5">
-            <div class="custom-control custom-radio">
-              <input type="radio" id="bank_transfer" name="choicePay" class="custom-control-input" />
-              <label class="custom-control-label" for="bank_transfer">
-                <div class="d-flex align-items-center font-weight-normal">
-                  Virement bancaire
-                </div>
-              </label>
-            </div>
+          <div class="col-12 col-lg-4">
+            <div>BIC</div>
+            <div>11111111</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </transition>
 </template>
 
 <script>
-import { loadStripe } from '@stripe/stripe-js'
-
 export default {
   name: 'CheckoutWizardValidationPayment',
   props: ['course', 'total-price'],
   emits: ['complete'],
   data() {
     return {
-      deposit: ''
+      deposit: '',
+      paymentType: ''
     }
   }
-  // methods: {
-  //   async processPayment() {
-  //     this.$emit('complete')
-  //     const stripe = await loadStripe('pk_test_51IoZH6LutaKCaG86wTiuai8cPCobCxO4YsIfs0bQOSTLhxMiiKY9dLStcM1DldXATLp9nUh5MkIJlSekLzPJeWp0003rbJhwWa')
-  //     fetch('https://heaventrip-dev.herokuapp.com/api/v1/stripe-session', {
-  //       method: 'POST'
-  //     })
-  //       .then(function (response) {
-  //         return response.json()
-  //       })
-
-  //       .then(function (session) {
-  //         return stripe.redirectToCheckout({ sessionId: session.session.id })
-  //       })
-
-  //       .then(function (result) {
-  //         // If redirectToCheckout fails due to a browser or network
-
-  //         // error, you should display the localized error message to your
-
-  //         // customer using error.message.
-
-  //         if (result.error) {
-  //           alert(result.error.message)
-  //         }
-  //       })
-
-  //       .catch(function (error) {
-  //         console.error('Error:', error)
-  //       })
-  //   }
-  // }
 }
 </script>
 
