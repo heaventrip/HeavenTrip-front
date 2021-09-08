@@ -266,8 +266,8 @@
       </transition>
     </div>
   </transition>
-  <div class="card p-0" style="position: relative" v-if="notYetLastParticipant">
-    <div @click="nextParticipant" class="btn-next-participant" type="button">
+  <div class="card p-0" style="position: relative" v-if="localExtraParticipants.length && !isLastParticipant">
+    <div @click="nextParticipant" class="btn-next-participant" type="button" :style="nextParticipantAllowed ? '' : 'color: #ebebeb'">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
         <div class="d-inline-block" style="position: relative" data-v-9215de46="">
@@ -285,7 +285,7 @@
 export default {
   name: 'CheckoutWizardForm',
   props: ['booker', 'extra-participants', 'course', 'avatar-key', 'needs-reset'],
-  emits: ['complete', 'updated-participants', 'updated-booker', 'updated-notYetLastParticipant'],
+  emits: ['complete', 'updated-participants', 'updated-booker', 'updated-isLastParticipant'],
   data() {
     return {
       currFormParticipant: 0,
@@ -341,19 +341,28 @@ export default {
       this.currFormStep = step
     },
     nextParticipant() {
+      if (!this.nextParticipantAllowed) {
+        this.$notify({ group: 'app', type: 'info', text: 'Tous les champs doivent être renseignés !' })
+        return
+      }
+
       if (this.currForm === 'booker') this.currForm = 'extraParticipant'
-      else if (this.currForm === 'extraParticipant' && this.participantsBookingFilled) this.currFormParticipant++
+      else if (this.currForm === 'extraParticipant') this.currFormParticipant++
     }
   },
   computed: {
+    nextParticipantAllowed() {
+      if (this.currForm === 'booker') return this.bookerBookingFilled
+      else return this.participantBookingFilled
+    },
     filled() {
-      if (this.localExtraParticipants.length) return this.bookerBookingFilled && this.participantsBookingFilled
+      if (this.localExtraParticipants.length) return this.bookerBookingFilled && this.participantBookingFilled
       else return this.bookerBookingFilled
     },
     bookerBookingFilled() {
       return this.bookerRoomFilled && this.bookerEquipmentFilled && this.bookerActivitiesFilled
     },
-    participantsBookingFilled() {
+    participantBookingFilled() {
       return this.extraParticipantRoomFilled && this.extraParticipantEquipmentFilled && this.extraParticipantActivitiesFilled
     },
     bookerRoomFilled() {
@@ -378,8 +387,8 @@ export default {
       if (!this.localExtraParticipants.length) return
       return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities || this.localExtraParticipants[this.currFormParticipant].booking.extraActivities.length
     },
-    notYetLastParticipant() {
-      return this.extraParticipants.length && !(this.currForm === 'extraParticipant' && this.currFormParticipant === this.extraParticipants.length - 1)
+    isLastParticipant() {
+      return this.extraParticipants.length && this.currForm === 'extraParticipant' && this.currFormParticipant === this.extraParticipants.length - 1
     }
   },
   activated() {
@@ -426,10 +435,10 @@ export default {
         this.$emit('updated-participants', val)
       }
     },
-    notYetLastParticipant: {
+    isLastParticipant: {
       immediate: true,
       handler(val) {
-        this.$emit('updated-notYetLastParticipant', val)
+        this.$emit('updated-isLastParticipant', val)
       }
     }
   },

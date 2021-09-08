@@ -16,14 +16,14 @@
       <div class="card__footer item-details" style="width: 100%">
         <div class="card__footer__static-infos content d-flex justify-content-between">
           <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
-            <svg class="mr-3" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="80" viewBox="0 0 42.57972 37.89174">
+            <svg class="mr-4" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="80" viewBox="0 0 42.57972 37.89174">
               <path
                 id="BACKGROUND_PICTO"
                 data-name="BACKGROUND PICTO"
                 d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
               />
-              <InlineSvg v-if="course?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-              <InlineSvg v-else-if="course?.sports[0]?.picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+              <InlineSvg v-if="course?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+              <InlineSvg v-else-if="course?.sports[0]?.picto" :src="require(`@/assets/svg/${course.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
             </svg>
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
               <div class="card__footer__infos__heading d-flex flex-column">
@@ -252,7 +252,7 @@ export default {
 .card__footer__infos__heading-spot {
   font-weight: normal;
   color: #793f4e;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 }
 .shadow-effect {
   box-shadow: none !important;
@@ -277,7 +277,7 @@ export default {
 }
 .card__footer__price {
   padding-left: 1.5rem;
-  border-left: 1px solid rgba(41, 47, 51, 0.25);
+  border-left: 1px dashed rgba(41, 47, 51, 0.6);
 }
 .fade-enter-active {
   transition: opacity 0.3s ease-in-out;

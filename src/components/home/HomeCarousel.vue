@@ -89,7 +89,7 @@
                 </svg>
               </div>
             </div>
-            <div style="min-width: 60px">
+            <div style="min-width: 60px; transform: translateY(-2px)">
               <transition :name="counterSlideDir" mode="out-in">
                 <span class="slider-counter__current">{{ firstCardIndex + 1 }}</span>
               </transition>
@@ -98,7 +98,7 @@
                 ><span class="slider-counter__total">{{ nbOfCards }}</span></sup
               >
             </div>
-            <div class="ml-5 w-25">
+            <div class="ml-4 w-25">
               <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
                 <span class="bg-white position-relative pl-4"
                   ><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')"
@@ -146,7 +146,6 @@ export default {
       courses: [],
       currentViewportWidth: '',
       cardIndexCounter: 0,
-      leftSlideTl: null,
       rightSlideTl: null,
       counter: 0
     }
@@ -183,32 +182,31 @@ export default {
       this.$refs[`card${index}`].smallerCard()
     },
     initLeftSlideTl() {
-      let shallowCards = this.cards
-      let that = this
       let tl = gsap
         .timeline({
           onComplete: () => {
-            that.cardIndexCounter++
-            shallowCards.push(shallowCards.shift())
+            this.cardIndexCounter++
+            this.cards.push(this.cards.shift())
           },
           onReverseComplete: () => {
-            that.cardIndexCounter--
-            shallowCards.unshift(shallowCards.pop())
+            this.cardIndexCounter--
+            this.cards.unshift(this.cards.pop())
           }
         })
         .pause()
 
       // slide all left
-      tl.to(shallowCards, {
+      tl.to(this.cards, {
         x: `-=${this.cardWidth + this.cardMargin}`,
         duration: 1,
         ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
         modifiers: {
-          x: (x) => that.windowWrap(parseFloat(x)) + 'px'
+          x: (x) => this.windowWrap(parseFloat(x)) + 'px'
         },
         stagger: {
+          axis: 'x',
           each: 0.08,
-          from: 'start'
+          from: this.$data.firstCardIndex
         }
       })
       // and fade first one and put it at the end
@@ -287,6 +285,7 @@ export default {
   padding-top: 2rem;
   position: relative;
   margin-bottom: 3rem;
+  margin-left: 3vw;
   min-height: 420px;
 }
 .slider-buttons {
@@ -345,14 +344,14 @@ export default {
   font-family: Oswald, sans-serif;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   font-weight: 600;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   color: #292f33;
   display: inline-block;
 }
 .slider-counter__total {
   font-family: Oswald, sans-serif;
   color: #292f33;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   vertical-align: sub;
 }
 .multiactivity-item {

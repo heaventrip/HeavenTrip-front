@@ -82,11 +82,10 @@ export default {
   },
   computed: {
     filled() {
-      let arr = new Array()
-      this.localExtraParticipants.forEach((part) => arr.push(part.infos.firstName, part.infos.birthDay))
-      return arr.every((el) => {
-        el && el.length
-      })
+      return this.localExtraParticipants
+        .map((part) => Object.values(part.infos))
+        .flat()
+        .every((el) => el)
     }
   },
   watch: {
@@ -94,6 +93,13 @@ export default {
       deep: true,
       handler(val) {
         this.$emit('updated-participants', val)
+      }
+    },
+    filled: {
+      immediate: true,
+      handler(val) {
+        if (val) this.$emit('complete', true)
+        else this.$emit('complete', false)
       }
     }
   },

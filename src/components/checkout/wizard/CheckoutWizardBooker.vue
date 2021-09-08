@@ -188,6 +188,7 @@ export default {
   },
   data() {
     return {
+      currUser: null,
       allowForm: false,
       localBooker: this.$props.booker
     }
@@ -255,6 +256,25 @@ export default {
         })
         .catch((err) => this.$notify({ type: 'error', text: err.response.data.message }))
     }
+  },
+  created() {
+    if (!isLoggedIn()) return
+
+    const AUTH_TOKEN_KEY = 'authToken'
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+    // this.currUser = await this.getUserInfo()
+    this.$axios
+      .get('/users/current')
+      .then((res) => {
+        this.currUser = res.data.user
+        this.$root.initialLoading = false
+      })
+      .catch((err) => {
+        this.$notify({ type: 'error', text: err.message })
+        this.$root.initialLoading = false
+      })
   }
   // created() {
   //   if (!isLoggedIn()) return
@@ -300,7 +320,7 @@ export default {
 }
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
   top: 0.8em;
-  font-size: 100%;
+  font-size: 90%;
   color: #292f33;
   opacity: 1;
 }
