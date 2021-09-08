@@ -147,12 +147,14 @@ export default {
       currentViewportWidth: '',
       cardIndexCounter: 0,
       rightSlideTl: null,
-      counter: 0
+      leftSideTl: null,
+      counter: 0,
+      animPlaying: false
     }
   },
   computed: {
     windowWrap() {
-      return gsap.utils.wrap(this.cardWidth * -1, (this.cardWidth + this.cardMargin) * (this.nbOfCards - 1))
+      return gsap.utils.wrap((this.cardWidth + this.cardMargin) * -1, (this.cardWidth + this.cardMargin) * (this.nbOfCards - 1))
     },
     firstCardIndex() {
       return this.cardIndexCounter % this.nbOfCards
@@ -166,7 +168,7 @@ export default {
         this.nbOfCards = newVal.length
 
         this.initLeftSlideTl()
-        // this.initRightSlideTl()
+        this.initRightSlideTl()
       }
     }
   },
@@ -182,87 +184,60 @@ export default {
       this.$refs[`card${index}`].smallerCard()
     },
     initLeftSlideTl() {
-      let tl = gsap
-        .timeline({
-          onComplete: () => {
-            this.cardIndexCounter++
-            this.cards.push(this.cards.shift())
-          },
-          onReverseComplete: () => {
-            this.cardIndexCounter--
-            this.cards.unshift(this.cards.pop())
-          }
-        })
-        .pause()
-
       // slide all left
-      tl.to(this.cards, {
+      this.leftSlideTl = gsap.to(this.cards, {
+        paused: true,
         x: `-=${this.cardWidth + this.cardMargin}`,
         duration: 1,
         ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
+        onStart: () => {
+          this.animPlaying = true
+        },
+        onComplete: () => {
+          this.cardIndexCounter++
+          this.cards.push(this.cards.shift())
+          this.initLeftSlideTl()
+          this.initRightSlideTl()
+          this.animPlaying = false
+        },
         modifiers: {
           x: (x) => this.windowWrap(parseFloat(x)) + 'px'
         },
         stagger: {
-          axis: 'x',
           each: 0.08,
-          from: this.$data.firstCardIndex
+          from: 'start'
         }
       })
-      // and fade first one and put it at the end
-      // tl.to(
-      //   that.cards[that.firstCardIndex],
-      //   {
-      //     opacity: 0,
-      //     duration: 0.5,
-      //     ease: 'power4.in',
-      //     onComplete: () => {
-      //       gsap.to(that.cards[that.firstCardIndex], { opacity: 1, duration: 0.5, ease: 'power4.out' })
-      //     }
-      //   },
-      //   '0'
-      // )
-      this.leftSlideTl = tl
     },
     initRightSlideTl() {
-      let that = this
-      let tl = gsap.timeline().pause()
-
       // slide all right
-      this.cards.forEach((card, index) => {
-        tl.to(
-          card,
-          {
-            x: `+=${this.cardWidth + this.cardMargin}`,
-            ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
-            duration: 1.0,
-            modifiers: {
-              x: (x) => this.windowWrap(parseFloat(x)) + 'px'
-            }
-          },
-          '<'
-        )
+      this.rightSlideTl = gsap.to(this.cards, {
+        paused: true,
+        x: `+=${this.cardWidth + this.cardMargin}`,
+        duration: 1,
+        ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
+        onStart: () => {
+          this.animPlaying = true
+        },
+        onComplete: () => {
+          this.cardIndexCounter--
+          this.cards.unshift(this.cards.pop())
+          this.initLeftSlideTl()
+          this.initRightSlideTl()
+          this.animPlaying = false
+        },
+        modifiers: {
+          x: (x) => this.windowWrap(parseFloat(x)) + 'px'
+        }
       })
-
-      // and bring back last one
-      // tl.to(
-      //   this.cards[this.cards.length - 1],
-      //   {
-      //     opacity: 1,
-      //     duration: 0.5,
-      //     ease: 'power2.out'
-      //   },
-      //   '0'
-      // )
-      this.rightSlideTl = tl
     },
     slideLeft() {
       this.counterSlideDir = 'vertical-slide-up'
-      this.leftSlideTl.invalidate().restart()
+      if (!this.animPlaying) this.leftSlideTl.play()
     },
     slideRight() {
       this.counterSlideDir = 'vertical-slide-down'
-      this.leftSlideTl.reverse()
+      if (!this.animPlaying) this.rightSlideTl.play()
     }
   },
   updated() {
