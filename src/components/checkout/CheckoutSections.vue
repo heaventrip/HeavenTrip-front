@@ -64,7 +64,7 @@
                 @complete="(status) => (optionsComplete = status)"
                 @updated-participants="setParticipants"
                 @updated-booker="setBooker"
-                @updated-notYetLastParticipant="(val) => (notYetLastParticipant = val)"
+                @updated-isLastParticipant="(val) => (isLastParticipant = val)"
                 :avatar-key="avatarKey"
                 :booker="booker"
                 :extra-participants="extraParticipants"
@@ -97,12 +97,17 @@
                 @click.prevent="prevStep"
                 v-show="steps.indexOf(activeStep) !== 0"
                 class="btn text-uppercase prev-step-btn prev-btn mr-3"
-                :class="{ 'mr-auto': notYetLastParticipant && activeStep === 'options' }"
+                :class="{ 'mr-auto': !isLastParticipant && activeStep === 'options' }"
                 style="border-radius: 0"
               >
                 Précédent
               </button>
-              <button @click.prevent="nextStep" v-show="!(notYetLastParticipant && activeStep === 'options')" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
+              <button
+                @click.prevent="nextStep"
+                v-show="(isLastParticipant && activeStep === 'options') || activeStep !== 'options'"
+                class="btn text-uppercase next-step-btn next-btn"
+                style="border-radius: 0"
+              >
                 {{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}
               </button>
             </div>
@@ -120,7 +125,7 @@ import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
 // import CheckoutSuccess from './CheckoutSuccess.vue'
-import { getUserInfo } from '@/utils/auth'
+import { isLoggedIn } from '@/utils/auth'
 // import { loadStripe } from '@stripe/stripe-js'
 
 export default {
@@ -140,23 +145,23 @@ export default {
       transitionEntered: false,
       steps: ['booker', 'participants', 'options', 'insurance', 'validation', 'success'],
       bookerComplete: false,
-      participantsComplete: true,
+      participantsComplete: false,
       optionsComplete: false,
       insuranceComplete: false,
       activeStep: '',
       extraParticipants: [],
       booker: {
         infos: {
-          firstName: 'a',
-          lastName: 'a',
-          birthDate: 'a',
-          phone: 'a',
-          email: 'a',
-          gender: 'a',
-          country: 'a',
-          city: 'a',
-          street: 'a',
-          postalCode: 'a'
+          firstName: '',
+          lastName: '',
+          birthDate: '',
+          phone: '',
+          email: '',
+          gender: '',
+          country: '',
+          city: '',
+          street: '',
+          postalCode: ''
         },
         booking: {
           room: 0,
@@ -172,11 +177,21 @@ export default {
       updatedBooker: null,
       updatedExtraParticipants: null,
       avatarKey: '',
-      notYetLastParticipant: false,
-      needsReset: false
+      isLastParticipant: false,
+      needsReset: false,
+      currUser: null
     }
   },
   watch: {
+    currUser: {
+      immediate: true,
+      handler(val) {
+        if (!val) return
+        ;['firstName', 'lastName', 'birthDate', 'phone', 'email', 'gender', 'country', 'city', 'street', 'postalCode'].forEach((attr) => {
+          this.booker.infos[attr] = val[attr]
+        })
+      }
+    },
     extraParticipants: {
       deep: true,
       handler(val) {
@@ -319,8 +334,8 @@ export default {
     }
   },
   methods: {
-    getUserInfo() {
-      return getUserInfo()
+    isLoggedIn() {
+      return isLoggedIn()
     },
     isComplete(step) {
       return this.$data[`${step}Complete`]
@@ -329,7 +344,10 @@ export default {
       if (this.activeStep === 'options') this.transitionEntered = true
     },
     nextStep() {
-      if (!this.isComplete(this.activeStep)) return
+      if (!this.isComplete(this.activeStep)) {
+        this.$notify({ group: 'app', type: 'info', text: 'Tous les champs doivent être renseignés !' })
+        return
+      }
 
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex + 1]
@@ -364,7 +382,23 @@ export default {
     }
   },
   created() {
-    this.avatarKey = this.getUserInfo().avatar_key
+    if (!isLoggedIn()) return
+
+    const AUTH_TOKEN_KEY = 'authToken'
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+    // this.currUser = await this.getUserInfo()
+    this.$axios
+      .get('/users/current')
+      .then((res) => {
+        this.currUser = res.data.user
+        this.$root.initialLoading = false
+      })
+      .catch((err) => {
+        this.$notify({ type: 'error', text: err.message })
+        this.$root.initialLoading = false
+      })
   },
   mounted() {
     // this.submitBookingForm()

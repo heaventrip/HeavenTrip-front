@@ -45,12 +45,12 @@
               </transition>
             </div>
             <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
-            <div @click="showWishlist != showWishlist" :class="[isLightTheme === true ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+            <div @click="toggleWishlist" :class="[isLightTheme === true ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <transition name="fade-delayed">
                 <div v-show="showcontent">Mes envies</div>
               </transition>
               <transition name="fade-fast">
-                <div class="wishlists" v-show="showWishlist" :key="showWishlist">
+                <div class="wishlists mt-3" v-show="showWishlist" :key="showWishlist">
                   <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
                     <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
                     {{ wishlist.name }}
@@ -204,6 +204,11 @@ export default {
   //   this.currUser = this.$root.currUser
   // },
   methods: {
+    toggleWishlist() {
+      if (!this.wishlists.length) return
+
+      this.showWishlist = !this.showWishlist
+    },
     handleClickToClose(e) {
       if (e.target.closest('.bttn-block')) return
       this.toggleDropdown = false
@@ -215,6 +220,8 @@ export default {
     unwishlistCourse(courseId) {
       this.$axios.delete('/wishlists', { params: { courseId: courseId } }).then(() => {
         document.querySelector(`[data-course='${courseId}']`).remove()
+        this.fetchWishlists()
+        this.$notify({ group: 'app', type: 'success', text: "Tu ne t'intéresses plus à ce stage" })
       })
     },
     logOut() {
@@ -251,7 +258,13 @@ export default {
     //   }
     // },
     fetchWishlists() {
-      this.$axios.get('/users/1/wishlist-courses').then((res) => {
+      if (!isLoggedIn()) return
+
+      const AUTH_TOKEN_KEY = 'authToken'
+      const token = localStorage.getItem(AUTH_TOKEN_KEY)
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+      this.$axios.get('/users/current/wishlist-courses').then((res) => {
         this.wishlists = res.data.courses
       })
     }
