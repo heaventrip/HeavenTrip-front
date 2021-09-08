@@ -163,7 +163,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 6rem">
+        <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #f1f1f1; padding-left: 6rem">
           <div class="content-head equip mb-3">
             <i class="far fa-times-circle mr-2 h5 align-text-top mb-0"></i>
             <span class="d-inline-block" style="vertical-align: baseline">Non inclus :</span>
@@ -244,7 +244,7 @@ export default {
 }
 .options-item:not(:last-of-type) {
   padding-right: 1rem;
-  border-right: 1px dashed #ebebeb;
+  border-right: 1px dashed #f1f1f1;
 }
 .chapter-block {
   margin-bottom: 8rem;

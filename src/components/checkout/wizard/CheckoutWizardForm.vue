@@ -15,7 +15,7 @@
     <div class="position-relative">
       <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase pr-4">Complète la réservation de :</h6>
     </div>
-    <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #ebebeb"></div>
+    <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #f1f1f1"></div>
     <div class="participant-img-container position-relative" :class="{ 'participant-opacity': currForm !== 'booker' }">
       <div class="d-inline-block" style="position: relative; margin-left: 3rem">
         <img
@@ -267,7 +267,7 @@
     </div>
   </transition>
   <div class="card p-0" style="position: relative" v-if="localExtraParticipants.length && !isLastParticipant">
-    <div @click="nextParticipant" class="btn-next-participant" type="button" :style="nextParticipantAllowed ? '' : 'color: #ebebeb'">
+    <div @click="nextParticipant" class="btn-next-participant" type="button" :style="nextParticipantAllowed ? '' : 'color: #f1f1f1'">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
         <div class="d-inline-block" style="position: relative" data-v-9215de46="">
@@ -451,7 +451,7 @@ export default {
 <style scoped>
 .btn-next-participant,
 .btn-next-participant:active {
-  border: 1px solid #ebebeb;
+  border: 1px solid #f1f1f1;
   padding: 0 1.5rem;
   text-align: center;
   background-color: #292f33;

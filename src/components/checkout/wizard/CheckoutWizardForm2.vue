@@ -12,7 +12,7 @@
             style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
           />
           <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
-          <span class="participant-check" style="border: 4px solid #ebebeb"></span>
+          <span class="participant-check" style="border: 4px solid #f1f1f1"></span>
         </div>
         <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
         <div class="completion-details">

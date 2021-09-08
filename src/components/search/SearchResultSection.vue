@@ -1,13 +1,13 @@
 <template>
   <section class="result-section">
-    <div class="search-filter-div bg-white" style="position: sticky; top: 0; z-index: 10">
-      <router-link class="px-5 bg-danger d-flex align-items-center justify-content-around text-white home-ref" to="/">
-        <InlineSvg :src="require('@/assets/svg/home.svg')" height="24" fill="#fff" />
+    <div class="search-filter-div bg-white" style="position: sticky; top: 0; z-index: 10; height: 80px">
+      <router-link class="btn-home px-5 d-flex align-items-center justify-content-around text-white home-ref" to="/">
+        <InlineSvg :src="require('@/assets/svg/home.svg')" height="28" fill="#fff" />
       </router-link>
       <div class="result-div d-flex align-items-center p-3 px-5 pl-lg-5 w-100">
         <h4 class="pr-5 mr-5 mb-0 border-right border-dark count text-right font-weight-normal d-none d-md-block">
           <strong class="h6 d-block font-weight-bold mb-1">MA RECHERCHE</strong>
-          {{ normalResults.length }} séjour{{ normalResults.length > 1 ? 's' : '' }}
+          <div style="font-size: 0.8rem; padding-top: 0.15rem">{{ normalResults.length }} séjour trouvé{{ normalResults.length > 1 ? 's' : '' }}</div>
         </h4>
         <div class="d-md-flex align-items-center d-lg-none flex-1">
           <img class="mr-3 ml-4 head-img d-none d-md-block" fluid :src="require('@/assets/images/head-pin.png')" />
@@ -77,7 +77,7 @@
             </div>
             <div class="bg-white filter-body">
               <div class="filter-container theme-filter">
-                <div class="position-relative multi-select-filter" style="box-shadow: none; border-bottom: 1px solid rgba(41, 47, 51, 0.06); height: 4rem">
+                <div class="position-relative multi-select-filter" style="box-shadow: none; border-bottom: 1px solid rgba(41, 47, 51, 0.06); height: 4.4rem">
                   <div
                     class="d-flex align-items-center justify-content-around"
                     style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%"
@@ -492,7 +492,7 @@
                         style="cursor: default"
                         text-color="#292f33"
                         text="Sur devis"
-                        background-color="#ebebeb"
+                        background-color="#f1f1f1"
                         px="1.5rem"
                         size=".8rem"
                         width="max-content"
@@ -867,7 +867,7 @@ export default {
 <style scoped>
 .pad__content__description {
   font-size: 0.85rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-family: Muli, sans-serif;
   line-height: 1.7;
 }
@@ -880,13 +880,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 2px solid #f1f1f1;
+  border-left: 1px solid #f1f1f1;
 }
 .sort-by-button:last-of-type {
-  border-right: 2px solid #f1f1f1;
+  border-right: 1px solid #f1f1f1;
 }
 .sort-by-button:hover {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
+}
+.btn-home {
+  background-color: #d82558;
+}
+.btn-home:hover {
+  background-color: #292f33;
+  transition: all 0.3s ease;
 }
 .search-filter-div {
   display: flex;
@@ -925,7 +932,7 @@ export default {
 .pad__content__tags__tag {
   border-radius: 20px;
   background-color: #fafafa;
-  border: 1px solid #ebebeb;
+  border: 1px solid #f1f1f1;
   color: #793f4e;
   text-transform: uppercase;
   padding: 0.5rem 1rem;

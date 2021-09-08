@@ -153,7 +153,7 @@
   </div>
   <div class="d-flex" style="margin-top: 0.5rem; margin-bottom: 6rem">
     <div class="linear-block p-0 m-0 w-100">
-      <div class="card-body d-flex" style="box-shadow: 0 0 2px #ebebeb; height: 370px">
+      <div class="card-body d-flex" style="box-shadow: 0 0 2px #f1f1f1; height: 370px">
         <div class="guide-word__image">
           <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
         </div>
@@ -185,10 +185,10 @@
     </div>
     <!-- NOTE functional tabs but disabled for now -->
     <div v-if="false" class="d-flex flex-column" style="margin-left: 1px">
-      <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #ebebeb">
+      <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #f1f1f1">
         <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/bowl2.svg')" :fill="[tab === 1 ? '#fff' : '#292f33']" />
       </div>
-      <div @mouseover="tab = 2" type="button" :class="[tab === 2 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px 1px 2px #ebebeb">
+      <div @mouseover="tab = 2" type="button" :class="[tab === 2 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px 1px 2px #f1f1f1">
         <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/kitchenhat.svg')" :fill="[tab === 2 ? '#fff' : '#292f33']" />
       </div>
     </div>

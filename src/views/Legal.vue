@@ -68,7 +68,7 @@ export default {
   align-items: flex-end;
   width: 100vw;
   height: 120px;
-  box-shadow: 0px 1px 2px #ebebeb;
+  box-shadow: 0px 1px 2px #f1f1f1;
 }
 .legal__tabs-content {
   margin: 5vh 25vw;

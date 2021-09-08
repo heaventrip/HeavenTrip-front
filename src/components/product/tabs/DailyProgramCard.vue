@@ -126,6 +126,6 @@ export default {
   text-align: center;
 }
 .shadow-style {
-  box-shadow: 0 0 2px #ebebeb;
+  box-shadow: 0 0 2px #f1f1f1;
 }
 </style>

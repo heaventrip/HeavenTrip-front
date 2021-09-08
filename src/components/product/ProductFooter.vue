@@ -125,7 +125,7 @@
         </div>
       </div>
     </transition>
-    <div class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff; position: relative; z-index: 10">
+    <div class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #f1f1f1; background-color: #fff; position: relative; z-index: 10">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
       <div
         class="d-flex justify-content-between flex-1 mx-0 text-center"
@@ -598,7 +598,7 @@ export default {
 }
 .date-btn {
   color: #b4b4b480;
-  background-color: #ebebeb80;
+  background-color: #f1f1f180;
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
   font-size: 1.2rem;
@@ -608,7 +608,7 @@ export default {
   transition: all 0.3s ease;
 }
 .date-btn--active {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
   color: #7c7c7c;
 }
 .date-btn:hover {
@@ -634,7 +634,7 @@ export default {
   height: 100px !important;
 }
 .booking-session {
-  box-shadow: 0px -1px 2px #ebebeb;
+  box-shadow: 0px -1px 2px #f1f1f1;
   background-color: white;
   z-index: 5;
 }
@@ -652,7 +652,7 @@ export default {
   transition: background 0.3s ease;
 }
 .session-select-btn:not(.active):hover {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
 }
 .nav {
   flex-wrap: nowrap;

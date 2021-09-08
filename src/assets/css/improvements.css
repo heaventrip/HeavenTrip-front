@@ -326,7 +326,7 @@
   .main-product-content .linear-block{
     padding: 30px 60px;
     margin: 80px 0;
-    border: 1px solid #EBEBEB;
+    border: 1px solid #f1f1f1;
     border-radius: 8px;
     background: radial-gradient(#FFFFFF, #FCFCFCCC);
   }
@@ -399,7 +399,7 @@
     display: none;
   }
   .place-list li:not(:last-child) a{
-    border-right: 1px dashed #EBEBEB;
+    border-right: 1px dashed #f1f1f1;
     display: block;
     padding-right: 33px;
     margin-right: 33px;
@@ -481,7 +481,7 @@
   .main-product-content .linear-block{
     padding: 30px 60px;
     margin: 80px 0;
-    border: 1px solid #EBEBEB;
+    border: 1px solid #f1f1f1;
     border-radius: 5px;
     background: radial-gradient(#FFFFFF, #FCFCFCCC);
   }
@@ -554,7 +554,7 @@
     display: none;
   }
   .place-list li:not(:last-child) a{
-    border-right: 1px dashed #EBEBEB;
+    border-right: 1px dashed #f1f1f1;
     display: block;
     padding-right: 33px;
     margin-right: 33px;
@@ -607,7 +607,7 @@
     top: 80px;
   }
   .product-mini-section-content .activity-list .activity-content-list li:not(:first-child){
-    border-left: 1px solid #EBEBEB;
+    border-left: 1px solid #f1f1f1;
     padding-left: 25px;
     margin-left: 25px;
   }
@@ -615,7 +615,7 @@
     margin-left: auto;
   }
   .block-separator{
-    border: 1px solid #EBEBEB;
+    border: 1px solid #f1f1f1;
     margin: 120px 0;
   }
   .product-mini-section-content .tab-content.main-tab{
@@ -924,7 +924,7 @@
   }
   .shadow-box{
     box-shadow: 0px 0px 6px #0000000D;
-    border: 1px solid #EBEBEB;
+    border: 1px solid #f1f1f1;
     padding: 25px 30px;
     margin: 27px 0;
     border-radius: 8px;
