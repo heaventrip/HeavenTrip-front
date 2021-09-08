@@ -16,7 +16,7 @@
       <div class="card__footer item-details" style="width: 100%">
         <div class="card__footer__static-infos content d-flex justify-content-between">
           <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
-            <svg class="mr-3" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="80" viewBox="0 0 42.57972 37.89174">
+            <svg class="mr-4" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="80" viewBox="0 0 42.57972 37.89174">
               <path
                 id="BACKGROUND_PICTO"
                 data-name="BACKGROUND PICTO"
@@ -252,7 +252,7 @@ export default {
 .card__footer__infos__heading-spot {
   font-weight: normal;
   color: #793f4e;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 }
 .shadow-effect {
   box-shadow: none !important;
@@ -277,7 +277,7 @@ export default {
 }
 .card__footer__price {
   padding-left: 1.5rem;
-  border-left: 1px solid rgba(41, 47, 51, 0.25);
+  border-left: 1px dashed rgba(41, 47, 51, 0.6);
 }
 .fade-enter-active {
   transition: opacity 0.3s ease-in-out;

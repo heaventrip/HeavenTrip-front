@@ -161,6 +161,8 @@ ___________________________
 > bouton réserver max-width: 280
 > mettre prix sur la session et l'enlever de course
 > conditionner || avatar-empty
+- si payer par virement "confirmer ma réservation"
+- si payer par carte "je veux procéder au paiement"
 
 BUG
 - version grise du dropdown sur produit
@@ -168,9 +170,13 @@ BUG
 - voir les valeurs de sorties de l'anim car bug en resize
 
 TODO
-- cards (voir sms)
+> cards (voir sms)
+- bouton se connecter
 - WISHLIST!!!
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
+- le spinner recherche qui décale
+- newsletter
+- mails
 
 NOTE
 - dropdown up rajouter fading

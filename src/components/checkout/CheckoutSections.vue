@@ -64,7 +64,7 @@
                 @complete="(status) => (optionsComplete = status)"
                 @updated-participants="setParticipants"
                 @updated-booker="setBooker"
-                @updated-notYetLastParticipant="(val) => (notYetLastParticipant = val)"
+                @updated-isLastParticipant="(val) => (isLastParticipant = val)"
                 :avatar-key="avatarKey"
                 :booker="booker"
                 :extra-participants="extraParticipants"
@@ -97,12 +97,17 @@
                 @click.prevent="prevStep"
                 v-show="steps.indexOf(activeStep) !== 0"
                 class="btn text-uppercase prev-step-btn prev-btn mr-3"
-                :class="{ 'mr-auto': notYetLastParticipant && activeStep === 'options' }"
+                :class="{ 'mr-auto': !isLastParticipant && activeStep === 'options' }"
                 style="border-radius: 0"
               >
                 Précédent
               </button>
-              <button @click.prevent="nextStep" v-show="!(notYetLastParticipant && activeStep === 'options')" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
+              <button
+                @click.prevent="nextStep"
+                v-show="(isLastParticipant && activeStep === 'options') || activeStep !== 'options'"
+                class="btn text-uppercase next-step-btn next-btn"
+                style="border-radius: 0"
+              >
                 {{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}
               </button>
             </div>
@@ -140,7 +145,7 @@ export default {
       transitionEntered: false,
       steps: ['booker', 'participants', 'options', 'insurance', 'validation', 'success'],
       bookerComplete: false,
-      participantsComplete: true,
+      participantsComplete: false,
       optionsComplete: false,
       insuranceComplete: false,
       activeStep: '',
@@ -172,7 +177,7 @@ export default {
       updatedBooker: null,
       updatedExtraParticipants: null,
       avatarKey: '',
-      notYetLastParticipant: false,
+      isLastParticipant: false,
       needsReset: false
     }
   },
@@ -329,7 +334,10 @@ export default {
       if (this.activeStep === 'options') this.transitionEntered = true
     },
     nextStep() {
-      if (!this.isComplete(this.activeStep)) return
+      if (!this.isComplete(this.activeStep)) {
+        this.$notify({ group: 'app', type: 'info', text: 'Tous les champs doivent être renseignés !' })
+        return
+      }
 
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex + 1]

@@ -89,7 +89,7 @@
                 </svg>
               </div>
             </div>
-            <div style="min-width: 60px">
+            <div style="min-width: 60px; transform: translateY(-2px)">
               <transition :name="counterSlideDir" mode="out-in">
                 <span class="slider-counter__current">{{ firstCardIndex + 1 }}</span>
               </transition>
@@ -98,7 +98,7 @@
                 ><span class="slider-counter__total">{{ nbOfCards }}</span></sup
               >
             </div>
-            <div class="ml-5 w-25">
+            <div class="ml-4 w-25">
               <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
                 <span class="bg-white position-relative pl-4"
                   ><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')"
@@ -345,14 +345,14 @@ export default {
   font-family: Oswald, sans-serif;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   font-weight: 600;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   color: #292f33;
   display: inline-block;
 }
 .slider-counter__total {
   font-family: Oswald, sans-serif;
   color: #292f33;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   vertical-align: sub;
 }
 .multiactivity-item {
