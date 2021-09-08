@@ -237,7 +237,7 @@
             <!-- NOTE NORMAL -->
             <transition-group>
               <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
-                <div class="col-4 col-md-4 p-0">
+                <div class="p-0" style="flex: 0 0 38%">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="normalResult?.cover" />
                     <svg
@@ -275,9 +275,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="pad__content__description">
-                        {{ normalResult?.description.substr(0, 200) }}
-                      </div>
+                      <div class="pad__content__description">{{ normalResult?.description.substr(0, 150) }}...</div>
                       <!-- NOTE display for multisport -->
                       <!-- <div class="pad__content__sports d-flex align-items-center tooltip-div">
                         <span class="pad__content__activities__title">Activités :</span>
@@ -311,7 +309,7 @@
                     </div>
                   </div>
                   <!-- TODO changement de content au hover, et hover en gris -->
-                  <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
+                  <div class="d-inline-block pad__content p-0" style="width: 92px; height: min-content">
                     <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('01') }"><span>Janv.</span></div>
                     <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('02') }"><span>Fév.</span></div>
                     <div class="pad__content__month-block shadow" :class="{ 'pad__content__month-block--with-sessions': sessionsArr.includes('03') }"><span>Mars</span></div>
@@ -331,7 +329,7 @@
             <!-- NOTE LAST SESSION -->
             <transition-group>
               <div class="d-flex position-relative mb-5" v-for="lastSessionResult in lastSessionResults" :key="lastSessionResult">
-                <div class="col-4 col-md-4 p-0" style="box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
+                <div class="p-0" style="flex: 0 0 38%; box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="lastSessionResult?.cover" />
                     <svg
@@ -406,7 +404,7 @@
                     </div>
                   </div>
                   <!-- TODO changement de content au hover, et hover en gris -->
-                  <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content">
+                  <div class="d-inline-block pad__content p-0" style="width: 92px; height: min-content">
                     <div class="pad__content__month-block shadow"><span>Janv.</span></div>
                     <div class="pad__content__month-block shadow"><span>Fév.</span></div>
                     <div class="pad__content__month-block shadow"><span>Mars</span></div>
@@ -426,7 +424,7 @@
             <!-- NOTE TRIP REQUEST -->
             <transition-group>
               <div class="d-flex position-relative mb-5" v-for="requestedTripResult in requestedTripResults" :key="requestedTripResult">
-                <div class="col-4 col-md-4 p-0">
+                <div class="p-0" style="flex: 0 0 38%">
                   <div class="position-relative w-100 h-100">
                     <img class="img-fluid img-fill" fluid :src="requestedTripResult?.cover" />
                     <svg
@@ -505,7 +503,7 @@
                     </div>
                   </div>
                   <!-- TODO changement de content au hover, et hover en gris -->
-                  <div class="d-inline-block pad__content p-0" style="width: 50px; height: min-content; visibility: hidden">
+                  <div class="d-inline-block pad__content p-0" style="width: 92px; height: min-content; visibility: hidden">
                     <div class="pad__content__month-block shadow"><span>Janv.</span></div>
                     <div class="pad__content__month-block shadow"><span>Fév.</span></div>
                     <div class="pad__content__month-block shadow"><span>Mars</span></div>
@@ -660,6 +658,9 @@ export default {
       if (val.length) {
         let arr = []
         val.forEach((result) => {
+          // retrieve participants
+          result.wishlistUsers?.forEach((user) => this.avatarKeys.push(user.avatarKey))
+
           if (!result.sessions) return
 
           result.sessions.forEach((session) => {
@@ -667,9 +668,6 @@ export default {
             arr.push(session.dateStart.split('-')[1])
             this.sessionsArr = [...new Set(arr)]
           })
-
-          // retrieve participants
-          val.wishlistUsers?.forEach((user) => this.avatarKeys.push(user.avatarKey))
         })
       }
     },
@@ -870,6 +868,7 @@ export default {
 .pad__content__description {
   font-size: 1rem;
   margin-bottom: 1rem;
+  font-family: Muli, sans-serif;
 }
 .filter-div {
   width: 40%;
@@ -1026,7 +1025,7 @@ export default {
 }
 .pad__content__month-block {
   text-align: center;
-  padding: 0.2rem 0;
+  padding: 0.25rem 0;
   margin-bottom: 1px;
   margin-left: 1px;
   background-color: #fff;
