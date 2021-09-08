@@ -147,8 +147,8 @@
               JE PAPOTE AVEC :
             </div>
             <div class="messaging-tabs">
-              <div class="messaging-tab-btn noselect"># LES PARTICIPANTS</div>
-              <div class="messaging-tab-btn noselect active"># TOUT LES INTERESSES</div>
+              <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'participants'" :class="[{ active: activeTabMassaging === 'participants' }]"># LES PARTICIPANTS</div>
+              <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'interested'" :class="[{ active: activeTabMassaging === 'interested' }]"># TOUT LES INTERESSES</div>
             </div>
           </div>
           <div class="messages-container" @wheel.stop style="">
@@ -246,6 +246,7 @@ export default {
   emits: ['active-lightbox'],
   data() {
     return {
+      activeTabMassaging: 'interested',
       messages: [],
       messageSentSuccess: true,
       inputMessage: '',
@@ -303,30 +304,6 @@ export default {
             lastName: 'M'
           },
           content: 'cc cest le Jo',
-          createdAt: '2021-08-05T11:13:32.612Z'
-        },
-        {
-          user: {
-            firstName: 'Marie',
-            lastName: 'Dag'
-          },
-          content: 'zefazef rvzefz zefzefzef',
-          createdAt: '2021-08-05T11:13:32.612Z'
-        },
-        {
-          user: {
-            firstName: 'Bonie',
-            lastName: 'M'
-          },
-          content: 'zefazef rvzefz zefzefzezev fjghjyhjlhk dfsgdsfgdf',
-          createdAt: '2021-08-05T11:13:32.612Z'
-        },
-        {
-          user: {
-            firstName: 'Marie',
-            lastName: 'Dag'
-          },
-          content: 'zefazef rvzefz zefzefzef zefazef rvzefz zefzefzef zefazef rvzefz zefzefzefzefazef rvzefz zefzefzef',
           createdAt: '2021-08-05T11:13:32.612Z'
         }
       ] */
@@ -577,7 +554,7 @@ button {
 .messaging-tab-btn:hover {
   background-color: #f5f5f5;
 }
-.active.messaging-tab-btn:hover {
+.active.messaging-tab-btn {
   background-color: #292f33;
   color: white;
 }

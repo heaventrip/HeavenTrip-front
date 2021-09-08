@@ -248,8 +248,8 @@ export default {
   display: flex;
   max-height: 1000px;
   min-height: 530px;
-  border-top: 25px solid #ffffff70;
-  border-bottom: 25px solid #ffffff70;
+  border-top: 35px solid #ffffff70;
+  border-bottom: 35px solid #ffffff70;
   background: url('../../assets/images/asset-1.png') no-repeat center center / cover;
   height: 90vh;
   display: flex;
