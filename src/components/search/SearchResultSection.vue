@@ -253,15 +253,15 @@
                         data-name="BACKGROUND PICTO"
                         d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
                       />
-                      <InlineSvg v-if="normalResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-                      <InlineSvg v-else-if="normalResult?.sports[0]?.picto" :src="require(`@/assets/svg/${normalResult.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+                      <InlineSvg v-if="normalResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+                      <InlineSvg v-else-if="normalResult?.sports[0]?.picto" :src="require(`@/assets/svg/${normalResult.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
                     </svg>
                   </div>
                 </div>
                 <div class="d-flex fg-1">
                   <div class="d-flex flex-column justify-content-between shadow--right" style="z-index: 1; flex-grow: 1; background-color: rgb(255, 255, 255, 0.96)">
                     <div class="pad__content">
-                      <div class="d-flex justify-content-between align-items-center pb-3 mb-3" style="border-bottom: 1px dashed #ebebeb">
+                      <div class="d-flex justify-content-between align-items-center" style="border-bottom: 1px dashed #b4b4b4; padding-bottom: 1.2rem; margin-bottom: 0.5">
                         <div class="text-uppercase pad__content__title font-weight-bold d-flex flex-column justify-content-start">
                           <span class="pad__content__title__sport">{{ normalResult?.sports[0]?.name }}</span>
                           <span class="pad__content__title__spot font-weight-normal"><i class="fas fa-caret-right mr-3"></i>{{ normalResult?.spot.name }}</span>
@@ -269,7 +269,7 @@
                         <div class="pad__content__price">
                           <div class="pad__content__price__info" style="font-weight: 300">par pers. :</div>
                           <div class="pad__content__price__euro">
-                            <span class="euro"
+                            <span class=""
                               >{{ normalResult?.price >= 1000 ? `${normalResult?.price.toString()[0]} ${normalResult?.price.toString().slice(-3)}` : normalResult?.price }}&hairsp;&euro;</span
                             >
                           </div>
@@ -288,7 +288,7 @@
                       </div> -->
                       <div class="">
                         <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers inscrits&nbsp;</span><span>aux sessions :</span> </span>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between" style="margin-top: 0.3rem">
                           <InlineAvatars :avatars="avatarKeys" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         </div>
                       </div>
@@ -337,7 +337,7 @@
                       class="mr-3"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#d82558"
-                      height="80"
+                      height="75"
                       viewBox="0 0 42.57972 37.89174"
                     >
                       <path
@@ -345,8 +345,8 @@
                         data-name="BACKGROUND PICTO"
                         d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
                       />
-                      <InlineSvg v-if="lastSessionResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-                      <InlineSvg v-else-if="lastSessionResult?.sports[0]?.picto" :src="require(`@/assets/svg/${lastSessionResult.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+                      <InlineSvg v-if="lastSessionResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+                      <InlineSvg v-else-if="lastSessionResult?.sports[0]?.picto" :src="require(`@/assets/svg/${lastSessionResult.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
                     </svg>
                   </div>
                   <div
@@ -440,8 +440,8 @@
                         data-name="BACKGROUND PICTO"
                         d="M0,37.89123V0H35.35305a3.722,3.722,0,0,1,3.58921,2.68541,1.35541,1.35541,0,0,1,.06208.1694l3.56129,15.70049a.58657.58657,0,0,1,0,.25554L39.0284,34.944a.526.526,0,0,1-.04812.13139,3.72108,3.72108,0,0,1-3.62434,2.81631Z"
                       />
-                      <InlineSvg v-if="requestedTripResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-12 0 50 24" fill="white" />
-                      <InlineSvg v-else-if="requestedTripResult?.sports[0]?.picto" :src="require(`@/assets/svg/${requestedTripResult.sports[0].picto}.svg`)" viewBox="-12 0 50 24" fill="white" />
+                      <InlineSvg v-if="requestedTripResult?.multisport" :src="require(`@/assets/svg/playcards.svg`)" viewBox="-14 0 54 24" fill="white" />
+                      <InlineSvg v-else-if="requestedTripResult?.sports[0]?.picto" :src="require(`@/assets/svg/${requestedTripResult.sports[0].picto}.svg`)" viewBox="-14 0 54 24" fill="white" />
                     </svg>
                   </div>
                 </div>
@@ -991,6 +991,7 @@ export default {
   left: 0;
 }
 .pad__content__title__sport {
+  margin-bottom: 0.2rem;
   font-size: 1.75rem;
 }
 .pad__content__title__spot {
