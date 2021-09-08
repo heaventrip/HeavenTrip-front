@@ -630,23 +630,19 @@ button {
   background: url('../../assets/svg/send.svg') center / contain no-repeat;
 }
 .message-send-form {
-  -moz-box-shadow: inset 0 0 10px #000000;
-  -webkit-box-shadow: inset 0 0 10px #000000;
-  box-shadow: inset 0 0 10px #000000;
+  border: solid 8px #00000021;
 }
 .reply-container {
   background-color: #5a3a5f;
   color: white !important;
   width: 85%;
   overflow: visible !important;
-  padding: 25px;
-  height: 71px;
+  padding: 22px;
+  /* height: 71px; */
+  height: calc(71px - 8px); /* -8px is border from message-send-form */
   font-size: 0.8rem;
   letter-spacing: 0.03rem;
   font-weight: 400;
-  -moz-box-shadow: inset 0 0 10px #000000;
-  -webkit-box-shadow: inset 0 0 10px #000000;
-  box-shadow: inset 0 0 10px #000000;
 }
 
 .reply-container::placeholder {
