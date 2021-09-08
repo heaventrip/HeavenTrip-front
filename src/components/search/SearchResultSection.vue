@@ -275,7 +275,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="pad__content__description">{{ normalResult?.description.substr(0, 150) }}...</div>
+                      <div class="pad__content__description">{{ normalResult?.description.substr(0, 140) }}...</div>
                       <!-- NOTE display for multisport -->
                       <!-- <div class="pad__content__sports d-flex align-items-center tooltip-div">
                         <span class="pad__content__activities__title">Activités :</span>
