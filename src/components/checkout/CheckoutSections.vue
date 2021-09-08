@@ -125,7 +125,7 @@ import CheckoutWizardForm from './wizard/CheckoutWizardForm.vue'
 import CheckoutWizardForm2 from './wizard/CheckoutWizardForm2.vue'
 import CheckoutWizardValidation from './wizard/CheckoutWizardValidation.vue'
 // import CheckoutSuccess from './CheckoutSuccess.vue'
-import { getUserInfo } from '@/utils/auth'
+import { isLoggedIn } from '@/utils/auth'
 // import { loadStripe } from '@stripe/stripe-js'
 
 export default {
@@ -152,16 +152,16 @@ export default {
       extraParticipants: [],
       booker: {
         infos: {
-          firstName: 'a',
-          lastName: 'a',
-          birthDate: 'a',
-          phone: 'a',
-          email: 'a',
-          gender: 'a',
-          country: 'a',
-          city: 'a',
-          street: 'a',
-          postalCode: 'a'
+          firstName: '',
+          lastName: '',
+          birthDate: '',
+          phone: '',
+          email: '',
+          gender: '',
+          country: '',
+          city: '',
+          street: '',
+          postalCode: ''
         },
         booking: {
           room: 0,
@@ -178,10 +178,20 @@ export default {
       updatedExtraParticipants: null,
       avatarKey: '',
       isLastParticipant: false,
-      needsReset: false
+      needsReset: false,
+      currUser: null
     }
   },
   watch: {
+    currUser: {
+      immediate: true,
+      handler(val) {
+        if (!val) return
+        ;['firstName', 'lastName', 'birthDate', 'phone', 'email', 'gender', 'country', 'city', 'street', 'postalCode'].forEach((attr) => {
+          this.booker.infos[attr] = val[attr]
+        })
+      }
+    },
     extraParticipants: {
       deep: true,
       handler(val) {
@@ -324,8 +334,8 @@ export default {
     }
   },
   methods: {
-    getUserInfo() {
-      return getUserInfo()
+    isLoggedIn() {
+      return isLoggedIn()
     },
     isComplete(step) {
       return this.$data[`${step}Complete`]
@@ -372,7 +382,23 @@ export default {
     }
   },
   created() {
-    this.avatarKey = this.getUserInfo().avatar_key
+    if (!isLoggedIn()) return
+
+    const AUTH_TOKEN_KEY = 'authToken'
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+    // this.currUser = await this.getUserInfo()
+    this.$axios
+      .get('/users/current')
+      .then((res) => {
+        this.currUser = res.data.user
+        this.$root.initialLoading = false
+      })
+      .catch((err) => {
+        this.$notify({ type: 'error', text: err.message })
+        this.$root.initialLoading = false
+      })
   },
   mounted() {
     // this.submitBookingForm()

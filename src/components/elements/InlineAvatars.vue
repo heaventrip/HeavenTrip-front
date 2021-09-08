@@ -109,10 +109,10 @@ export default {
   created() {
     this.userAvatarId = localStorage.getItem('user.avatarId')
     // check if course is already wishlisted
-    this.$axios
-      .get('/wishlists', { params: { courseId: this.$props.courseId } })
-      .then(() => (this.wishlisted = true))
-      .catch(() => (this.wishlisted = false))
+    // this.$axios
+    //   .get('/wishlists', { params: { courseId: this.$props.courseId } })
+    //   .then(() => (this.wishlisted = true))
+    //   .catch(() => (this.wishlisted = false))
   },
   mounted() {
     let that = this
