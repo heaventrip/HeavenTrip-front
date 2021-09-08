@@ -10,7 +10,10 @@
     </div>
     <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[pSpacing, wishlistLoading ? 'cursor: default' : '']">
       <span id="loading" v-show="wishlistLoading"></span>
-      <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
+      <div v-if="wishlisted">
+        <img v-if="userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
+        <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" :style="[pHeight, pOutline]" style="border-radius: 50%" fill="#292f33" />
+      </div>
       <div v-else-if="wishlisted !== null" style="position: relative" :style="[pHeartWidth, pHeartHeight]" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
         <transition name="fade">
           <InlineSvg v-if="hoveredHeart" :class="`heart-logo heart-logo-grey`" :src="require(`@/assets/svg/heart-logo-grey.svg`)" />
@@ -40,7 +43,7 @@ export default {
         grey: '#292f33',
         violet: '#5a3a5f'
       },
-      wishlistLoading: false
+      wishlistLoading: true
     }
   },
   computed: {
@@ -109,10 +112,21 @@ export default {
   created() {
     this.userAvatarId = localStorage.getItem('user.avatarId')
     // check if course is already wishlisted
-    // this.$axios
-    //   .get('/wishlists', { params: { courseId: this.$props.courseId } })
-    //   .then(() => (this.wishlisted = true))
-    //   .catch(() => (this.wishlisted = false))
+
+    const AUTH_TOKEN_KEY = 'authToken'
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+    this.$axios
+      .get('/wishlists', { params: { courseId: this.$props.courseId } })
+      .then(() => {
+        this.wishlisted = true
+        this.wishlistLoading = false
+      })
+      .catch(() => {
+        this.wishlisted = false
+        this.wishlistLoading = false
+      })
   },
   mounted() {
     let that = this

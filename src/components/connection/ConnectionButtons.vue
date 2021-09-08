@@ -50,10 +50,10 @@
                 <div v-show="showcontent">Mes envies</div>
               </transition>
               <transition name="fade-fast">
-                <div class="wishlists mt-3" v-show="showWishlist" :key="showWishlist">
-                  <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
-                    <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
-                    {{ wishlist.name }}
+                <div class="wishlists mt-3" v-if="showWishlist">
+                  <div class="d-flex align-items-center" v-for="wishlist in wishlists" :key="wishlist">
+                    <a :href="`/product/${wishlist.id}`" class="text-reset wishlist-course py-2" :data-course="wishlist.id">&mdash;&nbsp;&nbsp;{{ wishlist.name }}</a>
+                    <InlineSvg @click.stop="unwishlistCourse(wishlist.id)" class="ml-auto" :src="require('@/assets/svg/heart-filled.svg')" fill="#d82558" height="15" />
                   </div>
                 </div>
               </transition>
@@ -143,7 +143,10 @@ export default {
     },
     toggleDropdown(val) {
       if (val) document.addEventListener('click', this.handleClickToClose)
-      else document.removeEventListener('click', this.handleClickToClose)
+      else {
+        document.removeEventListener('click', this.handleClickToClose)
+        this.showWishlist = false
+      }
     },
     // showWishlist(val) {
     //   if (val) {
@@ -214,12 +217,13 @@ export default {
       this.toggleDropdown = false
     },
     toggleDropdownMenu() {
+      this.fetchWishlists()
       this.toggleDropdown = !this.toggleDropdown
       this.showcontent = false
     },
     unwishlistCourse(courseId) {
       this.$axios.delete('/wishlists', { params: { courseId: courseId } }).then(() => {
-        document.querySelector(`[data-course='${courseId}']`).remove()
+        this.wishlists = this.wishlists.filter((wl) => wl.id !== courseId)
         this.fetchWishlists()
         this.$notify({ group: 'app', type: 'success', text: "Tu ne t'intéresses plus à ce stage" })
       })
