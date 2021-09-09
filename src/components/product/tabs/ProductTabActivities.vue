@@ -43,13 +43,12 @@
             </div>
             <div class="author" style="font-weight: 600"></div>
           </div>
-
           <div>
             <img
               class="img-fill"
               style="position: absolute !important"
               fluid=""
-              :src="`https://res.cloudinary.com/heaventrip/image/upload/v1631160961/staff/19477407_1401479543280177_161088362519259591_o_jul7m0.jpg`"
+              :src="`https://res.cloudinary.com/heaventrip/image/upload/v1631166701/staff/Heaven_Trip_Kitesurf-362_zj7zqu-min_vvn7qd.jpg`"
               data-v-5aafffc4=""
             />
           </div>
@@ -59,7 +58,7 @@
           <div class="mb-4" style="height: 1px; width: 40%; border-top: 1px dashed #292f33"></div>
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
-              <p class="content pt-3 text-grey" style="line-height: 24px">
+              <p class="content pt-3 text-grey" style="line-height: 25px">
                 {{ course?.staffs.find((el) => el.role === 'Guide')?.description }}
               </p>
             </div>
@@ -306,10 +305,10 @@ export default {
 }
 .guide-word__image {
   display: inline-block;
-  width: 30%;
+  width: 32%;
   position: relative;
   height: 100%;
-  min-width: 33%;
+  min-width: 30%;
 }
 .guide-word__text {
   display: inline-block;
