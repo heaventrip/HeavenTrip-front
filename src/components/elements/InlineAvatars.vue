@@ -8,7 +8,7 @@
         :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`"
       />
     </div>
-    <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[spacingStyle, wishlistLoading ? 'cursor: default' : '']">
+    <div v-show="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[spacingStyle, wishlistLoading ? 'cursor: default' : '']">
       <span id="loading" v-show="wishlistLoading"></span>
       <div v-if="wishlisted">
         <img v-if="userAvatarId" class="rounded-circle" :style="imgStyle" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
@@ -43,7 +43,7 @@ export default {
         grey: '#292f33',
         violet: '#5a3a5f'
       },
-      wishlistLoading: true
+      wishlistLoading: false
     }
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <div :key="step">
-      <PasswordStep1 v-if="step === 'emailForm'" @clicked-password-retrieved="$emit('clicked-password-retrieved')" @filled="step = 'emailSuccess'" />
+      <PasswordStep1 v-if="step === 'emailForm'" @clicked-password-retrieved="$emit('clicked-password-retrieved')" @user-email="(e) => (userEmail = e)" @filled="step = 'emailSuccess'" />
       <PasswordStep2 v-if="step === 'emailSuccess'" :user-email="userEmail" />
       <PasswordStep3 v-if="step === 'passwordForm'" @filled="step = 'passwordSuccess'" :token="token" />
       <PasswordStep4 v-if="step === 'passwordSuccess'" @complete="$emit('password-updated')" />
@@ -23,11 +23,12 @@ export default {
     PasswordStep3,
     PasswordStep4
   },
-  props: ['token', 'user-email'],
+  props: ['token'],
   emits: ['password-updated', 'clicked-password-retrieved', 'updated-step'],
   data() {
     return {
-      step: 'emailForm'
+      step: 'emailForm',
+      userEmail: ''
     }
   },
   watch: {

@@ -131,6 +131,12 @@ ___________________________
 > filtres dernières places/confirmés
 > ajouter equipment rental price
 
+5/09
+> scroll top sur insurance
+> continuer avec la résa de "X" bug
+> opacité avatar
+> taille des avatars
+
 6/09
 > mentions inverser le gras
 > pas la version grise
@@ -152,34 +158,32 @@ ___________________________
 8/09
 > si payer par virement "confirmer ma réservation"
 > si payer par carte "je veux procéder au paiement"
+> passer le filtre thématique en haut
 - card dernière place bandeau à passer en noir
 - pictos des filtres
-- passer le filtre thématique en haut
 
 BUG
-- wishlist refaire le composant
-- version grise du dropdown sur produit
-- lancer l'anim fullscreen en cas de rechargement des infos
-- voir les valeurs de sorties de l'anim car bug en resize
+> wishlist refaire le composant
+> version grise du dropdown sur produit
+> lancer l'anim fullscreen en cas de rechargement des infos
+> voir les valeurs de sorties de l'anim car bug en resize
 
 TODO
 > cards (voir sms)
-- bouton se connecter
-- WISHLIST!!!
+> bouton se connecter
+> WISHLIST!!!
+> le spinner recherche qui décale
+- dynamiser le delete d'un wishlist
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
-- le spinner recherche qui décale
 - newsletter
 - mails
+- icone tab product + voir threshold
+- bouton témoignage
+- hover photo recherche
 
 NOTE
 - dropdown up rajouter fading
 - text dynamique sélectionne une vignette quand pas logué
-
-5/09
-> scroll top sur insurance
-> continuer avec la résa de "X" bug
-> opacité avatar
-> taille des avatars
 
 GLOBAL
 - input largeur max

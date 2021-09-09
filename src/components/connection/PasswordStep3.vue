@@ -2,13 +2,13 @@
   <p class="content-head">Merci de saisir ton nouveau mot de passe :</p>
   <form>
     <div class="form-group has-float-label mb-5 mt-5">
-      <input v-model="password" id="login-password" class="form-control" :class="{ 'field-error': v$.user.password.$error }" type="password" name="" autocomplete="off" placeholder=" " />
+      <input v-model="user.password" id="login-password" class="form-control" :class="{ 'field-error': v$.user.password.$error }" type="password" name="" autocomplete="off" placeholder=" " />
       <label for="login-password">Nouveau mot de passe</label>
       <div v-if="v$.user.password.$errors.length" class="field-error-message">{{ v$.user.password.$errors[0].$message }}</div>
     </div>
     <div class="form-group has-float-label mb-5">
       <input
-        v-model="passwordConfirmation"
+        v-model="user.passwordConfirmation"
         id="login-second-password"
         class="form-control"
         :class="{ 'field-error': v$.user.passwordConfirmation.$error }"

@@ -43,8 +43,8 @@ export default {
   methods: {
     resendEmail() {
       this.$axios
-        .post('/send-confirmation-email', {
-          email: this.userEmail
+        .post('/send-password-email', {
+          user: { email: this.userEmail }
         })
         .then(() => this.$notify({ group: 'modal', type: 'success', text: 'Un nouvel email a été envoyé' }))
         .catch((err) => this.$notify({ group: 'modal', type: 'error', text: err.response?.data?.message || err.message }))

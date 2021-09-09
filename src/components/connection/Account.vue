@@ -198,7 +198,6 @@
             "
             @updated-step="(step) => (passwordActiveStep = step)"
             :token="$route.query.recover_password_token"
-            :user-email="user.email"
           />
         </form>
       </div>

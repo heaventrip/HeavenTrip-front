@@ -49,9 +49,9 @@
           <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
         </button>
         <button @click.prevent="goSearchPage" class="bttn-search btn text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
-          <div class="d-none d-lg-inline-block mb-1">
+          <div class="d-none d-lg-inline-block mb-1" style="position: relative">
+            Rechercher
             <span id="loading" v-show="fetching"></span>
-            rechercher
           </div>
           <div v-show="resultsNb" style="font-size: 0.8rem; font-weight: 300; text-transform: none">{{ resultsNb }} résultats</div>
         </button>
@@ -327,6 +327,8 @@ export default {
 }
 /* SPINNER */
 #loading {
+  position: absolute;
+  top: 3px;
   display: inline-block;
   width: 15px;
   height: 15px;
