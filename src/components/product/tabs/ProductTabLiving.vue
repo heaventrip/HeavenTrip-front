@@ -153,31 +153,61 @@
   </div>
   <div class="d-flex" style="margin-top: 0.5rem; margin-bottom: 6rem">
     <div class="linear-block p-0 m-0 w-100">
-      <div class="card-body d-flex" style="box-shadow: 0 0 2px #f1f1f1; height: 370px">
-        <div class="guide-word__image">
-          <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+      <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 326px" data-v-5aafffc4="">
+        <div class="guide-word__image" data-v-5aafffc4="">
+          <div
+            Style=" background-color: #292f33b0;
+              height: 70px;
+              position: absolute;
+              z-index: 1;
+              width: 100%;
+              bottom: 0px;
+              height: auto;
+              text-align: center;
+              padding: 15px;
+              letter-spacing: 0.04rem;
+              line-height: 1.8rem;
+              font-family: oswald;
+              font-size: 0.98rem"
+          >
+            <div class="author" style="color: #fff; font-weight: 300; display: inline-grid">
+              {{ course?.staffs.find((el) => el.role === 'Cook')?.firstName }} {{ course?.staffs.find((el) => el.role === 'Cook')?.lastName }}
+              <span style="color: #fff; font-weight: 800; margin: auto; display: inline-grid">
+                {{ course?.staffs.find((el) => el.role === 'Cook')?.title }}
+              </span>
+            </div>
+            <div class="author" style="font-weight: 600"></div>
+          </div>
+          <div>
+            <img
+              class="img-fill"
+              style="position: absolute !important"
+              fluid=""
+              :src="`https://res.cloudinary.com/heaventrip/image/upload/v1631166701/staff/Heaven_Trip_Kitesurf-362_zj7zqu-min_vvn7qd.jpg`"
+              data-v-5aafffc4=""
+            />
+          </div>
         </div>
         <div class="guide-word__text">
-          <h6 class="head text-uppercase text-white py-3 mb-1" style="width: max-content; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-          <div class="mb-4" style="height: 1px; width: 40%; border-top: 1px dashed #ffffff66"></div>
+          <h6 class="head text-uppercase text-grey py-3 mb-1" style="width: max-content; border-top: 1px dashed #292f33; border-bottom: none">Mot du Cuisinier…</h6>
+          <div class="mb-4" style="height: 1px; width: 40%; border-top: 1px dashed #292f33"></div>
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
-              <div class="guide-word__subtitle">Atmosphère culinaire</div>
-              <p class="content pt-3 text-white" style="line-height: 24px">
+              <p class="content pt-3 text-grey" style="line-height: 25px">
                 {{ course?.staffs.find((el) => el.role === 'Cook')?.description }}
               </p>
-              <h6 class="author text-white mt-4 mb-0">
+              <h6 class="author text-grey mt-4 mb-0">
                 {{ course?.staffs.find((el) => el.role === 'Cook')?.firstName }} {{ course?.staffs.find((el) => el.role === 'Cook')?.lastName }} -
                 {{ course?.staffs.find((el) => el.role === 'Cook')?.title }}
               </h6>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
-              <p class="content pt-3 text-white" style="line-height: 24px">
+              <p class="content pt-3 text-grey" style="line-height: 24px">
                 testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste
                 testeste testeste testeste testeste testeste
               </p>
-              <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+              <h6 class="author text-grey mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
           </transition>
         </div>
@@ -313,15 +343,18 @@ export default {
 .guide-word__subtitle {
   font-size: 0.875rem;
   font-weight: 400;
-  color: #fff;
+  color: #292f33;
 }
 .guide-word__image {
   display: inline-block;
-  width: 28%;
+  width: 32%;
+  position: relative;
+  height: 100%;
+  min-width: 30%;
 }
 .guide-word__text {
   display: inline-block;
-  background-color: #292f33;
+  background-color: #fff;
   text-align: left;
   padding: 2.5rem 3rem;
   width: 72%;
