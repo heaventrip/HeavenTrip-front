@@ -20,6 +20,7 @@
     <div class="linear-block p-0 m-0 w-100">
       <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 326px" data-v-5aafffc4="">
         <div class="guide-word__image" data-v-5aafffc4="">
+          <img class="img-fill" style="position: absolute !important" fluid="" :src="course?.staffs.find((el) => el.role === 'Guide')?.photoUrl" data-v-5aafffc4="" />
           <div
             Style=" background-color: #292f33db;
               height: 70px;
@@ -41,21 +42,10 @@
                 {{ course?.staffs.find((el) => el.role === 'Guide')?.title }}
               </span>
             </div>
-            <div class="author" style="font-weight: 600"></div>
-          </div>
-          <div>
-            <img
-              class="img-fill"
-              style="position: absolute !important"
-              fluid=""
-              :src="`https://res.cloudinary.com/heaventrip/image/upload/v1631166701/staff/Heaven_Trip_Kitesurf-362_zj7zqu-min_vvn7qd.jpg`"
-              data-v-5aafffc4=""
-            />
           </div>
         </div>
         <div class="guide-word__text">
           <h6 class="head text-uppercase text-grey py-3 mb-1" style="width: max-content; border-top: 1px dashed #292f33; border-bottom: none">Mot du Moniteur…</h6>
-          <div class="mb-4" style="height: 1px; width: 40%; border-top: 1px dashed #292f33"></div>
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
               <p class="content pt-3 text-grey" style="line-height: 25px">
