@@ -141,22 +141,28 @@
   <vue-easy-lightbox style="z-index: 2" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
   <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   <div class="linear-block mb-0 p-0" style="background-color: rgb(252, 252, 252); box-shadow: none">
-    <div class="card border-0 rounded-0">
-      <div class="head-block subhead-block d-flex">
-        <div class="">
-          <p class="sub-heading mb-2">Vie sur place</p>
-          <h4 class="heading mb-0">LES repas</h4>
+    <div class="linear-block mb-0">
+      <div class="card border-0 rounded-0">
+        <div class="head-block subhead-block d-flex mb-0">
+          <div class="">
+            <p class="sub-heading mb-2">Vie sur place</p>
+            <h4 class="heading mb-0">LES repas</h4>
+          </div>
+          <i class="fa fa-chevron-down h4 mb-0 arrow text-grey"></i>
         </div>
-        <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
       </div>
     </div>
+    <div class="card border-0 rounded-0">
+      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+    </div>
   </div>
+
   <div class="d-flex" style="margin-top: 0.5rem; margin-bottom: 6rem">
     <div class="linear-block p-0 m-0 w-100">
       <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 326px" data-v-5aafffc4="">
         <div class="guide-word__image" data-v-5aafffc4="">
           <div
-            Style=" background-color: #292f33b0;
+            Style=" background-color: #292f33db;
               height: 70px;
               position: absolute;
               z-index: 1;
@@ -183,7 +189,7 @@
               class="img-fill"
               style="position: absolute !important"
               fluid=""
-              :src="`https://res.cloudinary.com/heaventrip/image/upload/v1631166701/staff/Heaven_Trip_Kitesurf-362_zj7zqu-min_vvn7qd.jpg`"
+              :src="`https://res.cloudinary.com/heaventrip/image/upload/v1631174266/staff/Heaven_Trip_Kitesurf-112_1_ll3yon.jpg`"
               data-v-5aafffc4=""
             />
           </div>
@@ -196,10 +202,6 @@
               <p class="content pt-3 text-grey" style="line-height: 25px">
                 {{ course?.staffs.find((el) => el.role === 'Cook')?.description }}
               </p>
-              <h6 class="author text-grey mt-4 mb-0">
-                {{ course?.staffs.find((el) => el.role === 'Cook')?.firstName }} {{ course?.staffs.find((el) => el.role === 'Cook')?.lastName }} -
-                {{ course?.staffs.find((el) => el.role === 'Cook')?.title }}
-              </h6>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
@@ -347,10 +349,10 @@ export default {
 }
 .guide-word__image {
   display: inline-block;
-  width: 32%;
+  width: 28%;
   position: relative;
   height: 100%;
-  min-width: 30%;
+  min-width: 27%;
 }
 .guide-word__text {
   display: inline-block;

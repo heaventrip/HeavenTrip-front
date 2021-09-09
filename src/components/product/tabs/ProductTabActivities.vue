@@ -21,7 +21,7 @@
       <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 326px" data-v-5aafffc4="">
         <div class="guide-word__image" data-v-5aafffc4="">
           <div
-            Style=" background-color: #292f33b0;
+            Style=" background-color: #292f33db;
               height: 70px;
               position: absolute;
               z-index: 1;
@@ -305,10 +305,10 @@ export default {
 }
 .guide-word__image {
   display: inline-block;
-  width: 32%;
+  width: 28%;
   position: relative;
   height: 100%;
-  min-width: 30%;
+  min-width: 27%;
 }
 .guide-word__text {
   display: inline-block;
