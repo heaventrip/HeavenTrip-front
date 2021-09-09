@@ -242,7 +242,7 @@ export default {
           user: this.finalUser
         })
         .then((res) => {
-          this.$notify({ type: 'info', text: 'Un mail de confirmation vient de vous être envoyé' })
+          this.$notify({ group: 'modal', type: 'info', text: 'Un mail de confirmation vient de vous être envoyé' })
           this.$emit('submitted-form')
           this.stepper.bio.valid = true
           this.stepper.success.authorize = true
@@ -254,7 +254,12 @@ export default {
         })
     },
     resendEmailConfirmation() {
-      //todo: resend email confirmation
+      this.$axios
+        .post('/send-confirmation-email', {
+          email: this.finalUser.email
+        })
+        .then(() => this.$notify({ group: 'modal', type: 'success', text: 'Un nouvel email a été envoyé' }))
+        .catch((err) => this.$notify({ group: 'modal', type: 'error', text: err.response?.data?.message || err.message }))
     },
     fileSet() {
       this.$nextTick(() => {

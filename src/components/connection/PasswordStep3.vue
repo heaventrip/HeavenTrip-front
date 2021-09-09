@@ -2,57 +2,33 @@
   <p class="content-head">Merci de saisir ton nouveau mot de passe :</p>
   <form>
     <div class="form-group has-float-label mb-5 mt-5">
-      <input
-        v-model="firstPassword"
-        id="login-password"
-        class="form-control"
-        type="password"
-        name=""
-        autocomplete="off"
-        placeholder=" "
-        :style="[errors.find((elem) => elem.title === 'first') ? 'border-bottom: 1px solid tomato' : '']"
-      />
+      <input v-model="password" id="login-password" class="form-control" :class="{ 'field-error': v$.user.password.$error }" type="password" name="" autocomplete="off" placeholder=" " />
       <label for="login-password">Nouveau mot de passe</label>
-      <div v-if="errors.find((elem) => elem.title === 'first')" class="field-error-message">{{ errors.find((elem) => elem.title === 'first').message }}</div>
+      <div v-if="v$.user.password.$errors.length" class="field-error-message">{{ v$.user.password.$errors[0].$message }}</div>
     </div>
     <div class="form-group has-float-label mb-5">
       <input
-        v-model="secondPassword"
+        v-model="passwordConfirmation"
         id="login-second-password"
         class="form-control"
+        :class="{ 'field-error': v$.user.passwordConfirmation.$error }"
         type="password"
         name=""
         autocomplete="off"
         placeholder=" "
-        :style="[errors.find((elem) => elem.title === 'second') ? 'border-bottom: 1px solid tomato' : '']"
       />
       <label for="login-second-password">Confirmation de ton mot de passe</label>
-      <div v-if="errors.find((elem) => elem.title === 'second')" class="field-error-message">{{ errors.find((elem) => elem.title === 'second').message }}</div>
+      <div v-if="v$.user.passwordConfirmation.$errors.length" class="field-error-message">{{ v$.user.passwordConfirmation.$errors[0].$message }}</div>
     </div>
     <!--    <input class="form-control modal-input" type="password" autocomplete="off" name="" value="" placeholder="Nouveau mot de passe" />
     <input class="form-control modal-input" type="password" autocomplete="off" name="" placeholder="Confirmation de ton mot de passe" /> -->
-    <Button
-      id="btn-validate"
-      @click="
-        () => {
-          if (firstPassword === secondPassword) {
-            $emit('filled')
-          }
-        }
-      "
-      text="Valider"
-      px="1.5rem"
-      size=".8rem"
-      height="50px"
-      width="100%"
-      weight="bold"
-      color="white"
-      :disabled="!formIsFilled"
-    />
+    <Button id="btn-validate" @click="submitPasswordForm" text="Valider" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" :disabled="!formIsFilled" />
   </form>
 </template>
 
 <script>
+import { required, sameAs, minLength, helpers } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
 import Button from '@/components/elements/Button.vue'
 
 export default {
@@ -61,34 +37,43 @@ export default {
   components: {
     Button
   },
+  props: ['token'],
   data() {
     return {
-      firstPassword: '',
-      secondPassword: '',
-      errors: []
+      user: {
+        password: '',
+        passwordConfirmation: '',
+        recoverPasswordToken: this.$props.token
+      }
     }
   },
-  watch: {
-    firstPassword() {
-      this.validPassword('first')
-    },
-    secondPassword() {
-      this.validPassword('second')
+  setup() {
+    return { v$: useVuelidate() }
+  },
+  validations() {
+    return {
+      user: {
+        password: {
+          required: helpers.withMessage('Ce champ est requis', required),
+          minLength: helpers.withMessage('5 caractères minimum sont requis', minLength(5))
+        },
+        passwordConfirmation: {
+          required: helpers.withMessage('Ce champ est requis', required),
+          sameAs: helpers.withMessage("Le mot de passe n'est pas identique", sameAs(this.user.password))
+        }
+      }
     }
   },
   methods: {
-    validPassword: function (type) {
-      if (this.firstPassword != this.secondPassword && this.secondPassword) {
-        if (type === 'first') {
-          this.errors = [...this.errors, { title: 'first', message: 'Les mots de passe ne correspondent pas' }]
-        }
-        if (type === 'second') {
-          this.errors = [...this.errors, { title: 'second', message: 'Les mots de passe ne correspondent pas' }]
-        }
-      }
-      if (this.firstPassword === this.secondPassword) {
-        this.errors = []
-      }
+    submitPasswordForm() {
+      this.v$.$touch()
+      if (this.v$.$error) return
+
+      this.$axios
+        .post('/update-password', {
+          user: this.user
+        })
+        .catch((err) => this.$notify({ group: 'modal', type: 'error', text: err.response?.data?.message || err.message }))
     }
   }
 }

@@ -86,7 +86,7 @@ import gsap from 'gsap'
 
 export default {
   name: 'HomeCarouselCard',
-  props: ['course', 'index', 'cards-ref'],
+  props: ['course', 'index'],
   data() {
     return {
       animFinished: true,
@@ -110,7 +110,6 @@ export default {
     course: {
       immediate: true,
       handler(val) {
-        console.log('ccccccccccccccccccc', val)
         if (!val.wishlistUsers) return
 
         val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
@@ -132,11 +131,11 @@ export default {
       const tl = gsap
         .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
         .pause()
-        .to(this.$el, { width: this.cardWidth + this.cardExpand + 'px' })
+        .to(this.$el, { width: '+=' + this.cardExpand + 'px' })
+        .to(this.$el, { x: '-=' + this.cardExpand / 2 + 'px' }, '<')
         .to(staticInfos, { y: '-=45px' }, '<')
         .to(movingInfos, { y: '-=100' }, '<')
         .to(heartIcon, { autoAlpha: 1 }, '<')
-      // .to(cards, { x: '+=70' }, '<')
       this.tl = tl
     },
     addToWishlist() {
@@ -150,11 +149,6 @@ export default {
           .then(() => (this.wishlisted = true))
           .catch((err) => console.log(err))
       else this.$axios.delete('/wishlists', { params: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
-    },
-    getCardsToSlide(card) {
-      const cardPosition = this.$props.cardsArr.indexOf(card)
-      console.log(this.$props.cardsArr.slice(cardPosition + 1))
-      return this.$props.cardsArr.slice(cardPosition + 1)
     },
     biggerCard() {
       this.hovered = true
