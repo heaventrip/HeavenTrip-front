@@ -107,6 +107,9 @@ export default {
       currUser: null
     }
   },
+  provide: {
+    activeTab: 123
+  },
   computed: {
     isDarkTheme() {
       return this.$props.navSticky || this.$props.activeTab === 'agency' || this.$props.activeTab === 'news'
@@ -116,15 +119,18 @@ export default {
       else return 'dropdown-block--light'
     },
     avatarBorderStyle() {
-      if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
+      if (this.isDarkTheme && this.$props.navSticky) return 'white'
+      else if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
       else return this.toggleDropdown ? '#292f33' : 'white'
     },
     nameStyle() {
-      if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
+      if (this.isDarkTheme && this.$props.navSticky) return 'white'
+      else if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
       else return this.toggleDropdown ? '#292f33' : 'white'
     },
     svgFillStyle() {
-      if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
+      if (this.isDarkTheme && this.$props.navSticky) return 'white'
+      else if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
       else return this.toggleDropdown ? '#292f33' : 'white'
     }
   },
