@@ -248,7 +248,7 @@ export default {
 
 <style scoped>
 .gender-btn:not(.bg-grey):hover {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
   color: #292f33;
 }
 .card {

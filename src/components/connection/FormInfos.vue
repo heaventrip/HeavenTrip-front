@@ -414,7 +414,7 @@ export default {
   padding-top: 18px;
   margin-bottom: 50px;
   background: #292f33;
-  color: #ebebeb;
+  color: #f1f1f1;
   border: 1px solid #ffffff33;
 }
 .descr-text {

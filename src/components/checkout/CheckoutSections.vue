@@ -480,13 +480,13 @@ export default {
 }
 .next-btn.disable,
 .prev-btn.disable {
-  color: #ebebeb;
+  color: #f1f1f1;
   border: 1px solid #b4b4b4;
 }
 .next-btn.disable:hover,
 .prev-btn.disable:hover {
   background-color: white;
-  color: #ebebeb;
+  color: #f1f1f1;
 }
 
 .top-infos-container {

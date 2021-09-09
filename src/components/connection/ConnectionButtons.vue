@@ -26,8 +26,8 @@
                 <div v-show="showcontent">Mes infos</div>
               </transition>
             </div>
-            <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
-            <div @click="toggleWishlist" :class="[isDarkTheme ? 'menu-item-dark' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+            <div style="width: 70%; border-bottom: 1px dashed #f1f1f1; margin-left: 1.8rem"></div>
+            <div @click="toggleWishlist" :class="[isLightTheme === true ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <transition name="fade-delayed">
                 <div v-show="showcontent">Mes envies</div>
               </transition>
@@ -40,7 +40,7 @@
                 </div>
               </transition>
             </div>
-            <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
+            <div style="width: 70%; border-bottom: 1px dashed #f1f1f1; margin-left: 1.8rem"></div>
             <div
               @click="logOut"
               :class="[isDarkTheme ? 'menu-item-dark menu-item-disconnect-dark' : 'menu-item menu-item-disconnect']"

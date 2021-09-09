@@ -149,11 +149,11 @@ export default {
   border-radius: 0 !important;
 }
 .card-booker {
-  background-color: #ebebeb38;
+  background-color: #f1f1f138;
 }
 .btn-add-participant,
 .btn-add-participant:active {
-  border: 1px solid #ebebeb;
+  border: 1px solid #f1f1f1;
   padding: 1.5rem;
   text-align: center;
   background-color: #fff;

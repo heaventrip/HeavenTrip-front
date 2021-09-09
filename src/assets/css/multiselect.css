@@ -212,7 +212,7 @@
   /* height: 100px;
   overflow: scroll; */
   scrollbar-width: thin;
-  scrollbar-color: #292f33 #ebebeb;
+  scrollbar-color: #292f33 #f1f1f1;
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -221,13 +221,13 @@
 }
 
 .multiselect-options::-webkit-scrollbar-track {
-  background: #ebebeb;
+  background: #f1f1f1;
 }
 
 .multiselect-options::-webkit-scrollbar-thumb {
   background-color: #292f33;
   border-radius: 10px;
-  border: 5px solid #ebebeb;
+  border: 5px solid #f1f1f1;
 }
 .open-top .multiselect-options {
   transform: translateY(-100%);
@@ -254,7 +254,7 @@
   display: inline-block;
   height: inherit;
   width: 100%;
-  border-bottom: 1px dashed #ebebeb
+  border-bottom: 1px dashed #f1f1f1
 }
 .multiselect-option.is-pointed {
   color: #fff;
@@ -280,11 +280,11 @@
 .is-multiple .multiselect-option.is-selected,
 .is-tags .multiselect-option.is-selected {
   color: #7c7c7c;
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
 }
 .is-multiple .multiselect-option.is-selected.is-pointed,
 .is-tags .multiselect-option.is-selected.is-pointed {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
   color: #7c7c7c;
 }
 .multiselect-no-options,

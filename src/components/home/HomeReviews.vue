@@ -119,7 +119,7 @@ export default {
   vertical-align: sub;
 }
 .reviews__user-avatar {
-  border: 15px solid #ebebebb3;
+  border: 15px solid #f1f1f1b3;
   border-radius: 50%;
   object-fit: cover;
 }

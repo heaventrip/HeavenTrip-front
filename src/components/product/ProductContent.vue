@@ -650,7 +650,7 @@ button {
   width: inherit;
   position: fixed;
   background-color: white;
-  box-shadow: 0 0 3px #ebebeb;
+  box-shadow: 0 0 3px #f1f1f1;
   height: calc(100vh - 32px - 100px - 40px); /* substract top nav and booking footer */
 }
 @media only screen and (min-width: 1441px) {
