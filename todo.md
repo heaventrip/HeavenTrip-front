@@ -150,8 +150,8 @@ ___________________________
 > conditionner || avatar-empty
 
 8/09
-- si payer par virement "confirmer ma réservation"
-- si payer par carte "je veux procéder au paiement"
+> si payer par virement "confirmer ma réservation"
+> si payer par carte "je veux procéder au paiement"
 - card dernière place bandeau à passer en noir
 - pictos des filtres
 - passer le filtre thématique en haut

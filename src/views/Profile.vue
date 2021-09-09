@@ -207,8 +207,6 @@
 
 <script>
 import Button from '@/components/elements/Button.vue'
-import { logoutUser } from '@/utils/auth'
-import { getUserInfo } from '@/utils/auth'
 import { isLoggedIn } from '@/utils/auth'
 
 export default {
@@ -317,9 +315,6 @@ export default {
         })
         .catch((err) => this.$notify({ type: 'error', text: err.response.data.message }))
     },
-    getUserInfo() {
-      return getUserInfo()
-    },
     isLoggedIn() {
       return isLoggedIn()
     },
@@ -335,7 +330,6 @@ export default {
     const token = localStorage.getItem(AUTH_TOKEN_KEY)
     this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-    // this.currUser = await this.getUserInfo()
     this.$axios
       .get('/users/current')
       .then((res) => {
