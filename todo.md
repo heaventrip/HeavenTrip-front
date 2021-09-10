@@ -186,7 +186,7 @@ TODO
 - hover photo recherche
 - icone tab product
 - voir ce qui est autorisé en logué ou pas
-- rediriger vers le 
+- rediriger vers le modal produit si pas logué
 > voir les inputs du checkout name
 > voir "je ne souhaite pas d'autres activités"
 > select des pays
