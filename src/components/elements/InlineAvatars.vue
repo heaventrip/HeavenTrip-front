@@ -79,35 +79,24 @@ export default {
       }
     },
     addToWishlist() {
-      if (this.wishlistLoading) return
+      if (this.wishlistLoading || this.wishlisted) return
+
+      this.wishlistLoading = true
 
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-      this.wishlistLoading = true
-
-      if (!this.wishlisted)
-        this.$axios
-          .post('/wishlists', { wishlist: { courseId: this.$props.courseId } })
-          .then(() => {
-            this.wishlisted = true
-            this.wishlistLoading = false
-          })
-          .catch((err) => {
-            console.log(err)
-            this.wishlistLoading = false
-          })
-      else
-        this.$axios
-          .delete('/wishlists', { params: { courseId: this.$props.courseId } })
-          .then(() => {
-            this.wishlisted = false
-            this.wishlistLoading = false
-          })
-          .catch(() => {
-            this.wishlistLoading = false
-          })
+      this.$axios
+        .post('/wishlists', { wishlist: { courseId: this.$props.courseId } })
+        .then(() => {
+          this.wishlisted = true
+          this.wishlistLoading = false
+          this.$notify({ group: 'app', type: 'success', text: 'Ce stage a été ajouté à vos envies !' })
+        })
+        .catch((err) => {
+          this.wishlistLoading = false
+        })
     }
   },
   created() {
@@ -130,6 +119,10 @@ export default {
       })
   },
   mounted() {
+    this.$emitter.on('unwishlisted', (courseId) => {
+      if (this.$props.courseId === courseId) this.wishlisted = false
+    })
+
     let that = this
 
     document.querySelectorAll('.inline-avatar-container').forEach((img) => {

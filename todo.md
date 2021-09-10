@@ -1,11 +1,11 @@
 # home
 > ouvrir connexion menu au hover + rotate icon
-- animatique externe des cards @mousevents
+> animatique externe des cards @mousevents
 >>> animatique des reviews
 > animatique interne des cards
 
-- ajouter fading sur les apparitions
-- revoir les liens
+> ajouter fading sur les apparitions
+> revoir les liens
 > gérer les transis ENTRE items et enlever le trou entre les items + voir bottom bar 66deg (aspect continu sans saut)
 
 # product
@@ -16,7 +16,7 @@
 > (- formulaire créer session module booking (sur mois sans session ou ac sessions complètes))
 
 ### IMPERATIF V1 ###
- gérer les transitions et chargements de pages/composants etc.
+> gérer les transitions et chargements de pages/composants etc.
 > mécanique intégration des photos selon tags
 > résolution des URLs
  gestion des origines pour mailerlite (newsletter, signup, wishlist, etc)
@@ -131,6 +131,12 @@ ___________________________
 > filtres dernières places/confirmés
 > ajouter equipment rental price
 
+5/09
+> scroll top sur insurance
+> continuer avec la résa de "X" bug
+> opacité avatar
+> taille des avatars
+
 6/09
 > mentions inverser le gras
 > pas la version grise
@@ -152,34 +158,42 @@ ___________________________
 8/09
 > si payer par virement "confirmer ma réservation"
 > si payer par carte "je veux procéder au paiement"
+> passer le filtre thématique en haut
 - card dernière place bandeau à passer en noir
 - pictos des filtres
-- passer le filtre thématique en haut
 
 BUG
-- wishlist refaire le composant
-- version grise du dropdown sur produit
-- lancer l'anim fullscreen en cas de rechargement des infos
-- voir les valeurs de sorties de l'anim car bug en resize
+> wishlist refaire le composant
+> version grise du dropdown sur produit
+> lancer l'anim fullscreen en cas de rechargement des infos
+> voir les valeurs de sorties de l'anim car bug en resize
 
 TODO
 > cards (voir sms)
-- bouton se connecter
-- WISHLIST!!!
+> bouton se connecter
+> WISHLIST!!!
+> le spinner recherche qui décale
+> dynamiser le delete d'un wishlist
+- bloquer login après header product (router le header et le contenu)
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
-- le spinner recherche qui décale
 - newsletter
 - mails
+- icone tab product + voir threshold
+- bouton témoignage
+- hover photo recherche
+- voir les inputs du checkout name
+- voir "je ne souhaite pas d'autres activités"
+- select des pays
+- homme femme obligatoire
+- erreurs champs
+- faire les cards
+- bug mauvais avatar dans inline avatar
+- restyliser les wishlists
+
 
 NOTE
 - dropdown up rajouter fading
 - text dynamique sélectionne une vignette quand pas logué
-
-5/09
-> scroll top sur insurance
-> continuer avec la résa de "X" bug
-> opacité avatar
-> taille des avatars
 
 GLOBAL
 - input largeur max

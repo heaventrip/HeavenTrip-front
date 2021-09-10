@@ -86,7 +86,7 @@ import gsap from 'gsap'
 
 export default {
   name: 'HomeCarouselCard',
-  props: ['course', 'index'],
+  props: ['course', 'cards'],
   data() {
     return {
       animFinished: true,
@@ -107,6 +107,14 @@ export default {
     Tag
   },
   watch: {
+    cards: {
+      immediate: true,
+      handler(val) {
+        if (!val.length) return
+
+        this.setTimeline()
+      }
+    },
     course: {
       immediate: true,
       handler(val) {
@@ -131,13 +139,16 @@ export default {
       const tl = gsap
         .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
         .pause()
-        .to(this.$el, { width: '+=' + this.cardExpand + 'px' })
-        .to(this.$el, { x: '-=' + this.cardExpand / 2 + 'px' }, '<')
-        .to(staticInfos, { y: '-=45px' }, '<')
+        .to(this.$el, { width: '+=' + this.cardExpand })
+        .to(staticInfos, { y: '-=45' }, '<')
         .to(movingInfos, { y: '-=100' }, '<')
         .to(heartIcon, { autoAlpha: 1 }, '<')
+        .to(this.cards, { x: '+=70' }, '<')
       this.tl = tl
     },
+    // getCardsToSlide(cardId) {
+    //   let
+    // }
     addToWishlist() {
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
@@ -171,7 +182,7 @@ export default {
       .catch(() => (this.wishlisted = false))
   },
   mounted() {
-    this.setTimeline()
+    // this.setTimeline()
     this.cardBgImage = this.$el.querySelector('.card__bg-image')
     this.cardFooterPrice = this.$el.querySelector('.card__footer__price')
   }

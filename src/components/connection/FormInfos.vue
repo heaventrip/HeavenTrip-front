@@ -214,7 +214,6 @@ export default {
   computed: {
     finalUser() {
       let user = this.$props.user
-      console.log(this.avatarKey)
       return Object.assign(user, { gender: this.gender, description: this.description, avatarKey: this.avatarKey })
     }
   },
@@ -292,8 +291,7 @@ export default {
       this.showAvatarValidationButton = true
       this.showLoaderUploadImg = false
       this.avatarKey = jsonData.upload.public_id
-      localStorage.setItem('user.avatarId', jsonData.upload.public_id)
-      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${localStorage['user.avatarId']}.jpg`
+      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${this.avatarKey}.jpg`
       this.$parent.$forceUpdate()
     },
     /**

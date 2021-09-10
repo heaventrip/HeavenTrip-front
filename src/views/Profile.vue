@@ -307,13 +307,13 @@ export default {
       this.$axios
         .put('/users/current', { user: this.currUser })
         .then((res) => {
-          this.$notify({ type: 'success', text: 'Mis à jour avec succès' })
+          this.$notify({ group: 'app', type: 'success', text: 'Mis à jour avec succès' })
           this.currUser = res.data.user
           this.form1Modified = false
           this.form2Modified = false
           this.form3Modified = false
         })
-        .catch((err) => this.$notify({ type: 'error', text: err.response.data.message }))
+        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response.data.message }))
     },
     isLoggedIn() {
       return isLoggedIn()

@@ -32,7 +32,7 @@
                 <div v-show="showcontent">Mes envies</div>
               </transition>
               <transition name="fade-fast">
-                <div class="wishlists mt-3" v-if="showWishlist">
+                <div class="wishlists mt-3" v-if="showWishlist && wishlists.length">
                   <div class="d-flex align-items-center" v-for="wishlist in wishlists" :key="wishlist">
                     <a :href="`/product/${wishlist.id}`" class="text-reset wishlist-course py-2" :data-course="wishlist.id">&mdash;&nbsp;&nbsp;{{ wishlist.name }}</a>
                     <InlineSvg @click.stop="unwishlistCourse(wishlist.id)" class="ml-auto" :src="require('@/assets/svg/heart-filled.svg')" fill="#d82558" height="15" />
@@ -106,9 +106,6 @@ export default {
       wishlists: null,
       currUser: null
     }
-  },
-  provide: {
-    activeTab: 123
   },
   computed: {
     isDarkTheme() {
@@ -221,8 +218,9 @@ export default {
     unwishlistCourse(courseId) {
       this.$axios.delete('/wishlists', { params: { courseId: courseId } }).then(() => {
         this.wishlists = this.wishlists.filter((wl) => wl.id !== courseId)
-        this.fetchWishlists()
+        this.$emitter.emit('unwishlisted', courseId)
         this.$notify({ group: 'app', type: 'success', text: "Tu ne t'intéresses plus à ce stage" })
+        this.fetchWishlists()
       })
     },
     logOut() {

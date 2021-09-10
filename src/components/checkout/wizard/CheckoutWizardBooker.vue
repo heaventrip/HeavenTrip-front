@@ -109,14 +109,14 @@
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <input
+                    <CountrySelect
                       id="booker-country"
-                      type="text"
-                      name=""
-                      placeholder=" "
-                      class="form-control"
-                      :class="{ 'field-error': v$.localBooker.infos.country.$error }"
+                      style="position: relative; right: 3px"
                       v-model="localBooker.infos.country"
+                      :country="localBooker.infos.country"
+                      :countryName="true"
+                      topCountry="France"
+                      className="form-control"
                     />
                     <label for="booker-country">Pays*</label>
                     <div v-if="v$.localBooker.infos.country.$errors.length" class="field-error-message">{{ v$.localBooker.infos.country.$errors[0].$message }}</div>

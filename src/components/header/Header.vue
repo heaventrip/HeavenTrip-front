@@ -121,7 +121,6 @@ export default {
   props: ['course'],
   data() {
     return {
-      test: '123',
       navSticky: false,
       token: true,
       toggleSessions: false,

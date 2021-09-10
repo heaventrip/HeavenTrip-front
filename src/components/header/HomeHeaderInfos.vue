@@ -251,7 +251,6 @@ export default {
   display: inline-block;
   vertical-align: middle;
 }
-/* FIXME check rules in style.css that take precedence  */
 .divider {
   /* height: 1.3rem; */
   /* background-color: rgba(250, 250, 250, 0.35); */
