@@ -291,7 +291,7 @@ export default {
       this.showAvatarValidationButton = true
       this.showLoaderUploadImg = false
       this.avatarKey = jsonData.upload.public_id
-      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/avatars/${this.avatarKey}.jpg`
+      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/avatars/${this.avatarKey}.jpg`
       this.$parent.$forceUpdate()
     },
     /**

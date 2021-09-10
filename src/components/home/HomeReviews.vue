@@ -14,7 +14,7 @@
             class="sm-avatar rounded-circle"
             height="50"
             width="50"
-            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarId}.jpg`"
             type="button"
             :class="[activeAvatar === avatarId ? 'avatar-opacity' : '']"
           />
@@ -27,7 +27,7 @@
         <img
           height="240"
           width="240"
-          :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${activeReview?.user.avatarKey}.jpg`"
+          :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${activeReview?.user.avatarKey}.jpg`"
           class="reviews__user-avatar rounded-circle"
           rel="preload"
         />
@@ -82,7 +82,7 @@ export default {
         if (index > 3) return
 
         this.avatarKeys.push(review.user.avatarKey)
-        this.preloadImage(`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${review.user.avatarKey}.jpg`)
+        this.preloadImage(`https://res.cloudinary.com/heaventrip/image/upload/avatars/${review.user.avatarKey}.jpg`)
       })
       this.activeReview = val[0]
     }
