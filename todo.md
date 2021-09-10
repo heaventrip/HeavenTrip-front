@@ -174,6 +174,7 @@ TODO
 > WISHLIST!!!
 > le spinner recherche qui décale
 > dynamiser le delete d'un wishlist
+- unicité des wishlist
 - bloquer login après header product (router le header et le contenu)
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
 - newsletter

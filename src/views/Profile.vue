@@ -11,7 +11,7 @@
         <div class="left-panel__content p-4">
           <div class="d-flex justify-content-center align-items-center my-auto">
             <div style="position: relative; width: 40%" class="mr-3">
-              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`" />
+              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/avatars/${currUser?.avatarKey}.jpg`" />
               <!-- TODO install component to update avatar -->
               <div
                 v-if="false"

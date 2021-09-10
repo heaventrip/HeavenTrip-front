@@ -1,6 +1,6 @@
 <div class="d-none dropdown login-dropdown" :class="{ 'bg-white': toggleDropdown }">
   <button class="btn btn-block rounded-0 border-0" @click.prevent="toggleDropdown = !toggleDropdown">
-    <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatar_key}.jpg`" />
+    <img v-show="currUser?.avatar_key" class="login-img mr-2" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/avatars/${currUser?.avatar_key}.jpg`" />
     <span :class="{ 'text-dark': toggleDropdown }"
       >{{ currUser?.first_name }}
       <span class="l-name" style="margin-right: 40px"> .{{ currUser?.last_name?.[0] }} </span>
