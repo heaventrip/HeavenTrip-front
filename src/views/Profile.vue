@@ -10,7 +10,7 @@
         </div>
         <div class="left-panel__content p-4">
           <div class="d-flex justify-content-center align-items-center my-auto">
-            <div style="position: relative; width: 40%" class="mr-3">
+            <div style="position: relative; width: 20%" class="mr-3">
               <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${currUser?.avatarKey}.jpg`" />
               <!-- TODO install component to update avatar -->
               <div
@@ -414,12 +414,11 @@ label {
 .left-panel__content {
   width: inherit;
   position: fixed;
-  top: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 70vh;
+  height: 100vh;
   box-shadow: rgb(240, 240, 240) 0px 0px 6px;
 }
 .top-bar {
@@ -465,7 +464,7 @@ label {
 }
 .card {
   border: none;
-  box-shadow: rgb(240, 240, 240) 0px 0px 6px;
+  box-shadow: rgb(240, 240, 240) 0px 0px 2px;
   border-radius: 0 !important;
   width: 48%;
   padding: 1rem 2rem;

@@ -124,7 +124,7 @@
       </div>
     </div>
   </div>
-  <swiper :slidesPerView="3" :spaceBetween="1" :loop="true" :autoplay="true" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }">
+  <swiper :slidesPerView="3" :speed="1200" :spaceBetween="1" :loop="false" :autoplay="false" :pagination="{ type: 'fraction', renderFraction: renderSwiperFraction }">
     <swiper-slide
       ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/2Qjdhje2ymB9oOOvdO5NXD/e273c0ab52007962f987ac5a69fe2767/kitesurf-elgouna-hebergement2.jpg" @click="showImg(0)"
     /></swiper-slide>
