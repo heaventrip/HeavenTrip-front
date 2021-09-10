@@ -282,6 +282,7 @@ export default {
     this.$axios
       .get('/users/current')
       .then((res) => {
+        localStorage.setItem('user.avatarId', res.data.user.avatarKey)
         this.currUser = res.data.user
         this.$root.initialLoading = false
       })
