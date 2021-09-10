@@ -43,7 +43,7 @@ export default {
         grey: '#292f33',
         violet: '#5a3a5f'
       },
-      wishlistLoading: true
+      wishlistLoading: false
     }
   },
   computed: {

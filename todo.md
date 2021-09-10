@@ -181,14 +181,15 @@ TODO
 - icone tab product + voir threshold
 - bouton témoignage
 - hover photo recherche
-- voir les inputs du checkout name
-- voir "je ne souhaite pas d'autres activités"
-- select des pays
-- homme femme obligatoire
-- erreurs champs
+- icone tab product
+> voir les inputs du checkout name
+> voir "je ne souhaite pas d'autres activités"
+> select des pays
+> homme femme obligatoire
+> erreurs champs
 - faire les cards
-- bug mauvais avatar dans inline avatar
-- restyliser les wishlists
+> bug mauvais avatar dans inline avatar
+> restyliser les wishlists
 
 
 NOTE

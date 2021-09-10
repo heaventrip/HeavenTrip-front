@@ -299,7 +299,8 @@ export default {
       })
     },
     nextFormStep(step) {
-      let nextCard = document.querySelectorAll('.card-body')[step]
+      let cards = document.querySelectorAll('.card-body')
+      let nextCard = cards[step]
       nextCard.querySelector('.hidable').style.display = ''
       nextCard.removeAttribute('style') // remove opacity
 
@@ -308,7 +309,7 @@ export default {
         let buttons = document.querySelector('.nav-buttons-container')
         buttons.style.display = ''
       } else {
-        let followingCard = document.querySelectorAll('.card-body')[step + 1]
+        let followingCard = cards[step + 1]
         followingCard.style.display = ''
       }
 
@@ -425,7 +426,7 @@ export default {
     if (this.$props.needsReset) this.$nextTick(() => this.resetDisplay())
   },
   mounted() {
-    this.initFormDisplay('booker')
+    this.$nextTick(() => this.initFormDisplay('booker'))
   }
 }
 </script>

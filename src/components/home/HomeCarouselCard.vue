@@ -1,12 +1,16 @@
 <template>
   <div class="card-block" :style="{ width: cardWidth + 'px' }">
     <div class="shadow-effect overflow-hidden position-relative">
-      <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
+      <Tag style="position: absolute; top: 7%; right: 2rem; z-index: 1" color="grey" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
       <!-- <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" /> -->
-      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="Multi-activités" />
-      <div @click="addToWishlist" type="button" class="card-block__heart-icon" style="opacity: 0; position: absolute; top: 7%; right: 7%; z-index: 5">
-        <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" />
-        <InlineSvg v-else :src="require('@/assets/svg/heart-outline.svg')" height="20" />
+      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; right: 7rem; z-index: 1" color="pink" text="Multi-activités" />
+      <div
+        @click="addToWishlist"
+        type="button"
+        class="card-block__heart-icon d-flex"
+        style="position: absolute; z-index: 5; width: 80px; height: 80px; border-bottom-right-radius: 80%; background-color: rgba(255, 255, 255, 0.5)"
+      >
+        <InlineSvg :src="require('@/assets/svg/heart-filled.svg')" style="margin: 30% 30%" :fill="wishlisted ? '#d82558' : '#292f33'" height="20" />
       </div>
       <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
       <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->

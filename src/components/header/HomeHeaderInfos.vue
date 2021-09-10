@@ -100,7 +100,7 @@ import Tag from '@/components/elements/Tag.vue'
 
 export default {
   name: 'HeaderText',
-  emits: ['toggled-sessions'],
+  emits: ['toggled-sessions', 'set-course'],
   components: {
     Button,
     InlineProductInfos,
@@ -115,15 +115,22 @@ export default {
     }
   },
   watch: {
-    featuredCourse(val) {
-      if (!val.wishlistUsers) return
+    featuredCourse: {
+      immediate: true,
+      handler(val) {
+        if (!val) return
 
-      val.wishlistUsers.forEach((user, index) => {
-        // show max 5 avatars
-        if (index > 4) return
+        this.$emit('set-course', val)
 
-        this.avatarKeys.push(user.avatarKey)
-      })
+        if (!val.wishlistUsers) return
+
+        val.wishlistUsers.forEach((user, index) => {
+          // show max 5 avatars
+          if (index > 4) return
+
+          this.avatarKeys.push(user.avatarKey)
+        })
+      }
     }
   },
   methods: {

@@ -74,148 +74,150 @@
     </div>
   </div>
   <!-- NOTE ASSURANCES -->
-  <div class="card mb-0 rounded-0 border-0 px-5">
-    <div class="card-header border-0 p-0 d-flex">
-      <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center check-head py-4 flex-1">
-        <div style="font-size: 1rem; font-weight: 400">ASSURANCE DE :</div>
-        <div class="ml-auto text-right" style="font-size: 1rem; font-weight: 800">{{ booker.infos.firstName }} {{ booker.infos?.lastName }}</div>
-      </h6>
-    </div>
-    <div class="card-body border-top">
-      <p class="font-weight-500">Choisissez votre formule d’assurance :</p>
-      <div class="custom-radio-container assurance-radio-container">
-        <div class="row">
-          <div class="col-12 col-lg-6">
-            <div class="custom-control p-0 pb-3 mt-2">
-              <label class="" for="booker-ins1">
-                <input v-model="localBooker.booking.insurance" :value="{ ins1: 60 }" type="radio" id="booker-ins1" name="insurance_plan_booker" class="custom-control p-0-input" />
-                <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
-              </label>
+  <div class="insurance-cards">
+    <div class="insurance-card card mb-0 rounded-0 border-0 px-5">
+      <div class="card-header border-0 p-0 d-flex">
+        <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center check-head py-4 flex-1">
+          <div style="font-size: 1rem; font-weight: 400">ASSURANCE DE :</div>
+          <div class="ml-auto text-right" style="font-size: 1rem; font-weight: 800">{{ booker.infos.firstName }} {{ booker.infos?.lastName }}</div>
+        </h6>
+      </div>
+      <div class="hidable card-body border-top">
+        <p class="font-weight-500">Choisissez votre formule d’assurance :</p>
+        <div class="custom-radio-container assurance-radio-container">
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="custom-control p-0 pb-3 mt-2">
+                <label class="" for="booker-ins1">
+                  <input v-model="localBooker.booking.insurance" :value="{ ins1: 60 }" type="radio" id="booker-ins1" name="insurance_plan_booker" class="custom-control p-0-input" />
+                  <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
+                </label>
+              </div>
+              <ul class="pl-3 assurance-list font-weight-500">
+                <img class="mb-3" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" style="height: 12px" />
+                <li>Responsabilite civile</li>
+                <li>Rapatriement</li>
+                <li>Assistance medicale</li>
+                <li>Assurance bagages</li>
+                <li>Assistance voyage</li>
+              </ul>
             </div>
-            <ul class="pl-3 assurance-list font-weight-500">
-              <img class="mb-3" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" style="height: 12px" />
-              <li>Responsabilite civile</li>
-              <li>Rapatriement</li>
-              <li>Assistance medicale</li>
-              <li>Assurance bagages</li>
-              <li>Assistance voyage</li>
-            </ul>
-          </div>
-          <div class="col-12 col-lg-6">
-            <div class="custom-control p-0 pb-3 mt-2">
-              <label class="" for="booker-ins2">
-                <input v-model="localBooker.booking.insurance" :value="{ ins2: 60 }" type="radio" id="booker-ins2" name="insurance_plan_booker" class="custom-control p-0-input" />
-                <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
-              </label>
+            <div class="col-12 col-lg-6">
+              <div class="custom-control p-0 pb-3 mt-2">
+                <label class="" for="booker-ins2">
+                  <input v-model="localBooker.booking.insurance" :value="{ ins2: 60 }" type="radio" id="booker-ins2" name="insurance_plan_booker" class="custom-control p-0-input" />
+                  <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
+                </label>
+              </div>
+              <ul class="pl-3 assurance-list font-weight-500">
+                <img class="mb-3" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" style="height: 12px" />
+                <li>Responsabilite civile</li>
+                <li>Rapatriement</li>
+                <li>Assistance medicale</li>
+                <li>Assurance bagages</li>
+                <li>Assistance voyage</li>
+              </ul>
             </div>
-            <ul class="pl-3 assurance-list font-weight-500">
-              <img class="mb-3" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" style="height: 12px" />
-              <li>Responsabilite civile</li>
-              <li>Rapatriement</li>
-              <li>Assistance medicale</li>
-              <li>Assurance bagages</li>
-              <li>Assistance voyage</li>
-            </ul>
-          </div>
-          <div class="col-12">
-            <div class="custom-control p-0 pb-2 mt-4">
-              <label class="" for="booker-ins3">
-                <input v-model="localBooker.booking.insurance" :value="{ ins3: 0 }" type="radio" id="booker-ins3" name="insurance_plan_booker" class="custom-control p-0-input" />
-                <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
-              </label>
+            <div class="col-12">
+              <div class="custom-control p-0 pb-2 mt-4">
+                <label class="" for="booker-ins3">
+                  <input v-model="localBooker.booking.insurance" :value="{ ins3: 0 }" type="radio" id="booker-ins3" name="insurance_plan_booker" class="custom-control p-0-input" />
+                  <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
+                </label>
+              </div>
+              <p class="assurance-para font-weight-500">
+                Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en
+                cas d'urgence
+              </p>
             </div>
-            <p class="assurance-para font-weight-500">
-              Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en
-              cas d'urgence
-            </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card mb-0 rounded-0 border-0 px-5" v-for="(extraParticipant, index) in localExtraParticipants" :key="extraParticipant">
-    <div class="card-header border-0 p-0 d-flex">
-      <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center check-head py-4 flex-1">
-        <div style="font-size: 1rem; font-weight: 400">ASSURANCE DE :</div>
-        <div class="ml-auto text-right" style="font-size: 1rem; font-weight: 800">{{ extraParticipant.infos.firstName }} {{ extraParticipant.infos?.lastName }}</div>
-      </h6>
-    </div>
-    <div class="card-body border-top">
-      <p class="font-weight-500">Choisissez votre formule d’assurance :</p>
-      <div class="custom-radio-container assurance-radio-container">
-        <div class="row">
-          <div class="col-12 col-lg-5">
-            <div class="custom-control p-0 pb-2 mt-4">
-              <label class="" :for="`extraPart${index}-ins1`">
-                <input
-                  v-model="extraParticipant.booking.insurance"
-                  :value="{ ins1: 60 }"
-                  type="radio"
-                  :id="`extraPart${index}-ins1`"
-                  :name="`insurance_plan_extraPart${index}`"
-                  class="custom-control p-0-input"
-                />
-                <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
-                  Rapatriment 60&euro;/pers.
-                  <div class="ml-auto">
-                    <img class="" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" />
-                  </div>
-                </span>
-              </label>
+    <div class="insurance-card card mb-0 rounded-0 border-0 px-5" v-for="(extraParticipant, index) in localExtraParticipants" :key="extraParticipant">
+      <div class="card-header border-0 p-0 d-flex">
+        <h6 class="mb-0 text-uppercase font-weight-bold d-flex align-items-center check-head py-4 flex-1">
+          <div style="font-size: 1rem; font-weight: 400">ASSURANCE DE :</div>
+          <div class="ml-auto text-right" style="font-size: 1rem; font-weight: 800">{{ extraParticipant.infos.firstName }} {{ extraParticipant.infos?.lastName }}</div>
+        </h6>
+      </div>
+      <div class="hidable card-body border-top">
+        <p class="font-weight-500">Choisissez votre formule d’assurance :</p>
+        <div class="custom-radio-container assurance-radio-container">
+          <div class="row">
+            <div class="col-12 col-lg-5">
+              <div class="custom-control p-0 pb-2 mt-4">
+                <label class="" :for="`extraPart${index}-ins1`">
+                  <input
+                    v-model="extraParticipant.booking.insurance"
+                    :value="{ ins1: 60 }"
+                    type="radio"
+                    :id="`extraPart${index}-ins1`"
+                    :name="`insurance_plan_extraPart${index}`"
+                    class="custom-control p-0-input"
+                  />
+                  <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
+                    Rapatriment 60&euro;/pers.
+                    <div class="ml-auto">
+                      <img class="" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" />
+                    </div>
+                  </span>
+                </label>
+              </div>
+              <ul class="pl-3 assurance-list font-weight-500">
+                <li>Responsabilite civile</li>
+                <li>Rapatriement</li>
+                <li>Assistance medicale</li>
+                <li>Assurance bagages</li>
+                <li>Assistance voyage</li>
+              </ul>
             </div>
-            <ul class="pl-3 assurance-list font-weight-500">
-              <li>Responsabilite civile</li>
-              <li>Rapatriement</li>
-              <li>Assistance medicale</li>
-              <li>Assurance bagages</li>
-              <li>Assistance voyage</li>
-            </ul>
-          </div>
-          <div class="col-12 col-lg-6 offset-lg-1">
-            <div class="custom-control p-0 pb-3 mt-2 mb-4">
-              <label class="" :for="`extraPart${index}-ins2`">
-                <input
-                  v-model="extraParticipant.booking.insurance"
-                  :value="{ ins2: 60 }"
-                  type="radio"
-                  :id="`extraPart${index}-ins2`"
-                  :name="`insurance_plan_extraPart${index}`"
-                  class="custom-control p-0-input"
-                />
-                <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
-                  Rapatriment 60&euro;/pers.
-                  <div class="ml-auto">
-                    <img class="" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" />
-                  </div>
-                </span>
-              </label>
+            <div class="col-12 col-lg-6 offset-lg-1">
+              <div class="custom-control p-0 pb-3 mt-2 mb-4">
+                <label class="" :for="`extraPart${index}-ins2`">
+                  <input
+                    v-model="extraParticipant.booking.insurance"
+                    :value="{ ins2: 60 }"
+                    type="radio"
+                    :id="`extraPart${index}-ins2`"
+                    :name="`insurance_plan_extraPart${index}`"
+                    class="custom-control p-0-input"
+                  />
+                  <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
+                    Rapatriment 60&euro;/pers.
+                    <div class="ml-auto">
+                      <img class="" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" />
+                    </div>
+                  </span>
+                </label>
+              </div>
+              <ul class="pl-3 assurance-list font-weight-500">
+                <li>Responsabilite civile</li>
+                <li>Rapatriement</li>
+                <li>Assistance medicale</li>
+                <li>Assurance bagages</li>
+                <li>Assistance voyage</li>
+              </ul>
             </div>
-            <ul class="pl-3 assurance-list font-weight-500">
-              <li>Responsabilite civile</li>
-              <li>Rapatriement</li>
-              <li>Assistance medicale</li>
-              <li>Assurance bagages</li>
-              <li>Assistance voyage</li>
-            </ul>
-          </div>
-          <div class="col-12">
-            <div class="custom-control p-0 pb-3 mt-2 mb-4">
-              <label class="" :for="`extraPart${index}-ins3`">
-                <input
-                  v-model="extraParticipant.booking.insurance"
-                  :value="{ ins3: 0 }"
-                  type="radio"
-                  :id="`extraPart${index}-ins3`"
-                  :name="`insurance_plan_extraPart${index}`"
-                  class="custom-control p-0-input"
-                />
-                <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
-              </label>
+            <div class="col-12">
+              <div class="custom-control p-0 pb-3 mt-2 mb-4">
+                <label class="" :for="`extraPart${index}-ins3`">
+                  <input
+                    v-model="extraParticipant.booking.insurance"
+                    :value="{ ins3: 0 }"
+                    type="radio"
+                    :id="`extraPart${index}-ins3`"
+                    :name="`insurance_plan_extraPart${index}`"
+                    class="custom-control p-0-input"
+                  />
+                  <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Je suis déjà assuré&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&euro; </span>
+                </label>
+              </div>
+              <p class="assurance-para font-weight-500">
+                Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en
+                cas d'urgence
+              </p>
             </div>
-            <p class="assurance-para font-weight-500">
-              Si vous ne prenez pas d'assurances avec Heaven Trip, il vous sera demande de bien vouloir nous transmettre les informations de votre police d'assurance et les personnes a contacter en
-              cas d'urgence
-            </p>
           </div>
         </div>
       </div>
@@ -231,7 +233,8 @@ export default {
   data() {
     return {
       localBooker: this.$props.booker,
-      localExtraParticipants: this.$props.extraParticipants
+      localExtraParticipants: this.$props.extraParticipants,
+      currFormStep: 0
     }
   },
   computed: {
@@ -245,6 +248,10 @@ export default {
     participantsInsuranceFilled() {
       let insurancesArr = this.localExtraParticipants.map((part) => part.booking.insurance)
       return insurancesArr.every((el) => el)
+    },
+    currParticipantInsurance() {
+      if (!this.localExtraParticipants.length || this.currFormStep === 0) return
+      return this.localExtraParticipants[this.currFormStep - 1].booking.insurance
     }
   },
   watch: {
@@ -263,6 +270,14 @@ export default {
       handler(val) {
         this.$emit('updated-participants', val)
       }
+    },
+    'localBooker.booking.insurance': {
+      handler(val) {
+        if (val) this.nextFormStep()
+      }
+    },
+    currParticipantInsurance(val) {
+      if (val) this.nextFormStep()
     }
   },
   methods: {
@@ -273,7 +288,49 @@ export default {
       let activitiesExpArr = participant.booking.extraActivities.map((el) => Object.values(el)[0])
       let activitiesExp = activitiesExpArr.length ? activitiesExpArr.reduce((s, el) => s + el) : 0
       return roomExp + insuranceExp + equipmentExp + activitiesExp
+    },
+    initFormDisplay() {
+      let cards = Array.from(document.querySelectorAll('.insurance-card'))
+      let hiddenCards = cards.splice(1)
+      let buttons = document.querySelector('.nav-buttons-container')
+
+      buttons.style.display = 'none'
+      hiddenCards.forEach((card, index) => {
+        card.querySelector('.hidable').style.display = 'none'
+        card.style.filter = 'opacity(0.2)'
+
+        // only second card is half visible, others are hidden
+        if (index !== 0) card.style.display = 'none'
+      })
+    },
+    resetDisplay() {
+      this.cards.forEach((card) => {
+        card.removeAttribute('style')
+        card.querySelector('.hidable').style.display = ''
+      })
+    },
+    nextFormStep() {
+      this.currFormStep++
+
+      let cards = document.querySelectorAll('.insurance-card')
+      let nextCard = cards[this.currFormStep]
+
+      nextCard.querySelector('.hidable').style.display = ''
+      nextCard.removeAttribute('style') // remove opacity
+
+      if (this.currFormStep === this.localExtraParticipants.length + 1) {
+        let buttons = document.querySelector('.nav-buttons-container')
+        buttons.style.display = ''
+      } else {
+        let followingCard = cards[this.currFormStep + 1]
+        followingCard.style.display = ''
+      }
+
+      nextCard.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
     }
+  },
+  mounted() {
+    this.$nextTick(() => this.initFormDisplay())
   }
 }
 </script>
