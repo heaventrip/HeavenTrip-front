@@ -144,6 +144,7 @@
                         v-model="currUser.country"
                         :country="currUser.country"
                         :countryName="true"
+                        :removePlaceholder="true"
                         topCountry="France"
                         className="form-control"
                       />
