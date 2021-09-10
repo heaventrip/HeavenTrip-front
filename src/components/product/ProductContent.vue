@@ -18,12 +18,12 @@
       <div class="product-nav-tabs">
         <ProductNav :course="course" />
         <ul
-          style="height: 100px; background-color: white; font-weight: 400; padding: 0 2.3vw"
+          style="height: 100px; background-color: #fcfcfc; font-weight: 400; padding: 0 2.3vw"
           class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center"
           id="pills-tab"
           role="tablist"
         >
-          <li class="nav-item fg-0" role="presentation" type="button">
+          <li class="nav-item fg-0" style="background-color: white" role="presentation" type="button">
             <a @click.prevent="$emit('go-header')">
               <InlineSvg :src="require('@/assets/svg/small-card.svg')" height="20" />
             </a>
@@ -682,6 +682,8 @@ button {
 }
 
 .nav-link {
+  font-size: 0.8rem;
+  font-weight: 500;
   padding: 0.5rem !important;
 }
 .product-content {

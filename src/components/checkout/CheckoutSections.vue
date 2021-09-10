@@ -186,6 +186,7 @@ export default {
         ;['firstName', 'lastName', 'birthDate', 'phone', 'email', 'gender', 'country', 'city', 'street', 'postalCode'].forEach((attr) => {
           this.booker.infos[attr] = val[attr]
         })
+        this.avatarKey = val.avatarKey
       }
     },
     extraParticipants: {
