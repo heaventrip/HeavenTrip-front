@@ -289,7 +289,7 @@
                       <div class="">
                         <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers inscrits&nbsp;</span><span>aux sessions :</span> </span>
                         <div class="d-flex justify-content-between" style="margin-top: 0.3rem">
-                          <InlineAvatars :avatars="avatarKeys" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
+                          <InlineAvatars :avatars="getAvatarKeys(normalResult)" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         </div>
                       </div>
                     </div>
@@ -564,7 +564,7 @@ export default {
         value: '',
         openDirection: 'down',
         caret: false,
-        options: [],
+        options: [{ value: '', label: 'Toutes les thématiques' }],
         createTag: false
       },
       activitySelection: {
@@ -649,27 +649,19 @@ export default {
     selectionIsEmpty(val) {
       if (val) this.resetFilters()
     },
-    $route() {
-      if (this.$route.query) {
-        // this.submitSearchForm()
-      }
-    },
     normalResults(val) {
-      if (val.length) {
-        let arr = []
-        val.forEach((result) => {
-          // retrieve participants
-          result.wishlistUsers?.forEach((user) => this.avatarKeys.push(user.avatarKey))
+      if (!val.length) return
 
-          if (!result.sessions) return
+      let arr = []
+      val.forEach((result) => {
+        if (!result.sessions) return
 
-          result.sessions.forEach((session) => {
-            // push month of departure
-            arr.push(session.dateStart.split('-')[1])
-            this.sessionsArr = [...new Set(arr)]
-          })
+        result.sessions.forEach((session) => {
+          // push month of departure
+          arr.push(session.dateStart.split('-')[1])
+          this.sessionsArr = [...new Set(arr)]
         })
-      }
+      })
     },
     'countrySelection.value': {
       deep: true,
@@ -684,6 +676,9 @@ export default {
     }
   },
   methods: {
+    getAvatarKeys(course) {
+      return course.wishlistUsers?.map((user) => user.avatarKey)
+    },
     clearAndResearch() {
       this.clearFilters()
       this.updateSearch()
@@ -796,6 +791,32 @@ export default {
       this.$nextTick(function () {
         filterDropdown.scrollTo({ top: filterDropdown.scrollHeight * -1 })
       })
+    },
+    getQueryParams() {
+      let queryParams = this.$route.query
+
+      if (queryParams.theme) {
+        if (Array.isArray(queryParams.theme)) queryParams.theme.forEach((id) => this.$refs.themeMultiselect.select(id))
+        else this.$refs.themeMultiselect.select(queryParams.theme)
+      }
+      if (queryParams.activity) {
+        if (Array.isArray(queryParams.activity)) queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
+        else this.$refs.activityMultiselect.select(queryParams.activity)
+      }
+      if (queryParams.country) {
+        if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
+        else this.$refs.countryMultiselect.select(queryParams.country)
+      }
+      if (queryParams.spot) {
+        if (Array.isArray(queryParams.spot)) queryParams.spot.forEach((id) => this.$refs.spotMultiselect.select(id))
+        else this.$refs.spotMultiselect.select(queryParams.spot)
+      }
+      if (queryParams.level) {
+        if (Array.isArray(queryParams.level)) queryParams.level.forEach((id) => this.$refs.levelMultiselect.select(id))
+        else this.$refs.levelMultiselect.select(queryParams.level)
+      }
+
+      if (queryParams.length) this.submitSearchForm()
     }
   },
   created() {
@@ -805,60 +826,36 @@ export default {
       res.data.sportCategories.forEach((theme) => {
         this.themeSelection.options.push({ value: theme.id, label: theme.name })
       })
-
-      if (queryParams.theme) {
-        if (Array.isArray(queryParams.theme)) queryParams.theme.forEach((id) => this.$refs.themeMultiselect.select(id))
-        else this.$refs.themeMultiselect.select(queryParams.theme)
-      }
     })
     this.$axios.get('/sports').then((res) => {
       res.data.sports.forEach((sport) => {
         this.activitySelection.options.push({ value: sport.id, label: sport.name })
       })
-
-      if (queryParams.activity) {
-        if (Array.isArray(queryParams.activity)) queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
-        else this.$refs.activityMultiselect.select(queryParams.activity)
-      }
     })
     this.$axios.get('/countries').then((res) => {
       res.data.countries.forEach((country) => {
         this.countrySelection.options.push({ value: country.id, label: country.name })
       })
-
-      if (queryParams.country) {
-        if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
-        else this.$refs.countryMultiselect.select(queryParams.country)
-      }
     })
     this.$axios.get('/spots').then((res) => {
       res.data.spots.forEach((spot) => {
         this.spotSelection.options.push({ value: spot.id, label: spot.name })
       })
-
-      if (queryParams.spot) {
-        if (Array.isArray(queryParams.spot)) queryParams.spot.forEach((id) => this.$refs.spotMultiselect.select(id))
-        else this.$refs.spotMultiselect.select(queryParams.spot)
-      }
     })
     this.$axios.get('/levels').then((res) => {
       res.data.levels.forEach((level) => {
         this.levelSelection.options.push({ value: level.id, label: level.name })
       })
-
-      if (queryParams.level) {
-        if (Array.isArray(queryParams.level)) queryParams.level.forEach((id) => this.$refs.levelMultiselect.select(id))
-        else this.$refs.levelMultiselect.select(queryParams.level)
-      }
     })
-
-    if (queryParams) this.submitSearchForm()
   },
   mounted() {
+    this.$nextTick(() => this.getQueryParams)
+
     this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       tagContainer.closest('.filter-container').querySelector('.tags-container')?.append(tagContainer)
     })
+
     this.$root.initialLoading = false
   }
 }

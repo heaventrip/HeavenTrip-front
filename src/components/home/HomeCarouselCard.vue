@@ -5,12 +5,13 @@
       <!-- <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" /> -->
       <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; right: 7rem; z-index: 1" color="pink" text="Multi-activités" />
       <div
-        @click="addToWishlist"
+        @click.stop="addToWishlist"
         type="button"
         class="card-block__heart-icon d-flex"
         style="position: absolute; z-index: 5; width: 80px; height: 80px; border-bottom-right-radius: 80%; background-color: rgba(255, 255, 255, 0.5)"
       >
-        <InlineSvg :src="require('@/assets/svg/heart-filled.svg')" style="margin: 30% 30%" :fill="wishlisted ? '#d82558' : '#292f33'" height="20" />
+        <span v-show="wishlistLoading" id="loading"></span>
+        <InlineSvg :src="require('@/assets/svg/heart-filled.svg')" style="margin: 24px" :fill="wishlisted ? '#d82558' : '#292f33'" height="20" />
       </div>
       <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
       <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->
@@ -102,7 +103,8 @@ export default {
       cardExpand: 70,
       activeCard: '',
       tl: null,
-      cardsToSlide: ''
+      cardsToSlide: '',
+      wishlistLoading: false
     }
   },
   components: {
@@ -154,16 +156,25 @@ export default {
     //   let
     // }
     addToWishlist() {
+      if (this.wishlisted) {
+        this.$notify({ group: 'app', type: 'info', text: 'Tu es déjà intéressé(e) !' })
+        return
+      }
+
+      this.wishlistLoading = true
+
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-      if (!this.wishlisted)
-        this.$axios
-          .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
-          .then(() => (this.wishlisted = true))
-          .catch((err) => console.log(err))
-      else this.$axios.delete('/wishlists', { params: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
+      this.$axios
+        .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
+        .then(() => {
+          this.wishlisted = true
+          this.wishlistLoading = false
+          this.$notify({ group: 'app', type: 'success', text: 'Ce stage a été ajouté à vos envies !' })
+        })
+        .catch((err) => (this.wishlistLoading = false))
     },
     biggerCard() {
       this.hovered = true
@@ -186,6 +197,10 @@ export default {
       .catch(() => (this.wishlisted = false))
   },
   mounted() {
+    this.$emitter.on('unwishlisted', (courseId) => {
+      if (this.$props.course.id === courseId) this.wishlisted = false
+    })
+
     // this.setTimeline()
     this.cardBgImage = this.$el.querySelector('.card__bg-image')
     this.cardFooterPrice = this.$el.querySelector('.card__footer__price')
@@ -297,5 +312,27 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+/* SPINNER */
+#loading {
+  margin: 13px 16px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
