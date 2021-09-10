@@ -174,6 +174,8 @@ TODO
 > WISHLIST!!!
 > le spinner recherche qui décale
 > dynamiser le delete d'un wishlist
+- enlever les hover sur les wishlists
+- logo heaventrip
 - unicité des wishlist
 - bloquer login après header product (router le header et le contenu)
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
@@ -183,6 +185,8 @@ TODO
 - bouton témoignage
 - hover photo recherche
 - icone tab product
+- voir ce qui est autorisé en logué ou pas
+- rediriger vers le 
 > voir les inputs du checkout name
 > voir "je ne souhaite pas d'autres activités"
 > select des pays
