@@ -1,16 +1,4 @@
 <template>
-  <!-- <div class="preview-card border-0 d-none align-items-center text-uppercase flex-row bg-dark text-white px-5 rounded-lg mb-5">
-    <span class="font-weight-light mr-5 ml-2">vous êtes {{ $parent.partipantsNb }} trippers</span>
-    <ul class="list-unstyled mb-0 font-weight-500 name-list d-flex">
-      <li>marion</li>
-      <li>
-        axel
-        <a href="#"><i class="fa fa-times-circle ml-2 align-baseline text-white"></i></a>
-      </li>
-    </ul>
-    <a href="#" class="ml-auto font-weight-light text-reset">modifier</a>
-  </div> -->
-  <!-- TODO séparer les participants -->
   <div class="card card-header border-0 p-0 flex-row align-items-center pb-3" style="display: flex; flex-wrap: wrap; outline: 5px solid white" :style="{ zIndex: $windowWidth <= 1366 ? '' : '15' }">
     <div class="position-relative">
       <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase pr-4">Complète la réservation de :</h6>
@@ -102,7 +90,7 @@
         <h6 class="font-weight-bold">Activites en +</h6>
         <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
         <div class="hidable">
-          <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+          <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0" :style="localBooker.booking.noExtraActivities ? 'filter: opacity(0.5)' : ''">
             <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
               <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
                 <input
@@ -128,12 +116,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="border-top d-none">
-    <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
-    <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-    <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
-    <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
-    </div> -->
       <div class="card-body border-top">
         <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
         <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
@@ -224,7 +206,7 @@
             <h6 class="font-weight-bold">Activites en +</h6>
             <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
             <div class="hidable">
-              <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+              <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0" :style="localExtraParticipants[currFormParticipant].booking.noExtraActivities ? 'filter: opacity(0.5)' : ''">
                 <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
                   <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
                     <input
@@ -251,12 +233,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="card-body border-top d-none">
-      <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
-      <p class="font-weight-500">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-      <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
-      <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
-      </div> -->
           <div class="card-body border-top">
             <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
             <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
@@ -387,27 +363,27 @@ export default {
       if (!this.localExtraParticipants.length) return
       return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities || this.localExtraParticipants[this.currFormParticipant].booking.extraActivities.length
     },
+    extraParticipantNoExtraActivities() {
+      if (!this.localExtraParticipants.length) return
+      return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities
+    },
     isLastParticipant() {
       return this.extraParticipants.length && this.currForm === 'extraParticipant' && this.currFormParticipant === this.extraParticipants.length - 1
     }
   },
-  activated() {
-    if (this.$props.needsReset) this.$nextTick(() => this.resetDisplay())
-  },
   watch: {
-    bookerRoomFilled: {
-      handler(val) {
-        if (val) this.nextFormStep(1)
-      }
+    bookerRoomFilled(val) {
+      if (val) this.nextFormStep(1)
     },
-    'localBooker.booking.equipmentRental': {
-      handler(val) {
-        if (val) this.nextFormStep(2)
-      }
+    bookerEquipmentFilled(val) {
+      if (val) this.nextFormStep(2)
+    },
+    bookerActivitiesFilled(val) {
+      if (val) this.nextFormStep(3)
     },
     'localBooker.booking.noExtraActivities': {
       handler(val) {
-        if (val) this.nextFormStep(3)
+        if (val) this.localBooker.booking.extraActivities = []
       }
     },
     extraParticipantRoomFilled(val) {
@@ -418,6 +394,9 @@ export default {
     },
     extraParticipantActivitiesFilled(val) {
       if (val) this.nextFormStep(3)
+    },
+    extraParticipantNoExtraActivities(val) {
+      if (val) this.localExtraParticipants[this.currFormParticipant].booking.extraActivities = []
     },
     filled(val) {
       if (val) this.$emit('complete', true)
@@ -441,6 +420,9 @@ export default {
         this.$emit('updated-isLastParticipant', val)
       }
     }
+  },
+  activated() {
+    if (this.$props.needsReset) this.$nextTick(() => this.resetDisplay())
   },
   mounted() {
     this.initFormDisplay('booker')
