@@ -124,11 +124,13 @@ export default {
 
         if (!val.wishlistUsers) return
 
+        let currUserAvatar = localStorage.getItem('user.avatarId')
+
         val.wishlistUsers.forEach((user, index) => {
           // show max 5 avatars
           if (index > 4) return
 
-          this.avatarKeys.push(user.avatarKey)
+          if (user.avatarKey !== currUserAvatar) this.avatarKeys.push(user.avatarKey)
         })
       }
     }

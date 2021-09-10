@@ -10,7 +10,7 @@
             style="border-radius: 50%"
             :style="`border: 1px solid ${avatarBorderStyle}`"
             fluid
-            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${currUser?.avatarKey}.jpg`"
           />
           <div class="name-block d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="`color: ${nameStyle}`">
             <div>{{ currUser?.firstName }}</div>
@@ -282,6 +282,7 @@ export default {
     this.$axios
       .get('/users/current')
       .then((res) => {
+        localStorage.setItem('user.avatarId', res.data.user.avatarKey)
         this.currUser = res.data.user
         this.$root.initialLoading = false
       })

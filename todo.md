@@ -173,20 +173,15 @@ TODO
 > bouton se connecter
 > WISHLIST!!!
 > le spinner recherche qui décale
-<<<<<<< HEAD
-- dynamiser le delete d'un wishlist
-=======
 > dynamiser le delete d'un wishlist
+- unicité des wishlist
 - bloquer login après header product (router le header et le contenu)
->>>>>>> jonas
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
 - newsletter
 - mails
 - icone tab product + voir threshold
 - bouton témoignage
 - hover photo recherche
-<<<<<<< HEAD
-=======
 - icone tab product
 > voir les inputs du checkout name
 > voir "je ne souhaite pas d'autres activités"
@@ -196,9 +191,6 @@ TODO
 - faire les cards
 > bug mauvais avatar dans inline avatar
 > restyliser les wishlists
-
->>>>>>> jonas
-
 NOTE
 - dropdown up rajouter fading
 - text dynamique sélectionne une vignette quand pas logué

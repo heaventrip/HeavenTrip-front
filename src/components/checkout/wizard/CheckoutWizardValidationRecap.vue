@@ -13,7 +13,7 @@
           aria-controls="tripperBooker"
         >
           <div class="participant-img-container position-relative">
-            <img v-if="avatarKey" class="participant-img mr-3" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/h_218/v1624841583/${avatarKey}.jpg`" />
+            <img v-if="avatarKey" class="participant-img mr-3" fluid :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`" />
             <InlineSvg v-else class="mr-3" :src="require('@/assets/svg/avatar-empty.svg')" height="70" fill="#292f33" />
             <span class="participant-check"></span>
           </div>

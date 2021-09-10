@@ -19,7 +19,7 @@ export default {
   props: ['user', 'content', 'createdAt', 'position', 'coloring'],
   computed: {
     url() {
-      return `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${this.user?.avatarKey || 'empty'}.jpg`
+      return `https://res.cloudinary.com/heaventrip/image/upload/avatars/${this.user?.avatarKey || 'empty'}.jpg`
     }
   },
   methods: {

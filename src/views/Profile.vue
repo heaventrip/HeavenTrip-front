@@ -10,8 +10,13 @@
         </div>
         <div class="left-panel__content p-4">
           <div class="d-flex justify-content-center align-items-center my-auto">
+<<<<<<< HEAD
             <div style="position: relative; width: 20%" class="mr-3">
               <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`" />
+=======
+            <div style="position: relative; width: 40%" class="mr-3">
+              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${currUser?.avatarKey}.jpg`" />
+>>>>>>> dev
               <!-- TODO install component to update avatar -->
               <div
                 v-if="false"
