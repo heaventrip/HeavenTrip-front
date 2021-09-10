@@ -1,11 +1,11 @@
 # home
 > ouvrir connexion menu au hover + rotate icon
-- animatique externe des cards @mousevents
+> animatique externe des cards @mousevents
 >>> animatique des reviews
 > animatique interne des cards
 
-- ajouter fading sur les apparitions
-- revoir les liens
+> ajouter fading sur les apparitions
+> revoir les liens
 > gérer les transis ENTRE items et enlever le trou entre les items + voir bottom bar 66deg (aspect continu sans saut)
 
 # product
@@ -16,7 +16,7 @@
 > (- formulaire créer session module booking (sur mois sans session ou ac sessions complètes))
 
 ### IMPERATIF V1 ###
- gérer les transitions et chargements de pages/composants etc.
+> gérer les transitions et chargements de pages/composants etc.
 > mécanique intégration des photos selon tags
 > résolution des URLs
  gestion des origines pour mailerlite (newsletter, signup, wishlist, etc)
@@ -173,13 +173,31 @@ TODO
 > bouton se connecter
 > WISHLIST!!!
 > le spinner recherche qui décale
+<<<<<<< HEAD
 - dynamiser le delete d'un wishlist
+=======
+> dynamiser le delete d'un wishlist
+- bloquer login après header product (router le header et le contenu)
+>>>>>>> jonas
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
 - newsletter
 - mails
 - icone tab product + voir threshold
 - bouton témoignage
 - hover photo recherche
+<<<<<<< HEAD
+=======
+- icone tab product
+> voir les inputs du checkout name
+> voir "je ne souhaite pas d'autres activités"
+> select des pays
+> homme femme obligatoire
+> erreurs champs
+- faire les cards
+> bug mauvais avatar dans inline avatar
+> restyliser les wishlists
+
+>>>>>>> jonas
 
 NOTE
 - dropdown up rajouter fading

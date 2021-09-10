@@ -12,7 +12,7 @@
                 :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
                 style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
               />
-              <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
+              <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem; margin-bottom: 1rem" fill="#292f33" />
               <h4 class="head font-weight-bold text-uppercase">
                 {{ localBooker.infos.firstName || 'Participant' }}
                 <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"
@@ -91,6 +91,7 @@
                         Homme
                       </div>
                     </div>
+                    <div v-if="v$.localBooker.infos.gender.$errors.length" class="field-error-message">{{ v$.localBooker.infos.gender.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
@@ -109,14 +110,15 @@
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <input
+                    <CountrySelect
                       id="booker-country"
-                      type="text"
-                      name=""
-                      placeholder=" "
-                      class="form-control"
-                      :class="{ 'field-error': v$.localBooker.infos.country.$error }"
+                      style="position: relative; right: 3px"
                       v-model="localBooker.infos.country"
+                      :country="localBooker.infos.country"
+                      :countryName="true"
+                      :removePlaceholder="true"
+                      topCountry="France"
+                      className="form-control"
                     />
                     <label for="booker-country">Pays*</label>
                     <div v-if="v$.localBooker.infos.country.$errors.length" class="field-error-message">{{ v$.localBooker.infos.country.$errors[0].$message }}</div>
@@ -175,7 +177,7 @@
 </template>
 
 <script>
-import { required, helpers } from '@vuelidate/validators'
+import { required, helpers, numeric } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 
 export default {
@@ -188,7 +190,7 @@ export default {
   data() {
     return {
       currUser: null,
-      allowForm: false,
+      allowForm: '',
       localBooker: this.$props.booker
     }
   },
@@ -206,7 +208,8 @@ export default {
             required: helpers.withMessage('Ce champ est requis', required)
           },
           phone: {
-            required: helpers.withMessage('Ce champ est requis', required)
+            required: helpers.withMessage('Ce champ est requis', required),
+            numeric: helpers.withMessage('Numéro invalide', numeric)
           },
           gender: {
             required: helpers.withMessage('Ce champ est requis', required)
@@ -239,6 +242,8 @@ export default {
       handler(error) {
         if (!error) this.$emit('complete', true)
         else this.$emit('complete', false)
+
+        this.allowForm ||= error
       }
     }
   },

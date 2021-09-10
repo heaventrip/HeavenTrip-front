@@ -33,7 +33,7 @@
     <TheNavSticky v-if="navSticky" @changed-tab="setActiveTab" />
     <TheNav v-else :activeTab="activeTab" @left-all-tabs="leftAllTabs" @changed-tab="setActiveTab" />
     <keep-alive>
-      <component :is="'HomeHeaderInfos'" @toggled-sessions="toggleSessions = true" v-if="currentRoute('Home') && !navIsActive"></component>
+      <component :is="'HomeHeaderInfos'" v-if="currentRoute('Home') && !navIsActive" @set-course="setCourse" @toggled-sessions="toggleSessions = true"></component>
       <component :is="'ProductHeaderInfos'" v-else-if="currentRoute('Product') && !navIsActive" ref="productHeaderInfos" :course="course"></component>
       <component :is="'SearchHeaderInfos'" v-else-if="currentRoute('Search') && !navIsActive"></component>
     </keep-alive>
@@ -118,10 +118,9 @@ export default {
     ProductHeaderInfos,
     SearchHeaderInfos
   },
-  props: ['course'],
   data() {
     return {
-      test: '123',
+      course: null,
       navSticky: false,
       token: true,
       toggleSessions: false,
@@ -147,6 +146,9 @@ export default {
     }
   },
   methods: {
+    setCourse(course) {
+      this.course = course
+    },
     currentRoute(route) {
       // NOTE revoir condition avec /login
       if (this.$route.name === 'Account') return this.modalBackgroundView === route

@@ -55,6 +55,7 @@
                 :avatar-key="avatarKey"
                 :extra-participants="extraParticipants"
                 :booker="booker"
+                ref="participants"
               ></component>
             </keep-alive>
             <keep-alive>
@@ -203,7 +204,6 @@ export default {
       immediate: true,
       handler(val) {
         this.activeStep = 'booker'
-        console.log(val)
       }
     },
     activeStep: {
@@ -351,6 +351,8 @@ export default {
     },
     async nextStep() {
       if (!this.isComplete(this.activeStep)) {
+        if (this.activeStep === 'participants') this.$refs.participants.touch()
+
         this.$notify({ group: 'app', type: 'info', text: 'Tous les champs doivent être renseignés !' })
         return
       }

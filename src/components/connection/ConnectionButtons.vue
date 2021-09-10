@@ -27,15 +27,20 @@
               </transition>
             </div>
             <div style="width: 70%; border-bottom: 1px dashed #f1f1f1; margin-left: 1.8rem"></div>
-            <div @click="toggleWishlist" :class="[isLightTheme === true ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+            <div @click="toggleWishlist" :class="[isDarkTheme === true ? 'menu-item-dark' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <transition name="fade-delayed">
                 <div v-show="showcontent">Mes envies</div>
               </transition>
               <transition name="fade-fast">
-                <div class="wishlists mt-3" v-if="showWishlist">
+                <div class="wishlists mt-3" v-if="showWishlist && wishlists?.length">
                   <div class="d-flex align-items-center" v-for="wishlist in wishlists" :key="wishlist">
-                    <a :href="`/product/${wishlist.id}`" class="text-reset wishlist-course py-2" :data-course="wishlist.id">&mdash;&nbsp;&nbsp;{{ wishlist.name }}</a>
-                    <InlineSvg @click.stop="unwishlistCourse(wishlist.id)" class="ml-auto" :src="require('@/assets/svg/heart-filled.svg')" fill="#d82558" height="15" />
+                    <InlineSvg class="mr-2" :src="require('@/assets/svg/heart-filled.svg')" fill="#d82558" height="12" />
+                    <a :href="`/product/${wishlist.id}`" class="py-2 mr-auto" :class="[isDarkTheme === true ? 'wishlist-course-dark' : 'wishlist-course']" :data-course="wishlist.id">{{
+                      wishlist.name
+                    }}</a>
+                    <div @click="unwishlistCourse(wishlist.id)">
+                      <i class="wishlist-course__delete-btn fas fa-times mr-2"></i>
+                    </div>
                   </div>
                 </div>
               </transition>
@@ -106,9 +111,6 @@ export default {
       wishlists: null,
       currUser: null
     }
-  },
-  provide: {
-    activeTab: 123
   },
   computed: {
     isDarkTheme() {
@@ -221,8 +223,9 @@ export default {
     unwishlistCourse(courseId) {
       this.$axios.delete('/wishlists', { params: { courseId: courseId } }).then(() => {
         this.wishlists = this.wishlists.filter((wl) => wl.id !== courseId)
-        this.fetchWishlists()
+        this.$emitter.emit('unwishlisted', courseId)
         this.$notify({ group: 'app', type: 'success', text: "Tu ne t'intéresses plus à ce stage" })
+        this.fetchWishlists()
       })
     },
     logOut() {
@@ -291,6 +294,15 @@ export default {
 </script>
 
 <style scoped>
+a.wishlist-course,
+a.wishlist-course-dark {
+  color: inherit;
+}
+a.wishlist-course:hover,
+a.wishlist-course-dark:hover,
+.wishlist-course__delete:hover {
+  color: #7c7c7c;
+}
 .dropdown-block {
   position: absolute;
   z-index: 2;

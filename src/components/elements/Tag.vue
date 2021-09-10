@@ -50,7 +50,7 @@ export default {
   font-family: Oswald, sans-serif;
   font-weight: 500;
   letter-spacing: 0.2px;
-  /* font-size: 11px; FIXME add props */
+  /* font-size: 11px;
   font-size: 13px;
   text-transform: uppercase;
   /* position: relative;

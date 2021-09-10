@@ -22,45 +22,9 @@
       </div>
     </div>
     <div class="container-fluid">
-      <div class="d-flex justify-content-end" style="margin-right: 10vw">
-        <ul class="nav nav-pills mb-0 justify-content-center" id="pills-tab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link multiactivity-item" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Multi-activités</a>
-          </li>
-        </ul>
-      </div>
       <div class="d-flex align-items-center mt-4" style="margin-bottom: 5rem">
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <div class="cards-slider d-flex overflow-hidden">
-              <div
-                v-for="(course, index) in courses"
-                :key="course.id"
-                :style="`transform: translateX(${index * (cardWidth + cardMargin)}px)`"
-                @mouseenter="enterCard(index)"
-                @mouseleave="leaveCard(index)"
-              >
-                <HomeCarouselCard :index="index" :course="course" :ref="`card${index}`" />
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-            <div class="cards-slider d-flex overflow-hidden">
-              <!-- <div
-                v-for="(course, index) in courses.filter((el) => el.multisport)"
-                :key="course.id"
-                :style="`transform: translateX(${index * (cardWidth + cardMargin)}px)`"
-                @mouseenter="enterCard((index + 1) * 10)"
-                @mouseleave="leaveCard((index + 1) * 10)"
-              >
-                <HomeCarouselCard :index="(index + 1) * 10" :course="course" :ref="`card${(index + 1) * 10}`" />
-              </div> -->
-            </div>
-          </div>
-          <div class="d-flex align-items-center justify-content-end" style="margin-right: 5vw">
+          <div class="d-flex align-items-center" style="margin-right: 5vw; margin-left: 4vw">
             <div class="slider-buttons d-flex">
               <div @click="slideLeft" type="button" style="">
                 <svg xmlns="http://www.w3.org/2000/svg" class="slider-buttons__left" width="50" viewBox="0 0 40 40" fill="#292f33">
@@ -98,12 +62,44 @@
                 ><span class="slider-counter__total">{{ nbOfCards }}</span></sup
               >
             </div>
-            <div class="ml-4 w-25">
-              <div class="text-uppercase font-weight-bold activites-link d-block text-right text-decoration-none">
-                <span class="bg-white position-relative pl-4"
-                  ><a class="text-dark" href="">toutes les activites</a> <img class="ml-1 align-baseline" fluid :src="require('@/assets/images/ARROW_EXIT.png')"
-                /></span>
+            <div style="width: 20%; height: 1px; background-color: #ebebeb"></div>
+            <ul class="nav nav-pills mb-0 justify-content-center" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link multiactivity-item" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"
+                  >Multi-activités</a
+                >
+              </li>
+            </ul>
+            <div class="all-courses-btn">Tous nos stages&nbsp;&nbsp;&nbsp;<i class="fas fa-long-arrow-alt-right"></i></div>
+          </div>
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="cards-slider d-flex overflow-hidden">
+              <div
+                v-for="(course, index) in courses"
+                :key="course.id"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin)}px)`"
+                @mouseenter="enterCard(index)"
+                @mouseleave="leaveCard(index)"
+                @click="$router.to({ name: 'Product', params: { id: course.id } })"
+              >
+                <HomeCarouselCard :cards="cards?.slice(index + 1)" :course="course" :ref="`card${index}`" />
               </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="cards-slider d-flex overflow-hidden">
+              <!-- <div
+                v-for="(course, index) in courses.filter((el) => el.multisport)"
+                :key="course.id"
+                :style="`transform: translateX(${index * (cardWidth + cardMargin)}px)`"
+                @mouseenter="enterCard((index + 1) * 10)"
+                @mouseleave="leaveCard((index + 1) * 10)"
+              >
+                <HomeCarouselCard :index="(index + 1) * 10" :course="course" :ref="`card${(index + 1) * 10}`" />
+              </div> -->
             </div>
           </div>
         </div>
@@ -153,9 +149,6 @@ export default {
     }
   },
   computed: {
-    windowWrap() {
-      return gsap.utils.wrap((this.cardWidth + this.cardMargin) * -1, (this.cardWidth + this.cardMargin) * (this.nbOfCards - 1))
-    },
     firstCardIndex() {
       return this.cardIndexCounter % this.nbOfCards
     }
@@ -188,23 +181,17 @@ export default {
       this.leftSlideTl = gsap.to(this.cards, {
         paused: true,
         x: `-=${this.cardWidth + this.cardMargin}`,
-        duration: 1,
+        duration: 0.8,
         ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
         onStart: () => {
           this.animPlaying = true
         },
         onComplete: () => {
           this.cardIndexCounter++
-          this.cards.push(this.cards.shift())
-          this.initLeftSlideTl()
-          this.initRightSlideTl()
           this.animPlaying = false
         },
-        modifiers: {
-          x: (x) => this.windowWrap(parseFloat(x)) + 'px'
-        },
         stagger: {
-          each: 0.08,
+          each: 0.06,
           from: 'start'
         }
       })
@@ -214,30 +201,28 @@ export default {
       this.rightSlideTl = gsap.to(this.cards, {
         paused: true,
         x: `+=${this.cardWidth + this.cardMargin}`,
-        duration: 1,
+        duration: 0.8,
         ease: CustomEase.create('custom', 'M0,0,C0.31,0.024,0.393,0.414,0.436,0.548,0.558,0.934,0.818,1.001,1,1'),
         onStart: () => {
           this.animPlaying = true
         },
         onComplete: () => {
           this.cardIndexCounter--
-          this.cards.unshift(this.cards.pop())
-          this.initLeftSlideTl()
-          this.initRightSlideTl()
           this.animPlaying = false
         },
-        modifiers: {
-          x: (x) => this.windowWrap(parseFloat(x)) + 'px'
+        stagger: {
+          each: 0.06,
+          from: 'end'
         }
       })
     },
     slideLeft() {
       this.counterSlideDir = 'vertical-slide-up'
-      if (!this.animPlaying) this.leftSlideTl.play()
+      if (!this.animPlaying) this.leftSlideTl.invalidate().restart()
     },
     slideRight() {
       this.counterSlideDir = 'vertical-slide-down'
-      if (!this.animPlaying) this.rightSlideTl.play()
+      if (!this.animPlaying) this.rightSlideTl.invalidate().restart()
     }
   },
   updated() {
@@ -264,7 +249,7 @@ export default {
   min-height: 420px;
 }
 .slider-buttons {
-  margin-right: 5%;
+  margin-right: 3%;
 }
 .slider-buttons__left {
   margin-right: 1.5rem;
@@ -335,5 +320,19 @@ export default {
 }
 .multiactivity-item:hover {
   color: #292f33;
+}
+.all-courses-btn {
+  margin-left: auto;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid #292f33;
+}
+.all-courses-btn:hover {
+  background-color: #292f33;
+  color: white;
 }
 </style>
