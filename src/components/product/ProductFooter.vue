@@ -198,8 +198,8 @@
           style="padding: 0 3rem; border-left: 1px solid rgba(255, 255, 255, 0.1)"
           :type="availSessions.length ? 'button' : ''"
         >
-          <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
-            <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
+          <div class="d-flex justify-content-center align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
+            <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start" style="margin-right: 3rem">
               <div v-if="choseBtn" class="text-right" :class="{ 'text--grey': !showSessions }">
                 <div class="pb-0">
                   <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />

@@ -1,6 +1,6 @@
 <template>
   <div class="message" :class="position">
-    <img class="profil-img" src="@/assets/images/ui_faces/4.jpg" />
+    <img class="profil-img" :src="url" />
     <div class="message-container">
       <div class="message-header">
         <div class="profil-name">{{ user?.firstName }} {{ user?.lastName }}</div>
@@ -17,9 +17,9 @@
 <script>
 export default {
   props: ['user', 'content', 'createdAt', 'position', 'coloring'],
-  data() {
-    return {
-      url: `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${this.$props.user?.avatarId}.jpg`
+  computed: {
+    url() {
+      return `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${this.user?.avatarKey || 'empty'}.jpg`
     }
   },
   methods: {

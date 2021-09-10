@@ -25,7 +25,7 @@
             <div class="position-relative multi-select-filter">
               <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                 <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
-                <span v-if="countrySelection.value" class="search-bar__filter__name">{{ countrySelection.options.find((el) => el.value === countrySelection.value).label }}</span>
+                <span v-if="countrySelection.length" class="search-bar__filter__name">{{ countrySelection.options.find((el) => el.value === countrySelection.value).label }}</span>
                 <span v-else class="search-bar__filter__name">Pays</span>
               </div>
               <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
@@ -49,9 +49,9 @@
           <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
         </button>
         <button @click.prevent="goSearchPage" class="bttn-search btn text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
-          <div class="d-none d-lg-inline-block mb-1">
+          <div class="d-none d-lg-inline-block mb-1" style="position: relative">
+            Rechercher
             <span id="loading" v-show="fetching"></span>
-            rechercher
           </div>
           <div v-show="resultsNb" style="font-size: 0.8rem; font-weight: 300; text-transform: none">{{ resultsNb }} résultats</div>
         </button>
@@ -64,7 +64,7 @@
           text-color="#fff"
           style="transform: translateY(3px)"
           height="auto"
-          v-if="!!monthSelection.value.length || !!activitySelection.value.length"
+          v-if="monthSelection.value.length || activitySelection.value.length || countrySelection.value.length"
         />
       </div>
     </div>
@@ -128,10 +128,12 @@ export default {
       countrySelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
-        value: '',
+        value: [],
+        mode: 'tags',
         openDirection: 'top',
         caret: false,
-        options: []
+        options: [],
+        createTag: true
       },
       resultsNb: 0
     }
@@ -163,6 +165,17 @@ export default {
         else if (!this.monthSelection.value.length) this.slideUpSearchBar.reverse()
       }
     },
+    'countrySelection.value': {
+      deep: true,
+      handler(val) {
+        if (val.length) this.fetchData()
+
+        if (window.scrollY > 25) return
+
+        if (val.length) this.slideUpSearchBar.play()
+        else if (!this.countrySelection.value.length) this.slideUpSearchBar.reverse()
+      }
+    },
     'monthSelection.value': {
       deep: true,
       handler(val) {
@@ -184,7 +197,7 @@ export default {
       this.fetching = false
     },
     goSearchPage() {
-      this.$router.push({ name: 'Search', query: { month: this.monthSelection.value, activity: this.activitySelection.value } })
+      this.$router.push({ name: 'Search', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
     },
     fetchData() {
       this.filtered.activityArr = []
@@ -245,7 +258,7 @@ export default {
       this.resetFilters()
       this.fetching = false
     },
-    fetchCountries() {
+    async fetchCountries() {
       let arr = new Array()
       return new Promise((resolve, _) => {
         this.$axios.get('/countries').then((res) => {
@@ -256,7 +269,7 @@ export default {
         })
       })
     },
-    fetchSports() {
+    async fetchSports() {
       let arr = new Array()
       return new Promise((resolve, _) => {
         this.$axios.get('/sports').then((res) => {
@@ -269,7 +282,7 @@ export default {
     }
   },
   mounted() {
-    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
+    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=30', ease: 'power4.inOut' })
 
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').prepend(tagContainer)
@@ -327,6 +340,8 @@ export default {
 }
 /* SPINNER */
 #loading {
+  position: absolute;
+  top: 3px;
   display: inline-block;
   width: 15px;
   height: 15px;

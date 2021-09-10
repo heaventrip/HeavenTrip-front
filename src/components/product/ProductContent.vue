@@ -23,8 +23,13 @@
           id="pills-tab"
           role="tablist"
         >
+          <li class="nav-item fg-0" role="presentation" type="button">
+            <a @click.prevent="$emit('go-header')">
+              <InlineSvg :src="require('@/assets/svg/small-card.svg')" height="20" />
+            </a>
+          </li>
           <li class="nav-item" role="presentation" type="button">
-            <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
+            <a @click.prevent="scrollToSection('product-tab-infos')" class="nav-link active" id="pills-infos-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">Infos séjour</a>
           </li>
           <li class="nav-item" role="presentation" type="button">
             <a @click.prevent="scrollToSection('product-tab-activities')" class="nav-link" id="pills-activities-tab" data-toggle="pill" aria-controls="pills-activityspot" aria-selected="true"

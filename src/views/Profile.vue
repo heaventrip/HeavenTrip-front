@@ -144,6 +144,7 @@
                         v-model="currUser.country"
                         :country="currUser.country"
                         :countryName="true"
+                        :removePlaceholder="true"
                         topCountry="France"
                         className="form-control"
                       />
@@ -207,8 +208,6 @@
 
 <script>
 import Button from '@/components/elements/Button.vue'
-import { logoutUser } from '@/utils/auth'
-import { getUserInfo } from '@/utils/auth'
 import { isLoggedIn } from '@/utils/auth'
 
 export default {
@@ -309,16 +308,13 @@ export default {
       this.$axios
         .put('/users/current', { user: this.currUser })
         .then((res) => {
-          this.$notify({ type: 'success', text: 'Mis à jour avec succès' })
+          this.$notify({ group: 'app', type: 'success', text: 'Mis à jour avec succès' })
           this.currUser = res.data.user
           this.form1Modified = false
           this.form2Modified = false
           this.form3Modified = false
         })
-        .catch((err) => this.$notify({ type: 'error', text: err.response.data.message }))
-    },
-    getUserInfo() {
-      return getUserInfo()
+        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response.data.message }))
     },
     isLoggedIn() {
       return isLoggedIn()
@@ -335,10 +331,10 @@ export default {
     const token = localStorage.getItem(AUTH_TOKEN_KEY)
     this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-    // this.currUser = await this.getUserInfo()
     this.$axios
       .get('/users/current')
       .then((res) => {
+        console.log(res.data.user)
         this.currUser = res.data.user
         this.$root.initialLoading = false
       })

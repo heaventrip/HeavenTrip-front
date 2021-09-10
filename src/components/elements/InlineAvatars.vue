@@ -1,20 +1,23 @@
 <template>
-  <div class="d-flex align-items-center" style="height: 42px" :style="[pMarginBottomStyle, pMarginTopStyle]">
-    <div class="inline-avatar-container" v-for="(avatarId, index) in avatars" :key="avatarId" :style="[index === 0 ? '' : pSpacing]">
+  <div class="d-flex align-items-center" style="height: 42px" :style="marginStyle">
+    <div class="inline-avatar-container" v-for="(avatarId, index) in avatars" :key="avatarId" :style="[index === 0 ? '' : spacingStyle]">
       <img
         class="inline-avatar-img rounded-circle"
         :class="{ 'inline-avatar-img--transparent': hoveredHeart }"
-        :style="[pHeight, pOutline]"
+        :style="imgStyle"
         :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624841583/${avatarId}.jpg`"
       />
     </div>
-    <div v-if="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[pSpacing, wishlistLoading ? 'cursor: default' : '']">
+    <div v-show="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[spacingStyle, wishlistLoading ? 'cursor: default' : '']">
       <span id="loading" v-show="wishlistLoading"></span>
-      <img v-if="wishlisted && userAvatarId" class="rounded-circle" :style="[pHeight, pOutline]" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
-      <div v-else-if="wishlisted !== null" style="position: relative" :style="[pHeartWidth, pHeartHeight]" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
+      <div v-if="wishlisted">
+        <img v-if="userAvatarId" class="rounded-circle" :style="imgStyle" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${userAvatarId}.jpg`" />
+        <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" :style="imgStyle" style="border-radius: 50%" fill="#292f33" />
+      </div>
+      <div v-else-if="wishlisted !== null" style="position: relative" :style="heartStyle" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
         <transition name="fade">
           <InlineSvg v-if="hoveredHeart" :class="`heart-logo heart-logo-grey`" :src="require(`@/assets/svg/heart-logo-grey.svg`)" />
-          <InlineSvg v-else :style="pOutline" :class="`heart-logo heart-logo-white`" :src="require(`@/assets/svg/heart-logo-white.svg`)" />
+          <InlineSvg v-else :style="outlineStyle" :class="`heart-logo heart-logo-white`" :src="require(`@/assets/svg/heart-logo-white.svg`)" />
         </transition>
       </div>
     </div>
@@ -44,29 +47,30 @@ export default {
     }
   },
   computed: {
-    pSpacing() {
+    spacingStyle() {
       return `margin-left: ${this.spacing || '-0.5rem'};`
     },
-    pMarginTopStyle() {
-      return `margin-top: ${this.mt || '0.5rem'};`
+    marginStyle() {
+      return `margin-top: ${this.mt || '0.5rem'}; margin-bottom: ${this.mb || '0.5rem'}`
     },
-    pMarginBottomStyle() {
-      return `margin-bottom: ${this.mb || '0.5rem'};`
+    imgStyle() {
+      return `
+        height: ${this.height || '40px'};
+        width: ${this.height || '40px'};
+        outline: ${this.outlineWidth || '3px'} solid ${this.customColors[this.outlineColor] || this.outlineColor}
+      `
     },
-    pHeight() {
-      return `height: ${this.height || '40px'}; width: ${this.height || '40px'}`
-    },
-    pOutline() {
+    outlineStyle() {
       return `outline: ${this.outlineWidth || '3px'} solid ${this.customColors[this.outlineColor] || this.outlineColor}`
     },
-    pHeartWidth() {
-      return `width: ${this.heartWidth || '42px'}`
-    },
-    pHeartHeight() {
-      return `height: ${this.heartHeight || '42px'}`
+    heartStyle() {
+      return `width: ${this.heartWidth || '40px'}; height: ${this.heartHeight || '40px'}`
     }
   },
   methods: {
+    unwishlist() {
+      this.wishlisted = false
+    },
     scaleAvatar(obj, dir) {
       if (dir === 'up') {
         gsap.to(obj, { scale: 1.4, duration: 0.2, zIndex: 2, outlineWidth: '3px', ease: 'none' })
@@ -75,46 +79,50 @@ export default {
       }
     },
     addToWishlist() {
-      if (this.wishlistLoading) return
+      if (this.wishlistLoading || this.wishlisted) return
+
+      this.wishlistLoading = true
 
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-      this.wishlistLoading = true
-
-      if (!this.wishlisted)
-        this.$axios
-          .post('/wishlists', { wishlist: { courseId: this.$props.courseId } })
-          .then(() => {
-            this.wishlisted = true
-            this.wishlistLoading = false
-          })
-          .catch((err) => {
-            console.log(err)
-            this.wishlistLoading = false
-          })
-      else
-        this.$axios
-          .delete('/wishlists', { params: { courseId: this.$props.courseId } })
-          .then(() => {
-            this.wishlisted = false
-            this.wishlistLoading = false
-          })
-          .catch(() => {
-            this.wishlistLoading = false
-          })
+      this.$axios
+        .post('/wishlists', { wishlist: { courseId: this.$props.courseId } })
+        .then(() => {
+          this.wishlisted = true
+          this.wishlistLoading = false
+          this.$notify({ group: 'app', type: 'success', text: 'Ce stage a été ajouté à vos envies !' })
+        })
+        .catch((err) => {
+          this.wishlistLoading = false
+        })
     }
   },
   created() {
     this.userAvatarId = localStorage.getItem('user.avatarId')
     // check if course is already wishlisted
-    // this.$axios
-    //   .get('/wishlists', { params: { courseId: this.$props.courseId } })
-    //   .then(() => (this.wishlisted = true))
-    //   .catch(() => (this.wishlisted = false))
+
+    const AUTH_TOKEN_KEY = 'authToken'
+    const token = localStorage.getItem(AUTH_TOKEN_KEY)
+    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+    this.$axios
+      .get('/wishlists', { params: { courseId: this.$props.courseId } })
+      .then(() => {
+        this.wishlisted = true
+        this.wishlistLoading = false
+      })
+      .catch(() => {
+        this.wishlisted = false
+        this.wishlistLoading = false
+      })
   },
   mounted() {
+    this.$emitter.on('unwishlisted', (courseId) => {
+      if (this.$props.courseId === courseId) this.wishlisted = false
+    })
+
     let that = this
 
     document.querySelectorAll('.inline-avatar-container').forEach((img) => {
