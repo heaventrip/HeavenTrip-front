@@ -244,7 +244,7 @@ export default {
 }
 .options-item:not(:last-of-type) {
   padding-right: 1rem;
-  border-right: 1px dashed #f1f1f1;
+  border-right: 1px dashed #7c7c7ca6;
 }
 .chapter-block {
   margin-bottom: 8rem;

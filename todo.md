@@ -187,6 +187,29 @@ TODO
 - icone tab product
 - voir ce qui est autorisé en logué ou pas
 - rediriger vers le modal produit si pas logué
+- pouvoir faire entrer
+- 0.2 partout
+- grille des niveaux + bouton pointer
+- div en dessous de mot du pro
+- border top sur activités en options
+- 26px sur icone product
+- 46px avatar bloc gris checkout
+- majuscule 
+
+- recheck module booking
+- virer modifier quand il est cliqué sur checkout booker
+- passer le nb de participants au checkout
+- "facultatif..." dans info a savoir dans checkout
+- revoir le bouton modifier dans assurance
+- scroll de infos à savoir scroller jusqu'en bas de la page pr voir les boutons
+
+Cards
+- padding top 3 rem entre card et barre au dessus
+- décaler les tabs vers la droite légèrement (le double)
+- tous nos stages vers la droite un peu plus + card un peu plus resserrées
+- width a 70 height a 65 coeur margin a 19
+- coeur pas rouge mais filled si intéressé
+
 > voir les inputs du checkout name
 > voir "je ne souhaite pas d'autres activités"
 > select des pays

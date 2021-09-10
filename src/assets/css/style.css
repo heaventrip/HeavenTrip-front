@@ -748,7 +748,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   position: absolute;
   left: 0;
   right: 0;
-  top: 8vh;
+  /* top: 8vh; */
   z-index: -1;
   height: calc(100vh - 160px);
 }
