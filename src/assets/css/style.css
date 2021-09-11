@@ -2755,7 +2755,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 .main-product-content .activity-list>li {
   border-bottom: 1px dashed #dbdbdb;
   padding: 27px 0 23px;
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 2fr;
   align-items: center;
 }
@@ -2770,6 +2770,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   color: #d82558;
   text-transform: uppercase;
   font-weight: bold;
+  
 }
 
 .main-product-content .activity-list .activity-list-head .icon {
@@ -2783,6 +2784,12 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   color: #7c7c7c;
   text-transform: uppercase;
   display: flex;
+  justify-content: end;
+  flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+    
 }
 
 .brown-div {
