@@ -4,7 +4,7 @@
       class="search-bar col-12 col-sm-10 col-lg-9 mx-auto rounded p-0"
       style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px"
     >
-      <div class="bg-white d-flex centered-div">
+      <form @submit.prevent="goSearchPage" class="bg-white d-flex centered-div">
         <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 2rem 1.6rem 2rem">
           <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
           <input v-model="freeSearch" class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
@@ -55,7 +55,7 @@
           </div>
           <div v-show="resultsNb" style="font-size: 0.8rem; font-weight: 300; text-transform: none">{{ resultsNb }} résultats</div>
         </button>
-      </div>
+      </form>
       <div class="tags-container d-flex justify-content-center">
         <Button
           @click="clearFilters"
@@ -316,7 +316,7 @@ export default {
   transition: fill 0.3s ease;
 }
 .multi-select-filter {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .multi-select-filter:hover {
   background: #292f33;

@@ -36,7 +36,7 @@ export default {
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .bttn__text {
   position: relative;

@@ -174,27 +174,67 @@ TODO
 > WISHLIST!!!
 > le spinner recherche qui décale
 > dynamiser le delete d'un wishlist
-- enlever les hover sur les wishlists
-- logo heaventrip
-- unicité des wishlist
+> enlever les hover sur les wishlists
+
+GEOFF?
+- bug logo heaventrip signup
+- bouton témoignage
+- page paiement + hover avatars
+
+TODO
+- cards
+- voir ce qui est autorisé en logué ou pas
 - bloquer login après header product (router le header et le contenu)
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
-- newsletter
+- lister les résas
+- recheck module booking
+
+BACK
+- unicité des wishlist
+- sauvegarde db
+- validations
+- dependent destroy
 - mails
-- icone tab product + voir threshold
-- bouton témoignage
-- hover photo recherche
-- icone tab product
-- voir ce qui est autorisé en logué ou pas
-- rediriger vers le 
+- newsletter
+
+FIXME
+> 26px sur icone product
+> icone tab product en bg blanc
+> majuscule
+> 0.2 partout
+> div en dessous de mot du pro
+
+PRODUCT
+> border top sur activités en options
+> hover photo recherche
+> grille des niveaux + bouton pointer
+> pouvoir faire entrer ds recherche
+
+CARDS
+> padding top 3 rem entre card et barre au dessus
+> décaler les tabs vers la droite légèrement (le double)
+> card un peu plus resserrées
+> width a 70 height a 65 coeur margin a 19
+> coeur pas rouge mais filled si intéressé
+> tous nos stages vers la droite un peu plus
+
+CHECKOUT
+> 46px avatar bloc gris checkout
+> virer modifier quand il est cliqué sur checkout booker
+> passer le nb de participants au checkout a partir du prebooking
+> revoir le bouton modifier dans assurance
+> "facultatif..." dans info a savoir dans checkout
+> scroll de infos à savoir scroller jusqu'en bas de la page pr voir les boutons
+
+
 > voir les inputs du checkout name
 > voir "je ne souhaite pas d'autres activités"
 > select des pays
 > homme femme obligatoire
 > erreurs champs
-- faire les cards
 > bug mauvais avatar dans inline avatar
 > restyliser les wishlists
+
 NOTE
 - dropdown up rajouter fading
 - text dynamique sélectionne une vignette quand pas logué

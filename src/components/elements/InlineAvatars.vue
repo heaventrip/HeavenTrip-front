@@ -156,7 +156,7 @@ export default {
   fill: #292f33;
 }
 .inline-avatar-img {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .inline-avatar-img--transparent {
   opacity: 0.5;

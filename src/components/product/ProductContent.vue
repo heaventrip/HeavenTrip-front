@@ -1,14 +1,4 @@
 <template>
-  <!-- <div class="stay-dropdown d-block d-lg-none">
-    <select class="form-control select-place">
-      <option selected="" value="#pills-info">Infos séjour</option>
-      <option value="#pills-activityspot">Activités & spot</option>
-      <option value="#pills-place">Vie sur place</option>
-      <option value="#pills-programe">Programme</option>
-      <option value="#pills-tips">Tips & astuces</option>
-      <option value="#pills-opinion">Vos avis</option>
-    </select>
-  </div> -->
   <div class="header">
     <TheNavSticky />
   </div>
@@ -18,14 +8,14 @@
       <div class="product-nav-tabs">
         <ProductNav :course="course" />
         <ul
-          style="height: 100px; background-color: white; font-weight: 400; padding: 0 2.3vw"
+          style="height: 100px; background-color: #fcfcfc; font-weight: 400; padding: 0 2.3vw 0 0"
           class="nav nav-pills nav-justified text-uppercase narrow-header-pills d-none d-lg-flex align-items-center"
           id="pills-tab"
           role="tablist"
         >
-          <li class="nav-item fg-0" role="presentation" type="button">
-            <a @click.prevent="$emit('go-header')">
-              <InlineSvg :src="require('@/assets/svg/small-card.svg')" height="20" />
+          <li class="nav-item fg-0 d-flex" style="background-color: white; height: inherit" role="presentation" type="button">
+            <a class="m-auto" @click.prevent="$emit('go-header')">
+              <InlineSvg :src="require('@/assets/svg/small-card.svg')" height="26" />
             </a>
           </li>
           <li class="nav-item" role="presentation" type="button">
@@ -68,18 +58,6 @@
       <div id="product-tab-reviews" class="product-section" style="min-height: 100vh">
         <ProductTabReviews :course="course" />
       </div>
-      <!-- <div class="w-50" id="pills-info" aria-labelledby="pills-info-tab">
-      </div>
-      <div class="w-50" id="pills-activityspot" aria-labelledby="pills-activityspot-tab">
-      </div>
-      <div class="w-50" id="pills-place" aria-labelledby="pills-place-tab">
-      </div>
-      <div class="w-50" id="pills-programe" aria-labelledby="pills-programe-tab">
-      </div>
-      <div class="w-50" id="pills-tips" aria-labelledby="pills-tips-tab">
-      </div>
-      <div class="w-50" id="pills-opinion" aria-labelledby="pills-opinion-tab">
-      </div> -->
     </div>
     <div class="gallery-comment-block">
       <div class="aside-slider">
@@ -459,7 +437,7 @@ export default {
   fill: #ffffff;
   height: 17px;
   margin-bottom: 3px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .slider-buttons__left:hover .slider__arrow-left {
   animation: 0.3s ease-in 0s hideLeftArrow, 0.3s ease-out 0.3s showLeftArrow;
@@ -682,6 +660,8 @@ button {
 }
 
 .nav-link {
+  font-size: 0.8rem;
+  font-weight: 500;
   padding: 0.5rem !important;
 }
 .product-content {

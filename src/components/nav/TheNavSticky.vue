@@ -300,7 +300,7 @@ export default {
 }
 .nav__item {
   font-weight: 300 !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.2s ease !important;
 }
 .nav__item:hover {
   color: #b4b4b4 !important;
@@ -310,7 +310,7 @@ export default {
   border: none !important;
   font-family: Muli, sans-serif !important;
   font-weight: 300 !important;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .subactivity-nav__item.active {
   font-weight: 800 !important;

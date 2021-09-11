@@ -71,6 +71,7 @@
                 :extra-participants="extraParticipants"
                 :course="course"
                 :needs-reset="needsReset"
+                ref="options"
               >
               </component>
             </keep-alive>
@@ -81,6 +82,8 @@
                 @complete="(status) => (insuranceComplete = status)"
                 @updated-participants="setParticipants"
                 @updated-booker="setBooker"
+                @go-booker="activeStep = 'booker'"
+                @go-participant="goToParticipant"
                 :avatar-key="avatarKey"
                 :booker="booker"
                 :extra-participants="extraParticipants"
@@ -135,7 +138,7 @@ export default {
     // CheckoutSuccess
   },
   emits: ['booker-expense', 'extra-participants-expense', 'extra-participants-nb', 'changed-step'],
-  props: ['course', 'session', 'total-price'],
+  props: ['course', 'session', 'total-price', 'participants-nb'],
   data() {
     return {
       transitionEntered: false,
@@ -179,6 +182,29 @@ export default {
     }
   },
   watch: {
+    participantsNb: {
+      immediate: true,
+      handler(nb) {
+        for (let i = 1; i < nb; i++) {
+          this.extraParticipants.push({
+            infos: {
+              firstName: '',
+              birthDate: '',
+              email: ''
+            },
+            booking: {
+              room: 0,
+              roomMate: '',
+              equipmentRental: null,
+              noExtraActivities: false,
+              extraActivities: [],
+              comment: '',
+              insurance: ''
+            }
+          })
+        }
+      }
+    },
     currUser: {
       immediate: true,
       handler(val) {
@@ -186,6 +212,7 @@ export default {
         ;['firstName', 'lastName', 'birthDate', 'phone', 'email', 'gender', 'country', 'city', 'street', 'postalCode'].forEach((attr) => {
           this.booker.infos[attr] = val[attr]
         })
+        this.avatarKey = val.avatarKey
       }
     },
     extraParticipants: {
@@ -332,6 +359,10 @@ export default {
     }
   },
   methods: {
+    goToParticipant(id) {
+      if (this.$refs.options) this.$refs.options.currFormParticipant = id
+      this.activeStep = 'options'
+    },
     isLoggedIn() {
       return isLoggedIn()
     },
@@ -513,7 +544,7 @@ export default {
 .top-info-back {
   background-color: #292f33;
   color: white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   padding-left: 2rem;
   padding-right: 2rem;
 }

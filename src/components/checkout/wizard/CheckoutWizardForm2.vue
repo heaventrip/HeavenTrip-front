@@ -9,9 +9,9 @@
             class="participant-img mr-3"
             fluid
             :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
-            style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
+            style="height: 46px; border: 1px solid #292f33; box-shadow: none; outline: none"
           />
-          <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
+          <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="46" style="margin-right: 1rem" fill="#292f33" />
           <span class="participant-check" style="border: 4px solid #f1f1f1"></span>
         </div>
         <strong class="participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName }}</strong>
@@ -36,7 +36,7 @@
         </div>
       </h6>
       <div class="d-flex flex-column">
-        <button class="btn text-uppercase personalize-btn rounded-0 border-0 px-4 flex-1">MODIFIER</button>
+        <button @click.prevent="$emit('go-booker')" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4 flex-1">MODIFIER</button>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
     <div class="card-header rounded-0 border-0 p-0 d-flex">
       <h6 class="mb-0 text-uppercase font-weight-normal d-flex align-items-center check-head px-5 p-4 flex-1">
         <div class="participant-img-container position-relative">
-          <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
+          <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" height="46" style="margin-right: 1rem" fill="#292f33" />
         </div>
         <strong class="participant-name h6 mb-0 font-weight-bold">{{ extraParticipant.infos.firstName }}</strong>
         <div class="completion-details">
@@ -68,7 +68,7 @@
         </div>
       </h6>
       <div class="d-flex flex-column">
-        <button @click.prevent="" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="flex-grow: 3">MODIFIER</button>
+        <button @click.prevent="$emit('go-participant', index)" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="flex-grow: 3">MODIFIER</button>
         <button @click.prevent="localExtraParticipants.splice(index, 1)" class="btn text-uppercase personalize-btn rounded-0 border-0 px-4" style="margin-top: 1px; flex-grow: 1">RETIRER</button>
       </div>
     </div>
@@ -145,8 +145,8 @@
         <p class="font-weight-500">Choisissez votre formule d’assurance :</p>
         <div class="custom-radio-container assurance-radio-container">
           <div class="row">
-            <div class="col-12 col-lg-5">
-              <div class="custom-control p-0 pb-2 mt-4">
+            <div class="col-12 col-lg-6">
+              <div class="custom-control p-0 pb-3 mt-2">
                 <label class="" :for="`extraPart${index}-ins1`">
                   <input
                     v-model="extraParticipant.booking.insurance"
@@ -156,15 +156,11 @@
                     :name="`insurance_plan_extraPart${index}`"
                     class="custom-control p-0-input"
                   />
-                  <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
-                    Rapatriment 60&euro;/pers.
-                    <div class="ml-auto">
-                      <img class="" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" />
-                    </div>
-                  </span>
+                  <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
                 </label>
               </div>
               <ul class="pl-3 assurance-list font-weight-500">
+                <img class="mb-3" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" style="height: 12px" />
                 <li>Responsabilite civile</li>
                 <li>Rapatriement</li>
                 <li>Assistance medicale</li>
@@ -172,8 +168,8 @@
                 <li>Assistance voyage</li>
               </ul>
             </div>
-            <div class="col-12 col-lg-6 offset-lg-1">
-              <div class="custom-control p-0 pb-3 mt-2 mb-4">
+            <div class="col-12 col-lg-6">
+              <div class="custom-control p-0 pb-3 mt-2">
                 <label class="" :for="`extraPart${index}-ins2`">
                   <input
                     v-model="extraParticipant.booking.insurance"
@@ -183,15 +179,11 @@
                     :name="`insurance_plan_extraPart${index}`"
                     class="custom-control p-0-input"
                   />
-                  <span class="d-flex align-items-center mb-2 font-weight-bold dotted-border">
-                    Rapatriment 60&euro;/pers.
-                    <div class="ml-auto">
-                      <img class="" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" />
-                    </div>
-                  </span>
+                  <span class="d-flex align-items-center mb-2 font-weight-bold" style="width: 90%"> Rapatriement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60&euro;/pers. </span>
                 </label>
               </div>
               <ul class="pl-3 assurance-list font-weight-500">
+                <img class="mb-3" fluid :src="require('@/assets/images/GEODESK_logo_Color.png')" style="height: 12px" />
                 <li>Responsabilite civile</li>
                 <li>Rapatriement</li>
                 <li>Assistance medicale</li>
@@ -200,7 +192,7 @@
               </ul>
             </div>
             <div class="col-12">
-              <div class="custom-control p-0 pb-3 mt-2 mb-4">
+              <div class="custom-control p-0 pb-2 mt-4">
                 <label class="" :for="`extraPart${index}-ins3`">
                   <input
                     v-model="extraParticipant.booking.insurance"
@@ -246,12 +238,13 @@ export default {
       return !!this.localBooker.booking.insurance
     },
     participantsInsuranceFilled() {
-      let insurancesArr = this.localExtraParticipants.map((part) => part.booking.insurance)
+      let insurancesArr = this.localExtraParticipants.map((part) => !!part.booking.insurance)
       return insurancesArr.every((el) => el)
     },
     currParticipantInsurance() {
+      console.log('currPartIns', this.currFormStep)
       if (!this.localExtraParticipants.length || this.currFormStep === 0) return
-      return this.localExtraParticipants[this.currFormStep - 1].booking.insurance
+      return !!this.localExtraParticipants[this.currFormStep - 1].booking.insurance
     }
   },
   watch: {
@@ -287,6 +280,8 @@ export default {
       let equipmentExp = participant.booking.equipmentRental ? 50 : 0
       let activitiesExpArr = participant.booking.extraActivities.map((el) => Object.values(el)[0])
       let activitiesExp = activitiesExpArr.length ? activitiesExpArr.reduce((s, el) => s + el) : 0
+      console.log('room', roomExp)
+      console.log('ins', insuranceExp)
       return roomExp + insuranceExp + equipmentExp + activitiesExp
     },
     initFormDisplay() {
@@ -310,21 +305,22 @@ export default {
       })
     },
     nextFormStep() {
+      if (this.currFormStep === this.localExtraParticipants.length) {
+        let buttons = document.querySelector('.nav-buttons-container')
+        buttons.style.display = ''
+        return
+      }
+
       this.currFormStep++
 
-      let cards = document.querySelectorAll('.insurance-card')
+      const cards = document.querySelectorAll('.insurance-card')
       let nextCard = cards[this.currFormStep]
 
       nextCard.querySelector('.hidable').style.display = ''
       nextCard.removeAttribute('style') // remove opacity
 
-      if (this.currFormStep === this.localExtraParticipants.length + 1) {
-        let buttons = document.querySelector('.nav-buttons-container')
-        buttons.style.display = ''
-      } else {
-        let followingCard = cards[this.currFormStep + 1]
-        followingCard.style.display = ''
-      }
+      let followingCard = cards[this.currFormStep + 1]
+      if (followingCard) followingCard.style.display = ''
 
       nextCard.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
     }

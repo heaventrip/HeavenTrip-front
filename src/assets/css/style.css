@@ -748,7 +748,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   position: absolute;
   left: 0;
   right: 0;
-  top: 8vh;
+  /* top: 8vh; */
   z-index: -1;
   height: calc(100vh - 160px);
 }
@@ -3419,7 +3419,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
   color: #292f33;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   border: 1px solid #292f33;
 }
 
@@ -3956,7 +3956,6 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
   font-weight: 400;
   position: relative;
   padding: 8px 0 13px;
-  margin-left: 30px;
 }
 
 .carousel-section .nav-pills .nav-link.active {
