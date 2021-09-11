@@ -646,6 +646,13 @@ export default {
     }
   },
   watch: {
+    '$route.query': {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        console.log('QUERY', val)
+      }
+    },
     selectionIsEmpty(val) {
       if (val) this.resetFilters()
     },
@@ -804,8 +811,14 @@ export default {
         else this.$refs.themeMultiselect.select(queryParams.theme)
       }
       if (queryParams.activity) {
-        if (Array.isArray(queryParams.activity)) queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
-        else this.$refs.activityMultiselect.select(queryParams.activity)
+        console.log('1')
+        if (Array.isArray(queryParams.activity)) {
+          console.log('2')
+          queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
+        } else {
+          console.log(queryParams.activity)
+          this.$refs.activityMultiselect.select(5)
+        }
       }
       if (queryParams.country) {
         if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
@@ -824,8 +837,6 @@ export default {
     }
   },
   created() {
-    let queryParams = this.$route.query
-
     this.$axios.get('/sport-categories').then((res) => {
       res.data.sportCategories.forEach((theme) => {
         this.themeSelection.options.push({ value: theme.id, label: theme.name })
@@ -853,8 +864,7 @@ export default {
     })
   },
   mounted() {
-    this.$nextTick(() => this.getQueryParams)
-
+    this.getQueryParams()
     this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       tagContainer.closest('.filter-container').querySelector('.tags-container')?.append(tagContainer)
