@@ -71,6 +71,7 @@
                 :extra-participants="extraParticipants"
                 :course="course"
                 :needs-reset="needsReset"
+                ref="options"
               >
               </component>
             </keep-alive>
@@ -81,6 +82,8 @@
                 @complete="(status) => (insuranceComplete = status)"
                 @updated-participants="setParticipants"
                 @updated-booker="setBooker"
+                @go-booker="activeStep = 'booker'"
+                @go-participant="goToParticipant"
                 :avatar-key="avatarKey"
                 :booker="booker"
                 :extra-participants="extraParticipants"
@@ -333,6 +336,10 @@ export default {
     }
   },
   methods: {
+    goToParticipant(id) {
+      if (this.$refs.options) this.$refs.options.currFormParticipant = id
+      this.activeStep = 'options'
+    },
     isLoggedIn() {
       return isLoggedIn()
     },

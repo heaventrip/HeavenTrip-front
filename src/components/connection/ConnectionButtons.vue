@@ -32,20 +32,20 @@
                 <div v-show="showcontent">Mes envies</div>
               </transition>
               <transition name="fade-fast">
-                <div class="wishlists mt-3" v-if="showWishlist && wishlists?.length">
+                <div @click.stop class="wishlists mt-3" v-if="showWishlist && wishlists?.length">
                   <div class="d-flex align-items-center" v-for="wishlist in wishlists" :key="wishlist">
                     <InlineSvg class="mr-2" :src="require('@/assets/svg/heart-filled.svg')" fill="#d82558" height="12" />
                     <a :href="`/product/${wishlist.id}`" class="py-2 mr-auto" :class="[isDarkTheme === true ? 'wishlist-course-dark' : 'wishlist-course']" :data-course="wishlist.id">{{
                       wishlist.name
                     }}</a>
-                    <div @click="unwishlistCourse(wishlist.id)">
-                      <i class="wishlist-course__delete-btn fas fa-times mr-2"></i>
+                    <div class="wishlist-course__delete-btn" @click="unwishlistCourse(wishlist.id)">
+                      <i class="fas fa-times mr-2"></i>
                     </div>
                   </div>
                 </div>
               </transition>
             </div>
-            <div style="width: 70%; border-bottom: 1px dashed #f1f1f1; margin-left: 1.8rem"></div>
+            <div style="width: 70%; border-bottom: 1px dashed rgba(241, 241, 241, 0.18); margin-left: 1.8rem"></div>
             <div
               @click="logOut"
               :class="[isDarkTheme ? 'menu-item-dark menu-item-disconnect-dark' : 'menu-item menu-item-disconnect']"
@@ -355,5 +355,11 @@ a.wishlist-course-dark:hover,
 .menu-item-dark:hover {
   background-color: white;
   color: #292f33;
+}
+.wishlist-course__delete-btn {
+  transition: all 0.2s ease;
+}
+.wishlist-course__delete-btn:hover {
+  color: #d82558;
 }
 </style>

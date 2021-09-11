@@ -2,26 +2,28 @@
   <div class="login-signup-tab">
     <div class="card border-0">
       <div class="card-body">
-        <div class="row">
-          <div class="col-12 col-lg-4">
-            <div class="participants-div align-items-center">
-              <img
-                v-if="avatarKey"
-                class="participant-img"
-                fluid
-                :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
-                style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none; margin-bottom: 1rem"
-              />
-              <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-bottom: 1rem" fill="#292f33" />
-              <h4 class="head font-weight-bold text-uppercase text-center">
-                {{ localBooker.infos.firstName || 'Participant' }}s
-                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'visibility: hidden' : '']"
-                  ><i class="fas fa-edit mr-2"></i> Modifier</span
-                >
-              </h4>
+        <div class="participants-div flex-row align-items-center justify-content-start offset-1 mt-4 pb-5" style="border-bottom: 1px solid #ebebeb">
+          <img
+            v-if="avatarKey"
+            class="participant-img"
+            fluid
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
+            style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none; margin-right: 1rem"
+          />
+          <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="mr-3" fill="#292f33" />
+          <h4 class="head font-weight-bold text-uppercase mb-0">
+            <div>
+              1
+              <InlineSvg :src="require('@/assets/svg/triangle-right.svg')" height="8" class="mx-2" fill="#292f33" />
+              {{ localBooker.infos.firstName || 'Participant' }}
             </div>
-          </div>
-          <div class="col-12 col-lg-8">
+            <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.2' : '']"
+              ><i class="fas fa-edit mr-2"></i> Modifier</span
+            >
+          </h4>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-9 offset-1">
             <form class="pt-5" :class="{ 'form--disallowed': !allowForm }">
               <div class="row">
                 <div class="col-12 col-lg-5">

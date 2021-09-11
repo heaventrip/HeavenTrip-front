@@ -213,13 +213,13 @@ CARDS
 > tous nos stages vers la droite un peu plus
 
 CHECKOUT
-- 46px avatar bloc gris checkout
+> 46px avatar bloc gris checkout
 - recheck module booking
-- virer modifier quand il est cliqué sur checkout booker
+> virer modifier quand il est cliqué sur checkout booker
 - passer le nb de participants au checkout a partir du prebooking
-- revoir le bouton modifier dans assurance
-- "facultatif..." dans info a savoir dans checkout
-- scroll de infos à savoir scroller jusqu'en bas de la page pr voir les boutons
+> revoir le bouton modifier dans assurance
+> "facultatif..." dans info a savoir dans checkout
+> scroll de infos à savoir scroller jusqu'en bas de la page pr voir les boutons
 
 
 > voir les inputs du checkout name
