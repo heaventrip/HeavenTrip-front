@@ -10,10 +10,10 @@
         <div class="div-group">
           <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'female'">
+            <label :class="[gender === 'f' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'f'">
               <input type="radio" name="gender" /> Femme
             </label>
-            <label :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'male'">
+            <label :class="[gender === 'm' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'm'">
               <input type="radio" name="gender" /> Homme
             </label>
           </div>
@@ -435,7 +435,7 @@ export default {
   padding-top: 12px;
   text-transform: uppercase;
   font-weight: 400;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   color: #292f33;
   margin: initial;
   margin-left: 196px;
@@ -451,7 +451,7 @@ export default {
 }
 .profile-gender-btn {
   border: 1px solid white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   color: white;
 }
 .profile-gender-btn-selected {

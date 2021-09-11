@@ -171,7 +171,7 @@ export default {
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .btn-add-participant:hover {
   background-color: #292f33;

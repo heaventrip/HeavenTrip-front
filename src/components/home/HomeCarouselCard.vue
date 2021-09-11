@@ -8,10 +8,11 @@
         @click.stop="addToWishlist"
         type="button"
         class="card-block__heart-icon d-flex"
-        style="position: absolute; z-index: 5; width: 80px; height: 80px; border-bottom-right-radius: 80%; background-color: rgba(255, 255, 255, 0.5)"
+        style="position: absolute; z-index: 5; width: 70px; height: 65px; border-bottom-right-radius: 80%; background-color: rgba(255, 255, 255, 0.5)"
       >
         <span v-show="wishlistLoading" id="loading"></span>
-        <InlineSvg :src="require('@/assets/svg/heart-filled.svg')" style="margin: 24px" :fill="wishlisted ? '#d82558' : '#292f33'" height="20" />
+        <InlineSvg v-show="!wishlisted" :src="require('@/assets/svg/heart-outline.svg')" style="margin: 19px" fill="#292f33" height="20" />
+        <InlineSvg v-show="wishlisted" :src="require('@/assets/svg/heart-filled.svg')" style="margin: 19px" fill="#292f33" height="20" />
       </div>
       <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
       <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->

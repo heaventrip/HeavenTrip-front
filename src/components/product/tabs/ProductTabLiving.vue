@@ -186,32 +186,14 @@
           </div>
         </div>
         <div class="guide-word__text">
-          <h6 class="head text-uppercase text-grey py-3 mb-1" style="width: max-content; border-top: 1px dashed #292f33; border-bottom: none">Mot du Cuisinier…</h6>
+          <h6 class="head text-uppercase text-grey py-3 mb-0" style="width: max-content; border-top: 1px dashed #292f33; border-bottom: none">Mot du Cuisinier…</h6>
+          <div style="height: 1px; border-top: 1px dashed #292f33; width: 200px"></div>
           <transition name="fade" mode="out-in">
-            <div v-if="tab === 1">
-              <p class="content pt-3 text-grey" style="line-height: 25px">
-                {{ course?.staffs.find((el) => el.role === 'Cook')?.description }}
-              </p>
-            </div>
-            <div v-else>
-              <div class="guide-word__subtitle">Un peu sur moi!</div>
-              <p class="content pt-3 text-grey" style="line-height: 24px">
-                testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste
-                testeste testeste testeste testeste testeste
-              </p>
-              <h6 class="author text-grey mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
+            <div>
+              <p class="content pt-3 text-grey" style="line-height: 25px" v-html="course?.staffs.find((el) => el.role === 'Cook')?.description"></p>
             </div>
           </transition>
         </div>
-      </div>
-    </div>
-    <!-- NOTE functional tabs but disabled for now -->
-    <div v-if="false" class="d-flex flex-column" style="margin-left: 1px">
-      <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #f1f1f1">
-        <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/bowl2.svg')" :fill="[tab === 1 ? '#fff' : '#292f33']" />
-      </div>
-      <div @mouseover="tab = 2" type="button" :class="[tab === 2 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px 1px 2px #f1f1f1">
-        <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/kitchenhat.svg')" :fill="[tab === 2 ? '#fff' : '#292f33']" />
       </div>
     </div>
   </div>

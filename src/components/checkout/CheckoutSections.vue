@@ -514,7 +514,7 @@ export default {
 .top-info-back {
   background-color: #292f33;
   color: white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   padding-left: 2rem;
   padding-right: 2rem;
 }

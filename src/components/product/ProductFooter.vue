@@ -605,7 +605,7 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .date-btn--active {
   background-color: #f1f1f1;
@@ -641,7 +641,7 @@ export default {
 .booking-session .session-head {
   background-color: #292f33;
   letter-spacing: 0.03rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 .booking-session .session-head:hover {
@@ -666,7 +666,7 @@ export default {
 .booking-session-list .nav-link.empty-sessions {
   opacity: 0.3;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .booking-session-list .nav-link.empty-sessions.active {
   opacity: 1;

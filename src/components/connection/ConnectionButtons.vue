@@ -328,7 +328,7 @@ a.wishlist-course-dark:hover,
 .connection-icon,
 .name-block,
 .avatar-block {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .menu-item,
 .menu-item-dark {

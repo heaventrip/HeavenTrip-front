@@ -469,7 +469,7 @@ export default {
   margin-right: 2rem;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .connection-nav-button--active {
   color: rgba(255, 255, 255);

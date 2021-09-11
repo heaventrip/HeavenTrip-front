@@ -7,15 +7,15 @@
             <div class="participants-div align-items-center">
               <img
                 v-if="avatarKey"
-                class="participant-img mr-3"
+                class="participant-img"
                 fluid
                 :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
-                style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
+                style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none; margin-bottom: 1rem"
               />
-              <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem; margin-bottom: 1rem" fill="#292f33" />
-              <h4 class="head font-weight-bold text-uppercase">
-                {{ localBooker.infos.firstName || 'Participant' }}
-                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"
+              <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-bottom: 1rem" fill="#292f33" />
+              <h4 class="head font-weight-bold text-uppercase text-center">
+                {{ localBooker.infos.firstName || 'Participant' }}s
+                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'visibility: hidden' : '']"
                   ><i class="fas fa-edit mr-2"></i> Modifier</span
                 >
               </h4>
@@ -287,6 +287,8 @@ export default {
   margin-bottom: 2.5rem;
 }
 .form-control {
+  font-family: Muli, sans-serif;
+  font-size: 0.8rem;
   padding-left: 0;
   border-radius: 0;
   border: none;

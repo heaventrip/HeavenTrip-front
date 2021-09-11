@@ -175,35 +175,45 @@ TODO
 > le spinner recherche qui décale
 > dynamiser le delete d'un wishlist
 - enlever les hover sur les wishlists
-- logo heaventrip
+- bug logo heaventrip signup
 - unicité des wishlist
-- bloquer login après header product (router le header et le contenu)
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
-- newsletter
-- mails
 - bouton témoignage
+
 - voir ce qui est autorisé en logué ou pas
-- rediriger vers le modal produit si pas logué
+- bloquer login après header product (router le header et le contenu)
+- lister les résas
+
+BACK
+- sauvegarde db
+- validations
+- dependent destroy
+- mails
+- newsletter
 
 FIXME
-- hover photo recherche
-- icone tab product en bg blanc
-- pouvoir faire entrer ds recherche
-- 0.2 partout
-- grille des niveaux + bouton pointer
-- div en dessous de mot du pro
-- border top sur activités en options
-- 26px sur icone product
-- 46px avatar bloc gris checkout
-- majuscule
+> 26px sur icone product
+> icone tab product en bg blanc
+> majuscule
+> 0.2 partout
+> div en dessous de mot du pro
+
+PRODUCT
+> border top sur activités en options
+> hover photo recherche
+> grille des niveaux + bouton pointer
+> pouvoir faire entrer ds recherche
+
 CARDS
-- padding top 3 rem entre card et barre au dessus
-- décaler les tabs vers la droite légèrement (le double)
-- tous nos stages vers la droite un peu plus + card un peu plus resserrées
-- width a 70 height a 65 coeur margin a 19
-- coeur pas rouge mais filled si intéressé
+> padding top 3 rem entre card et barre au dessus
+> décaler les tabs vers la droite légèrement (le double)
+> card un peu plus resserrées
+> width a 70 height a 65 coeur margin a 19
+> coeur pas rouge mais filled si intéressé
+> tous nos stages vers la droite un peu plus
 
 CHECKOUT
+- 46px avatar bloc gris checkout
 - recheck module booking
 - virer modifier quand il est cliqué sur checkout booker
 - passer le nb de participants au checkout a partir du prebooking
@@ -220,6 +230,7 @@ CHECKOUT
 - faire les cards
 > bug mauvais avatar dans inline avatar
 > restyliser les wishlists
+
 NOTE
 - dropdown up rajouter fading
 - text dynamique sélectionne une vignette quand pas logué

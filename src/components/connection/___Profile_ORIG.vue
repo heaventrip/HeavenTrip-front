@@ -213,7 +213,7 @@ export default {
 }
 .profile-gender-btn {
   border: 1px solid #292f33;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .profile-gender-btn:hover,
 .profile-gender-btn.active {

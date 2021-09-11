@@ -13,7 +13,7 @@
               <span class="separator"></span>
             </div>
             <p class="mb-0 d-none d-md-inline-block">
-              <span class="font-weight-bold d-none d-lg-inline-block">{{ $root.currUser?.firstName }},</span>
+              <span class="font-weight-bold d-none d-lg-inline-block">{{ $root.currUser?.firstName[0].toUpperCase() + $root.currUser?.firstName.toLowerCase().slice(1) }},</span>
               sélectionné une vignette pour connaitre les dates de departs et les places restantes. Tu pourras y v! sélectionné une vignette pour connaitre les dates de departs et les places
               restantes. Tu pourras y voir les autres Trippers interesses ou inscrits et chater avec eux !
             </p>
@@ -24,7 +24,7 @@
     <div class="container-fluid">
       <div class="d-flex align-items-center mt-4" style="margin-bottom: 5rem">
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
-          <div class="d-flex align-items-center" style="margin-right: 5vw; margin-left: 4vw">
+          <div class="d-flex align-items-center" style="margin: 0 4vw">
             <div class="slider-buttons d-flex">
               <div @click="slideLeft" type="button" style="">
                 <svg xmlns="http://www.w3.org/2000/svg" class="slider-buttons__left" width="50" viewBox="0 0 40 40" fill="#292f33">
@@ -63,11 +63,11 @@
               >
             </div>
             <div style="width: 20%; height: 1px; background-color: #ebebeb"></div>
-            <ul class="nav nav-pills mb-0 justify-content-center" id="pills-tab" role="tablist">
-              <li class="nav-item" role="presentation">
+            <ul class="nav nav-pills mb-0 justify-content-center" style="margin-left: 4rem" id="pills-tab" role="tablist">
+              <li class="nav-item mr-3" role="presentation">
                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Nos inspirations</a>
               </li>
-              <li class="nav-item" role="presentation">
+              <li class="nav-item mr-3" role="presentation">
                 <a class="nav-link multiactivity-item" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"
                   >Multi-activités</a
                 >
@@ -135,7 +135,7 @@ export default {
       cards: [],
       counterSlideDir: 'vertical-slide-up',
       nbOfCards: 1,
-      cardMargin: 40,
+      cardMargin: 25,
       cardWidth: 520,
       firstName: '',
       animFinished: true,
@@ -242,7 +242,7 @@ export default {
 
 <style scoped>
 .cards-slider {
-  padding-top: 2rem;
+  padding-top: 3rem;
   position: relative;
   margin-bottom: 3rem;
   margin-left: 3vw;
@@ -328,7 +328,7 @@ export default {
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0.5rem 1.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   border: 1px solid #292f33;
 }
 .all-courses-btn:hover {
