@@ -28,6 +28,25 @@
         </div>
       </div>
       <div v-if="currUser" class="cards-container">
+        <div class="cards-container__reservation-row">
+          <div class="card border-0 w-100">
+            <div class="card-body">
+              <div class="card__title align-items-center justify-content-between" style="margin-bottom: 2rem">
+                <div>Mes réservations</div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-7">
+                  <div style="font-family: Muli, sans-serif; font-size: 0.8rem">
+                    Attention, cette action est irréversible ! Si tu décides de supprimer ton compte tu perdras toutes tes données et tes bonus.
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2 offset-3">
+                  <Button style="transform: translateY(-50%)" text="Supprimer" px="1rem" color="grey" height="3rem" weight="bold" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="cards-container__first-row">
           <div class="card border-0">
             <div class="card-body">

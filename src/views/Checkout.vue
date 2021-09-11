@@ -8,7 +8,7 @@
       @changed-step="setActiveStep"
       :course="course"
       :session="session"
-      :participantsNb="participantsNb"
+      :participants-nb="participantsNb"
       :total-price="totalPrice"
     />
   </div>

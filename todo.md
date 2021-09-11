@@ -174,17 +174,23 @@ TODO
 > WISHLIST!!!
 > le spinner recherche qui décale
 > dynamiser le delete d'un wishlist
-- enlever les hover sur les wishlists
-- bug logo heaventrip signup
-- unicité des wishlist
-- FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
-- bouton témoignage
+> enlever les hover sur les wishlists
 
+GEOFF?
+- bug logo heaventrip signup
+- bouton témoignage
+- page paiement + hover avatars
+
+TODO
+- cards
 - voir ce qui est autorisé en logué ou pas
 - bloquer login après header product (router le header et le contenu)
+- FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
 - lister les résas
+- recheck module booking
 
 BACK
+- unicité des wishlist
 - sauvegarde db
 - validations
 - dependent destroy
@@ -214,9 +220,8 @@ CARDS
 
 CHECKOUT
 > 46px avatar bloc gris checkout
-- recheck module booking
 > virer modifier quand il est cliqué sur checkout booker
-- passer le nb de participants au checkout a partir du prebooking
+> passer le nb de participants au checkout a partir du prebooking
 > revoir le bouton modifier dans assurance
 > "facultatif..." dans info a savoir dans checkout
 > scroll de infos à savoir scroller jusqu'en bas de la page pr voir les boutons
@@ -227,7 +232,6 @@ CHECKOUT
 > select des pays
 > homme femme obligatoire
 > erreurs champs
-- faire les cards
 > bug mauvais avatar dans inline avatar
 > restyliser les wishlists
 

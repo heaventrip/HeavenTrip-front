@@ -93,6 +93,7 @@ import gsap from 'gsap'
 export default {
   name: 'HomeCarouselCard',
   props: ['course', 'cards'],
+  emits: ['card-hovered'],
   data() {
     return {
       animFinished: true,
@@ -102,7 +103,6 @@ export default {
       wishlisted: false,
       cardWidth: 500,
       cardExpand: 70,
-      activeCard: '',
       tl: null,
       cardsToSlide: '',
       wishlistLoading: false
@@ -117,9 +117,7 @@ export default {
     cards: {
       immediate: true,
       handler(val) {
-        if (!val.length) return
-
-        this.setTimeline()
+        if (val?.length) this.setTimeline()
       }
     },
     course: {

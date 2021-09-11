@@ -138,7 +138,7 @@ export default {
     // CheckoutSuccess
   },
   emits: ['booker-expense', 'extra-participants-expense', 'extra-participants-nb', 'changed-step'],
-  props: ['course', 'session', 'total-price'],
+  props: ['course', 'session', 'total-price', 'participants-nb'],
   data() {
     return {
       transitionEntered: false,
@@ -182,6 +182,29 @@ export default {
     }
   },
   watch: {
+    participantsNb: {
+      immediate: true,
+      handler(nb) {
+        for (let i = 1; i < nb; i++) {
+          this.extraParticipants.push({
+            infos: {
+              firstName: '',
+              birthDate: '',
+              email: ''
+            },
+            booking: {
+              room: 0,
+              roomMate: '',
+              equipmentRental: null,
+              noExtraActivities: false,
+              extraActivities: [],
+              comment: '',
+              insurance: ''
+            }
+          })
+        }
+      }
+    },
     currUser: {
       immediate: true,
       handler(val) {

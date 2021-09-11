@@ -83,9 +83,9 @@
                 :style="`transform: translateX(${index * (cardWidth + cardMargin)}px)`"
                 @mouseenter="enterCard(index)"
                 @mouseleave="leaveCard(index)"
-                @click="$router.to({ name: 'Product', params: { id: course.id } })"
+                @click="$router.push({ name: 'Product', params: { id: course.id } })"
               >
-                <HomeCarouselCard :cards="cards?.slice(index + 1)" :course="course" :ref="`card${index}`" />
+                <HomeCarouselCard @card-hovered="(val) => (cardHovered = val)" :cards="{ left: cards?.slice(0, index), right: cards?.slice(index + 1) }" :course="course" :ref="`card${index}`" />
               </div>
             </div>
           </div>
@@ -242,7 +242,7 @@ export default {
 
 <style scoped>
 .cards-slider {
-  padding-top: 3rem;
+  padding-top: 2rem;
   position: relative;
   margin-bottom: 3rem;
   margin-left: 3vw;
