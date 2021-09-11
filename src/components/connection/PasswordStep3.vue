@@ -22,7 +22,7 @@
     </div>
     <!--    <input class="form-control modal-input" type="password" autocomplete="off" name="" value="" placeholder="Nouveau mot de passe" />
     <input class="form-control modal-input" type="password" autocomplete="off" name="" placeholder="Confirmation de ton mot de passe" /> -->
-    <Button id="btn-validate" @click="submitPasswordForm" text="Valider" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" :disabled="!formIsFilled" />
+    <Button id="btn-validate" @click="submitPasswordForm" text="Valider" px="1.5rem" size=".8rem" height="50px" width="100%" weight="bold" color="white" />
   </form>
 </template>
 

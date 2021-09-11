@@ -71,10 +71,10 @@
       <div class="container p-0">
         <div class="row">
           <div class="pr-lg-0 d-none d-lg-block mx-auto" style="flex-grow: 0.4">
-            <div class="search-container d-flex align-items-center" style="background-color: #fff">
-              <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
+            <form @submit.prevent="submitSearchForm" class="search-container d-flex align-items-center" style="background-color: #fff">
+              <label @click="submitSearchForm" for="search-input" type="button" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
               <input v-model="freeSearch" id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
-            </div>
+            </form>
             <div class="bg-white filter-body">
               <div class="filter-container theme-filter">
                 <div class="position-relative multi-select-filter" style="box-shadow: none; border-bottom: 1px solid rgba(41, 47, 51, 0.06); height: 4.4rem">
@@ -238,8 +238,8 @@
             <transition-group>
               <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
                 <div class="p-0" style="flex: 0 0 36%">
-                  <div class="position-relative w-100 h-100">
-                    <img class="img-fluid img-fill" fluid :src="normalResult?.cover" />
+                  <div class="position-relative w-100 h-100" style="overflow: hidden">
+                    <img @mouseenter="scaleImg('out', $event)" @mouseleave="scaleImg('in', $event)" class="img-fluid img-fill" style="transform: scale(1.2)" fluid :src="normalResult?.cover" />
                     <svg
                       style="position: absolute; left: 0; top: 50%; transform: translateY(-50%)"
                       class="mr-3"
@@ -331,7 +331,7 @@
               <div class="d-flex position-relative mb-5" v-for="lastSessionResult in lastSessionResults" :key="lastSessionResult">
                 <div class="p-0" style="flex: 0 0 36%; box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
                   <div class="position-relative w-100 h-100">
-                    <img class="img-fluid img-fill" fluid :src="lastSessionResult?.cover" />
+                    <img @mouseenter="scaleImg('out', $event)" @mouseleave="scaleImg('in', $event)" class="img-fluid img-fill" fluid :src="lastSessionResult?.cover" />
                     <svg
                       style="position: absolute; left: 0; top: 50%; transform: translateY(-50%)"
                       class="mr-3"
@@ -426,7 +426,7 @@
               <div class="d-flex position-relative mb-5" v-for="requestedTripResult in requestedTripResults" :key="requestedTripResult">
                 <div class="p-0" style="flex: 0 0 36%">
                   <div class="position-relative w-100 h-100">
-                    <img class="img-fluid img-fill" fluid :src="requestedTripResult?.cover" />
+                    <img @mouseenter="scaleImg('out', $event)" @mouseleave="scaleImg('in', $event)" class="img-fluid img-fill" fluid :src="requestedTripResult?.cover" />
                     <svg
                       style="position: absolute; left: 0; top: 50%; transform: translateY(-50%)"
                       class="mr-3"
@@ -676,6 +676,10 @@ export default {
     }
   },
   methods: {
+    scaleImg(dir, event) {
+      if (dir === 'out') gsap.to(event.target, { scale: 1, duration: 3, ease: 'power3.out' })
+      else gsap.to(event.target, { scale: 1.2, duration: 3, ease: 'power3.out' })
+    },
     getAvatarKeys(course) {
       return course.wishlistUsers?.map((user) => user.avatarKey)
     },
@@ -890,7 +894,7 @@ export default {
 }
 .btn-home:hover {
   background-color: #292f33;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .search-filter-div {
   display: flex;
@@ -918,7 +922,7 @@ export default {
 }
 .multi-select-filter {
   box-shadow: 0px 0px 1px rgba(41, 47, 51, 0.2);
-  transition: all 0.3s ease !important;
+  transition: all 0.2s ease !important;
 }
 .divider {
   display: inline-block;

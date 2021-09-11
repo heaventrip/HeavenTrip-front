@@ -679,7 +679,7 @@
 
 .upload-container .vue-image-crop-upload .vicp-wrap .vicp-operate a {
   border: 1px solid white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   position: relative;
   float: left;
   display: block;

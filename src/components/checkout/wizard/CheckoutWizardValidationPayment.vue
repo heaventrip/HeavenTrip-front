@@ -131,7 +131,7 @@ export default {
   letter-spacing: 0.1rem;
   color: white;
   border: 0;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .stripe-redirect-button:hover {
   background-color: #d82558;

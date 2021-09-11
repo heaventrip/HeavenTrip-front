@@ -45,18 +45,17 @@
           </div>
         </div>
         <div class="guide-word__text">
-          <h6 class="head text-uppercase text-grey py-3 mb-1" style="width: max-content; border-top: 1px dashed #292f33; border-bottom: none">Mot du Moniteur…</h6>
+          <h6 class="head text-uppercase text-grey py-3 mb-0" style="width: max-content; border-top: 1px dashed #292f33">Mot du Moniteur…</h6>
+          <div style="height: 1px; border-top: 1px dashed #292f33; width: 200px"></div>
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
-              <p class="content pt-3 text-grey" style="line-height: 25px">
-                {{ course?.staffs.find((el) => el.role === 'Guide')?.description }}
-              </p>
+              <p class="content pt-3 text-grey" style="line-height: 25px" v-html="course?.staffs.find((el) => el.role === 'Guide')?.description"></p>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
               <p class="content pt-3 text-white" style="line-height: 24px">
                 testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste
-                testeste testeste testeste testeste testeste
+                testeste testeste testeste testseste testeste
               </p>
               <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
@@ -96,9 +95,12 @@
         </div>
         <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
         <transition name="fade">
-          <p :key="activeSportTab" class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">
-            {{ activeSportTab?.description || course.sports[0].description }}
-          </p>
+          <p
+            :key="activeSportTab"
+            class="content"
+            style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem"
+            v-html="activeSportTab?.description || course.sports[0].description"
+          ></p>
         </transition>
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
@@ -213,17 +215,21 @@
         <p class="content">
           En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.
         </p>
-        <ul class="activity-list list-unstyled mb-0">
-          <li v-for="(alternative, index) in altCourses" :key="alternative" :class="[index === altCourses.length - 1 ? 'pb-0' : '']">
+        <ul class="activity-list list-unstyled mb-0 pt-2">
+          <li
+            v-for="(alternative, index) in altCourses"
+            :style="altCourses.length === 1 ? 'border-top: 1px dashed #dbdbdb' : ''"
+            :key="alternative"
+            :class="[index === altCourses.length - 1 ? 'pb-0' : '']"
+          >
             <h5 class="activity-list-head mb-0">
               <InlineSvg v-if="alternative.picto" fill="#d82558" height="35" class="d-inline-block mr-4" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
               <span class="d-inline-block align-middle">{{ alternative.title }}</span>
             </h5>
             <ul class="list-unstyled text-uppercase activity-content-list justify-content-end mb-0">
-              <li class="optional-activity__info-item">
-                Durée :&nbsp;&nbsp;<strong>{{ alternative.duration }}journée{{ alternative.duration > 1 ? 's' : '' }}</strong>
+              <li v-for="altInfo in alternative.alternativeInfos" :key="altInfo" class="optional-activity__info-item">
+                <strong>{{ altInfo.title }} :</strong>&nbsp;&nbsp;{{ altInfo.description }}
               </li>
-              <li class="optional-activity__info-item">plongée :&nbsp;&nbsp;<strong>2</strong></li>
               <li class="optional-activity__info-item--price">
                 <strong>{{ alternative.price }}€</strong>&nbsp;/pers.
               </li>

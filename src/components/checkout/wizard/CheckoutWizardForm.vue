@@ -4,7 +4,13 @@
       <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase pr-4">Complète la réservation de :</h6>
     </div>
     <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #f1f1f1"></div>
-    <div class="participant-img-container position-relative" :class="{ 'participant-opacity': currForm !== 'booker' }">
+    <div
+      @mouseenter="bookerAvatarHovered = true"
+      @mouseleave="bookerAvatarHovered = false"
+      class="participant-img-container"
+      :class="{ 'participant-opacity': currForm !== 'booker' && !bookerAvatarHovered }"
+      type="button"
+    >
       <div class="d-inline-block" style="position: relative; margin-left: 3rem">
         <img
           v-if="avatarKey"
@@ -14,19 +20,47 @@
           style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
         />
         <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
+        <transition name="fade">
+          <InlineSvg
+            v-show="false"
+            :src="require('@/assets/svg/edit-booker.svg')"
+            class="mr-2"
+            height="70"
+            style="border-radius: 50%; border: 1px solid #292f33; position: absolute; left: 0; top: 0"
+            fill="red"
+          />
+        </transition>
         <span class="participant-check"></span>
       </div>
-      <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ booker.infos.firstName || 'Participant 1' }}</strong>
+      <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName || `Participant` }}</strong>
     </div>
     <div
       class="participant-add position-relative d-flex align-items-center"
+      type="button"
+      @mouseenter="participantAvatarHovered = true"
+      @mouseleave="participantAvatarHovered = false"
       v-for="(extraParticipantForHeader, index) in extraParticipants"
       :key="extraParticipantForHeader"
-      :class="{ 'participant-opacity': extraParticipantForHeader !== localExtraParticipants[currFormParticipant] || currForm !== 'extraParticipant' }"
+      :class="{ 'participant-opacity': (extraParticipantForHeader !== localExtraParticipants[currFormParticipant] || currForm !== 'extraParticipant') && !participantAvatarHovered }"
     >
       <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
-      <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="70" fill="#292f33" />
-      <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
+      <div style="position: relative">
+        <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="70" fill="#292f33" :style="participantAvatarHovered ? 'filter: opacity(0.3)' : ''" />
+        <transition name="fade">
+          <InlineSvg
+            v-show="false"
+            :src="require('@/assets/svg/edit-booker.svg')"
+            class="mr-2"
+            height="70"
+            style="border-radius: 50%; border: 1px solid #292f33; position: absolute; left: 0; top: 0"
+            fill="red"
+          />
+        </transition>
+      </div>
+      <div>
+        <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
+        <span @click.prevent="localExtraParticipants.splice(index, 1)" type="button" class="d-block mt-1 text-danger text-uppercase" style="font-size: 0.75rem">Retirer</span>
+      </div>
     </div>
   </div>
   <transition name="fade" mode="out-in" @enter="scroll">
@@ -119,7 +153,7 @@
       <div class="card-body border-top">
         <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
         <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-        <textarea v-model="localBooker.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+        <textarea placeholder="(Faculatif)" v-model="localBooker.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
       </div>
     </div>
     <div v-else>
@@ -236,7 +270,12 @@
           <div class="card-body border-top">
             <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
             <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-            <textarea v-model="localExtraParticipants[currFormParticipant].booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+            <textarea
+              placeholder="(Faculatif)"
+              v-model="localExtraParticipants[currFormParticipant].booking.comment"
+              class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5"
+              rows="5"
+            ></textarea>
           </div>
         </div>
       </transition>
@@ -264,6 +303,8 @@ export default {
   emits: ['complete', 'updated-participants', 'updated-booker', 'updated-isLastParticipant'],
   data() {
     return {
+      bookerAvatarHovered: false,
+      participantAvatarHovered: false,
       currFormParticipant: 0,
       currFormStep: 0,
       currForm: 'booker',
@@ -442,7 +483,7 @@ export default {
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   color: #fff;
 }
 .btn-next-participant:hover {

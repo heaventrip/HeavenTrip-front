@@ -142,14 +142,14 @@ export default {
 }
 .back-to-home-link {
   border-right: 1px solid white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .back-to-home-link:hover {
   color: #292f33 !important;
   background-color: white !important;
 }
 .descriptif-link {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .descriptif-link:hover {
   background-color: white;

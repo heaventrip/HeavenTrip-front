@@ -97,7 +97,7 @@ body.modal-open::after {
 /* VERTICAL SLIDE UP */
 .connection-slide-up-enter-active,
 .connection-slide-up-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .connection-slide-up-enter-from {
   transform: translateY(300px);
@@ -109,7 +109,7 @@ body.modal-open::after {
 /* connection SLIDE DOWN */
 .connection-slide-down-enter-active,
 .connection-slide-down-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .connection-slide-down-enter-from {
   transform: translateY(-300px);
@@ -121,7 +121,7 @@ body.modal-open::after {
 /* VERTICAL SLIDE UP */
 .vertical-slide-up-enter-active,
 .vertical-slide-up-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .vertical-slide-up-enter-from {
   transform: translateY(20px);
@@ -135,7 +135,7 @@ body.modal-open::after {
 /* VERTICAL SLIDE DOWN */
 .vertical-slide-down-enter-active,
 .vertical-slide-down-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .vertical-slide-down-enter-from {
   transform: translateY(-20px);
