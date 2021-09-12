@@ -299,7 +299,7 @@ export default {
   margin: auto;
 }
 .nav__item {
-  font-weight: 300 !important;
+  font-weight: 400 !important;
   transition: all 0.2s ease !important;
 }
 .nav__item:hover {

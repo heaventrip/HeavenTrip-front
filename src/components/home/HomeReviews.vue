@@ -128,7 +128,7 @@ export default {
 }
 .reviews__comment {
   width: 38%;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .review-comment__date {
   text-transform: uppercase;

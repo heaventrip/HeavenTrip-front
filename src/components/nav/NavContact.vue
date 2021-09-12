@@ -84,7 +84,7 @@ export default {
 }
 .newsletter-form button {
   padding: 0 1.5rem;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .mail-input {
   background-color: transparent;
@@ -99,7 +99,7 @@ export default {
   padding-left: 0;
 }
 .btn-dark {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   padding: 0.6rem;
 }
 input {

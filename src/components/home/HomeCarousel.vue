@@ -22,9 +22,9 @@
       </div>
     </div>
     <div class="container-fluid">
-      <div class="d-flex align-items-center mt-4" style="margin-bottom: 5rem">
+      <div class="d-flex align-items-center mt-0" style="margin-bottom: 5rem">
         <div class="col-12 tab-content order-lg-3" id="pills-tabContent">
-          <div class="d-flex align-items-center" style="margin: 0 4vw">
+          <div class="d-flex align-items-center" style="margin: 3vh 4vw">
             <div class="slider-buttons d-flex">
               <div @click="slideLeft" type="button" style="">
                 <svg xmlns="http://www.w3.org/2000/svg" class="slider-buttons__left" width="50" viewBox="0 0 40 40" fill="#292f33">
@@ -53,7 +53,7 @@
                 </svg>
               </div>
             </div>
-            <div style="min-width: 60px; transform: translateY(-2px)">
+            <div style="min-width: 100px; transform: translateY(-2px)">
               <transition :name="counterSlideDir" mode="out-in">
                 <span class="slider-counter__current">{{ firstCardIndex + 1 }}</span>
               </transition>
@@ -327,7 +327,7 @@ export default {
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
-  padding: 0.5rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   transition: all 0.2s ease;
   border: 1px solid #292f33;
 }

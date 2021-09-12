@@ -79,7 +79,7 @@ export default {
   cursor: pointer;
   margin: 0 3rem;
   color: #b4b4b4;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-family: Oswald, sans-serif;
   font-weight: 600;
   text-transform: uppercase;

@@ -506,7 +506,7 @@ export default {
 }
 
 .participant-name {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .card {
   border: none;

@@ -3,7 +3,7 @@
     <div class="content d-flex align-items-center justify-content-between w-100 mt-5 mt-lg-0" v-if="featuredCourse">
       <div>
         <div style="width: 115%">
-          <div class="top-block d-flex align-items-center" style="width: 100%">
+          <div class="top-block d-flex align-items-center" style="width: 90%">
             <svg xmlns="http://www.w3.org/2000/svg" height="170" viewBox="0 0 100 100">
               <g id="Calque_2" data-name="Calque 2">
                 <g id="Calque_1-2" data-name="Calque 1">
@@ -27,15 +27,16 @@
             <!-- <img class="head-icon d-inline-block" fluid :src="require('@/assets/svg/picto-ski.svg')" /> -->
             <!-- <img class="head-pin-icon d-none d-lg-inline-block" fluid :src="require('@/assets/images/head-pin.png')" /> -->
             <div class="title-activities">
-              <h1 class="headsport heading text-uppercase mb-2">{{ featuredCourse.sports?.[0].name }}</h1>
+              <h1 class="headsport heading text-uppercase mb-3">{{ featuredCourse.name }}</h1>
               <h5 class="header-infos__sub-title d-block"><i class="fas fa-caret-right mr-1"></i> {{ featuredCourse.spot?.name }}</h5>
             </div>
           </div>
           <div class="d-flex">
-            <Tag text="4 départs" color="white" class="product-infos__tag" height="30px" />
+            <Tag text="4 départs" color="white" class="tag__content tag--fullscreen" height="30px" />
             <InlineProductInfos
               :infos="[featuredCourse.country?.name, `${featuredCourse.duration} jours`, featuredCourse.level?.name, `${featuredCourse.max} places`]"
               :icons="['globe', 'timer', 'intensity-2-white', 'people']"
+              :src="require(`@/assets/svg/${featuredCourse.sports[0].picto}.svg`)"
               pr="0rem"
               :border-top="false"
               color="white"
@@ -158,8 +159,8 @@ export default {
   }
 }
 .title-activities {
-  width: 90%;
-  margin-left: 2.5rem;
+  width: 86%;
+  margin-left: 2rem;
   position: relative;
   top: 1px;
   padding: 1.4rem 0;
@@ -169,8 +170,7 @@ export default {
   font-size: 0.9rem;
 }
 .product-infos__tag {
-  margin-right: 2.5rem;
-  margin-top: 0.3rem;
+  margin-right: 2rem;
 }
 .header-infos__sub-title {
   font-size: 1.4rem;
@@ -179,9 +179,8 @@ export default {
   text-transform: uppercase;
 }
 .headsport {
-  font-weight: 500 !important;
-  font-size: 3rem !important;
-  letter-spacing: 3px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3.2px !important;
 }
 .top-block__svg {
   max-width: 9rem;
@@ -270,7 +269,7 @@ export default {
   margin-right: 10px;
 }
 .top-block {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.9rem;
 }
 .list-info {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
@@ -279,7 +278,7 @@ export default {
 .trippers-div {
   margin-top: 0.4rem;
   border-top: 1px solid rgba(250, 250, 250, 0.35);
-  padding-top: 1.6rem;
+  padding-top: 1.2rem;
   width: max-content;
 }
 .icons {

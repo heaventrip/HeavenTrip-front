@@ -83,24 +83,24 @@ export default {
 }
 .block {
   border-top: 1px solid rgba(250, 250, 250, 0.35);
-  width: 100%;
+  width: 72%;
   height: max-content;
 }
 .block__text-content {
-  margin-left: 0.6rem;
+  margin-left: 0.7rem;
   display: inline-block;
   vertical-align: middle;
-  font-size: 0.73rem;
-  letter-spacing: 0.08rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.1rem;
 }
 @media (max-width: 1441px) {
   .block {
-    width: 72%;
+    width: 82%;
     padding-bottom: 1.1rem;
   }
   .block__text-content {
     margin-left: 0.7rem;
-    font-size: 0.73rem;
+    font-size: 0.85rem;
     letter-spacing: 0.03rem;
   }
 }
