@@ -10,10 +10,10 @@
         <div class="div-group">
           <label class="form-label text-uppercase font-weight-bold d-block" style="margin-bottom: 1.5rem">Faut choisir !</label>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label :class="[gender === 'female' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'female'">
+            <label :class="[gender === 'f' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4" @click="gender = 'f'">
               <input type="radio" name="gender" /> Femme
             </label>
-            <label :class="[gender === 'male' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'male'">
+            <label :class="[gender === 'm' ? 'profile-gender-btn-selected' : '']" class="btn profile-gender-btn rounded-0 btn-lg px-4 group-btn" @click="gender = 'm'">
               <input type="radio" name="gender" /> Homme
             </label>
           </div>
@@ -212,7 +212,6 @@ export default {
   computed: {
     finalUser() {
       let user = this.$props.user
-      console.log(this.avatarKey)
       return Object.assign(user, { gender: this.gender, description: this.description, avatarKey: this.avatarKey })
     }
   },
@@ -240,7 +239,7 @@ export default {
           user: this.finalUser
         })
         .then((res) => {
-          this.$notify({ type: 'info', text: 'Un mail de confirmation vient de vous être envoyé' })
+          this.$notify({ group: 'modal', type: 'info', text: 'Un mail de confirmation vient de vous être envoyé' })
           this.$emit('submitted-form')
           this.stepper.bio.valid = true
           this.stepper.success.authorize = true
@@ -252,7 +251,12 @@ export default {
         })
     },
     resendEmailConfirmation() {
-      //todo: resend email confirmation
+      this.$axios
+        .post('/send-confirmation-email', {
+          email: this.finalUser.email
+        })
+        .then(() => this.$notify({ group: 'modal', type: 'success', text: 'Un nouvel email a été envoyé' }))
+        .catch((err) => this.$notify({ group: 'modal', type: 'error', text: err.response?.data?.message || err.message }))
     },
     fileSet() {
       this.$nextTick(() => {
@@ -285,8 +289,7 @@ export default {
       this.showAvatarValidationButton = true
       this.showLoaderUploadImg = false
       this.avatarKey = jsonData.upload.public_id
-      localStorage.setItem('user.avatarId', jsonData.upload.public_id)
-      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${localStorage['user.avatarId']}.jpg`
+      this.imgDataUrl = `https://res.cloudinary.com/heaventrip/image/upload/avatars/${this.avatarKey}.jpg`
       this.$parent.$forceUpdate()
     },
     /**
@@ -407,7 +410,7 @@ export default {
   padding-top: 18px;
   margin-bottom: 50px;
   background: #292f33;
-  color: #ebebeb;
+  color: #f1f1f1;
   border: 1px solid #ffffff33;
 }
 .descr-text {
@@ -430,7 +433,7 @@ export default {
   padding-top: 12px;
   text-transform: uppercase;
   font-weight: 400;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   color: #292f33;
   margin: initial;
   margin-left: 196px;
@@ -446,7 +449,7 @@ export default {
 }
 .profile-gender-btn {
   border: 1px solid white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   color: white;
 }
 .profile-gender-btn-selected {

@@ -43,7 +43,7 @@
           <div class="like-div">
             <h5 class="content-head">Tu vas adorer :</h5>
             <ul class="list-unstyled text-uppercase content-list">
-              <li v-for="willLove in course.willLoves" :key="willLove">
+              <li v-for="willLove in course?.willLoves" :key="willLove">
                 <a @click.prevent class="text-reset" style="cursor: default" href=""><i class="fas fa-plus mr-2"></i>{{ willLove?.name }}</a>
               </li>
             </ul>
@@ -58,7 +58,7 @@
         <p class="sub-heading mb-2">Suis-je prêt ?</p>
         <h4 class="heading mb-0">Niveau & intensité</h4>
       </div>
-      <h6 @click="levelsModal = true" class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
+      <h6 @click="levelsModal = true" type="button" class="need-level text-uppercase d-none d-lg-flex align-items-center ml-auto mb-0">
         <img class="img_icon mr-2" fluid :src="require('@/assets/images/svg/PICTO_GRILLE_NIVEAUX.svg')" />
         <span>voir la grille <br />des niveaux</span>
         <teleport to="#modal">
@@ -85,14 +85,24 @@
                   <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-level1" role="tabpanel" aria-labelledby="v-pills-level1-tab">
                       <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
-                      <h5 class="surfcontent-head mb-4">TOUS NIVEAUX</h5>
-                      <ul class="mb-0 surflist">
-                        aaaaa
-                      </ul>
+                      <h5 class="surfcontent-head mb-4">Tous niveaux</h5>
+                      <ul class="mb-0 surflist" v-html="course?.levelInfos.find((el) => el.level.step === 1)?.description"></ul>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-level2" role="tabpanel" aria-labelledby="v-pills-level2-tab">qwertyu</div>
-                    <div class="tab-pane fade" id="v-pills-level3" role="tabpanel" aria-labelledby="v-pills-level3-tab">asdfghjk</div>
-                    <div class="tab-pane fade" id="v-pills-level4" role="tabpanel" aria-labelledby="v-pills-level4-tab">zxcvbnm,</div>
+                    <div class="tab-pane fade" id="v-pills-level2" role="tabpanel" aria-labelledby="v-pills-level2-tab">
+                      <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
+                      <h5 class="surfcontent-head mb-4">Initié</h5>
+                      <ul class="mb-0 surflist" v-html="course?.levelInfos.find((el) => el.level.step === 2)?.description"></ul>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-level3" role="tabpanel" aria-labelledby="v-pills-level3-tab">
+                      <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
+                      <h5 class="surfcontent-head mb-4">Confirmé</h5>
+                      <ul class="mb-0 surflist" v-html="course?.levelInfos.find((el) => el.level.step === 3)?.description"></ul>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-level4" role="tabpanel" aria-labelledby="v-pills-level4-tab">
+                      <h4 class="surfhead text-center"><img class="align-text-bottom mr-3" fluid :src="require('@/assets/images/svg/PICTO_KITESURF.svg')" /> KITESURF</h4>
+                      <h5 class="surfcontent-head mb-4">Expert</h5>
+                      <ul class="mb-0 surflist" v-html="course?.levelInfos.find((el) => el.level.step === 4)?.description"></ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -163,7 +173,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #ebebeb; padding-left: 6rem">
+        <div class="col-12 col-lg-6" style="height: min-content; border-left: 1px solid #f1f1f1; padding-left: 6rem">
           <div class="content-head equip mb-3">
             <i class="far fa-times-circle mr-2 h5 align-text-top mb-0"></i>
             <span class="d-inline-block" style="vertical-align: baseline">Non inclus :</span>
@@ -244,7 +254,7 @@ export default {
 }
 .options-item:not(:last-of-type) {
   padding-right: 1rem;
-  border-right: 1px dashed #ebebeb;
+  border-right: 1px dashed #7c7c7ca6;
 }
 .chapter-block {
   margin-bottom: 8rem;

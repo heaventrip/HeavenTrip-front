@@ -2,26 +2,28 @@
   <div class="login-signup-tab">
     <div class="card border-0">
       <div class="card-body">
-        <div class="row">
-          <div class="col-12 col-lg-4">
-            <div class="participants-div align-items-center">
-              <img
-                v-if="avatarKey"
-                class="participant-img mr-3"
-                fluid
-                :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
-                style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
-              />
-              <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
-              <h4 class="head font-weight-bold text-uppercase">
-                {{ localBooker.infos.firstName || 'Participant' }}
-                <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.4' : '']"
-                  ><i class="fas fa-edit mr-2"></i> Modifier</span
-                >
-              </h4>
+        <div class="participants-div flex-row align-items-center justify-content-start offset-1 mt-4 pb-5" style="border-bottom: 1px solid #ebebeb">
+          <img
+            v-if="avatarKey"
+            class="participant-img"
+            fluid
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
+            style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none; margin-right: 1rem"
+          />
+          <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="mr-3" fill="#292f33" />
+          <h4 class="head font-weight-bold text-uppercase mb-0">
+            <div>
+              1
+              <InlineSvg :src="require('@/assets/svg/triangle-right.svg')" height="8" class="mx-2" fill="#292f33" />
+              {{ localBooker.infos.firstName || 'Participant' }}
             </div>
-          </div>
-          <div class="col-12 col-lg-8">
+            <span type="button" @click="allowForm = true" class="d-block mt-2 text-danger text-uppercase" :style="[allowForm === true ? 'opacity: 0.2' : '']"
+              ><i class="fas fa-edit mr-2"></i> Modifier</span
+            >
+          </h4>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-9 offset-1">
             <form class="pt-5" :class="{ 'form--disallowed': !allowForm }">
               <div class="row">
                 <div class="col-12 col-lg-5">
@@ -91,6 +93,7 @@
                         Homme
                       </div>
                     </div>
+                    <div v-if="v$.localBooker.infos.gender.$errors.length" class="field-error-message">{{ v$.localBooker.infos.gender.$errors[0].$message }}</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-5">
@@ -109,14 +112,15 @@
                 </div>
                 <div class="col-12 col-lg-5">
                   <div class="form-group has-float-label">
-                    <input
+                    <CountrySelect
                       id="booker-country"
-                      type="text"
-                      name=""
-                      placeholder=" "
-                      class="form-control"
-                      :class="{ 'field-error': v$.localBooker.infos.country.$error }"
+                      style="position: relative; right: 3px"
                       v-model="localBooker.infos.country"
+                      :country="localBooker.infos.country"
+                      :countryName="true"
+                      :removePlaceholder="true"
+                      topCountry="France"
+                      className="form-control"
                     />
                     <label for="booker-country">Pays*</label>
                     <div v-if="v$.localBooker.infos.country.$errors.length" class="field-error-message">{{ v$.localBooker.infos.country.$errors[0].$message }}</div>
@@ -175,9 +179,8 @@
 </template>
 
 <script>
-import { required, helpers } from '@vuelidate/validators'
+import { required, helpers, numeric } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
-import { isLoggedIn } from '@/utils/auth'
 
 export default {
   name: 'CheckoutWizardBooker',
@@ -189,7 +192,7 @@ export default {
   data() {
     return {
       currUser: null,
-      allowForm: false,
+      allowForm: '',
       localBooker: this.$props.booker
     }
   },
@@ -207,7 +210,8 @@ export default {
             required: helpers.withMessage('Ce champ est requis', required)
           },
           phone: {
-            required: helpers.withMessage('Ce champ est requis', required)
+            required: helpers.withMessage('Ce champ est requis', required),
+            numeric: helpers.withMessage('Numéro invalide', numeric)
           },
           gender: {
             required: helpers.withMessage('Ce champ est requis', required)
@@ -240,67 +244,18 @@ export default {
       handler(error) {
         if (!error) this.$emit('complete', true)
         else this.$emit('complete', false)
+
+        this.allowForm ||= error
       }
     }
   },
-  methods: {
-    isLoggedIn() {
-      return isLoggedIn()
-    },
-    updateUser() {
-      this.$axios
-        .put('/users/current', { user: this.currUser })
-        .then((res) => {
-          this.$notify({ type: 'success', text: 'Mis à jour avec succès' })
-          this.currUser = res.data.user
-        })
-        .catch((err) => this.$notify({ type: 'error', text: err.response.data.message }))
-    }
-  },
-  created() {
-    if (!isLoggedIn()) return
-
-    const AUTH_TOKEN_KEY = 'authToken'
-    const token = localStorage.getItem(AUTH_TOKEN_KEY)
-    this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
-    // this.currUser = await this.getUserInfo()
-    this.$axios
-      .get('/users/current')
-      .then((res) => {
-        this.currUser = res.data.user
-        this.$root.initialLoading = false
-      })
-      .catch((err) => {
-        this.$notify({ type: 'error', text: err.message })
-        this.$root.initialLoading = false
-      })
-  }
-  // created() {
-  //   if (!isLoggedIn()) return
-
-  //   const AUTH_TOKEN_KEY = 'authToken'
-  //   const token = localStorage.getItem(AUTH_TOKEN_KEY)
-  //   this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
-  //   // this.currUser = await this.getUserInfo()
-  //   this.$axios
-  //     .get('/users/current')
-  //     .then((res) => {
-  //       this.currUser = res.data.user
-  //       this.$root.initialLoading = false
-  //     })
-  //     .catch((err) => {
-  //       this.$notify({ type: 'error', text: err.message })
-  //       this.$root.initialLoading = false
-  //     })
-  // }
+  methods: {}
 }
 </script>
 
 <style scoped>
 .gender-btn:not(.bg-grey):hover {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
   color: #292f33;
 }
 .card {
@@ -334,6 +289,8 @@ export default {
   margin-bottom: 2.5rem;
 }
 .form-control {
+  font-family: Muli, sans-serif;
+  font-size: 0.8rem;
   padding-left: 0;
   border-radius: 0;
   border: none;

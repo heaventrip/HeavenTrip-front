@@ -10,8 +10,8 @@
         </div>
         <div class="left-panel__content p-4">
           <div class="d-flex justify-content-center align-items-center my-auto">
-            <div style="position: relative; width: 40%" class="mr-3">
-              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`" />
+            <div style="position: relative; width: 20%" class="mr-3">
+              <img class="avatar-img" :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${currUser?.avatarKey}.jpg`" />
               <!-- TODO install component to update avatar -->
               <div
                 v-if="false"
@@ -28,6 +28,25 @@
         </div>
       </div>
       <div v-if="currUser" class="cards-container">
+        <div class="cards-container__reservation-row">
+          <div class="card border-0 w-100">
+            <div class="card-body">
+              <div class="card__title align-items-center justify-content-between" style="margin-bottom: 2rem">
+                <div>Mes réservations</div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-7">
+                  <div style="font-family: Muli, sans-serif; font-size: 0.8rem">
+                    Attention, cette action est irréversible ! Si tu décides de supprimer ton compte tu perdras toutes tes données et tes bonus.
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2 offset-3">
+                  <Button style="transform: translateY(-50%)" text="Supprimer" px="1rem" color="grey" height="3rem" weight="bold" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="cards-container__first-row">
           <div class="card border-0">
             <div class="card-body">
@@ -144,6 +163,7 @@
                         v-model="currUser.country"
                         :country="currUser.country"
                         :countryName="true"
+                        :removePlaceholder="true"
                         topCountry="France"
                         className="form-control"
                       />
@@ -207,8 +227,6 @@
 
 <script>
 import Button from '@/components/elements/Button.vue'
-import { logoutUser } from '@/utils/auth'
-import { getUserInfo } from '@/utils/auth'
 import { isLoggedIn } from '@/utils/auth'
 
 export default {
@@ -309,16 +327,13 @@ export default {
       this.$axios
         .put('/users/current', { user: this.currUser })
         .then((res) => {
-          this.$notify({ type: 'success', text: 'Mis à jour avec succès' })
+          this.$notify({ group: 'app', type: 'success', text: 'Mis à jour avec succès' })
           this.currUser = res.data.user
           this.form1Modified = false
           this.form2Modified = false
           this.form3Modified = false
         })
-        .catch((err) => this.$notify({ type: 'error', text: err.response.data.message }))
-    },
-    getUserInfo() {
-      return getUserInfo()
+        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response.data.message }))
     },
     isLoggedIn() {
       return isLoggedIn()
@@ -335,9 +350,11 @@ export default {
     const token = localStorage.getItem(AUTH_TOKEN_KEY)
     this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     // this.currUser = await this.getUserInfo()
+
     this.$axios
       .get('/users/current')
       .then((res) => {
+        console.log(res.data.user)
         this.currUser = res.data.user
         this.$root.initialLoading = false
         console.log(res.data.user)
@@ -418,12 +435,11 @@ label {
 .left-panel__content {
   width: inherit;
   position: fixed;
-  top: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 70vh;
+  height: 100vh;
   box-shadow: rgb(240, 240, 240) 0px 0px 6px;
 }
 .top-bar {
@@ -469,7 +485,7 @@ label {
 }
 .card {
   border: none;
-  box-shadow: rgb(240, 240, 240) 0px 0px 6px;
+  box-shadow: rgb(240, 240, 240) 0px 0px 2px;
   border-radius: 0 !important;
   width: 48%;
   padding: 1rem 2rem;

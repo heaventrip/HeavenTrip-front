@@ -34,8 +34,11 @@ import VueGtag from 'vue-gtag-next'
 import VueCountryRegionSelect from 'vue3-country-region-select'
 import VueElementLoading from 'vue-element-loading'
 import Notifications from '@kyvg/vue3-notification'
+import mitt from 'mitt'
 
 const app = createApp(App)
+const emitter = mitt()
+
 app.component('InlineSvg', InlineSvg)
 app.component('PerfectScrollbar', PerfectScrollbar)
 app.component('VueElementLoading', VueElementLoading)
@@ -58,3 +61,4 @@ app.mount('#app')
 app.config.globalProperties.$axios = axios.create({ baseURL: 'https://heaventrip-dev.herokuapp.com/api/v1' })
 app.config.globalProperties.$contentful = require('contentful')
 app.config.globalProperties.$contentfulManagement = require('contentful-management')
+app.config.globalProperties.$emitter = emitter

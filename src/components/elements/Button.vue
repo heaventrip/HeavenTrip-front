@@ -36,7 +36,7 @@ export default {
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .bttn__text {
   position: relative;
@@ -104,7 +104,7 @@ export default {
 }
 @media only screen and (max-height: 950px) {
   .bttn {
-    height: 2.7rem !important;
+    max-height: 2.7rem !important;
   }
   .bttn__text--bold {
     font-size: 0.7rem;

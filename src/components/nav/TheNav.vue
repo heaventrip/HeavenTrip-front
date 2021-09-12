@@ -279,7 +279,7 @@ export default {
   color: rgba(250, 250, 250, 0.3) !important;
   border: none !important;
   font-family: Muli, sans-serif !important;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .subactivity-nav__item.active {
   font-weight: 800 !important;

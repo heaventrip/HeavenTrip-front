@@ -6,7 +6,7 @@
           v-if="avatarKey"
           class="participant-img mr-3"
           fluid
-          :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
+          :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
           style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
         />
         <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
@@ -44,18 +44,22 @@
                   <div class="form-group has-float-label pr-5">
                     <input v-model="extraParticipant.infos.firstName" class="form-control" type="text" name="" placeholder=" " />
                     <label>Prénom*</label>
+                    <div v-if="touched && !extraParticipant.infos.firstName" class="field-error-message">Ce champ est requis</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-4">
                   <div class="form-group has-float-label pr-5">
                     <input v-model="extraParticipant.infos.birthDate" type="date" name="" class="form-control" placeholder=" " required datepicker id="date" />
                     <label for="date">Date de naissance*</label>
+                    <div v-if="touched && !extraParticipant.infos.birthDate" class="field-error-message">Ce champ est requis</div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-4">
                   <div class="form-group has-float-label">
                     <input v-model="extraParticipant.infos.email" id="emailAddr" class="form-control" type="email" name="" placeholder=" " />
                     <label for="emailAddr">E-mail*</label>
+                    <div v-if="touched && !extraParticipant.infos.email" class="field-error-message">Ce champ est requis</div>
+                    <div v-else-if="touched && !isEmailValid(extraParticipant.infos.email)" class="field-error-message">L'email doit être au format xxx@xxx.xxx</div>
                   </div>
                 </div>
               </div>
@@ -76,16 +80,13 @@ export default {
   props: ['booker', 'avatar-key', 'extra-participants'],
   data() {
     return {
-      allowForm: false,
-      localExtraParticipants: this.$props.extraParticipants
+      localExtraParticipants: this.$props.extraParticipants,
+      touched: false
     }
   },
   computed: {
-    filled() {
-      return this.localExtraParticipants
-        .map((part) => Object.values(part.infos))
-        .flat()
-        .every((el) => el)
+    filledPrevious() {
+      return this.localExtraParticipants.map((part) => part.infos.firstName && part.infos.birthDate && this.isEmailValid(part.infos.email)).every((el) => el)
     }
   },
   watch: {
@@ -95,7 +96,7 @@ export default {
         this.$emit('updated-participants', val)
       }
     },
-    filled: {
+    filledPrevious: {
       immediate: true,
       handler(val) {
         if (val) this.$emit('complete', true)
@@ -109,6 +110,11 @@ export default {
       return email.match(validRegex) ? true : false
     },
     addParticipant() {
+      // display errors only after first participant is filled
+      if (this.localExtraParticipants.length > 0) this.touched = true
+
+      if (this.localExtraParticipants.length && !this.filledPrevious) return
+
       this.localExtraParticipants.push({
         infos: {
           firstName: '',
@@ -125,6 +131,10 @@ export default {
           insurance: ''
         }
       })
+      this.touched = false
+    },
+    touch() {
+      this.touched = true
     },
     test() {
       document.querySelector('.btn-add-participant').scrollIntoView({ behavior: 'smooth' })
@@ -149,11 +159,11 @@ export default {
   border-radius: 0 !important;
 }
 .card-booker {
-  background-color: #ebebeb38;
+  background-color: #f1f1f138;
 }
 .btn-add-participant,
 .btn-add-participant:active {
-  border: 1px solid #ebebeb;
+  border: 1px solid #f1f1f1;
   padding: 1.5rem;
   text-align: center;
   background-color: #fff;
@@ -161,7 +171,7 @@ export default {
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .btn-add-participant:hover {
   background-color: #292f33;
@@ -174,5 +184,14 @@ export default {
 .plus-icon {
   fill: #292f33;
   transition: fill 0.3s ease;
+}
+.field-error {
+  border-bottom: 1px solid tomato !important;
+}
+.field-error-message {
+  position: absolute;
+  font-family: Muli, sans-serif;
+  color: tomato;
+  font-size: 0.6rem;
 }
 </style>

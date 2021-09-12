@@ -3,7 +3,7 @@
     <div class="col-12 col-lg-6 offset-1" style="padding-top: 8rem padding-bottom: 4rem; top: 10vh">
       <CheckoutWizardValidationPayment @complete="$emit('complete')" :total-price="totalPrice" :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
-    <div class="col-12 col-lg-4 ml-auto p-0" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px">
+    <div class="col-12 col-lg-4 ml-auto p-0" style="box-shadow: rgba(235, 235, 235, 0.4) -1px 0px 8px; position: fixed; right: 0; height: 100%">
       <CheckoutWizardValidationRecap :avatar-key="avatarKey" :total-price="totalPrice" :course="course" :booker="booker" :extra-participants="extraParticipants" />
     </div>
   </div>

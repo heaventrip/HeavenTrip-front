@@ -1,13 +1,13 @@
 <template>
   <section class="result-section">
-    <div class="search-filter-div bg-white" style="position: sticky; top: 0; z-index: 10">
-      <router-link class="px-5 bg-danger d-flex align-items-center justify-content-around text-white home-ref" to="/">
-        <InlineSvg :src="require('@/assets/svg/home.svg')" height="24" fill="#fff" />
+    <div class="search-filter-div bg-white" style="position: sticky; top: 0; z-index: 10; height: 80px">
+      <router-link class="btn-home px-5 d-flex align-items-center justify-content-around text-white home-ref" to="/">
+        <InlineSvg :src="require('@/assets/svg/home.svg')" height="28" fill="#fff" />
       </router-link>
       <div class="result-div d-flex align-items-center p-3 px-5 pl-lg-5 w-100">
         <h4 class="pr-5 mr-5 mb-0 border-right border-dark count text-right font-weight-normal d-none d-md-block">
           <strong class="h6 d-block font-weight-bold mb-1">MA RECHERCHE</strong>
-          {{ normalResults.length }} séjour{{ normalResults.length > 1 ? 's' : '' }}
+          <div style="font-size: 0.8rem; padding-top: 0.15rem">{{ normalResults.length }} séjour trouvé{{ normalResults.length > 1 ? 's' : '' }}</div>
         </h4>
         <div class="d-md-flex align-items-center d-lg-none flex-1">
           <img class="mr-3 ml-4 head-img d-none d-md-block" fluid :src="require('@/assets/images/head-pin.png')" />
@@ -71,13 +71,13 @@
       <div class="container p-0">
         <div class="row">
           <div class="pr-lg-0 d-none d-lg-block mx-auto" style="flex-grow: 0.4">
-            <div class="search-container d-flex align-items-center" style="background-color: #fff">
-              <label for="search-input" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
+            <form @submit.prevent="submitSearchForm" class="search-container d-flex align-items-center" style="background-color: #fff">
+              <label @click="submitSearchForm" for="search-input" type="button" class="mb-0"><img class="mx-3" fluid :src="require('@/assets/images/search.png')" /></label>
               <input v-model="freeSearch" id="search-input" class="form-control border-0 rounded-0" type="text" name="" placeholder="Tape ici ta recherche manuelle …" />
-            </div>
+            </form>
             <div class="bg-white filter-body">
               <div class="filter-container theme-filter">
-                <div class="position-relative multi-select-filter" style="box-shadow: none; border-bottom: 1px solid rgba(41, 47, 51, 0.06); height: 4rem">
+                <div class="position-relative multi-select-filter" style="box-shadow: none; border-bottom: 1px solid rgba(41, 47, 51, 0.06); height: 4.4rem">
                   <div
                     class="d-flex align-items-center justify-content-around"
                     style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%"
@@ -238,8 +238,8 @@
             <transition-group>
               <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
                 <div class="p-0" style="flex: 0 0 36%">
-                  <div class="position-relative w-100 h-100">
-                    <img class="img-fluid img-fill" fluid :src="normalResult?.cover" />
+                  <div class="position-relative w-100 h-100" style="overflow: hidden">
+                    <img @mouseenter="scaleImg('out', $event)" @mouseleave="scaleImg('in', $event)" class="img-fluid img-fill" style="transform: scale(1.2)" fluid :src="normalResult?.cover" />
                     <svg
                       style="position: absolute; left: 0; top: 50%; transform: translateY(-50%)"
                       class="mr-3"
@@ -289,7 +289,7 @@
                       <div class="">
                         <span class="pad__content__avatars-title text-uppercase mb-0 d-none d-lg-inline-block"> <span>Trippers inscrits&nbsp;</span><span>aux sessions :</span> </span>
                         <div class="d-flex justify-content-between" style="margin-top: 0.3rem">
-                          <InlineAvatars :avatars="avatarKeys" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
+                          <InlineAvatars :avatars="getAvatarKeys(normalResult)" outline-color="white" :heart="false" spacing="-10px" mt="0.5rem" mb="0rem" />
                         </div>
                       </div>
                     </div>
@@ -331,7 +331,7 @@
               <div class="d-flex position-relative mb-5" v-for="lastSessionResult in lastSessionResults" :key="lastSessionResult">
                 <div class="p-0" style="flex: 0 0 36%; box-shadow: -1px 0px 6px rgba(41, 47, 51, 0.04)">
                   <div class="position-relative w-100 h-100">
-                    <img class="img-fluid img-fill" fluid :src="lastSessionResult?.cover" />
+                    <img @mouseenter="scaleImg('out', $event)" @mouseleave="scaleImg('in', $event)" class="img-fluid img-fill" fluid :src="lastSessionResult?.cover" />
                     <svg
                       style="position: absolute; left: 0; top: 50%; transform: translateY(-50%)"
                       class="mr-3"
@@ -426,7 +426,7 @@
               <div class="d-flex position-relative mb-5" v-for="requestedTripResult in requestedTripResults" :key="requestedTripResult">
                 <div class="p-0" style="flex: 0 0 36%">
                   <div class="position-relative w-100 h-100">
-                    <img class="img-fluid img-fill" fluid :src="requestedTripResult?.cover" />
+                    <img @mouseenter="scaleImg('out', $event)" @mouseleave="scaleImg('in', $event)" class="img-fluid img-fill" fluid :src="requestedTripResult?.cover" />
                     <svg
                       style="position: absolute; left: 0; top: 50%; transform: translateY(-50%)"
                       class="mr-3"
@@ -492,7 +492,7 @@
                         style="cursor: default"
                         text-color="#292f33"
                         text="Sur devis"
-                        background-color="#ebebeb"
+                        background-color="#f1f1f1"
                         px="1.5rem"
                         size=".8rem"
                         width="max-content"
@@ -564,7 +564,7 @@ export default {
         value: '',
         openDirection: 'down',
         caret: false,
-        options: [],
+        options: [{ value: '', label: 'Toutes les thématiques' }],
         createTag: false
       },
       activitySelection: {
@@ -646,30 +646,29 @@ export default {
     }
   },
   watch: {
+    '$route.query': {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        console.log('QUERY', val)
+      }
+    },
     selectionIsEmpty(val) {
       if (val) this.resetFilters()
     },
-    $route() {
-      if (this.$route.query) {
-        // this.submitSearchForm()
-      }
-    },
     normalResults(val) {
-      if (val.length) {
-        let arr = []
-        val.forEach((result) => {
-          // retrieve participants
-          result.wishlistUsers?.forEach((user) => this.avatarKeys.push(user.avatarKey))
+      if (!val.length) return
 
-          if (!result.sessions) return
+      let arr = []
+      val.forEach((result) => {
+        if (!result.sessions) return
 
-          result.sessions.forEach((session) => {
-            // push month of departure
-            arr.push(session.dateStart.split('-')[1])
-            this.sessionsArr = [...new Set(arr)]
-          })
+        result.sessions.forEach((session) => {
+          // push month of departure
+          arr.push(session.dateStart.split('-')[1])
+          this.sessionsArr = [...new Set(arr)]
         })
-      }
+      })
     },
     'countrySelection.value': {
       deep: true,
@@ -684,6 +683,13 @@ export default {
     }
   },
   methods: {
+    scaleImg(dir, event) {
+      if (dir === 'out') gsap.to(event.target, { scale: 1, duration: 3, ease: 'power3.out' })
+      else gsap.to(event.target, { scale: 1.2, duration: 3, ease: 'power3.out' })
+    },
+    getAvatarKeys(course) {
+      return course.wishlistUsers?.map((user) => user.avatarKey)
+    },
     clearAndResearch() {
       this.clearFilters()
       this.updateSearch()
@@ -796,69 +802,74 @@ export default {
       this.$nextTick(function () {
         filterDropdown.scrollTo({ top: filterDropdown.scrollHeight * -1 })
       })
-    }
-  },
-  created() {
-    let queryParams = this.$route.query
-
-    this.$axios.get('/sport-categories').then((res) => {
-      res.data.sportCategories.forEach((theme) => {
-        this.themeSelection.options.push({ value: theme.id, label: theme.name })
-      })
+    },
+    getQueryParams() {
+      let queryParams = this.$route.query
 
       if (queryParams.theme) {
         if (Array.isArray(queryParams.theme)) queryParams.theme.forEach((id) => this.$refs.themeMultiselect.select(id))
         else this.$refs.themeMultiselect.select(queryParams.theme)
       }
+      if (queryParams.activity) {
+        console.log('1')
+        if (Array.isArray(queryParams.activity)) {
+          console.log('2')
+          queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
+        } else {
+          console.log(queryParams.activity)
+          this.$refs.activityMultiselect.select(5)
+        }
+      }
+      if (queryParams.country) {
+        if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
+        else this.$refs.countryMultiselect.select(queryParams.country)
+      }
+      if (queryParams.spot) {
+        if (Array.isArray(queryParams.spot)) queryParams.spot.forEach((id) => this.$refs.spotMultiselect.select(id))
+        else this.$refs.spotMultiselect.select(queryParams.spot)
+      }
+      if (queryParams.level) {
+        if (Array.isArray(queryParams.level)) queryParams.level.forEach((id) => this.$refs.levelMultiselect.select(id))
+        else this.$refs.levelMultiselect.select(queryParams.level)
+      }
+
+      if (queryParams.length) this.submitSearchForm()
+    }
+  },
+  created() {
+    this.$axios.get('/sport-categories').then((res) => {
+      res.data.sportCategories.forEach((theme) => {
+        this.themeSelection.options.push({ value: theme.id, label: theme.name })
+      })
     })
     this.$axios.get('/sports').then((res) => {
       res.data.sports.forEach((sport) => {
         this.activitySelection.options.push({ value: sport.id, label: sport.name })
       })
-
-      if (queryParams.activity) {
-        if (Array.isArray(queryParams.activity)) queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
-        else this.$refs.activityMultiselect.select(queryParams.activity)
-      }
     })
     this.$axios.get('/countries').then((res) => {
       res.data.countries.forEach((country) => {
         this.countrySelection.options.push({ value: country.id, label: country.name })
       })
-
-      if (queryParams.country) {
-        if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
-        else this.$refs.countryMultiselect.select(queryParams.country)
-      }
     })
     this.$axios.get('/spots').then((res) => {
       res.data.spots.forEach((spot) => {
         this.spotSelection.options.push({ value: spot.id, label: spot.name })
       })
-
-      if (queryParams.spot) {
-        if (Array.isArray(queryParams.spot)) queryParams.spot.forEach((id) => this.$refs.spotMultiselect.select(id))
-        else this.$refs.spotMultiselect.select(queryParams.spot)
-      }
     })
     this.$axios.get('/levels').then((res) => {
       res.data.levels.forEach((level) => {
         this.levelSelection.options.push({ value: level.id, label: level.name })
       })
-
-      if (queryParams.level) {
-        if (Array.isArray(queryParams.level)) queryParams.level.forEach((id) => this.$refs.levelMultiselect.select(id))
-        else this.$refs.levelMultiselect.select(queryParams.level)
-      }
     })
-
-    if (queryParams) this.submitSearchForm()
   },
   mounted() {
+    this.getQueryParams()
     this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       tagContainer.closest('.filter-container').querySelector('.tags-container')?.append(tagContainer)
     })
+
     this.$root.initialLoading = false
   }
 }
@@ -867,7 +878,7 @@ export default {
 <style scoped>
 .pad__content__description {
   font-size: 0.85rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-family: Muli, sans-serif;
   line-height: 1.7;
 }
@@ -880,13 +891,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 2px solid #f1f1f1;
+  border-left: 1px solid #f1f1f1;
 }
 .sort-by-button:last-of-type {
-  border-right: 2px solid #f1f1f1;
+  border-right: 1px solid #f1f1f1;
 }
 .sort-by-button:hover {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
+}
+.btn-home {
+  background-color: #d82558;
+}
+.btn-home:hover {
+  background-color: #292f33;
+  transition: all 0.2s ease;
 }
 .search-filter-div {
   display: flex;
@@ -914,7 +932,7 @@ export default {
 }
 .multi-select-filter {
   box-shadow: 0px 0px 1px rgba(41, 47, 51, 0.2);
-  transition: all 0.3s ease !important;
+  transition: all 0.2s ease !important;
 }
 .divider {
   display: inline-block;
@@ -925,7 +943,7 @@ export default {
 .pad__content__tags__tag {
   border-radius: 20px;
   background-color: #fafafa;
-  border: 1px solid #ebebeb;
+  border: 1px solid #f1f1f1;
   color: #793f4e;
   text-transform: uppercase;
   padding: 0.5rem 1rem;

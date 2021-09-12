@@ -23,7 +23,7 @@
           <p class="sub-heading mb-2">Vos avis</p>
           <h4 class="heading mb-0">Les témoignages</h4>
         </div>
-        <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
+        <i class="fa fa-chevron-down h4 mb-0 arrow text-grey"></i>
       </div>
     </div>
   </div>

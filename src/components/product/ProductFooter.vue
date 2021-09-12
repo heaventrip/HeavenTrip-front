@@ -125,7 +125,7 @@
         </div>
       </div>
     </transition>
-    <div class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #ebebeb; background-color: #fff; position: relative; z-index: 10">
+    <div class="booking-bottom d-flex text-uppercase w-100" style="box-shadow: 0px -1px 2px #f1f1f1; background-color: #fff; position: relative; z-index: 10">
       <!-- <div class="d-flex align-items-center justify-content-around flex-1 text-white"> -->
       <div
         class="d-flex justify-content-between flex-1 mx-0 text-center"
@@ -198,8 +198,8 @@
           style="padding: 0 3rem; border-left: 1px solid rgba(255, 255, 255, 0.1)"
           :type="availSessions.length ? 'button' : ''"
         >
-          <div class="d-flex justify-content-around align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
-            <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start">
+          <div class="d-flex justify-content-center align-items-center btn-block rounded-0" role="group" aria-label="Basic example">
+            <div id="" class="text-uppercase date-buttons d-flex align-items-end Zebra_DatePicker_Icon_Wrapper start" style="margin-right: 3rem">
               <div v-if="choseBtn" class="text-right" :class="{ 'text--grey': !showSessions }">
                 <div class="pb-0">
                   <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />
@@ -598,17 +598,17 @@ export default {
 }
 .date-btn {
   color: #b4b4b480;
-  background-color: #ebebeb80;
+  background-color: #f1f1f180;
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
   font-size: 1.2rem;
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .date-btn--active {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
   color: #7c7c7c;
 }
 .date-btn:hover {
@@ -634,14 +634,14 @@ export default {
   height: 100px !important;
 }
 .booking-session {
-  box-shadow: 0px -1px 2px #ebebeb;
+  box-shadow: 0px -1px 2px #f1f1f1;
   background-color: white;
   z-index: 5;
 }
 .booking-session .session-head {
   background-color: #292f33;
   letter-spacing: 0.03rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 .booking-session .session-head:hover {
@@ -652,7 +652,7 @@ export default {
   transition: background 0.3s ease;
 }
 .session-select-btn:not(.active):hover {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
 }
 .nav {
   flex-wrap: nowrap;
@@ -666,7 +666,7 @@ export default {
 .booking-session-list .nav-link.empty-sessions {
   opacity: 0.3;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .booking-session-list .nav-link.empty-sessions.active {
   opacity: 1;

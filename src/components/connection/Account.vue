@@ -123,11 +123,13 @@
             </p>
           </div>
         </div>
-        <div v-else-if="isNewPassword">
-          <div id="title-password" class="connection-nav-button">Nouveau mot de passe</div>
-        </div>
-        <div v-else-if="activeTab === 'password'">
-          <div id="title-password" class="connection-nav-button">Mot de passe oublié</div>
+        <div v-if="activeTab === 'password'">
+          <div v-if="passwordActiveStep === 'passwordForm'">
+            <div id="title-password" class="connection-nav-button">Nouveau mot de passe</div>
+          </div>
+          <div v-else-if="passwordActiveStep === 'emailForm'">
+            <div id="title-password" class="connection-nav-button">Mot de passe oublié</div>
+          </div>
         </div>
         <div v-else>
           <div class="d-flex connection-nav-container">
@@ -177,8 +179,6 @@
               ></component>
             </keep-alive>
           </transition>
-          <!-- <router-view v-if="$route.name === 'FormLogin' || $route.name === 'FormSignup'" v-slot="{ Component }">
-          </router-view> -->
           <FormInfos
             v-if="activeTab === 'infos'"
             ref="formInfos"
@@ -191,24 +191,22 @@
             :user="user"
           />
           <Password
-            v-if="activeTab === 'password' && !$route.query.recover_password_token"
+            v-if="activeTab === 'password'"
             @password-updated="
               () => {
                 activeTab = 'login'
                 tlConnectionTab.reverse()
-                isNewPassword = false
               }
             "
             @clicked-password-retrieved="
               () => {
                 activeTab = 'login'
                 tlConnectionTab.reverse()
-                isNewPassword = false
               }
             "
-            @change-news-password="isNewPassword = true"
+            @updated-step="(step) => (passwordActiveStep = step)"
+            :token="$route.query.recover_password_token"
           />
-          <PasswordStep3 v-if="$route.query.recover_password_token" />
         </form>
       </div>
 
@@ -265,6 +263,7 @@ import FormInfos from './FormInfos.vue'
 import Password from './Password.vue'
 import PasswordStep3 from './PasswordStep3.vue'
 import gsap from 'gsap'
+import { START_LOCATION } from 'vue-router'
 
 export default {
   name: 'Account',
@@ -286,7 +285,6 @@ export default {
         login: 'FormLogin',
         signup: 'FormSignup'
       },
-      isNewPassword: false,
       fromRoute: '',
       genderIsValid: false,
       avatarIsValid: false,
@@ -296,31 +294,21 @@ export default {
       tlConnectionTab: null,
       user: null,
       avatarKeys: [],
-      hiddenArrow: false
+      hiddenArrow: false,
+      passwordActiveStep: ''
     }
   },
   watch: {
-    // activeTab(val) {
-    //   if (val === 'login' || val === 'signup') this.createTsConnectionTab()
-    // },
-    // '$route.params.activeTab': {
-    //   immediate: true,
-    //   handler(val) {
-    //     this.activeTab = val
-    //   }
-    // },
-    // newActiveTab: {
-    //   immediate: true,
-    //   handler(val) {
-    //     this.activeTab = val
-    //   }
-    // },
     activeTab(val) {
       history.pushState(null, null, val)
     },
     $route: {
       immediate: true,
       handler(to, from) {
+        // if (from === START_LOCATION && this.$route.params.activeTab === 'infos') {
+        //   // TODO proper display of freshly loaded info page
+        // }
+
         this.fromRoute = from
         this.activeTab = this.$route.params.activeTab
       }
@@ -379,8 +367,8 @@ export default {
       let tl = gsap.timeline().pause()
 
       // slide left
-      tl.to(greyContainer, { width: '88%', ease: 'power4.out', duration: 0.8 }, '<')
-        .to(purpleContainer, { width: '12%', ease: 'power4.out', duration: 0.8 }, '<')
+      tl.fromTo(greyContainer, { width: '48%' }, { width: '88%', ease: 'power4.out', duration: 0.8 }, '<')
+        .fromTo(purpleContainer, { width: '52%' }, { width: '12%', ease: 'power4.out', duration: 0.8 }, '<')
         .to(purpleContainer, { backgroundColor: '#d82558', duration: 0.8 }, '<')
         .to(purpleSvgsBlock, { width: '100%', marginRight: '0px', duration: 0.8 }, '<')
         .fromTo(purpleContentBlock, { width: '60%' }, { width: '0', ease: 'power4.out', duration: 0.8 }, '<')
@@ -512,7 +500,7 @@ export default {
   margin-right: 2rem;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .connection-nav-button--active {
   color: rgba(255, 255, 255);

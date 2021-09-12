@@ -62,6 +62,6 @@ export default {
   padding-bottom: 1rem !important;
   margin-bottom: 3rem !important;
   font-size: 1rem !important;
-  opacity: 50%;
+  opacity: 0.5;
 }
 </style>

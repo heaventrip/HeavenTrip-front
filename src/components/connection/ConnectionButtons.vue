@@ -8,65 +8,52 @@
             v-show="currUser?.avatarKey"
             height="40"
             style="border-radius: 50%"
-            :style="`border: 1px solid ${toggleDropdown ? (isLightTheme ? 'white' : '#292f33') : isLightTheme ? '#292f33' : 'white'}`"
+            :style="`border: 1px solid ${avatarBorderStyle}`"
             fluid
-            :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${currUser?.avatarKey}.jpg`"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${currUser?.avatarKey}.jpg`"
           />
-          <div
-            class="name-block d-flex ml-3"
-            :class="toggleDropdown ? 'flex-column' : 'flex-row'"
-            :style="toggleDropdown ? (isLightTheme ? 'color: white' : 'color: #292f33') : isLightTheme ? 'color: #292f33' : 'color: white'"
-          >
+          <div class="name-block d-flex ml-3" :class="toggleDropdown ? 'flex-column' : 'flex-row'" :style="`color: ${nameStyle}`">
             <div>{{ currUser?.firstName }}</div>
             <div v-if="toggleDropdown" style="font-weight: 700">{{ currUser?.lastName }}</div>
             <div v-else style="font-weight: 700">.{{ currUser?.lastName?.[0] }}</div>
           </div>
-          <InlineSvg
-            class="connection-icon ml-auto"
-            :src="require('@/assets/svg/connection-dropdown.svg')"
-            :fill="toggleDropdown ? (isLightTheme ? 'white' : '#292f33') : isLightTheme ? '#292f33' : 'white'"
-            :transform="toggleDropdown ? 'rotate(-90)' : ''"
-          />
+          <InlineSvg class="connection-icon ml-auto" :src="require('@/assets/svg/connection-dropdown.svg')" :fill="svgFillStyle" :transform="toggleDropdown ? 'rotate(-90)' : ''" />
         </div>
         <transition @before-enter="showcontent = true" :name="toggleDropdown ? 'connection-slide-down' : 'connection-slide-up'">
-          <div
-            :key="toggleDropdown"
-            :class="{ 'bg-white': toggleDropdown, 'd-flex': toggleDropdown, 'd-none': !toggleDropdown, 'bg-dark': isLightTheme }"
-            class="flex-column"
-            style="position: absolute; z-index: 2; padding-top: 60px; width: 250px; top: 0px; padding-bottom: 3px"
-            :style="[
-              toggleDropdown ? 'color: #292f33' : '',
-              isLightTheme ? 'color: white; border-left: 3px solid #292f33; border-right: 5px solid #292f33;' : 'border-left: 3px solid white; border-right: 5px solid white;'
-            ]"
-          >
-            <div @click="$router.push({ name: 'Profile' })" :class="[isLightTheme ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+          <div :key="toggleDropdown" class="dropdown-block" :class="[toggleDropdown ? 'd-flex' : 'd-none', dropdownClass]">
+            <div @click="$router.push({ name: 'Profile' })" :class="[isDarkTheme ? 'menu-item-dark' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <transition name="fade-delayed">
                 <div v-show="showcontent">Mes infos</div>
               </transition>
             </div>
-            <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
-            <div @click="toggleWishlist" :class="[isLightTheme === true ? 'menu-item-light' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
+            <div style="width: 70%; border-bottom: 1px dashed rgba(241, 241, 241, 0.18); margin-left: 1.8rem"></div>
+            <div @click="toggleWishlist" :class="[isDarkTheme === true ? 'menu-item-dark' : 'menu-item']" style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem">
               <transition name="fade-delayed">
                 <div v-show="showcontent">Mes envies</div>
               </transition>
               <transition name="fade-fast">
-                <div class="wishlists mt-3" v-show="showWishlist" :key="showWishlist">
-                  <div class="wishlist-course py-2 px-4" :data-course="wishlist.id" v-for="wishlist in wishlists" :key="wishlist">
-                    <span type="button" @click.stop="unwishlistCourse(wishlist.id)" class="mr-2">X</span>
-                    {{ wishlist.name }}
+                <div @click.stop class="wishlists mt-3" v-if="showWishlist && wishlists?.length">
+                  <div class="d-flex align-items-center" v-for="wishlist in wishlists" :key="wishlist">
+                    <InlineSvg class="mr-2" :src="require('@/assets/svg/heart-filled.svg')" fill="#d82558" height="12" />
+                    <a :href="`/product/${wishlist.id}`" class="py-2 mr-auto" :class="[isDarkTheme === true ? 'wishlist-course-dark' : 'wishlist-course']" :data-course="wishlist.id">{{
+                      wishlist.name
+                    }}</a>
+                    <div class="wishlist-course__delete-btn" @click="unwishlistCourse(wishlist.id)">
+                      <i class="fas fa-times mr-2"></i>
+                    </div>
                   </div>
                 </div>
               </transition>
             </div>
-            <div style="width: 70%; border-bottom: 1px dashed #ebebeb; margin-left: 1.8rem"></div>
+            <div style="width: 70%; border-bottom: 1px dashed rgba(241, 241, 241, 0.18); margin-left: 1.8rem"></div>
             <div
               @click="logOut"
-              :class="[isLightTheme ? 'menu-item-light menu-item-disconnect-light' : 'menu-item menu-item-disconnect']"
+              :class="[isDarkTheme ? 'menu-item-dark menu-item-disconnect-dark' : 'menu-item menu-item-disconnect']"
               style="font-family: Muli; font-size: 0.7rem; padding: 1rem 1.8rem"
             >
               <transition name="fade-delayed">
                 <div v-show="showcontent">
-                  <InlineSvg class="disconnect-icon" :src="require('@/assets/svg/disconnect.svg')" height="20" :fill="isLightTheme ? 'white' : '#292f33'" />
+                  <InlineSvg class="disconnect-icon" :src="require('@/assets/svg/disconnect.svg')" height="20" :fill="isDarkTheme ? 'white' : '#292f33'" />
                   <span class="ml-2 align-middle">Se déconnecter</span>
                 </div>
               </transition>
@@ -75,10 +62,7 @@
         </transition>
       </li>
       <li v-if="!isLoggedIn()" type="button">
-        <a
-          @click.prevent="$router.push({ name: 'Account', params: { activeTab: 'login' } })"
-          class="px-4 py-4 d-inline-block"
-          :style="activeTab === 'agency' || activeTab === 'news' ? 'color: #292f33' : 'color: white'"
+        <a @click.prevent="$router.push({ name: 'Account', params: { activeTab: 'login' } })" class="px-4 py-4 d-inline-block" :style="isDarkTheme && !navSticky ? 'color: #292f33' : 'color: white'"
           >se connecter</a
         >
       </li>
@@ -86,7 +70,7 @@
         <a
           @click.prevent="$router.push({ name: 'Account', params: { activeTab: 'signup' } })"
           class="px-4 py-4 profile-link font-weight-bold d-inline-block"
-          :style="isLightTheme ? 'color: #fff; background-color: #292f33' : ''"
+          :style="isDarkTheme ? 'color: #fff; background-color: #292f33' : ''"
           >creér son profil</a
         >
       </li>
@@ -98,9 +82,6 @@
         </div>
       </transition>
     </teleport>
-    <!-- <teleport to="#modal">
-      <Profile v-if="isLoggedIn() && showProfilePage" @closed-page="showProfilePage = false" />
-    </teleport> -->
   </div>
 </template>
 
@@ -108,7 +89,6 @@
 import Account from '@/components/connection/Account.vue'
 import { isLoggedIn } from '@/utils/auth'
 import { logoutUser } from '@/utils/auth'
-import { getUserInfo } from '@/utils/auth'
 
 export default {
   name: 'ConnectionButtons',
@@ -133,8 +113,27 @@ export default {
     }
   },
   computed: {
-    isLightTheme() {
+    isDarkTheme() {
       return this.$props.navSticky || this.$props.activeTab === 'agency' || this.$props.activeTab === 'news'
+    },
+    dropdownClass() {
+      if (this.isDarkTheme) return 'dropdown-block--dark'
+      else return 'dropdown-block--light'
+    },
+    avatarBorderStyle() {
+      if (this.isDarkTheme && this.$props.navSticky) return 'white'
+      else if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
+      else return this.toggleDropdown ? '#292f33' : 'white'
+    },
+    nameStyle() {
+      if (this.isDarkTheme && this.$props.navSticky) return 'white'
+      else if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
+      else return this.toggleDropdown ? '#292f33' : 'white'
+    },
+    svgFillStyle() {
+      if (this.isDarkTheme && this.$props.navSticky) return 'white'
+      else if (this.isDarkTheme) return this.toggleDropdown ? 'white' : '#292f33'
+      else return this.toggleDropdown ? '#292f33' : 'white'
     }
   },
   watch: {
@@ -143,7 +142,10 @@ export default {
     },
     toggleDropdown(val) {
       if (val) document.addEventListener('click', this.handleClickToClose)
-      else document.removeEventListener('click', this.handleClickToClose)
+      else {
+        document.removeEventListener('click', this.handleClickToClose)
+        this.showWishlist = false
+      }
     },
     // showWishlist(val) {
     //   if (val) {
@@ -214,14 +216,16 @@ export default {
       this.toggleDropdown = false
     },
     toggleDropdownMenu() {
+      this.fetchWishlists()
       this.toggleDropdown = !this.toggleDropdown
       this.showcontent = false
     },
     unwishlistCourse(courseId) {
       this.$axios.delete('/wishlists', { params: { courseId: courseId } }).then(() => {
-        document.querySelector(`[data-course='${courseId}']`).remove()
-        this.fetchWishlists()
+        this.wishlists = this.wishlists.filter((wl) => wl.id !== courseId)
+        this.$emitter.emit('unwishlisted', courseId)
         this.$notify({ group: 'app', type: 'success', text: "Tu ne t'intéresses plus à ce stage" })
+        this.fetchWishlists()
       })
     },
     logOut() {
@@ -238,9 +242,6 @@ export default {
     },
     logoutUser() {
       return logoutUser()
-    },
-    getUserInfo() {
-      return getUserInfo()
     },
     // openModal(form) {
     //   this.showModal = true
@@ -281,6 +282,7 @@ export default {
     this.$axios
       .get('/users/current')
       .then((res) => {
+        localStorage.setItem('user.avatarId', res.data.user.avatarKey)
         this.currUser = res.data.user
         this.$root.initialLoading = false
       })
@@ -293,13 +295,43 @@ export default {
 </script>
 
 <style scoped>
+a.wishlist-course,
+a.wishlist-course-dark {
+  color: inherit;
+}
+a.wishlist-course:hover,
+a.wishlist-course-dark:hover,
+.wishlist-course__delete:hover {
+  color: #7c7c7c;
+}
+.dropdown-block {
+  position: absolute;
+  z-index: 2;
+  padding-top: 60px;
+  width: 250px;
+  top: 0px;
+  padding-bottom: 3px;
+  flex-direction: column;
+}
+.dropdown-block--dark {
+  background-color: #292f33;
+  color: white;
+  border-left: 3px solid #292f33;
+  border-right: 5px solid #292f33;
+}
+.dropdown-block--light {
+  background-color: white;
+  color: #292f33;
+  border-left: 3px solid white;
+  border-right: 5px solid white;
+}
 .connection-icon,
 .name-block,
 .avatar-block {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .menu-item,
-.menu-item-light {
+.menu-item-dark {
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
@@ -317,11 +349,17 @@ export default {
   background-color: #292f33;
   color: white;
 }
-.menu-item-disconnect-light:hover .disconnect-icon {
+.menu-item-disconnect-dark:hover .disconnect-icon {
   fill: #292f33;
 }
-.menu-item-light:hover {
+.menu-item-dark:hover {
   background-color: white;
   color: #292f33;
+}
+.wishlist-course__delete-btn {
+  transition: all 0.2s ease;
+}
+.wishlist-course__delete-btn:hover {
+  color: #d82558;
 }
 </style>

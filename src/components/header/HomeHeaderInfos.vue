@@ -55,7 +55,7 @@
             <br />
             les <span>{{ featuredCourse.wishlistUsers?.length }} intéressé{{ featuredCourse.wishlistUsers?.length > 1 ? 's' : '' }}</span>
           </span> -->
-          <InlineAvatars :course-id="featuredCourse?.id" :avatars="avatarKeys" outline-color="violetfullscreen" :heart="true" spacing="-10px" />
+          <InlineAvatars v-if="featuredCourse" :course-id="featuredCourse.id" :avatars="avatarKeys" outline-color="violetfullscreen" :heart="true" spacing="-10px" />
           <span class="divider d-none d-md-inline-block d-lg-none mx-2"></span>
           <a class="details-link text-uppercase text-white font-weight-bold d-inline-block d-lg-none pl-3" href="#"
             >Détails <img class="img-fluid mt-n1" fluid :src="require('@/assets/images/arr-r.png')"
@@ -100,7 +100,7 @@ import Tag from '@/components/elements/Tag.vue'
 
 export default {
   name: 'HeaderText',
-  emits: ['toggled-sessions'],
+  emits: ['toggled-sessions', 'set-course'],
   components: {
     Button,
     InlineProductInfos,
@@ -115,15 +115,24 @@ export default {
     }
   },
   watch: {
-    featuredCourse(val) {
-      if (!val.wishlistUsers) return
+    featuredCourse: {
+      immediate: true,
+      handler(val) {
+        if (!val) return
 
-      val.wishlistUsers.forEach((user, index) => {
-        // show max 5 avatars
-        if (index > 4) return
+        this.$emit('set-course', val)
 
-        this.avatarKeys.push(user.avatarKey)
-      })
+        if (!val.wishlistUsers) return
+
+        let currUserAvatar = localStorage.getItem('user.avatarId')
+
+        val.wishlistUsers.forEach((user, index) => {
+          // show max 5 avatars
+          if (index > 4) return
+
+          if (user.avatarKey !== currUserAvatar) this.avatarKeys.push(user.avatarKey)
+        })
+      }
     }
   },
   methods: {
@@ -251,7 +260,6 @@ export default {
   display: inline-block;
   vertical-align: middle;
 }
-/* FIXME check rules in style.css that take precedence  */
 .divider {
   /* height: 1.3rem; */
   /* background-color: rgba(250, 250, 250, 0.35); */

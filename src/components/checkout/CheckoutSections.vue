@@ -1,5 +1,5 @@
 <template>
-  <div class="checkout-main-container" :style="[activeStep === 'validation' ? 'height: calc(100vh - 170px)' : '']">
+  <div class="checkout-main-container">
     <div class="top-infos-container" v-if="activeStep === 'validation'">
       <div class="top-info top-info-back" type="button" @click="activeStep = 'insurance'">
         <InlineSvg :src="require('@/assets/svg/arrow-right.svg')" transform="rotate(180)" class="mr-3" height="12" fill="white" />
@@ -55,6 +55,7 @@
                 :avatar-key="avatarKey"
                 :extra-participants="extraParticipants"
                 :booker="booker"
+                ref="participants"
               ></component>
             </keep-alive>
             <keep-alive>
@@ -70,6 +71,7 @@
                 :extra-participants="extraParticipants"
                 :course="course"
                 :needs-reset="needsReset"
+                ref="options"
               >
               </component>
             </keep-alive>
@@ -80,6 +82,8 @@
                 @complete="(status) => (insuranceComplete = status)"
                 @updated-participants="setParticipants"
                 @updated-booker="setBooker"
+                @go-booker="activeStep = 'booker'"
+                @go-participant="goToParticipant"
                 :avatar-key="avatarKey"
                 :booker="booker"
                 :extra-participants="extraParticipants"
@@ -97,17 +101,12 @@
                 @click.prevent="prevStep"
                 v-show="steps.indexOf(activeStep) !== 0"
                 class="btn text-uppercase prev-step-btn prev-btn mr-3"
-                :class="{ 'mr-auto': !isLastParticipant && activeStep === 'options' }"
+                :class="{ 'mr-auto': !showNextBtn }"
                 style="border-radius: 0"
               >
                 Précédent
               </button>
-              <button
-                @click.prevent="nextStep"
-                v-show="(isLastParticipant && activeStep === 'options') || activeStep !== 'options'"
-                class="btn text-uppercase next-step-btn next-btn"
-                style="border-radius: 0"
-              >
+              <button @click.prevent="nextStep" v-show="showNextBtn" class="btn text-uppercase next-step-btn next-btn" style="border-radius: 0">
                 {{ bookerInputsChanged && activeStep === 'booker' ? 'valider' : 'étape suivante' }}
               </button>
             </div>
@@ -139,7 +138,7 @@ export default {
     // CheckoutSuccess
   },
   emits: ['booker-expense', 'extra-participants-expense', 'extra-participants-nb', 'changed-step'],
-  props: ['course', 'session', 'total-price'],
+  props: ['course', 'session', 'total-price', 'participants-nb'],
   data() {
     return {
       transitionEntered: false,
@@ -183,6 +182,29 @@ export default {
     }
   },
   watch: {
+    participantsNb: {
+      immediate: true,
+      handler(nb) {
+        for (let i = 1; i < nb; i++) {
+          this.extraParticipants.push({
+            infos: {
+              firstName: '',
+              birthDate: '',
+              email: ''
+            },
+            booking: {
+              room: 0,
+              roomMate: '',
+              equipmentRental: null,
+              noExtraActivities: false,
+              extraActivities: [],
+              comment: '',
+              insurance: ''
+            }
+          })
+        }
+      }
+    },
     currUser: {
       immediate: true,
       handler(val) {
@@ -190,6 +212,7 @@ export default {
         ;['firstName', 'lastName', 'birthDate', 'phone', 'email', 'gender', 'country', 'city', 'street', 'postalCode'].forEach((attr) => {
           this.booker.infos[attr] = val[attr]
         })
+        this.avatarKey = val.avatarKey
       }
     },
     extraParticipants: {
@@ -208,7 +231,6 @@ export default {
       immediate: true,
       handler(val) {
         this.activeStep = 'booker'
-        console.log(val)
       }
     },
     activeStep: {
@@ -224,6 +246,9 @@ export default {
     }
   },
   computed: {
+    showNextBtn() {
+      return (!this.extraParticipants.length && this.activeStep === 'options') || (this.isLastParticipant && this.activeStep === 'options') || this.activeStep !== 'options'
+    },
     bookerExpense() {
       return this.bookerEquipmentExpense + this.bookerInsuranceExpense + this.bookerRoomExpense + this.bookerActivitiesExpense
     },
@@ -334,8 +359,20 @@ export default {
     }
   },
   methods: {
+    goToParticipant(id) {
+      if (this.$refs.options) this.$refs.options.currFormParticipant = id
+      this.activeStep = 'options'
+    },
     isLoggedIn() {
       return isLoggedIn()
+    },
+    async updateUser() {
+      return this.$axios
+        .put('/users/current', { user: this.booker.infos })
+        .then((res) => {
+          this.currUser = res.data.user
+        })
+        .catch((err) => this.$notify({ group: 'app', type: 'error', text: err.response?.data?.message || err.message }))
     },
     isComplete(step) {
       return this.$data[`${step}Complete`]
@@ -343,11 +380,15 @@ export default {
     beforeLeave() {
       if (this.activeStep === 'options') this.transitionEntered = true
     },
-    nextStep() {
+    async nextStep() {
       if (!this.isComplete(this.activeStep)) {
+        if (this.activeStep === 'participants') this.$refs.participants.touch()
+
         this.$notify({ group: 'app', type: 'info', text: 'Tous les champs doivent être renseignés !' })
         return
       }
+
+      if (this.activeStep === 'booker') await this.updateUser()
 
       let currIndex = this.steps.indexOf(this.activeStep)
       this.activeStep = this.steps[currIndex + 1]
@@ -388,7 +429,6 @@ export default {
     const token = localStorage.getItem(AUTH_TOKEN_KEY)
     this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-    // this.currUser = await this.getUserInfo()
     this.$axios
       .get('/users/current')
       .then((res) => {
@@ -473,13 +513,13 @@ export default {
 }
 .next-btn.disable,
 .prev-btn.disable {
-  color: #ebebeb;
+  color: #f1f1f1;
   border: 1px solid #b4b4b4;
 }
 .next-btn.disable:hover,
 .prev-btn.disable:hover {
   background-color: white;
-  color: #ebebeb;
+  color: #f1f1f1;
 }
 
 .top-infos-container {
@@ -489,9 +529,11 @@ export default {
   z-index: 100;
 }
 .top-info {
+  color: #292f33;
   font-weight: 500;
   font-family: Oswald, sans-serif;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
+  font-size: 0.85rem;
 }
 .top-info {
   background-color: white;
@@ -502,7 +544,9 @@ export default {
 .top-info-back {
   background-color: #292f33;
   color: white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .top-info-back:hover {
   background-color: #d82558;

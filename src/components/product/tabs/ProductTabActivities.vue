@@ -18,28 +18,44 @@
   </div>
   <div class="d-flex" style="margin: 6rem 0rem">
     <div class="linear-block p-0 m-0 w-100">
-      <div class="card-body d-flex" style="box-shadow: 0 0 2px #ebebeb; height: 370px">
-        <div class="guide-word__image">
-          <img class="img-fill" fluid :src="require('@/assets/images/ui_faces/1.jpg')" />
+      <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 326px" data-v-5aafffc4="">
+        <div class="guide-word__image" data-v-5aafffc4="">
+          <img class="img-fill" style="position: absolute !important" fluid="" :src="course?.staffs.find((el) => el.role === 'Guide')?.photoUrl" data-v-5aafffc4="" />
+          <div
+            Style=" background-color: #292f33db;
+              height: 70px;
+              position: absolute;
+              z-index: 1;
+              width: 100%;
+              bottom: 0px;
+              height: auto;
+              text-align: center;
+              padding: 15px;
+              letter-spacing: 0.04rem;
+              line-height: 1.8rem;
+              font-family: oswald;
+              font-size: 0.98rem"
+          >
+            <div class="author" style="color: #fff; font-weight: 300; display: inline-grid">
+              {{ course?.staffs.find((el) => el.role === 'Guide')?.firstName }} {{ course?.staffs.find((el) => el.role === 'Guide')?.lastName }}
+              <span style="color: #fff; font-weight: 800; margin: auto; display: inline-grid">
+                {{ course?.staffs.find((el) => el.role === 'Guide')?.title }}
+              </span>
+            </div>
+          </div>
         </div>
         <div class="guide-word__text">
-          <h6 class="head text-uppercase text-white py-3 mb-1" style="width: max-content; border-top: 1px dashed #ffffff66; border-bottom: none">Mot du pro…</h6>
-          <div class="mb-4" style="height: 1px; width: 40%; border-top: 1px dashed #ffffff66"></div>
+          <h6 class="head text-uppercase text-grey py-3 mb-0" style="width: max-content; border-top: 1px dashed #292f33">Mot du Moniteur…</h6>
+          <div style="height: 1px; border-top: 1px dashed #292f33; width: 200px"></div>
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
-              <p class="content pt-3 text-white" style="line-height: 24px">
-                {{ course?.staffs.find((el) => el.role === 'Guide')?.description }}
-              </p>
-              <h6 class="author text-white mt-4 mb-0">
-                {{ course?.staffs.find((el) => el.role === 'Guide')?.firstName }} {{ course?.staffs.find((el) => el.role === 'Guide')?.lastName }} -
-                {{ course?.staffs.find((el) => el.role === 'Guide')?.title }}
-              </h6>
+              <p class="content pt-3 text-grey" style="line-height: 25px" v-html="course?.staffs.find((el) => el.role === 'Guide')?.description"></p>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
               <p class="content pt-3 text-white" style="line-height: 24px">
                 testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste
-                testeste testeste testeste testeste testeste
+                testeste testeste testeste testseste testeste
               </p>
               <h6 class="author text-white mt-4 mb-0">Edouard du Thin - Moniteur Ski / Snow</h6>
             </div>
@@ -48,10 +64,10 @@
       </div>
     </div>
     <div v-if="course.multisport" class="d-flex flex-column" style="margin-left: 1px">
-      <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #ebebeb">
+      <div @mouseover="tab = 1" type="button" :class="[tab === 1 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px -1px 2px #f1f1f1">
         <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/bowl2.svg')" :fill="[tab === 1 ? '#fff' : '#5d3462']" />
       </div>
-      <div @mouseover="tab = 2" type="button" :class="[tab === 2 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px 1px 2px #ebebeb">
+      <div @mouseover="tab = 2" type="button" :class="[tab === 2 ? 'bg-dark' : 'bg-white']" style="position: relative; width: 60px; height: 60px; box-shadow: 1px 1px 2px #f1f1f1">
         <InlineSvg height="30px" style="margin: 15px" :src="require('@/assets/svg/kitchenhat.svg')" :fill="[tab === 2 ? '#fff' : '#5d3462']" />
       </div>
     </div>
@@ -79,9 +95,12 @@
         </div>
         <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
         <transition name="fade">
-          <p :key="activeSportTab" class="content" style="font-family: Muli; line-height: 1.2; font-weight: 400; font-size: 0.875rem">
-            {{ activeSportTab?.description || course.sports[0].description }}
-          </p>
+          <div
+            :key="activeSportTab"
+            class="content"
+            style="font-family: Muli; line-height: 26px !important; font-weight: 400; font-size: 0.875rem"
+            v-html="activeSportTab?.description || course.sports[0].description"
+          ></div>
         </transition>
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
@@ -188,27 +207,29 @@
       <div class="head-block subhead-block d-flex">
         <div class="">
           <p class="sub-heading mb-2">Activités & Spot</p>
-          <h4 class="heading mb-0">Activités en option</h4>
+          <h4 class="heading mb-0">Activités sur place</h4>
         </div>
         <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
       </div>
       <div class="card-body">
         <p class="content">
-          En cas de mauvaises conditions météorologiques ou autres facteurs empêchants la pratique de votre activité principale, nous proposons des activités de remplacement inclus dans le prix.
+          Petit récap rien que pour toi des activités que tu peux pratiquer en plus, <b>organisation et paiement sur place.</b><br />En cas de mauvaises conditions météorologiques ou autres facteurs
+          empêchants la pratique de votre activité principale, certaines de ces activités seront proposées en remplacement.
         </p>
-        <ul class="activity-list list-unstyled mb-0">
-          <li v-for="(alternative, index) in altCourses" :key="alternative" :class="[index === altCourses.length - 1 ? 'pb-0' : '']">
+        <ul class="activity-list list-unstyled mb-0 pt-2">
+          <li
+            v-for="(alternative, index) in altCourses"
+            :style="altCourses.length === 1 ? 'border-top: 1px dashed #dbdbdb' : ''"
+            :key="alternative"
+            :class="[index === altCourses.length - 1 ? 'pb-0' : '']"
+          >
             <h5 class="activity-list-head mb-0">
               <InlineSvg v-if="alternative.picto" fill="#d82558" height="35" class="d-inline-block mr-4" :src="require(`@/assets/svg/${alternative.picto}.svg`)" />
               <span class="d-inline-block align-middle">{{ alternative.title }}</span>
             </h5>
             <ul class="list-unstyled text-uppercase activity-content-list justify-content-end mb-0">
-              <li class="optional-activity__info-item">
-                Durée :&nbsp;&nbsp;<strong>{{ alternative.duration }}journée{{ alternative.duration > 1 ? 's' : '' }}</strong>
-              </li>
-              <li class="optional-activity__info-item">plongée :&nbsp;&nbsp;<strong>2</strong></li>
-              <li class="optional-activity__info-item--price">
-                <strong>{{ alternative.price }}€</strong>&nbsp;/pers.
+              <li v-for="altInfo in alternative.alternativeInfos" :key="altInfo" class="optional-activity__info-item">
+                <strong>{{ altInfo.title }} :</strong>&nbsp;&nbsp;{{ altInfo.description }}
               </li>
             </ul>
           </li>
@@ -278,11 +299,14 @@ export default {
 }
 .guide-word__image {
   display: inline-block;
-  width: 35%;
+  width: 28%;
+  position: relative;
+  height: 100%;
+  min-width: 27%;
 }
 .guide-word__text {
   display: inline-block;
-  background-color: #5d3462;
+  background-color: #fff;
   text-align: left;
   padding: 2.5rem 3rem;
   width: 72%;

@@ -1,12 +1,18 @@
 <template>
   <div class="card-block" :style="{ width: cardWidth + 'px' }">
     <div class="shadow-effect overflow-hidden position-relative">
-      <Tag style="position: absolute; top: 7%; left: 2rem; z-index: 1" color="grey" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
+      <Tag style="position: absolute; top: 7%; right: 2rem; z-index: 1" color="grey" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
       <!-- <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" /> -->
-      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="Multi-activités" />
-      <div @click="addToWishlist" type="button" class="card-block__heart-icon" style="opacity: 0; position: absolute; top: 7%; right: 7%; z-index: 5">
-        <InlineSvg v-if="wishlisted" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" />
-        <InlineSvg v-else :src="require('@/assets/svg/heart-outline.svg')" height="20" />
+      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; right: 7rem; z-index: 1" color="pink" text="Multi-activités" />
+      <div
+        @click.stop="addToWishlist"
+        type="button"
+        class="card-block__heart-icon d-flex"
+        style="position: absolute; z-index: 5; width: 70px; height: 65px; border-bottom-right-radius: 80%; background-color: rgba(255, 255, 255, 0.5)"
+      >
+        <span v-show="wishlistLoading" id="loading"></span>
+        <InlineSvg v-show="!wishlisted" :src="require('@/assets/svg/heart-outline.svg')" style="margin: 19px" fill="#292f33" height="20" />
+        <InlineSvg v-show="wishlisted" :src="require('@/assets/svg/heart-filled.svg')" style="margin: 19px" fill="#292f33" height="20" />
       </div>
       <!-- <InlineSvg v-if="wishlisted" class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" fill="#d82558" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" />
       <InlineSvg v-else class="card-block__heart-icon" :src="require('@/assets/svg/heart-outline.svg')" height="20" style="opacity: 0; position: absolute; top: 7%; right: 7%" /> -->
@@ -86,7 +92,8 @@ import gsap from 'gsap'
 
 export default {
   name: 'HomeCarouselCard',
-  props: ['course', 'index', 'cards-ref'],
+  props: ['course', 'cards'],
+  emits: ['card-hovered'],
   data() {
     return {
       animFinished: true,
@@ -96,9 +103,9 @@ export default {
       wishlisted: false,
       cardWidth: 500,
       cardExpand: 70,
-      activeCard: '',
       tl: null,
-      cardsToSlide: ''
+      cardsToSlide: '',
+      wishlistLoading: false
     }
   },
   components: {
@@ -107,10 +114,15 @@ export default {
     Tag
   },
   watch: {
+    cards: {
+      immediate: true,
+      handler(val) {
+        if (val?.length) this.setTimeline()
+      }
+    },
     course: {
       immediate: true,
       handler(val) {
-        console.log('ccccccccccccccccccc', val)
         if (!val.wishlistUsers) return
 
         val.wishlistUsers.forEach((user) => this.avatarKeys.push(user.avatarKey))
@@ -132,29 +144,36 @@ export default {
       const tl = gsap
         .timeline({ defaults: { duration: 0.5, ease: 'power3.inOut' } })
         .pause()
-        .to(this.$el, { width: this.cardWidth + this.cardExpand + 'px' })
-        .to(staticInfos, { y: '-=45px' }, '<')
+        .to(this.$el, { width: '+=' + this.cardExpand })
+        .to(staticInfos, { y: '-=45' }, '<')
         .to(movingInfos, { y: '-=100' }, '<')
         .to(heartIcon, { autoAlpha: 1 }, '<')
-      // .to(cards, { x: '+=70' }, '<')
+        .to(this.cards, { x: '+=70' }, '<')
       this.tl = tl
     },
+    // getCardsToSlide(cardId) {
+    //   let
+    // }
     addToWishlist() {
+      if (this.wishlisted) {
+        this.$notify({ group: 'app', type: 'info', text: 'Tu es déjà intéressé(e) !' })
+        return
+      }
+
+      this.wishlistLoading = true
+
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-      if (!this.wishlisted)
-        this.$axios
-          .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
-          .then(() => (this.wishlisted = true))
-          .catch((err) => console.log(err))
-      else this.$axios.delete('/wishlists', { params: { courseId: this.$props.course.id } }).then(() => (this.wishlisted = false))
-    },
-    getCardsToSlide(card) {
-      const cardPosition = this.$props.cardsArr.indexOf(card)
-      console.log(this.$props.cardsArr.slice(cardPosition + 1))
-      return this.$props.cardsArr.slice(cardPosition + 1)
+      this.$axios
+        .post('/wishlists', { wishlist: { courseId: this.$props.course.id } })
+        .then(() => {
+          this.wishlisted = true
+          this.wishlistLoading = false
+          this.$notify({ group: 'app', type: 'success', text: 'Ce stage a été ajouté à vos envies !' })
+        })
+        .catch((err) => (this.wishlistLoading = false))
     },
     biggerCard() {
       this.hovered = true
@@ -177,7 +196,11 @@ export default {
       .catch(() => (this.wishlisted = false))
   },
   mounted() {
-    this.setTimeline()
+    this.$emitter.on('unwishlisted', (courseId) => {
+      if (this.$props.course.id === courseId) this.wishlisted = false
+    })
+
+    // this.setTimeline()
     this.cardBgImage = this.$el.querySelector('.card__bg-image')
     this.cardFooterPrice = this.$el.querySelector('.card__footer__price')
   }
@@ -288,5 +311,27 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+/* SPINNER */
+#loading {
+  margin: 13px 16px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

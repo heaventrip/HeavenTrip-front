@@ -1,44 +1,66 @@
 <template>
-  <!-- <div class="preview-card border-0 d-none align-items-center text-uppercase flex-row bg-dark text-white px-5 rounded-lg mb-5">
-    <span class="font-weight-light mr-5 ml-2">vous êtes {{ $parent.partipantsNb }} trippers</span>
-    <ul class="list-unstyled mb-0 font-weight-500 name-list d-flex">
-      <li>marion</li>
-      <li>
-        axel
-        <a href="#"><i class="fa fa-times-circle ml-2 align-baseline text-white"></i></a>
-      </li>
-    </ul>
-    <a href="#" class="ml-auto font-weight-light text-reset">modifier</a>
-  </div> -->
-  <!-- TODO séparer les participants -->
   <div class="card card-header border-0 p-0 flex-row align-items-center pb-3" style="display: flex; flex-wrap: wrap; outline: 5px solid white" :style="{ zIndex: $windowWidth <= 1366 ? '' : '15' }">
     <div class="position-relative">
       <h6 class="font-weight-normal mb-0 d-inline-block bg-white pr-3 position-relative text-uppercase pr-4">Complète la réservation de :</h6>
     </div>
-    <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #ebebeb"></div>
-    <div class="participant-img-container position-relative" :class="{ 'participant-opacity': currForm !== 'booker' }">
+    <div class="d-inline-block mr-auto" style="flex-grow: 1; height: 1px; background-color: #f1f1f1"></div>
+    <div
+      @mouseenter="bookerAvatarHovered = true"
+      @mouseleave="bookerAvatarHovered = false"
+      class="participant-img-container"
+      :class="{ 'participant-opacity': currForm !== 'booker' && !bookerAvatarHovered }"
+      type="button"
+    >
       <div class="d-inline-block" style="position: relative; margin-left: 3rem">
         <img
           v-if="avatarKey"
           class="participant-img mr-3"
           fluid
-          :src="`https://res.cloudinary.com/heaventrip/image/upload/v1624837376/${avatarKey}.jpg`"
+          :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
           style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none"
         />
         <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="margin-right: 1rem" fill="#292f33" />
+        <transition name="fade">
+          <InlineSvg
+            v-show="false"
+            :src="require('@/assets/svg/edit-booker.svg')"
+            class="mr-2"
+            height="70"
+            style="border-radius: 50%; border: 1px solid #292f33; position: absolute; left: 0; top: 0"
+            fill="red"
+          />
+        </transition>
         <span class="participant-check"></span>
       </div>
-      <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold" style="display: inline; vertical-align: middle">{{ booker.infos.firstName || 'Participant 1' }}</strong>
+      <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ booker.infos.firstName || `Participant` }}</strong>
     </div>
     <div
       class="participant-add position-relative d-flex align-items-center"
+      type="button"
+      @mouseenter="participantAvatarHovered = true"
+      @mouseleave="participantAvatarHovered = false"
       v-for="(extraParticipantForHeader, index) in extraParticipants"
       :key="extraParticipantForHeader"
-      :class="{ 'participant-opacity': extraParticipantForHeader !== localExtraParticipants[currFormParticipant] || currForm !== 'extraParticipant' }"
+      :class="{ 'participant-opacity': (extraParticipantForHeader !== localExtraParticipants[currFormParticipant] || currForm !== 'extraParticipant') && !participantAvatarHovered }"
     >
       <i class="fa fa-caret-right mx-3 small align-baseline caret-icon"></i>
-      <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="70" fill="#292f33" />
-      <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
+      <div style="position: relative">
+        <InlineSvg :src="require('@/assets/svg/avatar-empty.svg')" class="mr-2" height="70" fill="#292f33" :style="participantAvatarHovered ? 'filter: opacity(0.3)' : ''" />
+        <transition name="fade">
+          <InlineSvg
+            v-show="false"
+            :src="require('@/assets/svg/edit-booker.svg')"
+            class="mr-2"
+            height="70"
+            style="border-radius: 50%; border: 1px solid #292f33; position: absolute; left: 0; top: 0"
+            fill="red"
+          />
+        </transition>
+      </div>
+      <div>
+        <strong class="text-uppercase participant-name h6 mb-0 font-weight-bold">{{ extraParticipantForHeader.infos.firstName || `Participant ${index + 2}` }}</strong>
+        <span @click.prevent="localExtraParticipants.splice(index, 1)" type="button" class="d-block mt-1 text-danger text-uppercase" style="font-size: 0.75rem">Retirer</span>
+      </div>
     </div>
   </div>
   <transition name="fade" mode="out-in" @enter="scroll">
@@ -102,7 +124,7 @@
         <h6 class="font-weight-bold">Activites en +</h6>
         <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
         <div class="hidable">
-          <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+          <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0" :style="localBooker.booking.noExtraActivities ? 'filter: opacity(0.5)' : ''">
             <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
               <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
                 <input
@@ -128,16 +150,10 @@
           </div>
         </div>
       </div>
-      <!-- <div class="border-top d-none">
-    <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
-    <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-    <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
-    <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
-    </div> -->
       <div class="card-body border-top">
         <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
         <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-        <textarea v-model="localBooker.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+        <textarea placeholder="(Faculatif)" v-model="localBooker.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
       </div>
     </div>
     <div v-else>
@@ -224,7 +240,7 @@
             <h6 class="font-weight-bold">Activites en +</h6>
             <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
             <div class="hidable">
-              <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0">
+              <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0" :style="localExtraParticipants[currFormParticipant].booking.noExtraActivities ? 'filter: opacity(0.5)' : ''">
                 <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
                   <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
                     <input
@@ -251,23 +267,22 @@
               </div>
             </div>
           </div>
-          <!-- <div class="card-body border-top d-none">
-      <h6 class="font-weight-bold text-uppercase mb-1">infos a savoir</h6>
-      <p class="font-weight-500">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-      <textarea class="form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
-      <button class="btn btn-danger text-uppercase shadow p-3 px-4 continue-btn">continuer</button>
-      </div> -->
           <div class="card-body border-top">
             <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
             <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
-            <textarea v-model="localExtraParticipants[currFormParticipant].booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
+            <textarea
+              placeholder="(Faculatif)"
+              v-model="localExtraParticipants[currFormParticipant].booking.comment"
+              class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5"
+              rows="5"
+            ></textarea>
           </div>
         </div>
       </transition>
     </div>
   </transition>
   <div class="card p-0" style="position: relative" v-if="localExtraParticipants.length && !isLastParticipant">
-    <div @click="nextParticipant" class="btn-next-participant" type="button" :style="nextParticipantAllowed ? '' : 'color: #ebebeb'">
+    <div @click="nextParticipant" class="btn-next-participant" type="button" :style="nextParticipantAllowed ? '' : 'color: #f1f1f1'">
       <div class="d-flex flex-row align-items-center" style="padding: 1.25rem 2.25rem">
         <span class="mr-auto">Continuer avec la réservation de :</span>
         <div class="d-inline-block" style="position: relative" data-v-9215de46="">
@@ -288,6 +303,8 @@ export default {
   emits: ['complete', 'updated-participants', 'updated-booker', 'updated-isLastParticipant'],
   data() {
     return {
+      bookerAvatarHovered: false,
+      participantAvatarHovered: false,
       currFormParticipant: 0,
       currFormStep: 0,
       currForm: 'booker',
@@ -323,7 +340,8 @@ export default {
       })
     },
     nextFormStep(step) {
-      let nextCard = document.querySelectorAll('.card-body')[step]
+      let cards = document.querySelectorAll('.card-body')
+      let nextCard = cards[step]
       nextCard.querySelector('.hidable').style.display = ''
       nextCard.removeAttribute('style') // remove opacity
 
@@ -332,7 +350,7 @@ export default {
         let buttons = document.querySelector('.nav-buttons-container')
         buttons.style.display = ''
       } else {
-        let followingCard = document.querySelectorAll('.card-body')[step + 1]
+        let followingCard = cards[step + 1]
         followingCard.style.display = ''
       }
 
@@ -387,27 +405,27 @@ export default {
       if (!this.localExtraParticipants.length) return
       return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities || this.localExtraParticipants[this.currFormParticipant].booking.extraActivities.length
     },
+    extraParticipantNoExtraActivities() {
+      if (!this.localExtraParticipants.length) return
+      return this.localExtraParticipants[this.currFormParticipant].booking.noExtraActivities
+    },
     isLastParticipant() {
       return this.extraParticipants.length && this.currForm === 'extraParticipant' && this.currFormParticipant === this.extraParticipants.length - 1
     }
   },
-  activated() {
-    if (this.$props.needsReset) this.$nextTick(() => this.resetDisplay())
-  },
   watch: {
-    bookerRoomFilled: {
-      handler(val) {
-        if (val) this.nextFormStep(1)
-      }
+    bookerRoomFilled(val) {
+      if (val) this.nextFormStep(1)
     },
-    'localBooker.booking.equipmentRental': {
-      handler(val) {
-        if (val) this.nextFormStep(2)
-      }
+    bookerEquipmentFilled(val) {
+      if (val) this.nextFormStep(2)
+    },
+    bookerActivitiesFilled(val) {
+      if (val) this.nextFormStep(3)
     },
     'localBooker.booking.noExtraActivities': {
       handler(val) {
-        if (val) this.nextFormStep(3)
+        if (val) this.localBooker.booking.extraActivities = []
       }
     },
     extraParticipantRoomFilled(val) {
@@ -418,6 +436,9 @@ export default {
     },
     extraParticipantActivitiesFilled(val) {
       if (val) this.nextFormStep(3)
+    },
+    extraParticipantNoExtraActivities(val) {
+      if (val) this.localExtraParticipants[this.currFormParticipant].booking.extraActivities = []
     },
     filled(val) {
       if (val) this.$emit('complete', true)
@@ -442,8 +463,11 @@ export default {
       }
     }
   },
+  activated() {
+    if (this.$props.needsReset) this.$nextTick(() => this.resetDisplay())
+  },
   mounted() {
-    this.initFormDisplay('booker')
+    this.$nextTick(() => this.initFormDisplay('booker'))
   }
 }
 </script>
@@ -451,7 +475,7 @@ export default {
 <style scoped>
 .btn-next-participant,
 .btn-next-participant:active {
-  border: 1px solid #ebebeb;
+  border: 1px solid #f1f1f1;
   padding: 0 1.5rem;
   text-align: center;
   background-color: #292f33;
@@ -459,7 +483,7 @@ export default {
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   color: #fff;
 }
 .btn-next-participant:hover {

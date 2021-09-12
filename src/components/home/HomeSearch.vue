@@ -4,7 +4,7 @@
       class="search-bar col-12 col-sm-10 col-lg-9 mx-auto rounded p-0"
       style="position: relative; bottom: 50px; border-radius: 10px; box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0.09); background-color: rgba(0, 0, 0, 0.09); max-width: 1200px"
     >
-      <div class="bg-white d-flex centered-div">
+      <form @submit.prevent="goSearchPage" class="bg-white d-flex centered-div">
         <div class="d-flex align-items-center flex-1 search-input-container" style="padding: 1.4rem 2rem 1.6rem 2rem">
           <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/lens.svg')" height="22" />
           <input v-model="freeSearch" class="form-control p-0 search-input ml-3" type="text" name="" placeholder="Ma recherche manuelle" />
@@ -25,7 +25,7 @@
             <div class="position-relative multi-select-filter">
               <div style="position: absolute; top: 50%; transform: translateY(-50%); text-align: center; width: 100%">
                 <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/country-search.svg')" height="22" />
-                <span v-if="countrySelection.value" class="search-bar__filter__name">{{ countrySelection.options.find((el) => el.value === countrySelection.value).label }}</span>
+                <span v-if="countrySelection.length" class="search-bar__filter__name">{{ countrySelection.options.find((el) => el.value === countrySelection.value).label }}</span>
                 <span v-else class="search-bar__filter__name">Pays</span>
               </div>
               <Multiselect class="country-multiselect" ref="countryMultiselect" @open="setMultiSelect('country')" v-model="countrySelection.value" v-bind="countrySelection" style="width: 100%">
@@ -49,13 +49,13 @@
           <img class="mx-2" fluid :src="require('@/assets/images/mob-1.png')" />
         </button>
         <button @click.prevent="goSearchPage" class="bttn-search btn text-uppercase search-btn px-3 px-sm-5 rounded-right border-0" style="border-left: 1px solid rgba(255, 255, 255, 0.1) !important">
-          <div class="d-none d-lg-inline-block mb-1">
+          <div class="d-none d-lg-inline-block mb-1" style="position: relative">
+            Rechercher
             <span id="loading" v-show="fetching"></span>
-            rechercher
           </div>
           <div v-show="resultsNb" style="font-size: 0.8rem; font-weight: 300; text-transform: none">{{ resultsNb }} résultats</div>
         </button>
-      </div>
+      </form>
       <div class="tags-container d-flex justify-content-center">
         <Button
           @click="clearFilters"
@@ -64,7 +64,7 @@
           text-color="#fff"
           style="transform: translateY(3px)"
           height="auto"
-          v-if="!!monthSelection.value.length || !!activitySelection.value.length"
+          v-if="monthSelection.value.length || activitySelection.value.length || countrySelection.value.length"
         />
       </div>
     </div>
@@ -128,10 +128,12 @@ export default {
       countrySelection: {
         hideSelected: false,
         noOptionsText: 'La liste est vide',
-        value: '',
+        value: [],
+        mode: 'tags',
         openDirection: 'top',
         caret: false,
-        options: []
+        options: [],
+        createTag: true
       },
       resultsNb: 0
     }
@@ -163,6 +165,17 @@ export default {
         else if (!this.monthSelection.value.length) this.slideUpSearchBar.reverse()
       }
     },
+    'countrySelection.value': {
+      deep: true,
+      handler(val) {
+        if (val.length) this.fetchData()
+
+        if (window.scrollY > 25) return
+
+        if (val.length) this.slideUpSearchBar.play()
+        else if (!this.countrySelection.value.length) this.slideUpSearchBar.reverse()
+      }
+    },
     'monthSelection.value': {
       deep: true,
       handler(val) {
@@ -184,7 +197,7 @@ export default {
       this.fetching = false
     },
     goSearchPage() {
-      this.$router.push({ name: 'Search', query: { month: this.monthSelection.value, activity: this.activitySelection.value } })
+      this.$router.push({ name: 'Search', query: { country: this.countrySelection.value, month: this.monthSelection.value, activity: this.activitySelection.value } })
     },
     fetchData() {
       this.filtered.activityArr = []
@@ -245,7 +258,7 @@ export default {
       this.resetFilters()
       this.fetching = false
     },
-    fetchCountries() {
+    async fetchCountries() {
       let arr = new Array()
       return new Promise((resolve, _) => {
         this.$axios.get('/countries').then((res) => {
@@ -256,7 +269,7 @@ export default {
         })
       })
     },
-    fetchSports() {
+    async fetchSports() {
       let arr = new Array()
       return new Promise((resolve, _) => {
         this.$axios.get('/sports').then((res) => {
@@ -269,7 +282,7 @@ export default {
     }
   },
   mounted() {
-    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
+    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=30', ease: 'power4.inOut' })
 
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       document.querySelector('.tags-container').prepend(tagContainer)
@@ -303,7 +316,7 @@ export default {
   transition: fill 0.3s ease;
 }
 .multi-select-filter {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 .multi-select-filter:hover {
   background: #292f33;
@@ -327,6 +340,8 @@ export default {
 }
 /* SPINNER */
 #loading {
+  position: absolute;
+  top: 3px;
   display: inline-block;
   width: 15px;
   height: 15px;
