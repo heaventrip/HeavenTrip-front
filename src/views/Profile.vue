@@ -334,13 +334,13 @@ export default {
     const AUTH_TOKEN_KEY = 'authToken'
     const token = localStorage.getItem(AUTH_TOKEN_KEY)
     this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
     // this.currUser = await this.getUserInfo()
     this.$axios
       .get('/users/current')
       .then((res) => {
         this.currUser = res.data.user
         this.$root.initialLoading = false
+        console.log(res.data.user)
       })
       .catch((err) => {
         this.$notify({ type: 'error', text: err.message })

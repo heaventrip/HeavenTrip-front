@@ -83,7 +83,11 @@
             type="button"
             :style="{ color: genderIsValid ? '#d82558' : '#ffffff' }"
             class="connection-nav-button"
-            :class="[{ 'connection-nav-button--active': activeInfoTab === 'gender' && !genderIsValid }, { 'connection-nav-button--valid--active': activeInfoTab === 'gender' && genderIsValid }]"
+            :class="[
+              { 'connection-nav-button-infos': activeTab === 'infos' },
+              { 'connection-nav-button--active': activeInfoTab === 'gender' && !genderIsValid },
+              { 'connection-nav-button--valid--active': activeInfoTab === 'gender' && genderIsValid }
+            ]"
           >
             Camp
           </div>
@@ -93,7 +97,11 @@
             type="button"
             :style="{ color: avatarIsValid ? '#d82558' : genderIsValid ? '#ffffff' : '' }"
             class="connection-nav-button"
-            :class="[{ 'connection-nav-button--active': activeInfoTab === 'avatar' && !avatarIsValid }, { 'connection-nav-button--valid--active': activeInfoTab === 'avatar' && avatarIsValid }]"
+            :class="[
+              { 'connection-nav-button-infos': activeTab === 'infos' },
+              { 'connection-nav-button--active': activeInfoTab === 'avatar' && !avatarIsValid },
+              { 'connection-nav-button--valid--active': activeInfoTab === 'avatar' && avatarIsValid }
+            ]"
           >
             Photo de profil
           </div>
@@ -103,7 +111,7 @@
             type="button"
             :style="{ color: avatarIsValid ? '#ffffff' : '' }"
             class="connection-nav-button"
-            :class="{ 'connection-nav-button--active': activeInfoTab === 'bio' }"
+            :class="[{ 'connection-nav-button-infos': activeTab === 'infos' }, { 'connection-nav-button--active': activeInfoTab === 'bio' }]"
           >
             Quelques mots
           </div>
@@ -131,7 +139,7 @@
                 }
               "
               type="button"
-              class="connection-nav-button button-sign"
+              class="connection-nav-button-annimate connection-nav-button button-sign"
               :class="{ 'connection-nav-button--active': activeTab === 'login' }"
             >
               Connexion
@@ -144,7 +152,7 @@
                 }
               "
               type="button"
-              class="connection-nav-button button-sign"
+              class="connection-nav-button-annimate connection-nav-button button-sign"
               :class="{ 'connection-nav-button--active': activeTab === 'signup' }"
             >
               Inscription
@@ -333,9 +341,32 @@ export default {
     },
     createTsConnectionTab() {
       let borderSelection = document.querySelector('.border-selection')
+      let connectionNavButtons = document.querySelectorAll('.connection-nav-button-annimate')
+
+      let connectionTabButtonLoginWidth = connectionNavButtons[0].getBoundingClientRect().width
+      let connectionTabButtonSignupWidth = connectionNavButtons[1].getBoundingClientRect().width
+      borderSelection.style.width = connectionTabButtonLoginWidth
+
+      /*       const mediaQuery = window.matchMedia('(max-width: 768px)')
+      
+      function handleTabletChange(e) {
+        console.log('sdvsdv')
+        if (e.matches) {
+          console.log('Media Query Matched!')
+        }
+      }
+      mediaQuery.addListener(handleTabletChange)
+      mediaQuery.addEventListener(handleTabletChange)
+
+      handleTabletChange(mediaQuery) */
+
       let tlConnectionTab = gsap.timeline().pause()
-      console.log(window.innerWidth)
-      tlConnectionTab.to(borderSelection, { width: '94', x: '+=116', ease: 'power1.out', duration: 0.06 })
+
+      var style = window.getComputedStyle ? getComputedStyle(connectionNavButtons[0], null) : connectionNavButtons[0].currentStyle
+      var connectionTabButtonLoginMarginRight = parseInt(style.marginRight) || 0
+      let movementLength = connectionTabButtonLoginWidth + connectionTabButtonLoginMarginRight
+
+      tlConnectionTab.to(borderSelection, { width: connectionTabButtonSignupWidth, x: movementLength, ease: 'power1.out', duration: 0.06 })
 
       this.tlConnectionTab = tlConnectionTab
     },
@@ -487,8 +518,19 @@ export default {
   color: rgba(255, 255, 255);
   border-bottom: 0px solid white;
 }
-.connection-nav-button--valid--active {
+.connection-nav-button-infos {
+  border-bottom: 1px solid transparent;
+}
+.connection-nav-button-infos.connection-nav-button--valid--active {
   border-bottom: 1px solid #d82558;
+  transition: border-bottom 0.3s;
+  text-decoration: none;
+}
+.connection-nav-button-infos.connection-nav-button--active {
+  color: rgba(255, 255, 255);
+  border-bottom: 1px solid white;
+  transition: border-bottom 0.3s;
+  text-decoration: none;
 }
 .button-sign:hover {
   color: white;

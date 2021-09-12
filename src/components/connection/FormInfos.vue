@@ -78,9 +78,7 @@
         <label v-else-if="showAvatarValidationButton && !error && !showLoaderUploadImg" @click="validateTheAvatar" class="btn avatar-validation-btn rounded-0 btn-lg px-4">
           Valider ma photo de profil
         </label>
-        <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="label-error rounded-0 px-4" style="position: absolute; margin-top: 70px; color: tomato">{{
-          error
-        }}</label>
+        <label v-else-if="!showAvatarValidationButton && error && !showLoaderUploadImg" class="label-error rounded-0" style="position: absolute; margin-top: 70px; color: tomato">{{ error }}</label>
       </div>
       <div v-else-if="activeInfoTabs[activeStep] === 'bio'" class="centered-vh">
         <div class="descr-text">
