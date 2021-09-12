@@ -2770,7 +2770,6 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   color: #d82558;
   text-transform: uppercase;
   font-weight: bold;
-  
 }
 
 .main-product-content .activity-list .activity-list-head .icon {
@@ -2786,10 +2785,9 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   display: flex;
   justify-content: end;
   flex: 1;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0%;
-    
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
 }
 
 .brown-div {
