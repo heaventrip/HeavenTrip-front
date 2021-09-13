@@ -140,15 +140,12 @@ export default {
   },
   props: [],
   computed: {
-    totalSelectedNb() {
-      return this.activitySelection.value.length + this.monthSelection.value.length
-    },
-    selectionIsActive() {
-      return this.totalSelectedNb || this.countrySelection.value
+    totalSelected() {
+      return this.activitySelection.value.length + this.monthSelection.value.length + this.countrySelection.value.length
     }
   },
   watch: {
-    selectionIsActive(val) {
+    totalSelected(val) {
       if (!val) this.resetFilters()
     },
     firstName(newVal) {

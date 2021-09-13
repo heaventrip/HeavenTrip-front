@@ -188,6 +188,11 @@ TODO
 - FAIRE LE LIEN AVEC LA SESSION DS LE BOOKING
 - lister les résas
 - recheck module booking
+- bloquer flèches des cards quand on arrive au bout
+> tags pas fixés
+- au dessus du liseret : 1rem + 20px / en dessous du lisert : 20px
+- hover du svg infos sanitaire
+> déclenchement du hover de la nav plus proche du texte du bouton
 
 BACK
 - unicité des wishlist

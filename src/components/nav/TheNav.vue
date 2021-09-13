@@ -26,37 +26,27 @@
     </button>
 
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
-      <div class="logged_in-div d-none align-items-center bg-white d-lg-none">
-        <!-- d-flex -->
-        <a href="#"><img class="menu-icon mr-4" fluid :src="require('@/assets/images/svg/PICTO_LOG_USER_PROFIL_SUB_MENU_2.svg')" /></a>
-        <img fluid :src="require('@/assets/images/avatar.png')" class="d-block user_img rounded-circle" alt="..." />
-        <h5 class="logged_in_name mb-0 text-uppercase">MARION <span>Klein</span></h5>
-        <div class="position-relative ml-auto">
-          <img class="picto-icon" fluid :src="require('@/assets/images/svg/PICTO_CHAT.svg')" />
-          <div class="notify-number">1</div>
-        </div>
-      </div>
       <ul id="header_nav" class="navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs">
-        <li class="nav-item">
-          <a @mouseover="onMouseOvered('activities')" class="nav-link" :class="{ active: activeTab === 'activities' }" id="pills-activities-tab" type="button">
+        <li class="nav-item" style="cursor: pointer" @mouseover="onMouseOvered('activities')">
+          <a class="nav-link" :class="{ active: activeTab === 'activities' }" id="pills-activities-tab" type="button">
             <span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
         </li>
-        <li class="nav-item">
-          <a @mouseover="onMouseOvered('destinations')" class="nav-link" :class="{ active: activeTab === 'destinations' }" id="pills-destinations-tab" type="button">
+        <li class="nav-item" style="cursor: pointer" @mouseover="onMouseOvered('destinations')">
+          <a class="nav-link" :class="{ active: activeTab === 'destinations' }" id="pills-destinations-tab" type="button">
             <span>02</span> destination <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
         </li>
-        <li class="nav-item">
-          <a @mouseover="onMouseOvered('agency')" class="nav-link" :class="{ active: activeTab === 'agency' }" id="pills-agency-tab" type="button">
+        <li class="nav-item" style="cursor: pointer" @mouseover="onMouseOvered('agency')">
+          <a class="nav-link" :class="{ active: activeTab === 'agency' }" id="pills-agency-tab" type="button">
             <span>03</span> l'agence <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>
         </li>
-        <li class="nav-item">
-          <a @mouseover="onMouseOvered('news')" class="nav-link" :class="{ active: activeTab === 'news' }" id="pills-news-tab" type="button">
+        <li class="nav-item" style="cursor: pointer" @mouseover="onMouseOvered('news')">
+          <a class="nav-link" :class="{ active: activeTab === 'news' }" id="pills-news-tab" type="button">
             <span>04</span> actualités <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i>
             <div class="nav-annim-border"></div>
           </a>

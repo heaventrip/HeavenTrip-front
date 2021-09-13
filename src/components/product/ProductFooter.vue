@@ -73,7 +73,7 @@
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
                   <div class="info-div-left d-flex align-items-center justify-content-between" style="min-width: 29%">
-                    <h6 v-if="$windowWidth <= 1500" class="month-count mb-0">
+                    <h6 v-if="$windowWidth <= 1500" class="month-count mb-0" style="white-space: nowrap">
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
@@ -96,11 +96,11 @@
                         <span> pour confirmer </span>
                       </h6>
                       <span v-if="daysLeft" class="cancel-info-text">Tu as {{ daysLeft }} jours pour réserver</span>
-                      <span v-else class="cancel-info-text">Réserverations désormais fermées</span>
+                      <span v-else class="cancel-info-text">Réservations désormais fermées</span>
                     </div>
                   </div>
                   <div class="registrants fg-1" style="width: 20%">
-                    <h6 v-if="session.nbOfParticipants === 0" class="premier-text mb-0 font-weight-bold text-uppercase">
+                    <h6 v-if="session.nbOfParticipants === 0" class="premier-text mb-0 font-weight-bold text-uppercase" style="margin-left: 15%">
                       <img class="mic_icon" fluid :src="require('@/assets/images/mic.png')" />Sois le premier !
                     </h6>
                     <InlineAvatars v-else :avatars="getParticipantsAvatarKeys(session)" :heart="false" outline-color="white" outline-width="3px" height="40px" spacing="-8px" mt="0rem" mb="0rem" />
@@ -416,7 +416,8 @@ export default {
     },
     getParticipantsAvatarKeys(session) {
       let avatars = new Array()
-      return session.participants?.forEach((user) => avatars.push(user.avatarKey))
+      session.participants?.forEach((user) => avatars.push(user.avatarKey))
+      return avatars
     },
     clickToClose() {
       this.showSessions = false

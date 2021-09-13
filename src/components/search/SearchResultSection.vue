@@ -145,7 +145,7 @@
                   </div>
                   <div class="tags-container"></div>
                 </div>
-                <div v-if="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="filter-container spot-filter">
+                <div v-show="activitySelection.value.length + countrySelection.value.length > 0 || $route.query.spot" class="filter-container spot-filter">
                   <div class="position-relative multi-select-filter">
                     <div class="d-flex align-items-center" style="position: absolute; top: 50%; transform: translateY(-50%); padding-left: 1.5rem; padding-right: 1rem; width: 100%">
                       <InlineSvg class="search-bar__filter__svg" :src="require('@/assets/svg/map-pin.svg')" height="22" />
@@ -229,14 +229,14 @@
           <div class="d-flex flex-column col-12 col-lg-8 ml-auto">
             <vue-element-loading :active="loading" spinner="spinner" color="#d82558" background-color="transparent" />
             <div
-              v-show="!normalResults.length && !lastSessionResults.length && !requestedTripResults.length && !loading"
+              v-if="loading || (!normalResults.length && !lastSessionResults.length && !requestedTripResults.length)"
               style="text-align: center; margin-top: 4rem; font-size: 2rem; font-family: Oswald, sans-serif; font-weight: 500"
             >
               Aucun résultat ...
             </div>
             <!-- NOTE NORMAL -->
             <transition-group>
-              <div v-show="!loading" class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
+              <div class="d-flex position-relative mb-5" v-for="normalResult in normalResults" :key="normalResult">
                 <div class="p-0" style="flex: 0 0 36%">
                   <div class="position-relative w-100 h-100" style="overflow: hidden">
                     <img @mouseenter="scaleImg('out', $event)" @mouseleave="scaleImg('in', $event)" class="img-fluid img-fill" style="transform: scale(1.2)" fluid :src="normalResult?.cover" />
@@ -549,7 +549,6 @@ export default {
     return {
       loading: false,
       avatarKeys: [],
-      queryParams: '',
       dateConfirmed: '',
       lastPlaces: '',
       sortedBy: '',
@@ -635,27 +634,22 @@ export default {
         activityArr: [],
         levelArr: [],
         spotArr: [],
-        themeArr: []
+        themeArr: [],
+        monthArr: []
       },
-      slideUpSearchBar: null
+      filters: ['activity', 'month', 'country', 'spot', 'level']
     }
   },
   computed: {
-    selectionIsEmpty() {
-      return this.levelSelection.value.length + this.countrySelection.value.length + this.spotSelection.value.length + this.monthSelection.value.length + this.activitySelection.value.length === 0
+    totalSelected() {
+      return this.levelSelection.value.length + this.countrySelection.value.length + this.spotSelection.value.length + this.monthSelection.value.length + this.activitySelection.value.length
     }
   },
   watch: {
-    '$route.query': {
-      immediate: true,
-      deep: true,
-      handler(val) {
-        console.log('QUERY', val)
-      }
+    totalSelected(val) {
+      if (!val) this.resetFilters()
     },
-    selectionIsEmpty(val) {
-      if (val) this.resetFilters()
-    },
+
     normalResults(val) {
       if (!val.length) return
 
@@ -669,17 +663,6 @@ export default {
           this.sessionsArr = [...new Set(arr)]
         })
       })
-    },
-    'countrySelection.value': {
-      deep: true,
-      handler(val) {
-        if (val.length) this.submitSearchForm()
-
-        if (window.scrollY > 25) return
-
-        if (val.length) this.slideUpSearchBar.play()
-        else if (!this.countrySelection.value.length) this.slideUpSearchBar.reverse()
-      }
     }
   },
   methods: {
@@ -695,19 +678,20 @@ export default {
       this.updateSearch()
     },
     resetFilters() {
-      this.activitySelection.options.map((el) => (el.disabled = false))
-      this.countrySelection.options.map((el) => (el.disabled = false))
-      this.spotSelection.options.map((el) => (el.disabled = false))
-      this.levelSelection.options.map((el) => (el.disabled = false))
+      this.filters.forEach((filter) => {
+        this[filter + 'Selection'].options.map((el) => (el.disabled = false))
+      })
       this.fetching = false
     },
     clearFilters() {
-      this.$refs.countryMultiselect.clear()
-      this.$refs.spotMultiselect.clear()
-      this.$refs.levelMultiselect.clear()
-      this.$refs.activityMultiselect.clear()
+      console.log(this.filters)
+      console.log(this.$refs)
+      this.filters.forEach((filter) => {
+        let multiselect = filter + 'Multiselect'
+        console.log(multiselect)
+        this.$refs[multiselect].clear()
+      })
       this.resetFilters()
-      this.fetching = false
     },
     sortByPrice() {
       if (this.sortedBy === 'descPrice') {
@@ -740,13 +724,10 @@ export default {
       this.submitSearchForm()
     },
     submitSearchForm() {
-      this.filtered.themesArr = []
-      this.filtered.activityArr = []
-      this.filtered.levelArr = []
-      this.filtered.countryArr = []
-      this.filtered.spotArr = []
+      this.filters.forEach((filter) => {
+        this.filtered[filter + 'Arr'] = []
+      })
       this.resetFilters()
-
       this.loading = true
 
       this.$axios
@@ -764,35 +745,23 @@ export default {
           sessions_confirmed_eq: this.dateConfirmed
         })
         .then((res) => {
-          // console.log(res.data.courses[0].sports.map((el) => console.log(el)))
+          this.normalResults = res.data.courses
+
           res.data.courses.forEach((course) => {
             this.filtered.activityArr.push(course.sports.map((sport) => sport.id))
             this.filtered.countryArr.push(course.country.id)
             this.filtered.spotArr.push(course.spot.id)
             this.filtered.levelArr.push(course.level.id)
+            this.filtered.monthArr.push(course.sessions.map((session) => session.monthOfDeparture))
           })
 
-          this.activitySelection.options.map((el) => Object.assign(el, { disabled: true }))
-          this.filtered.activityArr.flat().forEach((id) => {
-            this.activitySelection.options.find((option) => option.value === id).disabled = false
+          this.filters.forEach((filter) => {
+            this[filter + 'Selection'].options.map((el) => Object.assign(el, { disabled: true }))
+            this.filtered[filter + 'Arr'].flat().forEach((id) => {
+              this[filter + 'Selection'].options.find((option) => option.value === id).disabled = false
+            })
           })
 
-          this.countrySelection.options.map((el) => Object.assign(el, { disabled: true }))
-          this.filtered.countryArr.flat().forEach((id) => {
-            this.countrySelection.options.find((option) => option.value === id).disabled = false
-          })
-
-          this.spotSelection.options.map((el) => Object.assign(el, { disabled: true }))
-          this.filtered.spotArr.flat().forEach((id) => {
-            this.spotSelection.options.find((option) => option.value === id).disabled = false
-          })
-
-          this.levelSelection.options.map((el) => Object.assign(el, { disabled: true }))
-          this.filtered.levelArr.flat().forEach((id) => {
-            this.levelSelection.options.find((option) => option.value === id).disabled = false
-          })
-
-          this.normalResults = res.data.courses
           this.loading = false
         })
         .catch((err) => (this.loading = false))
@@ -802,70 +771,59 @@ export default {
       this.$nextTick(function () {
         filterDropdown.scrollTo({ top: filterDropdown.scrollHeight * -1 })
       })
-    },
-    getQueryParams() {
-      let queryParams = this.$route.query
-
-      if (queryParams.theme) {
-        if (Array.isArray(queryParams.theme)) queryParams.theme.forEach((id) => this.$refs.themeMultiselect.select(id))
-        else this.$refs.themeMultiselect.select(queryParams.theme)
-      }
-      if (queryParams.activity) {
-        console.log('1')
-        if (Array.isArray(queryParams.activity)) {
-          console.log('2')
-          queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
-        } else {
-          console.log(queryParams.activity)
-          this.$refs.activityMultiselect.select(5)
-        }
-      }
-      if (queryParams.country) {
-        if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
-        else this.$refs.countryMultiselect.select(queryParams.country)
-      }
-      if (queryParams.spot) {
-        if (Array.isArray(queryParams.spot)) queryParams.spot.forEach((id) => this.$refs.spotMultiselect.select(id))
-        else this.$refs.spotMultiselect.select(queryParams.spot)
-      }
-      if (queryParams.level) {
-        if (Array.isArray(queryParams.level)) queryParams.level.forEach((id) => this.$refs.levelMultiselect.select(id))
-        else this.$refs.levelMultiselect.select(queryParams.level)
-      }
-
-      if (queryParams.length) this.submitSearchForm()
     }
   },
   created() {
+    let queryParams = this.$route.query
+
     this.$axios.get('/sport-categories').then((res) => {
       res.data.sportCategories.forEach((theme) => {
         this.themeSelection.options.push({ value: theme.id, label: theme.name })
       })
+      if (queryParams.theme) {
+        if (Array.isArray(queryParams.theme)) queryParams.theme.forEach((id) => this.$refs.themeMultiselect.select(id))
+        else this.$refs.themeMultiselect.select(queryParams.theme)
+      }
     })
     this.$axios.get('/sports').then((res) => {
       res.data.sports.forEach((sport) => {
         this.activitySelection.options.push({ value: sport.id, label: sport.name })
       })
+      if (queryParams.activity) {
+        if (Array.isArray(queryParams.activity)) queryParams.activity.forEach((id) => this.$refs.activityMultiselect.select(id))
+        else this.$refs.activityMultiselect.select(queryParams.activity)
+      }
     })
     this.$axios.get('/countries').then((res) => {
       res.data.countries.forEach((country) => {
         this.countrySelection.options.push({ value: country.id, label: country.name })
       })
+
+      if (queryParams.country) {
+        if (Array.isArray(queryParams.country)) queryParams.country.forEach((id) => this.$refs.countryMultiselect.select(id))
+        else this.$refs.countryMultiselect.select(queryParams.country)
+      }
     })
     this.$axios.get('/spots').then((res) => {
       res.data.spots.forEach((spot) => {
         this.spotSelection.options.push({ value: spot.id, label: spot.name })
       })
+      if (queryParams.spot) {
+        if (Array.isArray(queryParams.spot)) queryParams.spot.forEach((id) => this.$refs.spotMultiselect.select(id))
+        else this.$refs.spotMultiselect.select(queryParams.spot)
+      }
     })
     this.$axios.get('/levels').then((res) => {
       res.data.levels.forEach((level) => {
         this.levelSelection.options.push({ value: level.id, label: level.name })
       })
+      if (queryParams.level) {
+        if (Array.isArray(queryParams.level)) queryParams.level.forEach((id) => this.$refs.levelMultiselect.select(id))
+        else this.$refs.levelMultiselect.select(queryParams.level)
+      }
     })
   },
   mounted() {
-    this.getQueryParams()
-    this.slideUpSearchBar = gsap.timeline({ paused: true }).to('.search-bar', { y: '-=25', ease: 'power4.inOut' })
     document.querySelectorAll('.multiselect-tags').forEach((tagContainer) => {
       tagContainer.closest('.filter-container').querySelector('.tags-container')?.append(tagContainer)
     })
