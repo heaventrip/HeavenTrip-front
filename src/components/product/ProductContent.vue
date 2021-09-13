@@ -159,11 +159,17 @@
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
+            <div class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="activeTabMassaging === 'participants' && !isParticipant">
+              <p>No access participants</p>
+            </div>
             <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="messagesWishlist && activeTabMassaging === 'interested' && isIntressed">
               <li v-for="msg in messagesWishlist" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
+            <div class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="activeTabMassaging === 'interested' && !isIntressed">
+              <p>No access interested</p>
+            </div>
             <!-- <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
