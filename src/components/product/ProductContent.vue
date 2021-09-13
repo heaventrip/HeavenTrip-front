@@ -131,11 +131,11 @@
               JE PAPOTE AVEC :
             </div>
             <div class="messaging-tabs">
-              <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'participants'" :class="[{ active: activeTabMassaging === 'participants' }]"># LES PARTICIPANTS</div>
               <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'interested'" :class="[{ active: activeTabMassaging === 'interested' }]"># TOUT LES INTERESSES</div>
+              <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'participants'" :class="[{ active: activeTabMassaging === 'participants' }]"># LES PARTICIPANTS</div>
             </div>
           </div>
-          <div class="messages-container" @wheel.stop style="">
+          <div class="messages-container" @wheel.stop v-if="!((activeTabMassaging === 'participants' && !isParticipant) || (activeTabMassaging === 'interested' && !isIntressed))">
             <!-- <Message
               :user="{
                 firstName: 'Geoff',
@@ -159,23 +159,54 @@
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
-            <div class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="activeTabMassaging === 'participants' && !isParticipant">
-              <p>No access participants</p>
-            </div>
             <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="messagesWishlist && activeTabMassaging === 'interested' && isIntressed">
               <li v-for="msg in messagesWishlist" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
-            <div class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="activeTabMassaging === 'interested' && !isIntressed">
-              <p>No access interested</p>
-            </div>
+
             <!-- <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul> -->
           </div>
+          <div class="no-access-frame mb-0 discuss-list mt-3" v-if="activeTabMassaging === 'interested' && !isIntressed">
+            <div class="no-access-frame-header">
+              <InlineSvg :src="require('@/assets/svg/picto-micro.svg')" height="50" style="transform: translateY(-30%)" />
+              <p>
+                Pour discuter avec les autres sur le chat, il faut que<br />
+                tu fasses parti des intéressés ou des participants !
+              </p>
+            </div>
+            <div class="no-access-frame-footer">
+              <div class="no-access-frame-footer-text">Intéresse toi en cliquant sur le coeur !</div>
+              <InlineAvatars
+                :course-id="course?.id"
+                :avatars="avatarKeys"
+                :heart="true"
+                heart-height="44px"
+                heart-width="44px"
+                spacing="-6px"
+                :heart-color="showSessions ? 'white' : 'grey'"
+                outline-width="4px"
+                :outline-color="showSessions ? 'grey' : 'light-white'"
+                :count="false"
+                mt="0.3rem"
+                mb="0rem"
+              />
+            </div>
+          </div>
+          <div class="no-access-frame mb-0 discuss-list mt-3" v-if="activeTabMassaging === 'participants' && !isParticipant">
+            <div class="no-access-frame-header">
+              <InlineSvg :src="require('@/assets/svg/private.svg')" height="50" style="transform: translateY(-30%)" />
+              <p>
+                Pour discuter avec les autres sur le chat, il faut que<br />
+                tu fasses parti des participants !
+              </p>
+            </div>
+          </div>
+
           <form @submit.prevent="submitMessageForm" class="message-send-form mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
             <textarea
               @keypress="
@@ -215,6 +246,7 @@ import ProductTabActivities from '@/components/product/tabs/ProductTabActivities
 import ProductTabLiving from '@/components/product/tabs/ProductTabLiving.vue'
 import ProductTabProgram from '@/components/product/tabs/ProductTabProgram.vue'
 import ProductTabReviews from '@/components/product/tabs/ProductTabReviews.vue'
+import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
 import Message from '@/components/product/Message.vue'
 import gsap from 'gsap'
@@ -239,6 +271,7 @@ export default {
     ProductTabTips,
     VueEasyLightbox,
     Message,
+    InlineAvatars,
     Swiper,
     SwiperSlide
   },
@@ -507,6 +540,37 @@ export default {
 </script>
 
 <style scoped>
+.no-access-frame {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-self: center;
+  place-content: center;
+}
+.no-access-frame-header {
+  width: 100%;
+  text-align: center;
+}
+.no-access-frame-header p {
+  letter-spacing: 0.03rem;
+  line-height: 2.4;
+  color: #292f33;
+}
+.no-access-frame-footer {
+  width: 100%;
+  display: flex;
+  border-top: 1px dashed #292f33;
+  flex-direction: column;
+  align-items: center;
+}
+.no-access-frame-footer-text {
+  color: #292f33;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-bottom: 1vh;
+  margin-top: 3vh;
+}
 .svg-btn-send {
   fill: #ffffff;
   height: 17px;
@@ -709,13 +773,14 @@ button {
   position: fixed;
   background-color: white;
   box-shadow: 0 0 3px #f1f1f1;
-  height: calc(100vh - 32px - 100px - 40px); /* substract top nav and booking footer */
+  height: calc(100vh - 32px - 120px - 40px); /* substract top nav and booking footer */
 }
-@media only screen and (min-width: 1441px) {
+/* @media only screen and (min-width: 1441px) {
   .aside-slider {
-    height: calc(100vh - 32px - 120px - 40px); /* height: calc(100vh - 71px - 120px - 40px);*/
+    height: calc(100vh - 32px - 120px - 40px);
   }
-}
+} */
+/* height: calc(100vh - 71px - 120px - 40px);*/
 .aside-slider .swiper-slide__img {
   height: 32vh;
   display: block;
