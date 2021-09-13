@@ -203,7 +203,7 @@
               <div v-if="choseBtn" class="text-right" :class="{ 'text--grey': !showSessions }">
                 <div class="pb-0">
                   <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />
-                  <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400">Session :&nbsp;&nbsp;</span>
+                  <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400"> Session :&nbsp;&nbsp;</span>
                   <span class="d-inline-block align-middle"
                     >{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }} au
                     {{ new Date(choice.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}</span
