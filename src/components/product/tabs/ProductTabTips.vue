@@ -77,8 +77,8 @@
                 </li>
               </ul>
             </div>
-            <div class="pt-5" style="color: #7c7c7c !important">
-              <button @click="countryModal = true" class="btn btn-block rounded-0 py-3 text-uppercase" style="background-color: #fff; border-color: #e1e1e1">
+            <div class="pt-5">
+              <button @click="countryModal = true" class="btn btn-block btn_sanitaire rounded-0 py-3 text-uppercase">
                 <img class="d-inline-block" fluid :src="require('@/assets/svg/sanitaire.svg')" height="28" style="padding-right: 12px" />
                 <span class="d-inline-block" style="vertical-align: middle; font-size: 0.869rem">INFOs SANITAIRE</span>
               </button>
@@ -217,5 +217,16 @@ export default {
   font-weight: 900;
   text-align: center;
   color: #fff;
+}
+.btn_sanitaire {
+  background-color: #ffffff;
+  color: #292f33;
+  border: 1px solid#292f33;
+}
+
+.btn_sanitaire:hover {
+  background-color: #292f33;
+  color: white;
+  border: 1px solid white;
 }
 </style>

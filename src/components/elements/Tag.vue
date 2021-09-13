@@ -34,6 +34,17 @@ export default {
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
 }
+.tag--departheadproduct {
+  background-color: rgba(255, 255, 255, 0.726);
+  color: #5a3a5f;
+  opacity: 100%;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .tag--sooncourse {
   background-color: #d82558;
   color: #ffffff;

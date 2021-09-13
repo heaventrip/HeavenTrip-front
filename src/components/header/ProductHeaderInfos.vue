@@ -33,7 +33,7 @@
     <div class="header__bottom-infos d-flex flex-column align-items-center">
       <div class="block d-flex align-items-center text-uppercase justify-content-between">
         <div class="block__item">
-          <Tag :text="`${course.sessions?.length} départs`" color="white" style="width: min-content" />
+          <Tag :text="`${course.sessions?.length} départs`" color="departheadproduct" style="width: min-content" />
         </div>
         <div class="block__item">
           <div class="block__item__content">
@@ -109,7 +109,11 @@
       <span>Détails & booking</span>
     </div>
   </div>
-  <ul class="header__bottom-popup-menu bg-white nav nav-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center" id="pills-tab" role="tablist">
+  <ul
+    class="header__bottom-popup-menu bg-white nav nav-header-pills nav-justified text-uppercase font-weight-bold narrow-header-pills d-none d-lg-flex align-items-center"
+    id="pills-tab"
+    role="tablist"
+  >
     <li class="nav-item" type="button" role="presentation">
       <a @click.prevent="$emit('clicked-tab', 'activities')" class="nav-link p-0" id="pills-info-tab" data-toggle="pill" aria-controls="pills-info" aria-selected="false">01. Infos séjour</a>
     </li>
