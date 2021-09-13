@@ -42,7 +42,7 @@ export default {
   font-weight: 500;
   padding-left: 0.8rem;
   padding-right: 0.8rem;
-  padding-top: 1rem;
+  padding-top: 1.1rem;
   padding-bottom: 1rem;
 }
 .tag--sooncourse {

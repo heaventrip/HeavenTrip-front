@@ -39,7 +39,7 @@
           <div class="notify-number">1</div>
         </div>
       </div>
-      <ul id="header_nav" class="sticky-nav navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs" :style="[activeTab === 'activities' ? 'margin-top: 4px' : '']">
+      <ul id="header_nav" class="sticky-nav-dark sticky-nav navbar-nav mx-md-5 text-uppercase nav nav-pills mobile-navs" :style="[activeTab === 'activities' ? 'margin-top: 4px' : '']">
         <li class="nav-item">
           <a @click="onClicked('activities')" class="nav-link border-0 nav__item" id="pills-activities-tab" data-toggle="pill" href="#pills-activities"
             ><span>01</span> activites <i class="fas fa-chevron-right float-right nav-arrow d-block d-lg-none"></i
@@ -326,6 +326,11 @@ export default {
   z-index: 11;
   background-color: #292f33;
 }
+
+.sticky-nav-dark {
+  font-size: 0.85rem !important;
+}
+
 .navbar-logo {
   cursor: pointer;
 }

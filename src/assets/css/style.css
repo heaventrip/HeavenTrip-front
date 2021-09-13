@@ -767,12 +767,12 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .header .navbar-dark .navbar-nav .nav-link {
   font-family: Oswald, sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #ffffff;
   padding: 1.3rem 0;
   margin: 0 30px -1px;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.1rem;
   border-bottom: 1px solid transparent;
   background-color: transparent;
   border-radius: 0;
@@ -1863,7 +1863,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .pre-booking-footer .order-tab-list>li {
   border-bottom: 1px dashed #292f33;
-  padding: 40px 0;
+  padding: 50px 0;
 }
 
 .pre-booking-footer .order-tab-list>li:last-child {
@@ -1911,6 +1911,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   letter-spacing: -0.4px;
   line-height: 30px;
   text-align: center;
+  flex: 25%
 }
 
 .pre-booking-footer .order-tab-list>li .amount-per strong {
@@ -1918,7 +1919,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .pre-booking-footer .order-tab-list>li .hours-count {
-  padding: 0 1rem;
+ 
   font-size: 1rem;
   line-height: 26px;
   font-weight: 400;
