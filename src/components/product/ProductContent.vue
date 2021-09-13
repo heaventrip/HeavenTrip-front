@@ -154,21 +154,27 @@
               createdAt="2021-08-05T11:13:32.612Z"
               position="left"
             /> -->
-            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messagesParticipant && activeTabMassaging === 'participants'">
+            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messagesParticipant && activeTabMassaging === 'participants' && isParticipant">
               <li v-for="msg in messagesParticipant" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
-            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="messagesWishlist && activeTabMassaging === 'interested'">
+            <div class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="activeTabMassaging === 'participants' && !isParticipant">
+              <p>No access participants</p>
+            </div>
+            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="messagesWishlist && activeTabMassaging === 'interested' && isIntressed">
               <li v-for="msg in messagesWishlist" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
             </ul>
-            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messages">
+            <div class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="activeTabMassaging === 'interested' && !isIntressed">
+              <p>No access interested</p>
+            </div>
+            <!-- <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
               </li>
-            </ul>
+            </ul> -->
           </div>
           <form @submit.prevent="submitMessageForm" class="message-send-form mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
             <textarea
@@ -241,7 +247,7 @@ export default {
   data() {
     return {
       activeTabMassaging: 'interested',
-      messages: [],
+      //messages: [],
       messagesParticipant: [],
       messagesWishlist: [],
       isParticipant: false,
@@ -293,31 +299,37 @@ export default {
     isCurrentUser(user) {
       return isCurrentUser(user)
     },
-    belongChannel() {
-      this.$axios
+
+    async fetchMessages() {
+      let isParticipant = false
+      let isIntressed = false
+      let res = await this.$axios.get('/users/current')
+      res.data.user.participatingCourses.ids.find((id) => id === this.$props.course?.id) ? (isParticipant = true) : (isParticipant = false)
+      res.data.user.wishlistCourses.ids.find((id) => id === this.$props.course?.id) ? (isIntressed = true) : (isIntressed = false)
+
+      this.isParticipant = isParticipant
+      this.isIntressed = isIntressed
+      /*       this.$axios
         .get('/users/current')
         .then((res) => {
           res.data.user.participatingCourses.ids.find((id) => id === this.$props.course?.id) ? (this.isParticipant = true) : (this.isParticipant = false)
-          res.data.user.wishlistCourses.ids.find((id) => id === this.$props.course?.id) ? (this.isIntressed = true) : (this.isIntressed = false)
+          res.data.user.wishlistCourses.ids.find((id) => id === this.$props.course?.id) ? (this.isIntressed = true) : (this.isIntressed = true)
         })
         .catch((err) => {
           this.$notify({ type: 'error', text: err.message })
-        })
-    },
-    fetchMessages() {
-      this.belongChannel()
-      if (this.isParticipant) {
+        }) */
+      if (isParticipant) {
         this.$axios.get('/messages', { params: { courseId: this.$props.course?.id, channel: 1 } }).then((res) => {
           this.messagesParticipant = res.data.messages
         })
       }
-      if (this.isIntressed) {
+      if (isIntressed) {
         this.$axios.get('/messages', { params: { courseId: this.$props.course?.id, channel: 0 } }).then((res) => {
           this.messagesWishlist = res.data.messages
         })
       }
 
-      this.$axios.get('/messages', { params: { courseId: this.$props.course?.id } }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
+      //this.$axios.get('/messages', { params: { courseId: this.$props.course?.id } }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
       /* this.messages = [
         {
           user: {
@@ -346,22 +358,36 @@ export default {
       return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     },
     submitMessageForm() {
-      this.belongChannel()
       if (!this.inputMessage) return
 
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      if (this.isParticipant || this.isIntressed) {
+      console.log('gneu', this.isParticipant && this.activeTabMassaging === 'participants')
+      console.log('ff', this.isParticipant, this.activeTabMassaging)
+      if (this.isParticipant && this.activeTabMassaging === 'participants') {
+        console.log('isParticipant')
         this.$axios
-          .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage, channel: this.isParticipant ? 1 : this.isIntressed ? 0 : '' } })
+          .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage, channel: 1 } })
           .then((res) => {
             console.log(res)
             this.fetchMessages()
             this.inputMessage = ''
           })
           .catch((err) => console.log(err))
-      } else {
+      }
+      if (this.isIntressed && this.activeTabMassaging === 'interested') {
+        console.log('isIntressed')
+        this.$axios
+          .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage, channel: 0 } })
+          .then((res) => {
+            console.log(res)
+            this.fetchMessages()
+            this.inputMessage = ''
+          })
+          .catch((err) => console.log(err))
+      }
+      /* else {
         this.$axios
           .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
           .then((res) => {
@@ -370,7 +396,7 @@ export default {
             this.inputMessage = ''
           })
           .catch((err) => console.log(err))
-      }
+      } */
     },
     showImg(index) {
       this.index = index
