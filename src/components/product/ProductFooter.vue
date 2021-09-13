@@ -136,7 +136,7 @@
           <div class="d-inline-block text-left">
             <ul class="int-list list-unstyled d-inline-flex align-items-center mx-5 mb-0">
               <div v-if="choice.nbOfParticipants === 0" style="font-family: Oswald, sans-serif; font-size: 0.75rem">
-                <h6 class="premier-text mb-0 font-weight-bold d-none">
+                <h6 class="premier-text mb-0 font-weight-bold">
                   <img class="mic_icon" fluid :src="require('@/assets/images/mic-w.png')" />
                   Sois le premier !
                 </h6>

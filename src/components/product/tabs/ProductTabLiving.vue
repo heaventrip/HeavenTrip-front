@@ -39,7 +39,7 @@
         <transition name="fade-fast" mode="out-in">
           <div :key="activeRoomTab">
             <p class="content mt-3">{{ activeRoomTab?.description }}</p>
-            <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
+            <ul class="list-unstyled place-list text-uppercase mb-2 d-flex flex-wrap flex-column flex-lg-row" style="margin-top: 2rem">
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
                   Nom :
