@@ -3197,7 +3197,8 @@ button.Zebra_DatePicker_Icon {
   border-radius: 0.25rem;
   padding: 30px 0 26px;
   color: #cecece;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 .main-product-content .narrow-header-pills.nav-pills .nav-link:hover {
@@ -3215,7 +3216,7 @@ button.Zebra_DatePicker_Icon {
   position: absolute;
   background-color: #292f33;
   height: 2px;
-  width: 75%;
+  width: 60%;
   left: 50%;
   bottom: -2rem;
   transform: translateX(-51%);
