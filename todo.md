@@ -142,7 +142,7 @@ ___________________________
 > pas la version grise
 - style du bouton dans la modal
 > copier les bons styles d'input dans modal contact
-- rajouter bouton toutes les thématiques dans la recherche
+> rajouter bouton toutes les thématiques dans la recherche
 
 7/09
 > "e-mail" sans "adresse"
