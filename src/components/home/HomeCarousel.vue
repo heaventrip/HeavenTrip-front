@@ -325,7 +325,7 @@ export default {
   margin-left: auto;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.785rem;
   font-weight: 500;
   padding: 0.8rem 1.5rem;
   transition: all 0.2s ease;
