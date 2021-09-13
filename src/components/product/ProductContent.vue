@@ -154,6 +154,16 @@
               createdAt="2021-08-05T11:13:32.612Z"
               position="left"
             /> -->
+            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messagesParticipant && activeTabMassaging === 'participants'">
+              <li v-for="msg in messagesParticipant" :key="msg">
+                <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
+              </li>
+            </ul>
+            <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-else-if="messagesWishlist && activeTabMassaging === 'interested'">
+              <li v-for="msg in messagesWishlist" :key="msg">
+                <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
+              </li>
+            </ul>
             <ul class="messages-container-ul list-unstyled mb-0 discuss-list mt-3" v-if="messages">
               <li v-for="msg in messages" :key="msg">
                 <Message :user="msg.user" :key="msg.user.id + msg.createdAt" :content="msg.content" :createdAt="msg.createdAt" :position="isCurrentUser(msg.user) ? 'right' : 'left'" />
@@ -232,6 +242,10 @@ export default {
     return {
       activeTabMassaging: 'interested',
       messages: [],
+      messagesParticipant: [],
+      messagesWishlist: [],
+      isParticipant: false,
+      isIntressed: false,
       messageSentSuccess: true,
       inputMessage: '',
       asideSlider: true,
@@ -279,7 +293,30 @@ export default {
     isCurrentUser(user) {
       return isCurrentUser(user)
     },
+    belongChannel() {
+      this.$axios
+        .get('/users/current')
+        .then((res) => {
+          res.data.user.participatingCourses.ids.find((id) => id === this.$props.course?.id) ? (this.isParticipant = true) : (this.isParticipant = false)
+          res.data.user.wishlistCourses.ids.find((id) => id === this.$props.course?.id) ? (this.isIntressed = true) : (this.isIntressed = false)
+        })
+        .catch((err) => {
+          this.$notify({ type: 'error', text: err.message })
+        })
+    },
     fetchMessages() {
+      this.belongChannel()
+      if (this.isParticipant) {
+        this.$axios.get('/messages', { params: { courseId: this.$props.course?.id, channel: 1 } }).then((res) => {
+          this.messagesParticipant = res.data.messages
+        })
+      }
+      if (this.isIntressed) {
+        this.$axios.get('/messages', { params: { courseId: this.$props.course?.id, channel: 0 } }).then((res) => {
+          this.messagesWishlist = res.data.messages
+        })
+      }
+
       this.$axios.get('/messages', { params: { courseId: this.$props.course?.id } }).then((res) => (this.messages = res.data.messages)) //this.messages = res.data.messages
       /* this.messages = [
         {
@@ -309,20 +346,31 @@ export default {
       return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     },
     submitMessageForm() {
+      this.belongChannel()
       if (!this.inputMessage) return
 
       const AUTH_TOKEN_KEY = 'authToken'
       const token = localStorage.getItem(AUTH_TOKEN_KEY)
       this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
-      this.$axios
-        .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
-        .then((res) => {
-          console.log(res)
-          this.fetchMessages()
-          this.inputMessage = ''
-        })
-        .catch((err) => console.log(err))
+      if (this.isParticipant || this.isIntressed) {
+        this.$axios
+          .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage, channel: this.isParticipant ? 1 : this.isIntressed ? 0 : '' } })
+          .then((res) => {
+            console.log(res)
+            this.fetchMessages()
+            this.inputMessage = ''
+          })
+          .catch((err) => console.log(err))
+      } else {
+        this.$axios
+          .post('/messages', { message: { courseId: this.$props.course.id, content: this.inputMessage } })
+          .then((res) => {
+            console.log(res)
+            this.fetchMessages()
+            this.inputMessage = ''
+          })
+          .catch((err) => console.log(err))
+      }
     },
     showImg(index) {
       this.index = index

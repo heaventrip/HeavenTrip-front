@@ -24,8 +24,10 @@ export default {
   },
   methods: {
     formatDateToStringDayHourMinute(date) {
-      let dateString = date.toLocaleString()
-      return dateString
+      let days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+      //let dateString = date.toLocaleString()
+      var dayName = days[date.getDay()]
+      return `${dayName} - ${date.getHours()}:${date.getMinutes()}`
     }
   }
 }
