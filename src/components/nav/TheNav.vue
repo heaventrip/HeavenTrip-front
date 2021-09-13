@@ -310,7 +310,7 @@ export default {
     margin-top: 0px !important;
   }
   /*.subactivity-nav__item {
-    font-size: 0.875rem !important;
+    font-size: 0.8748rem !important;
   }*/
 }
 .navbar {

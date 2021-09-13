@@ -79,7 +79,7 @@ body.modal-open::after {
   transform: translateY(1rem);
 }
 .custom-notifications .vue-notification {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .modal__backdrop {
   position: fixed;
@@ -285,7 +285,7 @@ body.modal-open::after {
   font-size: 0.8125rem;
 }
 .text--14 {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .text--16 {
   font-size: 1rem;

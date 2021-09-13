@@ -175,7 +175,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .f-14 {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .zero-opacity {
@@ -247,7 +247,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   letter-spacing: 0.42px;
   color: #b4b4b4;
   font-family: Muli, sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 800;
   line-height: 15px;
   border-bottom: 1px dashed #ffffff;
@@ -277,7 +277,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   letter-spacing: 0.14px;
   color: #ffffff;
   font-family: Muli, sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 300;
   line-height: 15px;
   text-decoration: none;
@@ -313,7 +313,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .header .wrapper .wrapper-pills.nav-pills .nav-link {
   font-family: Muli, sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: bold;
   line-height: 15px;
   letter-spacing: 0.14px;
@@ -418,7 +418,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .header .wrapper .wrapper-content .wrapper-head-para {
   font-family: Muli, sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 300;
   line-height: 18px;
   color: #ffffff;
@@ -451,7 +451,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 .team-pane .para {
   color: #292f33;
   letter-spacing: 0.14px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   margin-bottom: 0;
   line-height: 22px;
 }
@@ -514,7 +514,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 .header .wrapper .tab-header-content .inner-tab-pills .inner-tab-content p {
   letter-spacing: 0.14px;
   color: #292f33;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 28px;
 }
 
@@ -577,7 +577,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   letter-spacing: 0.14px;
   color: #292f33;
   line-height: 24px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .tel-box {
@@ -591,14 +591,14 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   color: #292f33;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   margin-bottom: 10px;
 }
 
 .contact-form .form-control {
   color: #292f33;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-family: Muli, sans-serif;
   background-color: transparent;
   border-radius: 0;
@@ -740,7 +740,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 .inner-div .inner-tab-div p {
   letter-spacing: 0.14px;
   color: #292f33;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 28px;
 }
 
@@ -767,12 +767,12 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .header .navbar-dark .navbar-nav .nav-link {
   font-family: Oswald, sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #ffffff;
   padding: 1.3rem 0;
   margin: 0 30px -1px;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.1rem;
   border-bottom: 1px solid transparent;
   background-color: transparent;
   border-radius: 0;
@@ -836,7 +836,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 /* .header .content .sub-heading{
   font-weight: 400;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.6px;
 } */
 
@@ -1038,13 +1038,13 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .date-model .scroll-pill-tab-content .order-tab-list>li .month-count {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: bold;
   color: #292f33;
 }
 
 .date-model .scroll-pill-tab-content .order-tab-list>li .register-count, .date-model .scroll-pill-tab-content .order-tab-list>li .hours-count {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   letter-spacing: -0.42px;
   color: #d82558;
@@ -1069,7 +1069,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .date-model .scroll-pill-tab-content .order-tab-list>li .amount-per strong {
   letter-spacing: -0.28px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .date-model .scroll-pill-tab-content .order-tab-list>li .choose-btn {
@@ -1132,7 +1132,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   padding: 20px 30px;
   color: #292f33;
   font-weight: 400;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0;
   position: relative;
 }
@@ -1192,7 +1192,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   height: 50px;
   border: 0;
   border-radius: 0;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   color: #7c7c7c;
   font-weight: 400;
   padding-left: 30px;
@@ -1218,7 +1218,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .login-modal .modal-content-body .modal-btn {
   font-weight: bold;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.7px;
   padding: 15px;
   margin-top: 20px;
@@ -1242,7 +1242,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .login-modal .modal-content-body .info-text {
   font-weight: 400;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.7px;
   line-height: 30px;
   margin-bottom: 30px;
@@ -1250,7 +1250,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .social-btn {
   font-family: 'Oswald', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: -0.28px;
   color: #7c7c7c;
   border: 1px solid #1a1a1a1a;
@@ -1373,7 +1373,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .login-modal.profile-modal .modal-content-body .profile-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   line-height: 24px;
   padding: 0 30px 35px;
@@ -1413,7 +1413,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .login-modal.profile-modal .modal-content-body .form-label {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 21px;
   margin-bottom: 18px;
 }
@@ -1481,7 +1481,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .header .content .details-btn {
   border-radius: 0;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -1602,7 +1602,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .header-pills .nav-link {
   color: #7c7c7c;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 700;
   border-bottom: 4px solid transparent;
   border-radius: 0;
@@ -1748,7 +1748,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .search-div .content-div p {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 22px;
   margin-bottom: 36px;
 }
@@ -1804,7 +1804,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .booking-bottom .premier-text, .pre-booking-footer .premier-text {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.42px;
   font-weight: 400;
 }
@@ -1863,7 +1863,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .pre-booking-footer .order-tab-list>li {
   border-bottom: 1px dashed #292f33;
-  padding: 40px 0;
+  padding: 50px 0;
 }
 
 .pre-booking-footer .order-tab-list>li:last-child {
@@ -1911,6 +1911,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   letter-spacing: -0.4px;
   line-height: 30px;
   text-align: center;
+  flex: 25%
 }
 
 .pre-booking-footer .order-tab-list>li .amount-per strong {
@@ -1918,7 +1919,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .pre-booking-footer .order-tab-list>li .hours-count {
-  padding: 0 1rem;
+ 
   font-size: 1rem;
   line-height: 26px;
   font-weight: 400;
@@ -1928,7 +1929,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .pre-booking-footer .order-tab-list>li .tripper-count {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 21px;
   font-weight: 400;
 }
@@ -2108,7 +2109,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: #292f33;
   line-height: 53px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
@@ -2127,7 +2128,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .select2-results__option {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
@@ -2167,13 +2168,17 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .main-product-content .content {
-  font-size: 0.875rem;
-  line-height: 28px;
+  font-size: 0.8748rem;
+  line-height: 27px;
   font-weight: 400;
+  letter-spacing: 0.02rem;
 }
 
 .main-product-content .card-body .content {
-  letter-spacing: 0.03rem;
+font-size: 0.8748rem;
+  letter-spacing: 0.02rem;
+  font-weight: 400;
+ 
 }
 
 .main-product-content .content-head {
@@ -2189,10 +2194,10 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .main-product-content .content-list li a {
-  font-size: 0.875rem;
+  font-size: 0.869rem;
   font-weight: 400;
   padding: 18px 0;
-  margin-left: 23px;
+  margin-left: 10px;
   position: relative;
   display: block;
 }
@@ -2200,7 +2205,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 .main-product-content .content-list.equip li a {
   font-family: 'Muli', sans-serif;
   padding: 8px 0;
-  font-weight: 500;
+  font-weight: 400;
   margin-left: 0;
   border-bottom: 1px dashed #7c7c7ca6;
   display: inline-block;
@@ -2233,7 +2238,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .main-product-content .subhead-block {
-  margin-bottom: 3rem;
+  margin-bottom: 3.3rem;
 }
 
 .left-border {
@@ -2242,15 +2247,15 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .head-block .heading {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 900;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.2;
   color: #292f33;
 }
 
 .head-block .sub-heading {
   letter-spacing: -0.28px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   line-height: 1;
   color: #d82558;
@@ -2293,7 +2298,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .need-list {
   letter-spacing: -0.28px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-family: 'Muli', sans-serif;
   font-weight: 400;
   margin: 5px 0 50px;
@@ -2364,7 +2369,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .box .list li a {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   color: #e2e2e2;
   border-bottom: 1px dashed #ffffff4d;
@@ -2418,7 +2423,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .place-list li a {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: #7c7c7c;
   display: block;
@@ -2457,7 +2462,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .tour-head, .pays-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 1.4px;
   line-height: 21px;
   padding-bottom: 10px;
@@ -2482,11 +2487,11 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .pays-block .letter-space {
-  letter-spacing: 1.6px;
+  letter-spacing: .6px;
 }
 
 .pays-list li {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   color: #ffffff;
   margin-top: 30px;
@@ -2507,14 +2512,16 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .shadow-box .head {
-  letter-spacing: 1.6px;
-  font-size: 1rem;
+  letter-spacing: 0.02rem;
+  font-size: 0.869rem;
   font-weight: 400;
   color: #d82558;
+  text-transform: uppercase  ;
+  padding-bottom: 5px;
 }
 
 .shadow-box .points li {
-  font-size: 0.875rem;
+  font-size: 0.869rem;
   font-weight: 400;
   font-family: 'Muli', sans-serif;
   line-height: 28px;
@@ -2685,7 +2692,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   font-family: 'Muli', sans-serif;
   letter-spacing: 0.14px;
   color: #b4b4b4;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 700;
   text-transform: uppercase;
   border-bottom: 1px dashed #7c7c7ca6;
@@ -2728,7 +2735,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .kitesurf-nav-content .surflist {
   font-family: 'Muli', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 22px;
   letter-spacing: -0.28px;
   color: #7c7c7c;
@@ -2765,8 +2772,8 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .main-product-content .activity-list .activity-list-head {
-  font-size: 13px;
-  letter-spacing: 1.3px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04rem;
   color: #d82558;
   text-transform: uppercase;
   font-weight: bold;
@@ -2774,14 +2781,13 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 
 .main-product-content .activity-list .activity-list-head .icon {
   width: 27px;
-  margin-right: 13px;
+  margin-right: 0.04rem;
 }
 
 .main-product-content .activity-list .activity-content-list {
-  font-size: 13px;
+  font-size: 0.8rem;
   font-weight: 400;
-  color: #7c7c7c;
-  text-transform: uppercase;
+   text-transform: uppercase;
   display: flex;
   justify-content: end;
   flex: 1;
@@ -2826,7 +2832,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .brown-div .author {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -2875,7 +2881,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 .galary-count {
   letter-spacing: -0.28px;
   font-family: 'Muli', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .galary-grid .img-container {
@@ -2965,7 +2971,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
 }
 
 .date-buttons {
-  font-size: 0.875rem !important;
+  font-size: 0.8748rem !important;
   font-weight: 700 !important;
   letter-spacing: 1.4px !important;
   color: #ffffff !important;
@@ -3190,9 +3196,16 @@ button.Zebra_DatePicker_Icon {
   border-radius: 0.25rem;
   padding: 30px 0 26px;
   color: #cecece;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
-
+.main-product-content .nav-header-pills .nav-link  {
+  border-radius: 0.25rem;
+  padding: 30px 0 26px;
+  color: #cecece;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
 .main-product-content .narrow-header-pills.nav-pills .nav-link:hover {
   color: #292f33;
 }
@@ -3207,15 +3220,15 @@ button.Zebra_DatePicker_Icon {
   content: '';
   position: absolute;
   background-color: #292f33;
-  height: 1px;
-  width: 100%;
+  height: 2px;
+  width: 60%;
   left: 50%;
-  bottom: -1.95rem;
-  transform: translateX(-50%);
+  bottom: -2rem;
+  transform: translateX(-51%);
 }
 
 .main-product-content .tab-small-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 25px;
   letter-spacing: -0.28px;
   color: #d82558;
@@ -3292,7 +3305,7 @@ button.Zebra_DatePicker_Icon {
 }
 
 .session-content-list .session-sub-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -3379,7 +3392,7 @@ button.Zebra_DatePicker_Icon {
 }
 
 .participants-count-block .place-count {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.42px;
   font-weight: 400;
 }
@@ -3490,7 +3503,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .booking-session .session-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: bold;
   background-color: #d82558;
   color: #ffffff;
@@ -3696,7 +3709,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 /*-----------------------------------------------*/
 
 .centered-div {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   /* margin-top: -35px; */
   box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
@@ -3706,7 +3719,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 
 .search-btn {
   border-radius: 0;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 1px;
   font-weight: 700;
 }
@@ -3721,7 +3734,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .search-input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: #7c7c7c;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   opacity: 1;
 }
@@ -3729,7 +3742,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .search-input::-moz-placeholder {
   /* Firefox 19+ */
   color: #7c7c7c;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   opacity: 1;
 }
@@ -3737,7 +3750,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .search-input:-ms-input-placeholder {
   /* IE 10+ */
   color: #7c7c7c;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   opacity: 1;
 }
@@ -3745,7 +3758,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .search-input:-moz-placeholder {
   /* Firefox 18- */
   color: #7c7c7c;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   opacity: 1;
 }
@@ -3812,7 +3825,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .search-list .multi-select-filter .sol-label-text {
   padding: 10px;
   border-bottom: none;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   color: #b4b4b4;
 }
 
@@ -3931,7 +3944,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 
 .carousel-section .grid-box p {
   line-height: 1.75;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.2px;
 }
 
@@ -3956,7 +3969,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .carousel-section .nav-pills .nav-link {
   color: #9a9a9a;
   font-family: 'Muli', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: -0.42px;
   font-weight: 400;
   position: relative;
@@ -3985,7 +3998,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
   background: url('../images/down_gray.png') no-repeat center right 20px / 12px;
   font-family: 'Muli', sans-serif;
   font-weight: 300;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   height: 50px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -4018,7 +4031,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
   bottom: 0;
   background-image: -moz-linear-gradient(transparent, rgb(255 255 255 / 98%));
   background-image: -webkit-linear-gradient(transparent, rgb(255 255 255 / 98%));
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.98) 20%, rgba(255, 255, 255, 0) 52%);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.96) 20%, rgba(255, 255, 255, 0) 55%);
   z-index: 0;
 }
 
@@ -4055,7 +4068,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 
 .customers-testimonials .item-details .content .heading {
   color: #793f4e;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -4101,7 +4114,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
   top: -5px;
   right: -5px;
   background-color: rgba(250, 250, 250, 0.95);
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   border-bottom-left-radius: 40px;
   padding: 15px 30px;
 }
@@ -4127,7 +4140,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .testimonials .slick-dots {
   counter-reset: dots;
   font-family: 'Muli', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   padding: 0 80px 0 25px;
   position: absolute;
@@ -4306,7 +4319,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
   transform: none !important;
   background-color: transparent;
   color: #fff;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 18px;
   border: none;
   font-family: 'Muli', sans-serif;
@@ -4324,7 +4337,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .map-section .country-head, .map-section .city-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: bold;
 }
 
@@ -4381,13 +4394,13 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .map-section .content-grid .contents p {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 1.4;
   font-weight: 400;
 }
 
 .map-section .flex-div .activity-count {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .zone-div {
@@ -4440,7 +4453,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .middle-section .para {
   font-family: Muli, sans-serif;
   font-weight: 300;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 2;
 }
 
@@ -4458,7 +4471,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .middle-section .tooltip-div .euro {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -4475,7 +4488,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .middle-section .social-info .content-list li {
   padding: 0 14px;
   border-left: 1px solid #ffffff;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -4506,7 +4519,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .type-of-trip .btn {
   background-color: #292f33;
   border-radius: 0 !important;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .type-of-trip .btn:hover, .type-of-trip .btn.active {
@@ -4571,7 +4584,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .bottom-section .user_name {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .bottom-section .quote {
@@ -4581,7 +4594,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 .bottom-section .user_comment {
   font-family: Muli, sans-serif;
   font-weight: 400;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   line-height: 1.8;
   border-top: 1px solid;
   padding-top: 12px;
@@ -4688,7 +4701,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .footer .para.head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.4px;
 }
 
@@ -4742,7 +4755,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .footer .social-icons span {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -4759,7 +4772,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 }
 
 .footer .list-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 700;
   margin-bottom: 20px;
 }
@@ -4792,7 +4805,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 
 .footer .drpbtn-right {
   background-color: transparent;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   padding-right: 14px;
   position: relative;
   line-height: 1;
@@ -4895,7 +4908,7 @@ input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-o
 
 .back-to-home-link:hover .back-to-home {
   display: inline-block;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -4915,7 +4928,7 @@ a.descriptif-link.bg-danger:hover {
 
 .checkout-header-block .spacing-word {
   letter-spacing: 1.4px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .total-amount-block {
@@ -5044,7 +5057,7 @@ a.descriptif-link.bg-danger:hover {
   border: none;
   display: inline-block;
   padding: 0;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 700;
 }
 
@@ -5112,7 +5125,7 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .check-amount-head, .pay-head, .assurance-radio-container {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -5256,7 +5269,7 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .custom-control .custom-control-label {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   display: block;
   padding-left: 3.25rem;
 }
@@ -5473,7 +5486,7 @@ a.descriptif-link.bg-danger:hover {
 
 .left-pad-pars {
   padding-left: 1.75rem;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -5511,7 +5524,7 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .completion-details-list li .detail-head {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 700;
 }
 
@@ -5693,7 +5706,7 @@ a.descriptif-link.bg-danger:hover {
 
 .success-msg-content {
   letter-spacing: 0.7px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
 }
 
@@ -5773,14 +5786,14 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .filter-div .btn, .search-container {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   border: 0;
   border-left: 1px solid #f1f1f1;
   padding: 1rem 1.25rem;
 }
 
 .search-container .form-control {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .search-container .form-control::-webkit-input-placeholder {
@@ -5813,12 +5826,12 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .result-block .filter-head, .result-block .filter-body .letter {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   letter-spacing: 0.7px;
 }
 
 .result-block .filter-body {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   box-shadow: 0px 3px 8px #00000005;
   border: 1px solid #f4f4f4;
   letter-spacing: 0;
@@ -5889,7 +5902,7 @@ a.descriptif-link.bg-danger:hover {
 .result-block .clear-btn {
   background-color: #f1f1f1;
   color: #292f33;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-family: 'Muli', sans-serif;
   height: 60px;
 }
@@ -5940,7 +5953,7 @@ a.descriptif-link.bg-danger:hover {
 }
 
 .search-result-list .per-count {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 
 .search-result-list .per-count strong {
@@ -6425,9 +6438,10 @@ a.descriptif-link.bg-danger:hover {
     background: none; */
   }
   .main-product-content .content-head.equip {
-    letter-spacing: 1.4px;
-    font-size: 0.875rem;
+    letter-spacing: 0.02rem;
+    font-size: 0.869rem;
     color: #d82558;
+    font-weight: 400;
   }
   .main-product-content .like-div {
     display: flex;
@@ -6439,7 +6453,7 @@ a.descriptif-link.bg-danger:hover {
     align-items: center;
   }
   .main-product-content .like-div .content-head {
-    font-size: 13px;
+    font-size: 0.8rem;
     margin: 0;
   }
   .main-product-content .like-div .content-list {
@@ -6448,7 +6462,8 @@ a.descriptif-link.bg-danger:hover {
     margin-left: auto;
   }
   .main-product-content .like-div .content-list li a {
-    font-size: 12px;
+    font-size: 0.8rem;
+    font-weight: 300;
     letter-spacing: 0.03rem;
     padding: 0;
     padding-right: 26px;
@@ -6458,17 +6473,17 @@ a.descriptif-link.bg-danger:hover {
     padding: 0;
     border: 0;
     border-top: 1px dashed #dbdbdb;
-    padding-top: 25px;
+    padding-top: 20px;
     background-color: transparent;
     color: #292f33;
     margin-top: 20px;
   }
   .main-product-content .like-div.white .content-head, .main-product-content .like-div.white .content-list li a {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+ 
   }
-  .main-product-content .like-div.white .content-list li a {
-    /* border-right: 1px solid #292f33; */
-  }
+
   .main-product-content .like-div .content-list li:last-child a, .main-product-content .like-div.white .content-list li:last-child a {
     padding-right: 0;
     border-right: 0;
@@ -6499,9 +6514,8 @@ a.descriptif-link.bg-danger:hover {
     border: none;
   }
   .top-positioned-div {
-    position: absolute;
-    top: 0;
-    right: 0;
+   width: 100%;
+   padding-top: 35px;
   }
   .outer-circle {
     width: 458px;
@@ -6540,12 +6554,12 @@ a.descriptif-link.bg-danger:hover {
   }
   .main-product-content .activity-list .activity-content-list li:not(:first-child) {
     border-left: 1px solid #f1f1f1;
-    padding-left: 25px;
-    margin-left: 25px;
+    padding-left: 18px;
+    margin-left: 18px;
   }
   .main-product-content .activity-list .activity-content-list li:last-child {
     padding-left: 1rem;
-    margin-left: 3rem;
+    margin-left: 1rem;
   }
   .block-separator {
     border: 1px solid #f1f1f1;
@@ -6761,7 +6775,7 @@ a.descriptif-link.bg-danger:hover {
     height: 40px;
   }
   .selected-filter-count {
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
   }
   .result-div .count {
     border-color: #ffffff !important;
@@ -6906,7 +6920,7 @@ a.descriptif-link.bg-danger:hover {
     color: #022e39;
     font-family: 'Muli', sans-serif;
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
     line-height: 22px;
     margin-left: 10px;
   }
@@ -7185,7 +7199,7 @@ a.descriptif-link.bg-danger:hover {
     font-size: 1.125rem;
   }
   .bottom-section .para-points {
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
     margin-bottom: 25px;
   }
   .bottom-section .sub-heading {
@@ -7196,7 +7210,7 @@ a.descriptif-link.bg-danger:hover {
   }
   .footer .heading {
     font-weight: 400;
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
   }
 }
 
@@ -7240,7 +7254,7 @@ a.descriptif-link.bg-danger:hover {
     left: 50px;
   }
   .middle-section .contents-list {
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
   }
   .middle-section .social-info .gold {
     font-family: 'Muli', sans-serif;
@@ -7284,7 +7298,7 @@ a.descriptif-link.bg-danger:hover {
     padding: 36px 0 !important;
   }
   .header .content .euro-count {
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
     letter-spacing: -0.28px;
     font-weight: 400;
   }
@@ -7405,7 +7419,7 @@ a.descriptif-link.bg-danger:hover {
     letter-spacing: 0;
   }
   .search-result-list .heading span {
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
   }
   .result-section .search-filter-div {
     display: grid;
@@ -7530,7 +7544,7 @@ a.descriptif-link.bg-danger:hover {
     letter-spacing: 1.6px;
   }
   .customers-testimonials .item-details .content .sub-heading {
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
   }
   .testimonials {
     margin-bottom: 50px;
@@ -7643,7 +7657,7 @@ a.descriptif-link.bg-danger:hover {
     letter-spacing: 0.54px;
   }
   .main-product-content .sub-head {
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
     letter-spacing: 1.4px;
   }
   .select2-container--default .select2-selection--single {

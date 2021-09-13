@@ -68,35 +68,35 @@
     <transition name="fade-slow">
       <div class="tab-content">
         <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
-          <div v-if="showSessions" class="container" style="padding: 0 3rem">
+          <div v-if="showSessions" class="container" style="padding: 0 5vh">
             <ul v-if="filterSessions(index + 1).length" class="list-unstyled order-tab-list mb-0 pb-4">
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
-                  <div class="info-div-left d-flex align-items-center justify-content-between">
-                    <h6 v-if="$windowWidth <= 1500" class="month-count mb-0">
+                  <div class="info-div-left d-flex align-items-center justify-content-between" style="min-width: 29%">
+                    <h6 v-if="$windowWidth <= 1280" class="month-count mb-0">
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
-                    <h6 v-else class="month-count mb-0">
+                    <h6 v-else class="flex-1 month-count mb-0" style="padding-right: 3rem; min-width: max-content">
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
-                    <a href="#" @click.prevent class="register-count date-confirmed mb-0" style="margin: 0 3rem 0 2rem; cursor: default; white-space: nowrap">
+                    <a href="#" @click.prevent class="register-count date-confirmed ml-auto mb-0" style="cursor: default; white-space: nowrap">
                       <strong>{{ session.max - session.nbOfParticipants }} place{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}</strong>
                       restante{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}
                     </a>
-                    <div class="ml-auto text-right mr-4">
+                    <div class="ml-auto text-right mr-4" style="padding-left: 1rem; width: 37%">
                       <h6 class="text-uppercase mb-0 font-weight-normal tripper-text">
                         <strong>{{ session.nbOfParticipants }} TRIPPER{{ session.nbOfParticipants > 1 ? 'S' : '' }}</strong> inscrit{{ session.nbOfParticipants > 1 ? 's' : '' }}&nbsp;:
                       </h6>
-                      <h6 class="text-uppercase text-danger mb-0 tripper-count">
+                      <h6 class="text-danger tripper-count" style="margin-bottom: -4px">
                         <span style="font-weight: 700"> {{ session.min - session.nbOfParticipants }} tripper{{ session.min - session.nbOfParticipants > 1 ? 's' : '' }} </span>
                         <span> pour confirmer </span>
                       </h6>
-                      <span v-if="daysLeft" class="cancel-info-text">il te reste {{ daysLeft }} jours pour réserver</span>
-                      <span v-else class="cancel-info-text">les réserverations sont désormais fermées</span>
+                      <span v-if="daysLeft" class="cancel-info-text">Tu as {{ daysLeft }} jours pour réserver</span>
+                      <span v-else class="cancel-info-text">Réserverations désormais fermées</span>
                     </div>
                   </div>
                   <div class="registrants fg-1" style="width: 20%">
@@ -106,7 +106,7 @@
                     <InlineAvatars v-else :avatars="getParticipantsAvatarKeys(session)" :heart="false" outline-color="white" outline-width="3px" height="40px" spacing="-8px" mt="0rem" mb="0rem" />
                   </div>
                   <div class="d-flex align-items-center ml-auto justify-content-between fg-1">
-                    <h6 class="hours-count mb-0 fg-1 ml-5">
+                    <h6 class="hours-count mb-0 fg-1 ml-5" style="flex: 2 0 20%; max-width: 36%">
                       <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/timer.svg')" height="20" />
                       <div v-if="$windowWidth <= 1440" class="d-inline-block align-middle">{{ course.duration }} jour{{ course?.duration > 1 ? 's' : '' }}</div>
                       <div v-else class="d-inline-block align-middle">{{ course.duration }} jours - {{ course?.duration - 1 }} nuits</div>
@@ -203,7 +203,7 @@
               <div v-if="choseBtn" class="text-right" :class="{ 'text--grey': !showSessions }">
                 <div class="pb-0">
                   <InlineSvg class="d-inline-block mr-2" :src="require('@/assets/svg/date-search.svg')" height="20" :fill="showSessions ? 'white' : '#292f33'" />
-                  <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400">Session :&nbsp;&nbsp;</span>
+                  <span class="d-inline-block align-middle" style="letter-spacing: 1px; font-weight: 400"> Session :&nbsp;&nbsp;</span>
                   <span class="d-inline-block align-middle"
                     >{{ new Date(choice.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }} au
                     {{ new Date(choice.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}</span
@@ -294,6 +294,7 @@
           @click="availSessions.length ? $router.push({ name: 'Checkout', params: { productId: course.id, participantsNb: participantsNb, choice: choice.id } }) : (contactModal = true)"
           class="btn border-0 rounded-0 reserve-btn"
           :style="{ fontSize: availSessions.length ? '1.4rem' : '1rem' }"
+          style="flex: 0 0 15%"
           :class="[{ disable: !choseBtn && availSessions.length }, { 'px-5': !availSessions.length }]"
         >
           {{ availSessions.length ? 'Réserver' : 'Créer une session' }}
@@ -692,9 +693,11 @@ export default {
   background-color: white !important;
   color: #b4b4b4 !important;
 }
-@media only screen and (max-width: 1440px) {
-  .info-div-left {
-    min-width: 560px;
+@media only screen and (max-width: 1461px) {
+  .month-count {
+    min-width: max-content;
+    font-size: 1rem !important;
+    padding-right: 1rem;
   }
   .register-count {
     min-width: 130px;
@@ -707,12 +710,8 @@ export default {
 .reserve-btn:not(.disable):hover {
   background-color: #292f33;
 }
-@media only screen and (min-width: 1441px) {
-  .container {
-    max-width: 2000px;
-  }
-  .reserve-btn {
-    height: 120px !important;
-  }
+
+.reserve-btn {
+  height: 120px !important;
 }
 </style>

@@ -58,7 +58,7 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-lg-8">
+          <div class="col-12 w-100">
             <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">L’EGYPTE</h5>
             <p class="content">
               {{ course.country.description }}
@@ -70,69 +70,59 @@
             <div class="like-div white">
               <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
                 <li class="fg-1" v-for="countryInfo in course.courseInfos.filter((el) => el.type === 'CountryInfo')" :key="countryInfo">
-                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
+                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.8rem; color: #7c7c7c" href="#">
                     <strong class="text-dark ml-2">{{ countryInfo.title }} :</strong>
                     {{ countryInfo.description }}
                   </a>
                 </li>
               </ul>
             </div>
+            <div class="pt-5">
+              <button @click="countryModal = true" class="btn btn-block btn_sanitaire rounded-0 py-3 text-uppercase">
+                <img class="d-inline-block" fluid :src="require('@/assets/svg/sanitaire.svg')" height="28" style="padding-right: 12px" />
+                <span class="d-inline-block" style="vertical-align: middle; font-size: 0.869rem">INFOs SANITAIRE</span>
+              </button>
+              <teleport to="#modal">
+                <transition name="fade">
+                  <div v-if="countryModal" class="modal__backdrop">
+                    <div class="row country-modal" style="width: 50vw">
+                      <div class="col-5 bg-dark">
+                        <div class="nav flex-column nav-pills kitesurf-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                          <h6 class="mb-5 text-uppercase text-white font-weight-normal">
+                            <i class="fas fa-notes-medical mr-3 h1 mb-0 align-bottom"></i>
+                            <span class="d-inline-block"
+                              >INFOs<br />
+                              SANITAIRE</span
+                            >
+                          </h6>
+                          <a class="nav-link active" id="v-pills-health1-tab" data-toggle="pill" href="#v-pills-health1" role="tab" aria-controls="v-pills-health1" aria-selected="true"
+                            >VACCIN <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                          ></a>
+                          <a class="nav-link" id="v-pills-health2-tab" data-toggle="pill" href="#v-pills-health2" role="tab" aria-controls="v-pills-health2" aria-selected="false"
+                            >REGLES A SAVOIR <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                          ></a>
+                          <a class="nav-link" id="v-pills-health3-tab" data-toggle="pill" href="#v-pills-health3" role="tab" aria-controls="v-pills-health3" aria-selected="false"
+                            >INFOS COVID <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="col-7 bg-white" style="position: relative">
+                        <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
+                          <div class="tab-pane fade show active" id="v-pills-health1" role="tabpanel" aria-labelledby="v-pills-health1-tab">
+                            {{ course?.country?.vaccineInfos }}
+                          </div>
+                          <div class="tab-pane fade" id="v-pills-health2" role="tabpanel" aria-labelledby="v-pills-health2-tab">{{ course?.country?.generalInfos }}</div>
+                          <div class="tab-pane fade" id="v-pills-health3" role="tabpanel" aria-labelledby="v-pills-health3-tab">{{ course?.country?.covidInfos }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
+              </teleport>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="top-positioned-div">
-      <div class="bg-dark pays-block text-uppercase">
-        <h6 class="head text-white font-weight-bold letter-space">
-          <img class="d-inline-block mr-2" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />
-          Quelques indicateurs
-        </h6>
-        <ul class="list-unstyled pays-list mb-0">
-          <li v-for="expenseInfo in course.courseInfos.filter((el) => el.type === 'ExpenseInfo')" :key="expenseInfo">
-            <strong class="letter-space">{{ expenseInfo.title }} :</strong> {{ expenseInfo.description }}
-          </li>
-        </ul>
-      </div>
-      <button @click="countryModal = true" class="btn btn-danger btn-block rounded-0 border-0 pay-btn py-3 text-uppercase mb-5">
-        <img class="d-inline-block mr-3" fluid :src="require('@/assets/images/svg/PICTO_INFOS_SUPP_CARD_HEBERGEMENT.svg')" />VOIR LES INFOs SANITAIRE
-      </button>
-      <teleport to="#modal">
-        <transition name="fade">
-          <div v-if="countryModal" class="modal__backdrop">
-            <div class="row country-modal" style="width: 50vw">
-              <div class="col-5 bg-dark">
-                <div class="nav flex-column nav-pills kitesurf-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <h6 class="mb-5 text-uppercase text-white font-weight-normal">
-                    <i class="fas fa-notes-medical mr-3 h1 mb-0 align-bottom"></i>
-                    <span class="d-inline-block"
-                      >INFOs<br />
-                      SANITAIRE</span
-                    >
-                  </h6>
-                  <a class="nav-link active" id="v-pills-health1-tab" data-toggle="pill" href="#v-pills-health1" role="tab" aria-controls="v-pills-health1" aria-selected="true"
-                    >VACCIN <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
-                  ></a>
-                  <a class="nav-link" id="v-pills-health2-tab" data-toggle="pill" href="#v-pills-health2" role="tab" aria-controls="v-pills-health2" aria-selected="false"
-                    >REGLES A SAVOIR <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
-                  ></a>
-                  <a class="nav-link" id="v-pills-health3-tab" data-toggle="pill" href="#v-pills-health3" role="tab" aria-controls="v-pills-health3" aria-selected="false"
-                    >INFOS COVID <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="col-7 bg-white" style="position: relative">
-                <div class="tab-content kitesurf-nav-content" id="v-pills-tabContent">
-                  <div class="tab-pane fade show active" id="v-pills-health1" role="tabpanel" aria-labelledby="v-pills-health1-tab">
-                    {{ course?.country?.vaccineInfos }}
-                  </div>
-                  <div class="tab-pane fade" id="v-pills-health2" role="tabpanel" aria-labelledby="v-pills-health2-tab">{{ course?.country?.generalInfos }}</div>
-                  <div class="tab-pane fade" id="v-pills-health3" role="tabpanel" aria-labelledby="v-pills-health3-tab">{{ course?.country?.covidInfos }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </transition>
-      </teleport>
     </div>
   </div>
   <div class="linear-block">
@@ -149,20 +139,6 @@
         <p class="content">
           {{ course.itinerary }}
         </p>
-        <div class="row">
-          <div class="col-9 col-lg-12 mx-auto">
-            <div class="like-div white">
-              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
-                <li class="fg-1" v-for="itineraryInfo in course.courseInfos.filter((el) => el.type === 'ItineraryInfo')" :key="itineraryInfo">
-                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
-                    <strong class="text-dark ml-2">{{ itineraryInfo.title }} :</strong>
-                    {{ itineraryInfo.description }}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -216,11 +192,13 @@ export default {
   margin-bottom: 0;
 }
 .pays-list li {
-  padding: 0.8rem 0;
+  padding: 0.85rem 0;
   margin: 0;
+  font-size: 0.78rem;
+  font-weight: 300;
 }
 .pays-list li:not(:last-child) {
-  border-bottom: 1px dashed #fff;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.424);
 }
 .country-modal {
   position: fixed;
@@ -239,5 +217,16 @@ export default {
   font-weight: 900;
   text-align: center;
   color: #fff;
+}
+.btn_sanitaire {
+  background-color: #ffffff;
+  color: #292f33;
+  border: 1px solid#292f33;
+}
+
+.btn_sanitaire:hover {
+  background-color: #292f33;
+  color: white;
+  border: 1px solid white;
 }
 </style>

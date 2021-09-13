@@ -54,9 +54,8 @@ export default {
 
 <style>
 .daily-program-card {
-  letter-spacing: 0.03rem;
-  font-size: 0.844rem;
-  color: black;
+  letter-spacing: 0.02rem;
+  color: #292929;
 }
 .daily-program-card .header {
   display: flex;
@@ -65,7 +64,7 @@ export default {
 .daily-program-card .header .title {
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   margin: initial;
   padding: 20px;
   background-color: rgb(255, 255, 255);
@@ -91,15 +90,16 @@ export default {
   text-transform: uppercase;
   font-weight: 400;
   display: initial;
-  font-size: 0.844rem;
+  font-size: 0.8rem;
   font-family: inherit;
+  color: #d9345a;
 }
 .daily-program-card .header .informations li img {
   margin-right: 10px;
   margin-bottom: 4px;
 }
 .daily-program-card .content {
-  padding: 30px 40px 25px;
+  padding: 30px 50px 25px;
   background-color: rgb(255, 255, 255);
 }
 .daily-program-card .content .principal-content {
@@ -110,7 +110,9 @@ export default {
   font-size: 0.844rem;
 }
 .daily-program-card .content p {
-  font-size: 0.844rem;
+  font-size: 0.8748rem;
+  line-height: 27px;
+  font-weight: 400;
 }
 .daily-program-card .content a {
   -moz-user-select: none; /* Firefox */

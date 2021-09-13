@@ -47,7 +47,7 @@
               v-model="participants"
               required
               class="text-uppercase px-2"
-              style="border: 1px solid #292f33; background: white; font-size: 0.875rem; font-weight: 500; font-family: Oswald, sans-serif; height: 100%"
+              style="border: 1px solid #292f33; background: white; font-size: 0.8748rem; font-weight: 500; font-family: Oswald, sans-serif; height: 100%"
             >
               <option value="">Nombre de participants</option>
               <option value="1">1</option>
@@ -129,7 +129,7 @@ export default {
   padding-left: 0;
 }
 .btn-dark {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   padding: 0.6rem;
 }
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {

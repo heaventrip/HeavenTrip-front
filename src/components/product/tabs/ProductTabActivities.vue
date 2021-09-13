@@ -18,7 +18,7 @@
   </div>
   <div class="d-flex" style="margin: 6rem 0rem">
     <div class="linear-block p-0 m-0 w-100">
-      <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 326px" data-v-5aafffc4="">
+      <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 100%" data-v-5aafffc4="">
         <div class="guide-word__image" data-v-5aafffc4="">
           <img class="img-fill" style="position: absolute !important" fluid="" :src="course?.staffs.find((el) => el.role === 'Guide')?.photoUrl" data-v-5aafffc4="" />
           <div
@@ -32,7 +32,7 @@
               text-align: center;
               padding: 15px;
               letter-spacing: 0.04rem;
-              line-height: 1.8rem;
+              line-height: 27px;
               font-family: oswald;
               font-size: 0.98rem"
           >
@@ -49,11 +49,11 @@
           <div style="height: 1px; border-top: 1px dashed #292f33; width: 200px"></div>
           <transition name="fade" mode="out-in">
             <div v-if="tab === 1">
-              <p class="content pt-3 text-grey" style="line-height: 25px" v-html="course?.staffs.find((el) => el.role === 'Guide')?.description"></p>
+              <p class="content text-grey" style="line-height: 27px; padding-top: 32px" v-html="course?.staffs.find((el) => el.role === 'Guide')?.description"></p>
             </div>
             <div v-else>
               <div class="guide-word__subtitle">Un peu sur moi!</div>
-              <p class="content pt-3 text-white" style="line-height: 24px">
+              <p class="content pt-3 text-white" style="line-height: 27px">
                 testeste testtesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste testesteste testeste testeste teseste testeste
                 testeste testeste testeste testseste testeste
               </p>
@@ -86,28 +86,23 @@
             v-for="sport in course.sports"
             :key="sport"
             class="head text-uppercase py-2 d-inline-block mr-5"
-            style="font-weight: 500; cursor: pointer"
+            style="cursor: pointer"
             :class="{ 'sport-tab--active': activeSportTab === sport }"
             @mouseover="activeSportTab = sport"
           >
             {{ sport.name }}
           </div>
         </div>
-        <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 500">{{ course.sports[0].name }}</div>
+        <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 900">{{ course.sports[0].name }}</div>
         <transition name="fade">
-          <div
-            :key="activeSportTab"
-            class="content"
-            style="font-family: Muli; line-height: 26px !important; font-weight: 400; font-size: 0.875rem"
-            v-html="activeSportTab?.description || course.sports[0].description"
-          ></div>
+          <div :key="activeSportTab" class="content" style="font-family: Muli" v-html="activeSportTab?.description || course.sports[0].description"></div>
         </transition>
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
             <div class="like-div white">
               <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
                 <li class="fg-1" v-for="sportInfo in activeSportTab.sportInfos || course.sports[0].sportInfos" :key="sportInfo">
-                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.875rem; color: #7c7c7c" href="#">
+                  <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.8rem; color: #7c7c7c" href="#">
                     {{ sportInfo.title }} :
                     <strong class="text-dark ml-2">{{ sportInfo.description }}</strong>
                   </a>
@@ -293,7 +288,7 @@ export default {
   margin-bottom: 0;
 }
 .guide-word__subtitle {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   color: #fff;
 }
@@ -302,7 +297,7 @@ export default {
   width: 28%;
   position: relative;
   height: 100%;
-  min-width: 27%;
+  min-width: 28%;
 }
 .guide-word__text {
   display: inline-block;

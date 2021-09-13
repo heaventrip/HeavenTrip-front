@@ -274,7 +274,7 @@ export default {
   pointer-events: none;
 }
 .has-float-label .form-control:placeholder-shown:not(:focus) + label {
-  top: 0.8em;
+  top: 0.5em;
   font-size: 90%;
   color: #292f33;
   opacity: 1;
@@ -290,13 +290,14 @@ export default {
 }
 .form-control {
   font-family: Muli, sans-serif;
-  font-size: 0.8rem;
+  font-size: 90%;
+  height: 40px;
   padding-left: 0;
   border-radius: 0;
   border: none;
   border-bottom: 1px solid #292f3357;
   background-color: transparent;
-  padding-bottom: 0.1rem;
+  padding-bottom: 0rem;
   color: #292f33;
   font-weight: 200;
 }
