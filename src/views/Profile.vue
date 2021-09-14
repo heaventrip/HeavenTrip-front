@@ -34,24 +34,25 @@
               <div class="card__title align-items-center justify-content-between" style="margin-bottom: 2rem">
                 <div>Mes réservations</div>
               </div>
-              <div class="d-flex w-100 align-items-center justify-content-between" style="padding-bottom: 0.5rem; border-bottom: 1px solid #b4b4b4">
-                <div class="fg-1">Numéro de réservation</div>
-                <div class="fg-1">Date</div>
-                <div class="fg-1">Produit</div>
-                <div class="fg-1">Status</div>
-                <div class="fg-1">Prix total</div>
+              <div class="d-flex w-100 align-items-center justify-content-between" style="padding-bottom: 0.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid #b4b4b4; font-weight: 400">
+                <div style="width: 20%">Numéro de réservation</div>
+                <div style="width: 20%">Date</div>
+                <div style="width: 20%">Produit</div>
+                <div style="width: 20%">Statut</div>
+                <div style="width: 20%">Prix total</div>
               </div>
               <div
                 v-for="(reservation, index) in currUser?.reservations"
                 :key="reservation"
                 class="d-flex w-100 align-items-center justify-content-between"
-                :style="index ? 'border-bottom: 1px dashed #f1f1f1' : ''"
+                style="padding-bottom: 0.5rem; margin-bottom: 0.5rem; font-family: Muli, sans-serif; font-size: 0.875rem"
+                :style="index !== currUser?.reservations.length - 1 ? 'border-bottom: 1px dashed #7c7c7c' : 'padding-bottom: 0rem; margin-bottom: 0rem'"
               >
-                <div class="fg-1">{{ reservation.id }}</div>
-                <div class="fg-1">{{ reservation.updatedAt }}</div>
-                <div class="fg-1">{{ reservation.session.course.name }}</div>
-                <div class="fg-1">{{ reservation.stripePayment.status }}</div>
-                <div class="fg-1">{{ reservation.stripePayment.paid }}</div>
+                <div style="width: 20%">{{ reservation.id }}</div>
+                <div style="width: 20%">{{ new Date(reservation.updatedAt).toLocaleString('fr-FR', { day: 'numeric', month: 'numeric', year: 'numeric' }) }}</div>
+                <div style="width: 20%">{{ reservation.session?.courseId }}</div>
+                <div style="width: 20%">{{ reservation.stripePayment?.status }}</div>
+                <div style="width: 20%">{{ parseFloat(reservation.stripePayment?.paid).toFixed(2) || 0 }}&thinsp;€</div>
               </div>
             </div>
           </div>
