@@ -131,7 +131,7 @@
             <div id="title-password" class="connection-nav-button">Mot de passe oublié</div>
           </div>
         </div>
-        <div v-else>
+        <div v-else-if="activeTab === 'login' || activeTab === 'signup'">
           <div class="d-flex connection-nav-container">
             <div
               @click="
