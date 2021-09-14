@@ -190,6 +190,7 @@
                   heart-height="44px"
                   heart-width="44px"
                   spacing="-6px"
+                  reverse-color="true"
                   :heart-color="showSessions ? 'white' : 'grey'"
                   outline-width="4px"
                   :outline-color="showSessions ? 'grey' : 'light-white'"
@@ -228,7 +229,7 @@
               style="padding-left: 3rem"
               rows="2"
               :class="[{ 'reply-container-disabled': sendFormIsDisabled() }]"
-              :disabled="sendFormIsDisabled"
+              :disabled="sendFormIsDisabled()"
             >
             </textarea>
             <button class="ml-3 fg-1 text-center" :class="[{ 'btn-send-disabled': sendFormIsDisabled() }]" type="submit">
