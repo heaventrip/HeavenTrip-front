@@ -34,15 +34,24 @@
               <div class="card__title align-items-center justify-content-between" style="margin-bottom: 2rem">
                 <div>Mes réservations</div>
               </div>
-              <div class="row">
-                <div class="col-12 col-lg-7">
-                  <div style="font-family: Muli, sans-serif; font-size: 0.8rem">
-                    Attention, cette action est irréversible ! Si tu décides de supprimer ton compte tu perdras toutes tes données et tes bonus.
-                  </div>
-                </div>
-                <div class="col-12 col-lg-2 offset-3">
-                  <Button style="transform: translateY(-50%)" text="Supprimer" px="1rem" color="grey" height="3rem" weight="bold" />
-                </div>
+              <div class="d-flex w-100 align-items-center justify-content-between" style="padding-bottom: 0.5rem; border-bottom: 1px solid #b4b4b4">
+                <div class="fg-1">Numéro de réservation</div>
+                <div class="fg-1">Date</div>
+                <div class="fg-1">Produit</div>
+                <div class="fg-1">Status</div>
+                <div class="fg-1">Prix total</div>
+              </div>
+              <div
+                v-for="(reservation, index) in currUser?.reservations"
+                :key="reservation"
+                class="d-flex w-100 align-items-center justify-content-between"
+                :style="index ? 'border-bottom: 1px dashed #f1f1f1' : ''"
+              >
+                <div class="fg-1">{{ reservation.id }}</div>
+                <div class="fg-1">{{ reservation.updatedAt }}</div>
+                <div class="fg-1">{{ reservation.session.course.name }}</div>
+                <div class="fg-1">{{ reservation.stripePayment.status }}</div>
+                <div class="fg-1">{{ reservation.stripePayment.paid }}</div>
               </div>
             </div>
           </div>
