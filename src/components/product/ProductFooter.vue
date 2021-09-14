@@ -73,7 +73,11 @@
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
                   <div class="info-div-left d-flex align-items-center justify-content-between" style="min-width: 29%">
+<<<<<<< HEAD
                     <h6 v-if="$windowWidth <= 1500" class="month-count mb-0" style="white-space: nowrap">
+=======
+                    <h6 v-if="$windowWidth <= 1280" class="month-count mb-0">
+>>>>>>> dev
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
@@ -172,6 +176,7 @@
                 <span v-if="course.wishlistUsers?.length === 1" style="font-weight: bold">Rejoins l'intéressé(e) :</span>
                 <span v-else style="font-weight: bold">Rejoins les {{ course.wishlistUsers?.length }} intéressé{{ course.wishlistUsers?.length > 1 ? 's' : '' }} :</span><br />
                 <InlineAvatars
+                  @added-to-wishlist="onAddedToWishlist()"
                   :course-id="course?.id"
                   :avatars="avatarKeys"
                   :heart="true"
@@ -413,6 +418,9 @@ export default {
           }
         })
       }
+    },
+    onAddedToWishlist() {
+      this.$emit('added-to-wishlist')
     },
     getParticipantsAvatarKeys(session) {
       let avatars = new Array()
@@ -694,9 +702,11 @@ export default {
   background-color: white !important;
   color: #b4b4b4 !important;
 }
-@media only screen and (max-width: 1440px) {
-  .info-div-left {
-    min-width: 560px;
+@media only screen and (max-width: 1461px) {
+  .month-count {
+    min-width: max-content;
+    font-size: 1rem !important;
+    padding-right: 1rem;
   }
   .register-count {
     min-width: 130px;
@@ -709,12 +719,8 @@ export default {
 .reserve-btn:not(.disable):hover {
   background-color: #292f33;
 }
-@media only screen and (min-width: 1441px) {
-  .container {
-    max-width: 2400px;
-  }
-  .reserve-btn {
-    height: 120px !important;
-  }
+
+.reserve-btn {
+  height: 120px !important;
 }
 </style>

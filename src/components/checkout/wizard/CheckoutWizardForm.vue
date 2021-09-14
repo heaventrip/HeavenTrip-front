@@ -145,7 +145,7 @@
         </div>
       </div>
       <div class="card-body border-top">
-        <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
+        <h6 class="font-weight-bold text-uppercase">infos a nous communiquer</h6>
         <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
         <textarea placeholder="(Faculatif)" v-model="localBooker.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
       </div>
