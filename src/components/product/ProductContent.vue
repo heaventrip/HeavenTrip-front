@@ -135,7 +135,7 @@
               <div class="messaging-tab-btn noselect" @click="activeTabMassaging = 'participants'" :class="[{ active: activeTabMassaging === 'participants' }]"># LES PARTICIPANTS</div>
             </div>
           </div>
-          <div class="messages-container" @wheel.stop v-if="!((activeTabMassaging === 'participants' && !isParticipant) || (activeTabMassaging === 'interested' && !isIntressed))">
+          <div class="messages-container" @wheel.stop v-if="!sendFormIsDisabled()">
             <!-- <Message
               :user="{
                 firstName: 'Geoff',
@@ -227,11 +227,12 @@
               type="submit"
               style="padding-left: 3rem"
               rows="2"
-              :disabled="(activeTabMassaging === 'participants' && !isParticipant) || (activeTabMassaging === 'interested' && !isIntressed)"
+              :class="[{ 'reply-container-disabled': sendFormIsDisabled() }]"
+              :disabled="sendFormIsDisabled"
             >
             </textarea>
-            <button class="ml-3 fg-1 text-center" type="submit">
-              <InlineSvg class="svg-btn-send" :src="require('@/assets/svg/send.svg')" height="20" />
+            <button class="ml-3 fg-1 text-center" :class="[{ 'btn-send-disabled': sendFormIsDisabled() }]" type="submit">
+              <InlineSvg class="svg-btn-send" :class="[{ 'svg-btn-send-disabled': sendFormIsDisabled() }]" :src="require('@/assets/svg/send.svg')" height="20" />
             </button>
             <!-- <label class="message-input-label">
             </label> -->
@@ -386,6 +387,9 @@ export default {
         return programs
       }
       return []
+    },
+    sendFormIsDisabled() {
+      return (this.activeTabMassaging === 'participants' && !this.isParticipant) || (this.activeTabMassaging === 'interested' && !this.isIntressed)
     },
     afterLeave() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -581,6 +585,23 @@ export default {
   margin-bottom: 3px;
   transition: all 0.2s ease;
 }
+.svg-btn-send:hover {
+  fill: #d82558;
+}
+.svg-btn-send:active {
+  fill: #a51e44;
+}
+.svg-btn-send.svg-btn-send-disabled {
+  fill: #ffffff;
+  cursor: auto;
+  height: 17px;
+  margin-bottom: 3px;
+  transition: all 0.2s ease;
+}
+.btn-send-disabled {
+  cursor: auto;
+  opacity: 0.5;
+}
 .slider-buttons__left:hover .slider__arrow-left {
   animation: 0.3s ease-in 0s hideLeftArrow, 0.3s ease-out 0.3s showLeftArrow;
 }
@@ -626,12 +647,6 @@ export default {
     transform: translateX(0px);
     opacity: 1;
   }
-}
-.svg-btn-send:hover {
-  fill: #d82558;
-}
-.svg-btn-send:active {
-  fill: #a51e44;
 }
 .customized-prev {
   display: none !important;
@@ -759,6 +774,10 @@ button {
   outline: none;
   color: #292f33;
 }
+.reply-container-disabled {
+  opacity: 0.5;
+}
+
 .main-tab {
   max-width: 1100px;
   position: relative;
