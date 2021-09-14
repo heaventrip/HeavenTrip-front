@@ -100,10 +100,10 @@
               </svg>
             </div>
             <swiper-slide
-              ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/7iSX7q6Kg5PsKz8TO8r2TX/83aefe5811d393613010ba2d7ead7df2/kitesurf-elgouna-diving" @click="showImg(0)"
+              ><img class="swiper-slide__img" src="https://images.ctfassets.net/85gxc8iirgln/1Vq1cyF2NWImt8C2uzW1jy/c7a102b9e43b86a42277b322b96759e5/kitesurf-elgouna-21.jpg" @click="showImg(0)"
             /></swiper-slide>
             <swiper-slide
-              ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/1NwMNTi8UI1plqxbjZ2fOD/45660f775915d1aed122f60e0bed6282/kitesurf-elgouna-paddle.jpg" @click="showImg(1)"
+              ><img class="swiper-slide__img" src="https://images.ctfassets.net/85gxc8iirgln/43Jb6iaufL4NBGBLB7VMab/b1a5aa03783264cd78a8a6899b61cdc3/kitesurf-elgouna-14.jpg" @click="showImg(1)"
             /></swiper-slide>
             <swiper-slide
               ><img class="swiper-slide__img" src="https://images.ctfassets.net/8dtxc3nuj0tn/3xNc0qwmQom0Dad0Ony1SY/d5347600c812d31df01166eb7e3c2554/kitesurf-elgouna-lecon.jpg" @click="showImg(2)"

@@ -68,17 +68,17 @@
     <transition name="fade-slow">
       <div class="tab-content">
         <div v-for="(month, index) in months" :key="month" class="tab-pane fade" :id="month" role="tabpanel" :aria-labelledby="`${month}-tab`">
-          <div v-if="showSessions" class="container" style="padding: 0 5vh">
+          <div v-if="showSessions" class="container" style="padding: 0 5vw">
             <ul v-if="filterSessions(index + 1).length" class="list-unstyled order-tab-list mb-0 pb-4">
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
-                  <div class="info-div-left d-flex align-items-center justify-content-between" style="min-width: 29%">
+                  <div class="info-div-left d-flex align-items-center justify-content-between" style="min-width: 31%">
                     <h6 v-if="$windowWidth <= 1280" class="month-count mb-0">
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                     </h6>
-                    <h6 v-else class="flex-1 month-count mb-0" style="padding-right: 3rem; min-width: max-content">
+                    <h6 v-else class="flex-1 month-count mb-0" style="padding-right: 2rem; min-width: max-content">
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
@@ -87,7 +87,7 @@
                       <strong>{{ session.max - session.nbOfParticipants }} place{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}</strong>
                       restante{{ session.max - session.nbOfParticipants > 1 ? 's' : '' }}
                     </a>
-                    <div class="ml-auto text-right mr-4" style="padding-left: 1rem; width: 37%">
+                    <div class="ml-auto text-right mr-4" style="padding-left: 2vw; width: 37%; flex: 1 0 0%; padding-right: 1vw">
                       <h6 class="text-uppercase mb-0 font-weight-normal tripper-text">
                         <strong>{{ session.nbOfParticipants }} TRIPPER{{ session.nbOfParticipants > 1 ? 'S' : '' }}</strong> inscrit{{ session.nbOfParticipants > 1 ? 's' : '' }}&nbsp;:
                       </h6>
@@ -710,7 +710,9 @@ export default {
 .reserve-btn:not(.disable):hover {
   background-color: #292f33;
 }
-
+.container {
+  max-width: 2300px;
+}
 .reserve-btn {
   height: 120px !important;
 }

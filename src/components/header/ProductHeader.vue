@@ -9,7 +9,7 @@
       <Tag color="white" :text="`${photos.length} photos`" style="position: absolute; margin-top: 1.5rem; right: 2rem" />
       <div style="height: 34%">
         <img
-          src="https://images.ctfassets.net/8dtxc3nuj0tn/4RJSKIk5v7saV1cji10crg/214b7be246e8c63cba0355ebaac5e989/kitesurf-elgouna-spot.jpg"
+          src="https://images.ctfassets.net/85gxc8iirgln/6Zepp4aVDUqolcW7OaChTj/b33fe852031ca0d791eb32274c5f8417/kitesurf-elgouna-30.jpg"
           @click="showImg(0)"
           style="border-bottom: 2px solid #292f33"
         />
@@ -18,15 +18,15 @@
         <div class="d-flex flex-column" style="width: 55%">
           <img
             class="header-product__pic"
-            src="https://images.ctfassets.net/8dtxc3nuj0tn/4SuuqMdgxsyjQQpdjEmun7/4db974d816a5a6df577f74f63e29b7b5/kitesurf-elgouna-lecon2.jpg"
+            src="https://images.ctfassets.net/85gxc8iirgln/3F1PeXoZuGqIcUdNnBd6CO/afc156debb9b48ff8de9e03b718e9ad2/kitesurf-elgouna-31.jpg"
             @click="showImg(1)"
             style="border-bottom: 2px solid #292f33"
           />
-          <img src="https://images.ctfassets.net/8dtxc3nuj0tn/4AISlea84OedWAbKNV4xru/afdddc130bb86a116db22a389326b339/kitesurf-elgouna-hebergement.jpg" @click="showImg(2)" />
+          <img src="https://images.ctfassets.net/85gxc8iirgln/1qFpjfC7DZuaCULpBbyBNH/c16129e159894e8e068b2f686607d180/kitesurf-elgouna-29.jpg" @click="showImg(2)" />
         </div>
         <div style="width: 45%">
           <img
-            src="https://images.ctfassets.net/8dtxc3nuj0tn/1S1Nt2KpYQGGvBiS3864QR/6d8a53010fc7459aaf35c68d4510b1d6/kitesurf-elgouna-cook.jpg"
+            src="https://images.ctfassets.net/85gxc8iirgln/1OPfgsXAhlBEEexeqFdEx2/76e22198eddef93ae52909717d8dd5f7/kitesurf-elgouna-23.jpg"
             @click="showImg(3)"
             style="border-left: 2px solid #292f33"
           />

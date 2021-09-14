@@ -90,7 +90,7 @@ export default {
   margin-left: 0.7rem;
   display: inline-block;
   vertical-align: middle;
-  font-size: 0.85rem;
+  font-size: 0.839rem;
   letter-spacing: 0.1rem;
 }
 @media (max-width: 1441px) {
