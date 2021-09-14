@@ -14,7 +14,7 @@
             class="sm-avatar rounded-circle"
             height="50"
             width="50"
-            :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarId}.jpg`"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/${avatarId}.jpg`"
             type="button"
             :class="[activeAvatar === avatarId ? 'avatar-opacity' : '']"
           />
@@ -24,13 +24,7 @@
     <transition name="fade-fast" mode="out-in">
       <div class="reviews__user d-flex flex-column ml-auto mr-4" :key="activeReview">
         <InlineSvg class="reviews__quote reviews__quote--left" :src="require('@/assets/svg/left-quote.svg')" height="25" />
-        <img
-          height="240"
-          width="240"
-          :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${activeReview?.user.avatarKey}.jpg`"
-          class="reviews__user-avatar rounded-circle"
-          rel="preload"
-        />
+        <img height="240" width="240" :src="`https://res.cloudinary.com/heaventrip/image/upload/${activeReview?.user.avatarKey}.jpg`" class="reviews__user-avatar rounded-circle" rel="preload" />
       </div>
     </transition>
     <transition name="fade-fast" mode="out-in">
@@ -82,7 +76,7 @@ export default {
         if (index > 3) return
 
         this.avatarKeys.push(review.user.avatarKey)
-        this.preloadImage(`https://res.cloudinary.com/heaventrip/image/upload/avatars/${review.user.avatarKey}.jpg`)
+        this.preloadImage(`https://res.cloudinary.com/heaventrip/image/upload/${review.user.avatarKey}.jpg`)
       })
       this.activeReview = val[0]
     }
