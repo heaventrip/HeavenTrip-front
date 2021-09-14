@@ -103,9 +103,9 @@ export default {
   color: #292f33;
 }
 @media only screen and (max-height: 950px) {
-  .bttn {
+  /*  .bttn {
     max-height: 2.7rem !important;
-  }
+  } */
   .bttn__text--bold {
     font-size: 0.7rem;
   }

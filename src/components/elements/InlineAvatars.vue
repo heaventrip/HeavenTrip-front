@@ -14,7 +14,11 @@
         <img v-if="userAvatarId" class="rounded-circle" :style="imgStyle" :src="`https://res.cloudinary.com/heaventrip/image/upload/${userAvatarId}`" />
       </div>
       <div v-else-if="wishlisted !== null" style="position: relative" :style="heartStyle" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
-        <transition name="fade">
+        <transition name="fade" v-if="reverseColor">
+          <InlineSvg v-if="hoveredHeart" :class="`heart-logo heart-logo-white`" :src="require(`@/assets/svg/heart-logo-white.svg`)" />
+          <InlineSvg v-else :style="outlineStyle" :class="`heart-logo heart-logo-grey`" :src="require(`@/assets/svg/heart-logo-grey.svg`)" />
+        </transition>
+        <transition name="fade" v-else>
           <InlineSvg v-if="hoveredHeart" :class="`heart-logo heart-logo-grey`" :src="require(`@/assets/svg/heart-logo-grey.svg`)" />
           <InlineSvg v-else :style="outlineStyle" :class="`heart-logo heart-logo-white`" :src="require(`@/assets/svg/heart-logo-white.svg`)" />
         </transition>
@@ -30,7 +34,7 @@ import gsap from 'gsap'
 export default {
   name: 'InlineAvatars',
   // eslint-disable-next-line prettier/prettier
-  props: ['course-id', 'height', 'heart', 'spacing', 'avatars', 'outline-color', 'outline-width', 'border-width', 'mt', 'mb', 'heart-color', 'heart-width', 'heart-height', 'count'],
+  props: ['course-id', 'height', 'heart', 'spacing', 'avatars', 'reverse-color', 'outline-color', 'outline-width', 'border-width', 'mt', 'mb', 'heart-color', 'heart-width', 'heart-height', 'count'],
   data() {
     return {
       hoveredHeart: false,
