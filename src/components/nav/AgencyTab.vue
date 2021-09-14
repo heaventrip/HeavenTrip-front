@@ -137,7 +137,7 @@ export default {
   bottom: 62px; /** line-height + padding-y */
   color: #292f33;
   letter-spacing: 0.5px;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .agency-btn {
   background-color: transparent;

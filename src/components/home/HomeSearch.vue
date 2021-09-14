@@ -332,7 +332,7 @@ export default {
 .search-bar__filter__name {
   margin-left: 1rem;
   vertical-align: middle;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .centered-div {
   box-shadow: none;

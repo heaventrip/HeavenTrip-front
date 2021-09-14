@@ -31,14 +31,14 @@
           :key="room"
           class="head text-uppercase py-2 d-inline-block mr-5"
           style="font-weight: 500; cursor: pointer"
-          :class="{ 'room-tab--active': activeRoomTab === room }"
+          :class="{ 'room-tab--desactive': activeRoomTab === room }"
           @mouseover="activeRoomTab = room"
         >
           {{ room?.title }}
         </div>
         <transition name="fade-fast" mode="out-in">
           <div :key="activeRoomTab">
-            <p class="content mt-3">{{ activeRoomTab?.title }}</p>
+            <p class="content mt-3">{{ activeRoomTab?.description }}</p>
             <ul class="list-unstyled place-list text-uppercase mt-4 mb-0 d-flex flex-wrap flex-column flex-lg-row">
               <li style="border-bottom: none; padding-bottom: 0">
                 <a href="" @click.prevent style="cursor: default" class="text-decoration-none">
@@ -141,25 +141,22 @@
   <vue-easy-lightbox style="z-index: 2" loop scrollDisabled escDisabled moveDisabled :visible="visible" :imgs="imgs" :index="index" @hide="visible = false"></vue-easy-lightbox>
   <p class="small-info">Pour assurer les départs, les hébergements sur les visuels sont susceptibles d’être différents selon les disponibilités et le nombre de participants.</p>
   <div class="linear-block mb-0 p-0" style="background-color: rgb(252, 252, 252); box-shadow: none">
-    <div class="linear-block mb-0">
+    <div class="linear-block mb-0 p-5" style="padding-top: 26px !important; padding-bottom: 26px !important">
       <div class="card border-0 rounded-0">
         <div class="head-block subhead-block d-flex mb-0">
           <div class="">
             <p class="sub-heading mb-2">Vie sur place</p>
             <h4 class="heading mb-0">LES repas</h4>
           </div>
-          <i class="fa fa-chevron-down h4 mb-0 arrow text-grey"></i>
         </div>
       </div>
     </div>
-    <div class="card border-0 rounded-0">
-      <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
-    </div>
+    <div class="card border-0 rounded-0"></div>
   </div>
 
   <div class="d-flex" style="margin-top: 0.5rem; margin-bottom: 6rem">
     <div class="linear-block p-0 m-0 w-100">
-      <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 326px" data-v-5aafffc4="">
+      <div class="card-body d-flex" style="box-shadow: rgb(241, 241, 241) 0px 0px 2px; height: 100%" data-v-5aafffc4="">
         <div class="guide-word__image" data-v-5aafffc4="">
           <img class="img-fill" style="position: absolute !important" fluid="" :src="course?.staffs.find((el) => el.role === 'Cook')?.photoUrl" />
           <div
@@ -173,7 +170,7 @@
               text-align: center;
               padding: 15px;
               letter-spacing: 0.04rem;
-              line-height: 1.8rem;
+              line-height: 27px;
               font-family: oswald;
               font-size: 0.98rem"
           >
@@ -190,7 +187,7 @@
           <div style="height: 1px; border-top: 1px dashed #292f33; width: 200px"></div>
           <transition name="fade" mode="out-in">
             <div>
-              <p class="content pt-3 text-grey" style="line-height: 25px" v-html="course?.staffs.find((el) => el.role === 'Cook')?.description"></p>
+              <p class="content text-grey" style="line-height: 27px; padding-top: 32px" v-html="course?.staffs.find((el) => el.role === 'Cook')?.description"></p>
             </div>
           </transition>
         </div>
@@ -204,12 +201,11 @@
           <p class="sub-heading mb-2">Vie sur place</p>
           <h4 class="heading mb-0">A proximité</h4>
         </div>
-        <i class="fa fa-chevron-down h4 mb-0 arrow text-white"></i>
       </div>
       <div class="card-body">
+        <div></div>
         <p class="content">
-          Un des meilleurs terrain de jeu pour s’initier et se perfectionner en kitesurf. Les débutants s’y sentent en sécurité grâce au plan d’eau de faible profondeur. En cas de mauvaises conditions
-          météorologiques ou autres. En cas de mauvaises conditions météorologiques ou autres. En cas de mauvaises conditions météorologiques.
+          {{ course?.areaDescription }}
         </p>
       </div>
     </div>
@@ -315,7 +311,7 @@ export default {
   margin-bottom: 0;
 }
 .guide-word__subtitle {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 400;
   color: #292f33;
 }
@@ -324,7 +320,7 @@ export default {
   width: 28%;
   position: relative;
   height: 100%;
-  min-width: 27%;
+  min-width: 28%;
 }
 .guide-word__text {
   display: inline-block;

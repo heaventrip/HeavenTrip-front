@@ -1,9 +1,9 @@
 <template>
   <div class="card-block" :style="{ width: cardWidth + 'px' }">
     <div class="shadow-effect overflow-hidden position-relative">
-      <Tag style="position: absolute; top: 7%; right: 2rem; z-index: 1" color="grey" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
-      <!-- <Tag style="position: absolute; top: 7%; left: 7rem; z-index: 1" color="pink" text="nouveau" /> -->
-      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; right: 7rem; z-index: 1" color="pink" text="Multi-activités" />
+      <Tag style="position: absolute; top: 7%; right: 2rem; z-index: 1" color="departcard" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
+      <!-- je t préparé le tag sooncourse <Tag v-if="!course?.sooncourse" style="position: absolute; top: 7%; 4rem; z-index: 1" color="sooncourse" text="Bientôt disponible" /> -->
+      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; right: 6rem; z-index: 1" color="cardstylecourse" text="Multi-activités" />
       <div
         @click.stop="addToWishlist"
         type="button"
@@ -22,7 +22,7 @@
       <div class="card__footer item-details" style="width: 100%">
         <div class="card__footer__static-infos content d-flex justify-content-between">
           <div class="d-flex align-items-center text-uppercase" style="flex-grow: 1; margin-right: 2rem">
-            <svg class="mr-4" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="80" viewBox="0 0 42.57972 37.89174">
+            <svg class="mr-4" xmlns="http://www.w3.org/2000/svg" fill="#d82558" height="75" viewBox="0 0 42.57972 37.89174" style="opacity: 80%">
               <path
                 id="BACKGROUND_PICTO"
                 data-name="BACKGROUND PICTO"
@@ -33,7 +33,7 @@
             </svg>
             <div class="card__footer__infos text-left" :class="{ 'card__footer__infos--border': hovered }">
               <div class="card__footer__infos__heading d-flex flex-column">
-                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.15)">{{ course?.sports[0]?.name }}</span>
+                <span class="card__footer__infos__heading-sport text--20 text--grey text--bold" style="text-shadow: 0px 0px 6px rgba(41, 47, 51, 0.28)">{{ course?.name }}</span>
                 <div>
                   <InlineSvg class="card__footer__infos__heading-arrow" :src="require('@/assets/svg/triangle-right.svg')" height="10" fill="#793f4e" />
                   <span class="card__footer__infos__heading-spot d-inline-block align-middle">{{ course.spot?.name }}</span>
@@ -235,7 +235,7 @@ export default {
 }
 .card-block {
   /* box-shadow: 0px 2px 6px rgb(0, 0, 0, 0.05) !important; */
-  box-shadow: 0px -1px 10px rgba(41, 47, 51, 0.1) !important;
+  box-shadow: 0px 2px 6px rgba(41, 47, 51, 0.08) !important;
   margin: 0 1rem;
   position: absolute;
   border-radius: 11px;
@@ -275,7 +275,7 @@ export default {
 .card__footer__infos__heading-spot {
   font-weight: normal;
   color: #793f4e;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
 }
 .shadow-effect {
   box-shadow: none !important;

@@ -84,11 +84,11 @@ export default {
   color: #7c7c7c;
 }
 .review__block-right__text-content {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-family: Muli, sans-serif;
 }
 .review__block-right__top-infos {
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-family: Oswald, sans-serif;
   font-weight: 600;
   width: 65%;

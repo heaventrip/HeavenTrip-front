@@ -122,22 +122,16 @@
       </div>
       <div class="card-body border-top">
         <h6 class="font-weight-bold">Activites en +</h6>
-        <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
+        <p class="font-weight-500">
+          Tu peux sélectionner plusieurs activités souaitées. Sur place, ton référent selon le planning pourra tout organiser. Les paiements se font directement auprès de lui.
+        </p>
         <div class="hidable">
           <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0" :style="localBooker.booking.noExtraActivities ? 'filter: opacity(0.5)' : ''">
             <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
               <label class="d-flex align-items-center border-0 m-0" for="customRadio7">
-                <input
-                  v-model="localBooker.booking.extraActivities"
-                  :value="{ [extraActivity.id]: extraActivity.price }"
-                  type="checkbox"
-                  id="customRadio7"
-                  class=""
-                  :disabled="localBooker.booking.noExtraActivities"
-                />
+                <input v-model="localBooker.booking.extraActivities" :value="[extraActivity.id]" type="checkbox" id="customRadio7" class="" :disabled="localBooker.booking.noExtraActivities" />
                 <span class="font-weight-bold text-uppercase">
                   <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
-                  <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
                 </span>
               </label>
             </div>
@@ -151,7 +145,7 @@
         </div>
       </div>
       <div class="card-body border-top">
-        <h6 class="font-weight-bold text-uppercase">infos a savoir</h6>
+        <h6 class="font-weight-bold text-uppercase">infos a nous communiquer</h6>
         <p class="font-weight-500" style="font-family: 0.875rem">Tu peux exprimer une demande specifique ou nous alerter sur tes allergies alimentaires etc...</p>
         <textarea placeholder="(Faculatif)" v-model="localBooker.booking.comment" class="hidable form-control info-textarea bg-light p-4 mb-4 mt-5" rows="5">Fais-toi plaisir !</textarea>
       </div>
@@ -238,14 +232,14 @@
           </div>
           <div class="card-body border-top">
             <h6 class="font-weight-bold">Activites en +</h6>
-            <p class="font-weight-500">Vous pouvez sélectionner plusieurs activités</p>
+            <p class="font-weight-500">Tu sélectionner plusieurs activités souhaitées.</p>
             <div class="hidable">
               <div class="custom-radio-container inline-blocks py-3 d-flex flex-wrap px-0" :style="localExtraParticipants[currFormParticipant].booking.noExtraActivities ? 'filter: opacity(0.5)' : ''">
                 <div v-for="extraActivity in course?.alternatives?.filter((el) => el.isOption)" :key="extraActivity.id" class="custom-control custom-radio bg-light rounded border m-2">
                   <label class="d-flex align-items-center border-0 m-0" :for="`extraPart${currFormParticipant}-activ0`">
                     <input
                       v-model="localExtraParticipants[currFormParticipant].booking.extraActivities"
-                      :value="{ [extraActivity.id]: extraActivity.price }"
+                      :value="[extraActivity.id]"
                       type="checkbox"
                       :id="`extraPart${currFormParticipant}-activ0`"
                       class=""
@@ -254,7 +248,6 @@
                     <!-- TODO extracti -->
                     <span class="font-weight-bold text-uppercase">
                       <div style="margin-right: 2.25rem">{{ extraActivity.title }}</div>
-                      <div class="border-left pl-4">+ {{ extraActivity.price }}&euro;<small class="text-lowercase">/pers.</small></div>
                     </span>
                   </label>
                 </div>

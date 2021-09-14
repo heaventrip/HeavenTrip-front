@@ -170,8 +170,7 @@ export default {
     if (!token_val) {
       this.token = false
     }
-    gsap.fromTo('.header-bg-image', { scale: 1.4 }, { scale: 1, duration: 3, ease: 'power4.inOut' })
-
+    gsap.fromTo('.header-bg-image', { scale: 1.2 }, { scale: 1, duration: 2, ease: 'power4.inOut' })
     if (this.$route.name === 'Search') return
     document.addEventListener('scroll', () => {
       if (window.scrollY > document.querySelector('.header').clientHeight) this.navSticky = true
@@ -230,6 +229,7 @@ export default {
   height: 100vh;
   z-index: -1;
 }
+
 .header-filter--search--grey::after {
   content: '';
   position: absolute;

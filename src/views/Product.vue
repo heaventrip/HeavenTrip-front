@@ -13,6 +13,7 @@
           @selected-session="selectedSession = true"
           @show-sessions="showSessions = true"
           @hide-sessions="showSessions = false"
+          @added-to-wishlist="onAddedToWishlist()"
           ref="productFooter"
         />
       </div>
@@ -55,6 +56,9 @@ export default {
     }
   },
   methods: {
+    onAddedToWishlist() {
+      this.$refs.productContent.fetchMessages()
+    },
     setLightboxStatus(val) {
       this.activeLightbox = val
     },

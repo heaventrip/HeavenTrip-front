@@ -17,7 +17,7 @@
 }
 .header .wrapper .wrapper-content .wrapper-head-para{
   font-family: Muli,sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8748rem;
   font-weight: 300;
   line-height: 18px;
   color: #ffffff;
@@ -337,7 +337,7 @@
   }
   .main-product-content .content-head.equip {
     letter-spacing: 1.4px;
-    font-size: .875rem;
+    font-size: .8748rem;
     color: #d82558;
   }
   .main-product-content .like-div {
@@ -351,7 +351,7 @@
     align-items: center;
   }
   .main-product-content .like-div .content-head{
-    font-size: 13px;
+    font-size: 0.8rem;
     margin: 0;
   }
   .main-product-content .like-div .content-list{
@@ -492,7 +492,7 @@
   }
   .main-product-content .content-head.equip {
     letter-spacing: 1.4px;
-    font-size: .875rem;
+    font-size: .8748rem;
     color: #d82558;
   }
   .main-product-content .like-div {
@@ -506,7 +506,7 @@
     align-items: center;
   }
   .main-product-content .like-div .content-head{
-    font-size: 13px;
+    font-size: 0.8rem;
     margin: 0;
   }
   .main-product-content .like-div .content-list{
@@ -1498,7 +1498,7 @@
     letter-spacing: 0;
   }
   .search-result-list .heading span{
-    font-size: 0.875rem;
+    font-size: 0.8748rem;
   }
   .result-section .search-filter-div{
     display: grid;
