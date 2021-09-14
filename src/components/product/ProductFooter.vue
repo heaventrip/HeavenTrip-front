@@ -73,11 +73,7 @@
               <li v-for="session in filterSessions(index + 1)" :key="session">
                 <div class="info-div w-100">
                   <div class="info-div-left d-flex align-items-center justify-content-between" style="min-width: 29%">
-<<<<<<< HEAD
                     <h6 v-if="$windowWidth <= 1500" class="month-count mb-0" style="white-space: nowrap">
-=======
-                    <h6 v-if="$windowWidth <= 1280" class="month-count mb-0">
->>>>>>> dev
                       {{ new Date(session.dateStart).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
                       <i class="fa fa-chevron-right mx-2 small align-baseline"></i>
                       {{ new Date(session.dateEnd).toLocaleString('fr-FR', { day: 'numeric', month: 'short' }) }}
