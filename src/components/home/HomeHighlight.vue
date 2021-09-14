@@ -115,7 +115,7 @@ export default {
       return isCurrentUser(user)
     },
     fetchMessages(courseId) {
-      this.$axios.get('/messages', { params: { courseId: courseId } }).then((res) => {
+      this.$axios.get('/messages', { params: { courseId: courseId, channel: 0 } }).then((res) => {
         this.messages = res.data.messages.slice(-3)
       })
     }
