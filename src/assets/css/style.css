@@ -770,7 +770,7 @@ button:focus, input:focus, .btn:focus, .form-control:focus, .btn.focus {
   font-size: 0.9rem;
   font-weight: 500;
   color: #ffffff;
-  padding: 1.3rem 0;
+  padding: 0 0 1.3rem 0;
   margin: 0 30px -1px;
   letter-spacing: 0.1rem;
   border-bottom: 1px solid transparent;
@@ -2787,13 +2787,10 @@ font-size: 0.8748rem;
 .main-product-content .activity-list .activity-content-list {
   font-size: 0.8rem;
   font-weight: 400;
-   text-transform: uppercase;
+  text-transform: uppercase;
   display: flex;
-  justify-content: end;
-  flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+  justify-content: flex-end;
+  flex: 1 1 0%;
 }
 
 .brown-div {

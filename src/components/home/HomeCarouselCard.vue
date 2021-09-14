@@ -1,9 +1,11 @@
 <template>
   <div class="card-block" :style="{ width: cardWidth + 'px' }">
     <div class="shadow-effect overflow-hidden position-relative">
-      <Tag style="position: absolute; top: 7%; right: 2rem; z-index: 1" color="departcard" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
-      <!-- je t préparé le tag sooncourse <Tag v-if="!course?.sooncourse" style="position: absolute; top: 7%; 4rem; z-index: 1" color="sooncourse" text="Bientôt disponible" /> -->
-      <Tag v-if="!course?.multisport" style="position: absolute; top: 7%; right: 6rem; z-index: 1" color="cardstylecourse" text="Multi-activités" />
+      <div class="d-flex" style="position: absolute; top: 7%; right: 2rem; z-index: 1">
+        <Tag class="mr-2" color="departcard" :text="`${course?.sessions?.length} départ${course?.sessions?.length > 1 ? 's' : ''}`" />
+        <Tag v-if="!course?.multisport" color="cardstylecourse" text="Multi-activités" />
+        <!-- <Tag color="sooncourse" text="Bientôt disponible" /> -->
+      </div>
       <div
         @click.stop="addToWishlist"
         type="button"

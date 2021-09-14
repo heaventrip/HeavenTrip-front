@@ -255,13 +255,13 @@ import InlineAvatars from '@/components/elements/InlineAvatars.vue'
 import ProductTabTips from '@/components/product/tabs/ProductTabTips.vue'
 import Message from '@/components/product/Message.vue'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+// import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import SwiperCore, { Thumbs, Navigation, Pagination, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { isCurrentUser } from '@/utils/auth'
 SwiperCore.use([Thumbs, Navigation, Pagination, EffectFade, Autoplay])
-gsap.registerPlugin(ScrollTrigger)
+// gsap.registerPlugin(ScrollTrigger)
 
 export default {
   name: 'ProductContent',

@@ -95,7 +95,7 @@
         </div>
         <div v-else class="head text-uppercase pb-2" style="width: 100%; font-weight: 900">{{ course.sports[0].name }}</div>
         <transition name="fade">
-          <div :key="activeSportTab" class="content" style="font-family: Muli" v-html="activeSportTab?.description || course.sports[0].description"></div>
+          <div :key="activeSportTab" class="content" style="font-family: Muli; margin-bottom: 1rem" v-html="activeSportTab?.description || course.sports[0].description"></div>
         </transition>
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">

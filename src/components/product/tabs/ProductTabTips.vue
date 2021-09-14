@@ -68,19 +68,19 @@
         <div class="row">
           <div class="col-9 col-lg-12 mx-auto">
             <div class="like-div white">
-              <ul class="list-unstyled text-uppercase content-list m-0 w-100 justify-content-between">
-                <li class="fg-1" v-for="countryInfo in course.courseInfos.filter((el) => el.type === 'CountryInfo')" :key="countryInfo">
+              <ul class="list-unstyled text-uppercase content-list m-0 w-100">
+                <li style="margin-right: 1.5rem" v-for="countryInfo in course.courseInfos.filter((el) => el.type === 'CountryInfo')" :key="countryInfo">
                   <a class="p-0 m-0" @click.prevent style="cursor: default; font-size: 0.8rem; color: #7c7c7c" href="#">
-                    <strong class="text-dark ml-2">{{ countryInfo.title }} :</strong>
+                    <strong class="text-dark">{{ countryInfo.title }} :</strong>
                     {{ countryInfo.description }}
                   </a>
                 </li>
               </ul>
             </div>
             <div class="pt-5">
-              <button @click="countryModal = true" class="btn btn-block btn_sanitaire rounded-0 py-3 text-uppercase">
-                <img class="d-inline-block" fluid :src="require('@/assets/svg/sanitaire.svg')" height="28" style="padding-right: 12px" />
-                <span class="d-inline-block" style="vertical-align: middle; font-size: 0.869rem">INFOs SANITAIRE</span>
+              <button @click="countryModal = true" class="btn btn-block btn-health-infos rounded-0 py-3 text-uppercase">
+                <InlineSvg :src="require('@/assets/svg/health.svg')" class="btn-health-infos__svg" height="28" />
+                <span class="d-inline-block" style="vertical-align: middle; font-size: 0.869rem">Infos sanitaires</span>
               </button>
               <teleport to="#modal">
                 <transition name="fade">
@@ -90,10 +90,7 @@
                         <div class="nav flex-column nav-pills kitesurf-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                           <h6 class="mb-5 text-uppercase text-white font-weight-normal">
                             <i class="fas fa-notes-medical mr-3 h1 mb-0 align-bottom"></i>
-                            <span class="d-inline-block"
-                              >INFOs<br />
-                              SANITAIRE</span
-                            >
+                            <span class="d-inline-block">Infos<br />sanitaires</span>
                           </h6>
                           <a class="nav-link active" id="v-pills-health1-tab" data-toggle="pill" href="#v-pills-health1" role="tab" aria-controls="v-pills-health1" aria-selected="true"
                             >VACCIN <i class="fas fa-chevron-right nav-arrow float-right mr-n4"></i
@@ -137,7 +134,7 @@
       <div class="card-body">
         <h5 class="pays-head border-0 p-0 text-uppercase font-weight-bold">S’Y RENDRE !</h5>
         <p class="content">
-          {{ course.itinerary }}
+          {{ course?.itinerary }}
         </p>
       </div>
     </div>
@@ -218,15 +215,23 @@ export default {
   text-align: center;
   color: #fff;
 }
-.btn_sanitaire {
+.btn-health-infos {
+  transition: all 0.2s ease;
   background-color: #ffffff;
   color: #292f33;
   border: 1px solid#292f33;
 }
-
-.btn_sanitaire:hover {
+.btn-health-infos__svg {
+  transition: all 0.2s ease;
+  padding-right: 0.8rem;
+  fill: #292f33;
+}
+.btn-health-infos:hover {
   background-color: #292f33;
   color: white;
   border: 1px solid white;
+}
+.btn-health-infos:hover .btn-health-infos__svg {
+  fill: white;
 }
 </style>
