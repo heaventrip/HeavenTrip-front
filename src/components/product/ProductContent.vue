@@ -332,6 +332,10 @@ export default {
     }
   },
   created() {
+    this.$emitter.on('unwishlisted', () => {
+      this.inputMessage = ''
+      this.fetchMessages()
+    })
     this.fetchMessages()
   },
   methods: {
