@@ -19,7 +19,7 @@ export default {
   props: ['user', 'content', 'createdAt', 'position', 'coloring'],
   computed: {
     url() {
-      return `https://res.cloudinary.com/heaventrip/image/upload/avatars/${this.user?.avatarKey || 'empty'}.jpg`
+      return `https://res.cloudinary.com/heaventrip/image/upload/avatars/${this.user?.avatarKey || 'empty'}`
     }
   },
   methods: {
@@ -37,6 +37,7 @@ export default {
 .profil-img {
   width: 60px;
   height: 60px;
+  background-color: white;
   border-radius: 50%;
 }
 .profil-name {
