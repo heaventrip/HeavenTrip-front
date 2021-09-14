@@ -7,7 +7,7 @@
             v-if="avatarKey"
             class="participant-img"
             fluid
-            :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarKey}.jpg`"
+            :src="`https://res.cloudinary.com/heaventrip/image/upload/${avatarKey}.jpg`"
             style="height: 70px; border: 1px solid #292f33; box-shadow: none; outline: none; margin-right: 1rem"
           />
           <InlineSvg v-else :src="require('@/assets/svg/avatar-empty.svg')" height="70" style="mr-3" fill="#292f33" />

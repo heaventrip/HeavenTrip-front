@@ -5,13 +5,13 @@
         class="inline-avatar-img rounded-circle"
         :class="{ 'inline-avatar-img--transparent': hoveredHeart }"
         :style="imgStyle"
-        :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${avatarId}`"
+        :src="`https://res.cloudinary.com/heaventrip/image/upload/${avatarId}`"
       />
     </div>
     <div v-show="heart" @click="addToWishlist" style="border-radius: 50%; z-index: 1" type="button" :style="[spacingStyle, wishlistLoading ? 'cursor: default' : '']">
       <span id="loading" v-show="wishlistLoading"></span>
       <div v-if="wishlisted">
-        <img v-if="userAvatarId" class="rounded-circle" :style="imgStyle" :src="`https://res.cloudinary.com/heaventrip/image/upload/avatars/${userAvatarId}`" />
+        <img v-if="userAvatarId" class="rounded-circle" :style="imgStyle" :src="`https://res.cloudinary.com/heaventrip/image/upload/${userAvatarId}`" />
       </div>
       <div v-else-if="wishlisted !== null" style="position: relative" :style="heartStyle" @mouseenter="hoveredHeart = true" @mouseleave="hoveredHeart = false">
         <transition name="fade" v-if="reverseColor">
