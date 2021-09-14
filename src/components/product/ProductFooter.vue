@@ -172,6 +172,7 @@
                 <span v-if="course.wishlistUsers?.length === 1" style="font-weight: bold">Rejoins l'intéressé(e) :</span>
                 <span v-else style="font-weight: bold">Rejoins les {{ course.wishlistUsers?.length }} intéressé{{ course.wishlistUsers?.length > 1 ? 's' : '' }} :</span><br />
                 <InlineAvatars
+                  @added-to-wishlist="onAddedToWishlist()"
                   :course-id="course?.id"
                   :avatars="avatarKeys"
                   :heart="true"
@@ -413,6 +414,9 @@ export default {
           }
         })
       }
+    },
+    onAddedToWishlist() {
+      this.$emit('added-to-wishlist')
     },
     getParticipantsAvatarKeys(session) {
       let avatars = new Array()

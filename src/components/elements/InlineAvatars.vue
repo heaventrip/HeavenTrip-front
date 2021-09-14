@@ -92,6 +92,7 @@ export default {
         .then(() => {
           this.wishlisted = true
           this.wishlistLoading = false
+          this.$emit('added-to-wishlist')
           this.$notify({ group: 'app', type: 'success', text: 'Ce stage a été ajouté à vos envies !' })
         })
         .catch((err) => {

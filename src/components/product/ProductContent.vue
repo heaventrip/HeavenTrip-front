@@ -171,42 +171,45 @@
               </li>
             </ul> -->
           </div>
-          <div class="no-access-frame mb-0 discuss-list mt-3" v-if="activeTabMassaging === 'interested' && !isIntressed">
-            <div class="no-access-frame-header">
-              <InlineSvg :src="require('@/assets/svg/picto-micro.svg')" height="50" style="transform: translateY(-30%)" />
-              <p>
-                Pour discuter avec les autres sur le chat, il faut que<br />
-                tu fasses parti des intéressés ou des participants !
-              </p>
+          <transition name="fade-fast" mode="out-in" v-else>
+            <div class="no-access-frame mb-0 discuss-list mt-3" v-if="activeTabMassaging === 'interested' && !isIntressed">
+              <div class="no-access-frame-header">
+                <InlineSvg :src="require('@/assets/svg/picto-micro.svg')" height="50" style="transform: translateY(-30%)" />
+                <p>
+                  Pour discuter avec les autres sur le chat, il faut que<br />
+                  tu fasses parti des intéressés ou des participants !
+                </p>
+              </div>
+              <div class="no-access-frame-footer">
+                <div class="no-access-frame-footer-text">Intéresse toi en cliquant sur le coeur !</div>
+                <InlineAvatars
+                  @added-to-wishlist="fetchMessages()"
+                  :course-id="course?.id"
+                  :avatars="avatarKeys"
+                  :heart="true"
+                  heart-height="44px"
+                  heart-width="44px"
+                  spacing="-6px"
+                  :heart-color="showSessions ? 'white' : 'grey'"
+                  outline-width="4px"
+                  :outline-color="showSessions ? 'grey' : 'light-white'"
+                  :count="false"
+                  mt="0.3rem"
+                  mb="0rem"
+                />
+              </div>
             </div>
-            <div class="no-access-frame-footer">
-              <div class="no-access-frame-footer-text">Intéresse toi en cliquant sur le coeur !</div>
-              <InlineAvatars
-                :course-id="course?.id"
-                :avatars="avatarKeys"
-                :heart="true"
-                heart-height="44px"
-                heart-width="44px"
-                spacing="-6px"
-                :heart-color="showSessions ? 'white' : 'grey'"
-                outline-width="4px"
-                :outline-color="showSessions ? 'grey' : 'light-white'"
-                :count="false"
-                mt="0.3rem"
-                mb="0rem"
-              />
-            </div>
-          </div>
-          <div class="no-access-frame mb-0 discuss-list mt-3" v-if="activeTabMassaging === 'participants' && !isParticipant">
-            <div class="no-access-frame-header">
-              <InlineSvg :src="require('@/assets/svg/private.svg')" height="50" style="transform: translateY(-30%)" />
-              <p>
-                Pour discuter avec les autres sur le chat, il faut que<br />
-                tu fasses parti des participants !
-              </p>
-            </div>
-          </div>
 
+            <div class="no-access-frame mb-0 discuss-list mt-3" v-else-if="activeTabMassaging === 'participants' && !isParticipant">
+              <div class="no-access-frame-header">
+                <InlineSvg :src="require('@/assets/svg/private.svg')" height="50" style="transform: translateY(-30%)" />
+                <p>
+                  Pour discuter avec les autres sur le chat, il faut que<br />
+                  tu fasses parti des participants !
+                </p>
+              </div>
+            </div>
+          </transition>
           <form @submit.prevent="submitMessageForm" class="message-send-form mt-auto d-flex align-items-center" style="background-color: #5a3a5f">
             <textarea
               @keypress="
@@ -224,6 +227,7 @@
               type="submit"
               style="padding-left: 3rem"
               rows="2"
+              :disabled="(activeTabMassaging === 'participants' && !isParticipant) || (activeTabMassaging === 'interested' && !isIntressed)"
             >
             </textarea>
             <button class="ml-3 fg-1 text-center" type="submit">
